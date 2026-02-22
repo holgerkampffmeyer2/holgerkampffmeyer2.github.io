@@ -11,6 +11,7 @@ const navItems = [
     label: 'Home',
     hasDropdown: true,
     items: [
+      { href: '/', label: 'Home' },
       { href: '/#galerie', label: 'Galerie' },
       { href: '/#djing', label: 'DJing' },
       { href: '/#kontakt', label: 'Kontakt' }
@@ -36,12 +37,12 @@ const navItems = [
         {navItems.map(item => (
           item.hasDropdown ? (
             <div class="relative group">
-              <button class="nav-link flex items-center gap-1">
+              <a href={item.href} class="nav-link flex items-center gap-1">
                 {item.label}
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </a>
               <div class="absolute top-full left-0 mt-2 w-48 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 {item.items?.map(subItem => (
                   <a href={subItem.href} class="block px-4 py-2 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] hover:bg-[var(--color-bg)] first:rounded-t-lg last:rounded-b-lg">
