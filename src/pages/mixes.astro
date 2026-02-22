@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const recentMixes = [
+  { title: "Afro Latin Tribal House Mix", date: "Februar 2026", url: "im-holding-you-afro-latin-tribal-house-mix123" },
+  { title: "Tech House Special", date: "Februar 2026", url: "tech-house-feb-2026" },
+  { title: "Latin House Vibes", date: "Januar 2026", url: "latin-house-vibes-jan-2026" },
+  { title: "Funky House Session", date: "Januar 2026", url: "funky-house-session-jan-2026" },
+  { title: "Afro House Beats", date: "Dezember 2025", url: "afro-house-beats-dec-2025" },
+  { title: "Weekly Sunday House Mix", date: "Dezember 2025", url: "-decweekly-sunday-house-2025" }
+];
+---
+
+<Layout title="DJ Mixes - DJ Hulk - Weekly Sunday House Mix">
+  <Navbar currentPage="/" />
+
+  <!-- Hero Section -->
+  <section class="hero-slider">
+    <div class="slide slide-1 active">
+      <div class="slide-content" style="background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url('/img/header.jpg');">
+        <div class="container mx-auto px-4">
+          <div class="max-w-3xl pt-32 text-center">
+            <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Weekly House Music DJ Mixes</span>
+            <h1 class="font-play text-5xl md:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">DJ Mixes</h1>
+            <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
+              Jeden Sonntag neue House & Tech House Mixes auf Mixcloud
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Mix -->
+  <section class="section-padding bg-[var(--color-bg)]">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Neuester Mix</span>
+      <h2 class="font-play text-4xl font-bold mt-4 mb-6">Weekly Sunday House Mix</h2>
+      <p class="text-[var(--color-text-muted)] mb-8">
+        Auf Mixcloud veröffentliche ich jeden Sonntag einen neuen Mix. Dabei spezialisiere ich mich auf Tech House, Latin House, Jackin and Funky House sowie Afro House.
+      </p>
+      
+      <div class="bg-[var(--color-surface)] rounded-xl p-4 mb-8">
+        <iframe width="100%" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fim-holding-you-afro-latin-tribal-house-mix123%2F" frameborder="0"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Mixes Grid -->
+  <section class="section-padding bg-[var(--color-surface)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Archiv</span>
+        <h2 class="font-play text-4xl font-bold mt-4">Alle DJ Mixes</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {recentMixes.map((mix, index) => (
+          <div class="bg-[var(--color-bg)] rounded-xl p-4 hover:shadow-lg transition-shadow animate-on-scroll" style={`animation-delay: ${index * 0.1}s`}>
+            <iframe width="100%" height="120" src={`https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2F${mix.url}%2F`} frameborder="0"></iframe>
+            <div class="mt-4">
+              <h3 class="font-bold">{mix.title}</h3>
+              <p class="text-sm text-[var(--color-text-muted)]">{mix.date}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="https://www.mixcloud.com/holger-kampffmeyer/" target="_blank" class="btn-primary">
+          Alle Mixes auf Mixcloud
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spotify Section -->
+  <section class="section-padding bg-[var(--color-bg)]">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Spotify</span>
+      <h2 class="font-play text-4xl font-bold mt-4 mb-6">Meine Spotify Playlist</h2>
+      <p class="text-[var(--color-text-muted)] mb-8">Wöchentlich aktualisierte Playlist mit den besten House Tunes!</p>
+      
+      <div class="rounded-xl overflow-hidden">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2IiSXnINIWdFMewY55iJWA?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

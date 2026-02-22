@@ -1,0 +1,99 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = 'home' } = Astro.props;
+
+const navItems = [
+  { 
+    href: '/', 
+    label: 'Home',
+    hasDropdown: true,
+    items: [
+      { href: '/#galerie', label: 'Galerie' },
+      { href: '/#djing', label: 'DJing' },
+      { href: '/#kontakt', label: 'Kontakt' }
+    ]
+  },
+  { href: '/vermietung', label: 'Vermietung' },
+  { href: '/work', label: 'Work' },
+  { href: '/impressum', label: 'Impressum' },
+];
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[var(--color-bg)]/90 backdrop-blur-md border-b border-[var(--color-border)]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center space-x-3">
+        <img src="/img/djhulk_logo.png" alt="DJ Hulk Logo" class="h-12" />
+        <span class="font-play text-xl font-bold hidden sm:block">DJ Hulk</span>
+      </a>
+      
+      <!-- Desktop Menu -->
+      <div class="desktop-menu hidden md:flex items-center space-x-6">
+        {navItems.map(item => (
+          item.hasDropdown ? (
+            <div class="relative group">
+              <button class="nav-link flex items-center gap-1">
+                {item.label}
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="absolute top-full left-0 mt-2 w-48 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                {item.items?.map(subItem => (
+                  <a href={subItem.href} class="block px-4 py-2 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] hover:bg-[var(--color-bg)] first:rounded-t-lg last:rounded-b-lg">
+                    {subItem.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a 
+              href={item.href} 
+              class:list={[
+                "nav-link",
+                { "active": currentPage === item.href || (currentPage === 'home' && item.href === '/') }
+              ]}
+            >
+              {item.label}
+            </a>
+          )
+        ))}
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="md:hidden text-[var(--color-text)] p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-[var(--color-surface)] border-t border-[var(--color-border)]">
+    <div class="px-4 py-4 space-y-3">
+      {navItems.map(item => (
+        <a href={item.href} class="block nav-link py-2">{item.label}</a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  menuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+  
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+</script>

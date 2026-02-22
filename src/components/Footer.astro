@@ -1,0 +1,40 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-[var(--color-surface)] border-t border-[var(--color-border)] py-12">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <div>
+        <h3 class="font-play text-xl font-bold mb-4">Holger Kampffmeyer</h3>
+        <p class="text-[var(--color-text-muted)]">(DJ Hulk)</p>
+        <p class="text-[var(--color-text-muted)] mt-2">DJ-Dienstleistungen & Verleih</p>
+      </div>
+      
+      <div>
+        <h4 class="font-bold mb-4">Links</h4>
+        <ul class="space-y-2">
+          <li><a href="/vermietung" class="text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] transition-colors">Vermietung</a></li>
+          <li><a href="/#djing" class="text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] transition-colors">DJing</a></li>
+          <li><a href="/#mixes" class="text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] transition-colors">Mixes</a></li>
+          <li><a href="/#galerie" class="text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] transition-colors">Galerie</a></li>
+          <li><a href="/work" class="text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] transition-colors">Work</a></li>
+          <li><a href="/impressum" class="text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] transition-colors">Impressum</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="font-bold mb-4">Kontakt</h4>
+        <ul class="space-y-2 text-[var(--color-text-muted)]">
+          <li>Magellanstraße 4</li>
+          <li>70771 Echterdingen</li>
+          <li><a href="mailto:info@holger-kampffmeyer.de" class="hover:text-[var(--color-secondary)] transition-colors">info@holger-kampffmeyer.de</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="border-t border-[var(--color-border)] pt-8 text-center text-[var(--color-text-muted)]">
+      <p>&copy; {currentYear} Holger Kampffmeyer. Alle Rechte vorbehalten.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const photos = [
+  '/img/em3f/DSC_2142.jpg',
+  '/img/em3f/DSC_2157.jpg',
+  '/img/em3f/DSC_2289.jpg',
+  '/img/em3f/DSC_2305.jpg',
+  '/img/em3f/DSC_2308.jpg',
+  '/img/em3f/DSC_2311.jpg',
+  '/img/em3f/DSC_2315.jpg',
+  '/img/em3f/DSC_2316.jpg',
+  '/img/em3f/DSC_2320.jpg',
+  '/img/em3f/DSC_2386.jpg',
+  '/img/em3f/DSC_2451.jpg',
+  '/img/em3f/DSC_2583.jpg',
+  '/img/em3f/UP8A7720.jpg',
+  '/img/em3f/UP8A7733.jpg',
+  '/img/em3f/UP8A7778.jpg',
+  '/img/em3f/UP8A8078.jpg'
+];
+---
+
+<Layout title="DJ Fotos - Electronic Music Family and Friends Festival">
+  <Navbar currentPage="/work" />
+
+  <!-- Hero Section -->
+  <section class="hero-slider">
+    <div class="slide slide-1 active">
+      <div class="slide-content" style="background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url('/img/tomatefestival.png');">
+        <div class="container mx-auto px-4">
+          <div class="max-w-3xl pt-32 text-center">
+            <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Electronic Music Family and Friends Festival</span>
+            <h1 class="font-play text-5xl md:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">DJ Fotos</h1>
+            <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
+              Eindrücke von Events und Festivals
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About EM3F -->
+  <section class="section-padding bg-[var(--color-bg)]">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="font-play text-3xl font-bold mb-6">Electronic Music Family and Friends Festival</h2>
+      <p class="text-[var(--color-text-muted)] mb-4">
+        Als Mitgründer des DJ Kollektivs <strong class="text-[var(--color-secondary)]">ToMaTe Stuttgart n.e.V.</strong> organisiere ich Veranstaltungen für Elektronische Musik.
+      </p>
+      <p class="text-[var(--color-text-muted)]">
+        Das jährlich stattfindende <strong class="text-[var(--color-secondary)]">Electronic Music Family and Friends Festival</strong> ist ein Highlight für alle Electronic Music Liebhaber in der Region Stuttgart.
+      </p>
+    </div>
+  </section>
+
+  <!-- Photo Gallery -->
+  <section class="section-padding bg-[var(--color-surface)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Galerie</span>
+        <h2 class="font-play text-4xl font-bold mt-4">Event Fotos</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {photos.map((photo, index) => (
+          <div class="aspect-square overflow-hidden rounded-xl animate-on-scroll" style={`animation-delay: ${index * 0.05}s`}>
+            <img 
+              src={photo} 
+              alt={`DJ Hulk Event ${index + 1}`} 
+              class="w-full h-full object-cover hover:scale-110 transition-transform duration-500 cursor-pointer"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- More Events Link -->
+  <section class="section-padding bg-[var(--color-bg)]">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="font-play text-3xl font-bold mb-6">Mehr Videos</h2>
+      <p class="text-[var(--color-text-muted)] mb-8">
+        Schau dir auch meine Videos auf YouTube und die Galerie auf der Startseite an.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://www.youtube.com/@djhulk_de" target="_blank" class="btn-primary">
+          YouTube
+        </a>
+        <a href="/#galerie" class="btn-secondary">
+          Video Galerie
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

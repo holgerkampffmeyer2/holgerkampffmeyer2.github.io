@@ -1,49 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Holger Kampffmeyer [DJ Hulk] - Musikanlagen, Lichttechnik, Tontechnik">
-  <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-[var(--color-bg)]/90 backdrop-blur-md border-b border-[var(--color-border)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="flex items-center justify-between h-20">
-        <!-- Logo -->
-        <a href="#" class="flex items-center space-x-3">
-          <img src="img/djhulk_logo.png" alt="DJ Hulk Logo" class="h-12" />
-          <span class="font-play text-xl font-bold hidden sm:block">DJ Hulk</span>
-        </a>
-        
-        <!-- Desktop Menu -->
-        <div class="desktop-menu hidden md:flex items-center space-x-8">
-          <a href="#hero" class="nav-link">Home</a>
-          <a href="#vermietung" class="nav-link">Vermietung</a>
-          <a href="#djing" class="nav-link">DJing</a>
-          <a href="#mixes" class="nav-link">Mixes</a>
-          <a href="#galerie" class="nav-link">Galerie</a>
-          <a href="#kontakt" class="nav-link">Kontakt</a>
-        </div>
-        
-        <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn" class="md:hidden text-[var(--color-text)] p-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-[var(--color-surface)] border-t border-[var(--color-border)]">
-      <div class="px-4 py-4 space-y-3">
-        <a href="#hero" class="block nav-link py-2">Home</a>
-        <a href="#vermietung" class="block nav-link py-2">Vermietung</a>
-        <a href="#djing" class="block nav-link py-2">DJing</a>
-        <a href="#mixes" class="block nav-link py-2">Mixes</a>
-        <a href="#galerie" class="block nav-link py-2">Galerie</a>
-        <a href="#kontakt" class="block nav-link py-2">Kontakt</a>
-      </div>
-    </div>
-  </nav>
+  <Navbar currentPage="/" />
 
   <!-- Hero Slider Section -->
   <section id="hero" class="hero-slider">
@@ -182,9 +144,9 @@ import Layout from '../layouts/Layout.astro';
           <div class="text-4xl mb-4">💡</div>
           <h3 class="text-xl font-bold mb-3">Lichttechnik</h3>
           <p class="text-[var(--color-text-muted)]">LED-Bars, Moving Heads, Laser und Effektgeräte</p>
+        </div>
         
-        <div        </div>
- class="equipment-card animate-on-scroll stagger-5">
+        <div class="equipment-card animate-on-scroll stagger-5">
           <div class="text-4xl mb-4">🌫️</div>
           <h3 class="text-xl font-bold mb-3">Nebelmaschinen</h3>
           <p class="text-[var(--color-text-muted)]">Atmosphärische Effekte für Ihre Veranstaltung</p>
