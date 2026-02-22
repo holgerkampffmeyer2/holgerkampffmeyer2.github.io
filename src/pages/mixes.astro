@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="DJ Mixes - DJ Hulk - Weekly Sunday House Mix"
+  description="Wöchentliche House und Tech House Mixes von DJ Hulk auf Mixcloud. Spezialisiert auf Latin House, Jackin, Funky House und Afro House."
+  image="/img/header.jpg"
+>
+  <Navbar currentPage="/" />
+
+  <!-- Hero Section -->
+  <section class="hero-slider">
+    <div class="slide slide-1 active">
+      <div class="slide-content" style="background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url('/img/header.jpg');">
+        <div class="container mx-auto px-4">
+          <div class="max-w-3xl pt-32 text-center">
+            <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Weekly House Music DJ Mixes</span>
+            <h1 class="font-play text-5xl md:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">DJ Mixes</h1>
+            <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
+              Jeden Sonntag neue House & Tech House Mixes auf Mixcloud
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Mix -->
+  <section class="section-padding bg-[var(--color-bg)]">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Neuester Mix</span>
+      <h2 class="font-play text-4xl font-bold mt-4 mb-6">Weekly Sunday House Mix</h2>
+      <p class="text-[var(--color-text-muted)] mb-8">
+        Auf Mixcloud veröffentliche ich jeden Sonntag einen neuen Mix. Dabei spezialisiere ich mich auf Tech House, Latin House, Jackin and Funky House sowie Afro House.
+      </p>
+      
+      <div class="bg-[var(--color-surface)] rounded-xl p-4 mb-8">
+        <iframe width="100%" height="150" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-deep-jackin-latin-house-mix169%2F" frameborder="0"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Mixes Grid -->
+  <section class="section-padding bg-[var(--color-surface)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Archiv</span>
+        <h2 class="font-play text-4xl font-bold mt-4">Alle DJ Mixes</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Mix 1 -->
+        <div class="bg-[var(--color-bg)] rounded-xl p-4">
+          <iframe width="100%" height="150" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FTheBigTurtle%2Fbigt-b2b-dj-hulk-select-radio-for-weareone-wbill-mcgruddy-unmastered-full%2F" frameborder="0"></iframe>
+        </div>
+
+        <!-- Mix 2 -->
+        <div class="bg-[var(--color-bg)] rounded-xl p-4">
+          <iframe width="100%" height="150" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-partymix-bootlegs-tech-bass-house-168%2F" frameborder="0"></iframe>
+        </div>
+
+        <!-- Mix 3 -->
+        <div class="bg-[var(--color-bg)] rounded-xl p-4">
+          <iframe width="100%" height="150" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FTonyCeee%2Fthe-houseboxx-vol6-by-tony-c-b2b-dj-hulk%2F" frameborder="0"></iframe>
+        </div>
+
+        <!-- Mix 4 -->
+        <div class="bg-[var(--color-bg)] rounded-xl p-4">
+          <iframe width="100%" height="150" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-latin-tech-tribal-mix167%2F" frameborder="0"></iframe>
+        </div>
+
+        <!-- Mix 5 -->
+        <div class="bg-[var(--color-bg)] rounded-xl p-4">
+          <iframe width="100%" height="150" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-deep-tech-afro-jackin-house-mix-166%2F" frameborder="0"></iframe>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="https://www.mixcloud.com/holger-kampffmeyer/" target="_blank" class="btn-primary">
+          Alle Mixes auf Mixcloud
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spotify Section -->
+  <section class="section-padding bg-[var(--color-bg)]">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Spotify</span>
+      <h2 class="font-play text-4xl font-bold mt-4 mb-6">Meine Spotify Playlist</h2>
+      <p class="text-[var(--color-text-muted)] mb-8">Wöchentlich aktualisierte Playlist mit den besten House Tunes!</p>
+      
+      <div class="rounded-xl overflow-hidden">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2IiSXnINIWdFMewY55iJWA?utm_source=generator" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Work / University Research - Holger Kampffmeyer"
+  description="Holger Kampffmeyer - IT Professional, DevOps, Cloud Native, Software Development. Team Manager bei Vector. Research an der Uni Stuttgart."
+  image="/img/header-work-dark.jpg"
+>
+  <Navbar currentPage="/work" />
+
+  <!-- Hero Section -->
+  <section class="hero-slider">
+    <div class="slide slide-1 active">
+      <div class="slide-content" style="background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(8, 145, 178, 0.2) 100%), url('/img/header-work-dark.jpg');">
+        <div class="container mx-auto px-4">
+          <div class="max-w-3xl pt-32 text-center">
+            <h1 class="font-play text-5xl md:text-6xl font-bold mb-4 gradient-text">Work / Research</h1>
+            <p class="text-[var(--color-text-muted)] text-xl">IT Professional, DevOps, Cloud Native, Software Development</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Section -->
+  <section class="section-padding bg-[var(--color-bg)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-3xl mx-auto">
+        <!-- Business / Work -->
+        <div class="bg-[var(--color-surface)] rounded-xl p-8 animate-on-scroll">
+          <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Business / Work</span>
+          <h2 class="font-play text-3xl font-bold mt-4 mb-6">Infos about my Work</h2>
+          
+          <div class="space-y-4 text-[var(--color-text-muted)]">
+            <p>
+              I work as a team manager for <a href="http://www.vector.com" target="_blank" class="text-[var(--color-secondary)] hover:underline">Vector</a>, a software company with more than 4000 employees that builds software tools for the automotive and embedded software industry.
+            </p>
+            
+            <p>I am interested in the following topics:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>Managing DevOps Teams</li>
+              <li>Project Management</li>
+              <li>Software Engineering</li>
+              <li>Software Architecture</li>
+              <li>Agile: Scrum, Software Kanban</li>
+              <li>Cloud, Docker, Kubernetes</li>
+              <li>Continuous Integration, Continuous Delivery</li>
+            </ul>
+            
+            <p class="mt-4">
+              For professional topics please get in contact with me via <a href="https://www.xing.com/profile/Holger_Kampffmeyer" target="_blank" class="text-[var(--color-secondary)] hover:underline">Xing</a> or <a href="https://www.linkedin.com/in/holger-kampffmeyer-390b6789/" target="_blank" class="text-[var(--color-secondary)] hover:underline">LinkedIn</a>.
+            </p>
+          </div>
+        </div>
+        
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications Section -->
+  <section class="section-padding bg-[var(--color-surface)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Publications</span>
+        <h2 class="font-play text-4xl font-bold mt-4">Research Papers</h2>
+      </div>
+      
+      <div class="space-y-6 max-w-4xl mx-auto">
+        <div class="bg-[var(--color-bg)] rounded-xl p-6 animate-on-scroll">
+          <a href="/files/models07_dpio.pdf" target="_blank" class="font-bold text-lg hover:text-[var(--color-secondary)] transition-colors">
+            Finding the Pattern You Need: The Design Pattern Intent Ontology
+          </a>
+          <p class="text-[var(--color-text-muted)] text-sm mt-2">University Research Paper</p>
+        </div>
+        
+        <div class="bg-[var(--color-bg)] rounded-xl p-6 animate-on-scroll">
+          <a href="/files/dasson07.pdf" target="_blank" class="font-bold text-lg hover:text-[var(--color-secondary)] transition-colors">
+            EPITELLA: Improving the Gnutella Search Algorithm through Epidemic Spreading Models for Complex Networks
+          </a>
+          <p class="text-[var(--color-text-muted)] text-sm mt-2">University Research Paper</p>
+        </div>
+        
+        <div class="bg-[var(--color-bg)] rounded-xl p-6 animate-on-scroll">
+          <a href="/files/hkampffm_P2PGnutImprovingReport.pdf.pdf" target="_blank" class="font-bold text-lg hover:text-[var(--color-secondary)] transition-colors">
+            Improving Gnutella Search Algorithms through Epidemic Dissemination
+          </a>
+          <p class="text-[var(--color-text-muted)] text-sm mt-2">University Research Paper</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="section-padding bg-[var(--color-bg)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Skills</span>
+        <h2 class="font-play text-4xl font-bold mt-4">Technical Expertise</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-[var(--color-surface)] rounded-xl p-6 animate-on-scroll">
+          <h3 class="font-bold text-xl mb-4 text-[var(--color-secondary)]">DevOps & Cloud</h3>
+          <ul class="space-y-2 text-[var(--color-text-muted)]">
+            <li>• Docker & Kubernetes</li>
+            <li>• AWS, Azure, GCP</li>
+            <li>• CI/CD Pipelines</li>
+            <li>• Infrastructure as Code</li>
+            <li>• Terraform, Ansible</li>
+          </ul>
+        </div>
+        
+        <div class="bg-[var(--color-surface)] rounded-xl p-6 animate-on-scroll">
+          <h3 class="font-bold text-xl mb-4 text-[var(--color-secondary)]">Software Engineering</h3>
+          <ul class="space-y-2 text-[var(--color-text-muted)]">
+            <li>• Java, Python, TypeScript</li>
+            <li>• Microservices Architecture</li>
+            <li>• Agile Methodologies</li>
+            <li>• Clean Code & Refactoring</li>
+            <li>• Testing & QA</li>
+          </ul>
+        </div>
+        
+        <div class="bg-[var(--color-surface)] rounded-xl p-6 animate-on-scroll">
+          <h3 class="font-bold text-xl mb-4 text-[var(--color-secondary)]">Project Management</h3>
+          <ul class="space-y-2 text-[var(--color-text-muted)]">
+            <li>• Scrum & Kanban</li>
+            <li>• Team Leadership</li>
+            <li>• Stakeholder Management</li>
+            <li>• Technical Planning</li>
+            <li>• Risk Management</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
