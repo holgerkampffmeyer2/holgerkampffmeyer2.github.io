@@ -86,6 +86,13 @@ src/
 - EM3F Festival Fotos
 - Video-Sektion mit YouTube Embeds
 - Spotify Playlist Embed
+- **WebP-Optimierung:** ~140 Bilder konvertiert (30-80% Größenersparnis)
+
+### Hero Slider
+- 4 Slides auf index.html mit unterschiedlichen Hintergründen
+- Automatische Rotation alle 5 Sekunden
+- Navigation via Pfeile und Dots
+- Fix: pointer-events und z-index für korrekte Button-Interaktion
 
 ### SEO & Meta
 - Canonical URL
@@ -109,7 +116,7 @@ src/
 ---
 
 ## Zukünftige Verbesserungen
-- [ ] Bildoptimierung (Astro Image)
-- [ ] Sitemap-Generierung
+- [x] Bildoptimierung (WebP)
+- [x] Sitemap-Generierung
 - [ ] RSS Feed
 - [ ] Blog-Sektion
