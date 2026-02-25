@@ -6,9 +6,6 @@ dist/
 # dependencies
 node_modules/
 
-# public assets (generated at build time)
-public/
-
 # logs
 npm-debug.log*
 yarn-debug.log*
