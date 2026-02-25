@@ -17,7 +17,15 @@ const navItems = [
       { href: '/#kontakt', label: 'Kontakt' }
     ]
   },
-  { href: '/vermietung', label: 'Vermietung' },
+  { 
+    href: '/vermietung', 
+    label: 'Vermietung',
+    hasDropdown: true,
+    items: [
+      { href: '/vermietung', label: 'Übersicht' },
+      { href: '/vermietung/ld-maui-28g3', label: 'LD Maui 28 G3' }
+    ]
+  },
   { href: '/work', label: 'Work' },
   { href: '/impressum', label: 'Impressum' },
 ];
