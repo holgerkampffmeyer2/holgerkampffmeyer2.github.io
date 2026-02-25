@@ -203,7 +203,12 @@ const testimonials = [
                 </li>
               ))}
             </ul>
-            <a href="#kontakt" class="btn-primary w-full text-center mt-4 block">Jetzt anfragen</a>
+            {index === 0 && (
+              <a href="/vermietung/ld-maui-28g3" class="btn-primary w-full text-center mt-4 block">Mehr Infos</a>
+            )}
+            {index !== 0 && (
+              <a href="#kontakt" class="btn-primary w-full text-center mt-4 block">Jetzt anfragen</a>
+            )}
           </div>
         ))}
       </div>

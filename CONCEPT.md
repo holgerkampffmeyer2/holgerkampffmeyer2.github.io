@@ -12,14 +12,22 @@
 ### Projektstruktur
 ```
 src/
-├── components/       # Wiederverwendbare UI-Komponenten
+├── components/           # Wiederverwendbare UI-Komponenten
 │   ├── Navbar.astro
-│   └── Footer.astro
-├── layouts/          # Seiten-Layouts
+│   ├── Footer.astro
+│   └── vermietung/      # Vermietung-spezifische Komponenten
+│       ├── ProductGallery.astro
+│       ├── TechnicalSpecs.astro
+│       ├── RentalIncludes.astro
+│       ├── RentalPricing.astro
+│       └── ExampleEvents.astro
+├── layouts/              # Seiten-Layouts
 │   └── Layout.astro
-├── pages/            # Routen/Seiten
+├── pages/                # Routen/Seiten
 │   ├── index.astro
 │   ├── vermietung.astro
+│   ├── vermietung/
+│   │   └── ld-maui-28g3.astro
 │   ├── work.astro
 │   ├── mixes.astro
 │   ├── em3f.astro
@@ -118,5 +126,30 @@ src/
 ## Zukünftige Verbesserungen
 - [x] Bildoptimierung (WebP)
 - [x] Sitemap-Generierung
+- [x] Produktdetailseiten für Vermietung
 - [ ] RSS Feed
 - [ ] Blog-Sektion
+
+---
+
+## Änderungen
+
+### 2025-xx-xx: Produktdetailseiten für Vermietung
+
+**Neue Komponenten unter `src/components/vermietung/`:**
+- `ProductGallery.astro` - Bildergalerie mit Thumbnail-Navigation
+- `TechnicalSpecs.astro` - Tabelle für technische Daten
+- `RentalIncludes.astro` - Liste mit Icons für Lieferumfang
+- `RentalPricing.astro` - Preis, Kaution und Mietbedingungen
+- `ExampleEvents.astro` - Karten für Beispielanwendungen
+
+**Neue Seiten:**
+- `src/pages/vermietung/ld-maui-28g3.astro` - Erste Produktdetailseite für LD Maui 28 G3
+
+**Features:**
+- Breadcrumb-Navigation
+- Responsive Bildergalerie mit Tastatursteuerung
+- Vollständige technische Spezifikationen
+- Mietpreis und Kaution (100€ / 200€)
+- Beispielanwendungen für bis zu 150 Personen (Hochzeit, Firmenfeier, Vereinsfeier)
+- Verlinkung von der Hauptseite

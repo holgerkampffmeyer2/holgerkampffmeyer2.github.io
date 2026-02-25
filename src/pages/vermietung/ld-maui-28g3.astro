@@ -1,0 +1,161 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import ProductGallery from '../../components/vermietung/ProductGallery.astro';
+import TechnicalSpecs from '../../components/vermietung/TechnicalSpecs.astro';
+import RentalIncludes from '../../components/vermietung/RentalIncludes.astro';
+import RentalPricing from '../../components/vermietung/RentalPricing.astro';
+import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
+
+const pageTitle = "LD Maui 28 G3 - Vermietung | DJ Hulk";
+
+const images = [
+  "/img/vermietung/IMG_7142.JPG",
+  "/img/vermietung/IMG_7142.JPG",
+  "/img/vermietung/IMG_7142.JPG"
+];
+
+const specs = {
+  "Peak-Leistung": "2060 W",
+  "RMS-Leistung": "1030 W",
+  "Max. SPL": "127 dB",
+  "Frequenzbereich": "37 Hz - 20 kHz",
+  "Subwoofer": '12" (305 mm)',
+  "Midrange": "12 x 3.5\"",
+  "Hochtöner": "2 x 1\"",
+  "Dispersion": "120° x 30°",
+  "Bluetooth": "5.0 mit AAC",
+  "Gewicht": "35.4 kg",
+  "Abmessungen Subwoofer": "370 x 527 x 472 mm",
+  "Gesamthöhe": "2052 mm"
+};
+
+const rentalIncludes = [
+  "2x LD Maui 28 G3 Säulensystem",
+  "2x Stromkabel",
+  "2x XLR Kabel 5m",
+  "Transporttaschen"
+];
+
+const events = [
+  {
+    title: "Hochzeit",
+    description: "Perfekt für die musikalische Untermalung Ihrer Hochzeitsfeier mit bis zu 150 Gästen. Kraftvoller Sound für Bothythmus und klare Durchsagen bei der Rede.",
+    personCount: "bis 150 Personen"
+  },
+  {
+    title: "Firmenfeier",
+    description: "Ideal für Betriebsfeiern, Jubiläen und Firmenevents. Professioneller Sound für Reden, Präsentationen und musikalische Unterhaltung.",
+    personCount: "bis 150 Personen"
+  },
+  {
+    title: "Vereinsfeier",
+    description: "Egal ob Sportverein, Musikverein oder sonstige Vereinsfeier - der kraftvolle Sound sorgt für beste Stimmung bei allen Gästen.",
+    personCount: "bis 150 Personen"
+  }
+];
+---
+
+<Layout 
+  title={pageTitle}
+  description="Mieten Sie das LD Maui 28 G3 Säulensystem für Ihre Party, Hochzeit oder Firmenfeier. Professionelle PA-Anlage mit 2060W für bis zu 150 Personen."
+  image="/img/vermietung/IMG_7142.JPG"
+>
+  <Navbar currentPage="/vermietung" />
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-section">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="breadcrumb">
+        <a href="/">Startseite</a>
+        <span class="separator">/</span>
+        <a href="/vermietung">Vermietung</a>
+        <span class="separator">/</span>
+        <span class="current">LD Maui 28 G3</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <section class="product-header section-padding pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Vermietung</span>
+      <h1 class="font-play text-4xl md:text-5xl font-bold mt-4 mb-4">LD Maui 28 G3</h1>
+      <p class="text-[var(--color-text-muted)] text-xl max-w-2xl">
+        Professionelles Säulen-PA-System mit kraftvollem Sound für bis zu 150 Personen. 
+        Kompaktes Plug & Play System mit erstklassiger Klangqualität.
+      </p>
+    </div>
+  </section>
+
+  <!-- 1. Bildergalerie -->
+  <ProductGallery images={images} title="LD Maui 28 G3" />
+
+  <!-- 2. Preis & Kaution -->
+  <RentalPricing price="ab 100€" deposit={200} />
+
+  <!-- 3. Technische Spezifikation -->
+  <TechnicalSpecs specs={specs} />
+
+  <!-- 4. Lieferumfang -->
+  <RentalIncludes items={rentalIncludes} />
+
+  <!-- 5. Beispielanwendungen -->
+  <ExampleEvents events={events} />
+
+  <!-- CTA Section -->
+  <section class="cta-section section-padding bg-[var(--color-surface)]">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="font-play text-3xl md:text-4xl font-bold mb-6">Interessiert an diesem Produkt?</h2>
+      <p class="text-[var(--color-text-muted)] mb-8">
+        Stellen Sie uns eine Anfrage für die LD Maui 28 G3 oder lassen Sie sich beraten.
+      </p>
+      <a href="/vermietung#kontakt" class="btn-primary">Jetzt anfragen</a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .breadcrumb-section {
+    padding-top: 120px;
+    padding-bottom: 1rem;
+    background: var(--color-bg);
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb a {
+    color: var(--color-text-muted);
+    transition: color 0.3s ease;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--color-secondary);
+  }
+
+  .breadcrumb .separator {
+    color: var(--color-border);
+  }
+
+  .breadcrumb .current {
+    color: var(--color-text);
+  }
+
+  .product-header {
+    background: var(--color-bg);
+    padding-bottom: 2rem;
+  }
+
+  .cta-section {
+    text-align: center;
+  }
+</style>
