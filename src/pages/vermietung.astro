@@ -145,7 +145,7 @@ const testimonials = [
   <!-- Hero Section -->
   <section class="hero-slider">
     <div class="slide slide-1 active">
-      <div class="slide-content" style="background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url("/img/vermietung/licht2.webp");">
+      <div class="slide-content" style={`background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url("/img/vermietung/licht2.webp");`}>
         <div class="container mx-auto px-4">
           <div class="max-w-3xl pt-32">
             <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Musikanlagen, PA, Partyanlagen</span>
@@ -209,7 +209,13 @@ const testimonials = [
                 <a href="/vermietung/ld-maui-28g3" class="btn-secondary w-full text-center mt-3 block">Mehr Infos</a>
               </>
             )}
-            {index !== 0 && (
+            {index === 2 && (
+              <>
+                <a href="#kontakt" class="btn-primary w-full text-center mt-4 block">Jetzt anfragen</a>
+                <a href="/vermietung/jbl-partybox-300-320" class="btn-secondary w-full text-center mt-3 block">Mehr Infos</a>
+              </>
+            )}
+            {index !== 0 && index !== 2 && (
               <a href="#kontakt" class="btn-primary w-full text-center mt-4 block">Jetzt anfragen</a>
             )}
           </div>
