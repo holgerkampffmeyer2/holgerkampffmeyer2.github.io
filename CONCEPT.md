@@ -194,3 +194,10 @@ node update-image-refs.mjs
 - Mietpreis und Kaution
 - Beispielanwendungen für verschiedene Veranstaltungsarten
 - Verlinkung von der Hauptseite und Navbar
+
+### 2026-02-25: Galerie-Verbesserungen
+
+**Änderung:**
+- Bilder in `public/img/vermietung/` für Produktgalerien
+- `object-contain` für vollständige Bildanzeige
+- Abgerundete Ecken in der Galerie
