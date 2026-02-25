@@ -215,7 +215,13 @@ const testimonials = [
                 <a href="/vermietung/jbl-partybox-300-320" class="btn-secondary w-full text-center mt-3 block">Mehr Infos</a>
               </>
             )}
-            {index !== 0 && index !== 2 && (
+            {index === 4 && (
+              <>
+                <a href="#kontakt" class="btn-primary w-full text-center mt-4 block">Jetzt anfragen</a>
+                <a href="/vermietung/partylicht-moving-head" class="btn-secondary w-full text-center mt-3 block">Mehr Infos</a>
+              </>
+            )}
+            {index !== 0 && index !== 2 && index !== 4 && (
               <a href="#kontakt" class="btn-primary w-full text-center mt-4 block">Jetzt anfragen</a>
             )}
           </div>
