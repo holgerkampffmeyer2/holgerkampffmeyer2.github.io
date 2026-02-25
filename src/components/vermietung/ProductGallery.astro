@@ -111,6 +111,7 @@ const { images, title } = Astro.props;
     object-fit: contain;
     transition: opacity 0.3s ease;
     background: var(--color-bg);
+    border-radius: 0.5rem;
   }
 
   .image-counter {
@@ -156,7 +157,8 @@ const { images, title } = Astro.props;
   .thumbnail img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    border-radius: 0.25rem;
   }
 
   .gallery-nav {
