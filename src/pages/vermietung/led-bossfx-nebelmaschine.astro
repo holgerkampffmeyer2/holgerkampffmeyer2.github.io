@@ -8,75 +8,65 @@ import RentalIncludes from '../../components/vermietung/RentalIncludes.astro';
 import RentalPricing from '../../components/vermietung/RentalPricing.astro';
 import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 
-const pageTitle = "Partylicht & Gobo Moving Head - Vermietung | DJ Hulk";
+const pageTitle = "LED BossFX-2 Pro & Nebelmaschine - Vermietung | DJ Hulk";
 
 const images = [
-  "/img/vermietung/61UpvPLTkHL._AC_SL1500_.webp",
-  "/img/vermietung/IMG_9114.webp",
-  "/img/vermietung/IMG_9115.webp",
-  "/img/vermietung/IMG_9119.webp",
-  "/img/vermietung/IMG_9129.webp",
-  "/img/vermietung/IMG_9139.webp",
-  "/img/vermietung/IMG_9140.webp",
-  "/img/vermietung/s-l1600.webp"
+  "/img/vermietung/stairville-led-bossfx-2-pro-bundle.webp",
+  "/img/vermietung/stairville-led-bossfx-2-pro-2.webp",
+  "/img/vermietung/stairville-led-bossfx-2-pro-3.webp",
+  "/img/vermietung/stairville-led-bossfx-2-pro-4.webp",
+  "/img/vermietung/stairville-af-150-fog-machine.webp",
+  "/img/vermietung/stairville-af-150-fog-machine-1.webp",
+  "/img/vermietung/stairville-af-150-fog-machine-2.webp"
 ];
 
-const specsMovingHead = {
-  "Modell": "18 Prisma LED Spot 10 Gobo RGBW DMX",
-  "DMX-Kanäle": "11/16",
-  "LED": "RGBW 4-in-1",
-  "Gobos": "10 Muster",
-  "Prismen": "18-fach Prisma",
-  "Steuerung": "Sound-zu-Licht, DMX, Automatikprogramme",
-  "Abmessungen": "20.5 x 28 cm"
+const specsPartylicht = {
+  "Modell": "Stairville LED BossFX-2 Pro",
+  "Effekte": "2 Derbys, 2 LED Flood Panels, 4 Strobe-LEDs",
+  "Steuerung": "Sound-zu-Licht, Fernbedienung",
+  "Stativ": "inklusive",
+  "Besonderheiten": "Weißes UV und Strobe kombiniert"
 };
 
-const specsPAR = {
-  "Modell": "2x 270W 18 LED PAR RGBW",
-  "LEDs": "18 x 15W RGBW 4-in-1",
-  "DMX-Kanäle": "9",
-  "Steuerung": "Sound-zu-Licht, DMX, Automatikprogramme",
-  "Gehäuse": "Robustes Aluminium",
-  "Abmessungen": "23 x 11.5 cm"
-};
-
-const specsStativ = {
-  "Typ": "Flexibles T-Bar Stativ DJ Ständer",
-  "Höhe": "100 - 180 cm",
-  "Breite": "95 cm",
-  "Montagepunkte": "4 für PAR-Lichter und Moving Heads"
+const specsNebelmaschine = {
+  "Modell": "Stairville AF-150 DMX",
+  "Leistung": "800 W",
+  "Ausstoß": "ca. 110 m³/min",
+  "Fluid": "1L inklusive",
+  "Steuerung": "DMX, Fernbedienung"
 };
 
 const rentalIncludes = [
-  "1x LED Spot Moving Head 18 Prisma",
-  "2x LED PAR RGBW Strahler",
-  "1x T-Bar Stativ",
-  "DMX-Kabel nach Bedarf"
+  "1x Stairville LED BossFX-2 Pro Lichtanlage",
+  "1x Stairville AF-150 Nebelmaschine",
+  "1x Stativ",
+  "1x Fernbedienung",
+  "1L Nebelfluid"
 ];
 
 const events = [
   {
     title: "Geburtstagsfeier",
-    description: "Spectaculäre Lichteffekte für Ihre Geburtstagsfeier. Die Moving Heads und PAR-Strahler sorgen für_partyatmosphäre.",
-    personCount: "bis 100 Personen"
+    description: "Die Kombination aus Licht und Nebel sorgt für eine partyatmosphäre. Perfekt für Geburtstagsfeiern und private Feiern.",
+    personCount: "bis 80 Personen"
   },
   {
     title: "Hochzeit",
-    description: "Verleihen Sie Ihrer Hochzeit das gewisse Extra mit professioneller Lichttechnik. Perfekt für Tanzfläche und Ambiente.",
-    personCount: "bis 150 Personen"
+    description: "Verleihen Sie Ihrer Hochzeit das gewisse Extra mit beeindruckender Lichtshow und Nebeleffekten.",
+    personCount: "bis 100 Personen"
   },
   {
-    title: "Firmenevent",
-    description: "Beeindruckende Beleuchtung für Firmenfeiern, Jubiläen und Messen. Per DMX programmierbar für individuelle Lichtshows.",
-    personCount: "bis 200 Personen"
+    title: "Firmenfeier",
+    description: "Professionelle Beleuchtung für Firmenfeiern und Events. Die Lichteffekte kommen durch den Nebel besonders gut zur Geltung.",
+    personCount: "bis 100 Personen"
   }
 ];
 ---
 
 <Layout 
   title={pageTitle}
-  description="Mieten Sie unsere Party-Lichtanlage mit Gobo Moving Head und LED PAR Strahlern. DMX-steuerbar mit Sound-zu-Licht Modus für Ihre Party."
-  image="/img/vermietung/licht1.webp"
+  description="Mieten Sie die LED Party-Lichtanlage BossFX-2 Pro mit AF-150 Nebelmaschine. Sound-zu-Licht Modus und DMX-Steuerung für Ihre Party."
+  image="/img/vermietung/stairville-led-bossfx-2-pro-bundle.webp"
 >
   <Navbar currentPage="/vermietung" />
 
@@ -88,7 +78,7 @@ const events = [
         <span class="separator">/</span>
         <a href="/vermietung">Vermietung</a>
         <span class="separator">/</span>
-        <span class="current">Partylicht & Moving Head</span>
+        <span class="current">LED BossFX-2 Pro & Nebelmaschine</span>
       </nav>
     </div>
   </div>
@@ -97,49 +87,38 @@ const events = [
   <section class="product-header section-padding pb-0">
     <div class="max-w-6xl mx-auto px-4">
       <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Vermietung</span>
-      <h1 class="font-play text-4xl md:text-5xl font-bold mt-4 mb-4">Partylicht & Gobo Moving Head</h1>
+      <h1 class="font-play text-4xl md:text-5xl font-bold mt-4 mb-4">LED BossFX-2 Pro & Nebelmaschine</h1>
       <p class="text-[var(--color-text-muted)] text-xl max-w-2xl">
-        Leistungsfähige DMX-steuerbare Party-Lichtanlage mit 18 Prisma LED Moving Head, 
-        zwei hellen 270W LED PAR Strahlern und flexiblem T-Bar Stativ. 
-        Sound-zu-Licht oder eigene Programme per DMX.
+        Komplette LED Party-Lichtanlage mit 2 Derbys, 2 LED Flood Panels und 4 Strobe-LEDs inklusive 
+        leistungsstarker 800W Nebelmaschine. Unerlässlich, um die Lichteffekte richtig zur Geltung zu bringen!
       </p>
     </div>
   </section>
 
   <!-- 1. Bildergalerie -->
-  <ProductGallery images={images} title="Partylicht & Moving Head" />
+  <ProductGallery images={images} title="LED BossFX-2 Pro & Nebelmaschine" />
 
   <!-- 2. Preis & Kaution -->
-  <RentalPricing price="ab 50€" deposit={100} />
+  <RentalPricing price="ab 60€" deposit={100} />
 
-  <!-- 3a. Technische Spezifikation Moving Head -->
+  <!-- 3a. Technische Spezifikation Partylicht -->
   <section class="section-padding bg-[var(--color-surface)]">
     <div class="max-w-6xl mx-auto px-4">
       <div class="text-center mb-12">
         <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Technische Daten</span>
-        <h2 class="font-play text-3xl md:text-4xl font-bold mt-4">Gobo Moving Head</h2>
+        <h2 class="font-play text-3xl md:text-4xl font-bold mt-4">LED BossFX-2 Pro</h2>
       </div>
-      <TechnicalSpecs specs={specsMovingHead} />
+      <TechnicalSpecs specs={specsPartylicht} />
     </div>
   </section>
 
-  <!-- 3b. Technische Spezifikation PAR Strahler -->
+  <!-- 3b. Technische Spezifikation Nebelmaschine -->
   <section class="section-padding bg-[var(--color-bg)]">
     <div class="max-w-6xl mx-auto px-4">
       <div class="text-center mb-12">
-        <h2 class="font-play text-3xl md:text-4xl font-bold mt-4">LED PAR Strahler</h2>
+        <h2 class="font-play text-3xl md:text-4xl font-bold mt-4">AF-150 Nebelmaschine</h2>
       </div>
-      <TechnicalSpecs specs={specsPAR} />
-    </div>
-  </section>
-
-  <!-- 3c. Technische Spezifikation Stativ -->
-  <section class="section-padding bg-[var(--color-surface)]">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2 class="font-play text-3xl md:text-4xl font-bold mt-4">T-Bar Stativ</h2>
-      </div>
-      <TechnicalSpecs specs={specsStativ} />
+      <TechnicalSpecs specs={specsNebelmaschine} />
     </div>
   </section>
 
@@ -154,7 +133,7 @@ const events = [
     <div class="max-w-4xl mx-auto text-center px-4">
       <h2 class="font-play text-3xl md:text-4xl font-bold mb-6">Interessiert an diesem Produkt?</h2>
       <p class="text-[var(--color-text-muted)] mb-8">
-        Stellen Sie uns eine Anfrage für die Party-Lichtanlage oder lassen Sie sich beraten.
+        Stellen Sie uns eine Anfrage für die LED BossFX-2 Pro mit Nebelmaschine oder lassen Sie sich beraten.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/vermietung#kontakt" class="btn-primary">Jetzt anfragen</a>

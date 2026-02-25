@@ -181,12 +181,16 @@ node update-image-refs.mjs
 - `ExampleEvents.astro` - Karten für Beispielanwendungen
 
 **Neue Seiten:**
-- `src/pages/vermietung/ld-maui-28g3.astro` - Erste Produktdetailseite für LD Maui 28 G3
+- `src/pages/vermietung/ld-maui-28g3.astro` - Produktdetailseite für LD Maui 28 G3
+- `src/pages/vermietung/jbl-partybox-300-320.astro` - Produktdetailseite für JBL Partybox 300/320 Set
+- `src/pages/vermietung/partylicht-moving-head.astro` - Produktdetailseite für Partylicht & Gobo Moving Head
+- `src/pages/vermietung/led-bossfx-nebelmaschine.astro` - Produktdetailseite für LED BossFX-2 Pro & Nebelmaschine
+- `src/pages/vermietung/kls-laser-bar.astro` - Produktdetailseite für Eurolite KLS Laser Bar
 
 **Features:**
 - Breadcrumb-Navigation
 - Responsive Bildergalerie mit Tastatursteuerung
 - Vollständige technische Spezifikationen
-- Mietpreis und Kaution (100€ / 200€)
-- Beispielanwendungen für bis zu 150 Personen (Hochzeit, Firmenfeier, Vereinsfeier)
-- Verlinkung von der Hauptseite
+- Mietpreis und Kaution
+- Beispielanwendungen für verschiedene Veranstaltungsarten
+- Verlinkung von der Hauptseite und Navbar
