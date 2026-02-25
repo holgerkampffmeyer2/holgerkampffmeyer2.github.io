@@ -94,7 +94,44 @@ src/
 - EM3F Festival Fotos
 - Video-Sektion mit YouTube Embeds
 - Spotify Playlist Embed
-- **WebP-Optimierung:** ~140 Bilder konvertiert (30-80% Größenersparnis)
+---
+
+## Bildoptimierung
+
+### Tools & Skripte
+
+Im Projekt-Root befinden sich mehrere Hilfsskripte zur Bildoptimierung:
+
+| Skript | Beschreibung |
+|--------|--------------|
+| `create-webp.mjs` | Konvertiert JPG/JPEG zu WebP (Qualität: 80%, max. 1920px) |
+| `optimize-images.mjs` | Optimiert JPG/PNG (Qualität: 80%, Größe je nach Verzeichnis) |
+| `update-image-refs.mjs` | Aktualisiert Bildreferenzen in Astro/HTML Dateien auf WebP |
+
+### Verwendung
+
+```bash
+# 1. WebP erstellen
+node create-webp.mjs
+
+# 2. Bilder optimieren
+node optimize-images.mjs
+
+# 3. Referenzen aktualisieren
+node update-image-refs.mjs
+```
+
+### Konfiguration
+
+- **Vermietungsbilder**: max. 1200px Breite
+- **Header/Videos**: max. 1920px Breite
+- **Icons**: max. 100px Breite
+- **WebP-Qualität**: 80%
+- **JPG/PNG-Qualität**: 80% mit mozjpeg/pngquant
+
+### Ergebnisse
+- ~140 Bilder zu WebP konvertiert
+- 30-80% Größenersparnis je nach Bildinhalt
 
 ### Hero Slider
 - 4 Slides auf index.html mit unterschiedlichen Hintergründen
