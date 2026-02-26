@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://holger-kampffmeyer.de/sitemap.xml

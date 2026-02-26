@@ -6,7 +6,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  site: 'https://sundundlicht-stuttgart.de',
+  site: 'https://holger-kampffmeyer.de',
   base: '/',
   output: 'static',
   build: {
