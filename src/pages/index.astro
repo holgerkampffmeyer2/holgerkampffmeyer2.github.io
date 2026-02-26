@@ -685,21 +685,6 @@ import Footer from "../components/Footer.astro";
   <Footer />
 
   <script>
-    // Mobile Menu Toggle
-    const menuBtn = document.getElementById("mobile-menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
-
-    menuBtn?.addEventListener("click", () => {
-      mobileMenu?.classList.toggle("hidden");
-    });
-
-    // Close mobile menu when clicking a link
-    mobileMenu?.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        mobileMenu.classList.add("hidden");
-      });
-    });
-
     // Hero Slider
     const slides = document.querySelectorAll(".slide");
     const dots = document.querySelectorAll(".slider-dot");
