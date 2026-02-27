@@ -57,9 +57,9 @@ src/pages/
 ```
 
 ## Wichtige Regeln
-1. Domain IMMER auf `holger-kampffmeyer.de` setzen (NICHT sundundlicht-stuttgart.de)
+1. Domain IMMER auf `holger-kampffmeyer.de` setzen
 2. Neue Seiten in `src/pages/` erstellen
-3. Statische Dateien wie sitemap.xml, robots.txt in `public/` ablegen
+3. Statische Dateien wie images, sitemap.xml, robots.txt in `public/` ablegen
 4. Nach Änderungen: build -> commit -> push
 
 ## Git-Workflow
