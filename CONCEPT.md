@@ -67,7 +67,8 @@ npm run preview  # Preview production build
 - **Background:** Dunkel (#0a0a0f) - Elegant, Club-Atmosphäre
 - **Surface:** leicht heller (#16161a) - Kartenhintergründe
 - **Text:** Hell (#e5e5e5) auf dunklem Grund
-
+### UI-Komponenten
+- Veranstaltungskarten im Archiv besitzen einen feinen Rahmen (border) und reagieren beim Hover mit sekundärer Farbe und leichtem Schatten – dieselbe Stilistik wie bei Vermietungs-Galeriekarten.
 ### Typografie
 - **Headings:** Play (bold) - Eigenständig, markant
 - **Body:** Josefin Sans - Modern, gut lesbar
@@ -80,7 +81,7 @@ npm run preview  # Preview production build
 
 ### Seitenstruktur
 1. **Home (index)** - Hero-Slider (DJ Hulk, Vermietung, Work), DJing Section, Vermietung, Kontakt
-2. **DJ Hulk** - DJing Info, Videos Link, Mixes, Radio Stations, Spotify Playlist
+2. **DJ Hulk** - DJing Info, Videos Link, Mixes, Radio Stations, Spotify Playlist, zusätzlich ein **Veranstaltungsarchiv** mit Karten für vergangene Gigs und Flyer
 3. **DJ / Videos** - YouTube Video-Galerie
 4. **DJ / Mixes** - Weekly Sunday House Mixes (Mixcloud)
 5. **DJ / EM3F** - Festival-Fotogalerie
