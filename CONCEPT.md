@@ -49,6 +49,14 @@ src/
 - Kein SSR - alle Seiten werden zur Build-Zeit generiert
 - Optimiert für maximale Performance und GitHub Pages Hosting
 
+### Build-Skripte
+```bash
+npm run dev      # Development server
+npm run check    # TypeScript check
+npm run build    # Production build
+npm run preview  # Preview production build
+```
+
 ---
 
 ## Designentscheidungen
@@ -166,6 +174,7 @@ node update-image-refs.mjs
 - Open Graph Tags
 - Meta Descriptions
 - Semantisches HTML
+- LLM-Optimierung: robots.txt erweitert für GPTBot, ChatGPT-User, Google-Extended, anthropic-ai, Claude-Web, cohere-ai
 
 ---
 
@@ -241,3 +250,13 @@ node update-image-refs.mjs
 - Startseite: DJing Section hinzugefügt + Vermietung + Kontakt Sections
 - DJ Hulk Seite: Radio Stations Section hinzugefügt (365 FM Radio, CouchRadio)
 - Video-Galerie auf eigene Unterseite `/dj/videos` ausgelagert
+
+### 2026-02-28: Index Seite Updates
+
+**Änderungen:**
+- Vermietung Section: Bilder hinzugefügt (2 Bilder im Grid)
+- "Was ich dir biete" Section: 4 Karten mit SVG-Icons (orange)
+- FAQ Section: 6 Fragen mit Answer-Details
+- Alle Bilder mit Hover-Effekt (ring + scale)
+- LLM-Optimierung: robots.txt mit GPTBot, ChatGPT-User, etc.
+- sitemap.xml aktualisiert mit allen 13 Seiten

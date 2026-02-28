@@ -28,6 +28,44 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
     
+    <!-- JSON-LD LocalBusiness -->
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "DJ Hulk - Holger Kampffmeyer",
+        "description": "Verleih von Musikanlagen, Partyboxen, Lichttechnik und Tontechnik im Großraum Stuttgart. Electronic Music DJ für Events, Feiern und Hochzeiten.",
+        "url": "https://holger-kampffmeyer.de",
+        "telephone": "+49-1711467491",
+        "email": "holger.kampffmeyer+dj@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Magellanstraße 4",
+          "addressLocality": "Leinfelden-Echterdingen",
+          "postalCode": "70771",
+          "addressRegion": "Baden-Württemberg",
+          "addressCountry": "DE"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "48.6938",
+          "longitude": "9.1539"
+        },
+        "openingHours": "Mo-Su 09:00-20:00",
+        "priceRange": "€€",
+        "areaServed": {
+          "@type": "State",
+          "name": "Baden-Württemberg"
+        },
+        "sameAs": [
+          "https://www.facebook.com/holger.kampffmeyer",
+          "https://www.instagram.com/djhulk_de",
+          "https://www.youtube.com/@djhulk_de",
+          "https://www.mixcloud.com/holger-kampffmeyer/"
+        ]
+      }
+    </script>
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

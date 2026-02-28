@@ -47,6 +47,10 @@ body {
   box-shadow: 0 0 30px rgba(249, 115, 22, 0.4);
 }
 
+.check-orange {
+  @apply w-4 h-4 text-orange-500 flex-shrink-0;
+}
+
 .card-glow:hover {
   box-shadow: 0 0 40px rgba(8, 145, 178, 0.3);
   transform: translateY(-4px);
