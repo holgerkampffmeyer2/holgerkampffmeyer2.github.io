@@ -8,10 +8,15 @@ const { currentPage = 'home' } = Astro.props;
 const navItems = [
   { 
     href: '/', 
-    label: 'Home' 
+    label: 'Home' ,
+    hasDropdown: true,
+    items: [
+      { href: '/#djing', label: 'DJ Hulk' },
+      { href: '/#vermietung', label: 'Vermietung' }
+    ]
   },
   { 
-    href: '/#djing', 
+    href: '/djhulk-electronic-music', 
     label: 'DJing',
     hasDropdown: true,
     items: [
@@ -22,12 +27,11 @@ const navItems = [
     ]
   },
   { 
-    href: '/#vermietung', 
+    href: '/vermietung', 
     label: 'Vermietung',
     hasDropdown: true,
     items: [
       { href: '/vermietung', label: 'Übersicht' },
-      { href: '/#vermietung', label: 'Zur Miettechnik' },
       { href: '/vermietung/ld-maui-28g3', label: 'LD Maui 28 G3' },
       { href: '/vermietung/jbl-partybox-300-320', label: 'JBL Partybox 300/320' },
       { href: '/vermietung/partylicht-moving-head', label: 'Partylicht & Moving Head' },
