@@ -179,96 +179,125 @@ import Footer from "../components/Footer.astro";
           <div class="text-center mb-12 animate-on-scroll">
             <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Veranstaltungsarchiv</span>
             <h2 class="font-play text-4xl md:text-5xl font-bold mt-4 mb-6">Ausgewählte Veranstaltungen & Flyer</h2>
-            <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Eine Auswahl vergangener Gigs, Festivals und Clubnächte. Klick auf eine Karte für Details.</p>
+            <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Eine Auswahl vergangener Gigs, Festivals und Clubnächte. </p>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-on-scroll">
-            <!-- Card 1 -->
-            <article class="bg-[var(--color-bg)] rounded-xl overflow-hidden shadow-sm hover:scale-[1.01] transition-transform">
-              <a href="/img/events/adp-afterhour-clubbing.jpg" target="_blank" class="block">
-                <picture>
-                  <source srcset="/img/events/adp-afterhour-clubbing.webp" type="image/webp" />
-                  <img src="/img/events/adp-afterhour-clubbing.jpg" alt="ADP Afterhour Clubbing" class="w-full object-cover aspect-[4/3]" />
-                </picture>
-                <div class="p-4">
-                  <h3 class="font-play text-xl font-bold mb-1">ADP Afterhour Clubbing</h3>
-                  <div class="text-[var(--color-text-muted)] text-sm mb-2">Datum: 05.08.2023 · Ort: Club XY, Stuttgart</div>
-                  <p class="text-[var(--color-text-muted)] text-sm">House & Tech House Afterhour mit Special Guest Sets.</p>
-                </div>
-              </a>
-            </article>
-
-            <!-- Card 2 -->
-            <article class="bg-[var(--color-bg)] rounded-xl overflow-hidden shadow-sm hover:scale-[1.01] transition-transform">
-              <a href="/img/events/Entdeckerfest-nowhatsapp-2025.png" target="_blank" class="block">
-                <picture>
-                  <source srcset="/img/events/Entdeckerfest-nowhatsapp-2025.webp" type="image/webp" />
-                  <img src="/img/events/Entdeckerfest-nowhatsapp-2025.png" alt="Entdeckerfest 2025" class="w-full object-cover aspect-[4/3]" />
-                </picture>
-                <div class="p-4">
-                  <h3 class="font-play text-xl font-bold mb-1">Entdeckerfest</h3>
-                  <div class="text-[var(--color-text-muted)] text-sm mb-2">Datum: 12.07.2025 · Ort: Innenstadtfestival</div>
-                  <p class="text-[var(--color-text-muted)] text-sm">Open-Air Festival mit elektronischer Bühne und Afterparty.</p>
-                </div>
-              </a>
-            </article>
-
-            <!-- Card 3 -->
-            <article class="bg-[var(--color-bg)] rounded-xl overflow-hidden shadow-sm hover:scale-[1.01] transition-transform">
-              <a href="/img/events/EM3F%202024.jpg" target="_blank" class="block">
-                <picture>
-                  <source srcset="/img/events/EM3F%202024.webp" type="image/webp" />
-                  <img src="/img/events/EM3F%202024.jpg" alt="EM3F 2024" class="w-full object-cover aspect-[4/3]" />
-                </picture>
-                <div class="p-4">
-                  <h3 class="font-play text-xl font-bold mb-1">Electronic Music Family & Friends 2024</h3>
-                  <div class="text-[var(--color-text-muted)] text-sm mb-2">Datum: 21.09.2024 · Ort: Festivalgelände, Stuttgart</div>
-                  <p class="text-[var(--color-text-muted)] text-sm">Festival-Projekt mit lokalen und internationalen Acts.</p>
-                </div>
-              </a>
-            </article>
-
-            <!-- Card 4 -->
+            <!-- Card 1: 20 Jahre Propp (14.10.2022) -->
             <article class="bg-[var(--color-bg)] rounded-xl overflow-hidden shadow-sm hover:scale-[1.01] transition-transform">
               <a href="/img/events/Poster%20-%2020%20Jahre%20Propp%20v2.png" target="_blank" class="block">
-                <picture>
-                  <source srcset="/img/events/Poster%20-%2020%20Jahre%20Propp%20v2.webp" type="image/webp" />
-                  <img src="/img/events/Poster%20-%2020%20Jahre%20Propp%20v2.png" alt="20 Jahre Propp" class="w-full object-cover aspect-[4/3]" />
-                </picture>
+                <div class="bg-black flex items-center justify-center" style="aspect-ratio: 3/4;">
+                  <picture>
+                    <source srcset="/img/events/Poster%20-%2020%20Jahre%20Propp%20v2.webp" type="image/webp" />
+                    <img src="/img/events/Poster%20-%2020%20Jahre%20Propp%20v2.png" alt="20 Jahre Propp" class="h-full object-contain" />
+                  </picture>
+                </div>
                 <div class="p-4">
-                  <h3 class="font-play text-xl font-bold mb-1">20 Jahre Propp</h3>
-                  <div class="text-[var(--color-text-muted)] text-sm mb-2">Datum: 14.10.2022 · Ort: Propp Club</div>
-                  <p class="text-[var(--color-text-muted)] text-sm">Jubiläumsparty mit alten Weggefährten und special DJ line-up.</p>
+                  <h3 class="font-play text-xl font-bold mb-1">20 Jahre Propp Fiseure</h3>
+                  <div class="text-[var(--color-text-muted)] text-sm mb-2">Datum: 14.10.2022 · Ort: Propp Friseursalon</div>
+                  <p class="text-[var(--color-text-muted)] text-sm">Jubiläumsparty und Firmenfest mit DJ Hulk.</p>
                 </div>
               </a>
             </article>
 
-            <!-- Card 5 -->
+            <!-- Card 2: Boho Vibes (10.06.2023) -->
             <article class="bg-[var(--color-bg)] rounded-xl overflow-hidden shadow-sm hover:scale-[1.01] transition-transform">
               <a href="/img/events/boho-vibes-juni-23.jpg" target="_blank" class="block">
-                <picture>
-                  <source srcset="/img/events/boho-vibes-juni-23.webp" type="image/webp" />
-                  <img src="/img/events/boho-vibes-juni-23.jpg" alt="Boho Vibes Juni 23" class="w-full object-cover aspect-[4/3]" />
-                </picture>
+                <div class="bg-black flex items-center justify-center aspect-[4/3]">
+                  <picture>
+                    <source srcset="/img/events/boho-vibes-juni-23.webp" type="image/webp" />
+                    <img src="/img/events/boho-vibes-juni-23.jpg" alt="Boho Vibes Juni 23" class="w-full h-full object-contain" />
+                  </picture>
+                </div>
                 <div class="p-4">
                   <h3 class="font-play text-xl font-bold mb-1">Boho Vibes</h3>
-                  <div class="text-[var(--color-text-muted)] text-sm mb-2">Datum: 10.06.2023 · Ort: Beachclub</div>
-                  <p class="text-[var(--color-text-muted)] text-sm">Sommerliche Chill & Dance Sessions am Wasser.</p>
+                  <div class="text-[var(--color-text-muted)] text-sm mb-2">Datum: 10.06.2023 · Ort: Mauritius Stuttgart Süd</div>
+                  <p class="text-[var(--color-text-muted)] text-sm">Sommerparty mit DJ Hulk.</p>
                 </div>
               </a>
             </article>
 
-            <!-- Card 6 -->
+            <!-- Card 3: ADP Afterhour Clubbing (05.08.2023) -->
+            <article class="bg-[var(--color-bg)] rounded-xl overflow-hidden shadow-sm hover:scale-[1.01] transition-transform">
+              <a href="/img/events/adp-afterhour-clubbing.jpg" target="_blank" class="block">
+                <div class="bg-black flex items-center justify-center aspect-[4/3]">
+                  <picture>
+                    <source srcset="/img/events/adp-afterhour-clubbing.webp" type="image/webp" />
+                    <img src="/img/events/adp-afterhour-clubbing.jpg" alt="ADP Afterhour Clubbing" class="w-full h-full object-contain" />
+                  </picture>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-play text-xl font-bold mb-1">ADP Afterhour Clubbing</h3>
+                  <div class="text-[var(--color-text-muted)] text-sm mb-2">Datum: 05.08.2023 · Ort: Vector Club, Stuttgart</div>
+                  <p class="text-[var(--color-text-muted)] text-sm">Musikuntermalung einer Afterhour Firmenfeier.</p>
+                </div>
+              </a>
+            </article>
+
+            <!-- Card 4: ADP Evening Event (12.08.2023) -->
+            <article class="bg-[var(--color-bg)] rounded-xl overflow-hidden shadow-sm hover:scale-[1.01] transition-transform">
+              <a href="/img/events/adp-evening-event-D724-4447-B663-073246B13C8B.jpg" target="_blank" class="block">
+                <div class="bg-black flex items-center justify-center aspect-[4/3]">
+                  <picture>
+                    <source srcset="/img/events/adp-evening-event-D724-4447-B663-073246B13C8B.webp" type="image/webp" />
+                    <img src="/img/events/adp-evening-event-D724-4447-B663-073246B13C8B.jpg" alt="ADP Evening Event" class="w-full h-full object-contain" />
+                  </picture>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-play text-xl font-bold mb-1">ADP Evening Event</h3>
+                  <div class="text-[var(--color-text-muted)] text-sm mb-2">Datum: 12.08.2023 · Ort: ADP Standort</div>
+                  <p class="text-[var(--color-text-muted)] text-sm">DJ Auftritt bei privatem Firmenabend.</p>
+                </div>
+              </a>
+            </article>
+
+            <!-- Card 5: Romy's Clubnight (02.11.2023) -->
             <article class="bg-[var(--color-bg)] rounded-xl overflow-hidden shadow-sm hover:scale-[1.01] transition-transform">
               <a href="/img/events/romys-clubnight-7563-40E0-A4C1-BC2ED29D5257.jpg" target="_blank" class="block">
-                <picture>
-                  <source srcset="/img/events/romys-clubnight-7563-40E0-A4C1-BC2ED29D5257.webp" type="image/webp" />
-                  <img src="/img/events/romys-clubnight-7563-40E0-A4C1-BC2ED29D5257.jpg" alt="Romy's Clubnight" class="w-full object-cover aspect-[4/3]" />
-                </picture>
+                <div class="bg-black flex items-center justify-center aspect-[4/3]">
+                  <picture>
+                    <source srcset="/img/events/romys-clubnight-7563-40E0-A4C1-BC2ED29D5257.webp" type="image/webp" />
+                    <img src="/img/events/romys-clubnight-7563-40E0-A4C1-BC2ED29D5257.jpg" alt="Romy's Clubnight" class="w-full h-full object-contain" />
+                  </picture>
+                </div>
                 <div class="p-4">
-                  <h3 class="font-play text-xl font-bold mb-1">Romy's Clubnight</h3>
-                  <div class="text-[var(--color-text-muted)] text-sm mb-2">Datum: 02.11.2023 · Ort: Romy's Club</div>
-                  <p class="text-[var(--color-text-muted)] text-sm">Clubnight mit elektronischer Bassline und Live Acts.</p>
+                  <h3 class="font-play text-xl font-bold mb-1">Romy's Clubnight 2023</h3>
+                  <div class="text-[var(--color-text-muted)] text-sm mb-2">Datum: 02.11.2023 · Ort: Romy's Club, Stuttgart</div>
+                  <p class="text-[var(--color-text-muted)] text-sm">Clubnight mit elektronischer Musik und DJ Hulk als Organisator.</p>
+                </div>
+              </a>
+            </article>
+
+            <!-- Card 6: EM3F Festival 2024 (21.09.2024) -->
+            <article class="bg-[var(--color-bg)] rounded-xl overflow-hidden shadow-sm hover:scale-[1.01] transition-transform">
+              <a href="/img/events/EM3F%202024.jpg" target="_blank" class="block">
+                <div class="bg-black flex items-center justify-center aspect-[4/3]">
+                  <picture>
+                    <source srcset="/img/events/EM3F%202024.webp" type="image/webp" />
+                    <img src="/img/events/EM3F%202024.jpg" alt="EM3F 2024" class="w-full h-full object-contain" />
+                  </picture>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-play text-xl font-bold mb-1">Electronic Music Family & Friends 2024</h3>
+                  <div class="text-[var(--color-text-muted)] text-sm mb-2">Datum: 21.09.2024 · Ort: Kulturinsel Stuttgart</div>
+                  <p class="text-[var(--color-text-muted)] text-sm">Festival-Projekt mit lokalen und internationalen DJ Acts.</p>
+                </div>
+              </a>
+            </article>
+
+            <!-- Card 7: Entdeckerfest 2025 (12.07.2025) -->
+            <article class="bg-[var(--color-bg)] rounded-xl overflow-hidden shadow-sm hover:scale-[1.01] transition-transform">
+              <a href="/img/events/Entdeckerfest-nowhatsapp-2025.png" target="_blank" class="block">
+                <div class="bg-black flex items-center justify-center" style="aspect-ratio: 9/16;">
+                  <picture>
+                    <source srcset="/img/events/Entdeckerfest-nowhatsapp-2025.webp" type="image/webp" />
+                    <img src="/img/events/Entdeckerfest-nowhatsapp-2025.png" alt="Entdeckerfest 2025" class="h-full object-contain" />
+                  </picture>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-play text-xl font-bold mb-1">Entdeckerfest 2025</h3>
+                  <div class="text-[var(--color-text-muted)] text-sm mb-2">Datum: 12.07.2025 · Ort: Echterdingen</div>
+                  <p class="text-[var(--color-text-muted)] text-sm">Jährliches Stadteilfest mit elektronischer Musik und DJ Acts.</p>
                 </div>
               </a>
             </article>
