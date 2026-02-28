@@ -16,8 +16,9 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 ## Build & Deployment
 ```bash
 npm run dev      # Development server
-npm run build    # Production build -> dist/
-npm run preview  # Preview production build
+npm run check   # TypeScript check
+npm run build   # Production build -> dist/
+npm run preview # Preview production build
 ```
 
 ## Wichtige Pfade
@@ -42,32 +43,35 @@ Alle Dateien in `public/` werden beim Build in den Root kopiert:
 ## Seitenstruktur
 ```
 src/pages/
-├── index.astro          # Startseite
-├── work.astro           # Work/Portfolio
-├── mixes.astro          # DJ Mixes (Mixcloud Embeds)
-├── em3f.astro           # EM3F Projekt
-├── vermietung.astro     # Vermietung Übersicht
-├── impressum.astro      # Impressum
-└── vermietung/          # Detailseiten
-    ├── led-bossfx-nebelmaschine.astro
-    ├── partylicht-moving-head.astro
-    ├── ld-maui-28g3.astro
-    ├── kls-laser-bar.astro
-    └── jbl-partybox-300-320.astro
+├── index.astro                    # Startseite
+├── djhulk-electronic-music.astro # DJ Hulk Hauptseite
+├── dj/                           # DJ Unterseiten
+│   ├── videos.astro              # Video-Galerie (YouTube)
+│   ├── mixes.astro              # DJ Mixes (Mixcloud)
+│   └── em3f.astro               # EM3F Festival Fotos
+├── vermietung.astro              # Vermietung Übersicht
+├── vermietung/                    # Detailseiten
+│   ├── ld-maui-28g3.astro
+│   ├── jbl-partybox-300-320.astro
+│   ├── partylicht-moving-head.astro
+│   ├── led-bossfx-nebelmaschine.astro
+│   └── kls-laser-bar.astro
+├── work.astro                    # Work/Research
+└── impressum.astro               # Impressum
 ```
 
 ## Wichtige Regeln
 1. Domain IMMER auf `holger-kampffmeyer.de` setzen
 2. Neue Seiten in `src/pages/` erstellen
 3. Statische Dateien wie images, sitemap.xml, robots.txt in `public/` ablegen
-4. Nach Änderungen: build -> commit -> push
+4. Nach Änderungen: check -> build -> commit -> push
 
 ## Git-Workflow
 ```bash
+npm run check
 npm run build
 git add .
 git commit -m "describe changes"
 git tag -a v.x.x.x -m "version message"
-git push && v.x.x.x
+git push && git push origin
 ```
- git push origin

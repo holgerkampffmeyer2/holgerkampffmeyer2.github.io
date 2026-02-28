@@ -13,14 +13,15 @@ import Footer from "../components/Footer.astro";
 
   <!-- Hero Slider Section -->
   <section id="hero" class="hero-slider">
-    <!-- Slide 1 -->
+    <!-- Slide 1: DJ Hulk -->
     <div class="slide slide-1 active" data-slide="0">
       <div class="slide-content">
         <div class="container mx-auto px-4">
           <div class="max-w-3xl">
             <span
               class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp stagger-1"
-              >Electro, House, Tech House, DnB</span>
+              >Electro, House, Tech House, Techno, DnB</span
+            >
             <h1
               class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2"
             >
@@ -34,21 +35,22 @@ import Footer from "../components/Footer.astro";
             <div
               class="flex flex-col sm:flex-row gap-4 animate-fadeInUp stagger-4"
             >
-              <a href="#djing" class="btn-primary">Infos zu mir als DJ</a>
+              <a href="/djhulk-electronic-music" class="btn-primary">Mehr über DJ Hulk</a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 2 -->
+    <!-- Slide 2: DJ Technik Verleih -->
     <div class="slide slide-2" data-slide="1">
       <div class="slide-content">
         <div class="container mx-auto px-4">
           <div class="max-w-3xl">
             <span
               class="text-[#22d3ee] text-lg tracking-widest uppercase animate-fadeInUp stagger-1"
-              >Musikanlagen, PA, Partyanlagen</span>
+              >Musikanlagen, PA, Partyanlagen</span
+            >
             <h1
               class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2"
             >
@@ -68,42 +70,15 @@ import Footer from "../components/Footer.astro";
       </div>
     </div>
 
-    <!-- Slide 3 -->
+    <!-- Slide 3: Work/Research -->
     <div class="slide slide-3" data-slide="2">
       <div class="slide-content">
         <div class="container mx-auto px-4">
           <div class="max-w-3xl">
             <span
-              class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp stagger-1"
-              >Weekly House Music DJ Mixes</span>
-            <h1
-              class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2"
-            >
-              DJ Mixes
-            </h1>
-            <p
-              class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-2xl animate-fadeInUp stagger-3"
-            >
-              Jeden Sonntag neue House & Tech House Mixes auf Mixcloud
-            </p>
-            <div
-              class="flex flex-col sm:flex-row gap-4 animate-fadeInUp stagger-4"
-            >
-              <a href="#mixes" class="btn-primary">Zu den Mixes</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide 4 -->
-    <div class="slide slide-4" data-slide="3">
-      <div class="slide-content">
-        <div class="container mx-auto px-4">
-          <div class="max-w-3xl">
-            <span
               class="text-[#22d3ee] text-lg tracking-widest uppercase animate-fadeInUp stagger-1"
-              >DevOps, Professional, Research</span>
+              >DevOps, Professional, Research</span
+            >
             <h1
               class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2"
             >
@@ -161,7 +136,6 @@ import Footer from "../components/Footer.astro";
       <div class="slider-dot active" data-dot="0"></div>
       <div class="slider-dot" data-dot="1"></div>
       <div class="slider-dot" data-dot="2"></div>
-      <div class="slider-dot" data-dot="3"></div>
     </div>
 
     <!-- Scroll Indicator -->
@@ -185,12 +159,13 @@ import Footer from "../components/Footer.astro";
   </section>
 
   <!-- Vermietung Section -->
-  <section id="vermietung" class="section-padding bg-[var(--color-bg)]">
+  <section id="vermietung" class="section-padding bg-[var(--color-surface)]">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16 animate-on-scroll">
         <span
           class="text-[var(--color-secondary)] text-lg tracking-widest uppercase"
-          >Vermietung</span>
+          >Vermietung</span
+        >
         <h2 class="font-play text-4xl md:text-5xl font-bold mt-4 mb-6">
           Musikanlagen, Partyboxen, Tontechnik und Licht
         </h2>
@@ -201,6 +176,90 @@ import Footer from "../components/Footer.astro";
           für Ihre privaten Feiern, Firmen-Events, Vereinsfeiern, Messen und
           sonstige Veranstaltungen.
         </p>
+      </div>
+
+      <!-- Was ich dir biete -->
+      <div class="mt-16">
+        <h3 class="font-play text-2xl md:text-3xl font-bold text-center mb-10">
+          Was ich dir biete
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-[var(--color-bg)] p-6 rounded-xl">
+            <div class="text-3xl mb-4">🔊</div>
+            <h4 class="font-bold text-lg mb-2">PA-Anlagen & Partyboxen</h4>
+            <p class="text-[var(--color-text-muted)] text-sm">
+              Kraftvoller Sound für Partys, Hochzeiten und Vereinsfeiern. Professionelle Musikanlagen und Partyboxen.
+            </p>
+          </div>
+          <div class="bg-[var(--color-bg)] p-6 rounded-xl">
+            <div class="text-3xl mb-4">💡</div>
+            <h4 class="font-bold text-lg mb-2">Lichttechnik</h4>
+            <p class="text-[var(--color-text-muted)] text-sm">
+              LED-Lichteffekte, Partylichtanlagen, Nebelmaschinen und komplette Lichtanlagen für die perfekte Stimmung.
+            </p>
+          </div>
+          <div class="bg-[var(--color-bg)] p-6 rounded-xl">
+            <div class="text-3xl mb-4">🎚️</div>
+            <h4 class="font-bold text-lg mb-2">Komplettpakete</h4>
+            <p class="text-[var(--color-text-muted)] text-sm">
+              Vermietung von Kombi-Angeboten aus Sound & Licht. Zuverlässig, günstig und persönlich beraten.
+            </p>
+          </div>
+          <div class="bg-[var(--color-bg)] p-6 rounded-xl">
+            <div class="text-3xl mb-4">✓</div>
+            <h4 class="font-bold text-lg mb-2">Warum bei mir mieten?</h4>
+            <p class="text-[var(--color-text-muted)] text-sm">
+              ✓ Kostenlose Lieferung im Raum Stuttgart<br/>
+              ✓ Persönliche Beratung & faire Preise<br/>
+              ✓ Einfache Abholung in Echterdingen
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="mt-16">
+        <h3 class="font-play text-2xl md:text-3xl font-bold text-center mb-10">
+          Häufig gestellte Fragen
+        </h3>
+        <div class="max-w-3xl mx-auto space-y-4">
+          <details class="bg-[var(--color-bg)] rounded-xl p-4 cursor-pointer">
+            <summary class="font-bold cursor-pointer">Wie viel kostet es, eine Partybox in Stuttgart zu mieten?</summary>
+            <p class="text-[var(--color-text-muted)] mt-3">
+              Unsere Partyboxen (z.B. JBL Partybox) sind bereits ab 80€ pro Boxenpaar und Tag verfügbar. Eine einzelne Box kostet 50€ pro Tag.
+            </p>
+          </details>
+          <details class="bg-[var(--color-bg)] rounded-xl p-4 cursor-pointer">
+            <summary class="font-bold cursor-pointer">Welche PA-Anlage eignet sich für 50 Personen?</summary>
+            <p class="text-[var(--color-text-muted)] mt-3">
+              Für Veranstaltungen mit 50-80 Personen empfehle ich unsere JBL Partyboxen oder das LD Maui 28 G3 Komplettset. Beide sind Plug & Play und in 5 Minuten aufgebaut.
+            </p>
+          </details>
+          <details class="bg-[var(--color-bg)] rounded-xl p-4 cursor-pointer">
+            <summary class="font-bold cursor-pointer">Wie funktioniert die Bezahlung?</summary>
+            <p class="text-[var(--color-text-muted)] mt-3">
+              Die Bezahlung erfolgt bei Abholung. Ich biete Barzahlung und PayPal an!
+            </p>
+          </details>
+          <details class="bg-[var(--color-bg)] rounded-xl p-4 cursor-pointer">
+            <summary class="font-bold cursor-pointer">Wo kann ich die Technik abholen?</summary>
+            <p class="text-[var(--color-text-muted)] mt-3">
+              Die Technik kann direkt in Leinfelden-Echterdingen (Magellanstraße 4) abgeholt werden. Ich erkläre dir ausführlich den Aufbau und gebe dir eine Einweisung.
+            </p>
+          </details>
+          <details class="bg-[var(--color-bg)] rounded-xl p-4 cursor-pointer">
+            <summary class="font-bold cursor-pointer">Was kostet eine Party-Lichtanlage?</summary>
+            <p class="text-[var(--color-text-muted)] mt-3">
+              Eine vollständige Partylichtanlage mit verschiedenen Effekten ist bereits ab 50€ pro Tag verfügbar. Inklusive persönlicher Beratung und Einweisung.
+            </p>
+          </details>
+          <details class="bg-[var(--color-bg)] rounded-xl p-4 cursor-pointer">
+            <summary class="font-bold cursor-pointer">Bietest du auch Pakete mit Nebelmaschine?</summary>
+            <p class="text-[var(--color-text-muted)] mt-3">
+              Ja, ich biete die Partylichtanlagen auch zusammen mit einer Nebelmaschine an. Das Komplettpaket gibt es ab 60€ pro Tag.
+            </p>
+          </details>
+        </div>
       </div>
 
       <div class="text-center mt-12 animate-on-scroll">
@@ -218,226 +277,6 @@ import Footer from "../components/Footer.astro";
     </div>
   </section>
 
-  <!-- Galerie Section -->
-  <section id="galerie" class="section-padding bg-[var(--color-surface)]">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16 animate-on-scroll">
-        <span
-          class="text-[var(--color-secondary)] text-lg tracking-widest uppercase"
-          >Galerie</span>
-        <h2 class="font-play text-4xl md:text-5xl font-bold mt-4">Videos</h2>
-      </div>
-
-      <div class="video-grid">
-        <div class="video-item group relative animate-on-scroll stagger-1">
-          <a
-            href="https://www.youtube.com/watch?v=HqM-zQy4sFc"
-            target="_blank"
-            class="block w-full h-full"
-          >
-            <img
-              src="img/videos/djhulktomate.png"
-              alt="DJ Hulk EM3F Aftermovie"
-              class="w-full h-full object-cover"
-            />
-            <div
-              class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <div class="play-button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-8 w-8 text-white ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z"></path>
-                </svg>
-              </div>
-            </div>
-            <div
-              class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent"
-            >
-              <h4 class="font-bold text-sm">
-                DJ Hulk - EM3F Festival 2024 Aftermovie
-              </h4>
-            </div>
-          </a>
-        </div>
-
-        <div class="video-item group relative animate-on-scroll stagger-2">
-          <a
-            href="https://www.youtube.com/watch?v=dvJtZv6AMd4"
-            target="_blank"
-            class="block w-full h-full"
-          >
-            <img
-              src="img/videos/IMG_5641.webp"
-              alt="DJ Hulk Drum n Base"
-              class="w-full h-full object-cover"
-            />
-            <div
-              class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <div class="play-button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-8 w-8 text-white ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z"></path>
-                </svg>
-              </div>
-            </div>
-            <div
-              class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent"
-            >
-              <h4 class="font-bold text-sm">DJ Hulk - Drum n Base Session</h4>
-            </div>
-          </a>
-        </div>
-
-        <div class="video-item group relative animate-on-scroll stagger-3">
-          <a
-            href="https://www.youtube.com/watch?v=bXlv5JCuM-8"
-            target="_blank"
-            class="block w-full h-full"
-          >
-            <img
-              src="img/videos/IMG_5639.webp"
-              alt="DJ Hulk Drum n Base 2"
-              class="w-full h-full object-cover"
-            />
-            <div
-              class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <div class="play-button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-8 w-8 text-white ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z"></path>
-                </svg>
-              </div>
-            </div>
-            <div
-              class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent"
-            >
-              <h4 class="font-bold text-sm">DJ Hulk - Drum n Base Session</h4>
-            </div>
-          </a>
-        </div>
-
-        <div class="video-item group relative animate-on-scroll stagger-4">
-          <a
-            href="https://www.youtube.com/watch?v=jI5PGVIE3fY"
-            target="_blank"
-            class="block w-full h-full"
-          >
-            <img
-              src="img/videos/video1.png"
-              alt="Outdoor Birthday Party"
-              class="w-full h-full object-cover"
-            />
-            <div
-              class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <div class="play-button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-8 w-8 text-white ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z"></path>
-                </svg>
-              </div>
-            </div>
-            <div
-              class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent"
-            >
-              <h4 class="font-bold text-sm">
-                DJ Hulk at Outdoor Birthday Party
-              </h4>
-            </div>
-          </a>
-        </div>
-
-        <div class="video-item group relative animate-on-scroll stagger-5">
-          <a
-            href="https://www.youtube.com/watch?v=4ahbk2bEzno"
-            target="_blank"
-            class="block w-full h-full"
-          >
-            <img
-              src="img/videos/video2.png"
-              alt="Outdoor Birthday Party 2"
-              class="w-full h-full object-cover"
-            />
-            <div
-              class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <div class="play-button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-8 w-8 text-white ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z"></path>
-                </svg>
-              </div>
-            </div>
-            <div
-              class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent"
-            >
-              <h4 class="font-bold text-sm">
-                DJ Hulk at Outdoor Birthday Party
-              </h4>
-            </div>
-          </a>
-        </div>
-
-        <div class="video-item group relative animate-on-scroll stagger-6">
-          <a
-            href="https://www.youtube.com/watch?v=gCHxs99R0Gg"
-            target="_blank"
-            class="block w-full h-full"
-          >
-            <img
-              src="img/videos/video3.png"
-              alt="Birthday Party"
-              class="w-full h-full object-cover"
-            />
-            <div
-              class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <div class="play-button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-8 w-8 text-white ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z"></path>
-                </svg>
-              </div>
-            </div>
-            <div
-              class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent"
-            >
-              <h4 class="font-bold text-sm">
-                Birthday Party - LD Systems Maui 28 G3
-              </h4>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- DJing Section -->
   <section id="djing" class="section-padding bg-[var(--color-bg)]">
     <div class="max-w-7xl mx-auto">
@@ -445,53 +284,33 @@ import Footer from "../components/Footer.astro";
         <div class="animate-on-scroll">
           <span
             class="text-[var(--color-secondary)] text-lg tracking-widest uppercase"
-            >DJing</span>
+            >DJing</span
+          >
           <h2 class="font-play text-4xl md:text-5xl font-bold mt-4 mb-6">
             DJ Hulk - DJ für Elektronische Musik
           </h2>
           <p class="text-[var(--color-text-muted)] mb-4">
-            Unter meinem Alter Ego DJ Hulk betätige ich mich als DJ für
-            elektronische Musik. Auf Mixcloud veröffentliche ich wöchentliche
-            DJ-Mixe (Weekly Sunday House Mix) mit den besten House und Tech
-            House Tracks.
+            Unter meinem Alter Ego <strong>DJ Hulk</strong> bin ich seit Jahren als DJ für elektronische Musik aktiv. 
+            Ich lege bei privaten Partys, Firmenevents und kleineren Veranstaltungen auf - immer mit dem Fokus auf House, Techno und Drum n Bass.
           </p>
-          <p class="text-[var(--color-text-muted)] mb-4">
-            Mein musikalisches Repertoire umfasst neben diversen House
-            Stilrichtungen auch Drum n Base (DnB), R&B, 2000 Hip Hop, Reggae
-            sowie Euro Dance der 90er - 2000er Jahre.
-            <p>
-              <a href="./mixes" class="primary-btn"
-                >Weiter zu meinen wöchentlichen DJ Mixes...</a>
-            </p>
-          </p>
+          
           <p class="text-[var(--color-text-muted)] mb-6">
-            Als Mitgründer des DJ Kollektivs <strong
-              class="text-[var(--color-primary)]"
-              >ToMaTe Stuttgart n.e.V.</strong
-            > organisiere ich Veranstaltungen für Elektronische Musik wie beispielsweise
-            das jährlich stattfindende <strong
-              class="text-[var(--color-primary)]"
-              >Electronic Music Family and Friends Festival</strong
-            >.
+            Auf <strong>Mixcloud</strong> veröffentliche ich wöchentliche DJ-Mixe und bin <strong>Resident DJ</strong> bei verschiedenen Online-Radiostationen.
           </p>
-          <p><a href="./em3f" class="primary-btn">Weitere Bilder...</a></p>
-          <div class="text-center mt-12 animate-on-scroll">
-            <a href="/em3f" class="btn-primary">Weitere Bilder...</a>
-            <a
-              href="/mixes"
-              class="btn-secondary flex items-center justify-center gap-2"
-              >Weitere DJ Mixes...</a>
+          <div class="flex flex-wrap gap-4">
+            <a href="/djhulk-electronic-music" class="btn-primary">Mehr über mich</a>
+            <a href="/dj/mixes" class="btn-secondary">Zu den Mixes</a>
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
           <img
-            src="img/DSC_2311.webp"
+            src="/img/DSC_2311.webp"
             alt="DJ Hulk"
             class="rounded-img object-cover aspect-square animate-on-scroll stagger-1"
           />
           <img
-            src="img/_P8A4017.webp"
+            src="/img/_81A4010.jpg"
             alt="DJ Hulk"
             class="rounded-img object-cover aspect-square animate-on-scroll stagger-2"
           />
@@ -500,60 +319,13 @@ import Footer from "../components/Footer.astro";
     </div>
   </section>
 
-  <!-- Mixes Section -->
-  <section id="mixes" class="section-padding bg-[var(--color-surface)]">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16 animate-on-scroll">
-        <span
-          class="text-[var(--color-secondary)] text-lg tracking-widest uppercase"
-          >Mixcloud</span>
-        <h2 class="font-play text-4xl md:text-5xl font-bold mt-4 mb-6">
-          Meine DJ Mixes
-        </h2>
-        <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">
-          Auf Mixcloud veröffentliche ich jeden Sonntag einen neuen Mix. Dabei
-          spezialisiere ich mich auf Tech House, Latin House, Jackin and Funky
-          House sowie Afro House.
-        </p>
-      </div>
-
-      <div class="max-w-3xl mx-auto mb-12 animate-on-scroll">
-        <div class="bg-[var(--color-bg)] rounded-xl p-4">
-          <iframe width="100%" height="120" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-deep-tech-minimal-house-mix161%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;" ></iframe>
-        </div>
-      </div>
-
-      <div class="text-center animate-on-scroll">
-        <span
-          class="text-[var(--color-secondary)] text-lg tracking-widest uppercase"
-          >Spotify</span>
-        <h3 class="font-play text-2xl font-bold mt-4 mb-6">
-          Meine Spotify Playlist
-        </h3>
-        <p class="text-[var(--color-text-muted)] mb-6">
-          Wöchentlich aktualisierte Playlist mit den besten House Tunes!
-        </p>
-        <div class="max-w-3xl mx-auto">
-          <iframe
-            style="border-radius:12px"
-            src="https://open.spotify.com/embed/playlist/2IiSXnINIWdFMewY55iJWA?utm_source=generator"
-            width="100%"
-            height="352"
-            frameborder="0"
-            allowfullscreen=""
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Kontakt Section -->
-  <section id="kontakt" class="section-padding bg-[var(--color-bg)]">
+  <section id="kontakt" class="section-padding bg-[var(--color-surface)]">
     <div class="max-w-4xl mx-auto text-center animate-on-scroll">
       <span
         class="text-[var(--color-secondary)] text-lg tracking-widest uppercase"
-        >Kontakt</span>
+        >Kontakt</span
+      >
       <h2 class="font-play text-4xl md:text-5xl font-bold mt-4 mb-6">
         Lass uns feiern!
       </h2>
@@ -681,19 +453,17 @@ import Footer from "../components/Footer.astro";
     </div>
   </section>
 
-  <!-- Footer -->
   <Footer />
 
   <script>
-    // Hero Slider
     const slides = document.querySelectorAll(".slide");
     const dots = document.querySelectorAll(".slider-dot");
     const prevBtn = document.getElementById("slider-prev");
     const nextBtn = document.getElementById("slider-next");
     let currentSlide = 0;
-    let slideInterval;
+    let slideInterval: ReturnType<typeof setInterval>;
 
-    function showSlide(index) {
+    function showSlide(index: number) {
       slides.forEach((slide, i) => {
         slide.classList.toggle("active", i === index);
       });
@@ -719,7 +489,6 @@ import Footer from "../components/Footer.astro";
       clearInterval(slideInterval);
     }
 
-    // Event Listeners
     prevBtn?.addEventListener("click", () => {
       prevSlide();
       stopSlider();
@@ -740,10 +509,8 @@ import Footer from "../components/Footer.astro";
       });
     });
 
-    // Start automatic slider
     startSlider();
 
-    // Scroll Animation Observer
     const observerOptions = {
       root: null,
       rootMargin: "0px",

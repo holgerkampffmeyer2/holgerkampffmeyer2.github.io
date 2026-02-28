@@ -8,13 +8,17 @@ const { currentPage = 'home' } = Astro.props;
 const navItems = [
   { 
     href: '/', 
-    label: 'Home',
+    label: 'Home' 
+  },
+  { 
+    href: '/djhulk-electronic-music', 
+    label: 'DJing',
     hasDropdown: true,
     items: [
-      { href: '/', label: 'Home' },
-      { href: '/#galerie', label: 'Galerie' },
-      { href: '/#djing', label: 'DJing' },
-      { href: '/#kontakt', label: 'Kontakt' }
+      { href: '/djhulk-electronic-music', label: 'Über mich' },
+      { href: '/dj/videos', label: 'Videos' },
+      { href: '/dj/mixes', label: 'Mixes' },
+      { href: '/dj/em3f', label: 'EM3F Festival' }
     ]
   },
   { 
@@ -68,7 +72,7 @@ const navItems = [
               href={item.href} 
               class:list={[
                 "nav-link",
-                { "active": currentPage === item.href || (currentPage === 'home' && item.href === '/') }
+                { "active": currentPage === item.href || (currentPage.startsWith('/dj') && item.href === '/djhulk-electronic-music') }
               ]}
             >
               {item.label}

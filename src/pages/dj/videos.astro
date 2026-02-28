@@ -1,0 +1,161 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+const videos = [
+  {
+    id: "jkvGFKG8Rsw",
+    title: "DJ Hulk - Tech House Mix",
+    thumbnail: "/img/videos/jkvGFKG8Rsw.jpg"
+  },
+  {
+    id: "Yoowst71tpE",
+    title: "DJ Hulk - Deep House Vibes",
+    thumbnail: "/img/videos/Yoowst71tpE.jpg"
+  },
+  {
+    id: "HqM-zQy4sFc",
+    title: "DJ Hulk - EM3F Festival 2024 Aftermovie",
+    thumbnail: "/img/videos/djhulktomate.png"
+  },
+  {
+    id: "dvJtZv6AMd4",
+    title: "DJ Hulk - Drum n Base Session",
+    thumbnail: "/img/videos/IMG_5641.webp"
+  },
+  {
+    id: "bXlv5JCuM-8",
+    title: "DJ Hulk - Drum n Base Session 2",
+    thumbnail: "/img/videos/IMG_5639.webp"
+  },
+  {
+    id: "jI5PGVIE3fY",
+    title: "DJ Hulk at Outdoor Birthday Party",
+    thumbnail: "/img/videos/video1.png"
+  },
+  {
+    id: "4ahbk2bEzno",
+    title: "DJ Hulk at Outdoor Birthday Party 2",
+    thumbnail: "/img/videos/video2.png"
+  },
+  {
+    id: "gCHxs99R0Gg",
+    title: "Birthday Party - LD Systems Maui 28 G3",
+    thumbnail: "/img/videos/video3.png"
+  }
+];
+---
+
+<Layout 
+  title="Videos - DJ Hulk - YouTube Videos und Event-Aufnahmen"
+  description="Videos von DJ Hulk - Event-Aufnahmen, Aftermovies, Party-Sessions und Live-Mitschnitte auf YouTube."
+  image="/img/header.webp"
+>
+  <Navbar currentPage="/dj/videos" />
+
+  <!-- Hero Section -->
+  <section class="hero-slider">
+    <div class="slide slide-1 active">
+      <div class="slide-content" style="background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url('/img/header.webp');">
+        <div class="container mx-auto px-4">
+          <div class="max-w-3xl pt-32 text-center">
+            <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Videos</span>
+            <h1 class="font-play text-5xl md:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">DJ Hulk Videos</h1>
+            <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
+              Event-Aufnahmen, Aftermovies und Party-Sessions
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YouTube Channel Info -->
+  <section class="section-padding bg-[var(--color-bg)]">
+    <div class="max-w-4xl mx-auto text-center mb-12">
+      <p class="text-[var(--color-text-muted)] text-lg">
+        Alle meine Videos findest du auf meinem YouTube-Kanal. Abonniere mich für neue Mixes und Event-Aufnahmen!
+      </p>
+      <a 
+        href="https://www.youtube.com/@djhulk_de" 
+        target="_blank"
+        class="btn-primary inline-flex items-center gap-2 mt-4"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        YouTube Kanal
+      </a>
+    </div>
+  </section>
+
+  <!-- Video Grid -->
+  <section class="section-padding bg-[var(--color-surface)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Galerie</span>
+        <h2 class="font-play text-4xl md:text-5xl font-bold mt-4">Videos</h2>
+      </div>
+
+      <div class="video-grid">
+        {videos.map((video, index) => (
+          <div class="video-item group relative animate-on-scroll" style={`stagger-${index + 1}`}>
+            <a
+              href={`https://www.youtube.com/watch?v=${video.id}`}
+              target="_blank"
+              class="block w-full h-full"
+            >
+              <img
+                src={video.thumbnail}
+                alt={video.title}
+                class="w-full h-full object-cover"
+              />
+              <div
+                class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <div class="play-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-8 w-8 text-white ml-1"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div
+                class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent"
+              >
+                <h4 class="font-bold text-sm">{video.title}</h4>
+              </div>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- More Videos Link -->
+  <section class="section-padding bg-[var(--color-bg)]">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="font-play text-3xl font-bold mb-6">Noch mehr Videos?</h2>
+      <p class="text-[var(--color-text-muted)] mb-8">
+        Auf meinem YouTube-Kanal findest du noch mehr Event-Aufnahmen, Party-Sessions und Live-Mitschnitte.
+      </p>
+      <a 
+        href="https://www.youtube.com/@djhulk_de" 
+        target="_blank"
+        class="btn-primary inline-flex items-center gap-2"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        Mehr Videos auf YouTube
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

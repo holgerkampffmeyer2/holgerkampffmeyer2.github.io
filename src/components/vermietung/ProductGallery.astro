@@ -54,7 +54,7 @@ const { images, title } = Astro.props;
   </div>
 </section>
 
-<script define:vars={{ images }}>
+<script is:inline define:vars={{ images }}>
   let currentIndex = 0;
   const mainImage = document.getElementById('mainImage');
   const imageCounter = document.getElementById('imageCounter');

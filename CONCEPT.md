@@ -24,13 +24,20 @@ src/
 ├── layouts/              # Seiten-Layouts
 │   └── Layout.astro
 ├── pages/                # Routen/Seiten
-│   ├── index.astro
-│   ├── vermietung.astro
-│   ├── vermietung/
-│   │   └── ld-maui-28g3.astro
+│   ├── index.astro                   # Startseite (Hero-Slider: 3 Slides)
+│   ├── djhulk-electronic-music.astro # DJ Hulk Hauptseite
+│   ├── dj/                          # DJ Unterseiten
+│   │   ├── videos.astro              # Video-Galerie (YouTube)
+│   │   ├── mixes.astro              # DJ Mixes (Mixcloud)
+│   │   └── em3f.astro               # EM3F Festival Fotos
+│   ├── vermietung.astro             # Vermietung Übersicht
+│   ├── vermietung/                  # Vermietung Detailseiten
+│   │   ├── ld-maui-28g3.astro
+│   │   ├── jbl-partybox-300-320.astro
+│   │   ├── partylicht-moving-head.astro
+│   │   ├── led-bossfx-nebelmaschine.astro
+│   │   └── kls-laser-bar.astro
 │   ├── work.astro
-│   ├── mixes.astro
-│   ├── em3f.astro
 │   └── impressum.astro
 ├── styles/
 │   └── global.css
@@ -64,20 +71,32 @@ src/
 - **Animationen:** Fade-in-up beim Scrollen (Intersection Observer)
 
 ### Seitenstruktur
-1. **Home (index)** - Hero-Slider, DJing, Vermietung, Galerie, Kontakt
-2. **Vermietung** - Equipment-Katalog mit Preisen, Kontaktformular
-3. **Work** - Business/Research Info, Research Papers (PDFs)
-4. **Mixes** - SoundCloud Embeds
-5. **EM3F** - Festival-Fotogalerie
-6. **Impressum** - Rechtliche Informationen
+1. **Home (index)** - Hero-Slider (DJ Hulk, Vermietung, Work), DJing Section, Vermietung, Kontakt
+2. **DJ Hulk** - DJing Info, Videos Link, Mixes, Radio Stations, Spotify Playlist
+3. **DJ / Videos** - YouTube Video-Galerie
+4. **DJ / Mixes** - Weekly Sunday House Mixes (Mixcloud)
+5. **DJ / EM3F** - Festival-Fotogalerie
+6. **Vermietung** - Equipment-Katalog mit Preisen, Detailseiten
+7. **Work** - Business/Research Info, Research Papers (PDFs)
+8. **Impressum** - Rechtliche Informationen
+
+### URLs
+- `/` - Startseite
+- `/djhulk-electronic-music` - DJ Hulk Seite
+- `/dj/videos` - Video-Galerie (YouTube)
+- `/dj/mixes` - DJ Mixes
+- `/dj/em3f` - EM3F Festival
+- `/vermietung` - Vermietung Übersicht
+- `/work` - Work/Research
 
 ---
 
 ## Funktionen
 
 ### Navigation
-- Hauptnavigation: Home, Vermietung, Work, Impressum
-- Home-Dropdown: Galerie, DJing, Kontakt
+- Hauptnavigation: Home, DJing (Dropdown), Vermietung (Dropdown), Work, Impressum
+- DJing-Dropdown: Über mich, Videos, Mixes, EM3F Festival
+- Vermietung-Dropdown: Übersicht + alle Detailseiten
 - Mobile Hamburger-Menü
 
 ### Vermietung
@@ -134,7 +153,10 @@ node update-image-refs.mjs
 - 30-80% Größenersparnis je nach Bildinhalt
 
 ### Hero Slider
-- 4 Slides auf index.html mit unterschiedlichen Hintergründen
+- 3 Slides auf index.html mit unterschiedlichen Hintergründen:
+  1. DJ Hulk → /djhulk-electronic-music
+  2. DJ Technik Verleih → /vermietung
+  3. Work/Research → /work
 - Automatische Rotation alle 5 Sekunden
 - Navigation via Pfeile und Dots
 - Fix: pointer-events und z-index für korrekte Button-Interaktion
@@ -201,3 +223,21 @@ node update-image-refs.mjs
 - Bilder in `public/img/vermietung/` für Produktgalerien
 - `object-contain` für vollständige Bildanzeige
 - Abgerundete Ecken in der Galerie
+
+### 2026-02-28: DJ Hulk Seiten-Refactoring
+
+**Ziel:** DJ-bezogene Inhalte von der Startseite auf separate Seite auslagern
+
+**Neue Seiten:**
+- `src/pages/dj/mixes.astro` - DJ Mixes (von `/mixes` verschoben)
+- `src/pages/dj/em3f.astro` - EM3F Festival Fotos (von `/em3f` verschoben)
+- `src/pages/dj/videos.astro` - Video-Galerie (YouTube)
+- `src/pages/djhulk-electronic-music.astro` - DJ Hulk Hauptseite
+
+**Änderungen:**
+- Hero Slider auf index.astro: 3 Slides statt 4 (DJ Hulk + Mixes zusammengeführt)
+- Galerie, DJing, Mixes, Spotify Sections → neue DJ Hulk Seite
+- Navbar: "DJing" Dropdown (Über mich, Videos, Mixes, EM3F)
+- Startseite: DJing Section hinzugefügt + Vermietung + Kontakt Sections
+- DJ Hulk Seite: Radio Stations Section hinzugefügt (365 FM Radio, CouchRadio)
+- Video-Galerie auf eigene Unterseite `/dj/videos` ausgelagert
