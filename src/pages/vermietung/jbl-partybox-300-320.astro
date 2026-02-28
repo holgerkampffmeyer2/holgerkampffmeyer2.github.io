@@ -18,6 +18,35 @@ const images = [
   "/img/vermietung/jblpartyboxen2.webp"
 ];
 
+// compute structured data for this product
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "JBL Partybox 300 + 320 Set",
+  "description": "Leihe dieses leistungsstarke Partyboxen‑Set (2×240W) mit Akku, Light‑Show und Bluetooth – ideal für private Feiern bis 80 Personen.",
+  "image": [
+    images[0],
+    images[1]
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://holger-kampffmeyer.de/vermietung/jbl-partybox-300-320",
+    "price": "80",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://holger-kampffmeyer.de/"},
+    {"@type": "ListItem", "position": 2, "name": "Vermietung", "item": "https://holger-kampffmeyer.de/vermietung"},
+    {"@type": "ListItem", "position": 3, "name": "JBL Partybox 300/320"}
+  ]
+};
+
 const specs = {
   "Ausgangsleistung": "2x 240 W",
   "Frequenzbereich": "40 Hz - 20 kHz",
@@ -60,6 +89,7 @@ const events = [
   title={pageTitle}
   description="Miete das Set JBL Partybox 300 + 320 für deine Party, Geburtstagsfeier oder Firmenfeier. 2x 240W mit Akku, Light Show und TWS-Kopplung für bis zu 80 Personen."
   image="/img/vermietung/partybox-300_kl.webp"
+  jsonLd={[productSchema, breadcrumbSchema]}
 >
   <Navbar currentPage="/vermietung" />
 
@@ -85,6 +115,9 @@ const events = [
         Miete unser Set aus JBL Partybox 300 und Stage 320 für deine nächste Party. 
         2x 240W mit JBL-Soundqualität, dynamischen Lichteffekten und bis zu 18 Stunden Akkubetrieb. 
         Perfekt für bis zu 80 Personen.
+      </p>
+      <p class="text-[var(--color-text-muted)] text-lg max-w-2xl mt-4">
+        Dieses Portable‑PA‑System wird häufig für Geburtstagsfeiern, Vereins‑ und Firmenveranstaltungen im Großraum Stuttgart eingesetzt. Dank Akku‑Betrieb und Bluetooth brauchst du keinen Stromanschluss und bist innerhalb von Minuten spielbereit.
       </p>
     </div>
   </section>

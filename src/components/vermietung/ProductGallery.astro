@@ -20,7 +20,7 @@ const { images, title } = Astro.props;
         <img 
           id="mainImage" 
           src={images[0]} 
-          alt={`${title} - Hauptbild`}
+          alt={`${title} – Hauptbild`}
           class="main-image"
         />
         <div class="image-counter" id="imageCounter">1 / {images.length}</div>
@@ -34,7 +34,7 @@ const { images, title } = Astro.props;
             data-index={index}
             aria-label={`Bild ${index + 1} anzeigen`}
           >
-            <img src={image} alt={`${title} - Miniatur ${index + 1}`} />
+            <img src={image} alt={`${title} – Miniatur ${index + 1}`} />
           </button>
         ))}
       </div>

@@ -5,12 +5,18 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  /** prevent indexing (e.g. legal pages) */
+  noIndex?: boolean;
+  /** additional JSON-LD objects to embed in head */
+  jsonLd?: object | object[];
 }
 
 const { 
   title, 
   description = "Holger Kampffmeyer / DJ Hulk. Verleih von Musikanlagen und Lichttechnik im Großraum Stuttgart. Electronic Music DJ für Events und Feiern.",
-  image = "/img/djhulk_logo.png"
+  image = "/img/djhulk_logo.png",
+  noIndex = false,
+  jsonLd
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -28,7 +34,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#0a0a0f" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow"} />
     
     <!-- JSON-LD LocalBusiness -->
     <script is:inline type="application/ld+json">
@@ -67,6 +73,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         ]
       }
     </script>
+    {jsonLd && (
+      Array.isArray(jsonLd) ? jsonLd : [jsonLd]
+    ).map(item => (
+      <script is:inline type="application/ld+json">
+        {JSON.stringify(item)}
+      </script>
+    ))}
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
