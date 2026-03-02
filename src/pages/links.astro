@@ -1,0 +1,184 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+
+import FacebookIcon from "../components/icons/FacebookIcon.astro";
+import InstagramIcon from "../components/icons/InstagramIcon.astro";
+import YouTubeIcon from "../components/icons/YouTubeIcon.astro";
+import MixcloudIcon from "../components/icons/MixcloudIcon.astro";
+import SpotifyIcon from "../components/icons/SpotifyIcon.astro";
+import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
+import XIcon from "../components/icons/XIcon.astro";
+import XingIcon from "../components/icons/XingIcon.astro";
+import ResidentAdvisorIcon from "../components/icons/ResidentAdvisorIcon.astro";
+import RadioIcon from "../components/icons/RadioIcon.astro";
+import EmailIcon from "../components/icons/EmailIcon.astro";
+import SoundCloudIcon from "../components/icons/SoundCloudIcon.astro";
+
+const links = [
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/djhulk_de",
+    icon: InstagramIcon,
+    color: "#E4405F",
+    description: "DJ Hulk auf Instagram - Partyfotos, Events und Behind the Scenes"
+  },
+  {
+    name: "Facebook",
+    url: "https://www.facebook.com/holger.kampffmeyer",
+    icon: FacebookIcon,
+    color: "#1877F2",
+    description: "Facebook Profil von Holger Kampffmeyer"
+  },
+  {
+    name: "YouTube",
+    url: "https://www.youtube.com/@djhulk_de",
+    icon: YouTubeIcon,
+    color: "#FF0000",
+    description: "DJ Hulk YouTube Channel - Videos, Aftermovies und Party Sessions"
+  },
+  {
+    name: "Mixcloud",
+    url: "https://www.mixcloud.com/holger-kampffmeyer/",
+    icon: MixcloudIcon,
+    color: "#5BC4E8",
+    description: "Weekly DJ Mixes - Tech House, Deep House, Afro House. Jeden Sonntag neuer Mix!"
+  },
+  {
+    name: "Spotify",
+    url: "https://open.spotify.com/user/11131869179?si=712b7425643f4f3e",
+    icon: SpotifyIcon,
+    color: "#1DB954",
+    description: "Spotify Profil mit Playlists und Musik"
+  },
+  {
+    name: "Spotify Playlist",
+    url: "https://open.spotify.com/playlist/2IiSXnINIWdFMewY55iJWA?utm_source=generator",
+    icon: SpotifyIcon,
+    color: "#1DB954",
+    description: "Wöchentlich aktualisierte House Music Playlist"
+  },
+  {
+    name: "SoundCloud",
+    url: "https://soundcloud.com/holger-kampffmeyer2",
+    icon: SoundCloudIcon,
+    color: "#FF5500",
+    description: "SoundCloud Profile - Sets und Produktionen"
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/holger-kampffmeyer-390b6789/",
+    icon: LinkedInIcon,
+    color: "#0A66C2",
+    description: "LinkedIn Profil - IT Professional, DevOps, Team Manager"
+  },
+  {
+    name: "XING",
+    url: "https://www.xing.com/profile/Holger_Kampffmeyer",
+    icon: XingIcon,
+    color: "#006567",
+    description: "XING Profil - Professionelles Netzwerk"
+  },
+  {
+    name: "X (Twitter)",
+    url: "https://x.com/djhulk_de",
+    icon: XIcon,
+    color: "#000000",
+    description: "DJ Hulk auf X (Twitter)"
+  },
+  {
+    name: "Resident Advisor",
+    url: "https://de.ra.co/dj/djhulk",
+    icon: ResidentAdvisorIcon,
+    color: "#FFFFFF",
+    description: "Resident Advisor Profil - Gigs, Biography und Mixes"
+  },
+  {
+    name: "365 FM Radio",
+    url: "https://www.365fmradio.de/",
+    icon: RadioIcon,
+    color: "#FF6B35",
+    description: "365 FM Radio - Electronic Music 24/7. Resident DJ mit Live Sessions am Wochenende"
+  },
+  {
+    name: "CouchRadio",
+    url: "https://www.couchradio.ch/",
+    icon: RadioIcon,
+    color: "#8B5CF6",
+    description: "CouchRadio - Finest Deep House, Progressive, Vocal, Tech House 24/7. Resident DJ."
+  },
+  {
+    name: "Email",
+    url: "mailto:holger.kampffmeyer+dj@gmail.com",
+    icon: EmailIcon,
+    color: "#EA4335",
+    description: "Email für DJ-Dienstleistungen und Technik-Verleih Anfragen"
+  }
+];
+---
+
+<Layout
+  title="Links - Holger Kampffmeyer [DJ Hulk]"
+  description="Alle Links von DJ Hulk - Social Media, Musik-Plattformen, Radio-Sendungen und Kontakt."
+>
+  <Navbar currentPage="/links" />
+
+  <section class="min-h-screen pt-24 pb-16 hero-gradient">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h1 class="font-play text-4xl md:text-6xl font-bold mb-4 gradient-text">
+          Alle Links
+        </h1>
+        <p class="text-[var(--color-text-muted)] text-lg max-w-2xl mx-auto">
+          Hier findest du alle meine Profile, Musik-Plattformen und Kontaktmöglichkeiten.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        {links.map((link) => (
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group relative bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-6 hover:border-[var(--color-primary)] transition-all duration-300 hover:transform hover:-translate-y-1 card-glow flex flex-col items-center text-center"
+          >
+            <div 
+              class="w-16 h-16 rounded-full flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+              style={`background-color: ${link.color}20`}
+            >
+              <link.icon class={`w-8 h-8`} style={`color: ${link.color}`} />
+            </div>
+            
+            <h3 class="font-bold text-lg mb-2 text-[var(--color-text)] group-hover:text-[var(--color-secondary)] transition-colors">
+              {link.name}
+            </h3>
+            
+            <p class="text-sm text-[var(--color-text-muted)] line-clamp-2">
+              {link.description}
+            </p>
+
+            <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-[var(--color-primary)]/5 to-[var(--color-secondary)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-16 text-center">
+        <p class="text-[var(--color-text-muted)]">
+          Oder zurück zur <a href="/" class="text-[var(--color-secondary)] hover:underline">Startseite</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

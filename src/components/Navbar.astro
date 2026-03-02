@@ -1,4 +1,7 @@
 ---
+import ChevronDownIcon from "./icons/ChevronDownIcon.astro";
+import MenuIcon from "./icons/MenuIcon.astro";
+
 interface Props {
   currentPage?: string;
 }
@@ -37,6 +40,7 @@ const navItems = [
       { href: '/vermietung/kls-laser-bar', label: 'KLS Laser Bar' }
     ]
   },
+  { href: '/links', label: 'Links' },
   { href: '/work', label: 'Work' },
   { href: '/impressum', label: 'Impressum' },
 ];
@@ -58,9 +62,7 @@ const navItems = [
             <div class="relative group">
               <a href={item.href} class="nav-link flex items-center gap-1">
                 {item.label}
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
+                <ChevronDownIcon class="h-4 w-4" />
               </a>
               <div class="absolute top-full left-0 mt-2 w-48 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 {item.items?.map(subItem => (
@@ -86,9 +88,7 @@ const navItems = [
       
       <!-- Mobile Menu Button -->
       <button id="mobile-menu-btn" class="md:hidden text-[var(--color-text)] p-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+        <MenuIcon class="h-8 w-8" />
       </button>
     </div>
   </div>
