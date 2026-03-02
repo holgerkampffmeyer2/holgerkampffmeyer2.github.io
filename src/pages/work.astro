@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import LinkedInIcon from '../components/icons/LinkedInIcon.astro';
+import XingIcon from '../components/icons/XingIcon.astro';
 ---
 
 <Layout 
@@ -136,6 +138,35 @@ import Footer from '../components/Footer.astro';
             <li>• Risk Management</li>
           </ul>
         </div>
+      </div>
+    </div>
+    </section>
+
+  <!-- Social Links Section -->
+  <section class="section-padding bg-[var(--color-surface)]">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Connect</span>
+      <h2 class="font-play text-4xl font-bold mt-4 mb-8">Let's Connect</h2>
+      
+      <div class="flex justify-center gap-6">
+        <a
+          href="https://www.linkedin.com/in/holger-kampffmeyer-390b6789/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-3 bg-[var(--color-bg)] px-6 py-4 rounded-xl hover:bg-[var(--color-primary)]/20 transition-all duration-300 group"
+        >
+          <LinkedInIcon class="w-8 h-8" />
+          <span class="font-bold group-hover:text-[var(--color-secondary)] transition-colors">LinkedIn</span>
+        </a>
+        <a
+          href="https://www.xing.com/profile/Holger_Kampffmeyer"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-3 bg-[var(--color-bg)] px-6 py-4 rounded-xl hover:bg-[var(--color-primary)]/20 transition-all duration-300 group"
+        >
+          <XingIcon class="w-8 h-8" />
+          <span class="font-bold group-hover:text-[var(--color-secondary)] transition-colors">XING</span>
+        </a>
       </div>
     </div>
   </section>
