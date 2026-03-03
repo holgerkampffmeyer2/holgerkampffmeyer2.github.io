@@ -76,7 +76,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     {jsonLd && (
       Array.isArray(jsonLd) ? jsonLd : [jsonLd]
     ).map(item => (
-      <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />
+      <script is:inline type="application/ld+json">{JSON.stringify(item)}</script>
     ))}
     
     <!-- Google Fonts -->
