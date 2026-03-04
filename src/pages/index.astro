@@ -54,20 +54,18 @@ const faqs = [
   title="DJ Hulk - Musikanlagen, Lichttechnik, Verleih Stuttgart"
   description="DJ Hulk - Holger Kampffmeyer. Verleih von Musikanlagen, Partyboxen, Lichttechnik und Tontechnik im Großraum Stuttgart. Electronic Music DJ für Events, Feiern und Hochzeiten."
   image="/img/header.webp"
-  jsonLd={
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqs.map(faq => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer
-        }
-      }))
-    }
-  }
+  jsonLd={{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  }}
 >
   <Navbar currentPage="/" />
 
