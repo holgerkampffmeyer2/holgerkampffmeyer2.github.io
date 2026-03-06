@@ -7,8 +7,13 @@ import TechnicalSpecs from '../../components/vermietung/TechnicalSpecs.astro';
 import RentalIncludes from '../../components/vermietung/RentalIncludes.astro';
 import RentalPricing from '../../components/vermietung/RentalPricing.astro';
 import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
+import IncludedInPackages from '../../components/vermietung/IncludedInPackages.astro';
 
 const pageTitle = "JBL Partybox 300/320 - Vermietung | DJ Hulk";
+
+const includedInPackages = [
+  { name: "Partypaket", url: "/vermietung/partypaket-stuttgart" }
+];
 
 const images = [
   "/img/vermietung/jbl-set1.webp",
@@ -114,13 +119,11 @@ const events = [
       <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Vermietung</span>
       <h1 class="font-play text-4xl md:text-5xl font-bold mt-4 mb-4">JBL Partybox 300/320</h1>
       <p class="text-[var(--color-text-muted)] text-xl max-w-2xl">
-        Miete unser Set aus JBL Partybox 300 und Stage 320 für deine nächste Party. 
-        2x 240W mit JBL-Soundqualität, dynamischen Lichteffekten und bis zu 18 Stunden Akkubetrieb. 
+        Miete unser Set aus JBL Partybox 300 und Stage 320 für deine nächste Party. Die JBL PartyBoxen sind mobile Party-Lautsprecher mit 240 W RMS-Leistung, tiefem Bass von 40 Hz und bis zu 18 Stunden Akkulaufzeit.
+        Dank Bluetooth, USB- und Klinkeneingängen kannst du deine Musik flexibel abspielen. Die integrierte Licht Show sorgt für die richtige Stimmung auf deiner Feier. <br />
         Perfekt für bis zu 80 Personen.
       </p>
-      <p class="text-[var(--color-text-muted)] text-lg max-w-2xl mt-4">
-        Dieses Portable‑PA‑System wird häufig für Geburtstagsfeiern, Vereins‑ und Firmenveranstaltungen im Großraum Stuttgart eingesetzt. Dank Akku‑Betrieb und Bluetooth brauchst du keinen Stromanschluss und bist innerhalb von Minuten spielbereit.
-      </p>
+      
     </div>
   </section>
 
@@ -142,10 +145,11 @@ const events = [
   <!-- CTA Section -->
   <section class="cta-section section-padding bg-[var(--color-surface)]">
     <div class="max-w-4xl mx-auto text-center px-4">
-      <h2 class="font-play text-3xl md:text-4xl font-bold mb-6">Interessiert an diesem Produkt?</h2>
-      <p class="text-[var(--color-text-muted)] mb-8">
+      <h2 class="font-play text-3xl md:text-4xl font-bold mb-2">Interessiert an diesem Produkt?</h2>
+      <p class="text-[var(--color-text-muted)] mb-6">
         Stell uns eine Anfrage für das JBL Partybox Set oder lass dich beraten.
       </p>
+      <IncludedInPackages packages={includedInPackages} />
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/vermietung#kontakt" class="btn-primary">Jetzt anfragen</a>
         <a href="/vermietung" class="btn-secondary">Zurück zur Übersicht</a>

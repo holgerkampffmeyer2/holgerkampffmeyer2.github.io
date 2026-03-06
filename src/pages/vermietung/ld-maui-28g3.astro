@@ -7,8 +7,14 @@ import TechnicalSpecs from '../../components/vermietung/TechnicalSpecs.astro';
 import RentalIncludes from '../../components/vermietung/RentalIncludes.astro';
 import RentalPricing from '../../components/vermietung/RentalPricing.astro';
 import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
+import IncludedInPackages from '../../components/vermietung/IncludedInPackages.astro';
 
 const pageTitle = "LD Maui 28 G3 - Vermietung | DJ Hulk";
+
+const includedInPackages = [
+  { name: "Veranstaltungspaket", url: "/vermietung/veranstaltungspaket-stuttgart" },
+  { name: "DJ-Paket Fildern", url: "/vermietung/djpaket-fildern" }
+];
 
 const images = [
   "/img/vermietung/ldmaui3.webp",
@@ -116,14 +122,15 @@ const events = [
   <!-- CTA Section -->
   <section class="cta-section section-padding bg-[var(--color-surface)]">
     <div class="max-w-4xl mx-auto text-center px-4">
-      <h2 class="font-play text-3xl md:text-4xl font-bold mb-6">Interessiert an diesem Produkt?</h2>
-      <p class="text-[var(--color-text-muted)] mb-8">
+      <h2 class="font-play text-3xl md:text-4xl font-bold mb-2">Interessiert an diesem Produkt?</h2>
+      <p class="text-[var(--color-text-muted)] mb-6">
         Stell uns eine Anfrage für die LD Maui 28 G3 oder lass dich beraten.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/vermietung#kontakt" class="btn-primary">Jetzt anfragen</a>
         <a href="/vermietung" class="btn-secondary">Zurück zur Übersicht</a>
       </div>
+      <IncludedInPackages packages={includedInPackages} />
     </div>
   </section>
 

@@ -7,8 +7,14 @@ import TechnicalSpecs from '../../components/vermietung/TechnicalSpecs.astro';
 import RentalIncludes from '../../components/vermietung/RentalIncludes.astro';
 import RentalPricing from '../../components/vermietung/RentalPricing.astro';
 import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
+import IncludedInPackages from '../../components/vermietung/IncludedInPackages.astro';
 
 const pageTitle = "Eurolite KLS Laser Bar & Nebelmaschine - Vermietung | DJ Hulk";
+
+const includedInPackages = [
+  { name: "Partypaket", url: "/vermietung/partypaket-stuttgart" },
+  { name: "Veranstaltungspaket", url: "/vermietung/veranstaltungspaket-stuttgart" }
+];
 
 const images = [
   "/img/vermietung/eurolite-kls-laser-bar.webp",
@@ -87,7 +93,7 @@ const events = [
       <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Vermietung</span>
       <h1 class="font-play text-4xl md:text-5xl font-bold mt-4 mb-4">Eurolite KLS Laser Bar FX</h1>
       <p class="text-[var(--color-text-muted)] text-xl max-w-2xl">
-        Professionelle LED Lichtanlage mit 2 Derbys, 2 LED Spots, 4 weißen Strobe-LEDs und Laser (RG, 2M). 
+        Die EUROLITE LED KLS Laser Bar FX ist ein kompaktes 4in1-Lichtset mit vielen Einsatzmöglichkeiten:  mit 2 Derbys, 2 LED Spots, 4 weißen Strobe-LEDs und Laser (RG, 2M) sorgt die Lichtanlage für eine beeindruckende Lichtshow. 
         Optional mit 1200W Nebelmaschine. Kein Laserschutzbeauftragter notwendig!
       </p>
     </div>
@@ -129,10 +135,11 @@ const events = [
   <!-- CTA Section -->
   <section class="cta-section section-padding bg-[var(--color-surface)]">
     <div class="max-w-4xl mx-auto text-center px-4">
-      <h2 class="font-play text-3xl md:text-4xl font-bold mb-6">Interessiert an diesem Produkt?</h2>
-      <p class="text-[var(--color-text-muted)] mb-8">
+      <h2 class="font-play text-3xl md:text-4xl font-bold mb-2">Interessiert an diesem Produkt?</h2>
+      <p class="text-[var(--color-text-muted)] mb-6">
         Stell uns eine Anfrage für die Eurolite KLS Laser Bar oder lass dich beraten.
       </p>
+      <IncludedInPackages packages={includedInPackages} />
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/vermietung#kontakt" class="btn-primary">Jetzt anfragen</a>
         <a href="/vermietung" class="btn-secondary">Zurück zur Übersicht</a>
