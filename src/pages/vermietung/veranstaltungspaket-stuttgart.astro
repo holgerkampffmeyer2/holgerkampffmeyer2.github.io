@@ -1,0 +1,196 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import ProductGallery from '../../components/vermietung/ProductGallery.astro';
+import PackageContents from '../../components/vermietung/PackageContents.astro';
+import RentalPricing from '../../components/vermietung/RentalPricing.astro';
+import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
+import Testimonials from '../../components/vermietung/Testimonials.astro';
+
+const pageTitle = "Veranstaltungspaket Stuttgart - Eventtechnik Miete | DJ Hulk";
+
+const images = [
+  "/img/vermietung/ldmaui3.webp",
+  "/img/vermietung/LDMAUI28G3_1_kl.webp",
+  "/img/vermietung/ldmaui2.webp",
+  "/img/vermietung/ld-3.webp",
+  "/img/vermietung/IMG_4594.webp",
+  "/img/vermietung/yamaha_mg6_kl.webp",
+  "/img/vermietung/eurolite-kls-laser-bar.webp",
+  "/img/vermietung/eurolite-kls-laser-bar2.webp",
+  "/img/vermietung/stairville-af-150-fog-machine.webp",
+  "/img/vermietung/stairville-af-150-fog-machine-1.webp",
+  "/img/vermietung/IMG_9114.webp",
+  "/img/vermietung/IMG_7142.webp",
+  "/img/vermietung/IMG_9130.webp",
+  "/img/vermietung/IMG_9131.webp"
+];
+
+const packageItems = [
+  { name: "2x LD Maui 28 G3 Säulensystem", detailPage: "/vermietung/ld-maui-28g3" },
+  { name: "Yamaha MG6 6-Kanal Mischpult" },
+  { name: "Eurolite KLS Laser Bar", detailPage: "/vermietung/kls-laser-bar" },
+  { name: "Stairville AF-150 Nebelmaschine", detailPage: "/vermietung/led-bossfx-nebelmaschine" },
+  { name: "2x LED Spot Moving Head" },
+  { name: "Mikrofon inkl. Kabel" },
+  { name: "4x LED PAR Strahler" },
+  { name: "Stromkabel und alle notwendigen Anschlusskabel mit dabei" }
+];
+
+const events = [
+  {
+    title: "Hochzeit",
+    description: "Das ideale Paket für Hochzeitsfeiern bis 150 Gäste. Professioneller Sound für Musik und Reden, kombiniert mit einer beeindruckenden Lichtshow.",
+    personCount: "bis 150 Personen"
+  },
+  {
+    title: "Firmenfeier",
+    description: "Perfekt für Betriebsfeiern, Jubiläen und Firmenevents. Leistungsstarke Anlage für klare Durchsagen und musikalische Untermalung.",
+    personCount: "bis 150 Personen"
+  },
+  {
+    title: "Vereinsfeier",
+    description: "Egal ob Sportverein, Musikverein oder sonstige Vereinsfeier - das Veranstaltungspaket liefert professionellen Sound und Licht für jede Größe.",
+    personCount: "bis 150 Personen"
+  },
+  {
+    title: "Gartenfest",
+    description: "Auch für größere Gartenfeste mit bis zu 150 Gästen geeignet. Wetterfeste Aufstellung und kraftvoller Sound auch im Außenbereich.",
+    personCount: "bis 150 Personen"
+  }
+];
+
+const packageFeatures = [
+  "Leistungsstarkes Komplettpaket für mittlere Feiern",
+  "LD Maui 28 G3 - professionelles Säulensystem mit erstklassigem Sound",
+  "Yamaha 6-Kanal Mischpult für flexible Audio-Steuerung",
+  "KLS Laser Bar mit spektakulären Licht- und Lasereffekten (kein Laserschutzbeauftragter nötig)",
+  "Nebelmaschine für atmosphärische Lichtwirkung",
+  "2 Moving Heads für dynamische Lichtshows",
+  "Mikrofon für Durchsagen und Ansprachen",
+  "4 LED PAR Strahler für atmosphärische Ambientebeleuchtung",
+  "Alle notwendigen Strom- und Anschlusskabel inklusive - einfacher Aufbau"
+];
+---
+
+<Layout 
+  title={pageTitle}
+  description="Miete das Veranstaltungspaket für dein Event in Stuttgart. Komplette Eventtechnik mit LD Maui Soundanlage, Licht, Nebel und Moving Heads für bis zu 150 Personen."
+  image="/img/vermietung/ldmaui3.webp"
+>
+  <Navbar currentPage="/vermietung" />
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-section">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="breadcrumb">
+        <a href="/">Startseite</a>
+        <span class="separator">/</span>
+        <a href="/vermietung">Vermietung</a>
+        <span class="separator">/</span>
+        <span class="current">Veranstaltungspaket Stuttgart</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <section class="product-header section-padding pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Vermietung</span>
+      <h1 class="font-play text-4xl md:text-5xl font-bold mt-4 mb-4">Veranstaltungspaket Stuttgart</h1>
+      <p class="text-[var(--color-text-muted)] text-xl max-w-2xl">
+        Das professionelle Veranstaltungspaket für mittlere Feiern bis ca. 150 Personen. 
+        Hochwertige Technik mit LD Maui Soundanlage, Licht, Nebel und Moving Heads.
+      </p>
+    </div>
+  </section>
+
+  <!-- Package Highlights -->
+  <section class="section-padding bg-[var(--color-surface)]">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {packageFeatures.map((feature) => (
+          <div class="bg-[var(--color-bg)] p-6 rounded-xl border border-[var(--color-border)] hover:border-[var(--color-secondary)] transition-all duration-300">
+            <div class="flex items-start gap-3">
+              <span class="text-[var(--color-secondary)] text-2xl">✓</span>
+              <p class="text-[var(--color-text)]">{feature}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. Bildergalerie -->
+  <ProductGallery images={images} title="Veranstaltungspaket" />
+
+  <!-- 2. Preis & Kaution -->
+  <RentalPricing price="Preis auf Anfrage" deposit={400} />
+
+  <!-- 3. Enthalten im Paket -->
+  <PackageContents title="Enthalten im Veranstaltungspaket" items={packageItems} />
+
+  <!-- 4. Beispielanwendungen -->
+  <ExampleEvents events={events} />
+
+  <!-- CTA Section -->
+  <section class="cta-section section-padding bg-[var(--color-surface)]">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="font-play text-3xl md:text-4xl font-bold mb-6">Interessiert an diesem Paket?</h2>
+      <p class="text-[var(--color-text-muted)] mb-8">
+        Stell uns eine Anfrage für das Veranstaltungspaket oder lass dich beraten.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/vermietung#kontakt" class="btn-primary">Jetzt anfragen</a>
+        <a href="/vermietung" class="btn-secondary">Zurück zur Übersicht</a>
+      </div>
+    </div>
+  </section>
+
+  <Testimonials />
+
+  <Footer />
+</Layout>
+
+<style>
+  .breadcrumb-section {
+    padding-top: 120px;
+    padding-bottom: 1rem;
+    background: var(--color-bg);
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb a {
+    color: var(--color-text-muted);
+    transition: color 0.3s ease;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--color-secondary);
+  }
+
+  .breadcrumb .separator {
+    color: var(--color-border);
+  }
+
+  .breadcrumb .current {
+    color: var(--color-text);
+  }
+
+  .product-header {
+    background: var(--color-bg);
+    padding-bottom: 2rem;
+  }
+
+  .cta-section {
+    text-align: center;
+  }
+</style>

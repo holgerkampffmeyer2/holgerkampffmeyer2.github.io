@@ -64,8 +64,18 @@ const { events } = Astro.props;
 <style>
   .events-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
+  }
+
+  .events-grid:has(> :nth-child(4):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    .events-grid:has(> :nth-child(4):last-child) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .event-card {

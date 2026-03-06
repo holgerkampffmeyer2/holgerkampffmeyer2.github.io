@@ -32,6 +32,9 @@ src/
 │   │   └── em3f.astro               # EM3F Festival Fotos
 │   ├── vermietung.astro             # Vermietung Übersicht
 │   ├── vermietung/                  # Vermietung Detailseiten
+│   │   ├── partypaket-stuttgart.astro
+│   │   ├── veranstaltungspaket-stuttgart.astro
+│   │   ├── djpaket-fildern.astro
 │   │   ├── ld-maui-28g3.astro
 │   │   ├── jbl-partybox-300-320.astro
 │   │   ├── partylicht-moving-head.astro
@@ -261,3 +264,32 @@ node update-image-refs.mjs
 - Alle Bilder mit Hover-Effekt (ring + scale)
 - LLM-Optimierung: robots.txt mit GPTBot, ChatGPT-User, etc.
 - sitemap.xml aktualisiert mit allen 13 Seiten
+
+### 2026-03-06: Partypaket und Veranstaltungspaket Seiten
+
+**Neue Komponenten unter `src/components/vermietung/`:**
+- `PackageContents.astro` - Paketzusammenstellung mit Links zu Produktdetailseiten
+- `Testimonials.astro` - Wiederverwendbare Kundenbewertungen
+
+**Neue Seiten:**
+- `src/pages/vermietung/partypaket-stuttgart.astro` - Partypaket für bis zu 50 Personen
+- `src/pages/vermietung/veranstaltungspaket-stuttgart.astro` - Veranstaltungspaket für bis zu 150 Personen
+
+**Änderungen:**
+- Navbar: Vermietung Dropdown mit neuen Paketseiten
+- PackageContents: "Enthalten im Partypaket/Veranstaltungspaket" mit Links zu Produktseiten
+- Testimonials: Als wiederverwendbare Komponente auf Vermietungsseite und Paketseiten
+- sitemap.xml und urllist.txt mit neuen Seiten aktualisiert
+
+### 2026-03-06: DJ-Paket Fildern
+
+**Neue Seite:**
+- `src/pages/vermietung/djpaket-fildern.astro` - DJ-Paket für bis zu 150 Personen
+
+**Enthalten im Paket:**
+- 2x LD Maui 28 G3
+- LED BossFX-2 Pro + AF-150 Nebelmaschine
+- 18 Prisma Moving Head
+- Showlight LED Stage Bar
+- 1 Funkmikrofon
+- 4x LED PAR Strahler
