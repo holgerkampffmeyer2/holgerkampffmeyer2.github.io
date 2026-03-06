@@ -60,10 +60,21 @@ const navItems = [
       
       <!-- Desktop Menu -->
       <div class="desktop-menu hidden md:flex items-center space-x-6">
-        {navItems.map(item => (
-          item.hasDropdown ? (
+        {navItems.map(item => {
+          const isActive = currentPage === item.href || 
+                          (currentPage.startsWith('/dj') && item.href === '/djhulk-electronic-music') ||
+                          (currentPage.startsWith('/vermietung') && item.href === '/vermietung') ||
+                          (currentPage === '/' && item.href === '/');
+          
+          return item.hasDropdown ? (
             <div class="relative group">
-              <a href={item.href} class="nav-link flex items-center gap-1">
+              <a 
+                href={item.href} 
+                class:list={[
+                  "nav-link flex items-center gap-1",
+                  { "active": isActive }
+                ]}
+              >
                 {item.label}
                 <ChevronDownIcon class="h-4 w-4" />
               </a>
@@ -80,13 +91,13 @@ const navItems = [
               href={item.href} 
               class:list={[
                 "nav-link",
-                { "active": currentPage === item.href || (currentPage.startsWith('/dj') && item.href === '/djhulk-electronic-music') }
+                { "active": isActive }
               ]}
             >
               {item.label}
             </a>
-          )
-        ))}
+          );
+        })}
       </div>
       
       <!-- Mobile Menu Button -->
