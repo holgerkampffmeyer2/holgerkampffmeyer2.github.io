@@ -8,8 +8,32 @@ import RentalIncludes from '../../components/vermietung/RentalIncludes.astro';
 import RentalPricing from '../../components/vermietung/RentalPricing.astro';
 import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import IncludedInPackages from '../../components/vermietung/IncludedInPackages.astro';
+import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
 
 const pageTitle = "Partylicht & Gobo Moving Head - Vermietung | DJ Hulk";
+
+const faqs = [
+  {
+    question: "Brauche ich DMX-Kenntnisse, um die Lichtanlage zu bedienen?",
+    answer: "Nein, du brauchst nicht zwingend DMX-Kenntnisse! Die Lichtanlage kann im Sound-zu-Licht-Modus betrieben werden, sodass sie automatisch auf die Musik reagiert. Optional kannst du aber auch den DMX-Controller nutzen für eigene Programme."
+  },
+  {
+    question: "Wie lange dauert der Aufbau der Lichtanlage?",
+    answer: "Der Aufbau dauert in der Regel 15-20 Minuten. Das T-Bar Stativ wird einfach aufgebaut, die Geräte montiert und angeschlossen. Ich erkläre dir bei der Abholung ausführlich, wie alles funktioniert."
+  },
+  {
+    question: "Kann ich die Lichter auch ohne Nebelmaschine nutzen?",
+    answer: "Ja, die Lichter funktionieren auch ohne Nebelmaschine. Allerdings kommen die Effekte viel besser zur Geltung, wenn Nebel eingesetzt wird. Eine Nebelmaschine kann optional dazgemietet werden."
+  },
+  {
+    question: "Welche Effekte bietet der Moving Head?",
+    answer: "Der 18 Prisma LED Spot verfügt über 10 verschiedene Gobo-Muster (Schablonen), ein 18-fach Prisma für spektakuläre Lichteffekte und RGBW-Farbmischung. Er kann sich horizontal und vertikal bewegen für dynamische Shows."
+  },
+  {
+    question: "Wie hoch sollte das Stativ montiert werden?",
+    answer: "Das T-Bar Stativ ist flexibel von 100 cm bis 180 cm höhenverstellbar. Für beste Ergebnisse empfehle ich eine Höhe von ca. 150-180 cm, sodass die Lichter über die Köpfe der Gäste leuchten können."
+  }
+];
 
 const includedInPackages = [
   { name: "Veranstaltungspaket", url: "/vermietung/veranstaltungspaket-stuttgart" },
@@ -57,7 +81,7 @@ const rentalIncludes = [
   "1x LED Spot Moving Head 18 Prisma",
   "2x LED PAR RGBW Strahler",
   "1x T-Bar Stativ",
-  "DMX-Controller und -Kabel nach Bedarf"
+  "DMX-Controller und -Kabel optional gegen Aufpreis"
 ];
 
 const events = [
@@ -154,6 +178,30 @@ const events = [
 
   <!-- 5. Beispielanwendungen -->
   <ExampleEvents events={events} />
+
+  <!-- FAQ -->
+  <section class="section-padding">
+    <div class="max-w-4xl mx-auto px-4">
+      <h3 class="font-play text-2xl md:text-3xl font-bold text-center mb-10">
+        Häufig gestellte Fragen
+      </h3>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="bg-[var(--color-surface)] rounded-xl p-4 cursor-pointer group">
+            <summary class="font-bold cursor-pointer flex items-center gap-3 list-none">
+              <span class="w-6 h-6 bg-orange-500/20 rounded flex items-center justify-center text-orange-500 group-open:rotate-90 transition-transform">
+                <ChevronRightIcon class="w-3 h-3" />
+              </span>
+              {faq.question}
+            </summary>
+            <p class="text-[var(--color-text-muted)] mt-3 ml-9">
+              {faq.answer}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- CTA Section -->
   <section class="cta-section section-padding bg-[var(--color-surface)]">

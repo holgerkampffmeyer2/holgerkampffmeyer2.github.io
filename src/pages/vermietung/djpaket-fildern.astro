@@ -7,8 +7,32 @@ import PackageContents from '../../components/vermietung/PackageContents.astro';
 import RentalPricing from '../../components/vermietung/RentalPricing.astro';
 import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import Testimonials from '../../components/vermietung/Testimonials.astro';
+import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
 
 const pageTitle = "DJ-Paket Fildern - Eventtechnik Miete | DJ Hulk";
+
+const faqs = [
+  {
+    question: "Was ist im DJ-Paket Fildern alles enthalten?",
+    answer: "Das DJ-Paket enthält: 2x LD Maui 28 G3 Säulensystem, Stairville LED BossFX-2 Pro, Stairville AF-150 Nebelmaschine, 18 Prisma 10 Gobo LED Moving Head, Showlight LED Stage Bar, Mikrofon inkl. XLR-Kabel, 2x LED PAR Strahler sowie alle Stromkabel, XLR-Kabel und Anschlusskabel."
+  },
+  {
+    question: "Wie lange dauert der Aufbau des DJ-Pakets?",
+    answer: "Für das komplette DJ-Paket solltest du ca. 45-60 Minuten einplanen. Ich erkläre dir bei der Abholung ausführlich den Aufbau. Die LD Maui Anlage ist in 5 Minuten aufgebaut, für Licht und Nebel kommen ca. 30-40 Minuten hinzu."
+  },
+  {
+    question: "Kann ich das Paket selbst abholen?",
+    answer: "Ja, du kannst das Paket selbst in Leinfelden-Echterdingen abholen. Ich erkläre dir ausführlich den Aufbau und die Bedienung. Alternativ biete ich auch Lieferung und Aufbau vor Ort an (gegen Aufpreis)."
+  },
+  {
+    question: "Für welche Art von Events eignet sich das DJ-Paket?",
+    answer: "Das DJ-Paket Fildern eignet sich ideal für: Hochzeiten (bis 150 Gäste), Firmenfeiern, Vereinsfeiern, DJ-Gigs, größere Gartenfeste und Partys. Es bietet professionellen Sound und eine beeindruckende Lichtshow. DAs DJ-Paket ist perfekt, wenn du selbst als DJ auftrittst oder der DJ seinen eigenen DJ-Mixer mitbringt und eine professionelle Sound- und Lichtanlage benötigt."
+  },
+  {
+    question: "Unterscheidet sich das DJ-Paket vom Veranstaltungspaket?",
+    answer: "Ja, das DJ-Paket enthält die LD Maui 28 G3 als Soundanlage (professionelles Säulensystem mit Yamahha Mischpult-Option), während das Veranstaltungspaket mehr Licht-Komponenten (Laser Bar, mehr PAR Strahler) enthält. Das DJ-Paket ist ideal, wenn du selbst als DJ auftrittst oder der DJ seinen eigenen DJ-Mixer mitbringt."
+  }
+];
 
 const images = [
   "/img/vermietung/ldmaui3.webp",
@@ -130,6 +154,30 @@ const packageFeatures = [
 
   <!-- 4. Beispielanwendungen -->
   <ExampleEvents events={events} />
+
+  <!-- FAQ -->
+  <section class="section-padding">
+    <div class="max-w-4xl mx-auto px-4">
+      <h3 class="font-play text-2xl md:text-3xl font-bold text-center mb-10">
+        Häufig gestellte Fragen
+      </h3>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="bg-[var(--color-surface)] rounded-xl p-4 cursor-pointer group">
+            <summary class="font-bold cursor-pointer flex items-center gap-3 list-none">
+              <span class="w-6 h-6 bg-orange-500/20 rounded flex items-center justify-center text-orange-500 group-open:rotate-90 transition-transform">
+                <ChevronRightIcon class="w-3 h-3" />
+              </span>
+              {faq.question}
+            </summary>
+            <p class="text-[var(--color-text-muted)] mt-3 ml-9">
+              {faq.answer}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- CTA Section -->
   <section class="cta-section section-padding bg-[var(--color-surface)]">

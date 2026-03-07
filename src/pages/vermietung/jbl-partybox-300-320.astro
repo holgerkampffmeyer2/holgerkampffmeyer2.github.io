@@ -8,8 +8,32 @@ import RentalIncludes from '../../components/vermietung/RentalIncludes.astro';
 import RentalPricing from '../../components/vermietung/RentalPricing.astro';
 import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import IncludedInPackages from '../../components/vermietung/IncludedInPackages.astro';
+import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
 
 const pageTitle = "JBL Partybox 300/320 - Vermietung | DJ Hulk";
+
+const faqs = [
+  {
+    question: "Wie lange hält der Akku der JBL Partybox?",
+    answer: "Die JBL Partybox 300 und 320 bieten bis zu 18 Stunden Akkulaufzeit. Die tatsächliche Laufzeit hängt von der Lautstärke und der Nutzung der Lichteffekte ab. Bei voller Lautstärke mit Light Show sind es ca. 6-8 Stunden."
+  },
+  {
+    question: "Kann ich zwei Partyboxen miteinander verbinden?",
+    answer: "Ja! Im Paket ist ein Verbindungskabel (5M) fürdie Verbindung der zwei Boxen enthalten. Das ist perfekt für größere Räume oder wenn du mehr Power brauchst."
+  },
+  {
+    question: "Wie spiele ich Musik auf den Partyboxen ab?",
+    answer: "Du hast mehrere Möglichkeiten: Bluetooth (von Smartphone/Tablet), USB-Stick, 3,5mm Klinke (AUX) oder sogar ein Mikrofon/Gitarre direkt anschließen. Bei Bedarf lege ich ein passendes Kabel für den Anschluss eines Laptops bei."
+  },
+  {
+    question: "Sind die Boxen wasserdicht?",
+    answer: "Die JBL Partybox 320 ist nach IPX4 spritzwassergeschützt und kann daher auch im Freien bei leichtem Regen genutzt werden. Die Partybox 300 ist nicht wasserdicht und sollte vor Nässe geschützt werden."
+  },
+  {
+    question: "Wie groß ist der Lieferumfang?",
+    answer: "Im Mietpaket enthalten sind: 1x JBL Partybox 300, 1x JBL Partybox 320, 2x Stromkabel und 1x Verbindungskabel (5m) für die Kopplung der 2 Boxen. Bei Bedarf lege ich noch ein Verbindungskabel für die Zuspielung von Musik über einen Laptops bei. Alles was du für den Start brauchst!"
+  }
+];
 
 const includedInPackages = [
   { name: "Partypaket", url: "/vermietung/partypaket-stuttgart" }
@@ -141,6 +165,30 @@ const events = [
 
   <!-- 5. Beispielanwendungen -->
   <ExampleEvents events={events} />
+
+  <!-- FAQ -->
+  <section class="section-padding">
+    <div class="max-w-4xl mx-auto px-4">
+      <h3 class="font-play text-2xl md:text-3xl font-bold text-center mb-10">
+        Häufig gestellte Fragen
+      </h3>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="bg-[var(--color-surface)] rounded-xl p-4 cursor-pointer group">
+            <summary class="font-bold cursor-pointer flex items-center gap-3 list-none">
+              <span class="w-6 h-6 bg-orange-500/20 rounded flex items-center justify-center text-orange-500 group-open:rotate-90 transition-transform">
+                <ChevronRightIcon class="w-3 h-3" />
+              </span>
+              {faq.question}
+            </summary>
+            <p class="text-[var(--color-text-muted)] mt-3 ml-9">
+              {faq.answer}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- CTA Section -->
   <section class="cta-section section-padding bg-[var(--color-surface)]">

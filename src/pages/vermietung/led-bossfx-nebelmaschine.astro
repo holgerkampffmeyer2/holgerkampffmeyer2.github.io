@@ -8,8 +8,32 @@ import RentalIncludes from '../../components/vermietung/RentalIncludes.astro';
 import RentalPricing from '../../components/vermietung/RentalPricing.astro';
 import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import IncludedInPackages from '../../components/vermietung/IncludedInPackages.astro';
+import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
 
 const pageTitle = "LED BossFX-2 Pro & Nebelmaschine - Vermietung | DJ Hulk";
+
+const faqs = [
+  {
+    question: "Ist Nebelfluid im Mietpreis enthalten?",
+    answer: "Ja, 1 Tankfüllung (ca. 1 Liter) Nebelfluid ist im Mietpreis inbegriffen. Das reicht für einen typischen Partyabend von ca. 4-6 Stunden. Falls du mehr benötigst, kannst du zusätzliches Fluid erhalten."
+  },
+  {
+    question: "Wie lange hält der Nebel an?",
+    answer: "Die AF-150 Nebelmaschine mit 800W Leistung erzeugt ca. 110 m³ Nebel pro Minute. Der Nebel verfliegt je nach Raumgröße und Belüftung nach etwa 30-60 Sekunden. Du kannst die Intensität über die Fernbedienung oder DMX steuern."
+  },
+  {
+    question: "Ist die Nutzung von Nebel gesundheitlich unbedenklich?",
+    answer: "Ja, wir verwenden nur hochwertiges, speziell für Veranstaltungen entwickeltes Nebelfluid. Es ist gesundheitlich unbedenklich und hinterlässt keine Rückstände. Es sollte jedoch bei sehr empfindlichen Personen mit Atemwegserkrankungen vorsichtig eingesetzt werden."
+  },
+  {
+    question: "Welche Steuerungsmöglichkeiten gibt es?",
+    answer: "Die LED BossFX-2 Pro kann per Sound-zu-Licht (automatisch auf Musik reagierend), über die mitgelieferte Fernbedienung oder per DMX gesteuert werden. Die Nebelmaschine wird per Fernbedienung oder DMX gesteuert."
+  },
+  {
+    question: "Kann ich das Set auch ohne Nebelmaschine mieten?",
+    answer: "Ja, die LED BossFX-2 Pro kann auch einzeln ohne Nebelmaschine gemietet werden. Allerdings kommen die Lichteffekte, besonders die Derby-Beams und Strobe-Effekte, viel besser zur Geltung, wenn Nebel eingesetzt wird."
+  }
+];
 
 const includedInPackages = [
   { name: "Partypaket", url: "/vermietung/partypaket-stuttgart" },
@@ -135,7 +159,31 @@ const events = [
    <!-- 5. Beispielanwendungen -->
    <ExampleEvents events={events} />
 
-  <!-- CTA Section -->
+   <!-- FAQ -->
+   <section class="section-padding">
+     <div class="max-w-4xl mx-auto px-4">
+       <h3 class="font-play text-2xl md:text-3xl font-bold text-center mb-10">
+         Häufig gestellte Fragen
+       </h3>
+       <div class="space-y-4">
+         {faqs.map((faq) => (
+           <details class="bg-[var(--color-surface)] rounded-xl p-4 cursor-pointer group">
+             <summary class="font-bold cursor-pointer flex items-center gap-3 list-none">
+               <span class="w-6 h-6 bg-orange-500/20 rounded flex items-center justify-center text-orange-500 group-open:rotate-90 transition-transform">
+                 <ChevronRightIcon class="w-3 h-3" />
+               </span>
+               {faq.question}
+             </summary>
+             <p class="text-[var(--color-text-muted)] mt-3 ml-9">
+               {faq.answer}
+             </p>
+           </details>
+         ))}
+       </div>
+     </div>
+   </section>
+
+   <!-- CTA Section -->
   <section class="cta-section section-padding bg-[var(--color-surface)]">
     <div class="max-w-4xl mx-auto text-center px-4">
       <h2 class="font-play text-3xl md:text-4xl font-bold mb-2">Interessiert an diesem Produkt?</h2>

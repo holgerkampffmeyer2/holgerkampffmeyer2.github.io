@@ -7,8 +7,32 @@ import PackageContents from '../../components/vermietung/PackageContents.astro';
 import RentalPricing from '../../components/vermietung/RentalPricing.astro';
 import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import Testimonials from '../../components/vermietung/Testimonials.astro';
+import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
 
 const pageTitle = "Veranstaltungspaket Stuttgart - Eventtechnik Miete | DJ Hulk";
+
+const faqs = [
+  {
+    question: "Was unterscheidet das Veranstaltungspaket vom DJ-Paket?",
+    answer: "Das Veranstaltungspaket enthält: 2x LD Maui 28 G3, Yamaha MG6 Mischpult, Eurolite KLS Laser Bar, AF-150 Nebelmaschine, 2x LED Spot Moving Head, Mikrofon und 4x LED PAR Strahler. Das DJ-Paket enthält stattdessen die LED BossFX Pro und einen Moving Head. Das Veranstaltungspaket hat mehr Licht-Komponenten."
+  },
+  {
+    question: "Wie groß darf die Veranstaltung sein?",
+    answer: "Das Veranstaltungspaket eignet sich für Veranstaltungen mit bis zu 150 Personen. Die LD Maui 28 G3 liefert mit 2060W genug Leistung auch für größere Räume. Die Lichtanlage mit Laser, Moving Heads und PAR Strahlern sorgt für eine beeindruckende Show."
+  },
+  {
+    question: "Kann ich die Technik auch ohne DJ nutzen?",
+    answer: "Ja, das Paket kannst du auch ohne DJ nutzen. Das Yamaha Mischpult ermöglicht dir den Anschluss mehrerer Audioquellen (Laptop, Mikrofon, etc.). Die Lichtanlage läuft im Sound-zu-Licht-Modus automatisch oder kann per DMX gesteuert werden."
+  },
+  {
+    question: "Ist das Yamaha Mischpult im Paket enthalten?",
+    answer: "Ja, das Yamaha MG6 6-Kanal Mischpult ist im Veranstaltungspaket enthalten. Es ermöglicht dir die flexible Steuerung verschiedener Audioquellen und bietet die Möglichkeit, Mikrofone und Musikquellen separat zu mischen."
+  },
+  {
+    question: "Wie funktioniert die Lieferung und Abholung?",
+    answer: "Du kannst die Technik selbst in Leinfelden-Echterdingen abholen oder wir liefern sie gegen Aufpreis direkt zu deinem Veranstaltungsort. Bei der Abholung geben wir dir eine ausführliche Einweisung in Aufbau und Bedienung."
+  }
+];
 
 const images = [
   "/img/vermietung/ldmaui3.webp",
@@ -133,6 +157,30 @@ const packageFeatures = [
 
   <!-- 4. Beispielanwendungen -->
   <ExampleEvents events={events} />
+
+  <!-- FAQ -->
+  <section class="section-padding">
+    <div class="max-w-4xl mx-auto px-4">
+      <h3 class="font-play text-2xl md:text-3xl font-bold text-center mb-10">
+        Häufig gestellte Fragen
+      </h3>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="bg-[var(--color-surface)] rounded-xl p-4 cursor-pointer group">
+            <summary class="font-bold cursor-pointer flex items-center gap-3 list-none">
+              <span class="w-6 h-6 bg-orange-500/20 rounded flex items-center justify-center text-orange-500 group-open:rotate-90 transition-transform">
+                <ChevronRightIcon class="w-3 h-3" />
+              </span>
+              {faq.question}
+            </summary>
+            <p class="text-[var(--color-text-muted)] mt-3 ml-9">
+              {faq.answer}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- CTA Section -->
   <section class="cta-section section-padding bg-[var(--color-surface)]">

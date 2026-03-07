@@ -8,8 +8,32 @@ import RentalIncludes from '../../components/vermietung/RentalIncludes.astro';
 import RentalPricing from '../../components/vermietung/RentalPricing.astro';
 import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import IncludedInPackages from '../../components/vermietung/IncludedInPackages.astro';
+import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
 
 const pageTitle = "Eurolite KLS Laser Bar & Nebelmaschine - Vermietung | DJ Hulk";
+
+const faqs = [
+  {
+    question: "Brauche ich einen Laserschutzbeauftragten für die Laser Bar?",
+    answer: "Nein, bei der Eurolite KLS Laser Bar handelt es sich um einen Laser der Klasse 2M. Dies bedeutet, dass kein Laserschutzbeauftragter erforderlich ist. Du solltest jedoch darauf achten, nicht direkt in den Laserstrahl zu blicken."
+  },
+  {
+    question: "Wie sicher ist der Laser im Partybetrieb?",
+    answer: "Der Laser der KLS Bar FX ist ein RG-Laser (Rot-Grün) der Klasse 2M. Er ist sicher für den Partygebrauch und Augensicherheit ist gewährleistet, solange man nicht absichtlich direkt in den Strahl schaut. Die Nutzung ist auch ohne spezielle Genehmigung erlaubt."
+  },
+  {
+    question: "Welche Effekte bietet die Laser Bar?",
+    answer: "Die Eurolite KLS Laser Bar FX vereint 4 Effekte in einem: 2 Derby-Beams mit drehenden Mustern, 2 LED-Spots für Flächeneffekte, 4 weiße Strobe-LEDs für Blitzlichter und einen Laser für spektakuläre Strahleneffekte."
+  },
+  {
+    question: "Kann ich die Laser Bar auch ohne Nebelmaschine nutzen?",
+    answer: "Ja, die Laser Bar funktioniert auch ohne Nebelmaschine. Allerdings kommen die Laserstrahlen und Effekte viel besser zur Geltung, wenn leichter Nebel die Luft vernebelt. Die 1200W Nebelmaschine kann optional dazugemietet werden."
+  },
+  {
+    question: "Wie wird die Laser Bar gesteuert?",
+    answer: "Die Steuerung erfolgt wahlweise per Sound-zu-Licht (automatisch auf Musik reagierend), über die mitgelieferte Fernbedienung oder per DMX. Der Sound-zu-Licht-Modus ist perfekt für Einsteiger geeignet."
+  }
+];
 
 const includedInPackages = [
   { name: "Partypaket", url: "/vermietung/partypaket-stuttgart" },
@@ -131,6 +155,30 @@ const events = [
 
   <!-- 5. Beispielanwendungen -->
   <ExampleEvents events={events} />
+
+  <!-- FAQ -->
+  <section class="section-padding">
+    <div class="max-w-4xl mx-auto px-4">
+      <h3 class="font-play text-2xl md:text-3xl font-bold text-center mb-10">
+        Häufig gestellte Fragen
+      </h3>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="bg-[var(--color-surface)] rounded-xl p-4 cursor-pointer group">
+            <summary class="font-bold cursor-pointer flex items-center gap-3 list-none">
+              <span class="w-6 h-6 bg-orange-500/20 rounded flex items-center justify-center text-orange-500 group-open:rotate-90 transition-transform">
+                <ChevronRightIcon class="w-3 h-3" />
+              </span>
+              {faq.question}
+            </summary>
+            <p class="text-[var(--color-text-muted)] mt-3 ml-9">
+              {faq.answer}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- CTA Section -->
   <section class="cta-section section-padding bg-[var(--color-surface)]">
