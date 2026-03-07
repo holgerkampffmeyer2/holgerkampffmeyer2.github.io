@@ -7,8 +7,9 @@ interface Props {
 const { price, deposit } = Astro.props;
 ---
 
-<section class="section-padding bg-[var(--color-bg)]">
+<section class="section-padding bg-[var(--color-bg)]" aria-labelledby="pricing-heading">
   <div class="max-w-4xl mx-auto">
+    <h2 id="pricing-heading" class="sr-only">Preis und Kaution</h2>
     <div class="pricing-card">
       <div class="price-section">
         <span class="price-label">Mietpreis</span>
@@ -28,7 +29,7 @@ const { price, deposit } = Astro.props;
       </div>
 
       <div class="conditions-section">
-        <h4 class="conditions-title">Mietbedingungen</h4>
+        <h3 class="conditions-title">Mietbedingungen</h3>
         <ul class="conditions-list">
           <li>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
@@ -136,7 +137,7 @@ const { price, deposit } = Astro.props;
     color: var(--color-text);
     font-weight: 600;
     margin-bottom: 1rem;
-    font-size: 1rem;
+    font-size: 1.125rem;
   }
 
   .conditions-list {
