@@ -227,6 +227,7 @@ node update-image-refs.mjs
 - [x] Sitemap-Generierung
 - [x] Produktdetailseiten für Vermietung
 - [x] RSS Feed
+- [] Baue eigene Mixcloud Widgets mithilfe der API https://www.mixcloud.com/developers/widget/ und lade die letzten 15 Mixes von https://www.mixcloud.com/holger-kampffmeyer/
 - [ ] Blog-Sektion
 
 ---
