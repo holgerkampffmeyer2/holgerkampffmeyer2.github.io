@@ -233,6 +233,7 @@ node update-image-refs.mjs
 - [x] `src/pages/dj/mixes.astro` auf dynamisches Laden umgestellt
 - [x] Integration in `package.json` Build-Prozess
 - [x] Visueller Abstand zwischen Sektionen auf allen Seiten reduziert (durch Anpassung von `.section-padding` in `global.css`)
+- [] Refactoring der Sektionen in der index.astro "Was ich Dir biete" und "FAQ" als Astro Komponente. Einbau der 2 Komponenten auf der vermietung.astro Seite ergänzen.
 - [ ] Blog-Sektion
 
 ---
