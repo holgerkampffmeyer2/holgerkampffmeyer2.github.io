@@ -20,7 +20,9 @@ src/
 │       ├── TechnicalSpecs.astro
 │       ├── RentalIncludes.astro
 │       ├── RentalPricing.astro
-│       └── ExampleEvents.astro
+│       ├── ExampleEvents.astro
+│       ├── IncludedInPackages.astro
+│       └── PackageContents.astro
 ├── layouts/              # Seiten-Layouts
 │   └── Layout.astro
 ├── pages/                # Routen/Seiten
@@ -41,7 +43,8 @@ src/
 │   │   ├── led-bossfx-nebelmaschine.astro
 │   │   └── kls-laser-bar.astro
 │   ├── work.astro
-│   └── impressum.astro
+│   ├── impressum.astro
+│   └── links.astro
 ├── styles/
 │   └── global.css
 └── env.d.ts
@@ -90,7 +93,8 @@ npm run preview  # Preview production build
 5. **DJ / EM3F** - Festival-Fotogalerie
 6. **Vermietung** - Equipment-Katalog mit Preisen, Detailseiten
 7. **Work** - Business/Research Info, Research Papers (PDFs)
-8. **Impressum** - Rechtliche Informationen
+8. **Links** - Social Media Links, Plattformen
+9. **Impressum** - Rechtliche Informationen
 
 ### URLs
 - `/` - Startseite
@@ -100,13 +104,15 @@ npm run preview  # Preview production build
 - `/dj/em3f` - EM3F Festival
 - `/vermietung` - Vermietung Übersicht
 - `/work` - Work/Research
+- `/impressum` - Impressum
+- `/links` - Links (Social Media, Plattformen)
 
 ---
 
 ## Funktionen
 
 ### Navigation
-- Hauptnavigation: Home, DJing (Dropdown), Vermietung (Dropdown), Work, Impressum
+- Hauptnavigation: Home, DJing (Dropdown), Vermietung (Dropdown), Work, Links, Impressum
 - DJing-Dropdown: Über mich, Videos, Mixes, EM3F Festival
 - Vermietung-Dropdown: Übersicht + alle Detailseiten
 - Mobile Hamburger-Menü
