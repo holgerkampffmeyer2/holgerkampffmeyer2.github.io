@@ -45,6 +45,9 @@ src/
 │   ├── work.astro
 │   ├── impressum.astro
 │   └── links.astro
+├── public/
+│   ├── rss.xml                 # RSS Feed
+│   ├── robots.txt
 ├── styles/
 │   └── global.css
 └── env.d.ts
@@ -205,7 +208,7 @@ node update-image-refs.mjs
 - [x] Bildoptimierung (WebP)
 - [x] Sitemap-Generierung
 - [x] Produktdetailseiten für Vermietung
-- [ ] RSS Feed
+- [x] RSS Feed
 - [ ] Blog-Sektion
 
 ---
