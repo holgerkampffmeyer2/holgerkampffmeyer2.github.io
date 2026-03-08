@@ -227,7 +227,7 @@ node update-image-refs.mjs
 - [x] Sitemap-Generierung
 - [x] Produktdetailseiten für Vermietung
 - [x] RSS Feed
-- [] Baue eigene Mixcloud Widgets mithilfe der API https://www.mixcloud.com/developers/widget/ und lade die letzten 15 Mixes von https://www.mixcloud.com/holger-kampffmeyer/
+- [x] Baue eigene Mixcloud Widgets mithilfe der API https://www.mixcloud.com/developers/widget/ und lade die letzten 15 Mixes von https://www.mixcloud.com/holger-kampffmeyer/
 - [ ] Blog-Sektion
 
 ---
@@ -321,3 +321,11 @@ node update-image-refs.mjs
 - Showlight LED Stage Bar
 - 1 Funkmikrofon
 - 4x LED PAR Strahler
+
+### 2026-03-08: Dynamische Mixcloud-Integration
+
+**Änderungen:**
+- Neues Skript `scripts/fetch-mixcloud.mjs` zum Abrufen der letzten 15 Mixes zur Build-Zeit
+- Neue Komponente `src/components/MixcloudWidget.astro` zur flexiblen Widget-Einbindung
+- `src/pages/dj/mixes.astro` auf dynamisches Laden umgestellt
+- Integration in `package.json` Build-Prozess

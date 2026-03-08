@@ -1,0 +1,19 @@
+---
+interface Props {
+  src: string;
+  title: string;
+  height?: string;
+}
+
+const { src, title, height = "150px" } = Astro.props;
+---
+
+<div class="bg-[var(--color-surface)] rounded-xl overflow-hidden shadow-lg transition-transform hover:scale-[1.01]">
+  <iframe 
+    style={`width: 100%; height: ${height}; border: none;`} 
+    src={src}
+    title={title}
+    allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"
+    loading="lazy"
+  ></iframe>
+</div>

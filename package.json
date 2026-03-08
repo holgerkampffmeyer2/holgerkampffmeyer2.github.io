@@ -3,8 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "node scripts/generate-rss.mjs && astro dev",
-    "build": "node scripts/generate-rss.mjs && astro build",
+    "dev": "node scripts/fetch-mixcloud.mjs && node scripts/generate-rss.mjs && astro dev",
+    "build": "node scripts/fetch-mixcloud.mjs && node scripts/generate-rss.mjs && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro",
