@@ -2,6 +2,42 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
+
+const latestMix = {
+  title: "DJ Hulk - Deep Jackin Latin House Mix",
+  src: "https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-deep-jackin-latin-house-mix169%2F"
+};
+
+const archiveMixes = [
+  {
+    title: "DJ Hulk b2b TheBigTurtle - Select Radio",
+    src: "https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FTheBigTurtle%2Fbigt-b2b-dj-hulk-select-radio-for-weareone-wbill-mcgruddy-unmastered-full%2F"
+  },
+  {
+    title: "DJ Hulk - Party Mix Bootlegs Tech Bass House",
+    src: "https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-partymix-bootlegs-tech-bass-house-168%2F"
+  },
+  {
+    title: "Tony C & DJ Hulk - The Houseboxx Vol.6",
+    src: "https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FTonyCeee%2Fthe-houseboxx-vol6-by-tony-c-b2b-dj-hulk%2F"
+  },
+  {
+    title: "DJ Hulk - Latin Tech Tribal Mix",
+    src: "https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-latin-tech-tribal-mix167%2F"
+  },
+  {
+    title: "DJ Hulk - Deep Tech Afro Jackin House Mix",
+    src: "https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-deep-tech-afro-jackin-house-mix-166%2F"
+  },
+  {
+    title: "DJ Hulk - Deep Jackin Soulful House Mix",
+    src: "https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-deep-jackin-soulful-house-mix170%2F"
+  },
+  {
+    title: "DJ Hulk - Techno Mix #171",
+    src: "https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-techno-mix-171%2F"
+  },
+];
 ---
 
 <Layout 
@@ -35,12 +71,17 @@ import Footer from '../../components/Footer.astro';
       <h2 class="font-play text-4xl font-bold mt-4 mb-6">Weekly Sunday House Mix</h2>
       <p class="text-[var(--color-text-muted)] mb-8">
         Auf Mixcloud veröffentliche ich jeden Sonntag einen neuen Mix. Dabei spezialisiere ich mich auf House, Tech House, Latin House, Jackin and Funky House sowie Afro House. <br>
-        Meine Mixe decken ein breits Spektrum elektronischer Musik ab und eignen sich zum HÖren im Auto, im Fitnessstudio oder zu Hause. <br>
+        Meine Mixe decken ein breits Spektrum elektronischer Musik ab und eignen sich zum Hören im Auto, im Fitnessstudio oder zu Hause. <br>
         Weitere Musikrichtungen wie Techno und Drum n Bass findest du ebenfalls in meinem Mixcloud‑Archiv.
       </p>
       
       <div class="bg-[var(--color-surface)] rounded-xl p-4 mb-8">
-        <iframe style="width: 100%; height: 150px; border: none;" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-deep-jackin-latin-house-mix169%2F" style="border: none;"></iframe>
+        <iframe 
+          style="width: 100%; height: 150px; border: none;" 
+          src={latestMix.src}
+          title={latestMix.title}
+          allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"
+        ></iframe>
       </div>
     </div>
   </section>
@@ -54,45 +95,25 @@ import Footer from '../../components/Footer.astro';
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Mix 1 -->
-        <div class="bg-[var(--color-bg)] rounded-xl p-4">
-          <iframe style="width: 100%; height: 150px; border: none;" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FTheBigTurtle%2Fbigt-b2b-dj-hulk-select-radio-for-weareone-wbill-mcgruddy-unmastered-full%2F" style="border: none;"></iframe>
-        </div>
-
-        <!-- Mix 2 -->
-        <div class="bg-[var(--color-bg)] rounded-xl p-4">
-          <iframe style="width: 100%; height: 150px; border: none;" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-partymix-bootlegs-tech-bass-house-168%2F" style="border: none;"></iframe>
-        </div>
-
-        <!-- Mix 3 -->
-        <div class="bg-[var(--color-bg)] rounded-xl p-4">
-          <iframe style="width: 100%; height: 150px; border: none;" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2FTonyCeee%2Fthe-houseboxx-vol6-by-tony-c-b2b-dj-hulk%2F" style="border: none;"></iframe>
-        </div>
-
-        <!-- Mix 4 -->
-        <div class="bg-[var(--color-bg)] rounded-xl p-4">
-          <iframe style="width: 100%; height: 150px; border: none;" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-latin-tech-tribal-mix167%2F" style="border: none;"></iframe>
-        </div>
-
-        <!-- Mix 5 -->
-        <div class="bg-[var(--color-bg)] rounded-xl p-4">
-          <iframe style="width: 100%; height: 150px; border: none;" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-deep-tech-afro-jackin-house-mix-166%2F" style="border: none;"></iframe>
-        </div>
-
-        <!-- Mix 6 -->
-        <div class="bg-[var(--color-bg)] rounded-xl p-4">
-          <iframe style="width: 100%; height: 120px; border: none;" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fholger-kampffmeyer%2Fdj-hulk-deep-jackin-soulful-house-mix170%2F" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;" ></iframe>
+        {archiveMixes.map((mix) => (
+          <div class="bg-[var(--color-bg)] rounded-xl p-4">
+            <iframe 
+              style="width: 100%; height: 150px; border: none;" 
+              src={mix.src}
+              title={mix.title}
+              allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"
+            ></iframe>
           </div>
+        ))}
       </div>
     </div>
 
-      
-      
-      <div class="text-center mt-12">
-        <a href="https://www.mixcloud.com/holger-kampffmeyer/" target="_blank" class="btn-primary">
-          Alle Mixes auf Mixcloud
-        </a>
-      </div>
+    
+    
+    <div class="text-center mt-12">
+      <a href="https://www.mixcloud.com/holger-kampffmeyer/" target="_blank" class="btn-primary">
+        Alle Mixes auf Mixcloud
+      </a>
     </div>
   </section>
 

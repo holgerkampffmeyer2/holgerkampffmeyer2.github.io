@@ -5,28 +5,28 @@
     <link>https://holger-kampffmeyer.de</link>
     <description>Weekly Tech House Mixes every Sunday + Event-Aufnahmen von DJ Hulk aus Stuttgart.</description>
     <language>de</language>
-    <lastBuildDate>Sun, 08 Mar 2026 12:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 08 Mar 2026 </lastBuildDate>
     <atom:link href="https://holger-kampffmeyer.de/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
       <guid isPermaLink="false">djhulk-mix-weekly</guid>
       <title>DJ Hulk - Weekly Tech House Mix</title>
       <link>https://holger-kampffmeyer.de/dj/mixes</link>
       <description>Neuester Sonntags-Mix auf Mixcloud</description>
-      <pubDate>Mon, 02 Mar 2026 12:00:00 +0100</pubDate>
+      <pubDate>Mon, 02 Mar 2026 </pubDate>
     </item>
     <item>
       <guid isPermaLink="false">djhulk-em3f-2024</guid>
       <title>DJ Hulk - EM3F Festival 2024 Aftermovie</title>
       <link>https://holger-kampffmeyer.de/dj/videos</link>
       <description>Video vom EM3F Festival 2024</description>
-      <pubDate>Thu, 15 Aug 2024 12:00:00 +0100</pubDate>
+      <pubDate>Thu, 15 Aug 2024 </pubDate>
     </item>
     <item>
       <guid isPermaLink="false">djhulk-vermietung-2026</guid>
       <title>Vermietung - Professionelle Eventtechnik</title>
       <link>https://holger-kampffmeyer.de/vermietung</link>
       <description>Party- und Veranstaltungstechnik mieten in Stuttgart</description>
-      <pubDate>Fri, 06 Mar 2026 12:00:00 +0100</pubDate>
+      <pubDate>Fri, 06 Mar 2026 </pubDate>
     </item>
   </channel>
 </rss>
