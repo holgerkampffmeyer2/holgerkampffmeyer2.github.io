@@ -13,6 +13,10 @@
 ```
 src/
 ├── components/           # Wiederverwendbare UI-Komponenten
+├── data/                 # Daten-Dateien
+│   └── rss-data.json    # RSS Feed Datenquelle
+├── scripts/              # Build-Skripte
+│   └── generate-rss.mjs # RSS Feed Generator
 │   ├── Navbar.astro
 │   ├── Footer.astro
 │   └── vermietung/      # Vermietung-spezifische Komponenten
@@ -134,6 +138,20 @@ npm run preview  # Preview production build
 - EM3F Festival Fotos
 - Video-Sektion mit YouTube Embeds
 - Spotify Playlist Embed
+
+### RSS Feed
+- Automatische Generierung bei jedem Build
+- Datenquelle: `src/data/rss-data.json`
+- Build-Script: `scripts/generate-rss.mjs`
+- Output: `public/rss.xml`
+- Einträge: Neueste Mixes, Videos, Vermietung
+
+**Neuen Eintrag hinzufügen:**
+```bash
+# 1. Daten in rss-data.json bearbeiten
+# 2. Build ausführen
+npm run build
+```
 ---
 
 ## Bildoptimierung
