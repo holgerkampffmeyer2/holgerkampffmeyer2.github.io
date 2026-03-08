@@ -232,6 +232,7 @@ node update-image-refs.mjs
 - [x] Neue Komponente `src/components/MixcloudWidget.astro` zur flexiblen Widget-Einbindung
 - [x] `src/pages/dj/mixes.astro` auf dynamisches Laden umgestellt
 - [x] Integration in `package.json` Build-Prozess
+- [x] Visueller Abstand zwischen Sektionen auf allen Seiten reduziert (durch Anpassung von `.section-padding` in `global.css`)
 - [ ] Blog-Sektion
 
 ---
