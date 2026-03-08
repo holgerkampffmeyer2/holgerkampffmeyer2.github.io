@@ -3,6 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import Testimonials from '../components/vermietung/Testimonials.astro';
+import BieteSection from '../components/BieteSection.astro';
+import FAQSection from '../components/FAQSection.astro';
+import MietanfrageAblauf from '../components/vermietung/MietanfrageAblauf.astro';
+import ChevronLeftIcon from "../components/icons/ChevronLeftIcon.astro";
+import ChevronRightIcon from "../components/icons/ChevronRightIcon.astro";
+import { faqs } from '../data/faqs';
 
 const equipment = [
   {
@@ -151,41 +157,144 @@ const equipment = [
   <Navbar currentPage="/vermietung" />
 
   <!-- Hero Section -->
-  <section class="hero-slider">
-    <div class="slide slide-1 active">
-      <div class="slide-content" style={`background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url("/img/vermietung/licht2.webp");`}>
+  <section id="hero" class="hero-slider">
+    <!-- Slide 1: Partypaket -->
+    <div class="slide slide-1 active" data-slide="0">
+      <div class="slide-content" style={`background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url("/img/vermietung/partypaket1.webp");`}>
         <div class="container mx-auto px-4">
           <div class="max-w-3xl pt-32">
-            <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Musikanlagen, PA, Partyanlagen</span>
-            <h1 class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">Vermietung / Verleih</h1>
+            <h1 class="font-play text-4xl md:text-6xl lg:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">Partypaket mieten in Stuttgart – ab 80€/Tag</h1>
             <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
-              Partyboxen, DJ-Equipment, Licht, Nebel, Mikrofon - alles für Ihre Party!
+              Vollständige Sets für Geburtstag, Hochzeit oder Firmenfeier. Plug & Play, inkl. Kabel & Einweisung. Abholung in Leinfelden-Echterdingen.
             </p>
+            <div class="flex flex-col sm:flex-row gap-4 animate-fadeInUp stagger-4">
+              <a href="/vermietung/partypaket-stuttgart" class="btn-primary">Details Partypaket</a>
+              <a href="#kontakt" class="btn-secondary">Jetzt anfragen</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- Slide 2: DJ-Paket -->
+    <div class="slide slide-2" data-slide="1">
+      <div class="slide-content" style={`background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url("/img/vermietung/IMG_6643.webp");`}>
+        <div class="container mx-auto px-4">
+          <div class="max-w-3xl pt-32">
+            <h1 class="font-play text-4xl md:text-6xl lg:text-7xl font-bold mb-6 gradient-text">DJ-Paket mieten in Stuttgart – ab 100€/Tag</h1>
+            <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl">
+              Dein komplettes Setup für professionelle DJ Gigs und mittlere Feiern.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 animate-fadeInUp stagger-4">
+              <a href="/vermietung/djpaket-fildern" class="btn-primary">Details DJ-Paket</a>
+              <a href="#kontakt" class="btn-secondary">Jetzt anfragen</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 3: Veranstaltungspaket -->
+    <div class="slide slide-3" data-slide="2">
+      <div class="slide-content" style={`background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url("/img/vermietung/ldmaui3.webp");`}>
+        <div class="container mx-auto px-4">
+          <div class="max-w-3xl pt-32">
+            <h1 class="font-play text-4xl md:text-6xl lg:text-7xl font-bold mb-6 gradient-text">Veranstaltungspaket mieten in Stuttgart – ab 100€/Tag</h1>
+            <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl">
+              Das Rundum-Sorglos-Paket für deine mittlere bis große Veranstaltung.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 animate-fadeInUp stagger-4">
+              <a href="/vermietung/veranstaltungspaket-stuttgart" class="btn-primary">Details Veranstaltungspaket</a>
+              <a href="#kontakt" class="btn-secondary">Jetzt anfragen</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slider Navigation & Dots (Copy/Paste from index.astro) -->
+    <button class="slider-nav prev" id="slider-prev">
+      <ChevronLeftIcon class="h-6 w-6" />
+    </button>
+    <button class="slider-nav next" id="slider-next">
+      <ChevronRightIcon class="h-6 w-6" />
+    </button>
+    <div class="slider-dots">
+      <div class="slider-dot active" data-dot="0"></div>
+      <div class="slider-dot" data-dot="1"></div>
+      <div class="slider-dot" data-dot="2"></div>
+    </div>
   </section>
+
+  <!-- Slider Script (Copy/Paste from index.astro) -->
+  <script>
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".slider-dot");
+    const prevBtn = document.getElementById("slider-prev");
+    const nextBtn = document.getElementById("slider-next");
+    let currentSlide = 0;
+    let slideInterval: ReturnType<typeof setInterval>;
+
+    function showSlide(index: number) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+      });
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      showSlide((currentSlide + 1) % slides.length);
+    }
+
+    function prevSlide() {
+      showSlide((currentSlide - 1 + slides.length) % slides.length);
+    }
+
+    function startSlider() {
+      slideInterval = setInterval(nextSlide, 8000);
+    }
+
+    function stopSlider() {
+      clearInterval(slideInterval);
+    }
+
+    prevBtn?.addEventListener("click", () => {
+      prevSlide();
+      stopSlider();
+      startSlider();
+    });
+
+    nextBtn?.addEventListener("click", () => {
+      nextSlide();
+      stopSlider();
+      startSlider();
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        showSlide(i);
+        stopSlider();
+        startSlider();
+      });
+    });
+
+    startSlider();
+  </script>
 
   <!-- Intro Section -->
   <section class="section-padding bg-[var(--color-bg)]">
-    <div class="max-w-4xl mx-auto text-center">
+    <div class="max-w-7xl mx-auto">
       <h2 class="font-play text-3xl md:text-4xl font-bold mb-6">Vermietung von Musikanlagen, PA Anlagen, Partyboxen und mehr!</h2>
       <p class="text-[var(--color-text-muted)] mb-6">
-        Vermietung / Verleih von Veranstaltungstechnik im Großraum Stuttgart, Leinfelden-Echterdingen, Tübingen, Esslingen und Umkreis. Ich vermiete Partyboxen, Musikanlagen, DJ-Equipment, Lichttechnik und Beleuchtung für Ihre privaten Feiern, Firmen-Events, Vereinsfeiern, Messen und sonstige Veranstaltungen.
+        Vermietung von Veranstaltungstechnik im Großraum Stuttgart, Leinfelden-Echterdingen, Tübingen, Esslingen und Umkreis. Ich vermiete Partyboxen, PA-Anlagen, Musikanlagen, Lautsprecher, DJ-Equipment, Lichttechnik und Beleuchtung für private Feiern, Firmen-Events, Vereinsfeiern, Messen und sonstige Veranstaltungen. <br />
+        Faire Preise, flexible Mietzeiträume und persönliche Beratung. Abholung in Leinfelden-Echterdingen, Lieferung auf Anfrage. Ich helfe Dir, die passende Technik für Deine Veranstaltung zu finden und gebe Dir eine ausführliche Einweisung. <br />
+        Ich biete schnelle Reaktionszeiten, auch bei kurzfristigen Anfragen. Bitte melde dich am besten telefonisch, damit ich dir schnell sagen kann, ob die gewünschte Technik noch verfügbar ist. Ich habe oft auch kurzfristig noch Geräte verfügbar!
       </p>
+
+      <BieteSection />
       
-      <div class="text-left bg-[var(--color-surface)] rounded-xl p-6 mt-8">
-        <h3 class="font-bold text-xl mb-4">Ablauf der Mietanfrage:</h3>
-        <ol class="space-y-3 text-[var(--color-text-muted)]">
-          <li><span class="text-[var(--color-secondary)] font-bold">1.</span> Du nimmst Kontakt zu mir auf. Bitte teile mir den Mietzeitraum und die Art Deiner Veranstaltung mit.</li>
-          <li><span class="text-[var(--color-secondary)] font-bold">2.</span> Sobald Deine Anfrage eingeht, melde ich mich umgehend bei Dir.</li>
-          <li><span class="text-[var(--color-secondary)] font-bold">3.</span> Ich erstelle ein individuelles Angebot.</li>
-          <li><span class="text-[var(--color-secondary)] font-bold">4.</span> Bei Gefallen bestätigst Du mir per Email das Angebot.</li>
-          <li><span class="text-[var(--color-secondary)] font-bold">5.</span> Du holst die Technik ab. Bezahlung erfolgt bar oder per PayPal.</li>
-          <li><span class="text-[var(--color-secondary)] font-bold">6.</span> Bei Rückgabe erhältst Du die Kaution zurück.</li>
-        </ol>
-      </div>
+      <MietanfrageAblauf />
     </div>
   </section>
 
@@ -221,6 +330,9 @@ const equipment = [
     </div>
   </section>
 
+  
+  
+
   <!-- Contact Form Section -->
   <section id="kontakt" class="section-padding bg-[var(--color-bg)]">
     <div class="max-w-4xl mx-auto text-center">
@@ -240,6 +352,7 @@ const equipment = [
     </div>
   </section>
 
+  <FAQSection faqs={faqs} />
   <Testimonials />
 
   <Footer />

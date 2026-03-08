@@ -5,7 +5,6 @@ import Footer from "../components/Footer.astro";
 import ChevronLeftIcon from "../components/icons/ChevronLeftIcon.astro";
 import ChevronRightIcon from "../components/icons/ChevronRightIcon.astro";
 import ChevronDownIcon from "../components/icons/ChevronDownIcon.astro";
-import CheckIcon from "../components/icons/CheckIcon.astro";
 import EmailIcon from "../components/icons/EmailIcon.astro";
 import FacebookIcon from "../components/icons/FacebookIcon.astro";
 import InstagramIcon from "../components/icons/InstagramIcon.astro";
@@ -13,49 +12,9 @@ import MixcloudIcon from "../components/icons/MixcloudIcon.astro";
 import SpotifyIcon from "../components/icons/SpotifyIcon.astro";
 import YouTubeIcon from "../components/icons/YouTubeIcon.astro";
 import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
-import VolumeUpIcon from "../components/icons/VolumeUpIcon.astro";
-import LightBulbIcon from "../components/icons/LightBulbIcon.astro";
-import PackageIcon from "../components/icons/PackageIcon.astro";
-import ShieldCheckIcon from "../components/icons/ShieldCheckIcon.astro";
-
-const faqs = [
-  {
-    question: "Wie viel kostet es, eine Partybox in Stuttgart zu mieten?",
-    answer: "Unsere Partyboxen (z.B. JBL Partybox) sind bereits ab 80€ pro Boxenpaar und Tag verfügbar. Eine einzelne Box kostet 50€ pro Tag."
-  },
-  {
-    question: "Welche PA-Anlage eignet sich für 50 Personen?",
-    answer: "Für Veranstaltungen mit 50-80 Personen empfehle ich unsere JBL Partyboxen oder das LD Maui 28 G3 Komplettset. Beide sind Plug & Play und in 5 Minuten aufgebaut."
-  },
-  {
-    question: "Wie funktioniert die Bezahlung?",
-    answer: "Die Bezahlung erfolgt bei Abholung. Ich biete Barzahlung und PayPal an!"
-  },
-  {
-    question: "Wo kann ich die Technik abholen?",
-    answer: "Die Technik kann direkt in Leinfelden-Echterdingen (Magellanstraße 4) abgeholt werden. Ich erkläre dir ausführlich den Aufbau und gebe dir eine Einweisung."
-  },
-  {
-    question: "Was kostet eine Party-Lichtanlage?",
-    answer: "Eine vollständige Partylichtanlage mit verschiedenen Effekten ist bereits ab 50€ pro Tag verfügbar. Inklusive persönlicher Beratung und Einweisung."
-  },
-  {
-    question: "Bietest du auch Pakete mit Nebelmaschine?",
-    answer: "Ja, ich biete die Partylichtanlagen auch zusammen mit einer Nebelmaschine an. Das Komplettpaket gibt es ab 60€ pro Tag."
-  },
-  {
-    question: "Brauche ich Vorkenntnisse, um die Anlage zu bedienen?",
-    answer: "Nein, ich biete eine umfassende Einweisung an. Die Technik ist für jeden Benutzer einfach zu bedienen."
-  },
-  {
-    question: "Reicht ein normales Auto für den Transport oder brauche ich einen Kombi/Transporter?",
-    answer: "Die einzelnen Komponenten sind gut in einem Kombi oder Kleinwagen mit umklappbarer Rückbank zu transportieren. Für größere Pakete oder mehrere Boxen empfehle ich einen Kombi oder Transporter. Ich berate dich gerne, welche Fahrzeuge geeignet sind."
-  },
-  {
-    question: "Was tun, wenn die Party schon in 3 Tagen ist?",
-    answer: "Ja, ich reagiere auch kurzfristig! Anfragen bis zu 2 Tagen vor der Veranstaltung sind meist noch möglich. Am besten rufst du mich direkt an unter 0171/1467491 für schnelle Abstimmung. Ich habe oft noch freie Geräte verfügbar."
-  }
-];
+import BieteSection from "../components/BieteSection.astro";
+import FAQSection from "../components/FAQSection.astro";
+import { faqs } from "../data/faqs";
 ---
 
 <Layout
@@ -136,35 +95,6 @@ const faqs = [
       </div>
     </div>
 
-    <!-- Slide 3: Work/Research -->
-    <div class="slide slide-3" data-slide="2">
-      <div class="slide-content">
-        <div class="container mx-auto px-4">
-          <div class="max-w-3xl">
-            <span
-              class="text-[#22d3ee] text-lg tracking-widest uppercase animate-fadeInUp stagger-1"
-              >DevOps, Professional, Research</span
-            >
-            <h2
-              class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2"
-            >
-              Work / Research
-            </h2>
-            <p
-              class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-2xl animate-fadeInUp stagger-3"
-            >
-              IT Professional, Cloud Native, Software Development
-            </p>
-            <div
-              class="flex flex-col sm:flex-row gap-4 animate-fadeInUp stagger-4"
-            >
-              <a href="/work" class="btn-primary">Infos zu meinem Job und Research Papers</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Slider Navigation -->
     <button class="slider-nav prev" id="slider-prev">
       <ChevronLeftIcon class="h-6 w-6" />
@@ -226,91 +156,8 @@ const faqs = [
         </div>
         </div>
 
-      <!-- Was ich dir biete -->
-      <div class="mt-16">
-        <h3 class="font-play text-2xl md:text-3xl font-bold text-center mb-10">
-          Was ich dir biete
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div class="bg-[var(--color-bg)] p-6 rounded-xl">
-            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-4 text-orange-500">
-              <VolumeUpIcon class="w-6 h-6" />
-            </div>
-            <h4 class="font-bold text-lg mb-2">PA-Anlagen & Partyboxen</h4>
-            <p class="text-[var(--color-text-muted)] text-sm">
-              Kraftvoller Sound für Partys, Hochzeiten und Vereinsfeiern. Professionelle Musikanlagen und Partyboxen.
-            </p>
-          </div>
-          <div class="bg-[var(--color-bg)] p-6 rounded-xl">
-            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-4 text-orange-500">
-              <LightBulbIcon class="w-6 h-6" />
-            </div>
-            <h4 class="font-bold text-lg mb-2">Lichttechnik</h4>
-            <p class="text-[var(--color-text-muted)] text-sm">
-              LED-Lichteffekte, Partylichtanlagen, Nebelmaschinen und komplette Lichtanlagen für die perfekte Stimmung.
-            </p>
-          </div>
-          <div class="bg-[var(--color-bg)] p-6 rounded-xl">
-            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-4 text-orange-500">
-              <PackageIcon class="w-6 h-6" />
-            </div>
-            <h4 class="font-bold text-lg mb-2">Komplettpakete</h4>
-            <p class="text-[var(--color-text-muted)] text-sm">
-              Vermietung von Kombi-Angeboten aus Sound & Licht. Zuverlässig, hochwertig und mit persönlicher Beratung.
-            </p>
-          </div>
-          <div class="bg-[var(--color-bg)] p-6 rounded-xl">
-            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-4 text-orange-500">
-              <ShieldCheckIcon class="w-6 h-6" />
-            </div>
-            <h4 class="font-bold text-lg mb-2">Warum bei mir mieten?</h4>
-            <ul class="text-[var(--color-text-muted)] text-sm space-y-2">
-              <li class="flex items-center gap-2">
-                <CheckIcon class="check-orange" />
-                Einfache Abholung in Stuttgart & Umgebung. Für die meisten Pakete reicht ein Kombi oder Kleinwagen mit umklappbarer Rückbank. Ich berate dich gerne, welche Fahrzeuge geeignet sind.
-              </li>
-              <li class="flex items-center gap-2">
-                <CheckIcon class="check-orange" />
-                Persönliche Beratung. Ich helfe dir, die passende Technik für deine Veranstaltung zu finden und gebe dir eine ausführliche Einweisung.
-              </li>
-              <li class="flex items-center gap-2">
-                <CheckIcon class="check-orange" />
-                Faire Preise. Rabatte für längere Mietdauer und mehrere Geräte. 
-              </li>
-              <li class="flex items-center gap-2">
-                <CheckIcon class="check-orange" />
-                Schnelle Reaktionszeiten, auch bei kurzfristigen Anfragen. Bitte melde dich am besten telefonisch unter 0171/1467491, damit ich dir schnell sagen kann, ob die gewünschte Technik noch verfügbar ist. Ich habe oft auch kurzfristig noch Geräte verfügbar!
-              </li>
-              <li class="flex items-center gap-2">
-                <CheckIcon class="check-orange" />
-                Leistungsstarke Technik für kleine und große Events
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ -->
-      <div class="mt-16">
-        <h3 class="font-play text-2xl md:text-3xl font-bold text-center mb-10">
-          Häufig gestellte Fragen
-        </h3>
-        <div class="max-w-3xl mx-auto space-y-4">
-          {faqs.map((faq) => (
-            <details class="bg-[var(--color-bg)] rounded-xl p-4 cursor-pointer group">
-              <summary class="font-bold cursor-pointer flex items-center gap-3 list-none">
-                <span class="w-6 h-6 bg-orange-500/20 rounded flex items-center justify-center text-orange-500 group-open:rotate-90 transition-transform">
-                  <ChevronRightIcon class="w-3 h-3" />
-                </span>
-                {faq.question}
-              </summary>
-              <p class="text-[var(--color-text-muted)] mt-3 ml-9">
-                {faq.answer}
-              </p>
-            </details>
-          ))}
-        </div>
-      </div>
+      <BieteSection />
+      <FAQSection faqs={faqs} />
 
       <div class="text-center mt-12 animate-on-scroll">
         <p class="text-[var(--color-text-muted)] mb-6">

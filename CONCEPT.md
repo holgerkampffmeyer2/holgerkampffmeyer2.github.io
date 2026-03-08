@@ -227,13 +227,12 @@ node update-image-refs.mjs
 - [x] Sitemap-Generierung
 - [x] Produktdetailseiten für Vermietung
 - [x] RSS Feed
-- [x] Baue eigene Mixcloud Widgets mithilfe der API https://www.mixcloud.com/developers/widget/ und lade die letzten 15 Mixes von https://www.mixcloud.com/holger-kampffmeyer/
-- [x] Neues Skript `scripts/fetch-mixcloud.mjs` zum Abrufen der letzten 15 Mixes zur Build-Zeit
+- [x] Neues Skript `scripts/fetch-mixcloud.mjs` zum Abrufen der letzten 16 Mixes zur Build-Zeit
 - [x] Neue Komponente `src/components/MixcloudWidget.astro` zur flexiblen Widget-Einbindung
 - [x] `src/pages/dj/mixes.astro` auf dynamisches Laden umgestellt
 - [x] Integration in `package.json` Build-Prozess
 - [x] Visueller Abstand zwischen Sektionen auf allen Seiten reduziert (durch Anpassung von `.section-padding` in `global.css`)
-- [] Refactoring der Sektionen in der index.astro "Was ich Dir biete" und "FAQ" als Astro Komponente. Einbau der 2 Komponenten auf der vermietung.astro Seite ergänzen.
+- [x] Refactoring der Sektionen in der index.astro "Was ich Dir biete" und "FAQ" als Astro Komponente. Einbau der 2 Komponenten auf der vermietung.astro Seite ergänzen.
 - [ ] Blog-Sektion
 
 ---
@@ -328,10 +327,14 @@ node update-image-refs.mjs
 - 1 Funkmikrofon
 - 4x LED PAR Strahler
 
-### 2026-03-08: Dynamische Mixcloud-Integration
+### 2026-03-08: Vermietungsseite Updates
 
-**Änderungen:**
-- Neues Skript `scripts/fetch-mixcloud.mjs` zum Abrufen der letzten 15 Mixes zur Build-Zeit
-- Neue Komponente `src/components/MixcloudWidget.astro` zur flexiblen Widget-Einbindung
-- `src/pages/dj/mixes.astro` auf dynamisches Laden umgestellt
-- Integration in `package.json` Build-Prozess
+**Neue Komponente:**
+- `src/components/vermietung/MietanfrageAblauf.astro` - Ablauf & Service-Sektion
+
+**Änderungen auf `src/pages/vermietung.astro`:**
+- Hero Section: Umstellung auf Hero-Carousel (3 Slides: Partypaket, DJ-Paket, Veranstaltungspaket) mit "ab"-Preisen und CTA-Buttons
+- Intro-Sektion: Text neu formatiert und zentriert (nun Block-Format)
+- Einbindung der Komponente `MietanfrageAblauf`
+- Slider-Übergang auf 8 Sekunden erhöht
+- Import-Fixes für Icons
