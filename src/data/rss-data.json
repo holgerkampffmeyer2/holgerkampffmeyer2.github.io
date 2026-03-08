@@ -1,0 +1,28 @@
+{
+  "title": "DJ Hulk - Neueste Mixes & Videos",
+  "description": "Weekly Tech House Mixes every Sunday + Event-Aufnahmen von DJ Hulk aus Stuttgart.",
+  "site": "https://holger-kampffmeyer.de",
+  "items": [
+    {
+      "id": "djhulk-mix-weekly",
+      "title": "DJ Hulk - Weekly Tech House Mix",
+      "link": "/dj/mixes",
+      "description": "Neuester Sonntags-Mix auf Mixcloud",
+      "pubDate": "2026-03-02"
+    },
+    {
+      "id": "djhulk-em3f-2024",
+      "title": "DJ Hulk - EM3F Festival 2024 Aftermovie",
+      "link": "/dj/videos",
+      "description": "Video vom EM3F Festival 2024",
+      "pubDate": "2024-08-15"
+    },
+    {
+      "id": "djhulk-vermietung-2026",
+      "title": "Vermietung - Professionelle Eventtechnik",
+      "link": "/vermietung",
+      "description": "Party- und Veranstaltungstechnik mieten in Stuttgart",
+      "pubDate": "2026-03-06"
+    }
+  ]
+}

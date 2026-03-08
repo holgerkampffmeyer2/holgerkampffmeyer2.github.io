@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>DJ Hulk - Neueste Mixes &amp; Videos</title>
+    <title>DJ Hulk - Neueste Mixes & Videos</title>
     <link>https://holger-kampffmeyer.de</link>
     <description>Weekly Tech House Mixes every Sunday + Event-Aufnahmen von DJ Hulk aus Stuttgart.</description>
     <language>de</language>
     <lastBuildDate>Sun, 08 Mar 2026 12:00:00 +0100</lastBuildDate>
     <atom:link href="https://holger-kampffmeyer.de/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <guid isPermaLink="false">djhulk-mix-2026-03-02</guid>
+      <guid isPermaLink="false">djhulk-mix-weekly</guid>
       <title>DJ Hulk - Weekly Tech House Mix</title>
       <link>https://holger-kampffmeyer.de/dj/mixes</link>
       <description>Neuester Sonntags-Mix auf Mixcloud</description>
@@ -19,7 +19,7 @@
       <title>DJ Hulk - EM3F Festival 2024 Aftermovie</title>
       <link>https://holger-kampffmeyer.de/dj/videos</link>
       <description>Video vom EM3F Festival 2024</description>
-      <pubDate>Thu, 15 Aug 2024 12:00:00 +0200</pubDate>
+      <pubDate>Thu, 15 Aug 2024 12:00:00 +0100</pubDate>
     </item>
     <item>
       <guid isPermaLink="false">djhulk-vermietung-2026</guid>
