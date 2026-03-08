@@ -17,11 +17,11 @@ function escapeXml(str) {
 }
 
 function formatRssDate(dateStr) {
-  const date = new Date(dateStr + 'T12:00:00+0100');
-  const dayName = dayNames[date.getDay()];
-  const day = String(date.getDate()).padStart(2, '0');
-  const monthName = monthNames[date.getMonth()];
-  const year = date.getFullYear();
+  const date = new Date(dateStr);
+  const dayName = dayNames[date.getUTCDay()];
+  const day = String(date.getUTCDate()).padStart(2, '0');
+  const monthName = monthNames[date.getUTCMonth()];
+  const year = date.getUTCFullYear();
   const time = '12:00:00';
   const offset = '+0100';
   return `${dayName}, ${day} ${monthName} ${year} ${time} ${offset}`;
@@ -33,7 +33,8 @@ function generateRss() {
   
   const data = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
   
-  const lastBuildDate = formatRssDate(new Date().toISOString().split('T')[0]);
+  const today = new Date();
+  const lastBuildDate = formatRssDate(today);
   
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
