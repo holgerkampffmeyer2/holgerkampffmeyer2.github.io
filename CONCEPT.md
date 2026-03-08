@@ -228,6 +228,10 @@ node update-image-refs.mjs
 - [x] Produktdetailseiten für Vermietung
 - [x] RSS Feed
 - [x] Baue eigene Mixcloud Widgets mithilfe der API https://www.mixcloud.com/developers/widget/ und lade die letzten 15 Mixes von https://www.mixcloud.com/holger-kampffmeyer/
+- [x] Neues Skript `scripts/fetch-mixcloud.mjs` zum Abrufen der letzten 15 Mixes zur Build-Zeit
+- [x] Neue Komponente `src/components/MixcloudWidget.astro` zur flexiblen Widget-Einbindung
+- [x] `src/pages/dj/mixes.astro` auf dynamisches Laden umgestellt
+- [x] Integration in `package.json` Build-Prozess
 - [ ] Blog-Sektion
 
 ---
