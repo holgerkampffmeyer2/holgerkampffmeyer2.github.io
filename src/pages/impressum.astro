@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
 import Footer from '../components/Footer.astro';
 ---
 
@@ -11,19 +12,15 @@ import Footer from '../components/Footer.astro';
 >
   <Navbar currentPage="/impressum" />
 
-  <!-- Hero Section -->
-  <section class="hero-slider">
-    <div class="slide slide-1 active">
-      <div class="slide-content" style={`background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url('/img/team-bg.webp');`}>
-        <div class="container mx-auto px-4">
-          <div class="max-w-3xl pt-32 text-center">
-            <h1 class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">Impressum</h1>
-            <p class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-2xl animate-fadeInUp stagger-3">Datenschutzerklärung - Holger Kampffmeyer DJ Dienstleistungen</p>
-          </div>
-        </div>
-      </div>
+  <Hero 
+    image="/img/team-bg.webp"
+    gradient="linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%)"
+  >
+    <div class="max-w-3xl pt-32 text-center">
+      <h1 class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">Impressum</h1>
+      <p class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-2xl animate-fadeInUp stagger-3">Datenschutzerklärung - Holger Kampffmeyer DJ Dienstleistungen</p>
     </div>
-  </section>
+  </Hero>
 
   <!-- Impressum Content -->
   <section class="section-padding bg-[var(--color-bg)]">

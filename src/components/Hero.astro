@@ -1,0 +1,17 @@
+---
+interface Props {
+  image: string;
+  gradient: string;
+  id?: string;
+}
+const { image, gradient, id } = Astro.props;
+---
+<section class="hero-slider" id={id}>
+  <div class="slide active">
+    <div class="slide-content" style={`background-image: ${gradient}, url('${image}');`}>
+      <div class="container mx-auto px-4">
+        <slot />
+      </div>
+    </div>
+  </div>
+</section>

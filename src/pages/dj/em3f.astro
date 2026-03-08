@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
 
 const photos = [
@@ -30,22 +31,18 @@ const photos = [
 >
   <Navbar currentPage="/dj/em3f" />
 
-  <!-- Hero Section -->
-  <section class="hero-slider">
-    <div class="slide slide-1 active">
-      <div class="slide-content" style="background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url('/img/tomatefestival.png');">
-        <div class="container mx-auto px-4">
-          <div class="max-w-3xl pt-32 text-center">
-            <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Electronic Music Family and Friends Festival</span>
-            <h1 class="font-play text-5xl md:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">DJ Fotos</h1>
-            <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
-              Eindrücke von Events und Festivals
-            </p>
-          </div>
-        </div>
-      </div>
+  <Hero 
+    image="/img/tomatefestival.png"
+    gradient="linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%)"
+  >
+    <div class="max-w-3xl pt-32 text-center">
+      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Electronic Music Family and Friends Festival</span>
+      <h1 class="font-play text-5xl md:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">DJ Fotos</h1>
+      <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
+        Eindrücke von Events und Festivals
+      </p>
     </div>
-  </section>
+  </Hero>
 
   <!-- About EM3F -->
   <section class="section-padding bg-[var(--color-bg)]">

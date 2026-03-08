@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
 import MixcloudWidget from '../../components/MixcloudWidget.astro';
 import mixcloudData from '../../data/mixcloud-data.json';
@@ -14,26 +15,22 @@ const archiveMixes = allMixes.slice(1);
 <Layout 
   title="DJ Mixes - DJ Hulk - Weekly Sunday House Mix"
   description="Wöchentliche House und Tech House Mixes von DJ Hulk auf Mixcloud. Spezialisiert auf Latin House, Jackin, Funky House und Afro House."
-  image="/img/header.webp"
+  image="/img/em3f/DSC_2451.webp"
 >
   <Navbar currentPage="/dj/mixes" />
 
-  <!-- Hero Section -->
-  <section class="hero-slider">
-    <div class="slide slide-1 active">
-      <div class="slide-content" style="background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url('/img/header.webp');">
-        <div class="container mx-auto px-4">
-          <div class="max-w-3xl pt-32 text-center">
-            <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Weekly House Music DJ Mixes</span>
-            <h1 class="font-play text-5xl md:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">DJ Mixes</h1>
-            <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
-              Jeden Sonntag neue House & Tech House Mixes auf Mixcloud
-            </p>
-          </div>
-        </div>
-      </div>
+  <Hero 
+    image="/img/em3f/DSC_2451.webp"
+    gradient="linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%)"
+  >
+    <div class="max-w-3xl pt-32 text-center">
+      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Weekly House Music DJ Mixes</span>
+      <h1 class="font-play text-5xl md:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">DJ Mixes</h1>
+      <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
+        Jeden Sonntag neue House & Tech House Mixes auf Mixcloud
+      </p>
     </div>
-  </section>
+  </Hero>
 
   <!-- Latest Mix -->
   <section class="section-padding bg-[var(--color-bg)]">

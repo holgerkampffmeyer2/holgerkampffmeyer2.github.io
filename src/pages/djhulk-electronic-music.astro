@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
 import Footer from "../components/Footer.astro";
 import RadioIcon from "../components/icons/RadioIcon.astro";
 import ChevronRightIcon from "../components/icons/ChevronRightIcon.astro";
@@ -21,45 +22,41 @@ const latestMix = mixcloudData.mixes && mixcloudData.mixes.length > 0 ? mixcloud
 <Layout
   title="DJ Hulk - Electronic Music DJ Stuttgart"
   description="DJ Hulk - Electronic Music DJ aus Stuttgart. House, Tech House, Drum n Bass. Weekly Sunday House Mixes auf Mixcloud. Events, Festivals und private Parties."
-  image="/img/header.webp"
+  image="/img/em3f/DSC_2316.webp"
 >
   <Navbar currentPage="/djhulk-electronic-music" />
 
-  <!-- Hero Section -->
-  <section class="hero-slider">
-    <div class="slide slide-1 active">
-      <div class="slide-content">
-        <div class="container mx-auto px-4">
-          <div class="max-w-3xl">
-            <span
-              class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp"
-              >Electro, House, Tech House, DnB</span
-            >
-            <h1
-              class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2"
-            >
-              DJ Hulk
-            </h1>
-            <p
-              class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-2xl animate-fadeInUp stagger-3"
-            >
-              Stuttgarter DJ für elektronische Musik - House, Tech House, Drum n Base
-            </p>
-            <div
-              class="flex flex-col sm:flex-row gap-4 animate-fadeInUp stagger-4"
-            >
-              <a href="#djing" class="btn-primary"
-                >Infos zu DJ Hulk</a
-              >
-              <a href="#mixes" class="btn-secondary"
-                >Meine DJ Mixes (Tech House)</a
-              >
-            </div>
-          </div>
-        </div>
+  <Hero
+    image="/img/em3f/DSC_2316.webp"
+    gradient="linear-gradient(135deg, rgba(10, 10, 15, 0.85) 0%, rgba(249, 115, 22, 0.2) 100%)"
+  >
+    <div class="max-w-3xl">
+      <span
+        class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp"
+        >Electro, House, Tech House, DnB</span
+      >
+      <h1
+        class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2"
+      >
+        DJ Hulk
+      </h1>
+      <p
+        class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-2xl animate-fadeInUp stagger-3"
+      >
+        Stuttgarter DJ für elektronische Musik - House, Tech House, Drum n Base
+      </p>
+      <div
+        class="flex flex-col sm:flex-row gap-4 animate-fadeInUp stagger-4"
+      >
+        <a href="#djing" class="btn-primary"
+          >Infos zu DJ Hulk</a
+        >
+        <a href="#mixes" class="btn-secondary"
+          >Meine DJ Mixes (Tech House)</a
+        >
       </div>
     </div>
-  </section>
+  </Hero>
 
   <!-- short summary for SEO and LLMs -->
   <section class="section-padding bg-[var(--color-surface)]" aria-labelledby="seo-summary-heading">

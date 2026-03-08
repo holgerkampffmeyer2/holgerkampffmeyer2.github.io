@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
 
 const videos = [
@@ -50,26 +51,22 @@ const videos = [
 <Layout 
   title="Videos - DJ Hulk - YouTube Videos und Event-Aufnahmen"
   description="Videos von DJ Hulk - Event-Aufnahmen, Aftermovies, Party-Sessions und Live-Mitschnitte auf YouTube."
-  image="/img/header.webp"
+  image="/img/_81A4218.webp"
 >
   <Navbar currentPage="/dj/videos" />
 
-  <!-- Hero Section -->
-  <section class="hero-slider">
-    <div class="slide slide-1 active">
-      <div class="slide-content" style="background-image: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%), url('/img/header.webp');">
-        <div class="container mx-auto px-4">
-          <div class="max-w-3xl pt-32 text-center">
-            <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Videos</span>
-            <h1 class="font-play text-5xl md:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">DJ Hulk Videos</h1>
-            <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
-              Event-Aufnahmen, Aftermovies und Party-Sessions
-            </p>
-          </div>
-        </div>
-      </div>
+  <Hero 
+    image="/img/_81A4218.webp"
+    gradient="linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%)"
+  >
+    <div class="max-w-3xl pt-32 text-center">
+      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Videos</span>
+      <h1 class="font-play text-5xl md:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">DJ Hulk Videos</h1>
+      <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
+        Event-Aufnahmen, Aftermovies und Party-Sessions
+      </p>
     </div>
-  </section>
+  </Hero>
 
   <!-- YouTube Channel Info -->
   <section class="section-padding bg-[var(--color-bg)]">
