@@ -55,6 +55,32 @@ const images = [
   "/img/vermietung/s-l1600.webp"
 ];
 
+const siteUrl = "https://holger-kampffmeyer.de";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Partylicht & Gobo Moving Head Vermietung",
+  "description": "Miete unsere Party-Lichtanlage mit Gobo Moving Head und LED PAR Strahlern. DMX-steuerbar mit optionalem DMX-Controller sowie Sound-zu-Licht Modus für deine Party.",
+  "image": [
+    siteUrl + images[0],
+    siteUrl + images[1]
+  ],
+  "provider": {
+    "@type": "Person",
+    "name": "Holger Kampffmeyer",
+    "telephone": "+49-171-1467491",
+    "url": "https://holger-kampffmeyer.de"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://holger-kampffmeyer.de/vermietung/partylicht-moving-head",
+    "price": "50",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock"
+  }
+};
+
 const specsMovingHead = {
   "Modell": "18 Prisma LED Spot 10 Gobo RGBW DMX",
   "DMX-Kanäle": "11/16",
@@ -111,6 +137,7 @@ const events = [
   title={pageTitle}
   description="Miete unsere Party-Lichtanlage mit Gobo Moving Head und LED PAR Strahlern. DMX-steuerbar mit optionalem DMX-Controller sowie Sound-zu-Licht Modus für deine Party."
   image="/img/vermietung/licht1.webp"
+  jsonLd={serviceSchema}
 >
   <Navbar currentPage="/vermietung" />
 

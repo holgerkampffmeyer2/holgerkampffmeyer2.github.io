@@ -112,7 +112,7 @@ npm run preview  # Preview production build
 - Mobile Hamburger-Menü
 
 ### Vermietung
-- 18 Equipment-Artikel mit Bildern, Preisen, Beschreibungen
+- 8 Equipment-Artikel mit Bildern, Preisen, Beschreibungen
 - Google Forms Embed für Mietanfragen
 - Testimonials von Kunden
 

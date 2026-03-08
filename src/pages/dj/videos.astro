@@ -74,6 +74,7 @@ const videos = [
   <!-- YouTube Channel Info -->
   <section class="section-padding bg-[var(--color-bg)]">
     <div class="max-w-4xl mx-auto text-center mb-12">
+      <h2 class="font-play text-2xl font-bold mb-4">YouTube Kanal</h2>
       <p class="text-[var(--color-text-muted)] text-lg">
         Alle meine Videos findest du auf meinem YouTube-Kanal. Abonniere mich für neue Mixes und Event-Aufnahmen!
       </p>
@@ -100,7 +101,7 @@ const videos = [
 
       <div class="video-grid">
         {videos.map((video, index) => (
-          <div class="video-item group relative animate-on-scroll" style={`stagger-${index + 1}`}>
+          <div class={`video-item group relative animate-on-scroll stagger-${index + 1}`}>
             <a
               href={`https://www.youtube.com/watch?v=${video.id}`}
               target="_blank"
@@ -128,7 +129,7 @@ const videos = [
               <div
                 class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent"
               >
-                <h4 class="font-bold text-sm">{video.title}</h4>
+                <h3 class="font-bold text-sm">{video.title}</h3>
               </div>
             </a>
           </div>

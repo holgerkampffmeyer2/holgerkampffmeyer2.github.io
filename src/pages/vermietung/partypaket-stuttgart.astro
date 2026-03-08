@@ -88,12 +88,39 @@ const packageFeatures = [
   "4 LED PAR Strahler für stimmungsvolle Ambientebeleuchtung",
   "Strom- und Anschlusskabel inklusive",
 ];
+
+const siteUrl = "https://holger-kampffmeyer.de";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Partypaket Stuttgart Vermietung",
+  "description": "Miete das Partypaket für deine Party in Stuttgart und Umgebung. Komplette Partytechnik mit JBL Partyboxen, Licht, Nebel und Mikrofon für bis zu 50 Personen.",
+  "image": [
+    siteUrl + images[0],
+    siteUrl + images[1]
+  ],
+  "provider": {
+    "@type": "Person",
+    "name": "Holger Kampffmeyer",
+    "telephone": "+49-171-1467491",
+    "url": "https://holger-kampffmeyer.de"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://holger-kampffmeyer.de/vermietung/partypaket-stuttgart",
+    "price": "0",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock"
+  }
+};
 ---
 
 <Layout 
   title={pageTitle}
   description="Miete das Partypaket für deine Party in Stuttgart und Umgebung. Komplette Partytechnik mit JBL Partyboxen, Licht, Nebel und Mikrofon für bis zu 50 Personen."
   image="/img/vermietung/partypaket1.webp"
+  jsonLd={serviceSchema}
 >
   <Navbar currentPage="/vermietung" />
 

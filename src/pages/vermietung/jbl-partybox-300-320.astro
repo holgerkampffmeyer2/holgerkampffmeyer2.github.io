@@ -53,16 +53,21 @@ const images = [
 
 const siteUrl = "https://holger-kampffmeyer.de";
 
-// compute structured data for this product
-const productSchema = {
+const serviceSchema = {
   "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "JBL Partybox 300 + 320 Set",
+  "@type": "Service",
+  "name": "JBL Partybox 300 + 320 Set Vermietung",
   "description": "Leihe dieses leistungsstarke Partyboxen‑Set (2×240W) mit Akku, Light‑Show und Bluetooth – ideal für private Feiern bis 80 Personen.",
   "image": [
     siteUrl + images[0],
     siteUrl + images[1]
   ],
+  "provider": {
+    "@type": "Person",
+    "name": "Holger Kampffmeyer",
+    "telephone": "+49-171-1467491",
+    "url": "https://holger-kampffmeyer.de"
+  },
   "offers": {
     "@type": "Offer",
     "url": "https://holger-kampffmeyer.de/vermietung/jbl-partybox-300-320",
@@ -124,7 +129,7 @@ const events = [
   title={pageTitle}
   description="Miete das Set JBL Partybox 300 + 320 für deine Party, Geburtstagsfeier oder Firmenfeier. 2x 240W mit Akku, Light Show und TWS-Kopplung für bis zu 80 Personen."
   image="/img/vermietung/partybox-300_kl.webp"
-  jsonLd={[productSchema, breadcrumbSchema]}
+  jsonLd={[serviceSchema, breadcrumbSchema]}
 >
   <Navbar currentPage="/vermietung" />
 

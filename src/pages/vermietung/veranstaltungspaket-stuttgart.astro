@@ -100,12 +100,39 @@ const packageFeatures = [
   "4 LED PAR Strahler für atmosphärische Ambientebeleuchtung",
   "Alle notwendigen Strom- und Anschlusskabel inklusive - einfacher Aufbau"
 ];
+
+const siteUrl = "https://holger-kampffmeyer.de";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Veranstaltungspaket Stuttgart Vermietung",
+  "description": "Miete das Veranstaltungspaket für dein Event in Stuttgart. Komplette Eventtechnik mit LD Maui Soundanlage, Licht, Nebel und Moving Heads für bis zu 150 Personen.",
+  "image": [
+    siteUrl + images[0],
+    siteUrl + images[1]
+  ],
+  "provider": {
+    "@type": "Person",
+    "name": "Holger Kampffmeyer",
+    "telephone": "+49-171-1467491",
+    "url": "https://holger-kampffmeyer.de"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://holger-kampffmeyer.de/vermietung/veranstaltungspaket-stuttgart",
+    "price": "0",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock"
+  }
+};
 ---
 
 <Layout 
   title={pageTitle}
   description="Miete das Veranstaltungspaket für dein Event in Stuttgart. Komplette Eventtechnik mit LD Maui Soundanlage, Licht, Nebel und Moving Heads für bis zu 150 Personen."
   image="/img/vermietung/ldmaui3.webp"
+  jsonLd={serviceSchema}
 >
   <Navbar currentPage="/vermietung" />
 

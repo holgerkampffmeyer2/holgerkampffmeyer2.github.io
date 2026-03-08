@@ -59,6 +59,32 @@ const images = [
   "/img/vermietung/IMG_7142.webp"
 ];
 
+const siteUrl = "https://holger-kampffmeyer.de";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "LD Maui 28 G3 Vermietung",
+  "description": "Miete das LD Maui 28 G3 Säulensystem für deine Party, Hochzeit oder Firmenfeier. Die LD Maui 28 G3 ist eine professionelle PA-Anlage mit starkem Bass, druckvollem und glasklarem Sound, mit 2060W, 127 dB Schalldruck, für bis zu 150 Personen.",
+  "image": [
+    siteUrl + images[0],
+    siteUrl + images[1]
+  ],
+  "provider": {
+    "@type": "Person",
+    "name": "Holger Kampffmeyer",
+    "telephone": "+49-171-1467491",
+    "url": "https://holger-kampffmeyer.de"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://holger-kampffmeyer.de/vermietung/ld-maui-28g3",
+    "price": "100",
+    "priceCurrency": "EUR",
+    "availability": "https://schema.org/InStock"
+  }
+};
+
 const specs = {
   "Peak-Leistung": "2060 W",
   "RMS-Leistung": "1030 W",
@@ -104,6 +130,7 @@ const events = [
   title={pageTitle}
   description="Miete das LD Maui 28 G3 Säulensystem für deine Party, Hochzeit oder Firmenfeier. Die LD Maui 28 G3 ist eine professionelle PA-Anlage mit starkem Bass, druckvollem und glasklarem Sound, mit 2060W, 127 dB Schalldruck, für bis zu 150 Personen."
   image="/img/vermietung/ldmaui3.webp"
+  jsonLd={serviceSchema}
 >
   <Navbar currentPage="/vermietung" />
 
