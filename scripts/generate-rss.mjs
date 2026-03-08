@@ -22,7 +22,7 @@ function formatRssDate(dateStr) {
   const day = String(date.getUTCDate()).padStart(2, '0');
   const monthName = monthNames[date.getUTCMonth()];
   const year = date.getUTCFullYear();
-  return `${dayName}, ${day} ${monthName} ${year} `;
+  return `${dayName}, ${day} ${monthName} ${year} 00:00:00 GMT`;
 }
 
 function generateRss() {
