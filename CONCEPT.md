@@ -1,5 +1,7 @@
 # Konzept: DJ Hulk / Holger Kampffmeyer Website
 
+> **Quick-Start:** Siehe AGENTS.md für die wichtigsten Befehle und Regeln.
+
 ## Architektur
 
 ### Technologie-Stack
@@ -338,3 +340,33 @@ node update-image-refs.mjs
 - Einbindung der Komponente `MietanfrageAblauf`
 - Slider-Übergang auf 8 Sekunden erhöht
 - Import-Fixes für Icons
+
+### 2026-03-09: Vermietungsseite - Katalogstruktur
+
+**Änderungen auf `src/pages/vermietung.astro`:**
+- Unterteilung in 3 Abschnitte: Komplettpakete, Sound, Licht
+- Equipment in 3 Kategorien aufgeteilt:
+  - **Komplettpakete:** Partypaket, DJ-Paket, Veranstaltungspaket
+  - **Sound:** LD Maui, JBL Partyboxen, Yamaha Mischpult, Mikrofon
+  - **Licht:** LED BossFX, Laser Bar, Moving Heads, PAR Strahler, Nebelmaschine, Beamer
+- Abwechselnde Hintergrundfarben (surface/bg) für visuelle Trennung
+
+### 2026-03-09: JSON-LD Schema Updates
+
+**Neue Schema-Typen:**
+- `SiteNavigationElement` als `ItemList` in Layout.astro
+- `LocalBusiness` + `Person` auf index.astro
+- `Person` auf work.astro mit XING/LinkedIn Verknüpfung
+- `Service`-Schema auf allen Vermietungs-Detailseiten
+
+**Änderungen:**
+- Alle JSON-LD Scripte in Layout.astro für konsistente Business-Daten
+- Index-Seite: FAQPage, LocalBusiness, Person
+- Work-Seite: Person mit sameAs für soziale Profile
+
+### 2026-03-09: Dependencies Update
+
+**Aktualisierte Versionen:**
+- Astro: 5.x (aktuell)
+- Tailwind CSS: 4.x
+- TypeScript: 5.x
