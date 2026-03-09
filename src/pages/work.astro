@@ -5,12 +5,44 @@ import Hero from '../components/Hero.astro';
 import Footer from '../components/Footer.astro';
 import LinkedInIcon from '../components/icons/LinkedInIcon.astro';
 import XingIcon from '../components/icons/XingIcon.astro';
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Holger Kampffmeyer",
+  "url": "https://holger-kampffmeyer.de/work",
+  "jobTitle": "Team Manager, DevOps, Cloud Native",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Vector",
+    "url": "https://www.vector.com"
+  },
+  "sameAs": [
+    "https://www.xing.com/profile/Holger_Kampffmeyer",
+    "https://www.linkedin.com/in/holger-kampffmeyer-390b6789/"
+  ],
+  "knowsAbout": [
+    "DevOps",
+    "Project Management",
+    "AI and Agentic Software Development",
+    "Software Architecture",
+    "Agile",
+    "Scrum",
+    "Kanban",
+    "Cloud",
+    "Docker",
+    "Kubernetes",
+    "Continuous Integration",
+    "Continuous Delivery"
+  ]
+};
 ---
 
 <Layout 
-  title="Work / University Research - Holger Kampffmeyer"
-  description="Holger Kampffmeyer - IT Professional, DevOps, Cloud Native, Software Development. Team Manager bei Vector. Research an der Uni Stuttgart."
+  title="Work - Holger Kampffmeyer"
+  description="Holger Kampffmeyer - IT Professional, DevOps, Cloud Native, Director DevOps Vector. "
   image="/img/header-work.webp"
+  jsonLd={personSchema}
 >
   <Navbar currentPage="/work" />
 
@@ -35,14 +67,14 @@ import XingIcon from '../components/icons/XingIcon.astro';
           
           <div class="space-y-4 text-[var(--color-text-muted)]">
             <p>
-              I work as a team manager for <a href="http://www.vector.com" target="_blank" class="text-[var(--color-secondary)] hover:underline">Vector</a>, a software company with more than 4000 employees that builds software tools for the automotive and embedded software industry.
+              I work as Director DevOps for <a href="http://www.vector.com" target="_blank" class="text-[var(--color-secondary)] hover:underline">Vector</a>, a software company with more than 4000 employees that builds software tools for the automotive and embedded software industry.
             </p>
             
             <p>I am interested in the following topics:</p>
             <ul class="list-disc list-inside space-y-2 ml-4">
               <li>Managing DevOps Teams</li>
               <li>Project Management</li>
-              <li>Software Engineering</li>
+              <li>AI and Agentic Software Development</li>
               <li>Software Architecture</li>
               <li>Agile: Scrum, Software Kanban</li>
               <li>Cloud, Docker, Kubernetes</li>
