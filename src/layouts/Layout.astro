@@ -44,7 +44,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         "name": "DJ Hulk - Holger Kampffmeyer",
         "description": "Verleih von Musikanlagen, Partyboxen, Lichttechnik und Tontechnik im Großraum Stuttgart. Electronic Music DJ für Events, Feiern und Hochzeiten.",
         "url": "https://holger-kampffmeyer.de",
-        "telephone": "+49-1711467491",
+        "telephone": "+491711467491",
         "email": "holger.kampffmeyer+dj@gmail.com",
         "address": {
           "@type": "PostalAddress",
@@ -70,6 +70,59 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           "https://www.instagram.com/djhulk_de",
           "https://www.youtube.com/@djhulk_de",
           "https://www.mixcloud.com/holger-kampffmeyer/"
+        ]
+      }
+    </script>
+
+    <!-- JSON-LD SiteNavigationElement -->
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SiteNavigationElement",
+        "name": "Main Navigation",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Startseite",
+            "url": "https://holger-kampffmeyer.de/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "DJ Hulk",
+            "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Vermietung",
+            "url": "https://holger-kampffmeyer.de/vermietung"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "DJ Mixes",
+            "url": "https://holger-kampffmeyer.de/dj/mixes"
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "name": "Videos",
+            "url": "https://holger-kampffmeyer.de/dj/videos"
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "name": "Work / Research",
+            "url": "https://holger-kampffmeyer.de/work"
+          },
+          {
+            "@type": "ListItem",
+            "position": 7,
+            "name": "Impressum",
+            "url": "https://holger-kampffmeyer.de/impressum"
+          }
         ]
       }
     </script>
