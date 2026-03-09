@@ -21,18 +21,63 @@ import { faqs } from "../data/faqs";
   title="DJ Hulk - Musikanlagen, Lichttechnik, Verleih Stuttgart"
   description="DJ Hulk - Holger Kampffmeyer. Verleih von Musikanlagen, Partyboxen, Lichttechnik und Tontechnik im Großraum Stuttgart. Electronic Music DJ für Events, Feiern und Hochzeiten."
   image="/img/header.webp"
-  jsonLd={{
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
-  }}
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Holger Kampffmeyer DJ Dienstleistungen",
+      "description": "Verleih von Musikanlagen, Partyboxen, Lichttechnik und Tontechnik im Großraum Stuttgart, Leinfelden-Echterdingen, Tübingen, Esslingen.",
+      "url": "https://holger-kampffmeyer.de",
+      "telephone": "+49-171-1467491",
+      "email": "holger.kampffmeyer+dj@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Leinfelden-Echterdingen",
+        "addressRegion": "Baden-Württemberg",
+        "addressCountry": "DE"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "Baden-Württemberg"
+      },
+      "sameAs": [
+        "https://www.xing.com/profile/Holger_Kampffmeyer",
+        "https://www.linkedin.com/in/holger-kampffmeyer-390b6789/",
+        "https://www.facebook.com/holger.kampffmeyer",
+        "https://www.instagram.com/djhulk_de"
+      ],
+      "priceRange": "€€"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Holger Kampffmeyer",
+      "alternateName": "DJ Hulk",
+      "url": "https://holger-kampffmeyer.de",
+      "jobTitle": "DJ, Eventtechnik-Verleiher",
+      "description": "DJ für elektronische Musik (House, Tech House, Techno, Drum n Bass) und Verleiher von Partytechnik im Großraum Stuttgart.",
+      "sameAs": [
+        "https://www.xing.com/profile/Holger_Kampffmeyer",
+        "https://www.linkedin.com/in/holger-kampffmeyer-390b6789/",
+        "https://www.facebook.com/holger.kampffmeyer",
+        "https://www.instagram.com/djhulk_de",
+        "https://www.mixcloud.com/holger-kampffmeyer/",
+        "https://www.youtube.com/@djhulk_de"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    }
+  ]}
 >
   <Navbar currentPage="/" />
 
