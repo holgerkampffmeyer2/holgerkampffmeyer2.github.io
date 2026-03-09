@@ -74,51 +74,50 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       }
     </script>
 
-    <!-- JSON-LD SiteNavigationElement -->
+    <!-- JSON-LD SiteNavigationElement as ItemList -->
     <script is:inline type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "SiteNavigationElement",
-        "name": "Main Navigation",
+        "@type": "ItemList",
         "itemListElement": [
           {
-            "@type": "ListItem",
+            "@type": "SiteNavigationElement",
             "position": 1,
             "name": "Startseite",
             "url": "https://holger-kampffmeyer.de/"
           },
           {
-            "@type": "ListItem",
+            "@type": "SiteNavigationElement",
             "position": 2,
             "name": "DJ Hulk",
             "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
           },
           {
-            "@type": "ListItem",
+            "@type": "SiteNavigationElement",
             "position": 3,
             "name": "Vermietung",
             "url": "https://holger-kampffmeyer.de/vermietung"
           },
           {
-            "@type": "ListItem",
+            "@type": "SiteNavigationElement",
             "position": 4,
             "name": "DJ Mixes",
             "url": "https://holger-kampffmeyer.de/dj/mixes"
           },
           {
-            "@type": "ListItem",
+            "@type": "SiteNavigationElement",
             "position": 5,
             "name": "Videos",
             "url": "https://holger-kampffmeyer.de/dj/videos"
           },
           {
-            "@type": "ListItem",
+            "@type": "SiteNavigationElement",
             "position": 6,
             "name": "Work / Research",
             "url": "https://holger-kampffmeyer.de/work"
           },
           {
-            "@type": "ListItem",
+            "@type": "SiteNavigationElement",
             "position": 7,
             "name": "Impressum",
             "url": "https://holger-kampffmeyer.de/impressum"
