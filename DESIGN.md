@@ -370,3 +370,15 @@ node update-image-refs.mjs
 - Astro: 5.x (aktuell)
 - Tailwind CSS: 4.x
 - TypeScript: 5.x
+
+### 2026-03-15: DJ Mixes Pagination
+
+**Änderungen:**
+- `scripts/fetch-mixcloud.mjs`: Fetch-Limit von 16 auf 100 erhöht
+- `src/pages/dj/mixes.astro`: 
+  - Pagination mit URL-Parameter (`?page=2`, etc.)
+  - 5 Mixes pro Seite (einstellbar über `ITEMS_PER_PAGE`)
+  - 1 Spalte Layout (untereinander)
+  - Previous/Next Buttons + Seitenzahlen
+  - Lazy Loading für iframes
+- `src/data/mixcloud-data.json`: 100 Mixes werden geladen (vorher 16)

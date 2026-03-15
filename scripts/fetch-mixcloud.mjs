@@ -9,7 +9,7 @@ const RSS_DATA_PATH = path.join(__dirname, '../src/data/rss-data.json');
 async function fetchMixcloud() {
   console.log('Fetching latest mixes from Mixcloud...');
   try {
-    const response = await fetch('https://api.mixcloud.com/holger-kampffmeyer/cloudcasts/?limit=16');
+    const response = await fetch('https://api.mixcloud.com/holger-kampffmeyer/cloudcasts/?limit=100');
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
