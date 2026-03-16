@@ -31,6 +31,19 @@ const photos = [
 >
   <Navbar currentPage="/dj/em3f" />
 
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-section">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="breadcrumb">
+        <a href="/">Startseite</a>
+        <span class="separator">/</span>
+        <a href="/djhulk-electronic-music">DJ Hulk</a>
+        <span class="separator">/</span>
+        <span class="current">Fotos</span>
+      </nav>
+    </div>
+  </div>
+
   <Hero 
     image="/img/tomatefestival.png"
     gradient="linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%)"
@@ -98,4 +111,37 @@ const photos = [
   </section>
 
   <Footer />
+
+  <style>
+    .breadcrumb-section {
+      padding-top: 120px;
+      padding-bottom: 1rem;
+      background: var(--color-bg);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .breadcrumb a {
+      color: var(--color-text-muted);
+      transition: color 0.3s ease;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--color-secondary);
+    }
+
+    .breadcrumb .separator {
+      color: var(--color-border);
+    }
+
+    .breadcrumb .current {
+      color: var(--color-text);
+    }
+  </style>
 </Layout>
