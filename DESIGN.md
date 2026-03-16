@@ -16,10 +16,13 @@
 src/
 ├── components/           # Wiederverwendbare UI-Komponenten
 ├── data/                 # Daten-Dateien
-│   └── rss-data.json    # RSS Feed Datenquelle
+│   └── mixcloud-data.json    # Mixcloud Daten (wird beim Build aktualisiert)
 ├── scripts/              # Build-Skripte
-│   └── generate-rss.mjs # RSS Feed Generator
-│   ├── Navbar.astro
+│   ├── fetch-mixcloud.mjs   # Mixcloud API Abfrage
+│   ├── generate-rss.mjs     # RSS Feed Generator
+│   ├── create-webp.mjs      # Bildoptimierung
+│   ├── optimize-images.mjs  # Bildoptimierung
+│   └── update-image-refs.mjs # Bildreferenzen aktualisieren
 │   ├── Footer.astro
 │   └── vermietung/      # Vermietung-spezifische Komponenten
 │       ├── ProductGallery.astro
@@ -164,21 +167,21 @@ Im Projekt-Root befinden sich mehrere Hilfsskripte zur Bildoptimierung:
 
 | Skript | Beschreibung |
 |--------|--------------|
-| `create-webp.mjs` | Konvertiert JPG/JPEG zu WebP (Qualität: 80%, max. 1920px) |
-| `optimize-images.mjs` | Optimiert JPG/PNG (Qualität: 80%, Größe je nach Verzeichnis) |
-| `update-image-refs.mjs` | Aktualisiert Bildreferenzen in Astro/HTML Dateien auf WebP |
+| `scripts/create-webp.mjs` | Konvertiert JPG/JPEG zu WebP (Qualität: 80%, max. 1920px) |
+| `scripts/optimize-images.mjs` | Optimiert JPG/PNG (Qualität: 80%, Größe je nach Verzeichnis) |
+| `scripts/update-image-refs.mjs` | Aktualisiert Bildreferenzen in Astro/HTML Dateien auf WebP |
 
 ### Verwendung
 
 ```bash
 # 1. WebP erstellen
-node create-webp.mjs
+node scripts/create-webp.mjs
 
 # 2. Bilder optimieren
-node optimize-images.mjs
+node scripts/optimize-images.mjs
 
 # 3. Referenzen aktualisieren
-node update-image-refs.mjs
+node scripts/update-image-refs.mjs
 ```
 
 ### Konfiguration

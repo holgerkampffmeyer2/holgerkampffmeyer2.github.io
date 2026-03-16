@@ -35,6 +35,9 @@ npm run preview # Preview production build
 2. Domain IMMER auf `holger-kampffmeyer.de` setzen
 3. Neue Seiten in `src/pages/` erstellen
 4. Nach Änderungen: check -> build -> commit -> push
+5. Der RSS-Feed (`public/rss.xml`) wird automatisch bei jedem `npm run build` generiert und basiert auf:
+   - Änderungsdatum der Astro-Dateien in `src/pages/`
+   - Neuesten Mixes aus Mixcloud (`src/data/mixcloud-data.json`)
 
 ## Git-Workflow
 ```bash

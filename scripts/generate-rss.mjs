@@ -11,19 +11,12 @@ const site = 'https://holger-kampffmeyer.de';
 
 const pageMeta = {
   '/': { title: 'DJ Hulk - Startseite', description: 'DJ Hulk - Musikanlagen, Lichttechnik, Verleih Stuttgart' },
-  '/index.html': { title: 'DJ Hulk - Startseite', description: 'DJ Hulk - Musikanlagen, Lichttechnik, Verleih Stuttgart' },
   '/djhulk-electronic-music': { title: 'DJ Hulk - Electronic Music', description: 'DJ Hulk - DJ für elektronische Musik aus Stuttgart' },
-  '/djhulk-electronic-music.html': { title: 'DJ Hulk - Electronic Music', description: 'DJ Hulk - DJ für elektronische Musik aus Stuttgart' },
   '/dj/mixes': { title: 'DJ Hulk - Mixes', description: 'Wöchentliche House und Tech House Mixes von DJ Hulk' },
-  '/dj/mixes.html': { title: 'DJ Hulk - Mixes', description: 'Wöchentliche House und Tech House Mixes von DJ Hulk' },
   '/dj/videos': { title: 'DJ Hulk - Videos', description: 'Event-Aufnahmen und Videos von DJ Hulk' },
-  '/dj/videos.html': { title: 'DJ Hulk - Videos', description: 'Event-Aufnahmen und Videos von DJ Hulk' },
   '/dj/em3f': { title: 'DJ Hulk - Event Fotos', description: 'Fotos von Events und Festivals' },
-  '/dj/em3f.html': { title: 'DJ Hulk - Event Fotos', description: 'Fotos von Events und Festivals' },
   '/vermietung': { title: 'Eventtechnik Vermietung', description: 'Partytechnik mieten in Stuttgart' },
-  '/vermietung.html': { title: 'Eventtechnik Vermietung', description: 'Partytechnik mieten in Stuttgart' },
   '/work': { title: 'DJ Hulk - Work', description: 'DJ Hulk - Work und Projekte' },
-  '/work.html': { title: 'DJ Hulk - Work', description: 'DJ Hulk - Work und Projekte' },
 };
 
 function escapeXml(str) {
@@ -72,13 +65,13 @@ function generateRss() {
         walkDir(fullPath);
       } else if (file.endsWith('.astro')) {
         const relativePath = path.relative(pagesDir, fullPath);
-        const htmlPath = '/' + relativePath.replace(/\.astro$/, '.html').replace(/\\/g, '/');
+        const htmlPath = '/' + relativePath.replace(/\.astro$/, '.html').replace(/\\/g, '/').replace('/index.html', '/');
         
         const shouldExclude = excludePages.some(ex => htmlPath.includes(ex));
         if (shouldExclude) continue;
 
         const pubDate = getFileMtime(fullPath);
-        const meta = pageMeta[htmlPath] || pageMeta[htmlPath.replace('.html', '')];
+        const meta = pageMeta[htmlPath];
 
         if (meta) {
           items.push({
