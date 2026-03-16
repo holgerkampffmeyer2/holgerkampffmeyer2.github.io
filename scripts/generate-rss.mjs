@@ -66,12 +66,13 @@ function generateRss() {
       } else if (file.endsWith('.astro')) {
         const relativePath = path.relative(pagesDir, fullPath);
         const htmlPath = '/' + relativePath.replace(/\.astro$/, '.html').replace(/\\/g, '/').replace('/index.html', '/');
+        const pageKey = htmlPath.replace('.html', '');
         
         const shouldExclude = excludePages.some(ex => htmlPath.includes(ex));
         if (shouldExclude) continue;
 
         const pubDate = getFileMtime(fullPath);
-        const meta = pageMeta[htmlPath];
+        const meta = pageMeta[pageKey];
 
         if (meta) {
           items.push({
