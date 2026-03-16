@@ -1,32 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>DJ Hulk - Neueste Mixes &amp; Videos</title>
+    <title>DJ Hulk - Neueste Updates</title>
     <link>https://holger-kampffmeyer.de</link>
-    <description>Weekly Tech House Mixes every Sunday + Event-Aufnahmen von DJ Hulk aus Stuttgart.</description>
+    <description>Neueste Mixes, Videos und Seiten-Updates von DJ Hulk aus Stuttgart.</description>
     <language>de</language>
     <lastBuildDate>Mon, 16 Mar 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://holger-kampffmeyer.de/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <guid isPermaLink="false">djhulk-mix-weekly</guid>
-      <title>DJ Hulk - Deep / Tech / Jackin House Mix#172</title>
+      <guid isPermaLink="false">/dj/em3f.html</guid>
+      <title>[Seite] DJ Hulk - Event Fotos</title>
+      <link>https://holger-kampffmeyer.de/dj/em3f.html</link>
+      <description>Fotos von Events und Festivals</description>
+      <pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">/dj/mixes.html</guid>
+      <title>[Seite] DJ Hulk - Mixes</title>
+      <link>https://holger-kampffmeyer.de/dj/mixes.html</link>
+      <description>Wöchentliche House und Tech House Mixes von DJ Hulk</description>
+      <pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">/dj/videos.html</guid>
+      <title>[Seite] DJ Hulk - Videos</title>
+      <link>https://holger-kampffmeyer.de/dj/videos.html</link>
+      <description>Event-Aufnahmen und Videos von DJ Hulk</description>
+      <pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">/index.html</guid>
+      <title>[Seite] DJ Hulk - Startseite</title>
+      <link>https://holger-kampffmeyer.de/index.html</link>
+      <description>DJ Hulk - Musikanlagen, Lichttechnik, Verleih Stuttgart</description>
+      <pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">mix-/holger-kampffmeyer/dj-hulk-deep-tech-jackin-house-mix172/</guid>
+      <title>[Mix] DJ Hulk - Deep / Tech / Jackin House Mix#172</title>
       <link>https://holger-kampffmeyer.de/dj/mixes</link>
       <description>Neuer Mix auf Mixcloud: DJ Hulk - Deep / Tech / Jackin House Mix#172</description>
       <pubDate>Sun, 15 Mar 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
-      <guid isPermaLink="false">djhulk-em3f-2024</guid>
-      <title>DJ Hulk - EM3F Festival 2024 Aftermovie</title>
-      <link>https://holger-kampffmeyer.de/dj/videos</link>
-      <description>Video vom EM3F Festival 2024</description>
-      <pubDate>Thu, 15 Aug 2024 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">/vermietung.html</guid>
+      <title>[Seite] Eventtechnik Vermietung</title>
+      <link>https://holger-kampffmeyer.de/vermietung.html</link>
+      <description>Partytechnik mieten in Stuttgart</description>
+      <pubDate>Tue, 10 Mar 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
-      <guid isPermaLink="false">djhulk-vermietung-2026</guid>
-      <title>Vermietung - Professionelle Eventtechnik</title>
-      <link>https://holger-kampffmeyer.de/vermietung</link>
-      <description>Party- und Veranstaltungstechnik mieten in Stuttgart</description>
-      <pubDate>Fri, 06 Mar 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">/djhulk-electronic-music.html</guid>
+      <title>[Seite] DJ Hulk - Electronic Music</title>
+      <link>https://holger-kampffmeyer.de/djhulk-electronic-music.html</link>
+      <description>DJ Hulk - DJ für elektronische Musik aus Stuttgart</description>
+      <pubDate>Mon, 09 Mar 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">/work.html</guid>
+      <title>[Seite] DJ Hulk - Work</title>
+      <link>https://holger-kampffmeyer.de/work.html</link>
+      <description>DJ Hulk - Work und Projekte</description>
+      <pubDate>Mon, 09 Mar 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">mix-/holger-kampffmeyer/dj-hulk-techno-mix-171/</guid>
+      <title>[Mix] DJ Hulk - Techno Mix #171</title>
+      <link>https://holger-kampffmeyer.de/dj/mixes</link>
+      <description>Neuer Mix auf Mixcloud: DJ Hulk - Techno Mix #171</description>
+      <pubDate>Sun, 08 Mar 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">mix-/holger-kampffmeyer/dj-hulk-deep-jackin-soulful-house-mix170/</guid>
+      <title>[Mix] DJ Hulk - Deep / Tech/ Jackin / Soulful House MIx#170</title>
+      <link>https://holger-kampffmeyer.de/dj/mixes</link>
+      <description>Neuer Mix auf Mixcloud: DJ Hulk - Deep / Tech/ Jackin / Soulful House MIx#170</description>
+      <pubDate>Sun, 01 Mar 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">mix-/holger-kampffmeyer/dj-hulk-deep-jackin-latin-house-mix169/</guid>
+      <title>[Mix] DJ Hulk - Deep / Jackin / Latin House Mix#169</title>
+      <link>https://holger-kampffmeyer.de/dj/mixes</link>
+      <description>Neuer Mix auf Mixcloud: DJ Hulk - Deep / Jackin / Latin House Mix#169</description>
+      <pubDate>Sun, 22 Feb 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">mix-/holger-kampffmeyer/dj-hulk-partymix-bootlegs-tech-bass-house-168/</guid>
+      <title>[Mix] DJ Hulk - Partymix / Bootlegs / Tech / Bass House #168</title>
+      <link>https://holger-kampffmeyer.de/dj/mixes</link>
+      <description>Neuer Mix auf Mixcloud: DJ Hulk - Partymix / Bootlegs / Tech / Bass House #168</description>
+      <pubDate>Sun, 15 Feb 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">mix-/holger-kampffmeyer/dj-hulk-latin-tech-tribal-mix167/</guid>
+      <title>[Mix] DJ Hulk - Latin / Tech / Tribal Mix#167</title>
+      <link>https://holger-kampffmeyer.de/dj/mixes</link>
+      <description>Neuer Mix auf Mixcloud: DJ Hulk - Latin / Tech / Tribal Mix#167</description>
+      <pubDate>Sun, 08 Feb 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">mix-/holger-kampffmeyer/dj-hulk-deep-tech-afro-jackin-house-mix-166/</guid>
+      <title>[Mix] DJ Hulk - Deep / Tech / Afro / Jackin House Mix #166</title>
+      <link>https://holger-kampffmeyer.de/dj/mixes</link>
+      <description>Neuer Mix auf Mixcloud: DJ Hulk - Deep / Tech / Afro / Jackin House Mix #166</description>
+      <pubDate>Sun, 01 Feb 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">mix-/holger-kampffmeyer/dj-hulk-deep-jackin-tech-house-mix-165/</guid>
+      <title>[Mix] DJ Hulk - Deep / Jackin / Tech House Mix 165</title>
+      <link>https://holger-kampffmeyer.de/dj/mixes</link>
+      <description>Neuer Mix auf Mixcloud: DJ Hulk - Deep / Jackin / Tech House Mix 165</description>
+      <pubDate>Sun, 25 Jan 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">mix-/holger-kampffmeyer/dj-hulk-raptor-house-ukg-mix164/</guid>
+      <title>[Mix] DJ Hulk - Raptor House &amp; UKG Mix#164</title>
+      <link>https://holger-kampffmeyer.de/dj/mixes</link>
+      <description>Neuer Mix auf Mixcloud: DJ Hulk - Raptor House &amp; UKG Mix#164</description>
+      <pubDate>Sun, 18 Jan 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">mix-/holger-kampffmeyer/dj-hulk-tech-bass-g-house-mix163/</guid>
+      <title>[Mix] DJ Hulk - Tech / Bass / G-House Mix#163</title>
+      <link>https://holger-kampffmeyer.de/dj/mixes</link>
+      <description>Neuer Mix auf Mixcloud: DJ Hulk - Tech / Bass / G-House Mix#163</description>
+      <pubDate>Sun, 11 Jan 2026 00:00:00 GMT</pubDate>
     </item>
   </channel>
 </rss>
