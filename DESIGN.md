@@ -382,3 +382,10 @@ node update-image-refs.mjs
   - Previous/Next Buttons + Seitenzahlen
   - Lazy Loading für iframes
 - `src/data/mixcloud-data.json`: 100 Mixes werden geladen (vorher 16)
+
+### 2026-03-16: Google Maps Einbettung
+
+**Änderungen:**
+- `src/pages/index.astro`: Google Maps iframe im Kontakt-Bereich eingebettet
+- Embed zeigt auf "Holger Kampffmeyer DJ Dienstleistungen" (Place ID)
+- Responsive: h-64 auf Mobile, h-80 auf größeren Bildschirmen
