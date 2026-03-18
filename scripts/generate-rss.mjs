@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -16,6 +17,14 @@ const pageMeta = {
   '/dj/videos': { title: 'DJ Hulk - Videos', description: 'Event-Aufnahmen und Videos von DJ Hulk' },
   '/dj/em3f': { title: 'DJ Hulk - Event Fotos', description: 'Fotos von Events und Festivals' },
   '/vermietung': { title: 'Eventtechnik Vermietung', description: 'Partytechnik mieten in Stuttgart' },
+  '/vermietung/partypaket-stuttgart': { title: 'Partypaket Stuttgart', description: 'Komplettpaket für bis zu 50 Personen - Sound, Licht, DJ-Equipment mieten' },
+  '/vermietung/veranstaltungspaket-stuttgart': { title: 'Veranstaltungspaket Stuttgart', description: 'Komplettpaket für bis zu 150 Personen - Profi-Equipment mieten' },
+  '/vermietung/djpaket-fildern': { title: 'DJ-Paket Fildern', description: 'DJ-Paket mit LD Maui, Moving Heads, LED PAR für bis zu 150 Personen' },
+  '/vermietung/ld-maui-28g3': { title: 'LD Maui 28 G3 mieten', description: 'Line Array Party-Soundsystem mit 2x 10" Subwoofer und 8x 3.5" Topteil' },
+  '/vermietung/jbl-partybox-300-320': { title: 'JBL Partybox 300/320 mieten', description: 'Kompaktes JBL Partybox Set für Indoor-Events' },
+  '/vermietung/partylicht-moving-head': { title: 'Partylicht & Moving Head mieten', description: 'LED Moving Head Spot + Partylicht Set für Dynamic Lightshows' },
+  '/vermietung/led-bossfx-nebelmaschine': { title: 'LED BossFX & Nebelmaschine mieten', description: 'LED BossFX-2 Pro + AF-150 Nebelmaschine für Atmosphäre' },
+  '/vermietung/kls-laser-bar': { title: 'Eurolite KLS Laser Bar mieten', description: 'Kompaktes LED Bar System mit Laser-Effekten für Partys' },
   '/work': { title: 'DJ Hulk - Work', description: 'DJ Hulk - Work und Projekte' },
 };
 
@@ -35,6 +44,18 @@ function formatRssDate(dateStr) {
   const monthName = monthNames[date.getUTCMonth()];
   const year = date.getUTCFullYear();
   return `${dayName}, ${day} ${monthName} ${year} 00:00:00 GMT`;
+}
+
+function getGitDateForFile(filePath) {
+  try {
+    const result = execSync(
+      `git log -1 --format="%ai" -- "${filePath}"`,
+      { cwd: path.join(__dirname, '..'), encoding: 'utf8' }
+    ).trim();
+    return result ? result.split(' ')[0] : null;
+  } catch {
+    return null;
+  }
 }
 
 function getFileMtime(filePath) {
@@ -71,7 +92,8 @@ function generateRss() {
         const shouldExclude = excludePages.some(ex => htmlPath.includes(ex));
         if (shouldExclude) continue;
 
-        const pubDate = getFileMtime(fullPath);
+        const gitDate = getGitDateForFile(fullPath);
+        const pubDate = gitDate || getFileMtime(fullPath);
         const meta = pageMeta[pageKey];
 
         if (meta) {
