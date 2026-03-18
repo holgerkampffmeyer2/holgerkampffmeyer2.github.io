@@ -50,10 +50,15 @@ function getGitDateForFile(filePath) {
   try {
     const result = execSync(
       `git log -1 --format="%ai" -- "${filePath}"`,
-      { cwd: path.join(__dirname, '..'), encoding: 'utf8' }
+      { cwd: path.join(__dirname, '..'), encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }
     ).trim();
-    return result ? result.split(' ')[0] : null;
-  } catch {
+    if (!result) {
+      console.warn(`⚠️ No git history for ${filePath}, using mtime`);
+      return null;
+    }
+    return result.split(' ')[0];
+  } catch (e) {
+    console.warn(`⚠️ Git command failed for ${filePath}: ${e.message}`);
     return null;
   }
 }
@@ -95,7 +100,7 @@ function generateRss() {
         const gitDate = getGitDateForFile(fullPath);
         const pubDate = gitDate || getFileMtime(fullPath);
         const meta = pageMeta[pageKey];
-
+        
         if (meta) {
           items.push({
             id: htmlPath,
