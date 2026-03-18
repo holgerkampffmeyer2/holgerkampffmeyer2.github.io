@@ -4,14 +4,12 @@ import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
 import Footer from "../components/Footer.astro";
 import RadioIcon from "../components/icons/RadioIcon.astro";
-import ChevronRightIcon from "../components/icons/ChevronRightIcon.astro";
 import EmailIcon from "../components/icons/EmailIcon.astro";
 import FacebookIcon from "../components/icons/FacebookIcon.astro";
 import InstagramIcon from "../components/icons/InstagramIcon.astro";
 import MixcloudIcon from "../components/icons/MixcloudIcon.astro";
 import SpotifyIcon from "../components/icons/SpotifyIcon.astro";
 import YouTubeIcon from "../components/icons/YouTubeIcon.astro";
-import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
 import ResidentAdvisorIcon from "../components/icons/ResidentAdvisorIcon.astro";
 import MixcloudWidget from "../components/MixcloudWidget.astro";
 import mixcloudData from "../data/mixcloud-data.json";
@@ -64,8 +62,8 @@ const latestMix = mixcloudData.mixes && mixcloudData.mixes.length > 0 ? mixcloud
       <h2 id="seo-summary-heading" class="sr-only">Über DJ Hulk</h2>
       <p class="text-[var(--color-text-muted)]">
         DJ Hulk ist ein elektronischer DJ aus Stuttgart, spezialisiert auf
-        House, Tech House, Techno und Drum n Bass. Hier findest du Informationen zu
-        Auftritten, Mixes, Festival‑Projekte und Technik‑Verleih.
+        House, Tech House, Techno und Drum n Bass. Hier findest du Informationen zu
+        Auftritten, Mixes, Festival-Projekte und Technik-Verleih.
       </p>
     </div>
   </section>
@@ -168,9 +166,13 @@ const latestMix = mixcloudData.mixes && mixcloudData.mixes.length > 0 ? mixcloud
       </div>
 
       {latestMix && (
-        <div class="max-w-3xl mx-auto">
-          <MixcloudWidget src={latestMix.src} title={latestMix.title} height="150px" />
-        </div>
+        <MixcloudWidget 
+          src={latestMix.src} 
+          title={latestMix.title} 
+          url={latestMix.url}
+          createdTime={latestMix.created_time}
+          variant="featured"
+        />
       )}
 
       <div class="text-center animate-on-scroll">
@@ -504,5 +506,4 @@ const latestMix = mixcloudData.mixes && mixcloudData.mixes.length > 0 ? mixcloud
     </section>
 
     <Footer />
-  </section>
 </Layout>

@@ -23,7 +23,7 @@ async function fetchMixcloud() {
       key: mix.key,
       url: mix.url,
       created_time: mix.created_time,
-      src: `https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&feed=${encodeURIComponent(mix.key)}`
+      src: `https://player-widget.mixcloud.com/widget/iframe/?feed=${encodeURIComponent(mix.key)}`
     }));
 
     const result = {

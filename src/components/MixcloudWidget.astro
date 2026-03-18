@@ -2,18 +2,96 @@
 interface Props {
   src: string;
   title: string;
+  description?: string;
+  url?: string;
+  createdTime?: string;
   height?: string;
+  variant?: 'card' | 'featured';
 }
 
-const { src, title, height = "150px" } = Astro.props;
+const { src, title, description, url, createdTime, height, variant = 'card' } = Astro.props;
+
+function formatDate(dateStr: string) {
+  if (!dateStr) return '';
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
+function addPlayerParam(baseSrc: string, param: string): string {
+  const separator = baseSrc.includes('?') ? '&' : '?';
+  return baseSrc + separator + param;
+}
+
+const playerSrc = variant === 'card' 
+  ? addPlayerParam(src, 'hide_tracklist=1')
+  : addPlayerParam(src, 'mini=1');
+
+const wrapperClass = variant === 'card' ? 'player-card' : 'player-featured';
+const titleSize = variant === 'card' ? 'text-lg' : 'text-xl';
+const infoSize = variant === 'card' ? 'text-xs' : 'text-sm';
+const linkSize = variant === 'card' ? 'text-xs' : 'text-sm';
 ---
 
-<div class="bg-[var(--color-surface)] rounded-xl overflow-hidden shadow-lg transition-transform hover:scale-[1.01]">
-  <iframe 
-    style={`width: 100%; height: ${height}; border: none;`} 
-    src={src}
-    title={title}
-    allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"
-    loading="lazy"
-  ></iframe>
+<div class="bg-[var(--color-surface)] rounded-xl overflow-hidden shadow-lg border border-[var(--color-border)]">
+  <div class={wrapperClass} style={height && variant === 'featured' ? `height: ${height}` : undefined}>
+    <iframe 
+      style="width: 100%; height: 100%; border: none;" 
+      src={playerSrc}
+      title={title}
+      allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"
+      loading="lazy"
+    ></iframe>
+  </div>
+  <div class="p-5">
+    <h3 class={`font-play font-bold text-[var(--color-text)] leading-tight mb-2 ${titleSize}`}>{title}</h3>
+    {createdTime && (
+      <p class={`text-[var(--color-text-muted)] mb-2 ${infoSize}`}>{formatDate(createdTime)}</p>
+    )}
+    {description && (
+      <div class={`text-[var(--color-text-muted)] leading-relaxed mb-3 mix-description ${infoSize}`} set:html={description}></div>
+    )}
+    {url && (
+      <a href={url} target="_blank" rel="noopener noreferrer" class={`inline-flex items-center gap-2 text-[var(--color-secondary)] hover:text-[var(--color-primary)] transition-colors font-medium ${linkSize}`}>
+        Auf Mixcloud anhören
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+      </a>
+    )}
+  </div>
 </div>
+
+<style>
+  .player-card {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+  .player-card iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .player-featured {
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+  }
+  .player-featured iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .mix-description :global(p) {
+    margin-bottom: 0.5rem;
+    text-align: justify;
+  }
+  .mix-description :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .mix-description :global(a) {
+    color: var(--color-secondary);
+    text-decoration: underline;
+  }
+  .mix-description :global(a:hover) {
+    color: var(--color-primary);
+  }
+</style>

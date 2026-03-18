@@ -4,7 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   vite: {
-    plugins: tailwindcss()
+    // @ts-ignore - Type mismatch between Astro's bundled Vite and the project's Vite version
+    plugins: [tailwindcss()]
   },
   site: 'https://holger-kampffmeyer.de',
   base: '/',

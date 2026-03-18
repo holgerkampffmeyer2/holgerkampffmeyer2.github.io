@@ -5,20 +5,20 @@
     <link>https://holger-kampffmeyer.de</link>
     <description>Neueste Mixes, Videos und Seiten-Updates von DJ Hulk aus Stuttgart.</description>
     <language>de</language>
-    <lastBuildDate>Mon, 16 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 18 Mar 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://holger-kampffmeyer.de/rss.xml" rel="self" type="application/rss+xml"/>
-    <item>
-      <guid isPermaLink="false">/dj/em3f.html</guid>
-      <title>[Seite] DJ Hulk - Event Fotos</title>
-      <link>https://holger-kampffmeyer.de/dj/em3f.html</link>
-      <description>Fotos von Events und Festivals</description>
-      <pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate>
-    </item>
     <item>
       <guid isPermaLink="false">/dj/mixes.html</guid>
       <title>[Seite] DJ Hulk - Mixes</title>
       <link>https://holger-kampffmeyer.de/dj/mixes.html</link>
       <description>Wöchentliche House und Tech House Mixes von DJ Hulk</description>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <guid isPermaLink="false">/dj/em3f.html</guid>
+      <title>[Seite] DJ Hulk - Event Fotos</title>
+      <link>https://holger-kampffmeyer.de/dj/em3f.html</link>
+      <description>Fotos von Events und Festivals</description>
       <pubDate>Mon, 16 Mar 2026 00:00:00 GMT</pubDate>
     </item>
     <item>

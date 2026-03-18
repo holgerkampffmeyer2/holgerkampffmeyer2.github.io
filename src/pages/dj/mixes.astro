@@ -7,10 +7,31 @@ import MixcloudWidget from '../../components/MixcloudWidget.astro';
 import mixcloudData from '../../data/mixcloud-data.json';
 
 const allMixes = mixcloudData.mixes || [];
-const latestMix = allMixes.length > 0 ? allMixes[0] : null;
+
+const mixesWithDetails = await Promise.all(
+  allMixes.map(async (mix) => {
+    try {
+      const apiUrl = `https://api.mixcloud.com${mix.key}?metadata=1`;
+      const response = await fetch(apiUrl);
+      if (response.ok) {
+        const data = await response.json();
+        return {
+          ...mix,
+          description: data.description || null,
+        };
+      }
+    } catch {
+      // Silently ignore fetch errors
+    }
+    return { ...mix, description: null };
+  })
+);
+
+const latestMix = mixesWithDetails[0];
+const otherMixes = mixesWithDetails.slice(1);
 
 const ITEMS_PER_PAGE = 5;
-const totalPages = Math.ceil((allMixes.length - 1) / ITEMS_PER_PAGE);
+const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
 ---
 
 <Layout 
@@ -48,19 +69,26 @@ const totalPages = Math.ceil((allMixes.length - 1) / ITEMS_PER_PAGE);
 
   <!-- Latest Mix -->
   <section class="section-padding bg-[var(--color-bg)]">
-    <div class="max-w-4xl mx-auto text-center">
-      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Neuester Mix</span>
-      <h2 class="font-play text-4xl font-bold mt-4 mb-6">{latestMix?.title || 'Weekly Sunday House Mix'}</h2>
-      <p class="text-[var(--color-text-muted)] mb-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-8">
+        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Neuester Mix</span>
+        <h2 class="font-play text-4xl font-bold mt-4">{latestMix?.title || 'Weekly Sunday House Mix'}</h2>
+      </div>
+      <p class="text-[var(--color-text-muted)] mb-8 text-justify">
         Auf Mixcloud veröffentliche ich jeden Sonntag einen neuen Mix. Dabei spezialisiere ich mich auf House, Tech House, Latin House, Jackin and Funky House sowie Afro House. <br>
         Meine Mixe decken ein breits Spektrum elektronischer Musik ab und eignen sich zum Hören im Auto, im Fitnessstudio oder zu Hause. <br>
         Weitere Musikrichtungen wie Techno und Drum n Bass findest du ebenfalls in meinem Mixcloud‑Archiv.
       </p>
       
       {latestMix && (
-        <div class="max-w-3xl mx-auto">
-          <MixcloudWidget src={latestMix.src} title={latestMix.title} height="150px" />
-        </div>
+        <MixcloudWidget 
+          src={latestMix.src} 
+          title={latestMix.title} 
+          description={latestMix.description || undefined}
+          url={latestMix.url}
+          createdTime={latestMix.created_time}
+          variant="featured"
+        />
       )}
     </div>
   </section>
@@ -74,10 +102,17 @@ const totalPages = Math.ceil((allMixes.length - 1) / ITEMS_PER_PAGE);
         <p class="text-[var(--color-text-muted)] mt-2">Seite <span id="currentPageDisplay">1</span> von {totalPages}</p>
       </div>
       
-      <div id="mixesGrid" class="grid grid-cols-1 gap-6" data-total-pages={totalPages} data-items-per-page={ITEMS_PER_PAGE}>
-        {allMixes.slice(1).map((mix, index) => (
+      <div id="mixesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-total-pages={totalPages} data-items-per-page={ITEMS_PER_PAGE}>
+        {otherMixes.map((mix, index) => (
           <div class="mix-item" data-page={Math.floor(index / ITEMS_PER_PAGE) + 1} style={`display: ${Math.floor(index / ITEMS_PER_PAGE) + 1 === 1 ? 'block' : 'none'}`}>
-            <MixcloudWidget src={mix.src} title={mix.title} height="150px" />
+            <MixcloudWidget 
+              src={mix.src} 
+              title={mix.title} 
+              description={mix.description || undefined}
+              url={mix.url}
+              createdTime={mix.created_time}
+              variant="card"
+            />
           </div>
         ))}
       </div>
@@ -219,6 +254,29 @@ const totalPages = Math.ceil((allMixes.length - 1) / ITEMS_PER_PAGE);
     
     // Run on page load
     initPagination();
+  </script>
+
+  <script is:inline src="https://widget.mixcloud.com/media/js/widgetApi.js"></script>
+  
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      var players = [];
+      var iframes = document.querySelectorAll('iframe[src*="player-widget.mixcloud.com"]');
+      
+      iframes.forEach(function(iframe) {
+        var player = Mixcloud.PlayerWidget(iframe);
+        player.ready.then(function() {
+          players.push(player);
+          player.events.play.on(function() {
+            players.forEach(function(p) {
+              if (p !== player) {
+                p.pause();
+              }
+            });
+          });
+        });
+      });
+    });
   </script>
 
   <style>

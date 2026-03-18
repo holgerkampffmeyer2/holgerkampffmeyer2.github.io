@@ -73,6 +73,7 @@ npm run dev      # Development server
 npm run check    # TypeScript check
 npm run build    # Production build
 npm run preview  # Preview production build
+npm run lint     # ESLint check
 ```
 
 ---
@@ -212,13 +213,21 @@ node scripts/update-image-refs.mjs
 - Semantisches HTML
 - LLM-Optimierung: robots.txt erweitert für GPTBot, ChatGPT-User, Google-Extended, anthropic-ai, Claude-Web, cohere-ai
 
+### Lint-Konfiguration
+- **Tool:** ESLint mit TypeScript- und Astro-Support
+- **Konfig:** `eslint.config.mjs`
+- **Regeln (alle auf warn):**
+  - `no-unused-vars` - Ungenutzte Variablen
+  - `no-console` - Console-Statements
+  - `@typescript-eslint/no-unused-vars` - Ungenutzte TypeScript-Variablen
+
 ---
 
 ## Deployment
 
 ### GitHub Actions Workflow
 - Trigger: Push auf main-Branch
-- Steps: Checkout → withastro/action@v5 → deploy-pages
+- Steps: Checkout → npm ci → npm run lint → npm run check → npm run build → upload-artifact → deploy-pages
 - Environment: github-pages
 
 ### Konfiguration
@@ -392,3 +401,29 @@ node scripts/update-image-refs.mjs
 - `src/pages/index.astro`: Google Maps iframe im Kontakt-Bereich eingebettet
 - Embed zeigt auf "Holger Kampffmeyer DJ Dienstleistungen" (Place ID)
 - Responsive: h-64 auf Mobile, h-80 auf größeren Bildschirmen
+
+### 2026-03-18: Lint-Fixes und MixcloudWidget Anpassung
+
+**Lint-Warnungen behoben:**
+- `src/pages/dj/mixes.astro`: `catch` Block ohne ungenutzte Variable, `console.warn` entfernt
+- `src/pages/djhulk-electronic-music.astro`: Ungenutzte Imports entfernt (ChevronRightIcon, LinkedInIcon)
+- `src/pages/links.astro`: Ungenutzter Import XIcon entfernt
+
+**MixcloudWidget-Komponente:**
+- `src/components/MixcloudWidget.astro`: Optionale `height` Property hinzugefügt
+- `astro.config.mjs`: `@ts-ignore` für Tailwind/Vite Type-Mismatch
+
+**Seitenanpassung:**
+- `src/pages/djhulk-electronic-music.astro`: Mixcloud Player wie auf dj/mixes.astro angepasst mit `variant="featured"`
+
+### 2026-03-18: CVE Fixes und GitHub Action Update
+
+**CVE Fixes:**
+- `npm audit fix` ausgeführt: devalue, lodash aktualisiert
+- `@astrojs/rss` entfernt (nicht verwendet, brachte fast-xml-parser mit)
+- Resultat: 0 vulnerabilities
+
+**GitHub Actions Workflow:**
+- `.github/workflows/deploy.yml` erweitert mit eigenen Steps statt withastro/action@v5
+- Neue Steps: Checkout → npm ci → npm run lint → npm run check → npm run build
+- Build schlägt fehl bei Lint/TypeScript-Fehlern (verhindert Deploy)

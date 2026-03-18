@@ -16,9 +16,10 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 ## Build & Deployment
 ```bash
 npm run dev      # Development server
-npm run check   # TypeScript check
-npm run build   # Production build -> dist/
-npm run preview # Preview production build
+npm run lint     # ESLint check
+npm run check    # TypeScript check
+npm run build    # Production build -> dist/
+npm run preview  # Preview production build
 ```
 
 ## Wichtige Pfade
@@ -31,17 +32,17 @@ npm run preview # Preview production build
 - `output: 'static'` für SSG
 
 ## Wichtige Regeln
-1. **CONCEPT.md lesen** für Design, Architektur und Technologie
+1. **DESIGN.md lesen** für Design, Architektur und Technologie
 2. Domain IMMER auf `holger-kampffmeyer.de` setzen
 3. Neue Seiten in `src/pages/` erstellen
-4. Nach Änderungen: check -> build -> commit -> push
+4. Nach Änderungen: lint -> check -> build -> commit -> push
 5. Der RSS-Feed (`public/rss.xml`) wird automatisch bei jedem `npm run build` generiert und basiert auf:
    - Änderungsdatum der Astro-Dateien in `src/pages/`
    - Neuesten Mixes aus Mixcloud (`src/data/mixcloud-data.json`)
 
 ## Git-Workflow
 ```bash
-npm run check && npm run build
+npm run lint && npm run check && npm run build
 git add .
 git commit -m "describe changes"
 git tag -a v.x.x.x -m "version message"
