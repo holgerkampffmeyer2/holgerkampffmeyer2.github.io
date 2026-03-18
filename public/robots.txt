@@ -21,3 +21,4 @@ User-agent: cohere-ai
 Allow: /
 
 Sitemap: https://holger-kampffmeyer.de/sitemap.xml
+Sitemap: https://holger-kampffmeyer.de/rss.xml
