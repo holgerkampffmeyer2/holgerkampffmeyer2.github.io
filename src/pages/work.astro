@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import Footer from '../components/Footer.astro';
 import LinkedInIcon from '../components/icons/LinkedInIcon.astro';
 import XingIcon from '../components/icons/XingIcon.astro';
+import GitHubIcon from '../components/icons/GitHubIcon.astro';
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -169,7 +170,39 @@ const personSchema = {
         </div>
       </div>
     </div>
-    </section>
+  </section>
+
+  <!-- Open Source Section -->
+  <section class="section-padding bg-[var(--color-surface)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Open Source</span>
+        <h2 class="font-play text-4xl font-bold mt-4">My Open Source Projects</h2>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-[var(--color-bg)] rounded-xl p-6 animate-on-scroll hover:border-[var(--color-secondary)] border border-transparent transition-all">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-[var(--color-surface)] rounded-lg flex items-center justify-center shrink-0">
+              <GitHubIcon class="w-6 h-6" />
+            </div>
+            <div>
+              <a href="https://github.com/holgerkampffmeyer2/optimize-music-prompts" target="_blank" class="font-bold text-lg hover:text-[var(--color-secondary)] transition-colors">
+                optimize-music-prompts
+              </a>
+              <p class="text-[var(--color-text-muted)] text-sm mt-2">
+                A AI agent for optimizing WAV music files. The tool helps to optimize the volume when converting WAV files to MP3 files, as well as extracting metadata from online sources.
+                 </p>
+              <a href="https://github.com/holgerkampffmeyer2/optimize-music-prompts" target="_blank" class="inline-flex items-center gap-2 text-[var(--color-secondary)] text-sm mt-3 hover:underline">
+                <GitHubIcon class="w-4 h-4" />
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Social Links Section -->
   <section class="section-padding bg-[var(--color-surface)]">

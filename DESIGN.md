@@ -5,9 +5,9 @@
 ## Architektur
 
 ### Technologie-Stack
-- **Framework:** Astro 5.x (Static Site Generation)
+- **Framework:** Astro 6.x (Static Site Generation)
 - **Styling:** Tailwind CSS 4.x
-- **Build-Tool:** Vite
+- **Build-Tool:** Vite (via @tailwindcss/vite Plugin)
 - **Sprache:** TypeScript / Astro Components
 - **Deployment:** GitHub Pages via GitHub Actions
 
@@ -379,7 +379,7 @@ node scripts/update-image-refs.mjs
 ### 2026-03-09: Dependencies Update
 
 **Aktualisierte Versionen:**
-- Astro: 5.x (aktuell)
+- Astro: 6.x (aktuell)
 - Tailwind CSS: 4.x
 - TypeScript: 5.x
 
@@ -427,3 +427,14 @@ node scripts/update-image-refs.mjs
 - `.github/workflows/deploy.yml` erweitert mit eigenen Steps statt withastro/action@v5
 - Neue Steps: Checkout → npm ci → npm run lint → npm run check → npm run build
 - Build schlägt fehl bei Lint/TypeScript-Fehlern (verhindert Deploy)
+
+### 2026-03-21: Astro 6.x Upgrade
+
+**Upgrade:**
+- Astro von 5.x auf 6.x aktualisiert
+- Tailwind CSS via `@tailwindcss/vite` Plugin (astro.config.mjs)
+- Keine breaking Changes für dieses Projekt
+
+**Geänderte Dateien:**
+- `astro.config.mjs`: Import und Plugin-Setup aktualisiert
+- `package.json`: Astro Version auf ^6.0.8 aktualisiert

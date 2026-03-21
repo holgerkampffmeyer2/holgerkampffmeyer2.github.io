@@ -9,7 +9,7 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 - **CNAME:** holger-kampffmeyer.de
 
 ## Tech-Stack
-- **Framework:** Astro 5.x
+- **Framework:** Astro 6.x
 - **Styling:** Tailwind CSS 4.x
 - **Build:** Static Site Generation (SSG)
 
