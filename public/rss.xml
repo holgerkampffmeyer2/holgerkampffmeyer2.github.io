@@ -5,8 +5,15 @@
     <link>https://holger-kampffmeyer.de</link>
     <description>Neueste Mixes, Videos und Seiten-Updates von DJ Hulk aus Stuttgart.</description>
     <language>de</language>
-    <lastBuildDate>Wed, 25 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 28 Mar 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://holger-kampffmeyer.de/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <guid isPermaLink="false">/vermietung.html</guid>
+      <title>[Seite] Eventtechnik Vermietung</title>
+      <link>https://holger-kampffmeyer.de/vermietung.html</link>
+      <description>Partytechnik mieten in Stuttgart</description>
+      <pubDate>Wed, 25 Mar 2026 00:00:00 GMT</pubDate>
+    </item>
     <item>
       <guid isPermaLink="false">/djhulk-electronic-music.html</guid>
       <title>[Seite] DJ Hulk - Electronic Music</title>
@@ -55,13 +62,6 @@
       <link>https://holger-kampffmeyer.de/dj/mixes</link>
       <description>Neuer Mix auf Mixcloud: DJ Hulk - Deep / Tech / Jackin House Mix#172</description>
       <pubDate>Sun, 15 Mar 2026 00:00:00 GMT</pubDate>
-    </item>
-    <item>
-      <guid isPermaLink="false">/vermietung.html</guid>
-      <title>[Seite] Eventtechnik Vermietung</title>
-      <link>https://holger-kampffmeyer.de/vermietung.html</link>
-      <description>Partytechnik mieten in Stuttgart</description>
-      <pubDate>Tue, 10 Mar 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <guid isPermaLink="false">/vermietung/djpaket-fildern.html</guid>
