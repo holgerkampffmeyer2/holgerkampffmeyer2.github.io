@@ -23,12 +23,22 @@ interface MixcloudMix {
   [key: string]: any;
 }
 
-let mixcloudData: { mixes: MixcloudMix[]; lastUpdated?: string } = { mixes: [] };
+interface MixcloudData {
+  mixes: MixcloudMix[];
+  lastUpdated?: string;
+}
+
+let mixcloudData: MixcloudData = { mixes: [] };
 
 try {
-  mixcloudData = await import("../data/mixcloud-data.json");
+  const imported = await import("../data/mixcloud-data.json");
+  if (imported && imported.default && Array.isArray(imported.default.mixes)) {
+    mixcloudData = imported.default;
+  }
 } catch (e) {
   console.warn('Could not load mixcloud-data.json:', e);
+  // mixcloudData remains { mixes: [] }
+}
 }
 
 const latestMix = mixcloudData.mixes && mixcloudData.mixes.length > 0 ? mixcloudData.mixes[0] : null;

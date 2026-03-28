@@ -2,7 +2,7 @@ import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
 
-const imgDirs = ['./img', './public/img'];
+const imgDirs = ['./img', './public/img', './public/assets'];
 
 async function createWebP() {
   let converted = 0;
@@ -16,12 +16,13 @@ async function createWebP() {
       if (typeof file !== 'string') continue;
       
       const ext = path.extname(file).toLowerCase();
-      if (ext !== '.jpg' && ext !== '.jpeg') continue;
+      if (ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png') continue;
       
+      // Skip icons and certain files
       if (file.includes('icons') || file === '5stars.png') continue;
       
       const filePath = path.join(imgDir, file);
-      const webpPath = filePath.replace(/\.jpe?g$/i, '.webp');
+      const webpPath = filePath.replace(/\.(jpe?g|png)$/i, '.webp');
       
       if (fs.existsSync(webpPath)) continue;
       
@@ -42,7 +43,7 @@ async function createWebP() {
       }
     }
   }
-
+  
   console.log(`\n✅ Created ${converted} WebP images`);
 }
 
