@@ -12,7 +12,24 @@ import SpotifyIcon from "../components/icons/SpotifyIcon.astro";
 import YouTubeIcon from "../components/icons/YouTubeIcon.astro";
 import ResidentAdvisorIcon from "../components/icons/ResidentAdvisorIcon.astro";
 import MixcloudWidget from "../components/MixcloudWidget.astro";
-import mixcloudData from "../data/mixcloud-data.json";
+
+interface MixcloudMix {
+  title: string;
+  key: string;
+  url: string;
+  created_time: string;
+  src: string;
+  description?: string | null;
+  [key: string]: any;
+}
+
+let mixcloudData: { mixes: MixcloudMix[]; lastUpdated?: string } = { mixes: [] };
+
+try {
+  mixcloudData = await import("../data/mixcloud-data.json");
+} catch (e) {
+  console.warn('Could not load mixcloud-data.json:', e);
+}
 
 const latestMix = mixcloudData.mixes && mixcloudData.mixes.length > 0 ? mixcloudData.mixes[0] : null;
 ---
