@@ -3,6 +3,10 @@ dist/
 # generated types
 .astro/
 
+# generated content
+public/rss.xml
+src/data/mixcloud-data.json
+
 # dependencies
 node_modules/
 
