@@ -4,12 +4,29 @@ import Navbar from '../../components/Navbar.astro';
 import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
 import MixcloudWidget from '../../components/MixcloudWidget.astro';
-import mixcloudData from '../../data/mixcloud-data.json';
+
+interface MixcloudMix {
+  title: string;
+  key: string;
+  url: string;
+  created_time: string;
+  src: string;
+  description?: string | null;
+  [key: string]: any;
+}
+
+let mixcloudData: { mixes: MixcloudMix[]; lastUpdated?: string } = { mixes: [] };
+
+try {
+  mixcloudData = await import('../../data/mixcloud-data.json');
+} catch (e) {
+  console.warn('Could not load mixcloud-data.json:', e);
+}
 
 const allMixes = mixcloudData.mixes || [];
 
 const mixesWithDetails = await Promise.all(
-  allMixes.map(async (mix) => {
+  allMixes.map(async (mix: MixcloudMix) => {
     try {
       const apiUrl = `https://api.mixcloud.com${mix.key}?metadata=1`;
       const response = await fetch(apiUrl);
@@ -103,7 +120,7 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
       </div>
       
       <div id="mixesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-total-pages={totalPages} data-items-per-page={ITEMS_PER_PAGE}>
-        {otherMixes.map((mix, index) => (
+        {otherMixes.map((mix: MixcloudMix, index: number) => (
           <div class="mix-item" data-page={Math.floor(index / ITEMS_PER_PAGE) + 1} style={`display: ${Math.floor(index / ITEMS_PER_PAGE) + 1 === 1 ? 'block' : 'none'}`}>
             <MixcloudWidget 
               src={mix.src} 
@@ -153,7 +170,7 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
 
   <Footer />
 
-  <script define:vars={{ ITEMS_PER_PAGE, totalPages }}>
+   <script is:inline define:vars={{ ITEMS_PER_PAGE, totalPages }}>
     function initPagination() {
       const params = new URLSearchParams(window.location.search);
       let currentPage = parseInt(params.get('page')) || 1;
