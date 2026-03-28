@@ -28,9 +28,9 @@ try {
     mixcloudData = imported.default;
   }
 } catch (e) {
+  // eslint-disable-next-line no-console
   console.warn('Could not load mixcloud-data.json:', e);
   // mixcloudData remains { mixes: [] }
-}
 }
 
 const allMixes = mixcloudData.mixes || [];

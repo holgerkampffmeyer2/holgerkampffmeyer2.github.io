@@ -36,9 +36,9 @@ try {
     mixcloudData = imported.default;
   }
 } catch (e) {
+  // eslint-disable-next-line no-console
   console.warn('Could not load mixcloud-data.json:', e);
   // mixcloudData remains { mixes: [] }
-}
 }
 
 const latestMix = mixcloudData.mixes && mixcloudData.mixes.length > 0 ? mixcloudData.mixes[0] : null;
