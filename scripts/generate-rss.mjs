@@ -135,6 +135,28 @@ function generateRss() {
     console.warn('⚠️ Could not read mixcloud data:', e.message);
   }
 
+  try {
+    const openSourceDataPath = path.join(__dirname, '../src/data/open-source-projects.json');
+    const openSourceData = JSON.parse(fs.readFileSync(openSourceDataPath, 'utf-8'));
+    const projects = openSourceData.projects || [];
+    
+    for (const project of projects) {
+      const gitDate = getGitDateForFile(path.join(__dirname, '../src/data/open-source-projects.json'));
+      const pubDate = gitDate || new Date().toISOString().split('T')[0];
+      
+      items.push({
+        id: `opensource-${project.name}`,
+        title: project.name,
+        link: project.url,
+        description: `Open Source Projekt: ${project.description}`,
+        pubDate: pubDate,
+        isOpenSource: true
+      });
+    }
+  } catch (e) {
+    console.warn('⚠️ Could not read open source projects data:', e.message);
+  }
+
   items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
   const today = new Date();
@@ -153,11 +175,12 @@ function generateRss() {
 
   for (const item of items) {
     const pubDate = formatRssDate(item.pubDate);
-    const category = item.isMix ? '[Mix]' : '[Seite]';
+    const category = item.isMix ? '[Mix]' : item.isOpenSource ? '[Open Source]' : '[Seite]';
+    const link = item.isOpenSource ? item.link : `${site}${item.link}`;
     xml += `    <item>
       <guid isPermaLink="false">${escapeXml(item.id)}</guid>
       <title>${escapeXml(category + ' ' + item.title)}</title>
-      <link>${site}${item.link}</link>
+      <link>${escapeXml(link)}</link>
       <description>${escapeXml(item.description)}</description>
       <pubDate>${pubDate}</pubDate>
     </item>

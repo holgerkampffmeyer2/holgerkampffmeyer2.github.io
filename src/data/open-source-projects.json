@@ -1,0 +1,25 @@
+{
+  "projects": [
+    {
+      "name": "wav-to-aac-converter",
+      "description": "AI agent for converting WAV music files into AAC or MP3 format. The tool helps to batch convert WAV to AAC or MP3, optimizes the volume (Loudness) as well as extracting metadata such as title, artist, and album cover from online sources.",
+      "url": "https://github.com/holgerkampffmeyer2/wav-to-aac-converter",
+      "image": "/assets/ai-powered.webp",
+      "imageAlt": "WAV to AAC/MP3 converter"
+    },
+    {
+      "name": "organize_mp3s",
+      "description": "AI agent tool for organizing MP3 files by extracting metadata and organizing them into a structured folder hierarchy based on artist, album, and track information.",
+      "url": "https://github.com/holgerkampffmeyer2/organize_mp3s",
+      "image": "/assets/organize_mp3s.webp",
+      "imageAlt": "organize MP3s into folders by genre"
+    },
+    {
+      "name": "generate-mixcloud-tracklist",
+      "description": "AI agent tool for generating tracklists from DJ mixes by transforming a Rekordbox CUE file into a structured format Mixcloud understands.",
+      "url": "https://github.com/holgerkampffmeyer2/generate-mixcloud-tracklist",
+      "image": "/assets/generate-mixcloudtracklist.webp",
+      "imageAlt": "generate-mixcloudtracklist logo"
+    }
+  ]
+}
