@@ -5,21 +5,47 @@
       "description": "AI agent for converting WAV music files into AAC or MP3 format. The tool helps to batch convert WAV to AAC or MP3, optimizes the volume (Loudness) as well as extracting metadata such as title, artist, and album cover from online sources.",
       "url": "https://github.com/holgerkampffmeyer2/wav-to-aac-converter",
       "image": "/assets/ai-powered.webp",
-      "imageAlt": "WAV to AAC/MP3 converter"
+      "imageAlt": "WAV to AAC/MP3 converter",
+      "features": [
+        "WAV to MP3/M4A conversion",
+        "Loudness normalization (True Peak ≤ -0.1 dBTP)",
+        "Metadata extraction (iTunes → Deezer → Bandcamp → MusicBrainz)",
+        "Cover art (embedded → local → Deezer → MusicBrainz → Bandcamp)",
+        "Unicode filename handling",
+        "Batch processing with parallel processes",
+        "Configurable via config.json"
+      ]
     },
     {
       "name": "organize_mp3s",
       "description": "AI agent tool for organizing MP3 files by extracting metadata and organizing them into a structured folder hierarchy based on artist, album, and track information.",
       "url": "https://github.com/holgerkampffmeyer2/organize_mp3s",
       "image": "/assets/organize_mp3s.webp",
-      "imageAlt": "organize MP3s into folders by genre"
+      "imageAlt": "organize MP3s into folders by genre",
+      "features": [
+        "MP3/M4A organization",
+        "Online genre lookup (iTunes → Bandcamp → MusicBrainz)",
+        "Label lookup",
+        "Metadata-based sorting",
+        "Fuzzy genre matching (30+ synonyms)",
+        "Subgenre hierarchy mapping",
+        "Metadata enrichment",
+        "Dry-run mode"
+      ]
     },
     {
       "name": "generate-mixcloud-tracklist",
       "description": "AI agent tool for generating tracklists from DJ mixes by transforming a Rekordbox CUE file into a structured format Mixcloud understands.",
       "url": "https://github.com/holgerkampffmeyer2/generate-mixcloud-tracklist",
       "image": "/assets/generate-mixcloudtracklist.webp",
-      "imageAlt": "generate-mixcloudtracklist logo"
+      "imageAlt": "generate-mixcloudtracklist logo",
+      "features": [
+        "Rekordbox CUE to Mixcloud tracklist conversion",
+        "Artist, title, timestamp extraction",
+        "Automatic Jingle filter",
+        "Batch conversion",
+        "AI-driven processing"
+      ]
     }
   ]
 }

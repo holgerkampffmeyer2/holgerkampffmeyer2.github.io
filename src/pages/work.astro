@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 import LinkedInIcon from '../components/icons/LinkedInIcon.astro';
 import XingIcon from '../components/icons/XingIcon.astro';
 import GitHubIcon from '../components/icons/GitHubIcon.astro';
+import ChevronDownIcon from '../components/icons/ChevronDownIcon.astro';
 import openSourceProjects from '../data/open-source-projects.json';
 
 const personSchema = {
@@ -174,36 +175,54 @@ const personSchema = {
   </section>
 
   <!-- Open Source Section -->
-  <section class="section-padding bg-[var(--color-surface)]">
+  <section id="opensource" class="section-padding bg-[var(--color-surface)]">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
         <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Open Source</span>
         <h2 class="font-play text-4xl font-bold mt-4">My Open Source Projects</h2>
       </div>
       
-     <div class="max-w-4xl mx-auto">
-       {openSourceProjects.projects.map((project, index) => (
-         <div class={`bg-[var(--color-bg)] rounded-xl p-6 animate-on-scroll hover:border-[var(--color-secondary)] border border-transparent transition-all ${index > 0 ? 'mt-6' : ''}`}>
-           <div class="flex items-start gap-4">
-             <div class="w-20 h-20 bg-[var(--color-surface)] rounded-lg flex items-center justify-center shrink-0">
-               <img src={project.image} alt={project.imageAlt} class="w-20 h-20 rounded-lg object-cover">
-             </div>
-             <div>
-               <a href={project.url} target="_blank" class="font-bold text-lg hover:text-[var(--color-secondary)] transition-colors">
-                 {project.name}
-               </a>
-               <p class="text-[var(--color-text-muted)] text-sm mt-2">
-                 {project.description}
-               </p>
-               <a href={project.url} target="_blank" class="inline-flex items-center gap-2 text-[var(--color-secondary)] text-sm mt-3 hover:underline">
-                 <GitHubIcon class="w-4 h-4" />
-                 View on GitHub
-               </a>
-             </div>
-           </div>
-         </div>
-       ))}
-     </div>
+      <div class="max-w-4xl mx-auto">
+        {openSourceProjects.projects.map((project, index) => (
+          <div class={`bg-[var(--color-bg)] rounded-xl p-6 animate-on-scroll hover:border-[var(--color-secondary)] border border-transparent transition-all ${index > 0 ? 'mt-6' : ''}`}>
+            <button 
+              type="button"
+              class="project-toggle w-full flex items-start gap-4 text-left"
+              data-project={project.name}
+            >
+              <div class="w-20 h-20 bg-[var(--color-surface)] rounded-lg flex items-center justify-center shrink-0">
+                <img src={project.image} alt={project.imageAlt} class="w-20 h-20 rounded-lg object-cover">
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center justify-between">
+                  <a href={project.url} target="_blank" class="font-bold text-lg hover:text-[var(--color-secondary)] transition-colors">
+                    {project.name}
+                  </a>
+                  <ChevronDownIcon class="toggle-icon w-5 h-5 text-[var(--color-secondary)] transition-transform" />
+                </div>
+                <p class="text-[var(--color-text-muted)] text-sm mt-2">
+                  {project.description}
+                </p>
+                <a href={project.url} target="_blank" class="inline-flex items-center gap-2 text-[var(--color-secondary)] text-sm mt-3 hover:underline">
+                  <GitHubIcon class="w-4 h-4" />
+                  View on GitHub
+                </a>
+              </div>
+            </button>
+            <div class="project-details hidden mt-4 pl-24">
+              <h4 class="font-bold text-sm text-[var(--color-secondary)] uppercase tracking-wider mb-3">Features</h4>
+              <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                {project.features.map((feature) => (
+                  <li class="flex items-center gap-2 text-[var(--color-text-muted)] text-sm">
+                    <span class="w-1.5 h-1.5 bg-[var(--color-secondary)] rounded-full shrink-0"></span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -235,6 +254,18 @@ const personSchema = {
       </div>
     </div>
   </section>
+
+  <script>
+    document.querySelectorAll('.project-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const details = button.nextElementSibling;
+        const icon = button.querySelector('.toggle-icon');
+        
+        details?.classList.toggle('hidden');
+        icon?.classList.toggle('rotate-180');
+      });
+    });
+  </script>
 
   <Footer />
 </Layout>
