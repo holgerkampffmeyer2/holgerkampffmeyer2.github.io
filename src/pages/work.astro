@@ -185,9 +185,8 @@ const personSchema = {
       <div class="max-w-4xl mx-auto">
         {openSourceProjects.projects.map((project, index) => (
           <div class={`bg-[var(--color-bg)] rounded-xl p-6 animate-on-scroll hover:border-[var(--color-secondary)] border border-transparent transition-all ${index > 0 ? 'mt-6' : ''}`}>
-            <button 
-              type="button"
-              class="project-toggle w-full flex items-start gap-4 text-left"
+            <div 
+              class="project-toggle w-full flex items-start gap-4 text-left cursor-pointer"
               data-project={project.name}
             >
               <div class="w-20 h-20 bg-[var(--color-surface)] rounded-lg flex items-center justify-center shrink-0">
@@ -208,9 +207,9 @@ const personSchema = {
                   View on GitHub
                 </a>
               </div>
-            </button>
+            </div>
             <div class="project-details hidden mt-4 pl-24">
-              <h4 class="font-bold text-sm text-[var(--color-secondary)] uppercase tracking-wider mb-3">Features</h4>
+              <h3 class="font-bold text-sm text-[var(--color-secondary)] uppercase tracking-wider mb-3">Features</h3>
               <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {project.features.map((feature) => (
                   <li class="flex items-center gap-2 text-[var(--color-text-muted)] text-sm">
