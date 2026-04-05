@@ -14,7 +14,7 @@ const personSchema = {
   "@type": "Person",
   "name": "Holger Kampffmeyer",
   "url": "https://holger-kampffmeyer.de/work",
-  "jobTitle": "Team Manager, DevOps, Cloud Native",
+  "jobTitle": "Director DevOps - AI Agentic Development, Platform Engineering, Cloud Native",
   "worksFor": {
     "@type": "Organization",
     "name": "Vector",
@@ -43,7 +43,7 @@ const personSchema = {
 
 <Layout 
   title="Work - Holger Kampffmeyer"
-  description="Holger Kampffmeyer - IT Professional, DevOps, Cloud Native, Director DevOps Vector. "
+  description="Holger Kampffmeyer - Director DevOps bei Vector. AI Agentic Development, Platform Engineering, Cloud Native Architecture."
   image="/img/header-work.webp"
   jsonLd={personSchema}
 >
@@ -55,42 +55,133 @@ const personSchema = {
   >
     <div class="max-w-3xl pt-32 text-center">
       <h1 class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">Work / Research</h1>
-      <p class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-2xl animate-fadeInUp stagger-3">IT Professional, DevOps, Cloud Native, Software Development</p>
+      <p class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-2xl animate-fadeInUp stagger-3">Director DevOps · AI Agentic Development · Platform Engineering</p>
     </div>
   </Hero>
+
+  <!-- Open Source Section - Moved to top -->
+  <section id="opensource" class="section-padding bg-[var(--color-bg)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Open Source</span>
+        <h2 class="font-play text-4xl font-bold mt-4">AI Agent Projects</h2>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        {openSourceProjects.projects.map((project, index) => (
+          <div class={`bg-[var(--color-surface)] rounded-xl p-6 animate-on-scroll hover:border-[var(--color-secondary)] border border-transparent transition-all ${index > 0 ? 'mt-6' : ''}`}>
+            <div 
+              class="project-toggle w-full flex items-start gap-4 text-left cursor-pointer"
+              data-project={project.name}
+            >
+              <div class="w-20 h-20 bg-[var(--color-bg)] rounded-lg flex items-center justify-center shrink-0">
+                <img src={project.image} alt={project.imageAlt} class="w-20 h-20 rounded-lg object-cover">
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center justify-between">
+                  <a href={project.url} target="_blank" class="font-bold text-lg hover:text-[var(--color-secondary)] transition-colors">
+                    {project.name}
+                  </a>
+                  <ChevronDownIcon class="toggle-icon w-5 h-5 text-[var(--color-secondary)] transition-transform" />
+                </div>
+                <p class="text-[var(--color-text-muted)] text-sm mt-2">
+                  {project.description}
+                </p>
+                <a href={project.url} target="_blank" class="inline-flex items-center gap-2 text-[var(--color-secondary)] text-sm mt-3 hover:underline">
+                  <GitHubIcon class="w-4 h-4" />
+                  View on GitHub
+                </a>
+              </div>
+            </div>
+            <div class="project-details hidden mt-4 pl-24">
+              <h3 class="font-bold text-sm text-[var(--color-secondary)] uppercase tracking-wider mb-3">Features</h3>
+              <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                {project.features.map((feature) => (
+                  <li class="flex items-center gap-2 text-[var(--color-text-muted)] text-sm">
+                    <span class="w-1.5 h-1.5 bg-[var(--color-secondary)] rounded-full shrink-0"></span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="section-padding bg-[var(--color-surface)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Expertise</span>
+        <h2 class="font-play text-4xl font-bold mt-4">Technical Skills</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-[var(--color-bg)] rounded-xl p-6 animate-on-scroll">
+          <h3 class="font-bold text-xl mb-4 text-[var(--color-secondary)]">AI Agentic Development</h3>
+          <ul class="space-y-2 text-[var(--color-text-muted)]">
+            <li>• Claude Code & OpenCode</li>
+            <li>• GitHub Copilot & Cursor</li>
+            <li>• Multi-Agent Systems</li>
+            <li>• Autonomous Workflow Automation</li>
+            <li>• AI-powered DevOps</li>
+          </ul>
+        </div>
+        
+        <div class="bg-[var(--color-bg)] rounded-xl p-6 animate-on-scroll">
+          <h3 class="font-bold text-xl mb-4 text-[var(--color-secondary)]">Platform Engineering</h3>
+          <ul class="space-y-2 text-[var(--color-text-muted)]">
+            <li>• Kubernetes & Docker</li>
+            <li>• GitOps (Github Actions, Flux)</li>
+            <li>• Terraform & Ansible</li>
+            <li>• AWS, Azure, on Prem</li>
+            <li>• Self-service Infrastructure</li>
+          </ul>
+        </div>
+        
+        <div class="bg-[var(--color-bg)] rounded-xl p-6 animate-on-scroll">
+          <h3 class="font-bold text-xl mb-4 text-[var(--color-secondary)]">Leadership & Delivery</h3>
+          <ul class="space-y-2 text-[var(--color-text-muted)]">
+            <li>• Team Leadership</li>
+            <li>• Scrum & Kanban</li>
+            <li>• CI/CD Pipeline Architecture</li>
+            <li>• DevOps & Developer Experience</li>
+            <li>• Enterprise Delivery</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Work Section -->
   <section class="section-padding bg-[var(--color-bg)]">
     <div class="max-w-7xl mx-auto">
       <div class="max-w-3xl mx-auto">
-        <!-- Business / Work -->
         <div class="bg-[var(--color-surface)] rounded-xl p-8 animate-on-scroll">
-          <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Business / Work</span>
-          <h2 class="font-play text-3xl font-bold mt-4 mb-6">Infos about my Work</h2>
+          <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Current Role</span>
+          <h2 class="font-play text-3xl font-bold mt-4 mb-6">Director DevOps at Vector</h2>
           
           <div class="space-y-4 text-[var(--color-text-muted)]">
             <p>
-              I work as Director DevOps for <a href="http://www.vector.com" target="_blank" class="text-[var(--color-secondary)] hover:underline">Vector</a>, a software company with more than 4000 employees that builds software tools for the automotive and embedded software industry.
+              I work as Director DevOps for <a href="http://www.vector.com" target="_blank" class="text-[var(--color-secondary)] hover:underline">Vector</a>, a leading software company with 4000+ employees building tools for the automotive and embedded software industry.
             </p>
             
-            <p>I am interested in the following topics:</p>
+            <p>My current focus areas:</p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>Managing DevOps Teams</li>
-              <li>Project Management</li>
-              <li>AI and Agentic Software Development</li>
-              <li>Software Architecture</li>
-              <li>Agile: Scrum, Software Kanban</li>
-              <li>Cloud, Docker, Kubernetes</li>
-              <li>Continuous Integration, Continuous Delivery</li>
+              <li>AI Agentic Software Development & Automation</li>
+              <li>Platform Engineering & Developer Experience</li>
+              <li>Building autonomous DevOps workflows with AI agents</li>
+              <li>Leading high-performance DevOps teams</li>
+              <li>Cloud-native architecture & GitOps</li>
             </ul>
             
             <p class="mt-4">
-              For professional topics please get in contact with me via <a href="https://www.xing.com/profile/Holger_Kampffmeyer" target="_blank" class="text-[var(--color-secondary)] hover:underline">Xing</a> or <a href="https://www.linkedin.com/in/holger-kampffmeyer-390b6789/" target="_blank" class="text-[var(--color-secondary)] hover:underline">LinkedIn</a>.
+              Connect with me on <a href="https://www.xing.com/profile/Holger_Kampffmeyer" target="_blank" class="text-[var(--color-secondary)] hover:underline">Xing</a> or <a href="https://www.linkedin.com/in/holger-kampffmeyer-390b6789/" target="_blank" class="text-[var(--color-secondary)] hover:underline">LinkedIn</a>.
             </p>
           </div>
         </div>
-        
-        
       </div>
     </div>
   </section>
@@ -128,105 +219,8 @@ const personSchema = {
     </div>
   </section>
 
-  <!-- Skills Section -->
-  <section class="section-padding bg-[var(--color-bg)]">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16">
-        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Skills</span>
-        <h2 class="font-play text-4xl font-bold mt-4">Technical Expertise</h2>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-[var(--color-surface)] rounded-xl p-6 animate-on-scroll">
-          <h3 class="font-bold text-xl mb-4 text-[var(--color-secondary)]">DevOps & Cloud</h3>
-          <ul class="space-y-2 text-[var(--color-text-muted)]">
-            <li>• Docker & Kubernetes</li>
-            <li>• AWS, Azure, GCP</li>
-            <li>• CI/CD Pipelines</li>
-            <li>• Infrastructure as Code</li>
-            <li>• Terraform, Ansible</li>
-          </ul>
-        </div>
-        
-        <div class="bg-[var(--color-surface)] rounded-xl p-6 animate-on-scroll">
-          <h3 class="font-bold text-xl mb-4 text-[var(--color-secondary)]">Software Engineering</h3>
-          <ul class="space-y-2 text-[var(--color-text-muted)]">
-            <li>• AI-powered Software Development: Github Copilot, Claude Code, OpenCode</li>
-            <li>• Java, Python, TypeScript</li>
-            <li>• Microservices Architecture</li>
-            <li>• Agile Methodologies</li>
-            <li>• Clean Code & Refactoring</li>
-            <li>• Testing & QA</li>
-          </ul>
-        </div>
-        
-        <div class="bg-[var(--color-surface)] rounded-xl p-6 animate-on-scroll">
-          <h3 class="font-bold text-xl mb-4 text-[var(--color-secondary)]">Project Management</h3>
-          <ul class="space-y-2 text-[var(--color-text-muted)]">
-            <li>• Scrum & Kanban</li>
-            <li>• Team Leadership</li>
-            <li>• Stakeholder Management</li>
-            <li>• Technical Planning</li>
-            <li>• Risk Management</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Open Source Section -->
-  <section id="opensource" class="section-padding bg-[var(--color-surface)]">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16">
-        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Open Source</span>
-        <h2 class="font-play text-4xl font-bold mt-4">My Open Source Projects</h2>
-      </div>
-      
-      <div class="max-w-4xl mx-auto">
-        {openSourceProjects.projects.map((project, index) => (
-          <div class={`bg-[var(--color-bg)] rounded-xl p-6 animate-on-scroll hover:border-[var(--color-secondary)] border border-transparent transition-all ${index > 0 ? 'mt-6' : ''}`}>
-            <div 
-              class="project-toggle w-full flex items-start gap-4 text-left cursor-pointer"
-              data-project={project.name}
-            >
-              <div class="w-20 h-20 bg-[var(--color-surface)] rounded-lg flex items-center justify-center shrink-0">
-                <img src={project.image} alt={project.imageAlt} class="w-20 h-20 rounded-lg object-cover">
-              </div>
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <a href={project.url} target="_blank" class="font-bold text-lg hover:text-[var(--color-secondary)] transition-colors">
-                    {project.name}
-                  </a>
-                  <ChevronDownIcon class="toggle-icon w-5 h-5 text-[var(--color-secondary)] transition-transform" />
-                </div>
-                <p class="text-[var(--color-text-muted)] text-sm mt-2">
-                  {project.description}
-                </p>
-                <a href={project.url} target="_blank" class="inline-flex items-center gap-2 text-[var(--color-secondary)] text-sm mt-3 hover:underline">
-                  <GitHubIcon class="w-4 h-4" />
-                  View on GitHub
-                </a>
-              </div>
-            </div>
-            <div class="project-details hidden mt-4 pl-24">
-              <h3 class="font-bold text-sm text-[var(--color-secondary)] uppercase tracking-wider mb-3">Features</h3>
-              <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                {project.features.map((feature) => (
-                  <li class="flex items-center gap-2 text-[var(--color-text-muted)] text-sm">
-                    <span class="w-1.5 h-1.5 bg-[var(--color-secondary)] rounded-full shrink-0"></span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <!-- Social Links Section -->
-  <section class="section-padding bg-[var(--color-surface)]">
+  <section class="section-padding bg-[var(--color-bg)]">
     <div class="max-w-4xl mx-auto text-center">
       <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Connect</span>
       <h2 class="font-play text-4xl font-bold mt-4 mb-8">Let's Connect</h2>
@@ -236,7 +230,7 @@ const personSchema = {
           href="https://www.linkedin.com/in/holger-kampffmeyer-390b6789/"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex items-center gap-3 bg-[var(--color-bg)] px-6 py-4 rounded-xl hover:bg-[var(--color-primary)]/20 transition-all duration-300 group"
+          class="flex items-center gap-3 bg-[var(--color-surface)] px-6 py-4 rounded-xl hover:bg-[var(--color-primary)]/20 transition-all duration-300 group"
         >
           <LinkedInIcon class="w-8 h-8" />
           <span class="font-bold group-hover:text-[var(--color-secondary)] transition-colors">LinkedIn</span>
@@ -245,7 +239,7 @@ const personSchema = {
           href="https://www.xing.com/profile/Holger_Kampffmeyer"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex items-center gap-3 bg-[var(--color-bg)] px-6 py-4 rounded-xl hover:bg-[var(--color-primary)]/20 transition-all duration-300 group"
+          class="flex items-center gap-3 bg-[var(--color-surface)] px-6 py-4 rounded-xl hover:bg-[var(--color-primary)]/20 transition-all duration-300 group"
         >
           <XingIcon class="w-8 h-8" />
           <span class="font-bold group-hover:text-[var(--color-secondary)] transition-colors">XING</span>
