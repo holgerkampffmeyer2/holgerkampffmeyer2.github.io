@@ -14,21 +14,18 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 | :---------------- | :----------------------------------------------- |
 | `npm install`     | Installs dependencies                            |
 | `npm run dev`     | Starts local dev server                          |
-| `npm run build`   | Build production site (incl. Mixcloud & RSS)    |
+| `npm run build`   | Build production -> dist/ (incl. Mixcloud & RSS) |
 | `npm run preview` | Preview build locally                            |
 | `npm run lint`    | ESLint check                                     |
 | `npm run check`   | TypeScript check                                 |
 
-## Google Reviews
+## Wichtige Pfade
 
-Die Rezensionen werden aus `src/data/google-reviews.json` geladen. Das JSON-File kann manuell befüllt werden.
-
-Um neue Rezensionen zu laden (Playwright muss installiert sein):
-```bash
-node scripts/fetchGoogleReviews.js
-```
-
-Hinweis: Das Playwright-Script wird von Google blockiert (reCAPTCHA). Es empfiehlt sich, die Rezensionen manuell in `src/data/google-reviews.json` einzutragen.
+- **Source:** `src/pages/`
+- **Statische Assets:** `public/` (wird in Root kopiert)
+- **Config:** `astro.config.mjs`
+- **Mixcloud-Daten:** `src/data/mixcloud-data.json`
+- **RSS-Feed:** `public/rss.xml` (wird automatisch bei build generiert)
 
 ## Development
 
@@ -59,3 +56,7 @@ git push && git push origin
 ## Deployment
 
 Website deployed via GitHub Pages. CNAME: holger-kampffmeyer.de
+
+## Hinweis
+
+Weitere projektbezogene Informationen für Agenten sind in `AGENTS.md` dokumentiert.
