@@ -163,6 +163,26 @@ const events = [
   <!-- 1. Bildergalerie -->
   <ProductGallery images={images} title="JBL Partybox 300/320" />
 
+  <!-- Demo Video -->
+  <section class="section-padding bg-[var(--color-bg)]">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="text-center mb-8">
+        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Demo</span>
+        <h2 class="font-play text-3xl font-bold mt-2">Sound-Demo</h2>
+        <p class="text-[var(--color-text-muted)] mt-2">Eindruck der Partybox in Aktion</p>
+      </div>
+      <div class="aspect-video rounded-xl overflow-hidden bg-black">
+        <iframe 
+          src="https://www.youtube.com/embed/Ivch0DqKkW0" 
+          title="JBL Partybox Demo"
+          class="w-full h-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
   <!-- 2. Preis & Kaution -->
   <RentalPricing price="ab 80€" deposit={150} />
 
