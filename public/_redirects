@@ -1,0 +1,4 @@
+# Redirect all non-www and non-https URLs to canonical https://holger-kampffmeyer.de
+http://holger-kampffmeyer.de/*  https://holger-kampffmeyer.de/:splat  301!
+http://www.holger-kampffmeyer.de/* https://holger-kampffmeyer.de/:splat 301!
+https://www.holger-kampffmeyer.de/* https://holger-kampffmeyer.de/:splat 301!
