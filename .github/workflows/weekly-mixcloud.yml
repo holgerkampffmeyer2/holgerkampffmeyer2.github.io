@@ -18,14 +18,19 @@ jobs:
         with:
           fetch-depth: 0
         
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+        
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
           node-version: '22'
-          cache: 'npm'
+          cache: 'pnpm'
         
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
         
       - name: Fetch latest Mixcloud data
         run: node scripts/fetch-mixcloud.mjs
@@ -34,13 +39,13 @@ jobs:
         run: node scripts/generate-rss.mjs
         
       - name: Run ESLint
-        run: npm run lint
+        run: pnpm run lint
         
       - name: TypeScript check
-        run: npm run check
+        run: pnpm run check
         
       - name: Build Astro site
-        run: npm run build
+        run: pnpm run build
         
       - uses: actions/upload-pages-artifact@v3
         with:

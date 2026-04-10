@@ -10,14 +10,14 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 
 ## Commands
 
-| Command           | Action                                           |
-| :---------------- | :----------------------------------------------- |
-| `npm install`     | Installs dependencies                            |
-| `npm run dev`     | Starts local dev server                          |
-| `npm run build`   | Build production -> dist/ (incl. Mixcloud & RSS) |
-| `npm run preview` | Preview build locally                            |
-| `npm run lint`    | ESLint check                                     |
-| `npm run check`   | TypeScript check                                 |
+| Command            | Action                                           |
+| :----------------- | :----------------------------------------------- |
+| `pnpm install`     | Installs dependencies                            |
+| `pnpm run dev`     | Starts local dev server                          |
+| `pnpm run build`   | Build production -> dist/ (incl. Mixcloud & RSS) |
+| `pnpm run preview` | Preview build locally                            |
+| `pnpm run lint`    | ESLint check                                     |
+| `pnpm run check`   | TypeScript check                                 |
 
 ## Wichtige Pfade
 
@@ -31,22 +31,22 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev
+pnpm run dev
 
 # Build for production
-npm run build
+pnpm run build
 
 # Preview production build
-npm run preview
+pnpm run preview
 ```
 
 ## Git-Workflow
 
 ```bash
-npm run lint && npm run check && npm run build
+pnpm run lint && pnpm run check && pnpm run build
 git add .
 git commit -m "describe changes"
 git tag -a v.x.x.x -m "version message"
