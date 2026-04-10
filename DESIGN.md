@@ -69,11 +69,11 @@ src/
 
 ### Build-Skripte
 ```bash
-npm run dev      # Development server
-npm run check    # TypeScript check
-npm run build    # Production build
-npm run preview  # Preview production build
-npm run lint     # ESLint check
+pnpm run dev      # Development server
+pnpm run check    # TypeScript check
+pnpm run build    # Production build
+pnpm run preview  # Preview production build
+pnpm run lint     # ESLint check
 ```
 
 ---
@@ -156,7 +156,7 @@ npm run lint     # ESLint check
 ```bash
 # 1. Daten in rss-data.json bearbeiten
 # 2. Build ausführen
-npm run build
+pnpm run build
 ```
 ---
 
@@ -227,7 +227,7 @@ node scripts/update-image-refs.mjs
 
 ### GitHub Actions Workflow
 - Trigger: Push auf main-Branch
-- Steps: Checkout → npm ci → npm run lint → npm run check → npm run build → upload-artifact → deploy-pages
+- Steps: Checkout → pnpm install → pnpm run lint → pnpm run check → pnpm run build → upload-artifact → deploy-pages
 - Environment: github-pages
 
 ### Konfiguration
@@ -419,13 +419,13 @@ node scripts/update-image-refs.mjs
 ### 2026-03-18: CVE Fixes und GitHub Action Update
 
 **CVE Fixes:**
-- `npm audit fix` ausgeführt: devalue, lodash aktualisiert
+- `pnpm audit fix` ausgeführt: devalue, lodash aktualisiert
 - `@astrojs/rss` entfernt (nicht verwendet, brachte fast-xml-parser mit)
 - Resultat: 0 vulnerabilities
 
 **GitHub Actions Workflow:**
 - `.github/workflows/deploy.yml` erweitert mit eigenen Steps statt withastro/action@v5
-- Neue Steps: Checkout → npm ci → npm run lint → npm run check → npm run build
+- Neue Steps: Checkout → pnpm install → pnpm run lint → pnpm run check → pnpm run build
 - Build schlägt fehl bei Lint/TypeScript-Fehlern (verhindert Deploy)
 
 ### 2026-03-21: Astro 6.x Upgrade
