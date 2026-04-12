@@ -1,0 +1,11 @@
+Ich möchte die Website um einen englischsprachigen Musik Blog erweitern. 
+
+1- Dafür lies die letzten 10 mixcloud posts https://www.mixcloud.com/holger-kampffmeyer/posts/, die eine Beschreibung, ein Bild und die Tracklist sowie den Link zum Mix enthalten
+2. Baue ein Script zum abrufen der letzten 10 mixcloud posts und speichere sie in einer json data, analog zu /data/mixcloud-data.json
+3. Mach einen plan für die Umstrukturierung für den neuen Musik Blog (/djhulk-electronic-music/msuik-blog). Er soll unterhalb von "DJing" angelegt sein. Es soll einen Verweis von der Startseite geben. 
+4. Es soll ein Archiv für alte Blog posts geben /djhulk-electronic-music/msuik-blog/archive). 
+5. Die Musik Blog Seite soll eine einleitende Beschreibung haben. Ich möchte Hörer ansprechen, die auf der Suche nach einem Musikmix für verschiedene Anlässe sind:
+- Musikmix für die Gym-Session, Autofahrt, zum konzentrierten Arbeiten, also Vorbereitung zum Abends ausgehen. Such die Verweise auf mein Mixcloud, Soundcloud und Spotify Profil und füge sie ein.
+6. Der aktuellste Blog Post soll auf der Seite des Musik Blogs (/djhulk-electronic-music/musik-blog) eingebettet sein. 
+7. Gibt es einen neueren Mixcloud Post, schiebe den aktuellen Post ins Archiv und erzeuge einen neuen POst für die msuik-blog Seite.
+8. Struktur eines Blog post Eintrags: alle Infos aus dem mixcloud POst. Zusätzlich der eingebette mixcloud player mit dem dazugehörigen Mix. Ein weiterer Abschnitt für den möglichen "Einsatzzweck" des Mixes: für die Gym-Session, die Fahrt zur Arbeit, konzentriertes Denken und Arbeiten etc.

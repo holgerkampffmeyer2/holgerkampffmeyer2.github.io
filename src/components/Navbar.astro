@@ -23,6 +23,7 @@ const navItems = [
     label: 'DJing',
     hasDropdown: true,
     items: [
+      { href: '/djhulk-electronic-music/musik-blog', label: 'Music Blog' },
       { href: '/dj/videos', label: 'Videos' },
       { href: '/dj/mixes', label: 'Mixes' },
       { href: '/dj/em3f', label: 'Fotos' }
@@ -62,6 +63,7 @@ const navItems = [
       <div class="desktop-menu hidden md:flex items-center space-x-6">
         {navItems.map(item => {
           const isActive = currentPage === item.href || 
+                          (currentPage.startsWith('/djhulk-electronic-music') && item.href === '/djhulk-electronic-music') ||
                           (currentPage.startsWith('/dj') && item.href === '/djhulk-electronic-music') ||
                           (currentPage.startsWith('/vermietung') && item.href === '/vermietung') ||
                           (currentPage === '/' && item.href === '/');

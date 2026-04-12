@@ -40,6 +40,25 @@ pnpm run preview  # Preview production build
    - Änderungsdatum der Astro-Dateien in `src/pages/`
    - Neuesten Mixes aus Mixcloud (`src/data/mixcloud-data.json`)
 
+## Music Blog
+- **Seite:** `/djhulk-electronic-music/musik-blog` (Startseite) und `/djhulk-electronic-music/musik-blog/archive` (Archiv)
+- **Daten:** `src/data/blog-posts.json` (wird automatisch generiert)
+- **Tracklists:** `src/data/tracklists/` (Quelldateien)
+- **Hero-Images:** `public/tracklists/` (WebP)
+
+### Blog-Posts Script
+`scripts/fetch-mixcloud-blog.mjs` holt die neuesten 10 Mixes von Mixcloud:
+- Genre → Use-Case Mapping (Gym, Drive, Work, Party)
+- Sucht Tracklists in `src/data/tracklists/` (Pattern: `*Mix{nummer}*tracklist*.txt`)
+- Sucht Hero-Images in `public/tracklists/` (Pattern: `*Mix{nummer}*.webp`)
+
+**Manuell ausführen:**
+```bash
+node scripts/fetch-mixcloud-blog.mjs
+```
+
+Dokumentation: `docs/music-blog-script.md`
+
 ## Git-Workflow
 ```bash
 pnpm run lint && pnpm run check && pnpm run build

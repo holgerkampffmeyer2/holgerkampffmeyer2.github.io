@@ -1,0 +1,168 @@
+---
+import GymIcon from './icons/GymIcon.astro';
+import DriveIcon from './icons/DriveIcon.astro';
+import WorkIcon from './icons/WorkIcon.astro';
+import PartyIcon from './icons/PartyIcon.astro';
+
+interface Props {
+  src: string;
+  title: string;
+  description?: string;
+  url?: string;
+  createdTime?: string;
+  heroImage?: string;
+  picture?: string;
+  tags?: string[];
+  useCases?: string[];
+  tracklist?: string[];
+  variant?: 'full' | 'card';
+}
+
+const { src, title, description, url, createdTime, heroImage, picture, tags = [], useCases = [], tracklist = [], variant = 'card' } = Astro.props;
+
+const USECASE_CONFIG: Record<string, { label: string; icon: typeof GymIcon; color: string }> = {
+  gym: { label: 'Gym Session', icon: GymIcon, color: 'text-[var(--color-primary)]' },
+  drive: { label: 'Drive / Relax', icon: DriveIcon, color: 'text-[var(--color-secondary)]' },
+  work: { label: 'Focus / Work', icon: WorkIcon, color: 'text-[var(--color-text)]' },
+  party: { label: 'Pre-Party', icon: PartyIcon, color: 'text-[var(--color-accent)]' }
+};
+
+function formatDate(dateStr: string) {
+  if (!dateStr) return '';
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+---
+
+<div class="blog-post bg-[var(--color-surface)] rounded-xl overflow-hidden border border-[var(--color-border)]">
+  {variant === 'full' && heroImage && (
+    <div class="hero-image">
+      <img src={heroImage} alt={title} class="w-full h-64 md:h-80 object-cover" />
+    </div>
+  )}
+  
+  <div class="p-6">
+    <div class="flex items-start justify-between gap-4 mb-4">
+      <h3 class="font-play text-xl font-bold text-[var(--color-text)]">{title}</h3>
+      {createdTime && (
+        <span class="text-sm text-[var(--color-text-muted)] whitespace-nowrap">{formatDate(createdTime)}</span>
+      )}
+    </div>
+    
+    {description && (
+      <div class="description text-[var(--color-text-muted)] mb-4" set:html={description.replace(/\n/g, '<br/>')}></div>
+    )}
+    
+    {useCases.length > 0 && (
+      <div class="mb-4">
+        <span class="text-sm font-medium text-[var(--color-text)]">Best suited for:</span>
+        <div class="flex flex-wrap gap-2 mt-2">
+          {useCases.map(useCase => {
+            const config = USECASE_CONFIG[useCase];
+            const IconComponent = config?.icon;
+            return (
+              <span class="inline-flex items-center gap-2 px-3 py-1 bg-[var(--color-bg)] rounded-full text-sm text-[var(--color-text)]">
+                {IconComponent && <IconComponent class={`w-4 h-4 ${config?.color || ''}`} />}
+                <span>{config?.label || useCase}</span>
+              </span>
+            );
+          })}
+        </div>
+      </div>
+    )}
+    
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-4">
+        {tags.map(tag => (
+          <span class="px-2 py-1 bg-[var(--color-primary)]/10 rounded text-xs text-[var(--color-primary)]">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+    
+    {variant === 'full' && (
+      <div class="player-compact mb-4">
+        <iframe 
+          style="width: 100%; height: 150px; border: none; border-radius: 8px;" 
+          src={src}
+          title={title}
+          allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"
+          loading="lazy"
+        ></iframe>
+      </div>
+    )}
+    
+    {variant === 'card' && (
+      <div class="player-card mb-4">
+        <iframe 
+          style="width: 100%; aspect-ratio: 16/9; border: none; border-radius: 8px;" 
+          src={src}
+          title={title}
+          allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"
+          loading="lazy"
+        ></iframe>
+      </div>
+    )}
+    
+    {tracklist.length > 0 && (
+      <div class="tracklist-section">
+        <button 
+          type="button" 
+          class="tracklist-toggle flex items-center gap-2 text-orange-500 hover:text-orange-400 transition-colors text-base font-bold w-full"
+          aria-expanded="false"
+        >
+          <svg class="tracklist-icon w-5 h-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+          <span>Tracklist ({tracklist.length} tracks)</span>
+        </button>
+        
+        <div class="tracklist-content hidden mt-3 pl-2 border-l-2 border-[var(--color-border)]">
+          <ul class="space-y-1">
+            {tracklist.map((track, idx) => (
+              <li class="text-sm text-[var(--color-text-muted)]">
+                <span class="text-[var(--color-primary)] mr-2">{idx + 1}.</span>
+                {track}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )}
+    
+    {url && (
+      <a href={url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[var(--color-secondary)] hover:text-[var(--color-primary)] transition-colors text-sm mt-4">
+        Listen on Mixcloud
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+      </a>
+    )}
+  </div>
+</div>
+
+<style>
+  .tracklist-content:not(.hidden) {
+    display: block;
+  }
+  
+  .tracklist-toggle[aria-expanded="true"] .tracklist-icon {
+    transform: rotate(180deg);
+  }
+  
+  .description :global(a) {
+    color: var(--color-secondary);
+    text-decoration: underline;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.tracklist-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const content = button.nextElementSibling;
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      
+      button.setAttribute('aria-expanded', (!isExpanded).toString());
+      content?.classList.toggle('hidden');
+    });
+  });
+</script>

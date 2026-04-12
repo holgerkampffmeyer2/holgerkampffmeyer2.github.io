@@ -1,0 +1,159 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Navbar from "../../../components/Navbar.astro";
+import Footer from "../../../components/Footer.astro";
+import BlogPost from "../../../components/BlogPost.astro";
+import MixcloudIcon from "../../../components/icons/MixcloudIcon.astro";
+import SpotifyIcon from "../../../components/icons/SpotifyIcon.astro";
+import SoundCloudIcon from "../../../components/icons/SoundCloudIcon.astro";
+import GymIcon from "../../../components/icons/GymIcon.astro";
+import DriveIcon from "../../../components/icons/DriveIcon.astro";
+import WorkIcon from "../../../components/icons/WorkIcon.astro";
+import PartyIcon from "../../../components/icons/PartyIcon.astro";
+
+interface BlogPostData {
+  number: number | null;
+  title: string;
+  key: string;
+  url: string;
+  created_time: string;
+  src: string;
+  description: string;
+  picture: string;
+  audio_length: number;
+  tags: string[];
+  useCases: string[];
+  tracklist: string[];
+  hasTracklist: boolean;
+  heroImage?: string;
+}
+
+interface BlogData {
+  posts: BlogPostData[];
+}
+
+let blogData: BlogData = { posts: [] };
+
+try {
+  const imported = await import("../../../data/blog-posts.json");
+  if (imported && imported.default && Array.isArray(imported.default.posts)) {
+    blogData = imported.default as unknown as BlogData;
+  }
+} catch (e) {
+  console.warn('Could not load blog-posts.json:', e);
+}
+
+const latestPost = blogData.posts && blogData.posts.length > 0 ? blogData.posts[0] : null;
+---
+
+<Layout
+  title="Music Blog - DJ Hulk Electronic Music"
+  description="Looking for a mix for your gym session, drive, work, or pre-party? Discover DJ Hulk's latest mixes with tracklists and use cases."
+  image="/img/_81A4010.webp"
+>
+  <Navbar currentPage="/djhulk-electronic-music/musik-blog" />
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-section pt-24">
+    <div class="max-w-4xl mx-auto px-4">
+      <nav class="breadcrumb">
+        <a href="/">Startseite</a>
+        <span class="separator">/</span>
+        <a href="/djhulk-electronic-music">DJ Hulk</a>
+        <span class="separator">/</span>
+        <span class="current">Music Blog</span>
+      </nav>
+    </div>
+  </div>
+
+<section class="pt-8 pb-16 hero-gradient">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="font-play text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text">
+        Music Blog
+      </h1>
+      <p class="text-[var(--color-text-muted)] text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+        Looking for the perfect mix? Find your soundtrack for every occasion.
+        Every Sunday I publish a new mix on Mixcloud, specialized for different use cases like gym, drive, work, or pre-party.
+      </p>
+      
+      <div class="mb-12">
+        <h2 class="font-play text-2xl font-bold mb-6 text-[var(--color-text)]">Find Your Perfect Mix</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <a href="/djhulk-electronic-music/musik-blog/archive?useCase=gym" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
+            <GymIcon class="w-8 h-8 mx-auto mb-2 text-orange-500" />
+            <span class="text-[var(--color-text)] font-medium">Gym Session</span>
+          </a>
+          <a href="/djhulk-electronic-music/musik-blog/archive?useCase=drive" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
+            <DriveIcon class="w-8 h-8 mx-auto mb-2 text-orange-500" />
+            <span class="text-[var(--color-text)] font-medium">Drive / Relax</span>
+          </a>
+          <a href="/djhulk-electronic-music/musik-blog/archive?useCase=work" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
+            <WorkIcon class="w-8 h-8 mx-auto mb-2 text-orange-500" />
+            <span class="text-[var(--color-text)] font-medium">Focus / Work</span>
+          </a>
+          <a href="/djhulk-electronic-music/musik-blog/archive?useCase=party" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
+            <PartyIcon class="w-8 h-8 mx-auto mb-2 text-orange-500" />
+            <span class="text-[var(--color-text)] font-medium">Pre-Party</span>
+          </a>
+        </div>
+      </div>
+
+      {latestPost && (
+        <div>
+          <h2 class="font-play text-2xl font-bold mb-6 text-[var(--color-text)]">Latest Mix</h2>
+          <BlogPost 
+            src={latestPost.src}
+            title={latestPost.title}
+            description={latestPost.description}
+            url={latestPost.url}
+            createdTime={latestPost.created_time}
+            heroImage={latestPost.heroImage}
+            picture={latestPost.picture}
+            tags={latestPost.tags}
+            useCases={latestPost.useCases}
+            tracklist={latestPost.tracklist}
+            variant="full"
+          />
+        </div>
+      )}
+
+      <div class="text-center mt-12">
+        <a href="/djhulk-electronic-music/musik-blog/archive" class="btn-primary">
+          View Archive
+        </a>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-6 mt-12">
+        <a 
+          href="https://www.mixcloud.com/holger-kampffmeyer/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors"
+        >
+          <MixcloudIcon class="w-6 h-6" />
+          <span>Mixcloud</span>
+        </a>
+        <a 
+          href="https://soundcloud.com/holger-kampffmeyer2" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors"
+        >
+          <SoundCloudIcon class="w-6 h-6" />
+          <span>SoundCloud</span>
+        </a>
+        <a 
+          href="https://open.spotify.com/playlist/2IiSXnINIWdFMewY55iJWA?utm_source=generator" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors"
+        >
+          <SpotifyIcon class="w-6 h-6" />
+          <span>Spotify Playlist</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
