@@ -6,39 +6,25 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_PATH = path.join(__dirname, '../src/data/blog-posts.json');
 const TRACKLISTS_DIR = path.join(__dirname, '../src/data/tracklists');
 const PUBLIC_TRACKLISTS_DIR = path.join(__dirname, '../public/tracklists');
+const MAPPING_PATH = path.join(__dirname, '../src/data/genre-use-case-mapping.json');
 
-const TAG_TO_USECASE = {
-  'drum & bass': 'gym',
-  'dnb': 'gym',
-  'jungle': 'gym',
-  'raptor': 'gym',
-  'ragga': 'gym',
-  'liquid': 'gym',
-  'dark': 'gym',
-  'atmospheric': 'gym',
-  'deep': 'drive',
-  'soulful': 'drive',
-  'funky': 'drive',
-  'organic': 'drive',
-  'club house': 'drive',
-  'tech house': 'work',
-  'minimal tech house': 'work',
-  'deep tech': 'work',
-  'minimal': 'work',
-  'progressive': 'work',
-  'latin house': 'party',
-  'tribal house': 'party',
-  'afro house': 'party',
-  'latin': 'party',
-  'tribal': 'party',
-  'afro': 'party',
-  'bass house': 'party',
-  'ghetto house': 'party',
-  'g-house': 'party',
-  'party': 'party',
-  'techno': 'work',
-  'house': 'work'
-};
+let TAG_TO_USECASE = {};
+
+function loadMappings() {
+  try {
+    const mappingData = JSON.parse(fs.readFileSync(MAPPING_PATH, 'utf8'));
+    TAG_TO_USECASE = {};
+    for (const entry of mappingData.mappings) {
+      const genres = entry.genres.map(g => g.toLowerCase());
+      const useCases = entry.useCases;
+      for (const genre of genres) {
+        TAG_TO_USECASE[genre] = useCases;
+      }
+    }
+  } catch (e) {
+    console.warn('Could not load genre-use-case-mapping.json:', e);
+  }
+}
 
 function extractMixNumber(title) {
   const match = title.match(/(\d{3})/);
@@ -102,7 +88,9 @@ function deriveUseCases(tags) {
     const tagName = tag.name.toLowerCase();
     const mapped = TAG_TO_USECASE[tagName];
     if (mapped) {
-      useCases.add(mapped);
+      for (const useCase of mapped) {
+        useCases.add(useCase);
+      }
     }
   }
   
@@ -212,4 +200,5 @@ async function fetchMixcloud() {
   }
 }
 
+loadMappings();
 fetchMixcloud();

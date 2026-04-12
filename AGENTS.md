@@ -41,14 +41,15 @@ pnpm run preview  # Preview production build
    - Neuesten Mixes aus Mixcloud (`src/data/mixcloud-data.json`)
 
 ## Music Blog
-- **Seite:** `/djhulk-electronic-music/musik-blog` (Startseite) und `/djhulk-electronic-music/musik-blog/archive` (Archiv)
+- **Seite:** `/dj/mixes` (Startseite mit neuestem Mix + Filter) und `/dj/mixes-blog-archive` (Archiv mit allen Mixes)
 - **Daten:** `src/data/blog-posts.json` (wird automatisch generiert)
 - **Tracklists:** `src/data/tracklists/` (Quelldateien)
 - **Hero-Images:** `public/tracklists/` (WebP)
+- **Genre-UseCase-Mapping:** `src/data/genre-use-case-mapping.json`
 
 ### Blog-Posts Script
 `scripts/fetch-mixcloud-blog.mjs` holt die neuesten 10 Mixes von Mixcloud:
-- Genre → Use-Case Mapping (Gym, Drive, Work, Party)
+- Genre → Use-Case Mapping (aus `genre-use-case-mapping.json`)
 - Sucht Tracklists in `src/data/tracklists/` (Pattern: `*Mix{nummer}*tracklist*.txt`)
 - Sucht Hero-Images in `public/tracklists/` (Pattern: `*Mix{nummer}*.webp`)
 

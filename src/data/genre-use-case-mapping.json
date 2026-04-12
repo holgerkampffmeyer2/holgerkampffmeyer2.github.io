@@ -1,0 +1,20 @@
+{
+  "mappings": [
+    {
+      "genres": ["drum & bass", "dnb", "jungle", "raptor", "ragga", "liquid", "dark", "atmospheric"],
+      "useCases": ["gym"]
+    },
+    {
+      "genres": ["deep", "soulful", "funky", "organic", "club house"],
+      "useCases": ["drive"]
+    },
+    {
+      "genres": ["tech house", "minimal tech house", "deep tech", "minimal", "progressive", "techno", "house"],
+      "useCases": ["work", "gym"]
+    },
+    {
+      "genres": ["latin house", "tribal house", "afro house", "latin", "tribal", "afro", "bass house", "ghetto house", "g-house", "party"],
+      "useCases": ["party"]
+    }
+  ]
+}

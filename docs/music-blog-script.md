@@ -6,12 +6,33 @@ Dieses Script holt die neuesten 10 Mixes von Mixcloud und erstellt die `blog-pos
 
 ### Genre → Use-Case Mapping
 
-| Genre (Mixcloud Tags) | Use Case |
-|----------------------|----------|
-| Drum & Bass, DnB, Jungle, Raptor, Ragga, Liquid, Dark, Atmospheric | 🏋️ **Gym Session** |
-| Deep, Soulful, Funky, Organic, Club House | 🚗 **Drive / Relax** |
-| Tech House, Minimal Tech House, Deep Tech, Minimal, Progressive, Techno, House | 💻 **Focus / Work** |
-| Latin House, Tribal House, Afro House, Latin, Tribal, Afro, Bass House, Ghetto House, G-House, Party | 🎉 **Pre-Party** |
+Das Mapping liegt in `src/data/genre-use-case-mapping.json`:
+
+```json
+{
+  "mappings": [
+    {
+      "genres": ["drum & bass", "dnb", "jungle", ...],
+      "useCases": ["gym"]
+    },
+    {
+      "genres": ["deep", "soulful", "funky", ...],
+      "useCases": ["drive"]
+    },
+    {
+      "genres": ["tech house", "minimal tech house", ...],
+      "useCases": ["work", "gym"]
+    },
+    {
+      "genres": ["latin house", "tribal house", ...],
+      "useCases": ["party"]
+    }
+  ]
+}
+```
+
+- Ein Genre kann mehrere Use-Cases haben (z.B. Tech House → work + gym)
+- Ein Use-Case kann mehrere Genres haben
 
 ### Workflow
 
@@ -60,4 +81,4 @@ Das Script wird automatisch bei `pnpm run build` ausgeführt.
 
 - **Keine Tracklist gefunden**: Prüfe ob Dateiname "Mix{nummer}" enthält und "tracklist" im Namen ist
 - **Kein Hero-Image**: Prüfe ob WebP-Datei in `public/tracklists/` existiert
-- **Falsche Use-Cases**: Tag nicht im Mapping → ergänze in `TAG_TO_USECASE` Objekt im Script
+- **Falsche Use-Cases**: Tag nicht im Mapping → ergänze in `src/data/genre-use-case-mapping.json`
