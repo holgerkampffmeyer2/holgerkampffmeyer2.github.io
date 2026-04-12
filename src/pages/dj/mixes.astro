@@ -3,12 +3,19 @@ import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import BlogPost from "../../components/BlogPost.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
 import MixcloudIcon from "../../components/icons/MixcloudIcon.astro";
 import SoundCloudIcon from "../../components/icons/SoundCloudIcon.astro";
 import GymIcon from "../../components/icons/GymIcon.astro";
 import DriveIcon from "../../components/icons/DriveIcon.astro";
 import WorkIcon from "../../components/icons/WorkIcon.astro";
 import PartyIcon from "../../components/icons/PartyIcon.astro";
+
+const breadcrumbSegments = [
+  { label: "Home", href: "/" },
+  { label: "DJ Hulk", href: "/djhulk-electronic-music" },
+  { label: "Music Blog" }
+];
 
 interface BlogPostData {
   number: number | null;
@@ -96,17 +103,7 @@ const latestPost = blogData.posts && blogData.posts.length > 0 ? blogData.posts[
   <Navbar currentPage="/dj/mixes" />
 
   <!-- Breadcrumb -->
-  <div class="breadcrumb-section pt-24">
-    <div class="max-w-4xl mx-auto px-4">
-      <nav class="breadcrumb">
-        <a href="/">Home</a>
-        <span class="separator">/</span>
-        <a href="/djhulk-electronic-music">DJ Hulk</a>
-        <span class="separator">/</span>
-        <span class="current">Music Blog</span>
-      </nav>
-    </div>
-  </div>
+  <Breadcrumb segments={breadcrumbSegments} />
 
 <section class="pt-8 pb-16 hero-gradient">
     <div class="max-w-4xl mx-auto px-4 text-center">

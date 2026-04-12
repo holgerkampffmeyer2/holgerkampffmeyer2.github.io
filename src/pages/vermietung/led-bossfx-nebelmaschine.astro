@@ -9,6 +9,13 @@ import RentalPricing from '../../components/vermietung/RentalPricing.astro';
 import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import IncludedInPackages from '../../components/vermietung/IncludedInPackages.astro';
 import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const breadcrumbSegments = [
+  { label: "Startseite", href: "/" },
+  { label: "Vermietung", href: "/vermietung" },
+  { label: "LED BossFX & Nebelmaschine" }
+];
 
 const pageTitle = "LED BossFX-2 Pro & Nebelmaschine - Vermietung | DJ Hulk";
 
@@ -131,18 +138,7 @@ const events = [
 >
   <Navbar currentPage="/vermietung" />
 
-  <!-- Breadcrumb -->
-  <div class="breadcrumb-section">
-    <div class="max-w-6xl mx-auto px-4">
-      <nav class="breadcrumb">
-        <a href="/">Startseite</a>
-        <span class="separator">/</span>
-        <a href="/vermietung">Vermietung</a>
-        <span class="separator">/</span>
-        <span class="current">LED BossFX-2 Pro & Nebelmaschine</span>
-      </nav>
-    </div>
-  </div>
+  <Breadcrumb segments={breadcrumbSegments} />
 
   <!-- Header -->
   <section class="product-header section-padding pb-0">
@@ -253,37 +249,6 @@ const events = [
 </Layout>
 
 <style>
-  .breadcrumb-section {
-    padding-top: 120px;
-    padding-bottom: 1rem;
-    background: var(--color-bg);
-  }
-
-  .breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-  }
-
-  .breadcrumb a {
-    color: var(--color-text-muted);
-    transition: color 0.3s ease;
-  }
-
-  .breadcrumb a:hover {
-    color: var(--color-secondary);
-  }
-
-  .breadcrumb .separator {
-    color: var(--color-border);
-  }
-
-  .breadcrumb .current {
-    color: var(--color-text);
-  }
-
   .product-header {
     background: var(--color-bg);
     padding-bottom: 2rem;

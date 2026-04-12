@@ -3,6 +3,13 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const breadcrumbSegments = [
+  { label: "Startseite", href: "/" },
+  { label: "DJ Hulk", href: "/djhulk-electronic-music" },
+  { label: "Videos" }
+];
 
 const videos = [
   {
@@ -56,17 +63,7 @@ const videos = [
   <Navbar currentPage="/dj/videos" />
 
   <!-- Breadcrumb -->
-  <div class="breadcrumb-section">
-    <div class="max-w-6xl mx-auto px-4">
-      <nav class="breadcrumb">
-        <a href="/">Startseite</a>
-        <span class="separator">/</span>
-        <a href="/djhulk-electronic-music">DJ Hulk</a>
-        <span class="separator">/</span>
-        <span class="current">Videos</span>
-      </nav>
-    </div>
-  </div>
+  <Breadcrumb segments={breadcrumbSegments} />
 
   <Hero 
     image="/img/_81A4218.webp"
@@ -169,37 +166,4 @@ const videos = [
   </section>
 
   <Footer />
-
-  <style>
-    .breadcrumb-section {
-      padding-top: 120px;
-      padding-bottom: 1rem;
-      background: var(--color-bg);
-    }
-
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-      color: var(--color-text-muted);
-    }
-
-    .breadcrumb a {
-      color: var(--color-text-muted);
-      transition: color 0.3s ease;
-    }
-
-    .breadcrumb a:hover {
-      color: var(--color-secondary);
-    }
-
-    .breadcrumb .separator {
-      color: var(--color-border);
-    }
-
-    .breadcrumb .current {
-      color: var(--color-text);
-    }
-  </style>
 </Layout>

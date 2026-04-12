@@ -3,7 +3,14 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import MixcloudWidget from '../../components/MixcloudWidget.astro';
+
+const breadcrumbSegments = [
+  { label: "Home", href: "/" },
+  { label: "DJ Hulk", href: "/djhulk-electronic-music" },
+  { label: "Alle Mixes" }
+];
 
 interface MixcloudMix {
   title: string;
@@ -94,17 +101,7 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
   <Navbar currentPage="/dj/mixes" />
 
   <!-- Breadcrumb -->
-  <div class="breadcrumb-section">
-    <div class="max-w-6xl mx-auto px-4">
-      <nav class="breadcrumb">
-        <a href="/">Home</a>
-        <span class="separator">/</span>
-        <a href="/djhulk-electronic-music">DJ Hulk</a>
-        <span class="separator">/</span>
-        <span class="current">Mixes</span>
-      </nav>
-    </div>
-  </div>
+  <Breadcrumb segments={breadcrumbSegments} />
 
   <Hero
     image="/img/em3f/DSC_2451.webp"
@@ -296,37 +293,4 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
       });
     });
   </script>
-
-  <style>
-    .breadcrumb-section {
-      padding-top: 120px;
-      padding-bottom: 1rem;
-      background: var(--color-bg);
-    }
-
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-      color: var(--color-text-muted);
-    }
-
-    .breadcrumb a {
-      color: var(--color-text-muted);
-      transition: color 0.3s ease;
-    }
-
-    .breadcrumb a:hover {
-      color: var(--color-secondary);
-    }
-
-    .breadcrumb .separator {
-      color: var(--color-border);
-    }
-
-    .breadcrumb .current {
-      color: var(--color-text);
-    }
-  </style>
 </Layout>

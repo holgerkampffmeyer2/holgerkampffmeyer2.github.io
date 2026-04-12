@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import BlogPost from "../../components/BlogPost.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
 import GymIcon from "../../components/icons/GymIcon.astro";
 import DriveIcon from "../../components/icons/DriveIcon.astro";
 import WorkIcon from "../../components/icons/WorkIcon.astro";
@@ -49,6 +50,16 @@ const USE_CASE_LABELS: Record<string, string> = {
   work: 'Focus / Work',
   party: 'Pre-Party'
 };
+
+const breadcrumbLabel = useCaseFilter 
+  ? `Blog Archive - ${USE_CASE_LABELS[useCaseFilter] || useCaseFilter}`
+  : 'Blog Archive';
+
+const breadcrumbSegments = [
+  { label: "Home", href: "/" },
+  { label: "DJ Mixes", href: "/dj/mixes" },
+  { label: breadcrumbLabel }
+];
 ---
 
 <Layout
@@ -73,17 +84,7 @@ const USE_CASE_LABELS: Record<string, string> = {
   <Navbar currentPage="/dj/mixes" />
 
   <!-- Breadcrumb -->
-  <div class="breadcrumb-section pt-24">
-    <div class="max-w-4xl mx-auto px-4">
-      <nav class="breadcrumb">
-        <a href="/">Home</a>
-        <span class="separator">/</span>
-        <a href="/dj/mixes">DJ Mixes</a>
-        <span class="separator">/</span>
-        <span class="current">Blog Archive {useCaseFilter ? `- ${USE_CASE_LABELS[useCaseFilter] || useCaseFilter}` : ''}</span>
-      </nav>
-    </div>
-  </div>
+  <Breadcrumb segments={breadcrumbSegments} />
 
   <section class="pt-8 pb-16">
     <div class="max-w-4xl mx-auto px-4 text-center">
