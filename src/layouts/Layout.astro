@@ -19,8 +19,8 @@ const {
   jsonLd
 } = Astro.props;
 
-const canonicalPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/').replace(/\/+$/, '/') || '/';
-const canonicalURL = new URL(canonicalPath, Astro.site);
+const canonicalPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/').replace(/\/+$/, '');
+const canonicalURL = new URL(canonicalPath || '/', Astro.site);
 ---
 
 <!doctype html>
@@ -84,7 +84,7 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
           {
             "@type": "SiteNavigationElement",
             "position": 1,
-            "name": "Startseite",
+            "name": "Home",
             "url": "https://holger-kampffmeyer.de/"
           },
           {
@@ -114,8 +114,14 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
           {
             "@type": "SiteNavigationElement",
             "position": 6,
-            "name": "Work / Research",
+            "name": "Work",
             "url": "https://holger-kampffmeyer.de/work"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 6,
+            "name": "Links",
+            "url": "https://holger-kampffmeyer.de/links"
           },
           {
             "@type": "SiteNavigationElement",

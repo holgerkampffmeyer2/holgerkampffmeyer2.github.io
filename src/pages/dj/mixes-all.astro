@@ -1,0 +1,332 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
+import Footer from '../../components/Footer.astro';
+import MixcloudWidget from '../../components/MixcloudWidget.astro';
+
+interface MixcloudMix {
+  title: string;
+  key: string;
+  url: string;
+  created_time: string;
+  src: string;
+  description?: string | null;
+  [key: string]: any;
+}
+
+interface MixcloudData {
+  mixes: MixcloudMix[];
+  lastUpdated?: string;
+}
+
+let mixcloudData: MixcloudData = { mixes: [] };
+
+try {
+  const imported = await import('../../data/mixcloud-data.json');
+  if (imported && imported.default && Array.isArray(imported.default.mixes)) {
+    mixcloudData = imported.default;
+  }
+} catch (e) {
+  console.warn('Could not load mixcloud-data.json:', e);
+}
+
+const allMixes = mixcloudData.mixes || [];
+
+const mixesWithDetails = await Promise.all(
+  allMixes.map(async (mix: MixcloudMix) => {
+    try {
+      const apiUrl = `https://api.mixcloud.com${mix.key}?metadata=1`;
+      const response = await fetch(apiUrl);
+      if (response.ok) {
+        const data = await response.json();
+        return {
+          ...mix,
+          description: data.description || null,
+        };
+      }
+    } catch {
+      // Silently ignore fetch errors
+    }
+    return { ...mix, description: null };
+  })
+);
+
+const otherMixes = mixesWithDetails.slice(1);
+
+const ITEMS_PER_PAGE = 6;
+const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
+---
+
+<Layout 
+  title="All DJ Mixes - DJ Hulk Mixcloud Archive"
+  description="All DJ Hulk mixes on Mixcloud. Weekly House, Tech House, Deep House & Latin House DJ mixes. Browse all Mixcloud mixes. Free DJ mixes download."
+  image="/img/em3f/DSC_2451.webp"
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicAlbum",
+      "name": "All DJ Hulk Mixes",
+      "description": "All weekly House, Tech House, Deep House and Latin House DJ mixes on Mixcloud by DJ Hulk.",
+      "url": "https://holger-kampffmeyer.de/dj/mixes-all",
+      "image": "https://holger-kampffmeyer.de/img/em3f/DSC_2451.webp",
+      "byArtist": {
+        "@type": "Person",
+        "name": "DJ Hulk"
+      },
+      "genre": ["House", "Tech House", "Deep House", "Latin House"]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "DJ Hulk",
+      "alternateName": "DJ Hulk - Electronic Music DJ",
+      "jobTitle": "Electronic Music DJ",
+      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music",
+      "sameAs": [
+        "https://www.mixcloud.com/holger-kampffmeyer/",
+        "https://soundcloud.com/holger-kampffmeyer2",
+        "https://open.spotify.com/user/11131869179"
+      ]
+    }
+  ]}
+>
+  <Navbar currentPage="/dj/mixes" />
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-section">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="separator">/</span>
+        <a href="/djhulk-electronic-music">DJ Hulk</a>
+        <span class="separator">/</span>
+        <span class="current">Mixes</span>
+      </nav>
+    </div>
+  </div>
+
+  <Hero
+    image="/img/em3f/DSC_2451.webp"
+    gradient="linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%)"
+  >
+    <div class="max-w-3xl pt-32 text-center">
+      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">All Mixcloud Mixes</span>
+      <h1 class="font-play text-5xl md:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">All DJ Mixes</h1>
+      <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
+        Browse all House & Tech House Mixes on Mixcloud
+      </p>
+      <a href="/dj/mixes" class="btn-primary animate-fadeInUp stagger-4">
+        Latest Mix with Tracklists →
+      </a>
+    </div>
+  </Hero>
+
+
+  <!-- All Mixes Grid with Pagination -->
+  <section class="section-padding bg-[var(--color-surface)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-8">
+        <p class="text-[var(--color-text-muted)] mt-2">Page <span id="currentPageDisplay">1</span> of {totalPages}</p>
+        <a href="/dj/mixes-blog-archive" class="inline-block mt-4 text-orange-500 hover:text-orange-400 transition-colors">
+          → View with Tracklists & Details
+        </a>
+      </div>
+      
+      <div id="mixesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-total-pages={totalPages} data-items-per-page={ITEMS_PER_PAGE}>
+        {otherMixes.map((mix: MixcloudMix, index: number) => (
+          <div class="mix-item" data-page={Math.floor(index / ITEMS_PER_PAGE) + 1} style={`display: ${Math.floor(index / ITEMS_PER_PAGE) + 1 === 1 ? 'block' : 'none'}`}>
+            <MixcloudWidget 
+              src={mix.src} 
+              title={mix.title} 
+              description={mix.description || undefined}
+              url={mix.url}
+              createdTime={mix.created_time}
+              variant="card"
+            />
+          </div>
+        ))}
+      </div>
+
+      <!-- Pagination -->
+      <div class="flex justify-center items-center gap-4 mt-12">
+        <button id="prevBtn" class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+          ← Previous
+        </button>
+        <div id="pageNumbers" class="flex gap-2">
+          <!-- Page numbers generated by JS -->
+        </div>
+        <button id="nextBtn" class="btn-primary">
+          Next →
+        </button>
+      </div>
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="https://www.mixcloud.com/holger-kampffmeyer/" target="_blank" class="btn-primary">
+        All Mixes on Mixcloud
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+
+   <script is:inline define:vars={{ ITEMS_PER_PAGE, totalPages }}>
+    function initPagination() {
+      const params = new URLSearchParams(window.location.search);
+      let currentPage = parseInt(params.get('page')) || 1;
+      currentPage = Math.max(1, Math.min(currentPage, totalPages));
+      
+      const grid = document.getElementById('mixesGrid');
+      const items = grid.querySelectorAll('.mix-item');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const pageDisplay = document.getElementById('currentPageDisplay');
+      const pageNumbers = document.getElementById('pageNumbers');
+      
+      function showPage(page) {
+        currentPage = page;
+        
+        items.forEach((item, index) => {
+          const itemPage = Math.floor(index / ITEMS_PER_PAGE) + 1;
+          if (itemPage === page) {
+            item.style.display = 'block';
+            const iframe = item.querySelector('iframe');
+            if (iframe) {
+              iframe.setAttribute('loading', 'lazy');
+            }
+          } else {
+            item.style.display = 'none';
+          }
+        });
+        
+        pageDisplay.textContent = page;
+        
+        prevBtn.disabled = page === 1;
+        nextBtn.disabled = page === totalPages;
+        
+        // Update URL
+        const url = new URL(window.location);
+        url.searchParams.set('page', page);
+        window.history.replaceState({}, '', url);
+        
+        renderPageNumbers();
+      }
+      
+      function renderPageNumbers() {
+        pageNumbers.innerHTML = '';
+        
+        // Always show first page
+        addPageButton(1, currentPage === 1);
+        
+        // Show ellipsis if needed
+        if (currentPage > 3) {
+          const ellipsis = document.createElement('span');
+          ellipsis.className = 'px-2 text-[var(--color-text-muted)]';
+          ellipsis.textContent = '...';
+          pageNumbers.appendChild(ellipsis);
+        }
+        
+        // Show pages around current
+        for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+          addPageButton(i, i === currentPage);
+        }
+        
+        // Show ellipsis if needed
+        if (currentPage < totalPages - 2) {
+          const ellipsis = document.createElement('span');
+          ellipsis.className = 'px-2 text-[var(--color-text-muted)]';
+          ellipsis.textContent = '...';
+          pageNumbers.appendChild(ellipsis);
+        }
+        
+        // Always show last page if more than 1
+        if (totalPages > 1) {
+          addPageButton(totalPages, currentPage === totalPages);
+        }
+      }
+      
+      function addPageButton(page, isActive) {
+        const btn = document.createElement('button');
+        btn.className = `w-10 h-10 rounded-lg font-semibold transition-colors ${
+          isActive 
+            ? 'bg-[var(--color-primary)] text-white' 
+            : 'bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-primary)] hover:text-white'
+        }`;
+        btn.textContent = page;
+        btn.addEventListener('click', () => showPage(page));
+        pageNumbers.appendChild(btn);
+      }
+      
+      prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) showPage(currentPage - 1);
+      });
+      
+      nextBtn.addEventListener('click', () => {
+        if (currentPage < totalPages) showPage(currentPage + 1);
+      });
+      
+      // Initial render
+      showPage(currentPage);
+    }
+    
+    // Run on page load
+    initPagination();
+  </script>
+
+  <script is:inline src="https://widget.mixcloud.com/media/js/widgetApi.js"></script>
+  
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      var players = [];
+      var iframes = document.querySelectorAll('iframe[src*="player-widget.mixcloud.com"]');
+      
+      iframes.forEach(function(iframe) {
+        var player = Mixcloud.PlayerWidget(iframe);
+        player.ready.then(function() {
+          players.push(player);
+          player.events.play.on(function() {
+            players.forEach(function(p) {
+              if (p !== player) {
+                p.pause();
+              }
+            });
+          });
+        });
+      });
+    });
+  </script>
+
+  <style>
+    .breadcrumb-section {
+      padding-top: 120px;
+      padding-bottom: 1rem;
+      background: var(--color-bg);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .breadcrumb a {
+      color: var(--color-text-muted);
+      transition: color 0.3s ease;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--color-secondary);
+    }
+
+    .breadcrumb .separator {
+      color: var(--color-border);
+    }
+
+    .breadcrumb .current {
+      color: var(--color-text);
+    }
+  </style>
+</Layout>

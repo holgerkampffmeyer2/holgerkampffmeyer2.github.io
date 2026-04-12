@@ -1,167 +1,203 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Navbar from '../../components/Navbar.astro';
-import Hero from '../../components/Hero.astro';
-import Footer from '../../components/Footer.astro';
-import MixcloudWidget from '../../components/MixcloudWidget.astro';
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import BlogPost from "../../components/BlogPost.astro";
+import MixcloudIcon from "../../components/icons/MixcloudIcon.astro";
+import SoundCloudIcon from "../../components/icons/SoundCloudIcon.astro";
+import GymIcon from "../../components/icons/GymIcon.astro";
+import DriveIcon from "../../components/icons/DriveIcon.astro";
+import WorkIcon from "../../components/icons/WorkIcon.astro";
+import PartyIcon from "../../components/icons/PartyIcon.astro";
 
-interface MixcloudMix {
+interface BlogPostData {
+  number: number | null;
   title: string;
   key: string;
   url: string;
   created_time: string;
   src: string;
-  description?: string | null;
-  [key: string]: any;
+  description: string;
+  picture: string;
+  audio_length: number;
+  tags: string[];
+  useCases: string[];
+  tracklist: string[];
+  hasTracklist: boolean;
+  heroImage?: string;
 }
 
-interface MixcloudData {
-  mixes: MixcloudMix[];
-  lastUpdated?: string;
+interface BlogData {
+  posts: BlogPostData[];
 }
 
-let mixcloudData: MixcloudData = { mixes: [] };
+let blogData: BlogData = { posts: [] };
 
 try {
-  const imported = await import('../../data/mixcloud-data.json');
-  if (imported && imported.default && Array.isArray(imported.default.mixes)) {
-    mixcloudData = imported.default;
+  const imported = await import("../../data/blog-posts.json");
+  if (imported && imported.default && Array.isArray(imported.default.posts)) {
+    blogData = imported.default as unknown as BlogData;
   }
 } catch (e) {
-  // eslint-disable-next-line no-console
-  console.warn('Could not load mixcloud-data.json:', e);
-  // mixcloudData remains { mixes: [] }
+  console.warn('Could not load blog-posts.json:', e);
 }
 
-const allMixes = mixcloudData.mixes || [];
-
-const mixesWithDetails = await Promise.all(
-  allMixes.map(async (mix: MixcloudMix) => {
-    try {
-      const apiUrl = `https://api.mixcloud.com${mix.key}?metadata=1`;
-      const response = await fetch(apiUrl);
-      if (response.ok) {
-        const data = await response.json();
-        return {
-          ...mix,
-          description: data.description || null,
-        };
-      }
-    } catch {
-      // Silently ignore fetch errors
-    }
-    return { ...mix, description: null };
-  })
-);
-
-const latestMix = mixesWithDetails[0];
-const otherMixes = mixesWithDetails.slice(1);
-
-const ITEMS_PER_PAGE = 6;
-const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
+const latestPost = blogData.posts && blogData.posts.length > 0 ? blogData.posts[0] : null;
 ---
 
-<Layout 
-  title="DJ Mixes - DJ Hulk - Weekly Sunday House Mix"
-  description="Wöchentliche House und Tech House Mixes von DJ Hulk auf Mixcloud. Spezialisiert auf Latin House, Jackin, Funky House und Afro House."
-  image="/img/em3f/DSC_2451.webp"
+<Layout
+  title="Music Blog - DJ Hulk Mixes with Tracklists"
+  description="Weekly House, Tech House & Deep House DJ mixes by DJ Hulk. Perfect for gym, driving, work focus, or pre-party. Listen on Mixcloud, SoundCloud & Spotify. Free DJ mixes with tracklists."
+  image="/img/_81A4010.webp"
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicPlaylist",
+      "name": "DJ Hulk Music Blog - Weekly House Mixes",
+      "description": "Weekly electronic music DJ mixes by DJ Hulk specialized for gym, driving, work focus, and pre-party. Includes tracklists for all mixes.",
+      "url": "https://holger-kampffmeyer.de/dj/mixes",
+      "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
+      "author": {
+        "@type": "Person",
+        "name": "DJ Hulk",
+        "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+      },
+      "genre": ["House", "Tech House", "Deep House", "Latin House"],
+      "numberOfTracks": blogData.posts?.length || 0
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "AudioObject",
+      "name": latestPost?.title || "DJ Hulk Mix",
+      "description": latestPost?.description?.substring(0, 200) || "",
+      "contentUrl": latestPost?.url || "",
+      "duration": latestPost?.audio_length ? `PT${Math.floor(latestPost.audio_length / 60)}M${latestPost.audio_length % 60}S` : undefined,
+      "genre": latestPost?.tags || [],
+      "producer": {
+        "@type": "Person",
+        "name": "DJ Hulk"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "DJ Hulk",
+      "alternateName": "DJ Hulk - Electronic Music",
+      "jobTitle": "Electronic Music DJ",
+      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music",
+      "sameAs": [
+        "https://www.mixcloud.com/holger-kampffmeyer/",
+        "https://soundcloud.com/holger-kampffmeyer2",
+        "https://open.spotify.com/user/11131869179"
+      ]
+    }
+  ]}
 >
   <Navbar currentPage="/dj/mixes" />
 
   <!-- Breadcrumb -->
-  <div class="breadcrumb-section">
-    <div class="max-w-6xl mx-auto px-4">
+  <div class="breadcrumb-section pt-24">
+    <div class="max-w-4xl mx-auto px-4">
       <nav class="breadcrumb">
-        <a href="/">Startseite</a>
+        <a href="/">Home</a>
         <span class="separator">/</span>
         <a href="/djhulk-electronic-music">DJ Hulk</a>
         <span class="separator">/</span>
-        <span class="current">Mixes</span>
+        <span class="current">Music Blog</span>
       </nav>
     </div>
   </div>
 
-  <Hero 
-    image="/img/em3f/DSC_2451.webp"
-    gradient="linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(249, 115, 22, 0.2) 100%)"
-  >
-    <div class="max-w-3xl pt-32 text-center">
-      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Weekly House Music DJ Mixes</span>
-      <h1 class="font-play text-5xl md:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">DJ Mixes</h1>
-      <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
-        Jeden Sonntag neue House & Tech House Mixes auf Mixcloud
-      </p>
-    </div>
-  </Hero>
-
-  <!-- Latest Mix -->
-  <section class="section-padding bg-[var(--color-bg)]">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-8">
-        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Neuester Mix</span>
-        <h2 class="font-play text-4xl font-bold mt-4">{latestMix?.title || 'Weekly Sunday House Mix'}</h2>
-      </div>
-      <p class="text-[var(--color-text-muted)] mb-8 text-justify">
-        Auf Mixcloud veröffentliche ich jeden Sonntag einen neuen Mix. Dabei spezialisiere ich mich auf House, Tech House, Latin House, Jackin and Funky House sowie Afro House. <br>
-        Meine Mixe decken ein breits Spektrum elektronischer Musik ab und eignen sich zum Hören im Auto, im Fitnessstudio oder zu Hause. <br>
-        Weitere Musikrichtungen wie Techno und Drum n Bass findest du ebenfalls in meinem Mixcloud‑Archiv.
+<section class="pt-8 pb-16 hero-gradient">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="font-play text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text">
+        Music Blog
+      </h1>
+      <p class="text-[var(--color-text-muted)] text-lg md:text-xl mb-8 max-w-2xl text-left">
+        House, Tech House & Deep House mixes for every occasion - but always the best bangers.<br/>
+        Every Sunday I publish a new mix on Mixcloud, specialized for gym, driving, work focus, and pre-party.
       </p>
       
-      {latestMix && (
-        <MixcloudWidget 
-          src={latestMix.src} 
-          title={latestMix.title} 
-          description={latestMix.description || undefined}
-          url={latestMix.url}
-          createdTime={latestMix.created_time}
-          variant="featured"
-        />
-      )}
-    </div>
-  </section>
-
-  <!-- All Mixes Grid with Pagination -->
-  <section class="section-padding bg-[var(--color-surface)]">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16">
-        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Archiv</span>
-        <h2 class="font-play text-4xl font-bold mt-4">Alle DJ Mixes</h2>
-        <p class="text-[var(--color-text-muted)] mt-2">Seite <span id="currentPageDisplay">1</span> von {totalPages}</p>
-      </div>
-      
-      <div id="mixesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-total-pages={totalPages} data-items-per-page={ITEMS_PER_PAGE}>
-        {otherMixes.map((mix: MixcloudMix, index: number) => (
-          <div class="mix-item" data-page={Math.floor(index / ITEMS_PER_PAGE) + 1} style={`display: ${Math.floor(index / ITEMS_PER_PAGE) + 1 === 1 ? 'block' : 'none'}`}>
-            <MixcloudWidget 
-              src={mix.src} 
-              title={mix.title} 
-              description={mix.description || undefined}
-              url={mix.url}
-              createdTime={mix.created_time}
-              variant="card"
-            />
-          </div>
-        ))}
-      </div>
-
-      <!-- Pagination -->
-      <div class="flex justify-center items-center gap-4 mt-12">
-        <button id="prevBtn" class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-          ← Zurück
-        </button>
-        <div id="pageNumbers" class="flex gap-2">
-          <!-- Page numbers generated by JS -->
+      <div class="mb-12">
+        <h2 class="font-play text-2xl font-bold mb-6 text-[var(--color-text)]">Find Your Perfect Mix</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <a href="/dj/mixes-blog-archive?useCase=gym" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
+            <GymIcon class="w-8 h-8 mx-auto mb-2 text-orange-500" />
+            <span class="text-[var(--color-text)] font-medium">Gym Session</span>
+          </a>
+          <a href="/dj/mixes-blog-archive?useCase=drive" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
+            <DriveIcon class="w-8 h-8 mx-auto mb-2 text-orange-500" />
+            <span class="text-[var(--color-text)] font-medium">Drive / Relax</span>
+          </a>
+          <a href="/dj/mixes-blog-archive?useCase=work" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
+            <WorkIcon class="w-8 h-8 mx-auto mb-2 text-orange-500" />
+            <span class="text-[var(--color-text)] font-medium">Focus / Work</span>
+          </a>
+          <a href="/dj/mixes-blog-archive?useCase=party" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
+            <PartyIcon class="w-8 h-8 mx-auto mb-2 text-orange-500" />
+            <span class="text-[var(--color-text)] font-medium">Pre-Party</span>
+          </a>
         </div>
-        <button id="nextBtn" class="btn-primary">
-          Weiter →
-        </button>
       </div>
-    </div>
 
-    <div class="text-center mt-12">
-      <a href="https://www.mixcloud.com/holger-kampffmeyer/" target="_blank" class="btn-primary">
-        Alle Mixes auf Mixcloud
-      </a>
+      {latestPost && (
+        <div>
+          <h2 class="font-play text-2xl font-bold mb-6 text-[var(--color-text)]">Latest Mix</h2>
+          <BlogPost 
+            src={latestPost.src}
+            title={latestPost.title}
+            description={latestPost.description}
+            url={latestPost.url}
+            createdTime={latestPost.created_time}
+            heroImage={latestPost.heroImage}
+            tags={latestPost.tags}
+            useCases={latestPost.useCases}
+            tracklist={latestPost.tracklist}
+            variant="full"
+          />
+        </div>
+      )}
+
+      <div class="text-center mt-8">
+        <a href="/dj/mixes-blog-archive" class="btn-primary">
+          View Music Blog Archive
+        </a>
+        <a href="/dj/mixes-all" class="btn-secondary ml-4">
+          All my DJ Mixes
+        </a>
+      </div>
+
+      <div class="mt-8">
+        <span class="text-[var(--color-text-muted)] text-sm">Listen on:</span>
+        <div class="flex flex-wrap justify-center gap-4 mt-2">
+          <a 
+            href="https://www.mixcloud.com/holger-kampffmeyer/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors"
+          >
+            <MixcloudIcon class="w-5 h-5" />
+            <span>Mixcloud</span>
+          </a>
+          <a 
+            href="https://soundcloud.com/holger-kampffmeyer2" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors"
+          >
+            <SoundCloudIcon class="w-5 h-5" />
+            <span>SoundCloud</span>
+          </a>
+          <a 
+            href="https://open.spotify.com/playlist/2IiSXnINIWdFMewY55iJWA?utm_source=generator" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors"
+          >
+          
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -169,8 +205,8 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
   <section class="section-padding bg-[var(--color-bg)]">
     <div class="max-w-4xl mx-auto text-center">
       <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Spotify</span>
-      <h2 class="font-play text-4xl font-bold mt-4 mb-6">Meine Spotify Playlist</h2>
-      <p class="text-[var(--color-text-muted)] mb-8">Wöchentlich aktualisierte Playlist mit den besten House Tunes!</p>
+      <h2 class="font-play text-4xl font-bold mt-4 mb-6">My Spotify Playlist</h2>
+      <p class="text-[var(--color-text-muted)] mb-8">Weekly updated playlist with the best House Tunes!</p>
       
       <div class="rounded-xl overflow-hidden">
         <iframe style="border-radius:12px; width: 100%; height: 352px; border: none;" src="https://open.spotify.com/embed/playlist/2IiSXnINIWdFMewY55iJWA?utm_source=generator" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
@@ -179,163 +215,4 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
   </section>
 
   <Footer />
-
-   <script is:inline define:vars={{ ITEMS_PER_PAGE, totalPages }}>
-    function initPagination() {
-      const params = new URLSearchParams(window.location.search);
-      let currentPage = parseInt(params.get('page')) || 1;
-      currentPage = Math.max(1, Math.min(currentPage, totalPages));
-      
-      const grid = document.getElementById('mixesGrid');
-      const items = grid.querySelectorAll('.mix-item');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      const pageDisplay = document.getElementById('currentPageDisplay');
-      const pageNumbers = document.getElementById('pageNumbers');
-      
-      function showPage(page) {
-        currentPage = page;
-        
-        items.forEach((item, index) => {
-          const itemPage = Math.floor(index / ITEMS_PER_PAGE) + 1;
-          if (itemPage === page) {
-            item.style.display = 'block';
-            const iframe = item.querySelector('iframe');
-            if (iframe) {
-              iframe.setAttribute('loading', 'lazy');
-            }
-          } else {
-            item.style.display = 'none';
-          }
-        });
-        
-        pageDisplay.textContent = page;
-        
-        prevBtn.disabled = page === 1;
-        nextBtn.disabled = page === totalPages;
-        
-        // Update URL
-        const url = new URL(window.location);
-        url.searchParams.set('page', page);
-        window.history.replaceState({}, '', url);
-        
-        renderPageNumbers();
-      }
-      
-      function renderPageNumbers() {
-        pageNumbers.innerHTML = '';
-        
-        // Always show first page
-        addPageButton(1, currentPage === 1);
-        
-        // Show ellipsis if needed
-        if (currentPage > 3) {
-          const ellipsis = document.createElement('span');
-          ellipsis.className = 'px-2 text-[var(--color-text-muted)]';
-          ellipsis.textContent = '...';
-          pageNumbers.appendChild(ellipsis);
-        }
-        
-        // Show pages around current
-        for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
-          addPageButton(i, i === currentPage);
-        }
-        
-        // Show ellipsis if needed
-        if (currentPage < totalPages - 2) {
-          const ellipsis = document.createElement('span');
-          ellipsis.className = 'px-2 text-[var(--color-text-muted)]';
-          ellipsis.textContent = '...';
-          pageNumbers.appendChild(ellipsis);
-        }
-        
-        // Always show last page if more than 1
-        if (totalPages > 1) {
-          addPageButton(totalPages, currentPage === totalPages);
-        }
-      }
-      
-      function addPageButton(page, isActive) {
-        const btn = document.createElement('button');
-        btn.className = `w-10 h-10 rounded-lg font-semibold transition-colors ${
-          isActive 
-            ? 'bg-[var(--color-primary)] text-white' 
-            : 'bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-primary)] hover:text-white'
-        }`;
-        btn.textContent = page;
-        btn.addEventListener('click', () => showPage(page));
-        pageNumbers.appendChild(btn);
-      }
-      
-      prevBtn.addEventListener('click', () => {
-        if (currentPage > 1) showPage(currentPage - 1);
-      });
-      
-      nextBtn.addEventListener('click', () => {
-        if (currentPage < totalPages) showPage(currentPage + 1);
-      });
-      
-      // Initial render
-      showPage(currentPage);
-    }
-    
-    // Run on page load
-    initPagination();
-  </script>
-
-  <script is:inline src="https://widget.mixcloud.com/media/js/widgetApi.js"></script>
-  
-  <script is:inline>
-    document.addEventListener('DOMContentLoaded', function() {
-      var players = [];
-      var iframes = document.querySelectorAll('iframe[src*="player-widget.mixcloud.com"]');
-      
-      iframes.forEach(function(iframe) {
-        var player = Mixcloud.PlayerWidget(iframe);
-        player.ready.then(function() {
-          players.push(player);
-          player.events.play.on(function() {
-            players.forEach(function(p) {
-              if (p !== player) {
-                p.pause();
-              }
-            });
-          });
-        });
-      });
-    });
-  </script>
-
-  <style>
-    .breadcrumb-section {
-      padding-top: 120px;
-      padding-bottom: 1rem;
-      background: var(--color-bg);
-    }
-
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-      color: var(--color-text-muted);
-    }
-
-    .breadcrumb a {
-      color: var(--color-text-muted);
-      transition: color 0.3s ease;
-    }
-
-    .breadcrumb a:hover {
-      color: var(--color-secondary);
-    }
-
-    .breadcrumb .separator {
-      color: var(--color-border);
-    }
-
-    .breadcrumb .current {
-      color: var(--color-text);
-    }
-  </style>
 </Layout>

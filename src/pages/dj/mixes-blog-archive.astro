@@ -1,12 +1,12 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
-import Navbar from "../../../components/Navbar.astro";
-import Footer from "../../../components/Footer.astro";
-import BlogPost from "../../../components/BlogPost.astro";
-import GymIcon from "../../../components/icons/GymIcon.astro";
-import DriveIcon from "../../../components/icons/DriveIcon.astro";
-import WorkIcon from "../../../components/icons/WorkIcon.astro";
-import PartyIcon from "../../../components/icons/PartyIcon.astro";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import BlogPost from "../../components/BlogPost.astro";
+import GymIcon from "../../components/icons/GymIcon.astro";
+import DriveIcon from "../../components/icons/DriveIcon.astro";
+import WorkIcon from "../../components/icons/WorkIcon.astro";
+import PartyIcon from "../../components/icons/PartyIcon.astro";
 
 interface BlogPostData {
   number: number | null;
@@ -32,7 +32,7 @@ interface BlogData {
 let blogData: BlogData = { posts: [] };
 
 try {
-  const imported = await import("../../../data/blog-posts.json");
+  const imported = await import("../../data/blog-posts.json");
   if (imported && imported.default && Array.isArray(imported.default.posts)) {
     blogData = imported.default as unknown as BlogData;
   }
@@ -52,23 +52,35 @@ const USE_CASE_LABELS: Record<string, string> = {
 ---
 
 <Layout
-  title="Music Blog-Archiv - DJ Hulk Electronic Music"
-  description="Browse all previous DJ mixes from DJ Hulk. Filter by use case: gym, drive, work, or party."
+  title="DJ Mix Blog Archive - DJ Hulk Mixes with Tracklists"
+  description="Browse all DJ Hulk mixes with tracklists. Filter by use case: gym workout mix, driving music, work focus playlist, pre-party mix. House, Tech House, Deep House."
   image="/img/_81A4010.webp"
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicAlbum",
+      "name": "DJ Hulk Mix Blog Archive",
+      "description": "Complete archive of DJ Hulk's electronic music mixes with tracklists - House, Tech House, Deep House, Latin House.",
+      "url": "https://holger-kampffmeyer.de/dj/mixes-blog-archive",
+      "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
+      "byArtist": {
+        "@type": "Person",
+        "name": "DJ Hulk"
+      }
+    }
+  ]}
 >
-  <Navbar currentPage="/djhulk-electronic-music/musik-blog/archive" />
+  <Navbar currentPage="/dj/mixes" />
 
   <!-- Breadcrumb -->
   <div class="breadcrumb-section pt-24">
     <div class="max-w-4xl mx-auto px-4">
       <nav class="breadcrumb">
-        <a href="/">Startseite</a>
+        <a href="/">Home</a>
         <span class="separator">/</span>
-        <a href="/djhulk-electronic-music">DJ Hulk</a>
+        <a href="/dj/mixes">DJ Mixes</a>
         <span class="separator">/</span>
-        <a href="/djhulk-electronic-music/musik-blog">Music Blog</a>
-        <span class="separator">/</span>
-        <span class="current">Archiv {useCaseFilter ? `- ${USE_CASE_LABELS[useCaseFilter] || useCaseFilter}` : ''}</span>
+        <span class="current">Blog Archive {useCaseFilter ? `- ${USE_CASE_LABELS[useCaseFilter] || useCaseFilter}` : ''}</span>
       </nav>
     </div>
   </div>
@@ -76,10 +88,10 @@ const USE_CASE_LABELS: Record<string, string> = {
   <section class="pt-8 pb-16">
     <div class="max-w-4xl mx-auto px-4 text-center">
       <h1 class="font-play text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text">
-        Music Blog-Archiv {useCaseFilter ? <span class="text-2xl text-orange-500">({USE_CASE_LABELS[useCaseFilter] || useCaseFilter})</span> : ''}
+        Blog Archive {useCaseFilter ? <span class="text-2xl text-orange-500">({USE_CASE_LABELS[useCaseFilter] || useCaseFilter})</span> : ''}
       </h1>
       <p class="text-[var(--color-text-muted)] text-lg">
-        Browse all previous mixes. Filter by use case: gym, drive, work, or party.
+        All mixes with tracklists. Filter by use case: gym, drive, work, or party.
       </p>
     </div>
   </section>
@@ -88,34 +100,34 @@ const USE_CASE_LABELS: Record<string, string> = {
     <div class="max-w-4xl mx-auto px-4">
       <div class="flex flex-wrap gap-3 mb-12" id="filterButtons">
         <a 
-          href="/djhulk-electronic-music/musik-blog/archive" 
+          href="/dj/mixes-blog-archive" 
           class="filter-btn px-4 py-2 rounded-lg border transition-colors bg-[var(--color-surface)] border-[var(--color-border)] text-[var(--color-text)] hover:border-orange-500"
         >
           All
         </a>
         <a 
-          href="/djhulk-electronic-music/musik-blog/archive?useCase=gym" 
+          href="/dj/mixes-blog-archive?useCase=gym" 
           class="filter-btn px-4 py-2 rounded-lg border transition-colors flex items-center gap-2 bg-[var(--color-surface)] border-[var(--color-border)] text-[var(--color-text)] hover:border-orange-500"
         >
           <GymIcon class="w-4 h-4" />
           <span>Gym</span>
         </a>
         <a 
-          href="/djhulk-electronic-music/musik-blog/archive?useCase=drive" 
+          href="/dj/mixes-blog-archive?useCase=drive" 
           class="filter-btn px-4 py-2 rounded-lg border transition-colors flex items-center gap-2 bg-[var(--color-surface)] border-[var(--color-border)] text-[var(--color-text)] hover:border-orange-500"
         >
           <DriveIcon class="w-4 h-4" />
           <span>Drive</span>
         </a>
         <a 
-          href="/djhulk-electronic-music/musik-blog/archive?useCase=work" 
+          href="/dj/mixes-blog-archive?useCase=work" 
           class="filter-btn px-4 py-2 rounded-lg border transition-colors flex items-center gap-2 bg-[var(--color-surface)] border-[var(--color-border)] text-[var(--color-text)] hover:border-orange-500"
         >
           <WorkIcon class="w-4 h-4" />
           <span>Work</span>
         </a>
         <a 
-          href="/djhulk-electronic-music/musik-blog/archive?useCase=party" 
+          href="/dj/mixes-blog-archive?useCase=party" 
           class="filter-btn px-4 py-2 rounded-lg border transition-colors flex items-center gap-2 bg-[var(--color-surface)] border-[var(--color-border)] text-[var(--color-text)] hover:border-orange-500"
         >
           <PartyIcon class="w-4 h-4" />
@@ -153,7 +165,6 @@ const USE_CASE_LABELS: Record<string, string> = {
               url={post.url}
               createdTime={post.created_time}
               heroImage={post.heroImage}
-              picture={post.picture}
               tags={post.tags}
               useCases={post.useCases}
               tracklist={post.tracklist}
@@ -176,8 +187,8 @@ const USE_CASE_LABELS: Record<string, string> = {
       </script>
 
       <div class="text-center mt-12">
-        <a href="/djhulk-electronic-music/musik-blog" class="btn-secondary">
-          ← Back to Music Blog
+        <a href="/dj/mixes" class="btn-secondary">
+          ← Back to Latest Mix
         </a>
       </div>
     </div>

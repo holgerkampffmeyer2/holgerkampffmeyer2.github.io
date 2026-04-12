@@ -13,6 +13,8 @@ const site = 'https://holger-kampffmeyer.de';
 const pageMeta = {
   '/': { title: 'DJ Hulk - Startseite', description: 'DJ Hulk - Musikanlagen, Lichttechnik, Verleih Stuttgart' },
   '/djhulk-electronic-music': { title: 'DJ Hulk - Electronic Music', description: 'DJ Hulk - DJ für elektronische Musik aus Stuttgart' },
+  '/djhulk-electronic-music/musik-blog': { title: 'DJ Hulk Music Blog', description: 'Weekly House & Tech House DJ mixes by DJ Hulk mit Tracklists - Gym, Drive, Work, Party' },
+  '/djhulk-electronic-music/musik-blog/archive': { title: 'DJ Hulk Mix Archive', description: 'Alle DJ Hulk Mixes - House, Tech House, Deep House mit Tracklists' },
   '/dj/mixes': { title: 'DJ Hulk - Mixes', description: 'Wöchentliche House und Tech House Mixes von DJ Hulk' },
   '/dj/videos': { title: 'DJ Hulk - Videos', description: 'Event-Aufnahmen und Videos von DJ Hulk' },
   '/dj/em3f': { title: 'DJ Hulk - Event Fotos', description: 'Fotos von Events und Festivals' },

@@ -11,14 +11,13 @@ interface Props {
   url?: string;
   createdTime?: string;
   heroImage?: string;
-  picture?: string;
   tags?: string[];
   useCases?: string[];
   tracklist?: string[];
   variant?: 'full' | 'card';
 }
 
-const { src, title, description, url, createdTime, heroImage, picture, tags = [], useCases = [], tracklist = [], variant = 'card' } = Astro.props;
+const { src, title, description, url, createdTime, heroImage, tags = [], useCases = [], tracklist = [], variant = 'card' } = Astro.props;
 
 const USECASE_CONFIG: Record<string, { label: string; icon: typeof GymIcon; color: string }> = {
   gym: { label: 'Gym Session', icon: GymIcon, color: 'text-[var(--color-primary)]' },
@@ -36,8 +35,8 @@ function formatDate(dateStr: string) {
 
 <div class="blog-post bg-[var(--color-surface)] rounded-xl overflow-hidden border border-[var(--color-border)]">
   {variant === 'full' && heroImage && (
-    <div class="hero-image">
-      <img src={heroImage} alt={title} class="w-full h-64 md:h-80 object-cover" />
+    <div class="hero-image -mx-6 -mt-6 mb-4">
+      <img src={heroImage} alt={title} class="w-full h-64 md:h-72 lg:h-80 object-cover" />
     </div>
   )}
   
@@ -85,7 +84,7 @@ function formatDate(dateStr: string) {
       <div class="player-compact mb-4">
         <iframe 
           style="width: 100%; height: 150px; border: none; border-radius: 8px;" 
-          src={src}
+          src={`${src}&hide_tracklist=1`}
           title={title}
           allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"
           loading="lazy"
@@ -97,7 +96,7 @@ function formatDate(dateStr: string) {
       <div class="player-card mb-4">
         <iframe 
           style="width: 100%; aspect-ratio: 16/9; border: none; border-radius: 8px;" 
-          src={src}
+          src={`${src}&hide_tracklist=1`}
           title={title}
           allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"
           loading="lazy"
