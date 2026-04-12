@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-12T20:26:26.822Z",
+  "lastUpdated": "2026-04-12T20:36:55.988Z",
   "posts": [
     {
       "number": 176,
@@ -41,7 +41,7 @@
         "Miguel Montez - Only Chords (Original Mix),"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ Hulk Mix 176.webp"
+      "heroImage": null
     },
     {
       "number": 175,
@@ -87,7 +87,7 @@
         "I Run (DJ Prophet Edit) (HAVEN)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud Post Mix175.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix175.webp"
     },
     {
       "number": 174,
@@ -131,7 +131,7 @@
         "Marcus Cito - Coldblooded (Extended Mix) [Colorblind]"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud Post Mix174.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix174.webp"
     },
     {
       "number": 173,
@@ -156,7 +156,7 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": "/tracklists/Mixcloud Post Mix173.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix173.webp"
     },
     {
       "number": 172,
@@ -196,7 +196,7 @@
         "NAAiV - On The Road"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud Post Mix172.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix172.webp"
     },
     {
       "number": 171,
@@ -241,7 +241,7 @@
         "JÄXM - Brick! (Edit)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud Post Mix171.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix171.webp"
     },
     {
       "number": 170,
@@ -283,7 +283,7 @@
         "Known Artist - Mar Del Plata (Club Mix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud Post Mix170.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix170.webp"
     },
     {
       "number": 169,
@@ -327,7 +327,7 @@
         "Noumena - Come Apart"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud Post Mix169.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix169.webp"
     },
     {
       "number": 168,
@@ -374,7 +374,7 @@
         "Justin Curoe - Feeling Low (Extended Mix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud Post Mix168.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix168.webp"
     },
     {
       "number": 167,
@@ -420,7 +420,7 @@
         "Mc On The Beat - Fiesta en la Disco"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud Post Mix167.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix167.webp"
     }
   ]
 }
