@@ -1,6 +1,22 @@
 {
   "projects": [
     {
+      "name": "remotion_teaser",
+      "description": "AI Agent powered tool for creating video teasers for DJ Mixes using Remotion. Automated teaser video generation with random templates and variations.",
+      "url": "https://github.com/holgerkampffmeyer2/remotion_teaser",
+      "image": "/assets/remotion_teaser.webp",
+      "imageAlt": "Teaser Video Generator",
+      "features": [
+        "5 Video Templates (cinematic-premium, neon-wave, prism-glass, cinematic-poster, mono-pulse)",
+        "Random Template Selection",
+        "Multiple Variants (1-3 per mix)",
+        "Visual Effects: Light Leaks and Starburst",
+        "Audio-reactive Equalizer",
+        "Configurable Start Offset",
+        "Multi-Format Output (YouTube & Instagram Reels)"
+      ]
+    },
+    {
       "name": "wav-to-aac-converter",
       "description": "AI agent for converting WAV music files into AAC or MP3 format. The tool helps to batch convert WAV to AAC or MP3, optimizes the volume (Loudness) as well as extracting metadata such as title, artist, and album cover from online sources.",
       "url": "https://github.com/holgerkampffmeyer2/wav-to-aac-converter",
