@@ -24,7 +24,7 @@ export default [
     },
     rules: {
       'no-unused-vars': 'warn',
-      'no-console': 'warn',
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
       '@typescript-eslint/no-unused-vars': 'warn',
     },
   },
@@ -41,7 +41,7 @@ export default [
     },
     rules: {
       'no-unused-vars': 'warn',
-      'no-console': 'warn',
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
       '@typescript-eslint/no-unused-vars': 'warn',
     },
   },
@@ -55,7 +55,7 @@ export default [
     },
     rules: {
       'no-unused-vars': 'warn',
-      'no-console': 'warn',
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
     },
   },
 ];
