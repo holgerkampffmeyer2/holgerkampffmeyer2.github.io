@@ -36,29 +36,18 @@ pnpm run preview  # Preview production build
 2. Domain IMMER auf `holger-kampffmeyer.de` setzen
 3. Neue Seiten in `src/pages/` erstellen
 4. Nach Änderungen: lint -> check -> build -> commit -> push
-5. Der RSS-Feed (`public/rss.xml`) wird automatisch bei jedem `pnpm run build` generiert und basiert auf:
-   - Änderungsdatum der Astro-Dateien in `src/pages/`
-   - Neuesten Mixes aus Mixcloud (`src/data/mixcloud-data.json`)
+5. Der RSS-Feed (`public/rss.xml`) wird automatisch bei jedem `pnpm run build` generiert:
+   - Astro-Seiten in `src/pages/` (nach Änderungsdatum)
+   - Neueste 10 Mixes aus Mixcloud (`src/data/mixcloud-data.json`) - wird beim Build aktualisiert
+   - Open Source Projekte (`src/data/open-source-projects.json`)
 
 ## Music Blog
-- **Seite:** `/dj/mixes` (Startseite mit neuestem Mix + Filter) und `/dj/mixes-blog-archive` (Archiv mit allen Mixes)
+Alle Informationen zum Music Blog findest du in [docs/music-blog-script.md](docs/music-blog-script.md).
+
+**Kurzfassung:**
+- **Seiten:** `/dj/mixes` (Startseite + Filter) und `/dj/mixes-blog-archive` (Archiv)
 - **Daten:** `src/data/blog-posts.json` (wird automatisch generiert)
-- **Tracklists:** `src/data/tracklists/` (Quelldateien)
-- **Hero-Images:** `public/tracklists/` (WebP)
-- **Genre-UseCase-Mapping:** `src/data/genre-use-case-mapping.json`
-
-### Blog-Posts Script
-`scripts/fetch-mixcloud-blog.mjs` holt die neuesten 10 Mixes von Mixcloud:
-- Genre → Use-Case Mapping (aus `genre-use-case-mapping.json`)
-- Sucht Tracklists in `src/data/tracklists/` (Pattern: `*Mix{nummer}*tracklist*.txt`)
-- Sucht Hero-Images in `public/tracklists/` (Pattern: `*Mix{nummer}*.webp`)
-
-**Manuell ausführen:**
-```bash
-node scripts/fetch-mixcloud-blog.mjs
-```
-
-Dokumentation: `docs/music-blog-script.md`
+- **RSS-Feed:** Wird bei jedem `pnpm run build` generiert basierend auf neuesten Mixes
 
 ## Git-Workflow
 ```bash

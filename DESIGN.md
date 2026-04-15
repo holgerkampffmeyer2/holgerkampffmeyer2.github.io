@@ -147,15 +147,21 @@ pnpm run lint     # ESLint check
 
 ### RSS Feed
 - Automatische Generierung bei jedem Build
-- Datenquelle: `src/data/rss-data.json`
+- Datenquellen:
+  - Astro-Seiten in `src/pages/` (nach Git-Änderungsdatum)
+  - Mixcloud-Daten (`src/data/mixcloud-data.json`) - neueste 10 Mixes
+  - Open Source Projekte (`src/data/open-source-projects.json`)
 - Build-Script: `scripts/generate-rss.mjs`
 - Output: `public/rss.xml`
-- Einträge: Neueste Mixes, Videos, Vermietung
+- Einträge werden nach Datum sortiert
 
-**Neuen Eintrag hinzufügen:**
+**Neuen RSS-Eintrag hinzufügen:**
 ```bash
-# 1. Daten in rss-data.json bearbeiten
-# 2. Build ausführen
+# RSS wird automatisch generiert bei:
+# - Neue Astro-Seiten in src/pages/
+# - Neue Mixes in mixcloud-data.json
+# - Neue Open Source Projekte in open-source-projects.json
+
 pnpm run build
 ```
 ---

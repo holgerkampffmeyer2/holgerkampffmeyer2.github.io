@@ -62,6 +62,11 @@ node scripts/fetch-mixcloud-blog.mjs
 
 Das Script wird automatisch bei `pnpm run build` ausgeführt.
 
+### RSS-Feed für Music Blog
+
+Der RSS-Feed wird automatisch bei jedem `pnpm run build` generiert. Für den Music Blog relevante Einträge:
+- **Mixes:** Die neuesten 10 Mixes werden aus `src/data/mixcloud-data.json` gelesen (dasselbe wie in blog-posts.json)
+
 ### Neuen Blog-Post hinzufügen
 
 1. **Tracklist** nach `src/data/tracklists/` kopieren:
