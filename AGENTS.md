@@ -35,8 +35,9 @@ pnpm run preview  # Preview production build
 1. **DESIGN.md lesen** für Design, Architektur und Technologie
 2. Domain IMMER auf `holger-kampffmeyer.de` setzen
 3. Neue Seiten in `src/pages/` erstellen
-4. Nach Änderungen: lint -> check -> build -> commit -> push
-5. Der RSS-Feed (`public/rss.xml`) wird automatisch bei jedem `pnpm run build` generiert:
+4. Nach Änderungen an Quellcode (Astro, TypeScript, Scripts): lint -> check -> build -> commit -> push
+5. Nach Änderungen nur an Dokumentation (.md): direkt commit -> push (kein lint/check/build nötig)
+6. Der RSS-Feed (`public/rss.xml`) wird automatisch bei jedem `pnpm run build` generiert:
    - Astro-Seiten in `src/pages/` (nach Änderungsdatum)
    - Neueste 10 Mixes aus Mixcloud (`src/data/mixcloud-data.json`) - wird beim Build aktualisiert
    - Open Source Projekte (`src/data/open-source-projects.json`)
