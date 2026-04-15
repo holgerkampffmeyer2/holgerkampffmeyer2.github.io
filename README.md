@@ -25,6 +25,9 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 - **Statische Assets:** `public/` (wird in Root kopiert)
 - **Config:** `astro.config.mjs`
 - **Mixcloud-Daten:** `src/data/mixcloud-data.json`
+- **Blog-Posts:** `src/data/blog-posts.json` (Music Blog)
+- **Tracklists:** `src/data/tracklists/`
+- **Hero-Images:** `public/tracklists/`
 - **RSS-Feed:** `public/rss.xml` (wird automatisch bei build generiert)
 
 ## Development
@@ -46,11 +49,17 @@ pnpm run preview
 ## Git-Workflow
 
 ```bash
+# Für Quellcode-Änderungen (Astro, TypeScript, Scripts):
 pnpm run lint && pnpm run check && pnpm run build
 git add .
 git commit -m "describe changes"
 git tag -a v.x.x.x -m "version message"
 git push && git push origin
+
+# Für reine Dokumentations-Änderungen (.md):
+git add .
+git commit -m "describe changes"
+git push
 ```
 
 ## Deployment
