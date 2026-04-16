@@ -141,7 +141,17 @@ const faqSchema = {
   title={pageTitle}
   description="Miete das Partypaket für deine Party in Stuttgart und Umgebung. Komplette Partytechnik mit JBL Partyboxen, Licht, Nebel und Mikrofon für bis zu 50 Personen."
   image="/img/vermietung/partypaket1.webp"
-  jsonLd={[serviceSchema, faqSchema]}
+  jsonLd={[serviceSchema, faqSchema, {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "Partypaket Stuttgart Demo",
+    "description": "Demo des Partypakets Stuttgart - JBL Partyboxen, LED Licht und Nebelmaschine",
+    "thumbnailUrl": "https://holger-kampffmeyer.de/img/vermietung/partypaket1.webp",
+    "contentUrl": "https://www.youtube.com/watch?v=Ivch0DqKkW0",
+    "embedUrl": "https://www.youtube.com/embed/Ivch0DqKkW0",
+    "uploadDate": "2024-01-20",
+    "publisher": {"@type": "Organization", "name": "DJ Hulk"}
+  }]}
 >
   <Navbar currentPage="/vermietung" />
 

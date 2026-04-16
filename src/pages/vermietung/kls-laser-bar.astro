@@ -139,13 +139,33 @@ const events = [
     personCount: "bis 100 Personen"
   }
 ];
+
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "KLS Laser Bar & Nebelmaschine Demo",
+  "description": "Demo der Eurolite KLS Laser Bar FX mit 1200W Nebelmaschine - Laser-Effekte und Nebel in Aktion",
+  "thumbnailUrl": "https://holger-kampffmeyer.de/img/vermietung/eurolite-kls-laser-bar.webp",
+  "contentUrl": "https://www.youtube.com/watch?v=namuAf4RySA",
+  "embedUrl": "https://www.youtube.com/embed/namuAf4RySA",
+  "uploadDate": "2024-02-05",
+  "duration": "PT38S",
+  "publisher": {
+    "@type": "Organization",
+    "name": "DJ Hulk",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://holger-kampffmeyer.de/img/djhulk_logo.webp"
+    }
+  }
+};
 ---
 
 <Layout 
   title={pageTitle}
   description="Miete die Eurolite KLS Laser Bar FX mit 1200W Nebelmaschine. Sound-zu-Licht Steuerung für deine Party."
   image="/img/vermietung/eurolite-kls-laser-bar.webp"
-  jsonLd={[serviceSchema, faqSchema]}
+  jsonLd={[serviceSchema, faqSchema, videoSchema]}
 >
   <Navbar currentPage="/vermietung" />
 

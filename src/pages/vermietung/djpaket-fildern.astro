@@ -144,13 +144,33 @@ const faqSchema = {
     }
   }))
 };
+
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "DJ-Paket Fildern Demo",
+  "description": "Demo des DJ-Paket Fildern - komplette Eventtechnik mit LD Maui, LED Licht und Nebelmaschine",
+  "thumbnailUrl": "https://holger-kampffmeyer.de/img/vermietung/ldmaui3.webp",
+  "contentUrl": "https://www.youtube.com/watch?v=vE5PQ7IUdrg",
+  "embedUrl": "https://www.youtube.com/embed/vE5PQ7IUdrg",
+  "uploadDate": "2024-03-15",
+  "duration": "PT1M32S",
+  "publisher": {
+    "@type": "Organization",
+    "name": "DJ Hulk",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://holger-kampffmeyer.de/img/djhulk_logo.webp"
+    }
+  }
+};
 ---
 
 <Layout 
   title={pageTitle}
   description="Miete das DJ-Paket Fildern für dein Event. Komplette Eventtechnik mit LD Maui Soundanlage, LED BossFX, Nebelmaschine, Moving Head und Stage Bar für bis zu 150 Personen."
   image="/img/vermietung/ldmaui3.webp"
-  jsonLd={[serviceSchema, faqSchema]}
+  jsonLd={[serviceSchema, faqSchema, videoSchema]}
 >
   <Navbar currentPage="/vermietung" />
 

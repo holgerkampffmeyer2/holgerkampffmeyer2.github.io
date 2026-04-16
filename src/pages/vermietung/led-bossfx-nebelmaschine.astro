@@ -141,13 +141,33 @@ const events = [
     personCount: "bis 100 Personen"
   }
 ];
+
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "LED BossFX & Nebelmaschine Demo",
+  "description": "Demo der LED BossFX-2 Pro Partylichtanlage mit AF-150 Nebelmaschine in Aktion",
+  "thumbnailUrl": "https://holger-kampffmeyer.de/img/vermietung/stairville-led-bossfx-2-pro-bundle.webp",
+  "contentUrl": "https://www.youtube.com/watch?v=MzCgO9gkBzQ",
+  "embedUrl": "https://www.youtube.com/embed/MzCgO9gkBzQ",
+  "uploadDate": "2024-02-10",
+  "duration": "PT45S",
+  "publisher": {
+    "@type": "Organization",
+    "name": "DJ Hulk",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://holger-kampffmeyer.de/img/djhulk_logo.webp"
+    }
+  }
+};
 ---
 
 <Layout 
   title={pageTitle}
   description="Miete die LED Party-Lichtanlage BossFX-2 Pro mit AF-150 Nebelmaschine. Sound-zu-Licht Modus und DMX-Steuerung für deine Party."
   image="/img/vermietung/stairville-led-bossfx-2-pro-bundle.webp"
-  jsonLd={[serviceSchema, faqSchema]}
+  jsonLd={[serviceSchema, faqSchema, videoSchema]}
 >
   <Navbar currentPage="/vermietung" />
 
