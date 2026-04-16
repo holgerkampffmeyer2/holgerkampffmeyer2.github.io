@@ -15,44 +15,79 @@ const videos = [
   {
     id: "jkvGFKG8Rsw",
     title: "DJ Hulk - Tech House Mix",
-    thumbnail: "/img/videos/jkvGFKG8Rsw.webp"
+    description: "Tech House Mix von DJ Hulk - energiegeladene Beats für deine Party",
+    thumbnail: "/img/videos/jkvGFKG8Rsw.webp",
+    uploadDate: "2024-03-15"
   },
   {
     id: "Yoowst71tpE",
     title: "DJ Hulk - Deep House Vibes",
-    thumbnail: "/img/videos/Yoowst71tpE.webp"
+    description: "Deep House Vibes Mix von DJ Hulk - entspannte House-Musik",
+    thumbnail: "/img/videos/Yoowst71tpE.webp",
+    uploadDate: "2024-02-20"
   },
   {
     id: "HqM-zQy4sFc",
     title: "DJ Hulk - EM3F Festival 2024 Aftermovie",
-    thumbnail: "/img/videos/djhulktomate.webp"
+    description: "Aftermovie vom EM3F Festival 2024 mit DJ Hulk",
+    thumbnail: "/img/videos/djhulktomate.webp",
+    uploadDate: "2024-08-01"
   },
   {
     id: "dvJtZv6AMd4",
-    title: "DJ Hulk - Drum n Base Session",
-    thumbnail: "/img/videos/IMG_5641.webp"
+    title: "DJ Hulk - Drum n Bass Session",
+    description: "Drum n Bass Session von DJ Hulk - intensive Bass-Musik",
+    thumbnail: "/img/videos/IMG_5641.webp",
+    uploadDate: "2024-01-10"
   },
   {
     id: "bXlv5JCuM-8",
-    title: "DJ Hulk - Drum n Base Session 2",
-    thumbnail: "/img/videos/IMG_5639.webp"
+    title: "DJ Hulk - Drum n Bass Session 2",
+    description: "Zweite Drum n Bass Session von DJ Hulk",
+    thumbnail: "/img/videos/IMG_5639.webp",
+    uploadDate: "2024-01-12"
   },
   {
     id: "jI5PGVIE3fY",
     title: "DJ Hulk at Outdoor Birthday Party",
-    thumbnail: "/img/videos/video1.webp"
+    description: "DJ Hulk Liveauftritt bei Outdoor Geburtstagsparty",
+    thumbnail: "/img/videos/video1.webp",
+    uploadDate: "2023-09-25"
   },
   {
     id: "4ahbk2bEzno",
     title: "DJ Hulk at Outdoor Birthday Party 2",
-    thumbnail: "/img/videos/video2.webp"
+    description: "DJ Hulk Liveauftritt bei Outdoor Geburtstagsparty - Teil 2",
+    thumbnail: "/img/videos/video2.webp",
+    uploadDate: "2023-09-26"
   },
   {
     id: "gCHxs99R0Gg",
     title: "Birthday Party - LD Systems Maui 28 G3",
-    thumbnail: "/img/videos/video3.webp"
+    description: "Geburtstagsparty mit LD Systems Maui 28 G3 Soundanlage",
+    thumbnail: "/img/videos/video3.webp",
+    uploadDate: "2023-08-15"
   }
 ];
+
+const videoSchema = videos.map(video => ({
+  "@type": "VideoObject",
+  "name": video.title,
+  "description": video.description,
+  "thumbnailUrl": `https://holger-kampffmeyer.de${video.thumbnail}`,
+  "contentUrl": `https://www.youtube.com/watch?v=${video.id}`,
+  "embedUrl": `https://www.youtube.com/embed/${video.id}`,
+  "uploadDate": video.uploadDate,
+  "duration": "PT1H",
+  "publisher": {
+    "@type": "Organization",
+    "name": "DJ Hulk",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://holger-kampffmeyer.de/img/_81A4218.webp"
+    }
+  }
+}));
 ---
 
 <Layout 
@@ -60,6 +95,7 @@ const videos = [
   description="Videos von DJ Hulk - Event-Aufnahmen, Aftermovies, Party-Sessions und Live-Mitschnitte auf YouTube."
   image="/img/_81A4218.webp"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
   <Navbar currentPage="/dj/videos" />
 
   <!-- Breadcrumb -->
