@@ -131,13 +131,26 @@ const serviceSchema = {
     "availability": "https://schema.org/InStock"
   }
 };
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
 ---
 
 <Layout 
   title={pageTitle}
   description="Miete das DJ-Paket Fildern für dein Event. Komplette Eventtechnik mit LD Maui Soundanlage, LED BossFX, Nebelmaschine, Moving Head und Stage Bar für bis zu 150 Personen."
   image="/img/vermietung/ldmaui3.webp"
-  jsonLd={serviceSchema}
+  jsonLd={[serviceSchema, faqSchema]}
 >
   <Navbar currentPage="/vermietung" />
 

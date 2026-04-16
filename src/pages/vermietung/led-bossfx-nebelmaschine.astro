@@ -87,6 +87,19 @@ const serviceSchema = {
   }
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+
 const specsPartylicht = {
   "Modell": "Stairville LED BossFX-2 Pro",
   "Effekte": "2 Derbys, 2 LED Flood Panels, 4 Strobe-LEDs",
@@ -134,7 +147,7 @@ const events = [
   title={pageTitle}
   description="Miete die LED Party-Lichtanlage BossFX-2 Pro mit AF-150 Nebelmaschine. Sound-zu-Licht Modus und DMX-Steuerung für deine Party."
   image="/img/vermietung/stairville-led-bossfx-2-pro-bundle.webp"
-  jsonLd={serviceSchema}
+  jsonLd={[serviceSchema, faqSchema]}
 >
   <Navbar currentPage="/vermietung" />
 

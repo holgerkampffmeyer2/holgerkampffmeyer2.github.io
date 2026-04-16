@@ -134,13 +134,26 @@ const serviceSchema = {
     "availability": "https://schema.org/InStock"
   }
 };
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
 ---
 
 <Layout 
   title={pageTitle}
   description="Miete das Veranstaltungspaket für dein Event in Stuttgart. Komplette Eventtechnik mit LD Maui Soundanlage, Licht, Nebel und Moving Heads für bis zu 150 Personen."
   image="/img/vermietung/ldmaui3.webp"
-  jsonLd={serviceSchema}
+  jsonLd={[serviceSchema, faqSchema]}
 >
   <Navbar currentPage="/vermietung" />
 

@@ -84,6 +84,19 @@ const serviceSchema = {
   }
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+
 const specsLaserBar = {
   "Modell": "Eurolite KLS Laser Bar FX",
   "Effekte": "2 Derbys, 2 LED Spots, 4 weiße Strobe-LEDs",
@@ -132,7 +145,7 @@ const events = [
   title={pageTitle}
   description="Miete die Eurolite KLS Laser Bar FX mit 1200W Nebelmaschine. Sound-zu-Licht Steuerung für deine Party."
   image="/img/vermietung/eurolite-kls-laser-bar.webp"
-  jsonLd={serviceSchema}
+  jsonLd={[serviceSchema, faqSchema]}
 >
   <Navbar currentPage="/vermietung" />
 

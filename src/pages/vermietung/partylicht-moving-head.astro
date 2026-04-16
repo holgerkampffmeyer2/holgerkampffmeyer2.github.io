@@ -88,6 +88,19 @@ const serviceSchema = {
   }
 };
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+
 const specsMovingHead = {
   "Modell": "18 Prisma LED Spot 10 Gobo RGBW DMX",
   "DMX-Kanäle": "11/16",
@@ -144,7 +157,7 @@ const events = [
   title={pageTitle}
   description="Miete unsere Party-Lichtanlage mit Gobo Moving Head und LED PAR Strahlern. DMX-steuerbar mit optionalem DMX-Controller sowie Sound-zu-Licht Modus für deine Party."
   image="/img/vermietung/licht1.webp"
-  jsonLd={serviceSchema}
+  jsonLd={[serviceSchema, faqSchema]}
 >
   <Navbar currentPage="/vermietung" />
 
