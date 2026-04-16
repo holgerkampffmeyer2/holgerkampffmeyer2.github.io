@@ -50,6 +50,11 @@ Alle Informationen zum Music Blog findest du in [docs/music-blog-script.md](docs
 - **Daten:** `src/data/blog-posts.json` (wird automatisch generiert)
 - **RSS-Feed:** Wird bei jedem `pnpm run build` generiert basierend auf neuesten Mixes
 
+## Structured Data (SEO)
+Alle Vermietungs-Seiten haben **FAQ-Schema** für Rich-Suchergebnisse in Google.
+- `src/pages/vermietung/*.astro` - Jeweils 6 FAQs mit JSON-LD
+- `src/pages/dj/videos.astro` - VideoObject Schema für 8 Videos
+
 ## Git-Workflow
 ```bash
 pnpm run lint && pnpm run check && pnpm run build

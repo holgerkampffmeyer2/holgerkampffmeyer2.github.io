@@ -66,6 +66,11 @@ git push
 
 Website deployed via GitHub Pages. CNAME: holger-kampffmeyer.de
 
+## Structured Data (SEO)
+
+- **Vermietung:** FAQ-Schema (6 FAQs pro Seite, JSON-LD)
+- **dj/videos:** VideoObject-Schema (8 Videos)
+
 ## Hinweis
 
 Weitere projektbezogene Informationen für Agenten sind in `AGENTS.md` dokumentiert.
