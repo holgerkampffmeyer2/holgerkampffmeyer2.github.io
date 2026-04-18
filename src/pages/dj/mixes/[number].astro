@@ -81,29 +81,41 @@ function formatDuration(seconds: number) {
   return `PT${mins}M${secs}S`;
 }
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "AudioObject",
-  "name": `Mix#${mixNumber} - ${post.title}`,
-  "description": post.description?.substring(0, 500) || "",
-  "contentUrl": post.url,
-  "duration": post.audio_length ? formatDuration(post.audio_length) : undefined,
-  "datePublished": post.created_time,
-  "genre": post.tags,
-  "producer": {
-    "@type": "Person",
-    "name": "DJ Hulk",
-    "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "AudioObject",
+    "name": `Mix#${mixNumber} - ${post.title}`,
+    "description": post.description?.substring(0, 500) || "",
+    "contentUrl": post.url,
+    "duration": post.audio_length ? formatDuration(post.audio_length) : undefined,
+    "datePublished": post.created_time,
+    "genre": post.tags,
+    "producer": {
+      "@type": "Person",
+      "name": "DJ Hulk",
+      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+    },
+    "image": post.picture
   },
-  "image": post.picture
-};
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "DJ Hulk",
+    "url": "https://holger-kampffmeyer.de/djhulk-electronic-music",
+    "sameAs": [
+      "https://www.mixcloud.com/holger-kampffmeyer/",
+      "https://soundcloud.com/holger-kampffmeyer2"
+    ]
+  }
+];
 ---
 
 <Layout
   title={pageTitle}
   description={pageDescription}
   image={post.picture}
-  jsonLd={[jsonLd, {
+  jsonLd={[...jsonLd, {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": breadcrumbSegments.map((segment, index) => ({
