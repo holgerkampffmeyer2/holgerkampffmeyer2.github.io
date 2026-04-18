@@ -7,9 +7,12 @@ interface Props {
   createdTime?: string;
   height?: string;
   variant?: 'card' | 'featured';
+  headingLevel?: 'h2' | 'h3' | 'h4';
 }
 
-const { src, title, description, url, createdTime, height, variant = 'card' } = Astro.props;
+const { src, title, description, url, createdTime, height, variant = 'card', headingLevel } = Astro.props;
+
+const Tag = headingLevel || (variant === 'featured' ? 'h2' : 'h4');
 
 function formatDate(dateStr: string) {
   if (!dateStr) return '';
@@ -43,7 +46,7 @@ const linkSize = variant === 'card' ? 'text-xs' : 'text-sm';
     ></iframe>
   </div>
   <div class="p-5">
-    <h3 class={`font-play font-bold text-[var(--color-text)] leading-tight mb-2 ${titleSize}`}>{title}</h3>
+    <Tag class={`font-play font-bold text-[var(--color-text)] leading-tight mb-2 ${titleSize}`}>{title}</Tag>
     {createdTime && (
       <p class={`text-[var(--color-text-muted)] mb-2 ${infoSize}`}>{formatDate(createdTime)}</p>
     )}
