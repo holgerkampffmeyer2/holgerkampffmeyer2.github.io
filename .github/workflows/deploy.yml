@@ -31,6 +31,9 @@ jobs:
       
       - name: Install dependencies
         run: pnpm install
+
+      - name: Fetch Mixcloud data
+        run: node scripts/fetch-mixcloud.mjs --force
       
       - name: Run ESLint
         run: pnpm run lint
