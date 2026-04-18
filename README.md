@@ -14,7 +14,9 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 | :----------------- | :----------------------------------------------- |
 | `pnpm install`     | Installs dependencies                            |
 | `pnpm run dev`     | Starts local dev server                          |
-| `pnpm run build`   | Build production -> dist/ (incl. Mixcloud & RSS) |
+| `pnpm run build`   | Build production -> dist/ + sitemap               |
+| `pnpm run build:data` | Fetch Mixcloud data only (--force)                |
+| `pnpm run build:full` | Full build incl. all data fetching (cached)     |
 | `pnpm run preview` | Preview build locally                            |
 | `pnpm run lint`    | ESLint check                                     |
 | `pnpm run check`   | TypeScript check                                 |

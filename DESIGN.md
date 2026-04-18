@@ -69,11 +69,13 @@ src/
 
 ### Build-Skripte
 ```bash
-pnpm run dev      # Development server
-pnpm run check    # TypeScript check
-pnpm run build    # Production build
-pnpm run preview  # Preview production build
-pnpm run lint     # ESLint check
+pnpm run dev        # Development server
+pnpm run check      # TypeScript check
+pnpm run build      # Production build -> dist/ + sitemap (schnell)
+pnpm run build:full # Full build mit Mixcloud fetch (cached, 24h)
+pnpm run build:data # Nur Daten fetch, kein Build
+pnpm run preview    # Preview production build
+pnpm run lint       # ESLint check
 ```
 
 ---

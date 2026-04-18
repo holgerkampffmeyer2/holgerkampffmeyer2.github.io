@@ -65,16 +65,18 @@ Das Mapping liegt in `src/data/genre-use-case-mapping.json`:
 ### Manuell ausführen
 
 ```bash
-node scripts/fetch-mixcloud-blog.mjs
+node scripts/fetch-mixcloud-blog.mjs --force
 ```
 
 ### Automatisch
 
-Das Script wird automatisch bei `pnpm run build` ausgeführt.
+- `pnpm run build:data` - Fetch nur Mixcloud-Daten (--force)
+- `pnpm run build:full` - Vollständiger Build inkl. Mixcloud (cached, 24h)
+- `pnpm run build` - Nur Astro Build (schnell, keine Datenfetch)
 
 ### RSS-Feed
 
-Der RSS-Feed wird automatisch bei jedem `pnpm run build` generiert. Für den Music Blog relevante Einträge:
+Der RSS-Feed wird automatisch bei `pnpm run build:full` generiert. Für den Music Blog relevante Einträge:
 - **Mixes:** Die neuesten 10 Mixes werden aus `blog-posts.json` gelesen
 
 ---
@@ -89,7 +91,7 @@ Der RSS-Feed wird automatisch bei jedem `pnpm run build` generiert. Für den Mus
 
 Beispiel:
 ```bash
-cp "C:\Users\...\rekordbox\Recording\DJ Hulk\Mix 176\DJ Hulk - Mix176-LatinHouse-tracklist.txt" src/data/tracklists/
+cp "tracklsts/DJ Hulk - Mix176-LatinHouse-tracklist.txt" src/data/tracklists/
 ```
 
 ### Schritt 2: Hero-Image vorbereiten (optional)
@@ -98,17 +100,21 @@ cp "C:\Users\...\rekordbox\Recording\DJ Hulk\Mix 176\DJ Hulk - Mix176-LatinHouse
 2. Konvertiere zu WebP: `node scripts/create-webp.mjs`
 3. Oder manuell nach `public/tracklists/` kopieren:
 ```bash
-cp "C:\Users\...\Mixcloud Post Mix176.png" public/tracklists/
+cp "tracklists/" public/tracklists/
 ```
 
 ### Schritt 3: Build ausführen
 
 ```bash
+# Schnell: Nur Astro Build (keine Datenfetch)
 pnpm run build
+
+# Oder Full: Mit Mixcloud fetch (24h Cache)
+pnpm run build:full
 ```
 
-**Was passiert automatisch:**
-1. Script holt neueste Mixes von Mixcloud API
+**Was passiert automatisch bei build:full:**
+1. Script holt neueste Mixes von Mixcloud API (wenn >24h vergangen)
 2. Tracklists werden zugeordnet
 3. Hero-Images werden zugeordnet
 4. `blog-posts.json` wird aktualisiert
@@ -135,6 +141,7 @@ Jede Mix-Seite erhält automatisch:
 
 **JSON-LD (Structured Data):**
 - `AudioObject` - Mix-Details (Titel, Beschreibung, Dauer, Datum)
+- `MusicGroup` - DJ Hulk als Musiker/Produzent
 - `BreadcrumbList` - Navigation
 - `Person` - DJ Hulk als Produzent
 
