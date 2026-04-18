@@ -1,0 +1,164 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Navbar from "../../../components/Navbar.astro";
+import Footer from "../../../components/Footer.astro";
+import Breadcrumb from "../../../components/Breadcrumb.astro";
+import MixDetail from "../../../components/dj/MixDetail.astro";
+
+interface BlogPostData {
+  number: number | null;
+  title: string;
+  key: string;
+  url: string;
+  created_time: string;
+  src: string;
+  description: string;
+  picture: string;
+  audio_length: number;
+  tags: string[];
+  useCases: string[];
+  tracklist: string[];
+  hasTracklist: boolean;
+  heroImage?: string;
+}
+
+interface BlogData {
+  posts: BlogPostData[];
+}
+
+export async function getStaticPaths() {
+  let blogData: BlogData = { posts: [] };
+
+  try {
+    const imported = await import("../../../data/blog-posts.json");
+    if (imported && imported.default && Array.isArray(imported.default.posts)) {
+      blogData = imported.default as unknown as BlogData;
+    }
+  } catch (e) {
+    console.warn('Could not load blog-posts.json:', e);
+  }
+
+  const postsWithTracklists = blogData.posts.filter((post: BlogPostData) => post.hasTracklist);
+
+  return postsWithTracklists.map((post: BlogPostData, index: number) => {
+    const allPosts = postsWithTracklists;
+    const currentIndex = allPosts.findIndex((p: BlogPostData) => p.number === post.number);
+    const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+    const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+    const isLatest = index === 0;
+
+    return {
+      params: { number: String(post.number) },
+      props: { post, prevPost, nextPost, isLatest, allPosts }
+    };
+  });
+}
+
+interface Props {
+  post: BlogPostData;
+  prevPost: BlogPostData | null;
+  nextPost: BlogPostData | null;
+  isLatest: boolean;
+  allPosts: BlogPostData[];
+}
+
+const { post, prevPost, nextPost, isLatest, allPosts } = Astro.props;
+
+const mixNumber = post.number;
+const pageTitle = `Mix#${mixNumber} - ${post.title} | DJ Hulk`;
+const pageDescription = post.description?.substring(0, 160) || `DJ Hulk Mix#${mixNumber} - House, Tech House, Deep House with full tracklist.`;
+
+const breadcrumbSegments = [
+  { label: "Home", href: "/" },
+  { label: "DJ Hulk", href: "/djhulk-electronic-music" },
+  { label: "Weekly DJ Mixes", href: "/dj/mixes" },
+  { label: `Mix#${mixNumber}` }
+];
+
+function formatDuration(seconds: number) {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `PT${mins}M${secs}S`;
+}
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AudioObject",
+  "name": `Mix#${mixNumber} - ${post.title}`,
+  "description": post.description?.substring(0, 500) || "",
+  "contentUrl": post.url,
+  "duration": post.audio_length ? formatDuration(post.audio_length) : undefined,
+  "datePublished": post.created_time,
+  "genre": post.tags,
+  "producer": {
+    "@type": "Person",
+    "name": "DJ Hulk",
+    "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+  },
+  "image": post.picture
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  image={post.picture}
+  jsonLd={[jsonLd, {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbSegments.map((segment, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": segment.label,
+      "item": segment.href ? `https://holger-kampffmeyer.de${segment.href}` : undefined
+    }))
+  }]}
+>
+  <Navbar currentPage="/dj/mixes" />
+
+  <Breadcrumb segments={breadcrumbSegments} />
+
+  <section class="pt-8 pb-16 hero-gradient">
+    <div class="max-w-6xl mx-auto px-4">
+      <MixDetail post={post} isLatest={isLatest} />
+
+      {/* Navigation between mixes */}
+      <div class="max-w-4xl mx-auto mt-12">
+        <div class="flex flex-wrap justify-between gap-4">
+          {nextPost ? (
+            <a href={`/dj/mixes/${nextPost.number}`} class="flex items-center gap-3 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors group">
+              <svg class="w-5 h-5 text-[var(--color-secondary)] group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              <div class="text-left">
+                <span class="text-xs text-[var(--color-text-muted)] block">Previous</span>
+                <span class="font-medium text-[var(--color-text)]">Mix#{nextPost.number}</span>
+              </div>
+            </a>
+          ) : <div></div>}
+          
+          {prevPost ? (
+            <a href={`/dj/mixes/${prevPost.number}`} class="flex items-center gap-3 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors group">
+              <div class="text-right">
+                <span class="text-xs text-[var(--color-text-muted)] block">Next</span>
+                <span class="font-medium text-[var(--color-text)]">Mix#{prevPost.number}</span>
+              </div>
+              <svg class="w-5 h-5 text-[var(--color-secondary)] group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          ) : <div></div>}
+        </div>
+      </div>
+
+      {/* Back to overview */}
+      <div class="text-center mt-10">
+        <a href="/dj/mixes" class="btn-secondary">
+          ← Back to Weekly DJ Mixes
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

@@ -141,6 +141,34 @@ import { faqs } from "../data/faqs";
       </div>
     </div>
 
+    <!-- Slide 3: Weekly Mixes -->
+    <div class="slide slide-3" data-slide="2">
+      <div class="slide-content">
+        <div class="container mx-auto px-4">
+          <div class="max-w-3xl">
+            <span
+              class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp stagger-1"
+              >Weekly DJ Mixes</span
+            >
+            <h2
+              class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2"
+            >
+              Mixes mit Tracklists
+            </h2>
+            <p class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
+              Jeden Sonntag neuer Mix - House, Tech House, Deep House. 
+              Mit vollständiger Tracklist und optimiert für Gym, Drive, Work oder Party.
+            </p>
+            <div
+              class="flex flex-col sm:flex-row gap-4 animate-fadeInUp stagger-4"
+            >
+              <a href="/dj/mixes" class="btn-primary">Zu den Mixes</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Slider Navigation -->
     <button class="slider-nav prev" id="slider-prev">
       <ChevronLeftIcon class="h-6 w-6" />
@@ -154,6 +182,7 @@ import { faqs } from "../data/faqs";
       <div class="slider-dot active" data-dot="0"></div>
       <div class="slider-dot" data-dot="1"></div>
       <div class="slider-dot" data-dot="2"></div>
+      <div class="slider-dot" data-dot="3"></div>
     </div>
 
     <!-- Scroll Indicator -->
@@ -161,6 +190,23 @@ import { faqs } from "../data/faqs";
       class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-float z-20"
     >
       <ChevronDownIcon class="h-8 w-8 text-[var(--color-text-muted)]" />
+    </div>
+  </section>
+
+  <!-- DJ Mixes with Tracklists Preview -->
+  <section class="section-padding">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-8">
+        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">DJ Mixes</span>
+        <h2 class="font-play text-3xl md:text-4xl font-bold mt-4 mb-4">Weekly Mixes with Tracklists</h2>
+        <p class="text-[var(--color-text-muted)] text-lg max-w-2xl mx-auto mb-8">
+          Jeden Sonntag neuer Mix - House, Tech House, Deep House mit vollständiger Tracklist. 
+          Perfekt für Gym, Drive, Work oder Party.
+        </p>
+        <a href="/dj/mixes" class="btn-primary">
+          Alle Mixes ansehen
+        </a>
+      </div>
     </div>
   </section>
 

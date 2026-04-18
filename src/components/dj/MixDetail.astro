@@ -1,0 +1,181 @@
+---
+import GymIcon from '../icons/GymIcon.astro';
+import DriveIcon from '../icons/DriveIcon.astro';
+import WorkIcon from '../icons/WorkIcon.astro';
+import PartyIcon from '../icons/PartyIcon.astro';
+import MixcloudIcon from '../icons/MixcloudIcon.astro';
+
+interface BlogPostData {
+  number: number | null;
+  title: string;
+  key: string;
+  url: string;
+  created_time: string;
+  src: string;
+  description: string;
+  picture: string;
+  audio_length: number;
+  tags: string[];
+  useCases: string[];
+  tracklist: string[];
+  hasTracklist: boolean;
+  heroImage?: string;
+}
+
+interface Props {
+  post: BlogPostData;
+  isLatest?: boolean;
+  showNavigation?: boolean;
+}
+
+const { post, isLatest = false, showNavigation = true } = Astro.props;
+
+const USECASE_CONFIG: Record<string, { label: string; icon: typeof GymIcon; color: string }> = {
+  gym: { label: 'Gym Session', icon: GymIcon, color: 'text-orange-500' },
+  drive: { label: 'Drive / Relax', icon: DriveIcon, color: 'text-orange-500' },
+  work: { label: 'Focus / Work', icon: WorkIcon, color: 'text-orange-500' },
+  party: { label: 'Pre-Party', icon: PartyIcon, color: 'text-orange-500' }
+};
+
+function formatDate(dateStr: string) {
+  if (!dateStr) return '';
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
+function formatDuration(seconds: number) {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+const mixNumber = post.number;
+const seoTitle = `Mix#${mixNumber} - ${post.title} | DJ Hulk`;
+const seoDescription = post.description?.substring(0, 160) || `DJ Hulk Mix#${mixNumber} - House, Tech House, Deep House with full tracklist.`;
+---
+
+<article class="mix-detail">
+  <div class="max-w-4xl mx-auto">
+    {/* Tags */}
+    {post.tags && post.tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-4">
+        {post.tags.map(tag => (
+          <span class="px-3 py-1 bg-[var(--color-primary)]/10 rounded-full text-sm text-[var(--color-primary)]">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+
+    {/* Title */}
+    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+      <h1 class="font-play text-3xl md:text-4xl lg:text-5xl font-bold gradient-text">
+        {post.title}
+      </h1>
+      {isLatest && (
+        <span class="shrink-0 bg-orange-500 text-white text-sm px-3 py-1 rounded font-medium self-start">
+          Latest Mix
+        </span>
+      )}
+    </div>
+
+    {/* Date & Duration */}
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-6">
+      <div class="flex items-center gap-2">
+        <span class="text-[var(--color-text-muted)] text-sm">Date:</span>
+        <span class="text-orange-500 font-medium bg-orange-500/10 px-3 py-1 rounded">
+          {post.created_time && formatDate(post.created_time)}
+        </span>
+      </div>
+      {post.audio_length && (
+        <div class="flex items-center gap-2">
+          <span class="text-[var(--color-text-muted)] text-sm">Mixlength:</span>
+          <span class="text-[var(--color-text)] font-medium bg-[var(--color-surface)] px-3 py-1 rounded border border-[var(--color-border)]">
+            {formatDuration(post.audio_length)}
+          </span>
+        </div>
+      )}
+    </div>
+
+    {/* Description */}
+    {post.description && (
+      <p class="text-[var(--color-text-muted)] text-lg mb-6 max-w-2xl" set:html={post.description.replace(/\n/g, '<br/>')}></p>
+    )}
+
+    {/* Use Cases */}
+    {post.useCases && post.useCases.length > 0 && (
+      <div class="flex flex-wrap gap-3 mb-8">
+        {post.useCases.map(useCase => {
+          const config = USECASE_CONFIG[useCase];
+          const IconComponent = config?.icon;
+          return (
+            <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--color-surface)] rounded-full text-sm border border-[var(--color-border)]">
+              {IconComponent && <IconComponent class={`w-4 h-4 ${config?.color || ''}`} />}
+              <span class="text-[var(--color-text)]">{config?.label || useCase}</span>
+            </span>
+          );
+        })}
+      </div>
+    )}
+
+    {/* Mixcloud Player */}
+    <div class="bg-[var(--color-surface)] rounded-xl overflow-hidden border border-[var(--color-border)] mb-8">
+      <div class="p-4 border-b border-[var(--color-border)]">
+        <h2 class="font-play text-lg font-bold">Mixcloud Player</h2>
+      </div>
+      <iframe 
+        style="width: 100%; height: 220px; border: none;" 
+        src={`${post.src}&hide_tracklist=1`}
+        title={post.title}
+        allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"
+        loading="lazy"
+      ></iframe>
+    </div>
+
+    {/* Tracklist */}
+    {post.tracklist && post.tracklist.length > 0 && (
+      <div class="bg-[var(--color-surface)] rounded-xl overflow-hidden border border-[var(--color-border)] mb-8">
+        <div class="p-4 border-b border-[var(--color-border)]">
+          <h2 class="font-play text-lg font-bold">Tracklist ({post.tracklist.length} Tracks)</h2>
+        </div>
+        <div class="p-4 max-h-[500px] overflow-y-auto">
+          <table class="w-full">
+            <thead class="sticky top-0 bg-[var(--color-surface)]">
+              <tr class="border-b border-[var(--color-border)]">
+                <th class="text-left text-xs text-[var(--color-text-muted)] uppercase tracking-wider py-2">Artist</th>
+                <th class="text-left text-xs text-[var(--color-text-muted)] uppercase tracking-wider py-2">Title</th>
+              </tr>
+            </thead>
+            <tbody>
+              {post.tracklist.map((track: string) => {
+                const parts = track.split(' - ');
+                const artist = parts[0]?.replace(/,$/, '') || '';
+                const title = parts.slice(1).join(' - ').replace(/,$/, '') || track;
+                return (
+                  <tr class="border-b border-[var(--color-border)] last:border-0 hover:bg-[var(--color-bg)] transition-colors">
+                    <td class="py-2 pr-3 align-top">
+                      <span class="text-[var(--color-text)] font-semibold text-sm">{artist}</span>
+                    </td>
+                    <td class="py-2 align-top">
+                      <span class="text-[var(--color-text-muted)] text-sm">{title}</span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )}
+
+    {/* Listen on Mixcloud */}
+    {post.url && showNavigation && (
+      <div class="flex flex-wrap gap-4 mb-8">
+        <a href={post.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-secondary)] transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-secondary)]">
+          <MixcloudIcon class="w-5 h-5" />
+          <span>Listen on Mixcloud</span>
+        </a>
+      </div>
+    )}
+  </div>
+</article>

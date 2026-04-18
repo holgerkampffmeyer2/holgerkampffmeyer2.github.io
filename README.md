@@ -25,10 +25,11 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 - **Statische Assets:** `public/` (wird in Root kopiert)
 - **Config:** `astro.config.mjs`
 - **Mixcloud-Daten:** `src/data/mixcloud-data.json`
-- **Blog-Posts:** `src/data/blog-posts.json` (Music Blog)
+- **Blog-Posts:** `src/data/blog-posts.json` (Weekly DJ Mixes)
 - **Tracklists:** `src/data/tracklists/`
 - **Hero-Images:** `public/tracklists/`
 - **RSS-Feed:** `public/rss.xml` (wird automatisch bei build generiert)
+- **Dokumentation:** `docs/music-blog-script.md`
 
 ## Development
 

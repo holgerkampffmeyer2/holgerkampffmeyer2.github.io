@@ -2,7 +2,6 @@
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
-import BlogPost from "../../components/BlogPost.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import GymIcon from "../../components/icons/GymIcon.astro";
 import DriveIcon from "../../components/icons/DriveIcon.astro";
@@ -51,55 +50,85 @@ const USE_CASE_LABELS: Record<string, string> = {
   party: 'Pre-Party'
 };
 
+const USECASE_CONFIG: Record<string, { label: string; icon: typeof GymIcon; color: string }> = {
+  gym: { label: 'Gym Session', icon: GymIcon, color: 'text-orange-500' },
+  drive: { label: 'Drive / Relax', icon: DriveIcon, color: 'text-orange-500' },
+  work: { label: 'Focus / Work', icon: WorkIcon, color: 'text-orange-500' },
+  party: { label: 'Pre-Party', icon: PartyIcon, color: 'text-orange-500' }
+};
+
 const breadcrumbLabel = useCaseFilter 
-  ? `Blog Archive - ${USE_CASE_LABELS[useCaseFilter] || useCaseFilter}`
-  : 'Blog Archive';
+  ? `Archive - ${USE_CASE_LABELS[useCaseFilter] || useCaseFilter}`
+  : 'Mix Archive';
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
-  { label: "DJ Mixes", href: "/dj/mixes" },
+  { label: "Weekly DJ Mixes", href: "/dj/mixes" },
   { label: breadcrumbLabel }
 ];
+
+function formatDate(dateStr: string) {
+  if (!dateStr) return '';
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
+const collectionPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "DJ Hulk Mix Archive",
+  "description": "Complete archive of DJ Hulk's electronic music mixes with tracklists - House, Tech House, Deep House, Latin House.",
+  "url": "https://holger-kampffmeyer.de/dj/mixes-blog-archive",
+  "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
+  "mainEntity": {
+    "@type": "MusicAlbum",
+    "name": "DJ Hulk Mix Archive",
+    "description": "All DJ mixes with tracklists by DJ Hulk",
+    "byArtist": {
+      "@type": "Person",
+      "name": "DJ Hulk",
+      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+    },
+    "genre": ["House", "Tech House", "Deep House", "Latin House"],
+    "numTracks": archivePosts.length
+  }
+};
+
+const jsonLd: any[] = [collectionPageSchema];
+if (useCaseFilter) {
+  jsonLd.push({
+    "@context": "https://schema.org",
+    "@type": "Thing",
+    "name": USE_CASE_LABELS[useCaseFilter] || useCaseFilter,
+    "description": `DJ mixes optimized for ${USE_CASE_LABELS[useCaseFilter] || useCaseFilter}`
+  });
+}
 ---
 
 <Layout
-  title="DJ Mix Blog Archive - DJ Hulk Mixes with Tracklists"
-  description="Browse all DJ Hulk mixes with tracklists. Filter by use case: gym workout mix, driving music, work focus playlist, pre-party mix. House, Tech House, Deep House."
+  title="Mix Archive - DJ Hulk Weekly DJ Mixes"
+  description="Browse all DJ Hulk weekly mixes with tracklists. Filter by mood: gym, drive, work or pre-party. House, Tech House, Deep House, Latin House."
   image="/img/_81A4010.webp"
-  jsonLd={[
-    {
-      "@context": "https://schema.org",
-      "@type": "MusicAlbum",
-      "name": "DJ Hulk Mix Blog Archive",
-      "description": "Complete archive of DJ Hulk's electronic music mixes with tracklists - House, Tech House, Deep House, Latin House.",
-      "url": "https://holger-kampffmeyer.de/dj/mixes-blog-archive",
-      "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
-      "byArtist": {
-        "@type": "Person",
-        "name": "DJ Hulk"
-      }
-    }
-  ]}
+  jsonLd={jsonLd}
 >
   <Navbar currentPage="/dj/mixes" />
 
-  <!-- Breadcrumb -->
   <Breadcrumb segments={breadcrumbSegments} />
 
   <section class="pt-8 pb-16">
-    <div class="max-w-4xl mx-auto px-4 text-center">
+    <div class="max-w-6xl mx-auto px-4 text-center">
       <h1 class="font-play text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text">
-        Blog Archive {useCaseFilter ? <span class="text-2xl text-orange-500">({USE_CASE_LABELS[useCaseFilter] || useCaseFilter})</span> : ''}
+        Mix Archive {useCaseFilter ? <span class="text-2xl text-orange-500">({USE_CASE_LABELS[useCaseFilter] || useCaseFilter})</span> : ''}
       </h1>
       <p class="text-[var(--color-text-muted)] text-lg">
-        All mixes with tracklists. Filter by use case: gym, drive, work, or party.
+        All DJ mixes with tracklists. Filter by mood to find your perfect mix.
       </p>
     </div>
   </section>
 
   <section class="section-padding bg-[var(--color-bg)]">
-    <div class="max-w-4xl mx-auto px-4">
-      <div class="flex flex-wrap gap-3 mb-12" id="filterButtons">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-wrap gap-3 mb-8" id="filterButtons">
         <a 
           href="/dj/mixes-blog-archive" 
           class="filter-btn px-4 py-2 rounded-lg border transition-colors bg-[var(--color-surface)] border-[var(--color-border)] text-[var(--color-text)] hover:border-orange-500"
@@ -153,25 +182,67 @@ const breadcrumbSegments = [
         })();
       </script>
 
-      <div class="space-y-16" id="postsContainer">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="postsContainer">
         {archivePosts.map(post => (
-          <div 
-            class="post-item" 
+          <a 
+            href={`/dj/mixes/${post.number}`}
+            class="post-item block bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors group"
             data-usecases={JSON.stringify(post.useCases)}
           >
-            <BlogPost 
-              src={post.src}
-              title={post.title}
-              description={post.description}
-              url={post.url}
-              createdTime={post.created_time}
-              heroImage={post.heroImage}
-              tags={post.tags}
-              useCases={post.useCases}
-              tracklist={post.tracklist}
-              variant="full"
-            />
-          </div>
+            <div class="aspect-video overflow-hidden">
+              <img 
+                src={post.picture} 
+                alt={post.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-4">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h2 class="font-play text-base font-bold text-[var(--color-text)] line-clamp-2 group-hover:text-[var(--color-primary)] transition-colors">
+                  {post.title}
+                </h2>
+              </div>
+              
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mb-3 text-xs">
+                <div class="flex items-center gap-1">
+                  <span class="text-[var(--color-text-muted)]">Date:</span>
+                  <span class="text-orange-500 font-medium bg-orange-500/10 px-2 py-0.5 rounded">
+                    {post.created_time && formatDate(post.created_time)}
+                  </span>
+                </div>
+                {post.audio_length && (
+                  <div class="flex items-center gap-1">
+                    <span class="text-[var(--color-text-muted)]">Mixlength:</span>
+                    <span class="text-[var(--color-text)] font-medium bg-[var(--color-bg)] px-2 py-0.5 rounded border border-[var(--color-border)]">
+                      {Math.floor(post.audio_length / 60)}:{String(post.audio_length % 60).padStart(2, '0')}
+                    </span>
+                  </div>
+                )}
+                {post.tracklist && post.tracklist.length > 0 && (
+                  <div class="flex items-center gap-1">
+                    <span class="text-[var(--color-text-muted)]">Tracks:</span>
+                    <span class="text-[var(--color-text)] font-medium">
+                      {post.tracklist.length}
+                    </span>
+                  </div>
+                )}
+              </div>
+              
+              <div class="flex flex-wrap gap-1.5">
+                {post.useCases.map(useCase => {
+                  const config = USECASE_CONFIG[useCase];
+                  const IconComponent = config?.icon;
+                  return (
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-[var(--color-bg)] rounded text-xs border border-[var(--color-border)]">
+                      {IconComponent && <IconComponent class={`w-3 h-3 ${config?.color || ''}`} />}
+                      <span class="text-[var(--color-text-muted)]">{config?.label?.split(' ')[0] || useCase}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          </a>
         ))}
       </div>
 
@@ -189,7 +260,7 @@ const breadcrumbSegments = [
 
       <div class="text-center mt-12">
         <a href="/dj/mixes" class="btn-secondary">
-          ← Back to Latest Mix
+          ← Back to Weekly DJ Mixes
         </a>
       </div>
     </div>

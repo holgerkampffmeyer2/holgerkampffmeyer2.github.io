@@ -2,7 +2,6 @@
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
-import BlogPost from "../../components/BlogPost.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import MixcloudIcon from "../../components/icons/MixcloudIcon.astro";
 import SoundCloudIcon from "../../components/icons/SoundCloudIcon.astro";
@@ -14,7 +13,7 @@ import PartyIcon from "../../components/icons/PartyIcon.astro";
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
   { label: "DJ Hulk", href: "/djhulk-electronic-music" },
-  { label: "Music Blog" }
+  { label: "Weekly DJ Mixes" }
 ];
 
 interface BlogPostData {
@@ -50,41 +49,74 @@ try {
 }
 
 const latestPost = blogData.posts && blogData.posts.length > 0 ? blogData.posts[0] : null;
+const postsWithTracklists = blogData.posts ? blogData.posts.filter(post => post.hasTracklist) : [];
+
+const USECASE_CONFIG: Record<string, { label: string; icon: typeof GymIcon; color: string }> = {
+  gym: { label: 'Gym Session', icon: GymIcon, color: 'text-orange-500' },
+  drive: { label: 'Drive / Relax', icon: DriveIcon, color: 'text-orange-500' },
+  work: { label: 'Focus / Work', icon: WorkIcon, color: 'text-orange-500' },
+  party: { label: 'Pre-Party', icon: PartyIcon, color: 'text-orange-500' }
+};
+
+function formatDate(dateStr: string) {
+  if (!dateStr) return '';
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
 ---
 
 <Layout
-  title="Music Blog - DJ Hulk Mixes with Tracklists"
-  description="Weekly House, Tech House & Deep House DJ mixes by DJ Hulk. Perfect for gym, driving, work focus, or pre-party. Listen on Mixcloud, SoundCloud & Spotify. Free DJ mixes with tracklists."
+  title="Weekly DJ Mixes on Mixcloud - DJ Hulk"
+  description="Every Sunday new DJ mix on Mixcloud by DJ Hulk. House, Tech House, Deep House with tracklists. Perfect for gym, driving, work, or pre-party. Many B2B collaborations."
   image="/img/_81A4010.webp"
   jsonLd={[
     {
       "@context": "https://schema.org",
-      "@type": "MusicPlaylist",
-      "name": "DJ Hulk Music Blog - Weekly House Mixes",
-      "description": "Weekly electronic music DJ mixes by DJ Hulk specialized for gym, driving, work focus, and pre-party. Includes tracklists for all mixes.",
+      "@type": "MusicAlbum",
+      "name": "DJ Hulk Mixes with Tracklists",
+      "description": "Weekly electronic music DJ mixes by DJ Hulk with full tracklists. Specialized for gym, driving, work focus, and pre-party.",
       "url": "https://holger-kampffmeyer.de/dj/mixes",
       "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
-      "author": {
+      "byArtist": {
         "@type": "Person",
         "name": "DJ Hulk",
         "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
       },
       "genre": ["House", "Tech House", "Deep House", "Latin House"],
-      "numberOfTracks": blogData.posts?.length || 0
+      "numTracks": blogData.posts?.length || 0,
+      "datePublished": latestPost?.created_time || undefined
     },
     {
       "@context": "https://schema.org",
+      "@type": "BroadcastService",
+      "name": "DJ Hulk Weekly Mixes",
+      "description": "Weekly House, Tech House & Deep House DJ mixes published every Sunday",
+      "url": "https://holger-kampffmeyer.de/dj/mixes",
+      "broadcaster": {
+        "@type": "Person",
+        "name": "DJ Hulk"
+      },
+      "genre": ["House", "Tech House", "Deep House", "Latin House"],
+      "publication": {
+        "@type": "BroadcastEvent",
+        "startDate": latestPost?.created_time || undefined,
+        "scheduleFrequency": "https://schema.org/Weekly"
+      }
+    },
+    latestPost ? {
+      "@context": "https://schema.org",
       "@type": "AudioObject",
-      "name": latestPost?.title || "DJ Hulk Mix",
-      "description": latestPost?.description?.substring(0, 200) || "",
-      "contentUrl": latestPost?.url || "",
-      "duration": latestPost?.audio_length ? `PT${Math.floor(latestPost.audio_length / 60)}M${latestPost.audio_length % 60}S` : undefined,
-      "genre": latestPost?.tags || [],
+      "name": latestPost.title,
+      "description": latestPost.description?.substring(0, 200) || "",
+      "contentUrl": latestPost.url,
+      "duration": latestPost.audio_length ? `PT${Math.floor(latestPost.audio_length / 60)}M${latestPost.audio_length % 60}S` : undefined,
+      "genre": latestPost.tags,
+      "datePublished": latestPost.created_time,
       "producer": {
         "@type": "Person",
         "name": "DJ Hulk"
       }
-    },
+    } : null,
     {
       "@context": "https://schema.org",
       "@type": "Person",
@@ -98,26 +130,128 @@ const latestPost = blogData.posts && blogData.posts.length > 0 ? blogData.posts[
         "https://open.spotify.com/user/11131869179"
       ]
     }
-  ]}
+  ].filter(Boolean)}
 >
   <Navbar currentPage="/dj/mixes" />
 
-  <!-- Breadcrumb -->
   <Breadcrumb segments={breadcrumbSegments} />
 
-<section class="pt-8 pb-16 hero-gradient">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h1 class="font-play text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text">
-        Music Blog
-      </h1>
-      <p class="text-[var(--color-text-muted)] text-lg md:text-xl mb-8 max-w-2xl text-left">
-        House, Tech House & Deep House mixes for every occasion - but always the best bangers.<br/>
-        Every Sunday I publish a new mix on Mixcloud, specialized for gym, driving, work focus, and pre-party.
-      </p>
-      
-      <div class="mb-12">
-        <h2 class="font-play text-2xl font-bold mb-6 text-[var(--color-text)]">Find Your Perfect Mix</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+  {latestPost && (
+    <section class="pt-8 pb-0">
+      <div class="max-w-6xl mx-auto px-4">
+        <h1 class="font-play text-4xl md:text-5xl lg:text-6xl font-bold mb-4 gradient-text">
+          Weekly DJ Mixes on Mixcloud
+        </h1>
+        <p class="text-[var(--color-text-muted)] text-lg mb-6 max-w-2xl">
+          Every Sunday I publish a new DJ mix on Mixcloud. My mixes feature House, Tech House, Deep House, Latin House, and more - 
+          perfect for gym workouts, driving, work focus, or pre-party vibes. 
+          Many mixes are collaborations with other DJs (B2B sets) from around the world.
+        </p>
+        
+        <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Latest Mix</span>
+        <h2 class="font-play text-3xl md:text-4xl lg:text-5xl font-bold mt-2 mb-2 text-[var(--color-text)]">
+          {latestPost.title}
+        </h2>
+        <p class="text-[var(--color-text-muted)] text-sm mb-4">
+          <span class="text-orange-500 font-medium bg-orange-500/10 px-2 py-0.5 rounded">{latestPost.created_time && formatDate(latestPost.created_time)}</span>
+        </p>
+        <p class="text-[var(--color-text-muted)] text-lg max-w-2xl mb-6">
+          {latestPost.description}
+        </p>
+      </div>
+    </section>
+  )}
+
+  <section class="pt-8 pb-16 hero-gradient">
+    <div class="max-w-6xl mx-auto px-4">
+      {latestPost && (
+        <>
+          <div class="mb-12">
+            <div class="flex flex-wrap gap-2 mb-4">
+              {latestPost.tags.map(tag => (
+                <span class="px-3 py-1 bg-[var(--color-primary)]/10 rounded-full text-sm text-[var(--color-primary)]">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <div class="flex flex-wrap gap-2">
+              {latestPost.useCases.map(useCase => {
+                const config = USECASE_CONFIG[useCase];
+                const IconComponent = config?.icon;
+                return (
+                  <span class="inline-flex items-center gap-2 px-3 py-1 bg-[var(--color-surface)] rounded-full text-sm border border-[var(--color-border)]">
+                    {IconComponent && <IconComponent class={`w-4 h-4 ${config?.color || ''}`} />}
+                    <span class="text-[var(--color-text)]">{config?.label || useCase}</span>
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-8">
+            <div class="bg-[var(--color-surface)] rounded-xl overflow-hidden border border-[var(--color-border)]">
+              <div class="p-4 border-b border-[var(--color-border)]">
+                <span class="text-[var(--color-secondary)] text-sm tracking-widest uppercase">Player</span>
+                <h2 class="font-play text-xl font-bold mt-1">Mixcloud Player</h2>
+              </div>
+              <div class="player-section">
+                <iframe 
+                  style="width: 100%; height: 220px; border: none;" 
+                  src={`${latestPost.src}&hide_tracklist=1`}
+                  title={latestPost.title}
+                  allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"
+                  loading="lazy"
+                ></iframe>
+              </div>
+            </div>
+
+            <div class="bg-[var(--color-surface)] rounded-xl overflow-hidden border border-[var(--color-border)]">
+              <div class="p-4 border-b border-[var(--color-border)]">
+                <span class="text-[var(--color-secondary)] text-sm tracking-widest uppercase">Tracklist</span>
+                <h2 class="font-play text-xl font-bold mt-1">Tracklist ({latestPost.tracklist?.length || 0} Tracks)</h2>
+              </div>
+              <div class="p-4 max-h-[400px] overflow-y-auto">
+                {latestPost.tracklist && latestPost.tracklist.length > 0 ? (
+                  <table class="w-full">
+                    <thead class="sticky top-0 bg-[var(--color-surface)]">
+                      <tr class="border-b border-[var(--color-border)]">
+                        <th class="text-left text-xs text-[var(--color-text-muted)] uppercase tracking-wider py-2">Artist</th>
+                        <th class="text-left text-xs text-[var(--color-text-muted)] uppercase tracking-wider py-2">Title</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {latestPost.tracklist.map((track: string, idx: number) => {
+                        const parts = track.split(' - ');
+                        const artist = parts[0]?.replace(/,$/, '') || '';
+                        const title = parts.slice(1).join(' - ').replace(/,$/, '') || track;
+                        return (
+                          <tr class="border-b border-[var(--color-border)] last:border-0 hover:bg-[var(--color-bg)] transition-colors">
+                            <td class="py-2 pr-3 align-top">
+                              <span class="text-[var(--color-text)] font-semibold text-sm">{artist}</span>
+                            </td>
+                            <td class="py-2 align-top">
+                              <span class="text-[var(--color-text-muted)] text-sm">{title}</span>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                ) : (
+                  <p class="text-[var(--color-text-muted)]">No tracklist available for this mix.</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      <div class="mt-16">
+        <h2 class="font-play text-2xl font-bold mb-3 text-[var(--color-text)] text-center">Find Your Perfect Mix</h2>
+        <p class="text-[var(--color-text-muted)] text-center mb-6 max-w-2xl mx-auto">
+          Browse my mix archive by mood. Click a category below to see all mixes tailored for that occasion - from high-energy gym workouts to relaxing drives or focused work sessions.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
           <a href="/dj/mixes-blog-archive?useCase=gym" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
             <GymIcon class="w-8 h-8 mx-auto mb-2 text-orange-500" />
             <span class="text-[var(--color-text)] font-medium">Gym Session</span>
@@ -137,36 +271,81 @@ const latestPost = blogData.posts && blogData.posts.length > 0 ? blogData.posts[
         </div>
       </div>
 
-      {latestPost && (
-        <div>
-          <h2 class="font-play text-2xl font-bold mb-6 text-[var(--color-text)]">Latest Mix</h2>
-          <BlogPost 
-            src={latestPost.src}
-            title={latestPost.title}
-            description={latestPost.description}
-            url={latestPost.url}
-            createdTime={latestPost.created_time}
-            heroImage={latestPost.heroImage}
-            tags={latestPost.tags}
-            useCases={latestPost.useCases}
-            tracklist={latestPost.tracklist}
-            variant="full"
-          />
+      {postsWithTracklists.length > 0 && (
+        <div class="mt-16">
+          <h2 class="font-play text-2xl font-bold mb-3 text-[var(--color-text)] text-center">All Mixes with Tracklists</h2>
+          <p class="text-[var(--color-text-muted)] text-center mb-6 max-w-2xl mx-auto">
+            Browse all available mixes with full tracklists. Scroll to see more.
+          </p>
+          
+          <div class="relative">
+            <div class="flex gap-4 overflow-x-auto snap-x pb-4 px-1 -mx-1 scrollbar-hide carousel-scroll">
+              {postsWithTracklists.map((post, idx) => (
+                <a 
+                  href={`/dj/mixes/${post.number}`} 
+                  class={`snap-center shrink-0 w-64 md:w-72 bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors group ${idx === 0 ? 'ring-2 ring-orange-500' : ''}`}
+                >
+                  <div class="relative aspect-video overflow-hidden">
+                    <img 
+                      src={post.picture} 
+                      alt={post.title}
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                    {idx === 0 && (
+                      <span class="absolute top-2 left-2 bg-orange-500 text-white text-xs px-2 py-1 rounded font-medium">
+                        Latest
+                      </span>
+                    )}
+                  </div>
+                  <div class="p-3">
+                    <h3 class="font-play font-semibold text-sm text-[var(--color-text)] line-clamp-2 mb-2">
+                      {post.title}
+                    </h3>
+                    <span class="text-xs text-orange-500 font-medium bg-orange-500/10 px-2 py-0.5 rounded">
+                      {post.created_time && formatDate(post.created_time)}
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+            
+            <div class="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 -ml-4 z-10">
+              <button 
+                onclick="document.querySelector('.carousel-scroll').scrollBy({left: -300, behavior: 'smooth'})"
+                class="w-10 h-10 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] flex items-center justify-center hover:border-[var(--color-primary)] transition-colors"
+              >
+                <svg class="w-5 h-5 text-[var(--color-text)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            </div>
+            <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 -mr-4 z-10">
+              <button 
+                onclick="document.querySelector('.carousel-scroll').scrollBy({left: 300, behavior: 'smooth'})"
+                class="w-10 h-10 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] flex items-center justify-center hover:border-[var(--color-primary)] transition-colors"
+              >
+                <svg class="w-5 h-5 text-[var(--color-text)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
-      <div class="text-center mt-8">
-        <a href="/dj/mixes-blog-archive" class="btn-primary">
-          View Music Blog Archive
+      <div class="text-center mt-12">
+        <a href="/dj/mixes-blog-archive" class="btn-secondary">
+          Mix Archive
         </a>
-        <a href="/dj/mixes-all" class="btn-secondary ml-4">
-          All my DJ Mixes
+        <a href="/dj/mixes-all" class="btn-primary ml-4">
+          Full Mixcloud Library
         </a>
       </div>
 
-      <div class="mt-8">
+      <div class="mt-12 text-center">
         <span class="text-[var(--color-text-muted)] text-sm">Listen on:</span>
-        <div class="flex flex-wrap justify-center gap-4 mt-2">
+        <div class="flex flex-wrap justify-center gap-4 mt-4">
           <a 
             href="https://www.mixcloud.com/holger-kampffmeyer/" 
             target="_blank" 
@@ -185,20 +364,11 @@ const latestPost = blogData.posts && blogData.posts.length > 0 ? blogData.posts[
             <SoundCloudIcon class="w-5 h-5" />
             <span>SoundCloud</span>
           </a>
-          <a 
-            href="https://open.spotify.com/playlist/2IiSXnINIWdFMewY55iJWA?utm_source=generator" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors"
-          >
-          
-          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Spotify Section -->
   <section class="section-padding bg-[var(--color-bg)]">
     <div class="max-w-4xl mx-auto text-center">
       <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Spotify</span>

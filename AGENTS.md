@@ -45,10 +45,15 @@ pnpm run preview  # Preview production build
 ## Music Blog
 Alle Informationen zum Music Blog findest du in [docs/music-blog-script.md](docs/music-blog-script.md).
 
-**Kurzfassung:**
-- **Seiten:** `/dj/mixes` (Startseite + Filter) und `/dj/mixes-blog-archive` (Archiv)
-- **Daten:** `src/data/blog-posts.json` (wird automatisch generiert)
-- **RSS-Feed:** Wird bei jedem `pnpm run build` generiert basierend auf neuesten Mixes
+**Seiten-Struktur:**
+- `/dj/mixes` - Weekly DJ Mixes (Übersicht + neuester Mix)
+- `/dj/mixes/{nummer}` - Einzelne Mix-Seite mit Player + Tracklist (z.B. `/dj/mixes/176`)
+- `/dj/mixes-blog-archive` - Mix Archive (kompakte Kartenansicht)
+- `/dj/mixes-all` - Full Mixcloud Library (alle Mixcloud-Mixes)
+
+**Daten:** `src/data/blog-posts.json` (wird automatisch generiert)
+
+**SEO:** Jede Mix-Seite hat eigenes AudioObject JSON-LD + BreadcrumbList
 
 ## Structured Data (SEO)
 Alle Vermietungs-Seiten haben **FAQ-Schema** für Rich-Suchergebnisse in Google.
