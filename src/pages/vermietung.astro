@@ -10,6 +10,36 @@ import ChevronLeftIcon from "../components/icons/ChevronLeftIcon.astro";
 import ChevronRightIcon from "../components/icons/ChevronRightIcon.astro";
 import { faqs } from '../data/faqs';
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Veranstaltungstechnik Vermietung",
+  "description": "Verleih von Musikanlagen, Partyboxen, Lichttechnik und DJ-Equipment im Großraum Stuttgart",
+  "provider": {
+    "@type": "Organization",
+    "name": "DJ Hulk - Holger Kampffmeyer",
+    "url": "https://holger-kampffmeyer.de"
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Baden-Württemberg"
+  },
+  "priceRange": "€€"
+};
+
 const komplettPakete = [
   {
     image: "/img/vermietung/partypaket1.webp",
@@ -157,8 +187,9 @@ const lichtEquipment = [
 
 <Layout 
   title="Vermietung - DJ Hulk - Partyboxen, Lichttechnik Stuttgart"
-  description="Verleih von Musikanlagen, Partyboxen, Lichttechnik, Nebelmaschinen und DJ-Equipment im Großraum Stuttgart. Faire Preise und professionelle Beratung."
+  description="Verleih von Musikanlagen, Partyboxen, Lichttechnik und DJ-Equipment im Großraum Stuttgart. Faire Preise und professionelle Beratung."
   image="/img/vermietung/licht2.webp"
+  jsonLd={[faqSchema, serviceSchema]}
 >
   <Navbar currentPage="/vermietung" />
 

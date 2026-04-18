@@ -3,10 +3,29 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DATA_PATH = path.join(__dirname, '../src/data/blog-posts.json');
-const TRACKLISTS_DIR = path.join(__dirname, '../src/data/tracklists');
-const PUBLIC_TRACKLISTS_DIR = path.join(__dirname, '../public/tracklists');
-const MAPPING_PATH = path.join(__dirname, '../src/data/genre-use-case-mapping.json');
+const ROOT_DIR = path.join(__dirname, '..');
+const DATA_PATH = path.join(ROOT_DIR, 'src/data/blog-posts.json');
+const TRACKLISTS_DIR = path.join(ROOT_DIR, 'src/data/tracklists');
+const PUBLIC_TRACKLISTS_DIR = path.join(ROOT_DIR, 'public/tracklists');
+const MAPPING_PATH = path.join(ROOT_DIR, 'src/data/genre-use-case-mapping.json');
+const TIMESTAMP_FILE = path.join(ROOT_DIR, 'node_modules/.mixcloud-blog-fetch');
+
+const MIN_INTERVAL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+function shouldFetch(force = false) {
+  if (force) return true;
+  
+  if (!fs.existsSync(TIMESTAMP_FILE)) return true;
+  
+  const lastFetch = parseInt(fs.readFileSync(TIMESTAMP_FILE, 'utf-8'));
+  const now = Date.now();
+  
+  return (now - lastFetch) > MIN_INTERVAL_MS;
+}
+
+function updateTimestamp() {
+  fs.writeFileSync(TIMESTAMP_FILE, Date.now().toString());
+}
 
 let TAG_TO_USECASE = {};
 
@@ -200,5 +219,17 @@ async function fetchMixcloud() {
   }
 }
 
-loadMappings();
-fetchMixcloud();
+async function main() {
+  if (!shouldFetch()) {
+    console.log('⏭️  Skipping Mixcloud blog fetch (less than 24h since last fetch)');
+    return;
+  }
+  
+  loadMappings();
+  await fetchMixcloud();
+  updateTimestamp();
+}
+
+// Parse args: --force or -f
+const force = process.argv.includes('--force') || process.argv.includes('-f');
+main();
