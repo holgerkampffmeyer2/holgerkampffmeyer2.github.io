@@ -72,8 +72,8 @@ function formatDate(dateStr: string) {
   jsonLd={[
     {
       "@context": "https://schema.org",
-      "@type": "MusicAlbum",
-      "name": "DJ Hulk Mixes with Tracklists",
+      "@type": "MusicPlaylist",
+      "name": "DJ Hulk Weekly Mixes",
       "description": "Weekly electronic music DJ mixes by DJ Hulk with full tracklists. Specialized for gym, driving, work focus, and pre-party.",
       "url": "https://holger-kampffmeyer.de/dj/mixes",
       "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
@@ -83,25 +83,7 @@ function formatDate(dateStr: string) {
         "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
       },
       "genre": ["House", "Tech House", "Deep House", "Latin House"],
-      "numTracks": blogData.posts?.length || 0,
-      "datePublished": latestPost?.created_time || undefined
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BroadcastService",
-      "name": "DJ Hulk Weekly Mixes",
-      "description": "Weekly House, Tech House & Deep House DJ mixes published every Sunday",
-      "url": "https://holger-kampffmeyer.de/dj/mixes",
-      "broadcaster": {
-        "@type": "Person",
-        "name": "DJ Hulk"
-      },
-      "genre": ["House", "Tech House", "Deep House", "Latin House"],
-      "publication": {
-        "@type": "BroadcastEvent",
-        "startDate": latestPost?.created_time || undefined,
-        "scheduleFrequency": "https://schema.org/Weekly"
-      }
+      "numTracks": blogData.posts?.length || 0
     },
     latestPost ? {
       "@context": "https://schema.org",
