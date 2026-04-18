@@ -29,6 +29,8 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 - **Tracklists:** `src/data/tracklists/`
 - **Hero-Images:** `public/tracklists/`
 - **RSS-Feed:** `public/rss.xml` (wird automatisch bei build generiert)
+- **Sitemap:** `public/sitemap.xml` (wird automatisch aktualisiert inkl. aller Mix-Seiten)
+- **URL-Liste:** `public/urllist.txt` (wird automatisch generiert)
 - **Dokumentation:** `docs/music-blog-script.md`
 
 ## Development

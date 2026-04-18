@@ -41,6 +41,10 @@ pnpm run preview  # Preview production build
    - Astro-Seiten in `src/pages/` (nach Änderungsdatum)
    - Neueste 10 Mixes aus Mixcloud (`src/data/mixcloud-data.json`) - wird beim Build aktualisiert
    - Open Source Projekte (`src/data/open-source-projects.json`)
+7. Die Sitemap (`public/sitemap.xml`) und URL-Liste (`public/urllist.txt`) werden automatisch aktualisiert:
+   - Script: `scripts/update-sitemap.mjs` wird nach dem Build ausgeführt
+   - Alle Mix-Seiten (`/dj/mixes/{nummer}`) werden dynamisch hinzugefügt
+   - Priority: Neueste 3 Mixes = 0.90, ältere = 0.80
 
 ## Music Blog
 Alle Informationen zum Music Blog findest du in [docs/music-blog-script.md](docs/music-blog-script.md).
