@@ -137,27 +137,8 @@ function generateRss() {
     console.warn('⚠️ Could not read mixcloud data:', e.message);
   }
 
-  try {
-    const openSourceDataPath = path.join(__dirname, '../src/data/open-source-projects.json');
-    const openSourceData = JSON.parse(fs.readFileSync(openSourceDataPath, 'utf-8'));
-    const projects = openSourceData.projects || [];
-    
-    for (const project of projects) {
-      const gitDate = getGitDateForFile(path.join(__dirname, '../src/data/open-source-projects.json'));
-      const pubDate = gitDate || new Date().toISOString().split('T')[0];
-      
-      items.push({
-        id: `opensource-${project.name}`,
-        title: project.name,
-        link: project.url,
-        description: `Open Source Projekt: ${project.description}`,
-        pubDate: pubDate,
-        isOpenSource: true
-      });
-    }
-  } catch (e) {
-    console.warn('⚠️ Could not read open source projects data:', e.message);
-  }
+  // Open Source projects removed from RSS - they contain external URLs (GitHub)
+  // which are not allowed in sitemaps used by Google Search Console
 
   items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
