@@ -25,7 +25,7 @@ function findStaticPages() {
       } else if (file.endsWith('.html') && file !== 'index.html') {
         const relativePath = path.relative(DIST_DIR, fullPath).replace('.html', '').replace(/\\/g, '/');
         if (!relativePath.startsWith('dj/mixes/')) {
-          pages.push(`${baseUrl}${relativePath}`);
+          pages.push(`${baseUrl}/${relativePath}`);
         }
       }
     }
@@ -120,7 +120,7 @@ function updateUrllist() {
   });
   
   // Combine: base + static pages + all mix pages
-  const urls = [baseUrl, ...staticUrls, ...mixUrls];
+  const urls = [`${baseUrl}/`, ...staticUrls, ...mixUrls];
   
   fs.writeFileSync(urllistPath, urls.join('\n') + '\n');
   console.log(`✅ Updated urllist.txt with ${urls.length} URLs`);
