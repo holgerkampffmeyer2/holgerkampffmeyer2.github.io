@@ -46,6 +46,17 @@ pnpm run preview  # Preview production build
 ## Music Blog
 Alle Informationen zum Music Blog findest du in [docs/music-blog-script.md](docs/music-blog-script.md).
 
+### Neuen Mix hinzufügen
+1. **Tracklist:** Nach `src/data/tracklists/` (`DJ Hulk - Mix{nummer} Genre-tracklist.txt`)
+2. **Hero-Image:** PNG nach `tracklists/` konvertieren → WebP nach `public/tracklists/`:
+   ```bash
+   # Konvertiere PNG zu WebP (aus tracklists/ Ordner)
+   node -e "import('sharp').then(m=>m.default('tracklists/Mixcloud Post Mix{nummer}.png').webp({quality:80}).toFile('public/tracklists/Mix{nummer}.webp'))"
+   # Oder mit dem sharp CLI direkt
+   node -e "import('sharp').then(m=>m.default('C:/work/holgerkampffmeyer2.github.io/tracklists/Mixcloud Post Mix177.png').webp({quality:80}).toFile('public/tracklists/Mix177.webp'))"
+   ```
+3. Build: `pnpm run build` (fetch-mixcloud-blog.mjs → blog-posts.json → Seiten generiert)
+
 **Seiten-Struktur:**
 - `/dj/mixes` - Weekly DJ Mixes (Übersicht + neuester Mix)
 - `/dj/mixes/{nummer}` - Einzelne Mix-Seite mit Player + Tracklist (z.B. `/dj/mixes/176`)
