@@ -1,0 +1,128 @@
+---
+interface Props {
+  itemsPerPage: number;
+  totalItems: number;
+  itemSelector?: string;
+  useCaseFilter?: string | null;
+}
+
+const { itemsPerPage, totalItems, itemSelector = '.post-item', useCaseFilter = null } = Astro.props;
+const totalPages = Math.ceil(totalItems / itemsPerPage);
+---
+
+{totalPages > 1 && (
+  <div class="flex justify-center items-center gap-4 mt-12">
+    <button id="prevBtn" class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+      ← Previous
+    </button>
+    <div id="pageNumbers" class="flex gap-2"></div>
+    <button id="nextBtn" class="btn-primary">
+      Next →
+    </button>
+  </div>
+)}
+
+<div class="text-center mt-8 mb-4">
+  <p id="pageInfo" class="text-[var(--color-text-muted)]">Page 1 of {totalPages}</p>
+</div>
+
+<script is:inline define:vars={{ itemsPerPage, totalPages, itemSelector, useCaseFilter }}>
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    let currentPage = parseInt(params.get('page')) || 1;
+    currentPage = Math.max(1, Math.min(currentPage, totalPages));
+
+    const filter = useCaseFilter || params.get('useCase');
+    
+    const grid = document.getElementById('postsContainer') || document.getElementById('mixesGrid');
+    const items = grid ? grid.querySelectorAll(itemSelector) : [];
+    
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const pageInfo = document.getElementById('pageInfo');
+    const pageNumbers = document.getElementById('pageNumbers');
+
+    function showPage(page) {
+      currentPage = page;
+
+      items.forEach((item, index) => {
+        const itemPage = Math.floor(index / itemsPerPage) + 1;
+        
+        if (itemPage === page) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      if (pageInfo) {
+        pageInfo.textContent = `Page ${page} of ${totalPages}`;
+      }
+
+      if (prevBtn) prevBtn.disabled = page === 1;
+      if (nextBtn) nextBtn.disabled = page === totalPages;
+
+      const url = new URL(window.location);
+      url.searchParams.set('page', page);
+      window.history.replaceState({}, '', url);
+
+      renderPageNumbers();
+    }
+
+    function renderPageNumbers() {
+      if (!pageNumbers) return;
+      
+      pageNumbers.innerHTML = '';
+
+      addPageButton(1, currentPage === 1);
+
+      if (currentPage > 3) {
+        const ellipsis = document.createElement('span');
+        ellipsis.className = 'px-2 text-[var(--color-text-muted)]';
+        ellipsis.textContent = '...';
+        pageNumbers.appendChild(ellipsis);
+      }
+
+      for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+        addPageButton(i, i === currentPage);
+      }
+
+      if (currentPage < totalPages - 2) {
+        const ellipsis = document.createElement('span');
+        ellipsis.className = 'px-2 text-[var(--color-text-muted)]';
+        ellipsis.textContent = '...';
+        pageNumbers.appendChild(ellipsis);
+      }
+
+      if (totalPages > 1) {
+        addPageButton(totalPages, currentPage === totalPages);
+      }
+    }
+
+    function addPageButton(page, isActive) {
+      const btn = document.createElement('button');
+      btn.className = `w-10 h-10 rounded-lg font-semibold transition-colors ${
+        isActive 
+          ? 'bg-[var(--color-primary)] text-white' 
+          : 'bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-primary)] hover:text-white border border-[var(--color-border)]'
+      }`;
+      btn.textContent = page;
+      btn.addEventListener('click', () => showPage(page));
+      pageNumbers.appendChild(btn);
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) showPage(currentPage - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (currentPage < totalPages) showPage(currentPage + 1);
+      });
+    }
+
+    showPage(currentPage);
+  })();
+</script>
