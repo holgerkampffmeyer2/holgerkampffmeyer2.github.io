@@ -348,8 +348,8 @@ if (useCaseFilter) {
           
           const prevBtn = document.getElementById('prevBtn');
           const nextBtn = document.getElementById('nextBtn');
-          if (prevBtn) prevBtn.addEventListener('click', () => showPage(currentPage - 1));
-          if (nextBtn) nextBtn.addEventListener('click', () => showPage(currentPage + 1));
+          prevBtn.addEventListener('click', function() { showPage(currentPage - 1); });
+          nextBtn.addEventListener('click', function() { showPage(currentPage + 1); });
           
           updatePagination();
         })();
