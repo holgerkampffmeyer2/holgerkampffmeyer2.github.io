@@ -348,8 +348,12 @@ if (useCaseFilter) {
           
           const prevBtn = document.getElementById('prevBtn');
           const nextBtn = document.getElementById('nextBtn');
-          prevBtn.addEventListener('click', function() { showPage(currentPage - 1); });
-          nextBtn.addEventListener('click', function() { showPage(currentPage + 1); });
+          
+          // Only add listeners after updatePagination runs
+          setTimeout(function() { 
+            prevBtn.addEventListener('click', function() { showPage(currentPage - 1); });
+            nextBtn.addEventListener('click', function() { showPage(currentPage + 1); });
+          }, 0);
           
           updatePagination();
         })();
