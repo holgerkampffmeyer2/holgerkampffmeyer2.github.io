@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/update-sitemap.mjs",
+    "build": "node scripts/generate-rss.mjs && astro build && node scripts/update-sitemap.mjs",
     "build:data": "node scripts/fetch-mixcloud.mjs --force && node scripts/fetch-mixcloud-blog.mjs --force && node scripts/generate-rss.mjs && node scripts/update-sitemap.mjs",
     "build:full": "node scripts/fetch-mixcloud.mjs && node scripts/fetch-mixcloud-blog.mjs && node scripts/generate-rss.mjs && node scripts/update-sitemap.mjs && astro build",
     "preview": "astro preview",
