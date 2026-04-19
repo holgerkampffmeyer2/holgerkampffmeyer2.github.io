@@ -219,8 +219,11 @@ async function fetchMixcloud() {
   }
 }
 
+// Parse args: --force or -f
+const force = process.argv.includes('--force') || process.argv.includes('-f');
+
 async function main() {
-  if (!shouldFetch()) {
+  if (!shouldFetch(force)) {
     console.log('⏭️  Skipping Mixcloud blog fetch (less than 24h since last fetch)');
     return;
   }
@@ -230,6 +233,4 @@ async function main() {
   updateTimestamp();
 }
 
-// Parse args: --force or -f
-const force = process.argv.includes('--force') || process.argv.includes('-f');
 main();

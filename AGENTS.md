@@ -50,11 +50,17 @@ Alle Informationen zum Music Blog findest du in [docs/music-blog-script.md](docs
 1. **Tracklist:** Nach `src/data/tracklists/` (`DJ Hulk - Mix{nummer} Genre-tracklist.txt`)
 2. **Hero-Image:** PNG nach `tracklists/` konvertieren → WebP nach `public/tracklists/`:
    ```bash
-   # Konvertiere PNG zu WebP (aus tracklists/ Ordner)
-   node -e "import('sharp').then(m=>m.default('tracklists/Mixcloud Post Mix{nummer}.png').webp({quality:80}).toFile('public/tracklists/Mix{nummer}.webp'))"
-   # Oder mit dem sharp CLI direkt
-   node -e "import('sharp').then(m=>m.default('C:/work/holgerkampffmeyer2.github.io/tracklists/Mixcloud Post Mix177.png').webp({quality:80}).toFile('public/tracklists/Mix177.webp'))"
+   # Einzelne Datei
+   node scripts/create-webp.mjs tracklists/Mixcloud\ Post\ Mix177.png
+   
+   # Oder alle tracklists konvertieren (Input-Pfad als Argument)
+   node scripts/create-webp.mjs -t
+   node scripts/create-webp.mjs tracklists/
+   
+   # Mit Optionen (Breite, Quality)
+   node scripts/create-webp.mjs tracklists/Mixcloud\ Post\ Mix177.png -w 1280 -q 85
    ```
+   Optionen: `-w` Breite, `-q` Quality, `-r` rekursiv, `-t` tracklists-Ordner mit einschließen, `-h` Hilfe
 3. Build: `pnpm run build` (fetch-mixcloud-blog.mjs → blog-posts.json → Seiten generiert)
 
 **Seiten-Struktur:**
