@@ -323,14 +323,24 @@ if (useCaseFilter) {
         if (nextBtn) nextBtn.disabled = page === filteredTotalPages || filteredTotalPages === 0;
 
         const url = new URL(window.location);
+        if (useCase) {
+          url.searchParams.set('useCase', useCase);
+        } else {
+          url.searchParams.delete('useCase');
+        }
         url.searchParams.set('page', page);
         window.history.replaceState({}, '', url);
+
+        // Scroll to top of grid
+        grid?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
         renderPageNumbers();
       }
 
       function renderPageNumbers() {
-        if (!pageNumbers || filteredTotalPages <= 1) {
+        if (!pageNumbers) return;
+        
+        if (!filteredTotalPages || filteredTotalPages <= 1) {
           pageNumbers.innerHTML = '';
           return;
         }
