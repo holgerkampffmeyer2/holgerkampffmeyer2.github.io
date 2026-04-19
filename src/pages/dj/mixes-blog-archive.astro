@@ -190,7 +190,8 @@ if (useCaseFilter) {
           <a 
             href={`/dj/mixes/${post.number}`}
             class="post-item block bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors group"
-            data-page={Math.floor(index / ITEMS_PER_PAGE) + 1}
+            data-usecases={JSON.stringify(post.useCases)}
+            data-index={index}
           >
             <div class="aspect-video overflow-hidden">
               <img 
@@ -278,10 +279,21 @@ if (useCaseFilter) {
       const params = new URLSearchParams(window.location.search);
       const useCase = params.get('useCase');
       let currentPage = parseInt(params.get('page')) || 1;
-      currentPage = Math.max(1, Math.min(currentPage, totalPages));
 
       const grid = document.getElementById('postsContainer');
-      const items = grid ? grid.querySelectorAll('.post-item') : [];
+      const allItems = grid ? Array.from(grid.querySelectorAll('.post-item')) : [];
+      
+      // Filter items by useCase
+      const filteredItems = useCase 
+        ? allItems.filter(item => {
+            const useCases = JSON.parse(item.dataset.usecases || '[]');
+            return useCases.includes(useCase);
+          })
+        : allItems;
+      
+      const filteredTotalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
+      currentPage = Math.max(1, Math.min(currentPage, filteredTotalPages || 1));
+
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
       const pageInfo = document.getElementById('pageInfo');
@@ -290,22 +302,25 @@ if (useCaseFilter) {
       function showPage(page) {
         currentPage = page;
 
-        items.forEach((item, index) => {
-          const itemPage = Math.floor(index / ITEMS_PER_PAGE) + 1;
-          
-          if (itemPage === page) {
+        // Hide all items first
+        allItems.forEach(item => item.style.display = 'none');
+        
+        // Show filtered items for current page
+        const startIndex = (page - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+        
+        filteredItems.forEach((item, idx) => {
+          if (idx >= startIndex && idx < endIndex) {
             item.style.display = 'block';
-          } else {
-            item.style.display = 'none';
           }
         });
 
         if (pageInfo) {
-          pageInfo.textContent = `Page ${page} of ${totalPages}`;
+          pageInfo.textContent = `Page ${page} of ${filteredTotalPages}`;
         }
 
         if (prevBtn) prevBtn.disabled = page === 1;
-        if (nextBtn) nextBtn.disabled = page === totalPages;
+        if (nextBtn) nextBtn.disabled = page === filteredTotalPages || filteredTotalPages === 0;
 
         const url = new URL(window.location);
         url.searchParams.set('page', page);
@@ -315,7 +330,10 @@ if (useCaseFilter) {
       }
 
       function renderPageNumbers() {
-        if (!pageNumbers) return;
+        if (!pageNumbers || filteredTotalPages <= 1) {
+          pageNumbers.innerHTML = '';
+          return;
+        }
         
         pageNumbers.innerHTML = '';
 
@@ -328,19 +346,19 @@ if (useCaseFilter) {
           pageNumbers.appendChild(ellipsis);
         }
 
-        for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+        for (let i = Math.max(2, currentPage - 1); i <= Math.min(filteredTotalPages - 1, currentPage + 1); i++) {
           addPageButton(i, i === currentPage);
         }
 
-        if (currentPage < totalPages - 2) {
+        if (currentPage < filteredTotalPages - 2) {
           const ellipsis = document.createElement('span');
           ellipsis.className = 'px-2 text-[var(--color-text-muted)]';
           ellipsis.textContent = '...';
           pageNumbers.appendChild(ellipsis);
         }
 
-        if (totalPages > 1) {
-          addPageButton(totalPages, currentPage === totalPages);
+        if (filteredTotalPages > 1) {
+          addPageButton(filteredTotalPages, currentPage === filteredTotalPages);
         }
       }
 
@@ -364,11 +382,18 @@ if (useCaseFilter) {
 
       if (nextBtn) {
         nextBtn.addEventListener('click', () => {
-          if (currentPage < totalPages) showPage(currentPage + 1);
+          if (currentPage < filteredTotalPages) showPage(currentPage + 1);
         });
       }
 
-      showPage(currentPage);
+      // Initial render
+      if (filteredItems.length === 0) {
+        if (pageInfo) pageInfo.textContent = 'Page 1 of 1';
+        if (prevBtn) prevBtn.disabled = true;
+        if (nextBtn) nextBtn.disabled = true;
+      } else {
+        showPage(currentPage);
+      }
     })();
   </script>
 </Layout>
