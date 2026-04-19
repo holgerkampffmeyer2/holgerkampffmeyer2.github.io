@@ -349,11 +349,17 @@ if (useCaseFilter) {
           const prevBtn = document.getElementById('prevBtn');
           const nextBtn = document.getElementById('nextBtn');
           
-          // Only add listeners after updatePagination runs
-          setTimeout(function() { 
-            prevBtn.addEventListener('click', function() { showPage(currentPage - 1); });
-            nextBtn.addEventListener('click', function() { showPage(currentPage + 1); });
-          }, 0);
+          if (prevBtn) {
+            prevBtn.addEventListener('click', function() {
+              if (currentPage > 1) showPage(currentPage - 1);
+            });
+          }
+          
+          if (nextBtn) {
+            nextBtn.addEventListener('click', function() {
+              if (currentPage < totalPages) showPage(currentPage + 1);
+            });
+          }
           
           updatePagination();
         })();
