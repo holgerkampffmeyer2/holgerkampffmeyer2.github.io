@@ -133,7 +133,7 @@ async function fetchMixcloud() {
   console.log('Fetching latest mixes from Mixcloud for Music Blog...');
   
   try {
-    const response = await fetch('https://api.mixcloud.com/holger-kampffmeyer/cloudcasts/?limit=10');
+    const response = await fetch('https://api.mixcloud.com/holger-kampffmeyer/cloudcasts/?limit=100');
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
