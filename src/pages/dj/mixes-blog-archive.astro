@@ -40,7 +40,7 @@ try {
   console.warn('Could not load blog-posts.json:', e);
 }
 
-const archivePosts = blogData.posts && blogData.posts.length > 1 ? blogData.posts.slice(1) : [];
+const archivePosts = blogData.posts ? blogData.posts.filter(post => post.hasTracklist).slice(1) : [];
 
 const useCaseFilter = Astro.url.searchParams.get('useCase');
 const USE_CASE_LABELS: Record<string, string> = {
