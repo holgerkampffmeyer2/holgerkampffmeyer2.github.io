@@ -13,9 +13,9 @@ const site = 'https://holger-kampffmeyer.de';
 const pageMeta = {
   '/': { title: 'DJ Hulk - Startseite', description: 'DJ Hulk - Musikanlagen, Lichttechnik, Verleih Stuttgart' },
   '/djhulk-electronic-music': { title: 'DJ Hulk - Electronic Music', description: 'DJ Hulk - DJ für elektronische Musik aus Stuttgart' },
-  '/djhulk-electronic-music/musik-blog': { title: 'DJ Hulk Music Blog', description: 'Weekly House & Tech House DJ mixes by DJ Hulk mit Tracklists - Gym, Drive, Work, Party' },
-  '/djhulk-electronic-music/musik-blog/archive': { title: 'DJ Hulk Mix Archive', description: 'Alle DJ Hulk Mixes - House, Tech House, Deep House mit Tracklists' },
   '/dj/mixes': { title: 'DJ Hulk - Mixes', description: 'Wöchentliche House und Tech House Mixes von DJ Hulk' },
+  '/dj/mixes-all': { title: 'DJ Hulk - All Mixes', description: 'Alle Mixes von DJ Hulk auf Mixcloud' },
+  '/dj/mixes-blog-archive': { title: 'DJ Hulk Mix Archive', description: 'Alle DJ Hulk Mixes - House, Tech House, Deep House mit Tracklists' },
   '/dj/videos': { title: 'DJ Hulk - Videos', description: 'Event-Aufnahmen und Videos von DJ Hulk' },
   '/dj/em3f': { title: 'DJ Hulk - Event Fotos', description: 'Fotos von Events und Festivals' },
   '/vermietung': { title: 'Eventtechnik Vermietung', description: 'Partytechnik mieten in Stuttgart' },
@@ -28,6 +28,7 @@ const pageMeta = {
   '/vermietung/led-bossfx-nebelmaschine': { title: 'LED BossFX & Nebelmaschine mieten', description: 'LED BossFX-2 Pro + AF-150 Nebelmaschine für Atmosphäre' },
   '/vermietung/kls-laser-bar': { title: 'Eurolite KLS Laser Bar mieten', description: 'Kompaktes LED Bar System mit Laser-Effekten für Partys' },
   '/work': { title: 'DJ Hulk - Work', description: 'DJ Hulk - Work und Projekte' },
+  '/links': { title: 'DJ Hulk - Links', description: 'Links zu Social Media und Partnerseiten' },
 };
 
 function escapeXml(str) {
@@ -93,10 +94,16 @@ function generateRss() {
         walkDir(fullPath);
       } else if (file.endsWith('.astro')) {
         const relativePath = path.relative(pagesDir, fullPath);
-        const htmlPath = '/' + relativePath.replace(/\.astro$/, '.html').replace(/\\/g, '/').replace('/index.html', '/');
-        const pageKey = htmlPath.replace('.html', '');
+        // Convert index.astro to '/' and other pages to clean paths
+        let pagePath = '/' + relativePath.replace(/\.astro$/, '').replace(/\\/g, '/');
+        if (pagePath.endsWith('/index')) {
+          pagePath = pagePath.replace('/index', '') || '/';
+        }
+        if (pagePath === '//') pagePath = '/';
         
-        const shouldExclude = excludePages.some(ex => htmlPath.includes(ex));
+        const pageKey = pagePath;
+        
+        const shouldExclude = excludePages.some(ex => pagePath.includes(ex));
         if (shouldExclude) continue;
 
         const gitDate = getGitDateForFile(fullPath);
@@ -105,9 +112,9 @@ function generateRss() {
         
         if (meta) {
           items.push({
-            id: htmlPath,
+            id: pagePath,
             title: meta.title,
-            link: htmlPath,
+            link: pagePath,
             description: meta.description,
             pubDate: pubDate,
             isPage: true

@@ -6,6 +6,11 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 <url>
+  <loc>https://holger-kampffmeyer.de</loc>
+  <lastmod>2026-04-19</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
   <loc>https://holger-kampffmeyer.de/dj/em3f</loc>
   <lastmod>2026-04-19</lastmod>
   <priority>0.80</priority>
@@ -32,11 +37,6 @@
 </url>
 <url>
   <loc>https://holger-kampffmeyer.de/djhulk-electronic-music</loc>
-  <lastmod>2026-04-19</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://holger-kampffmeyer.de/googlehostedservice</loc>
   <lastmod>2026-04-19</lastmod>
   <priority>0.80</priority>
 </url>

@@ -24,7 +24,8 @@ function findStaticPages() {
         walkDir(fullPath);
       } else if (file.endsWith('.html') && file !== 'index.html') {
         const relativePath = path.relative(DIST_DIR, fullPath).replace('.html', '').replace(/\\/g, '/');
-        if (!relativePath.startsWith('dj/mixes/')) {
+        // Exclude Google verification files and other non-pages
+        if (!relativePath.startsWith('dj/mixes/') && !relativePath.includes('googlehostedservice')) {
           pages.push(`${baseUrl}/${relativePath}`);
         }
       }
@@ -32,6 +33,8 @@ function findStaticPages() {
   }
   
   walkDir(DIST_DIR);
+  // Add root URL
+  pages.unshift(baseUrl);
   return pages.sort();
 }
 
