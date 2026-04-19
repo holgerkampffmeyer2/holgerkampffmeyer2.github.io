@@ -7,17 +7,32 @@ const ROOT_DIR = path.join(__dirname, '..');
 const DIST_DIR = path.join(ROOT_DIR, 'dist');
 const PUBLIC_DIR = path.join(ROOT_DIR, 'public');
 
-function getExistingUrls(filePath) {
-  if (!fs.existsSync(filePath)) return [];
+function findStaticPages() {
+  const baseUrl = 'https://holger-kampffmeyer.de';
+  const pages = [];
   
-  const content = fs.readFileSync(filePath, 'utf-8');
-  const urls = [];
-  const regex = /<loc>([^<]+)<\/loc>/g;
-  let match;
-  while ((match = regex.exec(content)) !== null) {
-    urls.push(match[1]);
+  // Find all HTML files in dist/ except index and mix pages
+  function walkDir(dir) {
+    if (!fs.existsSync(dir)) return;
+    
+    const files = fs.readdirSync(dir);
+    for (const file of files) {
+      const fullPath = path.join(dir, file);
+      const stat = fs.statSync(fullPath);
+      
+      if (stat.isDirectory()) {
+        walkDir(fullPath);
+      } else if (file.endsWith('.html') && file !== 'index.html') {
+        const relativePath = path.relative(DIST_DIR, fullPath).replace('.html', '').replace(/\\/g, '/');
+        if (!relativePath.startsWith('dj/mixes/')) {
+          pages.push(`${baseUrl}${relativePath}`);
+        }
+      }
+    }
   }
-  return urls;
+  
+  walkDir(DIST_DIR);
+  return pages.sort();
 }
 
 function findMixPages() {
@@ -35,12 +50,9 @@ function findMixPages() {
 
 function updateSitemap() {
   const sitemapPath = path.join(PUBLIC_DIR, 'sitemap.xml');
-  let existingUrls = getExistingUrls(sitemapPath);
+  const staticUrls = findStaticPages();
   const mixUrls = findMixPages();
   const today = new Date().toISOString().split('T')[0];
-  
-  // Remove mix URLs from existing that we'll re-add
-  existingUrls = existingUrls.filter(url => !url.includes('/dj/mixes/'));
   
   if (mixUrls.length === 0) {
     console.log('No mix pages found in dist/');
@@ -55,7 +67,7 @@ function updateSitemap() {
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 `;
   
-  for (const url of existingUrls) {
+  for (const url of staticUrls) {
     sitemap += `
 <url>
   <loc>${url}</loc>
@@ -90,16 +102,15 @@ function updateSitemap() {
 </urlset>`;
   
   fs.writeFileSync(sitemapPath, sitemap);
-  console.log(`✅ Updated sitemap.xml with ${mixUrls.length} mix pages`);
+  console.log(`✅ Updated sitemap.xml with ${staticUrls.length} static + ${mixUrls.length} mix pages`);
 }
 
 function updateUrllist() {
   const urllistPath = path.join(PUBLIC_DIR, 'urllist.txt');
   const baseUrl = 'https://holger-kampffmeyer.de';
   
-  // Get static pages from sitemap (without mix pages)
-  const sitemapPath = path.join(PUBLIC_DIR, 'sitemap.xml');
-  let staticUrls = getExistingUrls(sitemapPath).filter(url => !url.includes('/dj/mixes/'));
+  // Get static pages from dist
+  const staticUrls = findStaticPages();
   
   // Get all mix pages sorted by number descending
   const mixUrls = findMixPages().sort((a, b) => {
