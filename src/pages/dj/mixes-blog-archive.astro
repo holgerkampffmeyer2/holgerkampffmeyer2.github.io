@@ -42,6 +42,9 @@ try {
 
 const archivePosts = blogData.posts ? blogData.posts.filter(post => post.hasTracklist).slice(1) : [];
 
+const ITEMS_PER_PAGE = 12;
+const totalPages = Math.ceil(archivePosts.length / ITEMS_PER_PAGE);
+
 const useCaseFilter = Astro.url.searchParams.get('useCase');
 const USE_CASE_LABELS: Record<string, string> = {
   gym: 'Gym Session',
@@ -182,12 +185,14 @@ if (useCaseFilter) {
         })();
       </script>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="postsContainer">
-        {archivePosts.map(post => (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="postsContainer" data-total-pages={totalPages} data-items-per-page={ITEMS_PER_PAGE}>
+        {archivePosts.map((post, index) => (
           <a 
             href={`/dj/mixes/${post.number}`}
             class="post-item block bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors group"
             data-usecases={JSON.stringify(post.useCases)}
+            data-page={Math.floor(index / ITEMS_PER_PAGE) + 1}
+            style={`display: ${Math.floor(index / ITEMS_PER_PAGE) + 1 === 1 ? 'block' : 'none'}`}
           >
             <div class="aspect-video overflow-hidden">
               <img 
@@ -246,17 +251,126 @@ if (useCaseFilter) {
         ))}
       </div>
 
-      <script is:inline>
-        const urlParams = new URLSearchParams(window.location.search);
-        const filter = urlParams.get('useCase');
-        
-        document.querySelectorAll('.post-item').forEach(item => {
-          const useCases = JSON.parse(item.dataset.usecases || '[]');
-          if (filter && useCases.length > 0 && !useCases.includes(filter)) {
-            item.style.display = 'none';
+      <script is:inline define:vars={{ ITEMS_PER_PAGE, totalPages }}>
+        (function() {
+          const params = new URLSearchParams(window.location.search);
+          const filter = params.get('useCase');
+          const urlPage = parseInt(params.get('page')) || 1;
+          let currentPage = Math.max(1, Math.min(urlPage, totalPages));
+          
+          const grid = document.getElementById('postsContainer');
+          const items = grid.querySelectorAll('.post-item');
+          
+          function showPage(page) {
+            currentPage = page;
+            items.forEach(item => {
+              const itemPage = parseInt(item.dataset.page);
+              const useCases = JSON.parse(item.dataset.usecases || '[]');
+              const matchesFilter = !filter || useCases.includes(filter);
+              
+              if (itemPage === page && matchesFilter) {
+                item.style.display = 'block';
+              } else {
+                item.style.display = 'none';
+              }
+            });
+            
+            const url = new URL(window.location);
+            url.searchParams.set('page', page);
+            window.history.replaceState({}, '', url);
+            
+            updatePagination();
           }
-        });
+          
+          function updatePagination() {
+            const pageInfo = document.getElementById('pageInfo');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const pageNumbers = document.getElementById('pageNumbers');
+            
+            if (pageInfo) pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+            if (prevBtn) prevBtn.disabled = currentPage === 1;
+            if (nextBtn) nextBtn.disabled = currentPage === totalPages;
+            
+            if (pageNumbers) {
+              pageNumbers.innerHTML = '';
+              addPageButton(1, pageNumbers);
+              if (currentPage > 3) {
+                const ellipsis = document.createElement('span');
+                ellipsis.className = 'px-2 text-[var(--color-text-muted)]';
+                ellipsis.textContent = '...';
+                pageNumbers.appendChild(ellipsis);
+              }
+              for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+                addPageButton(i, pageNumbers);
+              }
+              if (currentPage < totalPages - 2) {
+                const ellipsis = document.createElement('span');
+                ellipsis.className = 'px-2 text-[var(--color-text-muted)]';
+                ellipsis.textContent = '...';
+                pageNumbers.appendChild(ellipsis);
+              }
+              if (totalPages > 1) {
+                addPageButton(totalPages, pageNumbers);
+              }
+            }
+          }
+          
+          function addPageButton(page, container) {
+            const btn = document.createElement('button');
+            btn.className = `w-10 h-10 rounded-lg font-semibold transition-colors ${
+              page === currentPage 
+                ? 'bg-[var(--color-primary)] text-white' 
+                : 'bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-primary)] hover:text-white border border-[var(--color-border)]'
+            }`;
+            btn.textContent = page;
+            btn.addEventListener('click', () => showPage(page));
+            container.appendChild(btn);
+          }
+          
+          // Initial filter
+          document.querySelectorAll('.post-item').forEach(item => {
+            const useCases = JSON.parse(item.dataset.usecases || '[]');
+            if (filter && useCases.length > 0 && !useCases.includes(filter)) {
+              item.style.display = 'none';
+            }
+          });
+          
+          // Initial page
+          items.forEach(item => {
+            const itemPage = parseInt(item.dataset.page);
+            const useCases = JSON.parse(item.dataset.usecases || '[]');
+            const matchesFilter = !filter || useCases.includes(filter);
+            if (itemPage !== currentPage || !matchesFilter) {
+              item.style.display = 'none';
+            }
+          });
+          
+          const prevBtn = document.getElementById('prevBtn');
+          const nextBtn = document.getElementById('nextBtn');
+          if (prevBtn) prevBtn.addEventListener('click', () => showPage(currentPage - 1));
+          if (nextBtn) nextBtn.addEventListener('click', () => showPage(currentPage + 1));
+          
+          updatePagination();
+        })();
       </script>
+
+      <!-- Pagination -->
+      {totalPages > 1 && (
+        <div class="flex justify-center items-center gap-4 mt-12">
+          <button id="prevBtn" class="btn-primary disabled:opacity-50 disabled:cursor-not-allowed">
+            ← Previous
+          </button>
+          <div id="pageNumbers" class="flex gap-2"></div>
+          <button id="nextBtn" class="btn-primary">
+            Next →
+          </button>
+        </div>
+      )}
+
+      <div class="text-center mt-8 mb-4">
+        <p id="pageInfo" class="text-[var(--color-text-muted)]">Page 1 of {totalPages}</p>
+      </div>
 
       <div class="text-center mt-12">
         <a href="/dj/mixes" class="btn-secondary">
