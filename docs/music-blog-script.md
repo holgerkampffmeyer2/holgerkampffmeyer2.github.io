@@ -103,6 +103,10 @@ cp "tracklsts/DJ Hulk - Mix176-LatinHouse-tracklist.txt" src/data/tracklists/
 cp "tracklists/" public/tracklists/
 ```
 
+**Wichtig:** WebP-Dateinamen dürfen KEINE Leerzeichen enthalten:
+- ✅ `Mixcloud-Post-Mix177.webp`
+- ❌ `Mixcloud Post Mix177.webp`
+
 ### Schritt 3: Build ausführen
 
 ```bash

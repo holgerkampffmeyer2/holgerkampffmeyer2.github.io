@@ -203,7 +203,7 @@ function formatDate(dateStr: string) {
                       </tr>
                     </thead>
                     <tbody>
-                      {latestPost.tracklist.map((track: string, idx: number) => {
+                      {latestPost.tracklist.map((track: string) => {
                         const parts = track.split(' - ');
                         const artist = parts[0]?.replace(/,$/, '') || '';
                         const title = parts.slice(1).join(' - ').replace(/,$/, '') || track;

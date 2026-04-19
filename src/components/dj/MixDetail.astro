@@ -48,10 +48,6 @@ function formatDuration(seconds: number) {
   const secs = seconds % 60;
   return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
-
-const mixNumber = post.number;
-const seoTitle = `Mix#${mixNumber} - ${post.title} | DJ Hulk`;
-const seoDescription = post.description?.substring(0, 160) || `DJ Hulk Mix#${mixNumber} - House, Tech House, Deep House with full tracklist.`;
 ---
 
 <article class="mix-detail">

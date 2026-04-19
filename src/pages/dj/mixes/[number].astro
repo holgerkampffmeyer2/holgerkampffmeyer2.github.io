@@ -41,15 +41,14 @@ export async function getStaticPaths() {
   const postsWithTracklists = blogData.posts.filter((post: BlogPostData) => post.hasTracklist);
 
   return postsWithTracklists.map((post: BlogPostData, index: number) => {
-    const allPosts = postsWithTracklists;
-    const currentIndex = allPosts.findIndex((p: BlogPostData) => p.number === post.number);
-    const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
-    const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+    const currentIndex = index;
+    const prevPost = currentIndex < postsWithTracklists.length - 1 ? postsWithTracklists[currentIndex + 1] : null;
+    const nextPost = currentIndex > 0 ? postsWithTracklists[currentIndex - 1] : null;
     const isLatest = index === 0;
 
     return {
       params: { number: String(post.number) },
-      props: { post, prevPost, nextPost, isLatest, allPosts }
+      props: { post, prevPost, nextPost, isLatest }
     };
   });
 }
@@ -59,10 +58,9 @@ interface Props {
   prevPost: BlogPostData | null;
   nextPost: BlogPostData | null;
   isLatest: boolean;
-  allPosts: BlogPostData[];
 }
 
-const { post, prevPost, nextPost, isLatest, allPosts } = Astro.props;
+const { post, prevPost, nextPost, isLatest } = Astro.props;
 
 const mixNumber = post.number;
 const pageTitle = `Mix#${mixNumber} - ${post.title} | DJ Hulk`;
