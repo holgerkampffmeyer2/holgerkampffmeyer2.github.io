@@ -95,7 +95,7 @@ const videoSchema = videos.map(video => ({
   description="Videos von DJ Hulk - Event-Aufnahmen, Aftermovies, Party-Sessions und Live-Mitschnitte auf YouTube."
   image="/img/_81A4218.webp"
 >
-  <script type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
   <Navbar currentPage="/dj/videos" />
 
   <!-- Breadcrumb -->

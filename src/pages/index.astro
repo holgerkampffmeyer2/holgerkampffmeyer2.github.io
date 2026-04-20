@@ -516,8 +516,10 @@ const faqs = getFaqsForPage('index');
      const prevBtn = document.getElementById("slider-prev");
      const nextBtn = document.getElementById("slider-next");
      let currentSlide = 0;
+     /** @type {ReturnType<typeof setInterval>} */
      let slideInterval = null;
 
+     /** @param {number} index */
      function showSlide(index) {
        slides.forEach((slide, i) => {
          slide.classList.toggle("active", i === index);

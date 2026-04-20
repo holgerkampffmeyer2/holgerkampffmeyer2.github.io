@@ -82,7 +82,7 @@ const totalPages = Math.ceil(allReviews.length / ITEMS_PER_PAGE);
   </div>
 </section>
 
-<script define:vars={{ totalPages, ITEMS_PER_PAGE }}>
+<script is:inline define:vars={{ totalPages, ITEMS_PER_PAGE }}>
   document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1;
     const cards = document.querySelectorAll('.review-card');
