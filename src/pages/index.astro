@@ -508,87 +508,87 @@ const faqs = getFaqsForPage('index');
     </div>
   </section>
 
-  <Footer />
+<Footer />
 
-   <script lang="ts">
-    const slides = document.querySelectorAll(".slide");
-    const dots = document.querySelectorAll(".slider-dot");
-    const prevBtn = document.getElementById("slider-prev");
-    const nextBtn = document.getElementById("slider-next");
-    let currentSlide = 0;
-    let slideInterval: ReturnType<typeof setInterval>;
+   <script>
+     const slides = document.querySelectorAll(".slide");
+     const dots = document.querySelectorAll(".slider-dot");
+     const prevBtn = document.getElementById("slider-prev");
+     const nextBtn = document.getElementById("slider-next");
+     let currentSlide = 0;
+     let slideInterval = null;
 
-    function showSlide(index: number) {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle("active", i === index);
-      });
-      dots.forEach((dot, i) => {
-        dot.classList.toggle("active", i === index);
-      });
-      currentSlide = index;
-    }
+     function showSlide(index) {
+       slides.forEach((slide, i) => {
+         slide.classList.toggle("active", i === index);
+       });
+       dots.forEach((dot, i) => {
+         dot.classList.toggle("active", i === index);
+       });
+       currentSlide = index;
+     }
 
-    function nextSlide() {
-      showSlide((currentSlide + 1) % slides.length);
-    }
+     function nextSlide() {
+       showSlide((currentSlide + 1) % slides.length);
+     }
 
-    function prevSlide() {
-      showSlide((currentSlide - 1 + slides.length) % slides.length);
-    }
+     function prevSlide() {
+       showSlide((currentSlide - 1 + slides.length) % slides.length);
+     }
 
-    function startSlider() {
-      slideInterval = setInterval(nextSlide, 5000);
-    }
+     function startSlider() {
+       slideInterval = setInterval(nextSlide, 5000);
+     }
 
      function stopSlider() {
        clearInterval(slideInterval);
      }
 
-      if (prevBtn) {
-        prevBtn.addEventListener("click", function() {
-          prevSlide();
-          stopSlider();
-          startSlider();
-        });
-      }
+     if (prevBtn) {
+       prevBtn.addEventListener("click", function() {
+         prevSlide();
+         stopSlider();
+         startSlider();
+       });
+     }
 
-      if (nextBtn) {
-        nextBtn.addEventListener("click", function() {
-          nextSlide();
-          stopSlider();
-          startSlider();
-        });
-      }
+     if (nextBtn) {
+       nextBtn.addEventListener("click", function() {
+         nextSlide();
+         stopSlider();
+         startSlider();
+       });
+     }
 
-      for (var i = 0; i < dots.length; i++) {
-        dots[i].addEventListener("click", (function(index) {
-          return function() {
-            showSlide(index);
-            stopSlider();
-            startSlider();
-          };
-        })(i));
-      }
+     for (var i = 0; i < dots.length; i++) {
+       dots[i].addEventListener("click", (function(index) {
+         return function() {
+           showSlide(index);
+           stopSlider();
+           startSlider();
+         };
+       })(i));
+     }
 
-      startSlider();
+     startSlider();
 
-      var observerOptions = {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1
-      };
+     var observerOptions = {
+       root: null,
+       rootMargin: "0px",
+       threshold: 0.1
+     };
 
-      var observer = new IntersectionObserver(function(entries) {
-        for (var i = 0; i < entries.length; i++) {
-          if (entries[i].isIntersecting) {
-            entries[i].target.classList.add("visible");
-          }
-        }
-      }, observerOptions);
+     var observer = new IntersectionObserver(function(entries) {
+       for (var i = 0; i < entries.length; i++) {
+         if (entries[i].isIntersecting) {
+           entries[i].target.classList.add("visible");
+         }
+       }
+     }, observerOptions);
 
-      var animateElements = document.querySelectorAll(".animate-on-scroll");
-      for (var i = 0; i < animateElements.length; i++) {
-        observer.observe(animateElements[i]);
-      }
-  </script>
+     var animateElements = document.querySelectorAll(".animate-on-scroll");
+     for (var i = 0; i < animateElements.length; i++) {
+       observer.observe(animateElements[i]);
+     }
+   </script>
 </Layout>
