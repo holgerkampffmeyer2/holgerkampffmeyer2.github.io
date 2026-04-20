@@ -510,15 +510,15 @@ const faqs = getFaqsForPage('index');
 
 <Footer />
 
-   <script is:inline lang="ts">
+   <script is:inline>
      const slides = document.querySelectorAll(".slide");
      const dots = document.querySelectorAll(".slider-dot");
      const prevBtn = document.getElementById("slider-prev");
      const nextBtn = document.getElementById("slider-next");
      let currentSlide = 0;
-     let slideInterval: ReturnType<typeof setInterval> = null;
+     let slideInterval = null;
 
-     function showSlide(index: number) {
+     function showSlide(index) {
        slides.forEach((slide, i) => {
          slide.classList.toggle("active", i === index);
        });
