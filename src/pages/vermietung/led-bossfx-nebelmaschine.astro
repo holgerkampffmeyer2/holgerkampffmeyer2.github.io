@@ -10,6 +10,7 @@ import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import IncludedInPackages from '../../components/vermietung/IncludedInPackages.astro';
 import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import { getFaqsForPage } from '../../lib/faqUtils';
 
 const breadcrumbSegments = [
   { label: "Startseite", href: "/" },
@@ -19,32 +20,7 @@ const breadcrumbSegments = [
 
 const pageTitle = "LED BossFX-2 Pro & Nebelmaschine - Vermietung | DJ Hulk";
 
-const faqs = [
-  {
-    question: "Ist Nebelfluid im Mietpreis enthalten?",
-    answer: "Ja, 1 Tankfüllung (ca. 1 Liter) Nebelfluid ist im Mietpreis inbegriffen. Das reicht für einen typischen Partyabend von ca. 4-6 Stunden. Falls du mehr benötigst, kannst du zusätzliches Fluid erhalten."
-  },
-  {
-    question: "Wie lange hält der Nebel an?",
-    answer: "Die AF-150 Nebelmaschine mit 800W Leistung erzeugt ca. 110 m³ Nebel pro Minute. Der Nebel verfliegt je nach Raumgröße und Belüftung nach etwa 30-60 Sekunden. Du kannst die Intensität über die Fernbedienung oder DMX steuern."
-  },
-  {
-    question: "Ist die Nutzung von Nebel gesundheitlich unbedenklich?",
-    answer: "Ja, wir verwenden nur hochwertiges, speziell für Veranstaltungen entwickeltes Nebelfluid. Es ist gesundheitlich unbedenklich und hinterlässt keine Rückstände. Es sollte jedoch bei sehr empfindlichen Personen mit Atemwegserkrankungen vorsichtig eingesetzt werden."
-  },
-  {
-    question: "Welche Steuerungsmöglichkeiten gibt es?",
-    answer: "Die LED BossFX-2 Pro kann per Sound-zu-Licht (automatisch auf Musik reagierend), über die mitgelieferte Fernbedienung oder per DMX gesteuert werden. Die Nebelmaschine wird per Fernbedienung oder DMX gesteuert."
-  },
-  {
-    question: "Kann ich das Set auch ohne Nebelmaschine mieten?",
-    answer: "Ja, die LED BossFX-2 Pro kann auch einzeln ohne Nebelmaschine gemietet werden. Allerdings kommen die Lichteffekte, besonders die Derby-Beams und Strobe-Effekte, viel besser zur Geltung, wenn Nebel eingesetzt wird."
-  },
-  {
-    question: "Was tun, wenn die Party schon in 3 Tagen ist?",
-    answer: "Ja, ich reagiere auch kurzfristig! Anfragen bis zu 2 Tagen vor der Veranstaltung sind meist noch möglich. Am besten rufst du mich direkt an unter 0171/1467491 für schnelle Abstimmung. Ich habe oft noch freie Geräte verfügbar."
-  }
-];
+const faqs = getFaqsForPage('led-bossfx-nebelmaschine');
 
 const includedInPackages = [
   { name: "Partypaket", url: "/vermietung/partypaket-stuttgart" },
@@ -90,7 +66,7 @@ const serviceSchema = {
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqs.map(faq => ({
+  "mainEntity": faqs.map((faq: any) => ({
     "@type": "Question",
     "name": faq.question,
     "acceptedAnswer": {

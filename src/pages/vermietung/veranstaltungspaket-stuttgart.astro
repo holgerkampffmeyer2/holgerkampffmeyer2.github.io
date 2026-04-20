@@ -9,6 +9,7 @@ import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import Testimonials from '../../components/vermietung/Testimonials.astro';
 import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import { getFaqsForPage } from '../../lib/faqUtils';
 
 const breadcrumbSegments = [
   { label: "Startseite", href: "/" },
@@ -18,32 +19,7 @@ const breadcrumbSegments = [
 
 const pageTitle = "Veranstaltungspaket Stuttgart - Eventtechnik Miete | DJ Hulk";
 
-const faqs = [
-  {
-    question: "Was unterscheidet das Veranstaltungspaket vom DJ-Paket?",
-    answer: "Das Veranstaltungspaket enthält: 2x LD Maui 28 G3, Yamaha MG6 Mischpult, Eurolite KLS Laser Bar, AF-150 Nebelmaschine, 2x LED Spot Moving Head, Mikrofon und 4x LED PAR Strahler. Das DJ-Paket enthält stattdessen die LED BossFX Pro und einen Moving Head. Das Veranstaltungspaket hat mehr Licht-Komponenten."
-  },
-  {
-    question: "Wie groß darf die Veranstaltung sein?",
-    answer: "Das Veranstaltungspaket eignet sich für Veranstaltungen mit bis zu 150 Personen. Die LD Maui 28 G3 liefert mit 2060W genug Leistung auch für größere Räume. Die Lichtanlage mit Laser, Moving Heads und PAR Strahlern sorgt für eine beeindruckende Show."
-  },
-  {
-    question: "Kann ich die Technik auch ohne DJ nutzen?",
-    answer: "Ja, das Paket kannst du auch ohne DJ nutzen. Das Yamaha Mischpult ermöglicht dir den Anschluss mehrerer Audioquellen (Laptop, Mikrofon, etc.). Die Lichtanlage läuft im Sound-zu-Licht-Modus automatisch oder kann per DMX gesteuert werden."
-  },
-  {
-    question: "Ist das Yamaha Mischpult im Paket enthalten?",
-    answer: "Ja, das Yamaha MG6 6-Kanal Mischpult ist im Veranstaltungspaket enthalten. Es ermöglicht dir die flexible Steuerung verschiedener Audioquellen und bietet die Möglichkeit, Mikrofone und Musikquellen separat zu mischen."
-  },
-  {
-    question: "Wie funktioniert die Lieferung und Abholung?",
-    answer: "Du kannst die Technik selbst in Leinfelden-Echterdingen abholen oder wir liefern sie gegen Aufpreis direkt zu deinem Veranstaltungsort. Bei der Abholung geben wir dir eine ausführliche Einweisung in Aufbau und Bedienung."
-  },
-  {
-    question: "Was tun, wenn die Party schon in 3 Tagen ist?",
-    answer: "Ja, ich reagiere auch kurzfristig! Anfragen bis zu 2 Tagen vor der Veranstaltung sind meist noch möglich. Am besten rufst du mich direkt an unter 0171/1467491 für schnelle Abstimmung. Ich habe oft noch freie Geräte verfügbar."
-  }
-];
+const faqs = getFaqsForPage('veranstaltungspaket-stuttgart');
 
 const images = [
   "/img/vermietung/ldmaui3.webp",
@@ -138,7 +114,7 @@ const serviceSchema = {
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqs.map(faq => ({
+  "mainEntity": faqs.map((faq: any) => ({
     "@type": "Question",
     "name": faq.question,
     "acceptedAnswer": {

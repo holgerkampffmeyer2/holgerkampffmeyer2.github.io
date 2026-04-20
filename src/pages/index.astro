@@ -15,7 +15,7 @@ import YouTubeIcon from "../components/icons/YouTubeIcon.astro";
 import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
 import BieteSection from "../components/BieteSection.astro";
 import FAQSection from "../components/FAQSection.astro";
-import { getFaqsForPage, getFaqSchema } from "../data/faqs";
+import { getFaqsForPage } from "../lib/faqUtils";
 
 const faqs = getFaqsForPage('index');
 ---
@@ -62,15 +62,25 @@ const faqs = getFaqsForPage('index');
       "sameAs": [
         "https://www.xing.com/profile/Holger_Kampffmeyer",
         "https://www.linkedin.com/in/holger-kampffmeyer-390b6789/",
-        "https://www.facebook.com/holger.kampffmeyer",
-        "https://www.instagram.com/djhulk_de",
-        "https://www.mixcloud.com/holger-kampffmeyer/",
-        "https://www.youtube.com/@djhulk_de"
-     ],
-     },
-     getFaqSchema('index')
-   ]}
-  >
+         "https://www.facebook.com/holger.kampffmeyer",
+         "https://www.instagram.com/djhulk_de",
+         "https://www.mixcloud.com/holger-kampffmeyer/",
+         "https://www.youtube.com/@djhulk_de"
+       ],
+       },
+       {
+         "@context": "https://schema.org",
+         "@type": "FAQPage",
+         "mainEntity": faqs.map((faq) => ({
+           "@type": "Question",
+           "name": faq.question,
+           "acceptedAnswer": {
+             "@type": "Answer",
+             "text": faq.answer
+           }
+         }))
+       },
+    {
   <Navbar currentPage="/" />
 
   <!-- Hero Slider Section -->
