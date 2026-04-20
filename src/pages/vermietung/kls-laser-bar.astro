@@ -10,6 +10,7 @@ import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import IncludedInPackages from '../../components/vermietung/IncludedInPackages.astro';
 import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import { getFaqsForPage } from '../../lib/faqUtils';
 
 const breadcrumbSegments = [
   { label: "Startseite", href: "/" },
@@ -19,32 +20,7 @@ const breadcrumbSegments = [
 
 const pageTitle = "Eurolite KLS Laser Bar & Nebelmaschine - Vermietung | DJ Hulk";
 
-const faqs = [
-  {
-    question: "Brauche ich einen Laserschutzbeauftragten für die Laser Bar?",
-    answer: "Nein, bei der Eurolite KLS Laser Bar handelt es sich um einen Laser der Klasse 2M. Dies bedeutet, dass kein Laserschutzbeauftragter erforderlich ist. Du solltest jedoch darauf achten, nicht direkt in den Laserstrahl zu blicken."
-  },
-  {
-    question: "Wie sicher ist der Laser im Partybetrieb?",
-    answer: "Der Laser der KLS Bar FX ist ein RG-Laser (Rot-Grün) der Klasse 2M. Er ist sicher für den Partygebrauch und Augensicherheit ist gewährleistet, solange man nicht absichtlich direkt in den Strahl schaut. Die Nutzung ist auch ohne spezielle Genehmigung erlaubt."
-  },
-  {
-    question: "Welche Effekte bietet die Laser Bar?",
-    answer: "Die Eurolite KLS Laser Bar FX vereint 4 Effekte in einem: 2 Derby-Beams mit drehenden Mustern, 2 LED-Spots für Flächeneffekte, 4 weiße Strobe-LEDs für Blitzlichter und einen Laser für spektakuläre Strahleneffekte."
-  },
-  {
-    question: "Kann ich die Laser Bar auch ohne Nebelmaschine nutzen?",
-    answer: "Ja, die Laser Bar funktioniert auch ohne Nebelmaschine. Allerdings kommen die Laserstrahlen und Effekte viel besser zur Geltung, wenn leichter Nebel die Luft vernebelt. Die 1200W Nebelmaschine kann optional dazugemietet werden."
-  },
-  {
-    question: "Wie wird die Laser Bar gesteuert?",
-    answer: "Die Steuerung erfolgt wahlweise per Sound-zu-Licht (automatisch auf Musik reagierend), über die mitgelieferte Fernbedienung oder per DMX. Der Sound-zu-Licht-Modus ist perfekt für Einsteiger geeignet."
-  },
-  {
-    question: "Was tun, wenn die Party schon in 3 Tagen ist?",
-    answer: "Ja, ich reagiere auch kurzfristig! Anfragen bis zu 2 Tagen vor der Veranstaltung sind meist noch möglich. Am besten rufst du mich direkt an unter 0171/1467491 für schnelle Abstimmung. Ich habe oft noch freie Geräte verfügbar."
-  }
-];
+const faqs = getFaqsForPage('kls-laser-bar');
 
 const includedInPackages = [
   { name: "Partypaket", url: "/vermietung/partypaket-stuttgart" },
@@ -87,7 +63,7 @@ const serviceSchema = {
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqs.map(faq => ({
+  "mainEntity": faqs.map((faq: any) => ({
     "@type": "Question",
     "name": faq.question,
     "acceptedAnswer": {

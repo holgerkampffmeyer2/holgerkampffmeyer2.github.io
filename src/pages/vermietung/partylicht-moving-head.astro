@@ -10,6 +10,7 @@ import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import IncludedInPackages from '../../components/vermietung/IncludedInPackages.astro';
 import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import { getFaqsForPage } from '../../lib/faqUtils';
 
 const breadcrumbSegments = [
   { label: "Startseite", href: "/" },
@@ -19,32 +20,7 @@ const breadcrumbSegments = [
 
 const pageTitle = "Partylicht & Gobo Moving Head - Vermietung | DJ Hulk";
 
-const faqs = [
-  {
-    question: "Brauche ich DMX-Kenntnisse, um die Lichtanlage zu bedienen?",
-    answer: "Nein, du brauchst nicht zwingend DMX-Kenntnisse! Die Lichtanlage kann im Sound-zu-Licht-Modus betrieben werden, sodass sie automatisch auf die Musik reagiert. Optional kannst du aber auch den DMX-Controller nutzen für eigene Programme."
-  },
-  {
-    question: "Wie lange dauert der Aufbau der Lichtanlage?",
-    answer: "Der Aufbau dauert in der Regel 15-20 Minuten. Das T-Bar Stativ wird einfach aufgebaut, die Geräte montiert und angeschlossen. Ich erkläre dir bei der Abholung ausführlich, wie alles funktioniert."
-  },
-  {
-    question: "Kann ich die Lichter auch ohne Nebelmaschine nutzen?",
-    answer: "Ja, die Lichter funktionieren auch ohne Nebelmaschine. Allerdings kommen die Effekte viel besser zur Geltung, wenn Nebel eingesetzt wird. Eine Nebelmaschine kann optional dazgemietet werden."
-  },
-  {
-    question: "Welche Effekte bietet der Moving Head?",
-    answer: "Der 18 Prisma LED Spot verfügt über 10 verschiedene Gobo-Muster (Schablonen), ein 18-fach Prisma für spektakuläre Lichteffekte und RGBW-Farbmischung. Er kann sich horizontal und vertikal bewegen für dynamische Shows."
-  },
-  {
-    question: "Wie hoch sollte das Stativ montiert werden?",
-    answer: "Das T-Bar Stativ ist flexibel von 100 cm bis 180 cm höhenverstellbar. Für beste Ergebnisse empfehle ich eine Höhe von ca. 150-180 cm, sodass die Lichter über die Köpfe der Gäste leuchten können."
-  },
-  {
-    question: "Was tun, wenn die Party schon in 3 Tagen ist?",
-    answer: "Ja, ich reagiere auch kurzfristig! Anfragen bis zu 2 Tagen vor der Veranstaltung sind meist noch möglich. Am besten rufst du mich direkt an unter 0171/1467491 für schnelle Abstimmung. Ich habe oft noch freie Geräte verfügbar."
-  }
-];
+const faqs = getFaqsForPage('partylicht-moving-head');
 
 const includedInPackages = [
   { name: "Veranstaltungspaket", url: "/vermietung/veranstaltungspaket-stuttgart" },
@@ -91,7 +67,7 @@ const serviceSchema = {
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqs.map(faq => ({
+  "mainEntity": faqs.map((faq: any) => ({
     "@type": "Question",
     "name": faq.question,
     "acceptedAnswer": {

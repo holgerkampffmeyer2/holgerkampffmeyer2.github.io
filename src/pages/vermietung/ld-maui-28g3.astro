@@ -10,6 +10,7 @@ import RentalPricing from '../../components/vermietung/RentalPricing.astro';
 import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import IncludedInPackages from '../../components/vermietung/IncludedInPackages.astro';
 import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
+import { getFaqsForPage } from '../../lib/faqUtils';
 
 const breadcrumbSegments = [
   { label: "Startseite", href: "/" },
@@ -19,32 +20,7 @@ const breadcrumbSegments = [
 
 const pageTitle = "LD Maui 28 G3 - Vermietung | DJ Hulk";
 
-const faqs = [
-  {
-    question: "Wie viele Personen können mit der LD Maui 28 G3 beschallt werden?",
-    answer: "Die LD Maui 28 G3 eignet sich perfekt für Veranstaltungen mit bis zu 150 Personen. Mit 2060W Peak-Leistung und 127 dB Schalldruck liefert sie kraftvollen Sound auch für größere Räume."
-  },
-  {
-    question: "Wie schließe ich die Anlage an?",
-    answer: "Die LD Maui 28 G3 ist ein echtes Plug-and-Play-System. Schließe einfach die beiden Säulen an den Subwoofer an, verbinde die Stromkabel und los geht's. Du kannst per Bluetooth, USB, AUX oder XLR Musik zuspielen."
-  },
-  {
-    question: "Kann ich die Anlage auch im Freien nutzen?",
-    answer: "Ja, die LD Maui 28 G3 kann auch im Außenbereich eingesetzt werden. Achte jedoch darauf, dass die Elektronik vor Regen und direkter Nässe geschützt wird. Bei Unsicherheit berate ich dich gerne persönlich."
-  },
-  {
-    question: "Brauche ich zusätzliche Kabel oder Adapter?",
-    answer: "Im Mietpreis inbegriffen sind alle notwendigen Kabel: 2x Stromkabel und 2x XLR-Kabel (5m). Achte darauf, dass Dein Mischpult XLR-Ausgänge hat oder miete das Yamaha Mischpult dazu."
-  },
-  {
-    question: "Wie schwer ist der Transport?",
-    answer: "Das Gesamtsystem wiegt ca. 35 kg. Die einzelnen Komponenten sind gut in einem Kombi oder Kleinwagen mit umklappbarer Rückbank zu transportieren. Für den Aufbau solltest du ca. 15-20 Minuten einplanen."
-  },
-  {
-    question: "Was tun, wenn die Party schon in 3 Tagen ist?",
-    answer: "Ja, ich reagiere auch kurzfristig! Anfragen bis zu 2 Tagen vor der Veranstaltung sind meist noch möglich. Am besten rufst du mich direkt an unter 0171/1467491 für schnelle Abstimmung. Ich habe oft noch freie Geräte verfügbar."
-  }
-];
+const faqs = getFaqsForPage('ld-maui-28g3');
 
 const includedInPackages = [
   { name: "Veranstaltungspaket", url: "/vermietung/veranstaltungspaket-stuttgart" },
@@ -95,7 +71,7 @@ const serviceSchema = {
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqs.map(faq => ({
+  "mainEntity": faqs.map((faq: any) => ({
     "@type": "Question",
     "name": faq.question,
     "acceptedAnswer": {

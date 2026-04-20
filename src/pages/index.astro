@@ -15,7 +15,9 @@ import YouTubeIcon from "../components/icons/YouTubeIcon.astro";
 import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
 import BieteSection from "../components/BieteSection.astro";
 import FAQSection from "../components/FAQSection.astro";
-import { faqs } from "../data/faqs";
+import { getFaqsForPage } from "../lib/faqUtils";
+
+const faqs = getFaqsForPage('index');
 ---
 
 <Layout
@@ -66,18 +68,18 @@ import { faqs } from "../data/faqs";
         "https://www.youtube.com/@djhulk_de"
       ]
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqs.map(faq => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer
-        }
-      }))
-    },
+{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": faqs.map((faq) => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": faq.answer
+            }
+          }))
+        },
     {
       "@context": "https://schema.org",
       "@type": "MusicGroup",

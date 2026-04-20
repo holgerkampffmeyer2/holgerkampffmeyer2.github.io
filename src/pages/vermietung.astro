@@ -8,12 +8,14 @@ import FAQSection from '../components/FAQSection.astro';
 import MietanfrageAblauf from '../components/vermietung/MietanfrageAblauf.astro';
 import ChevronLeftIcon from "../components/icons/ChevronLeftIcon.astro";
 import ChevronRightIcon from "../components/icons/ChevronRightIcon.astro";
-import { faqs } from '../data/faqs';
+import { getFaqsForPage } from '../lib/faqUtils';
+
+const faqs = getFaqsForPage('vermietung');
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqs.map(faq => ({
+  "mainEntity": faqs.map((faq: any) => ({
     "@type": "Question",
     "name": faq.question,
     "acceptedAnswer": {

@@ -10,6 +10,7 @@ import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import IncludedInPackages from '../../components/vermietung/IncludedInPackages.astro';
 import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import { getFaqsForPage } from '../../lib/faqUtils';
 
 const breadcrumbSegments = [
   { label: "Startseite", href: "/" },
@@ -19,32 +20,7 @@ const breadcrumbSegments = [
 
 const pageTitle = "JBL Partybox 300/320 - Vermietung | DJ Hulk";
 
-const faqs = [
-  {
-    question: "Wie lange hält der Akku der JBL Partybox?",
-    answer: "Die JBL Partybox 300 und 320 bieten bis zu 18 Stunden Akkulaufzeit. Die tatsächliche Laufzeit hängt von der Lautstärke und der Nutzung der Lichteffekte ab. Bei voller Lautstärke mit Light Show sind es ca. 6-8 Stunden."
-  },
-  {
-    question: "Kann ich zwei Partyboxen miteinander verbinden?",
-    answer: "Ja! Im Paket ist ein Verbindungskabel (5M) fürdie Verbindung der zwei Boxen enthalten. Das ist perfekt für größere Räume oder wenn du mehr Power brauchst."
-  },
-  {
-    question: "Wie spiele ich Musik auf den Partyboxen ab?",
-    answer: "Du hast mehrere Möglichkeiten: Bluetooth (von Smartphone/Tablet), USB-Stick, 3,5mm Klinke (AUX) oder sogar ein Mikrofon/Gitarre direkt anschließen. Bei Bedarf lege ich ein passendes Kabel für den Anschluss eines Laptops bei."
-  },
-  {
-    question: "Sind die Boxen wasserdicht?",
-    answer: "Die JBL Partybox 320 ist nach IPX4 spritzwassergeschützt und kann daher auch im Freien bei leichtem Regen genutzt werden. Die Partybox 300 ist nicht wasserdicht und sollte vor Nässe geschützt werden."
-  },
-  {
-    question: "Wie groß ist der Lieferumfang?",
-    answer: "Im Mietpaket enthalten sind: 1x JBL Partybox 300, 1x JBL Partybox 320, 2x Stromkabel und 1x Verbindungskabel (5m) für die Kopplung der 2 Boxen. Bei Bedarf lege ich noch ein Verbindungskabel für die Zuspielung von Musik über einen Laptops bei. Alles was du für den Start brauchst!"
-  },
-  {
-    question: "Was tun, wenn die Party schon in 3 Tagen ist?",
-    answer: "Ja, ich reagiere auch kurzfristig! Anfragen bis zu 2 Tagen vor der Veranstaltung sind meist noch möglich. Am besten rufst du mich direkt an unter 0171/1467491 für schnelle Abstimmung. Ich habe oft noch freie Geräte verfügbar."
-  }
-];
+const faqs = getFaqsForPage('jbl-partybox-300-320');
 
 const includedInPackages = [
   { name: "Partypaket", url: "/vermietung/partypaket-stuttgart" }
@@ -87,7 +63,7 @@ const serviceSchema = {
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqs.map(faq => ({
+  "mainEntity": faqs.map((faq: any) => ({
     "@type": "Question",
     "name": faq.question,
     "acceptedAnswer": {

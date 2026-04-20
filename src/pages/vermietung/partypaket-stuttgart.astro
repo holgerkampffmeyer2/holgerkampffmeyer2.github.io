@@ -9,6 +9,7 @@ import ExampleEvents from '../../components/vermietung/ExampleEvents.astro';
 import Testimonials from '../../components/vermietung/Testimonials.astro';
 import ChevronRightIcon from '../../components/icons/ChevronRightIcon.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import { getFaqsForPage } from '../../lib/faqUtils';
 
 const breadcrumbSegments = [
   { label: "Startseite", href: "/" },
@@ -18,32 +19,7 @@ const breadcrumbSegments = [
 
 const pageTitle = "Partypaket Stuttgart - Partytechnik Miete | DJ Hulk";
 
-const faqs = [
-  {
-    question: "Wie viele Personen passen zum Partypaket?",
-    answer: "Das Partypaket eignet sich perfekt für Veranstaltungen mit 50-80 Personen. Die JBL Partyboxen liefern kraftvollen Sound auch für kleinere Räume. Die kompakte Lichtanlage mit Laser und Nebel sorgt für eine tolle Party-Atmosphäre."
-  },
-  {
-    question: "Welche Geräte sind im Partypaket enthalten?",
-    answer: "Im Partypaket enthalten sind: 2x JBL Partybox 300, Eurolite KLS Laser Bar FX, Nebelmaschine, Mikrofon inkl. Kabel, 4x LED PAR Strahler sowie alle notwendigen Strom- und Anschlusskabel."
-  },
-  {
-    question: "Wie schwer ist der Transport?",
-    answer: "Die JBL Partyboxen wiegen jeweils ca. 15-16 kg und haben integrierte Tragegriffe. Die Laser Bar und Nebelmaschine sind ebenfalls kompakt und einfach zu transportieren. Das gesamte Paket passt in einen Kombi oder Kleinwagen mit umklappbarer Rückbank."
-  },
-  {
-    question: "Kann ich das Paket auch im Garten nutzen?",
-    answer: "Ja, das Partypaket kann auch im Außenbereich genutztzt werden. Die JBL Partyboxen sind zwar nicht wasserdicht, aber bei trockenem Wetter problemlos im Garten einsetzbar. Achte darauf, dass die Elektronik vor Regen geschützt wird."
-  },
-  {
-    question: "Wie lange dauert der Aufbau?",
-    answer: "Das Partypaket ist innerhalb von 30-45 Minuten vollständig aufgebaut. Die JBL Partyboxen sind in wenigen Minuten einsatzbereit (einfach anschließen und per Bluetooth verbinden). Die Laser Bar wird auf das mitgelieferten Stativ montiert. Die Nebelmaschine benötigt ca. 5 Minuten zum Aufheizen und kommt mit einem vollen Tank Nebelfluid."
-  },
-  {
-    question: "Was tun, wenn die Party schon in 3 Tagen ist?",
-    answer: "Ja, ich reagiere auch kurzfristig! Anfragen bis zu 2 Tagen vor der Veranstaltung sind meist noch möglich. Am besten rufst du mich direkt an unter 0171/1467491 für schnelle Abstimmung. Ich habe oft noch freie Geräte verfügbar."
-  }
-];
+const faqs = getFaqsForPage('partypaket-stuttgart');
 
 const images = [
   "/img/vermietung/partypaket1.webp",
