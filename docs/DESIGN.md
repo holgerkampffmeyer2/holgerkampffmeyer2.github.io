@@ -56,10 +56,10 @@ src/
 ## Build-Skripte
 
 ```bash
-npm run dev        # Development
-npm run lint      # ESLint
-npm run build     # Production (RSS + Sitemap)
-npm run preview   # Preview
+pnpm run dev        # Development
+pnpm run lint      # ESLint
+pnpm run build     # Production (RSS + Sitemap)
+pnpm run preview   # Preview
 ```
 
 ---
