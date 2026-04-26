@@ -51,10 +51,8 @@ function findMixPages() {
     .sort();
 }
 
-function updateSitemap() {
+function updateSitemap(staticUrls, mixUrls) {
   const sitemapPath = path.join(PUBLIC_DIR, 'sitemap.xml');
-  const staticUrls = findStaticPages();
-  const mixUrls = findMixPages();
   const today = new Date().toISOString().split('T')[0];
   
   if (mixUrls.length === 0) {
@@ -108,22 +106,19 @@ function updateSitemap() {
   console.log(`✅ Updated sitemap.xml with ${staticUrls.length} static + ${mixUrls.length} mix pages`);
 }
 
-function updateUrllist() {
+function updateUrllist(staticUrls, mixUrls) {
   const urllistPath = path.join(PUBLIC_DIR, 'urllist.txt');
   const baseUrl = 'https://holger-kampffmeyer.de';
   
-  // Get static pages from dist
-  const staticUrls = findStaticPages();
-  
   // Get all mix pages sorted by number descending
-  const mixUrls = findMixPages().sort((a, b) => {
+  const sortedMixUrls = [...mixUrls].sort((a, b) => {
     const numA = parseInt(a.split('/').pop());
     const numB = parseInt(b.split('/').pop());
     return numB - numA;
   });
   
   // Combine: base + static pages + all mix pages
-  const urls = [`${baseUrl}/`, ...staticUrls, ...mixUrls];
+  const urls = [`${baseUrl}/`, ...staticUrls, ...sortedMixUrls];
   
   fs.writeFileSync(urllistPath, urls.join('\n') + '\n');
   console.log(`✅ Updated urllist.txt with ${urls.length} URLs`);
@@ -131,8 +126,10 @@ function updateUrllist() {
 
 // Run if called directly
 if (import.meta.url === `file://${process.argv[1]}`) {
-  updateSitemap();
-  updateUrllist();
+  const staticUrls = findStaticPages();
+  const mixUrls = findMixPages();
+  updateSitemap(staticUrls, mixUrls);
+  updateUrllist(staticUrls, mixUrls);
 }
 
 export { updateSitemap, updateUrllist };
