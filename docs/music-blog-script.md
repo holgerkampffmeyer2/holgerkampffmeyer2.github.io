@@ -9,9 +9,11 @@ Die "Mixes with Tracklists" Seite präsentiert wöchentliche DJ-Mixes von DJ Hul
 - `/dj/mixes/{nummer}` - Einzelne Mix-Seite mit Player und Tracklist (z.B. `/dj/mixes/176`)
 - `/dj/mixes-blog-archive` - Komprimierte Archiv-Ansicht aller Mixes
 
-## Script: `scripts/fetch-mixcloud-blog.mjs`
+## Script: `scripts/fetch-mixcloud.mjs`
 
-Dieses Script holt die neuesten 10 Mixes von Mixcloud und erstellt die `blog-posts.json` Daten.
+Dieses Script holt die neuesten 100 Mixes von Mixcloud und erstellt beide Daten-Dateien:
+- `mixcloud-data.json` - Einfache Liste für `/dj/mixes-all`
+- `blog-posts.json` - Vollständige Daten mit Tracklists für Music Blog
 
 ### Genre → Use-Case Mapping
 
@@ -45,12 +47,12 @@ Das Mapping liegt in `src/data/genre-use-case-mapping.json`:
 
 ### Workflow
 
-1. **API Call**: Holt 10 neueste Mixes von `https://api.mixcloud.com/holger-kampffmeyer/cloudcasts/?limit=10`
-2. **Mix-Details**: Für jeden Mix wird die API mit `?metadata=1` aufgerufen für die vollständige Beschreibung
+1. **API Call**: Holt 100 neueste Mixes von Mixcloud API
+2. **Mix-Details**: Für jeden Mix wird die API mit `?metadata=1` aufgerufen für vollständige Beschreibung
 3. **Tracklist**: Sucht in `src/data/tracklists/` nach Dateien mit Pattern `*Mix{nummer}*tracklist*.txt`
 4. **Hero-Image**: Sucht in `public/tracklists/` nach `*Mix{nummer}*.webp`
 5. **Use-Cases**: Leitet aus Mixcloud-Tags ab (kann mehrere pro Mix sein)
-6. **Seiten-Generierung**: Erstellt automatisch `/dj/mixes/{nummer}.html` für jeden Mix mit Tracklist
+6. **Output**: Schreibt beide JSON-Dateien
 
 ### Voraussetzungen
 
@@ -60,12 +62,12 @@ Das Mapping liegt in `src/data/genre-use-case-mapping.json`:
 
 **Hero-Images** müssen in `public/tracklists/` liegen:
 - Format: WebP (wird aus PNG konvertiert)
-- Dateiname enthält Mix-Nummer: `Mixcloud Post Mix175.webp`
+- Dateiname enthält Mix-Nummer: `Mixcloud-Post-Mix175.webp`
 
 ### Manuell ausführen
 
 ```bash
-node scripts/fetch-mixcloud-blog.mjs --force
+node scripts/fetch-mixcloud.mjs --force
 ```
 
 ### Automatisch

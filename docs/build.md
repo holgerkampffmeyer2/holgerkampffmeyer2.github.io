@@ -16,9 +16,9 @@ pnpm run preview    # Preview production build
 2. Scripts nach Build: `scripts/update-sitemap.mjs` (automatisch)
 
 ## Caching
-- Mixcloud-Scripts: 24h Cache (`node_modules/.mixcloud-blog-fetch`)
+- Mixcloud-Script: 24h Cache (`node_modules/.mixcloud-fetch`)
 - `pnpm run build` ist schnell (~25s) wegen Cache
-- Für frische Daten: `pnpm run build:full` oder `node scripts/fetch-mixcloud-blog.mjs --force`
+- Für frische Daten: `pnpm run build:full` oder `node scripts/fetch-mixcloud.mjs --force`
 
 ## Output
 - `dist/` - statische HTML-Dateien
