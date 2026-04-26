@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { execSync } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -49,27 +48,9 @@ function formatRssDate(dateStr) {
   return `${dayName}, ${day} ${monthName} ${year} 00:00:00 GMT`;
 }
 
-function getGitDateForFile(filePath) {
+function getFileDate(filePath) {
   try {
-    const result = execSync(
-      `git log -1 --format="%ai" -- "${filePath}"`,
-      { cwd: path.join(__dirname, '..'), encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }
-    ).trim();
-    if (!result) {
-      console.warn(`⚠️ No git history for ${filePath}, using mtime`);
-      return null;
-    }
-    return result.split(' ')[0];
-  } catch (e) {
-    console.warn(`⚠️ Git command failed for ${filePath}: ${e.message}`);
-    return null;
-  }
-}
-
-function getFileMtime(filePath) {
-  try {
-    const stats = fs.statSync(filePath);
-    return stats.mtime.toISOString().split('T')[0];
+    return fs.statSync(filePath).mtime.toISOString().split('T')[0];
   } catch {
     return new Date().toISOString().split('T')[0];
   }
@@ -106,8 +87,8 @@ function generateRss() {
         const shouldExclude = excludePages.some(ex => pagePath.includes(ex));
         if (shouldExclude) continue;
 
-        const gitDate = getGitDateForFile(fullPath);
-        const pubDate = gitDate || getFileMtime(fullPath);
+        const gitDate = getFileDate(fullPath);
+        const pubDate = gitDate;
         const meta = pageMeta[pageKey];
         
         if (meta) {

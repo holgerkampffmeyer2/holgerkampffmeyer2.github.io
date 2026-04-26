@@ -56,7 +56,7 @@ function findTracklistFile(mixNumber) {
   }
   
   const files = fs.readdirSync(TRACKLISTS_DIR);
-  const pattern = new RegExp(`(?:Mix[#\\s]?|Techno\\s*|Partymix.*)${mixNumber}`, 'i');
+  const pattern = new RegExp(`(?:Mix[-#\\s]?|Techno\\s*|Partymix.*)${mixNumber}`, 'i');
   
   for (const file of files) {
     if (pattern.test(file) && file.toLowerCase().includes('tracklist')) {
@@ -72,7 +72,7 @@ function findHeroImage(mixNumber) {
   }
   
   const files = fs.readdirSync(PUBLIC_TRACKLISTS_DIR);
-  const pattern = new RegExp(`(?:Mix[#\\s]?|Techno\\s*|Partymix.*)${mixNumber}`, 'i');
+  const pattern = new RegExp(`(?:Mix[-#\\s]?|Techno\\s*|Partymix.*)${mixNumber}`, 'i');
   
   for (const file of files) {
     if (pattern.test(file) && file.toLowerCase().endsWith('.webp')) {
