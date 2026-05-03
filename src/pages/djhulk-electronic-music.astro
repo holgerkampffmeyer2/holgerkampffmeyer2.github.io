@@ -41,12 +41,33 @@ try {
 }
 
 const latestMix = mixcloudData.mixes && mixcloudData.mixes.length > 0 ? mixcloudData.mixes[0] : null;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "DJ Hulk",
+  "alternateName": "Holger Kampffmeyer",
+  "jobTitle": "Electronic Music DJ",
+  "description": "DJ Hulk ist ein elektronischer DJ aus Stuttgart, spezialisiert auf House, Tech House, Techno und Drum n Bass.",
+  "url": "https://holger-kampffmeyer.de/djhulk-electronic-music",
+  "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
+  "sameAs": [
+    "https://www.mixcloud.com/holger-kampffmeyer/",
+    "https://soundcloud.com/holger-kampffmeyer2",
+    "https://open.spotify.com/user/11131869179",
+    "https://www.youtube.com/@djhulk_de",
+    "https://www.instagram.com/djhulk_de",
+    "https://www.facebook.com/holger.kampffmeyer",
+    "https://de.ra.co/dj/djhulk"
+  ]
+};
 ---
 
 <Layout
   title="DJ Hulk - Electronic Music DJ Stuttgart"
   description="DJ Hulk - Electronic Music DJ aus Stuttgart. House, Tech House, Drum n Bass. Weekly Sunday House Mixes auf Mixcloud. Events, Festivals und private Parties."
   image="/img/_81A4010.webp"
+  jsonLd={[personSchema]}
 >
   <Navbar currentPage="/djhulk-electronic-music" />
 
