@@ -76,6 +76,26 @@ function formatDate(dateStr: string) {
   return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
 
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "DJ Hulk Weekly Mixes Blog",
+  "description": "Weekly electronic music DJ mixes by DJ Hulk with full tracklists. House, Tech House, Deep House, Latin House.",
+  "url": "https://holger-kampffmeyer.de/dj/mixes-blog-archive",
+  "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
+  "author": {
+    "@type": "Person",
+    "name": "DJ Hulk",
+    "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+  },
+  "blogPosts": archivePosts.slice(0, 10).map(post => ({
+    "@type": "BlogPosting",
+    "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.number}`,
+    "headline": `Mix#${post.number} - ${post.title}`,
+    "datePublished": post.created_time
+  }))
+};
+
 const collectionPageSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -83,13 +103,18 @@ const collectionPageSchema = {
   "description": "Complete archive of DJ Hulk's electronic music mixes with tracklists - House, Tech House, Deep House, Latin House.",
   "url": "https://holger-kampffmeyer.de/dj/mixes-blog-archive",
   "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
-  "mainEntity": {
+  "mainEntity": [blogSchema, {
     "@type": "MusicAlbum",
     "name": "DJ Hulk Mix Archive",
     "description": "All DJ mixes with tracklists by DJ Hulk",
+    "byArtist": {
+      "@type": "Person",
+      "name": "DJ Hulk",
+      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+    },
     "genre": ["House", "Tech House", "Deep House", "Latin House"],
     "numTracks": archivePosts.length
-  }
+  }]
 };
 
 const jsonLd: any[] = [collectionPageSchema];

@@ -51,6 +51,26 @@ try {
 const latestPost = blogData.posts && blogData.posts.length > 0 ? blogData.posts[0] : null;
 const postsWithTracklists = blogData.posts ? blogData.posts.filter(post => post.hasTracklist) : [];
 
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "DJ Hulk Weekly Mixes Blog",
+  "description": "Weekly electronic music DJ mixes by DJ Hulk with full tracklists. House, Tech House, Deep House, Latin House.",
+  "url": "https://holger-kampffmeyer.de/dj/mixes",
+  "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
+  "author": {
+    "@type": "Person",
+    "name": "DJ Hulk",
+    "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+  },
+  "blogPosts": postsWithTracklists.slice(0, 10).map(post => ({
+    "@type": "BlogPosting",
+    "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.number}`,
+    "headline": `Mix#${post.number} - ${post.title}`,
+    "datePublished": post.created_time
+  }))
+};
+
 const USECASE_CONFIG: Record<string, { label: string; icon: typeof GymIcon; color: string }> = {
   gym: { label: 'Gym Session', icon: GymIcon, color: 'text-orange-500' },
   drive: { label: 'Drive / Relax', icon: DriveIcon, color: 'text-orange-500' },
@@ -70,6 +90,7 @@ function formatDate(dateStr: string) {
   description="Every Sunday new DJ mix on Mixcloud by DJ Hulk. House, Tech House, Deep House with tracklists. Perfect for gym, driving, work, or pre-party. Many B2B collaborations."
   image="/img/_81A4010.webp"
   jsonLd={[
+    blogSchema,
     {
       "@context": "https://schema.org",
       "@type": "MusicPlaylist",
