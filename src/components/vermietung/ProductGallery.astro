@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
   images: string[];
   title: string;
@@ -17,11 +19,13 @@ const { images, title } = Astro.props;
     <div class="gallery-container">
       <!-- Main Image -->
       <div class="main-image-container">
-        <img 
+        <Image 
           id="mainImage" 
           src={images[0]} 
           alt={`${title} – Hauptbild`}
           class="main-image"
+          widths={[400, 800, 1200]}
+          formats={['webp', 'avif']}
         />
         <div class="image-counter" id="imageCounter">1 / {images.length}</div>
       </div>
@@ -34,7 +38,7 @@ const { images, title } = Astro.props;
             data-index={index}
             aria-label={`Bild ${index + 1} anzeigen`}
           >
-            <img src={image} alt={`${title} – Miniatur ${index + 1}`} loading="lazy" />
+            <Image src={image} alt={`${title} – Miniatur ${index + 1}`} loading="lazy" width={80} height={60} />
           </button>
         ))}
       </div>
