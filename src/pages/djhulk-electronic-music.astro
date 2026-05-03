@@ -44,6 +44,18 @@ const latestMix = mixcloudData.mixes && mixcloudData.mixes.length > 0 ? mixcloud
 
 const personSchema = {
   "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "DJ Hulk - Electronic Music DJ Stuttgart",
+  "description": "DJ Hulk - Electronic Music DJ aus Stuttgart. House, Tech House, Drum n Bass.",
+  "url": "https://holger-kampffmeyer.de/djhulk-electronic-music",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "DJ Hulk"
+  }
+};
+
+const personDetailsSchema = {
+  "@context": "https://schema.org",
   "@type": "Person",
   "name": "DJ Hulk",
   "alternateName": "Holger Kampffmeyer",
@@ -67,7 +79,7 @@ const personSchema = {
   title="DJ Hulk - Electronic Music DJ Stuttgart"
   description="DJ Hulk - Electronic Music DJ aus Stuttgart. House, Tech House, Drum n Bass. Weekly Sunday House Mixes auf Mixcloud. Events, Festivals und private Parties."
   image="/img/_81A4010.webp"
-  jsonLd={[personSchema]}
+  jsonLd={[personSchema, personDetailsSchema]}
 >
   <Navbar currentPage="/djhulk-electronic-music" />
 
