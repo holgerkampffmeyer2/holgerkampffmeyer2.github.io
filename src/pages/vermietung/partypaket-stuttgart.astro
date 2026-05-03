@@ -122,11 +122,19 @@ const faqSchema = {
     "@type": "VideoObject",
     "name": "Partypaket Stuttgart Demo",
     "description": "Demo des Partypakets Stuttgart - JBL Partyboxen, LED Licht und Nebelmaschine",
-    "thumbnailUrl": "https://holger-kampffmeyer.de/img/vermietung/partypaket1.webp",
-    "contentUrl": "https://www.youtube.com/watch?v=Ivch0DqKkW0",
+    "thumbnailUrl": ["https://holger-kampffmeyer.de/img/vermietung/partypaket1.webp"],
+    "contentUrl": "https://www.youtube.com/embed/Ivch0DqKkW0",
     "embedUrl": "https://www.youtube.com/embed/Ivch0DqKkW0",
-    "uploadDate": "2024-01-20",
-    "publisher": {"@type": "Organization", "name": "DJ Hulk"}
+    "uploadDate": "2024-01-20T00:00:00+00:00",
+    "duration": "PT1M30S",
+    "publisher": {
+      "@type": "Organization",
+      "name": "DJ Hulk",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://holger-kampffmeyer.de/img/djhulk_logo.webp"
+      }
+    }
   }]}
 >
   <Navbar currentPage="/vermietung" />

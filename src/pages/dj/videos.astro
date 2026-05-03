@@ -74,10 +74,10 @@ const videoSchema = videos.map(video => ({
   "@type": "VideoObject",
   "name": video.title,
   "description": video.description,
-  "thumbnailUrl": `https://holger-kampffmeyer.de${video.thumbnail}`,
-  "contentUrl": `https://www.youtube.com/watch?v=${video.id}`,
+  "thumbnailUrl": [`https://holger-kampffmeyer.de${video.thumbnail}`],
+  "contentUrl": `https://www.youtube.com/embed/${video.id}`,
   "embedUrl": `https://www.youtube.com/embed/${video.id}`,
-  "uploadDate": video.uploadDate,
+  "uploadDate": `${video.uploadDate}T00:00:00+00:00`,
   "duration": "PT1H",
   "publisher": {
     "@type": "Organization",
