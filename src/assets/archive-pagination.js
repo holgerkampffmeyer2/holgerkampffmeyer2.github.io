@@ -1,3 +1,4 @@
+/* global document, window */
 // Archive pagination and filtering logic for mixes-blog-archive.astro
 (function() {
   // Get URL parameters once

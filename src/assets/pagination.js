@@ -1,3 +1,4 @@
+/* global document, window */
 // Pagination logic for mixes-all.astro
 function initPagination() {
   const grid = document.getElementById('mixesGrid');

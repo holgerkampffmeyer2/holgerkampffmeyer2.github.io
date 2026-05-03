@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-undef
+/* global document, IntersectionObserver */
 // Intersection Observer for scroll animations
 (function() {
   if (document.readyState === 'loading') {
