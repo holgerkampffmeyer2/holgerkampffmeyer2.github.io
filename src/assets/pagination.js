@@ -81,7 +81,7 @@ function initPagination() {
   
   function addPageButton(page, isActive) {
     const btn = document.createElement('button');
-    btn.className = `w-10 h-10 rounded-lg font-semibold transition-colors ${
+    btn.className = `min-w-[44px] min-h-[44px] rounded-lg font-semibold transition-colors ${
       isActive 
         ? 'bg-[var(--color-primary)] text-white' 
         : 'bg-[var(--color-surface)] text-[var(--color-text)] hover:bg-[var(--color-primary)] hover:text-white'
