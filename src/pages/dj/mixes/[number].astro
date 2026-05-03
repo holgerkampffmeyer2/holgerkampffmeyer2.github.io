@@ -82,6 +82,28 @@ function formatDuration(seconds: number) {
 const jsonLd = [
   {
     "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": `Mix#${mixNumber} - ${post.title}`,
+    "description": post.description?.substring(0, 500) || "",
+    "image": post.picture,
+    "datePublished": post.created_time,
+    "author": {
+      "@type": "Person",
+      "name": "DJ Hulk",
+      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "DJ Hulk",
+      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://holger-kampffmeyer.de/dj/mixes/${mixNumber}`
+    }
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "AudioObject",
     "name": `Mix#${mixNumber} - ${post.title}`,
     "description": post.description?.substring(0, 500) || "",
