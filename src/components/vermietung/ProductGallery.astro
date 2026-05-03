@@ -34,7 +34,7 @@ const { images, title } = Astro.props;
             data-index={index}
             aria-label={`Bild ${index + 1} anzeigen`}
           >
-            <img src={image} alt={`${title} – Miniatur ${index + 1}`} />
+            <img src={image} alt={`${title} – Miniatur ${index + 1}`} loading="lazy" />
           </button>
         ))}
       </div>
