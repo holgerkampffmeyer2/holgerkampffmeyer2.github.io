@@ -24,6 +24,7 @@ const { images, title } = Astro.props;
           width="800"
           height="600"
           class="main-image"
+          loading="eager"
         />
         <div class="image-counter" id="imageCounter">1 / {images.length}</div>
       </div>
