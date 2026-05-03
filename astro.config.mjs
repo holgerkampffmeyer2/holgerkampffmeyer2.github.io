@@ -14,7 +14,6 @@ export default defineConfig({
     format: 'file'
   },
   redirects: {
-    '/dj': '/djhulk-electronic-music',
-    '/dj/': '/djhulk-electronic-music'
+    '/dj': '/djhulk-electronic-music'
   }
 });
