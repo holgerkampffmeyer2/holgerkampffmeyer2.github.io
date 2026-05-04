@@ -2,8 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import ChevronLeftIcon from "../components/icons/ChevronLeftIcon.astro";
-import ChevronRightIcon from "../components/icons/ChevronRightIcon.astro";
+import HeroSlider from "../components/HeroSlider.astro";
 import ChevronDownIcon from "../components/icons/ChevronDownIcon.astro";
 import EmailIcon from "../components/icons/EmailIcon.astro";
 import FacebookIcon from "../components/icons/FacebookIcon.astro";
@@ -97,115 +96,35 @@ const faqs = getFaqsForPage('index');
   <Navbar currentPage="/" />
 
   <!-- Hero Slider Section -->
-  <section id="hero" class="hero-slider">
-    <!-- Slide 1: DJ Hulk -->
-    <div class="slide slide-1 active" data-slide="0">
-      <div class="slide-content">
-        <div class="container mx-auto px-4">
-          <div class="max-w-3xl">
-            <span
-              class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp stagger-1"
-              >Electro, House, Tech House, Techno, DnB</span
-            >
-            <h1
-              class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2"
-            >
-              DJ Hulk
-            </h1>
-            <p
-              class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-2xl animate-fadeInUp stagger-3"
-            >
-              Stuttgarter DJ für elektronische Musik - House, Tech House, Techno, Drum n Base
-            </p>
-            <div
-              class="flex flex-col sm:flex-row gap-4 animate-fadeInUp stagger-4"
-            >
-              <a href="/djhulk-electronic-music" class="btn-primary">Mehr über DJ Hulk</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide 2: DJ Technik Verleih -->
-    <div class="slide slide-2" data-slide="1">
-      <div class="slide-content">
-        <div class="container mx-auto px-4">
-          <div class="max-w-3xl">
-            <span
-              class="text-[#22d3ee] text-lg tracking-widest uppercase animate-fadeInUp stagger-1"
-              >Musikanlagen, PA, Partyanlagen</span
-            >
-            <h2
-              class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2"
-            >
-              DJ Technik Verleih
-            </h2>
-            <p class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
-              Partyboxen, PA-Anlagen, DJ-Equipment, Lichttechnik, Partylichtanlagen, Nebel, Mikrofon - alles für Deine
-              Party!
-            </p>
-            <div
-              class="flex flex-col sm:flex-row gap-4 animate-fadeInUp stagger-4"
-            >
-              <a href="/vermietung" class="btn-primary">Vermietung & Technik‑Verleih Stuttgart</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide 3: Weekly Mixes -->
-    <div class="slide slide-3" data-slide="2">
-      <div class="slide-content">
-        <div class="container mx-auto px-4">
-          <div class="max-w-3xl">
-            <span
-              class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp stagger-1"
-              >Weekly DJ Mixes</span
-            >
-            <h2
-              class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2"
-            >
-              Mixes mit Tracklists
-            </h2>
-            <p class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
-              Jeden Sonntag neuer Mix - House, Tech House, Deep House. 
-              Mit vollständiger Tracklist und optimiert für Gym, Drive, Work oder Party.
-            </p>
-            <div
-              class="flex flex-col sm:flex-row gap-4 animate-fadeInUp stagger-4"
-            >
-              <a href="/dj/mixes" class="btn-primary">Zu den Mixes</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slider Navigation -->
-    <button class="slider-nav prev" id="slider-prev">
-      <ChevronLeftIcon class="h-6 w-6" />
-    </button>
-    <button class="slider-nav next" id="slider-next">
-      <ChevronRightIcon class="h-6 w-6" />
-    </button>
-
-    <!-- Slider Dots -->
-    <div class="slider-dots">
-      <div class="slider-dot active" data-dot="0"></div>
-      <div class="slider-dot" data-dot="1"></div>
-      <div class="slider-dot" data-dot="2"></div>
-      <div class="slider-dot" data-dot="3"></div>
-    </div>
-
-    <!-- Scroll Indicator -->
-    <div
-      class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-float z-20"
-    >
-      <ChevronDownIcon class="h-8 w-8 text-[var(--color-text-muted)]" />
-    </div>
-  </section>
+  <HeroSlider
+    interval={5000}
+    slides={[
+      {
+        title: "DJ Hulk",
+        titleTag: "h1",
+        category: "Electro, House, Tech House, Techno, DnB",
+        categoryColor: "var(--color-secondary)",
+        description: "Stuttgarter DJ für elektronische Musik - House, Tech House, Techno, Drum n Base",
+        buttons: [{ text: "Mehr über DJ Hulk", href: "/djhulk-electronic-music" }]
+      },
+      {
+        title: "DJ Technik Verleih",
+        titleTag: "h2",
+        category: "Musikanlagen, PA, Partyanlagen",
+        categoryColor: "#22d3ee",
+        description: "Partyboxen, PA-Anlagen, DJ-Equipment, Lichttechnik, Partylichtanlagen, Nebel, Mikrofon - alles für Deine Party!",
+        buttons: [{ text: "Vermietung & Technik‑Verleih Stuttgart", href: "/vermietung" }]
+      },
+      {
+        title: "Mixes mit Tracklists",
+        titleTag: "h2",
+        category: "Weekly DJ Mixes",
+        categoryColor: "var(--color-secondary)",
+        description: "Jeden Sonntag neuer Mix - House, Tech House, Deep House. Mit vollständiger Tracklist und optimiert für Gym, Drive, Work oder Party.",
+        buttons: [{ text: "Zu den Mixes", href: "/dj/mixes" }]
+      }
+    ]}
+  />
 
   <!-- Vermietung Section -->
   <section id="vermietung" class="section-padding bg-[var(--color-surface)]">
@@ -522,7 +441,7 @@ const faqs = getFaqsForPage('index');
           <LinkedInIcon class="h-7 w-7" />
         </a>
         <a
-          href="https://github.com/holgerkampffmeyer2/wav-to-aac-converter"
+          href="https://github.com/holgerkampffmeyer2/"
           target="_blank"
           rel="noopener noreferrer"
           class="social-link"
@@ -537,84 +456,23 @@ const faqs = getFaqsForPage('index');
 <Footer />
 
    <script is:inline>
-     const slides = document.querySelectorAll(".slide");
-     const dots = document.querySelectorAll(".slider-dot");
-     const prevBtn = document.getElementById("slider-prev");
-     const nextBtn = document.getElementById("slider-next");
-     let currentSlide = 0;
-     let slideInterval = null;
+      var observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1
+      };
 
-     function showSlide(index) {
-       slides.forEach((slide, i) => {
-         slide.classList.toggle("active", i === index);
-       });
-       dots.forEach((dot, i) => {
-         dot.classList.toggle("active", i === index);
-       });
-       currentSlide = index;
-     }
+      var observer = new IntersectionObserver(function(entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) {
+            entries[i].target.classList.add("visible");
+          }
+        }
+      }, observerOptions);
 
-     function nextSlide() {
-       showSlide((currentSlide + 1) % slides.length);
-     }
-
-     function prevSlide() {
-       showSlide((currentSlide - 1 + slides.length) % slides.length);
-     }
-
-     function startSlider() {
-       slideInterval = setInterval(nextSlide, 5000);
-     }
-
-     function stopSlider() {
-       clearInterval(slideInterval);
-     }
-
-     if (prevBtn) {
-       prevBtn.addEventListener("click", function() {
-         prevSlide();
-         stopSlider();
-         startSlider();
-       });
-     }
-
-     if (nextBtn) {
-       nextBtn.addEventListener("click", function() {
-         nextSlide();
-         stopSlider();
-         startSlider();
-       });
-     }
-
-     for (var i = 0; i < dots.length; i++) {
-       dots[i].addEventListener("click", (function(index) {
-         return function() {
-           showSlide(index);
-           stopSlider();
-           startSlider();
-         };
-       })(i));
-     }
-
-     startSlider();
-
-     var observerOptions = {
-       root: null,
-       rootMargin: "0px",
-       threshold: 0.1
-     };
-
-     var observer = new IntersectionObserver(function(entries) {
-       for (var i = 0; i < entries.length; i++) {
-         if (entries[i].isIntersecting) {
-           entries[i].target.classList.add("visible");
-         }
-       }
-     }, observerOptions);
-
-     var animateElements = document.querySelectorAll(".animate-on-scroll");
-     for (var i = 0; i < animateElements.length; i++) {
-       observer.observe(animateElements[i]);
-     }
+      var animateElements = document.querySelectorAll(".animate-on-scroll");
+      for (var i = 0; i < animateElements.length; i++) {
+        observer.observe(animateElements[i]);
+      }
    </script>
 </Layout>
