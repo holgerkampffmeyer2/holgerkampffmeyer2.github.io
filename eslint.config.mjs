@@ -49,6 +49,7 @@ export default [
     files: ['**/*.js', '**/*.mjs'],
     languageOptions: {
       globals: {
+        ...globals.browser,
         ...globals.node,
         ...globals.es2021,
       },
