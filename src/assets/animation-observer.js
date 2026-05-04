@@ -1,4 +1,3 @@
-/* global document, IntersectionObserver */
 // Intersection Observer for scroll animations
 (function() {
   if (document.readyState === 'loading') {
