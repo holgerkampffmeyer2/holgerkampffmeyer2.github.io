@@ -5,7 +5,7 @@ dist/
 
 # generated content
 public/rss.xml
-src/data/mixcloud-data.json
+# src/data/mixcloud-data.json - jetzt getrackt
 
 # dependencies
 node_modules/
