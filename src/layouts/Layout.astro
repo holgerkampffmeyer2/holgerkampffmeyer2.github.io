@@ -140,6 +140,9 @@ const canonicalURL = new URL(canonicalPath || '/', Astro.site);
       <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />
     ))}
     
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href={image} />
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
