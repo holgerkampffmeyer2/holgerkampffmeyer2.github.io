@@ -1,0 +1,28 @@
+module.exports = {
+  ci: {
+    collect: {
+      // Lighthouse CI configuration
+      numberOfRuns: 1,
+      url: [
+        'http://localhost:4321/',
+        'http://localhost:4321/djhulk-electronic-music',
+        'http://localhost:4321/vermietung',
+        'http://localhost:4321/dj/mixes',
+        'http://localhost:4321/work'
+      ],
+      startServerCommand: 'pnpm run preview -- --port 4321',
+      startServerReadyPattern: 'Server listening',
+    },
+    assert: {
+      assertions: {
+        'categories:performance': ['warn', { minScore: 0.8 }],
+        'categories:accessibility': ['error', { minScore: 0.9 }],
+        'categories:best-practices': ['warn', { minScore: 0.8 }],
+        'categories:seo': ['error', { minScore: 0.9 }],
+      },
+    },
+    upload: {
+      target: 'temporary-public-storage',
+    },
+  },
+};
