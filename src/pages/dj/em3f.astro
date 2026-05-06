@@ -11,6 +11,16 @@ const breadcrumbSegments = [
   { label: "Fotos" }
 ];
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
+    {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music"},
+    {"@type": "ListItem", "position": 3, "name": "EM3F Festival", "item": "https://holger-kampffmeyer.de/dj/em3f"}
+  ]
+};
+
 const photos = [
   "/img/em3f/DSC_2142.webp",
   "/img/em3f/DSC_2157.webp",
@@ -35,6 +45,7 @@ const photos = [
   title="DJ Fotos - Electronic Music Family and Friends Festival"
   description="Fotos vom Electronic Music Family and Friends Festival (EM3F). DJ Hulk's Festival-Fotogalerie mit Eindrücken vom Event."
   image="/img/tomatefestival.webp"
+  jsonLd={breadcrumbSchema}
 >
   <Navbar currentPage="/dj/em3f" />
 

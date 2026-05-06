@@ -73,6 +73,16 @@ const faqSchema = {
   }))
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
+    {"@type": "ListItem", "position": 2, "name": "Vermietung", "item": "https://holger-kampffmeyer.de/vermietung"},
+    {"@type": "ListItem", "position": 3, "name": "KLS Laser Bar", "item": "https://holger-kampffmeyer.de/vermietung/kls-laser-bar"}
+  ]
+};
+
 const specsLaserBar = {
   "Modell": "Eurolite KLS Laser Bar FX",
   "Effekte": "2 Derbys, 2 LED Spots, 4 weiße Strobe-LEDs",
@@ -141,7 +151,7 @@ const videoSchema = {
   title={pageTitle}
   description="Miete die Eurolite KLS Laser Bar FX mit 1200W Nebelmaschine. Sound-zu-Licht Steuerung für deine Party."
   image="/img/vermietung/eurolite-kls-laser-bar.webp"
-  jsonLd={[serviceSchema, faqSchema, videoSchema]}
+  jsonLd={[serviceSchema, breadcrumbSchema, faqSchema, videoSchema]}
 >
   <Navbar currentPage="/vermietung" />
 

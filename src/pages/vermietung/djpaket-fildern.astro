@@ -47,6 +47,16 @@ const packageItems = [
   { name: "Stromkabel, XLR Kabel und Anschlusskabel" }
 ];
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
+    {"@type": "ListItem", "position": 2, "name": "Vermietung", "item": "https://holger-kampffmeyer.de/vermietung"},
+    {"@type": "ListItem", "position": 3, "name": "DJ-Paket Fildern", "item": "https://holger-kampffmeyer.de/vermietung/djpaket-fildern"}
+  ]
+};
+
 const events = [
   {
     title: "Hochzeit",
@@ -146,7 +156,7 @@ const videoSchema = {
   title={pageTitle}
   description="Miete das DJ-Paket Fildern für dein Event. Komplette Eventtechnik mit LD Maui Soundanlage, LED BossFX, Nebelmaschine, Moving Head und Stage Bar für bis zu 150 Personen."
   image="/img/vermietung/ldmaui3.webp"
-  jsonLd={[serviceSchema, faqSchema, videoSchema]}
+  jsonLd={[serviceSchema, faqSchema, videoSchema, breadcrumbSchema]}
 >
   <Navbar currentPage="/vermietung" />
 

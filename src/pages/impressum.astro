@@ -4,11 +4,18 @@ import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import Footer from '../components/Footer.astro';
 ---
-
 <Layout 
   title="Impressum / Datenschutz - DJ Hulk"
   description="Impressum und Datenschutzerklärung von DJ Hulk - Holger Kampffmeyer. Informationen zum Verantwortlichen und zum Umgang mit personenbezogenen Daten."
   noIndex={true}
+  jsonLd={{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
+      {"@type": "ListItem", "position": 2, "name": "Impressum", "item": "https://holger-kampffmeyer.de/impressum"}
+    ]
+  }}
 >
   <Navbar currentPage="/impressum" />
 

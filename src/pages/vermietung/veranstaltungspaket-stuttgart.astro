@@ -111,6 +111,16 @@ const serviceSchema = {
   }
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
+    {"@type": "ListItem", "position": 2, "name": "Vermietung", "item": "https://holger-kampffmeyer.de/vermietung"},
+    {"@type": "ListItem", "position": 3, "name": "Veranstaltungspaket Stuttgart", "item": "https://holger-kampffmeyer.de/vermietung/veranstaltungspaket-stuttgart"}
+  ]
+};
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -129,7 +139,7 @@ const faqSchema = {
   title={pageTitle}
   description="Miete das Veranstaltungspaket für dein Event in Stuttgart. Komplette Eventtechnik mit LD Maui Soundanlage, Licht, Nebel und Moving Heads für bis zu 150 Personen."
   image="/img/vermietung/ldmaui3.webp"
-  jsonLd={[serviceSchema, faqSchema]}
+  jsonLd={[serviceSchema, breadcrumbSchema, faqSchema]}
 >
   <Navbar currentPage="/vermietung" />
 
