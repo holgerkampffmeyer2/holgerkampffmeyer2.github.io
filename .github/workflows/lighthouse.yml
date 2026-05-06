@@ -42,16 +42,18 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| URL | Performance | Accessibility | Best Practices | SEO |" >> $GITHUB_STEP_SUMMARY
           echo "|-----|-------------|---------------|-----------------|-----|" >> $GITHUB_STEP_SUMMARY
-          # Try to extract scores from Lighthouse CI output
+          # Extract scores from Lighthouse CI output
           if [ -d ".lighthouseci" ]; then
             for file in .lighthouseci/*.json; do
-              if [ -f "$file" ] && echo "$file" | grep -q "manifest"; then
-                url=$(jq -r '.url // "N/A"' "$file" 2>/dev/null || echo "N/A")
-                perf=$(jq -r '.summary.performance // "N/A"' "$file" 2>/dev/null || echo "N/A")
-                a11y=$(jq -r '.summary.accessibility // "N/A"' "$file" 2>/dev/null || echo "N/A")
-                bp=$(jq -r '.summary["best-practices"] // "N/A"' "$file" 2>/dev/null || echo "N/A")
-                seo=$(jq -r '.summary.seo // "N/A"' "$file" 2>/dev/null || echo "N/A")
-                echo "| $url | $perf | $a11y | $bp | $seo |" >> $GITHUB_STEP_SUMMARY
+              if [ -f "$file" ]; then
+                url=$(jq -r '.url // empty' "$file" 2>/dev/null)
+                if [ -n "$url" ]; then
+                  perf=$(jq -r '.summary.performance // "N/A"' "$file" 2>/dev/null)
+                  a11y=$(jq -r '.summary.accessibility // "N/A"' "$file" 2>/dev/null)
+                  bp=$(jq -r '.summary["best-practices"] // "N/A"' "$file" 2>/dev/null)
+                  seo=$(jq -r '.summary.seo // "N/A"' "$file" 2>/dev/null)
+                  echo "| $url | $perf | $a11y | $bp | $seo |" >> $GITHUB_STEP_SUMMARY
+                fi
               fi
             done
           fi
