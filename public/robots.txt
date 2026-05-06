@@ -20,5 +20,8 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
+# LLMs.txt for AI crawlers
+LLMs.txt: /llms.txt
+
 Sitemap: https://holger-kampffmeyer.de/sitemap.xml
 Sitemap: https://holger-kampffmeyer.de/rss.xml
