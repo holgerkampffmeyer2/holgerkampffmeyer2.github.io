@@ -35,6 +35,9 @@ jobs:
           uploadArtifacts: true
           temporaryPublicStorage: true
           
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+          
       - name: Format Lighthouse Results
         if: always()
         run: |
@@ -47,7 +50,7 @@ jobs:
             for file in .lighthouseci/*.json; do
               if [ -f "$file" ]; then
                 url=$(jq -r '.url // "N/A"' "$file" 2>/dev/null)
-                if [ -n "$url" ]; then
+                if [ -n "$url" ] && [ "$url" != "null" ]; then
                   perf=$(jq -r '.summary.performance // "N/A"' "$file" 2>/dev/null)
                   a11y=$(jq -r '.summary.accessibility // "N/A"' "$file" 2>/dev/null)
                   bp=$(jq -r '.summary["best-practices"] // "N/A"' "$file" 2>/dev/null)
