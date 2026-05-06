@@ -45,7 +45,17 @@ const personSchema = {
   title="Work - Holger Kampffmeyer"
   description="Holger Kampffmeyer - Director DevOps bei Vector. AI Agentic Development, Platform Engineering, Cloud Native Architecture."
   image="/img/header-work.webp"
-  jsonLd={personSchema}
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
+        {"@type": "ListItem", "position": 2, "name": "Work", "item": "https://holger-kampffmeyer.de/work"}
+      ]
+    },
+    personSchema
+  ]}
 >
   <Navbar currentPage="/work" />
 

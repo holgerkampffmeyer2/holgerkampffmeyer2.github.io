@@ -90,10 +90,19 @@ const videoSchema = videos.map(video => ({
 }));
 ---
 
-<Layout 
+<Layout
   title="Videos - DJ Hulk - YouTube Videos und Event-Aufnahmen"
   description="Videos von DJ Hulk - Event-Aufnahmen, Aftermovies, Party-Sessions und Live-Mitschnitte auf YouTube."
   image="/img/_81A4218.webp"
+  jsonLd={{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
+      {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music"},
+      {"@type": "ListItem", "position": 3, "name": "Videos", "item": "https://holger-kampffmeyer.de/dj/videos"}
+    ]
+  }}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
   <Navbar currentPage="/dj/videos" />

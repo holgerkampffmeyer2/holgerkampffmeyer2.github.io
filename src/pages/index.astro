@@ -25,6 +25,13 @@ const faqs = getFaqsForPage('index');
   jsonLd={[
     {
       "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"}
+      ]
+    },
+    {
+      "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "DJ Hulk - Musikanlagen, Lichttechnik, Verleih Stuttgart",
       "description": "DJ Hulk - Holger Kampffmeyer. Verleih von Musikanlagen, Partyboxen, Lichttechnik und Tontechnik im Großraum Stuttgart.",

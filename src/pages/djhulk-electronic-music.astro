@@ -79,7 +79,18 @@ const personDetailsSchema = {
   title="DJ Hulk - Electronic Music DJ Stuttgart"
   description="DJ Hulk - Electronic Music DJ aus Stuttgart. House, Tech House, Drum n Bass. Weekly Sunday House Mixes auf Mixcloud. Events, Festivals und private Parties."
   image="/img/_81A4010.webp"
-  jsonLd={[personSchema, personDetailsSchema]}
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
+        {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music"}
+      ]
+    },
+    personSchema,
+    personDetailsSchema
+  ]}
 >
   <Navbar currentPage="/djhulk-electronic-music" />
 

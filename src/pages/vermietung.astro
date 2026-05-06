@@ -189,7 +189,36 @@ const lichtEquipment = [
   title="Vermietung - DJ Hulk - Partyboxen, Lichttechnik Stuttgart"
   description="Verleih von Musikanlagen, Partyboxen, Lichttechnik und DJ-Equipment im Großraum Stuttgart. Faire Preise und professionelle Beratung."
   image="/img/vermietung/licht2.webp"
-  jsonLd={[faqSchema, serviceSchema]}
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
+        {"@type": "ListItem", "position": 2, "name": "Vermietung", "item": "https://holger-kampffmeyer.de/vermietung"}
+      ]
+    },
+    faqSchema,
+    serviceSchema,
+    {
+      "@context": "https://schema.org",
+      "@type": "OfferCatalog",
+      "name": "Vermietung Pakete",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Partypaket"}, "price": "160.00", "priceCurrency": "EUR"},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "DJ-Paket"}, "price": "200.00", "priceCurrency": "EUR"},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Veranstaltungspaket"}, "price": "180.00", "priceCurrency": "EUR"}
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "14",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  ]}
 >
   <Navbar currentPage="/vermietung" />
 
