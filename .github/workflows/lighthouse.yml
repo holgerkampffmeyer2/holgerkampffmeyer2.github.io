@@ -42,8 +42,8 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| URL | Performance | Accessibility | Best Practices | SEO |" >> $GITHUB_STEP_SUMMARY
           echo "|-----|-------------|---------------|-----------------|-----|" >> $GITHUB_STEP_SUMMARY
-          if [ -f ".lighthouseci/assertion-results.json" ]; then
-            cat .lighthouseci/assertion-results.json | jq -r '.[] | "| \(.url) | \(.actualScore // "N/A") | \(.actualScore // "N/A") | \(.actualScore // "N/A") |"' >> $GITHUB_STEP_SUMMARY
+          if [ -f ".lighthouseci/lhci-manifest.json" ]; then
+            jq -r '.[] | "| \(.url) | \(.summary.performance // "N/A") | \(.summary.accessibility // "N/A") | \(.summary["best-practices"] // "N/A") | \(.summary.seo // "N/A") |"' .lighthouseci/lhci-manifest.json >> $GITHUB_STEP_SUMMARY || true
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Full reports: Check the uploaded artifacts or the links in the Run Lighthouse CI step output" >> $GITHUB_STEP_SUMMARY
