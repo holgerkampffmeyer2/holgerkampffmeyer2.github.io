@@ -102,6 +102,26 @@ const rentalIncludes = [
   "1x Verbindungskabel 5m"
 ];
 
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "JBL Partybox 300 + 320 Sound-Check Demo",
+  "description": "Sound-Check der JBL Partybox 300 und 320 in Aktion - mobile Party-Lautsprecher mit 2x 240W, Light-Show und TWS-Kopplung",
+  "thumbnailUrl": ["https://holger-kampffmeyer.de/img/vermietung/jbl-set1.webp"],
+  "contentUrl": "https://www.youtube.com/watch?v=Ivch0DqKkW0",
+  "embedUrl": "https://www.youtube.com/embed/Ivch0DqKkW0",
+  "uploadDate": "2024-01-20T00:00:00+00:00",
+  "duration": "PT1M30S",
+  "publisher": {
+    "@type": "Organization",
+    "name": "DJ Hulk",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://holger-kampffmeyer.de/img/djhulk_logo.webp"
+    }
+  }
+};
+
 const events = [
   {
     title: "Party",
@@ -125,7 +145,7 @@ const events = [
   title={pageTitle}
   description="Miete das Set JBL Partybox 300 + 320 für deine Party, Geburtstagsfeier oder Firmenfeier. 2x 240W mit Akku, Light Show und TWS-Kopplung für bis zu 80 Personen."
   image="/img/vermietung/partybox-300_kl.webp"
-  jsonLd={[serviceSchema, breadcrumbSchema, faqSchema]}
+  jsonLd={[serviceSchema, breadcrumbSchema, faqSchema, videoSchema]}
 >
   <Navbar currentPage="/vermietung" />
 

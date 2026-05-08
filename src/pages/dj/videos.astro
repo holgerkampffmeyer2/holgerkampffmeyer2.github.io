@@ -70,24 +70,27 @@ const videos = [
   }
 ];
 
-const videoSchema = videos.map(video => ({
-  "@type": "VideoObject",
-  "name": video.title,
-  "description": video.description,
-  "thumbnailUrl": [`https://holger-kampffmeyer.de${video.thumbnail}`],
-  "contentUrl": `https://www.youtube.com/embed/${video.id}`,
-  "embedUrl": `https://www.youtube.com/embed/${video.id}`,
-  "uploadDate": `${video.uploadDate}T00:00:00+00:00`,
-  "duration": "PT1H",
-  "publisher": {
-    "@type": "Organization",
-    "name": "DJ Hulk",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://holger-kampffmeyer.de/img/_81A4218.webp"
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@graph": videos.map(video => ({
+    "@type": "VideoObject",
+    "name": video.title,
+    "description": video.description,
+    "thumbnailUrl": [`https://holger-kampffmeyer.de${video.thumbnail}`],
+    "contentUrl": `https://www.youtube.com/watch?v=${video.id}`,
+    "embedUrl": `https://www.youtube.com/embed/${video.id}`,
+    "uploadDate": `${video.uploadDate}T00:00:00+00:00`,
+    "duration": "PT1H",
+    "publisher": {
+      "@type": "Organization",
+      "name": "DJ Hulk",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://holger-kampffmeyer.de/img/_81A4218.webp"
+      }
     }
-  }
-}));
+  }))
+};
 ---
 
 <Layout

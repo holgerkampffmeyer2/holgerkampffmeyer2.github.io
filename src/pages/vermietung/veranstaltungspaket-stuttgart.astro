@@ -49,6 +49,26 @@ const packageItems = [
   { name: "Stromkabel und alle notwendigen Anschlusskabel mit dabei" }
 ];
 
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Veranstaltungspaket Stuttgart Sound-Check",
+  "description": "Sound-Check der LD Maui 28 G3 PA Anlage - Teil des Veranstaltungspakets Stuttgart mit professionellem Säulensystem und 2060W Peak-Leistung",
+  "thumbnailUrl": ["https://holger-kampffmeyer.de/img/vermietung/ldmaui3.webp"],
+  "contentUrl": "https://www.youtube.com/watch?v=vE5PQ7IUdrg",
+  "embedUrl": "https://www.youtube.com/embed/vE5PQ7IUdrg",
+  "uploadDate": "2024-03-15T00:00:00+00:00",
+  "duration": "PT1M32S",
+  "publisher": {
+    "@type": "Organization",
+    "name": "DJ Hulk",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://holger-kampffmeyer.de/img/djhulk_logo.webp"
+    }
+  }
+};
+
 const events = [
   {
     title: "Hochzeit",
@@ -139,7 +159,7 @@ const faqSchema = {
   title={pageTitle}
   description="Miete das Veranstaltungspaket für dein Event in Stuttgart. Komplette Eventtechnik mit LD Maui Soundanlage, Licht, Nebel und Moving Heads für bis zu 150 Personen."
   image="/img/vermietung/ldmaui3.webp"
-  jsonLd={[serviceSchema, breadcrumbSchema, faqSchema]}
+  jsonLd={[serviceSchema, breadcrumbSchema, faqSchema, videoSchema]}
 >
   <Navbar currentPage="/vermietung" />
 
