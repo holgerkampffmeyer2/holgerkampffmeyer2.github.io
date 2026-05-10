@@ -41,7 +41,13 @@ jobs:
       
       - name: Build Astro site
         run: pnpm run build
-      
+
+      - name: Generate RSS & Sitemap
+        run: pnpm run build:seo
+
+      - name: Rebuild with SEO assets
+        run: pnpm run build
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist

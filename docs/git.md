@@ -2,7 +2,7 @@
 
 ## Standard-Commit (Quellcode)
 ```bash
-pnpm run lint && pnpm run check && pnpm run build
+pnpm run lint && pnpm run check && pnpm run build && pnpm run build:seo
 git add .
 git commit -m "describe changes"
 git push origin main

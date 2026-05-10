@@ -78,7 +78,7 @@ node scripts/fetch-mixcloud.mjs --force
 
 ### RSS-Feed
 
-Der RSS-Feed wird automatisch bei `pnpm run build:full` generiert. Für den Music Blog relevante Einträge:
+Der RSS-Feed wird bei `pnpm run build:seo` oder `pnpm run build:full` generiert. Für den Music Blog relevante Einträge:
 - **Mixes:** Die neuesten 10 Mixes werden aus `blog-posts.json` gelesen
 
 ---

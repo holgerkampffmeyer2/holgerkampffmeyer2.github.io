@@ -21,6 +21,6 @@
 - `output: 'static'` für SSG
 
 ## SEO
-- Vermietungs-Seiten: FAQ-Schema in `src/pages/vermietung/*.astro`
+- Vermietung: Landingpage in `src/pages/vermietung.astro` mit BieteSection + FAQs
 - Videos: VideoObject Schema in `src/pages/dj/videos.astro`
 - Mix-Seiten: AudioObject + BreadcrumbList

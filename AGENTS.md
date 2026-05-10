@@ -12,6 +12,11 @@
 ## Wichtige Regeln
 1. **DESIGN.md lesen** für Design/Details
 2. Domain IMMER auf `holger-kampffmeyer.de` setzen
-3. Nach Quellcode-Änderungen: lint → check → build → commit → push
+3. Nach Quellcode-Änderungen: lint → check → build → build:seo → commit → push
 4. Nach reinen .md Änderungen: direkt push (kein lint/check/build)
 5. **Neuen Mix-Post erstellen**: Bei "neuen Post/Tracklist" → automatisch in `tracklists/` nach höchster Mix-Nummer suchen, Tracklist nach `src/data/tracklists/` kopieren, Bild (PNG→WebP) nach `public/tracklists/` konvertieren, dann `pnpm run build:full` → commit → push
+
+## Build-Commands
+- `pnpm run build` — nur Astro Build (schnell)
+- `pnpm run build:seo` — RSS + Sitemap generieren (nach build ausführen)
+- `pnpm run build:full` — Fetch Mixcloud + SEO + Build (für Mix-Posts)

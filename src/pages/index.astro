@@ -11,11 +11,6 @@ import SpotifyIcon from "../components/icons/SpotifyIcon.astro";
 import GitHubIcon from "../components/icons/GitHubIcon.astro";
 import YouTubeIcon from "../components/icons/YouTubeIcon.astro";
 import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
-import BieteSection from "../components/BieteSection.astro";
-import FAQSection from "../components/FAQSection.astro";
-import { getFaqsForPage } from "../lib/faqUtils";
-
-const faqs = getFaqsForPage('index');
 ---
 
 <Layout
@@ -85,25 +80,13 @@ const faqs = getFaqsForPage('index');
         "https://www.youtube.com/@djhulk_de"
       ]
     },
-       {
-         "@context": "https://schema.org",
-         "@type": "FAQPage",
-         "mainEntity": faqs.map((faq) => ({
-           "@type": "Question",
-           "name": faq.question,
-           "acceptedAnswer": {
-             "@type": "Answer",
-"text": faq.answer
-            }
-          }))
-        }
-      ]}
+       ]}
      >
   <Navbar currentPage="/" />
 
   <!-- Hero Slider Section -->
   <HeroSlider
-    interval={5000}
+    interval={7000}
     slides={[
       {
         title: "DJ Hulk",
@@ -114,83 +97,25 @@ const faqs = getFaqsForPage('index');
         buttons: [{ text: "Mehr über DJ Hulk", href: "/djhulk-electronic-music" }]
       },
       {
-        title: "DJ Technik Verleih",
-        titleTag: "h2",
-        category: "Musikanlagen, PA, Partyanlagen",
-        categoryColor: "#22d3ee",
-        description: "Partyboxen, PA-Anlagen, DJ-Equipment, Lichttechnik, Partylichtanlagen, Nebel, Mikrofon - alles für Deine Party!",
-        buttons: [{ text: "Vermietung & Technik‑Verleih Stuttgart", href: "/vermietung" }]
-      },
-      {
         title: "Mixes mit Tracklists",
         titleTag: "h2",
         category: "Weekly DJ Mixes",
         categoryColor: "var(--color-secondary)",
         description: "Jeden Sonntag neuer Mix - House, Tech House, Deep House. Mit vollständiger Tracklist und optimiert für Gym, Drive, Work oder Party.",
         buttons: [{ text: "Zu den Mixes", href: "/dj/mixes" }]
+      },
+      {
+        title: "Work",
+        titleTag: "h2",
+        category: "DevOps & Platform Engineering",
+        categoryColor: "#22d3ee",
+        description: "Holger Kampffmeyer - Director DevOps bei Vector. AI Agentic Development, Platform Engineering, Cloud Native.",
+        buttons: [{ text: "Mehr erfahren", href: "/work" }]
       }
     ]}
   />
 
-  <!-- Vermietung Section -->
-  <section id="vermietung" class="section-padding bg-[var(--color-surface)]">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16 animate-on-scroll">
-        <span
-          class="text-[var(--color-secondary)] text-lg tracking-widest uppercase"
-          >Vermietung</span
-        >
-        
-      </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        <div class="grid grid-cols-2 gap-4">
-          <img 
-            src="/img/vermietung/IMG_7142.webp" 
-            alt="Partytechnik Vermietung" 
-            width="400"
-            height="400"
-            class="rounded-xl w-full aspect-square object-cover hover:ring-2 hover:ring-[var(--color-secondary)] hover:scale-[1.02] transition-all duration-300"
-          />
-          <img 
-            src="/img/vermietung/jbl-set1.webp" 
-            alt="JBL Partybox Set" 
-            width="400"
-            height="400"
-            class="rounded-xl w-full aspect-square object-cover hover:ring-2 hover:ring-[var(--color-secondary)] hover:scale-[1.02] transition-all duration-300"
-          />
-        </div>
-        <div class="animate-on-scroll">
-          <h2 class="font-play text-4xl md:text-5xl font-bold mb-6">
-          Musikanlagen, Partyboxen, Tontechnik und Licht
-        </h2>
-          <p class="text-[var(--color-text-muted)] mb-8">
-            Vermietung / Verleih für Veranstaltungstechnik im Großraum Stuttgart,
-            Leinfelden-Echterdingen, Tübingen, Esslingen und Umkreis. Wir bieten
-            Partyboxen, PA-Anlagen, Musikanlagen, DJ-Equipment, Partylichtanlagen, LED-Strahler, Lichttechnik und Beleuchtung
-            für Ihre privaten Feiern, Firmen-Events, Vereinsfeiern, Messen und
-            sonstige Veranstaltungen.
-          </p>
-        </div>
-        </div>
-
-      <BieteSection />
-      <FAQSection faqs={faqs} />
-
-      <div class="text-center mt-12 animate-on-scroll">
-        <p class="text-[var(--color-text-muted)] mb-6">
-          Frage mich auch gerne kurzfristig an, wenn Du Technik für eine Veranstaltung benötigen! Ich habe auch oft kurzfristig noch Geräte verfügbar.
-        </p>
-        <a href="/vermietung" class="btn-primary mb-4">Zur Miettechnik!</a>
-        <a
-          href="#kontakt"
-          class="btn-secondary flex items-center justify-center gap-2"
-        >
-          Oder Kontakt aufnehmen!
-        </a>
-      </div>
-    </div>
-  </section>
 
   <!-- DJing Section -->
   <section id="djing" class="section-padding bg-[var(--color-bg)]">
@@ -378,8 +303,9 @@ const faqs = getFaqsForPage('index');
           Als DJ buchen
         </a>
         <a
-          href="/vermietung"
+          href="https://soundundlicht-stuttgart.de/vermietung/"
           class="btn-secondary flex items-center justify-center gap-2"
+          target="_blank" rel="noopener noreferrer"
         >
           Technik mieten
         </a>

@@ -15,7 +15,6 @@
 ```
 src/
 ├── components/           # UI-Komponenten
-│   └── vermietung/       # Vermietung-spezifisch
 ├── data/                 # Daten (faqs.ts, mixcloud-data.json)
 ├── layouts/             # Layouts (Layout.astro)
 ├── lib/                 # Utilities (faqUtils.ts)
@@ -26,8 +25,7 @@ src/
 │   │   ├── videos.astro
 │   │   ├── mixes.astro, mixes/[n].astro, mixes-all.astro
 │   │   └── em3f.astro
-│   ├── vermietung.astro
-│   ├── vermietung/       # 8 Detailseiten
+│   ├── vermietung.astro  # Landingpage mit Verweis → extern
 │   ├── work.astro
 │   ├── links.astro
 │   └── impressum.astro
@@ -45,8 +43,7 @@ src/
 | /dj/videos | Videos |
 | /dj/mixes | Mixes (pagiert) |
 | /dj/em3f | Festival Fotos |
-| /vermietung | Vermietung Übersicht |
-| /vermietung/\<produkt\> | 8 Detailseiten |
+| /vermietung | Vermietung Landingpage (Verweis → soundundlicht-stuttgart.de) |
 | /work | Work/Research |
 | /links | Links |
 | /impressum | Impressum |
@@ -58,7 +55,8 @@ src/
 ```bash
 pnpm run dev        # Development
 pnpm run lint      # ESLint
-pnpm run build     # Production (RSS + Sitemap)
+pnpm run build     # Production (nur Astro, schnell)
+pnpm run build:seo  # RSS + Sitemap generieren
 pnpm run preview   # Preview
 ```
 
