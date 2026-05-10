@@ -74,6 +74,13 @@ function formatDuration(seconds: number) {
         </span>
       )}
     </div>
+    
+    {/* Hero Image */}
+    {post.heroImage && (
+      <div class="mb-6">
+        <img src={post.heroImage} alt={post.title} class="w-full h-48 md:h-64 lg:h-80 object-cover rounded-xl border border-[var(--color-border)]" />
+      </div>
+    )}
 
     {/* Date & Duration */}
     <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-6">
