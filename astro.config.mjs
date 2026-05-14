@@ -11,7 +11,7 @@ export default defineConfig({
   base: '/',
   output: 'static',
   build: {
-    format: 'file'
+    format: 'directory'
   },
   redirects: {
     '/dj': '/djhulk-electronic-music'

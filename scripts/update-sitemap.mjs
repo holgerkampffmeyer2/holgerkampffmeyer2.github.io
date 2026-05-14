@@ -11,7 +11,7 @@ function findStaticPages() {
   const baseUrl = 'https://holger-kampffmeyer.de';
   const pages = [];
   
-  // Find all HTML files in dist/ except index and mix pages
+  // Find all HTML files in dist/ except mix pages
   function walkDir(dir) {
     if (!fs.existsSync(dir)) return;
     
@@ -22,8 +22,10 @@ function findStaticPages() {
       
       if (stat.isDirectory()) {
         walkDir(fullPath);
-      } else if (file.endsWith('.html') && file !== 'index.html') {
-        const relativePath = path.relative(DIST_DIR, fullPath).replace('.html', '').replace(/\\/g, '/');
+      } else if (file.endsWith('.html')) {
+        // Skip root index.html (added separately below)
+        if (fullPath === path.join(DIST_DIR, 'index.html')) continue;
+        const relativePath = path.relative(DIST_DIR, fullPath).replace('.html', '').replace(/\/index$/, '').replace(/\\/g, '/');
         // Exclude Google verification files and other non-pages
         if (!relativePath.startsWith('dj/mixes/') && !relativePath.includes('googlehostedservice')) {
           pages.push(`${baseUrl}/${relativePath}`);
@@ -42,13 +44,31 @@ function findMixPages() {
   const mixesDir = path.join(DIST_DIR, 'dj', 'mixes');
   if (!fs.existsSync(mixesDir)) return [];
   
-  const files = fs.readdirSync(mixesDir);
   const baseUrl = 'https://holger-kampffmeyer.de';
+  const pages = [];
   
-  return files
-    .filter(f => f.endsWith('.html') && f !== 'index.html')
-    .map(f => `${baseUrl}/dj/mixes/${f.replace('.html', '')}`)
-    .sort();
+  function walkMixDir(dir) {
+    const items = fs.readdirSync(dir);
+    for (const item of items) {
+      const fullPath = path.join(dir, item);
+      const stat = fs.statSync(fullPath);
+      
+      if (stat.isDirectory()) {
+        walkMixDir(fullPath);
+      } else if (item.endsWith('.html') && item !== 'index.html') {
+        // Direct .html file (format: 'file')
+        const relativePath = path.relative(mixesDir, fullPath).replace('.html', '');
+        pages.push(`${baseUrl}/dj/mixes/${relativePath}`);
+      } else if (item === 'index.html' && dir !== mixesDir) {
+        // index.html in subdirectory (format: 'directory')
+        const mixNum = path.basename(dir);
+        pages.push(`${baseUrl}/dj/mixes/${mixNum}`);
+      }
+    }
+  }
+  
+  walkMixDir(mixesDir);
+  return pages.sort();
 }
 
 function updateSitemap(staticUrls, mixUrls) {
