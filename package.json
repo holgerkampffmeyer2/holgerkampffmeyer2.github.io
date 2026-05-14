@@ -9,9 +9,9 @@
     "build:full": "node scripts/fetch-mixcloud.mjs && node scripts/generate-rss.mjs && node scripts/update-sitemap.mjs && astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "lint": "eslint src --ext .astro,.ts,.js && node scripts/check-paths.mjs",
+    "lint": "eslint src && node scripts/check-paths.mjs",
     "lint:paths": "node scripts/check-paths.mjs",
-    "lint:fix": "eslint src --ext .astro,.ts,.js --fix",
+    "lint:fix": "eslint src --fix",
     "astro": "astro",
     "generate-rss": "node scripts/generate-rss.mjs",
     "bing-indexnow": "node scripts/bing-indexnow.mjs"

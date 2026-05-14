@@ -9,6 +9,8 @@ interface Props {
   noIndex?: boolean;
   /** additional JSON-LD objects to embed in head */
   jsonLd?: object | object[];
+  /** image URL to preload for LCP (defaults to image) */
+  preloadImage?: string;
 }
 
 const { 
@@ -16,7 +18,8 @@ const {
   description = "DJ Hulk aus Stuttgart. Electronic Music DJ für Events, Feiern und Hochzeiten. Wöchentliche DJ Mixes auf Mixcloud.",
   image = "/img/djhulk_logo.webp",
   noIndex = false,
-  jsonLd
+  jsonLd,
+  preloadImage
 } = Astro.props;
 
 const canonicalPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/').replace(/\/+$/, '');
@@ -140,13 +143,13 @@ const canonicalURL = new URL(canonicalPath || '/', Astro.site);
       <script is:inline type="application/ld+json" set:html={JSON.stringify(item)} />
     ))}
     
-    <!-- Preload LCP image -->
-    <link rel="preload" as="image" href={image} />
+    <!-- Preload LCP image (use preloadImage if set, otherwise skip if image is only used for OG) -->
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} />}
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Play:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Play:wght@400;700&display=optional" rel="stylesheet">
     
     <!-- Open Graph -->
     <meta property="og:title" content={title} />

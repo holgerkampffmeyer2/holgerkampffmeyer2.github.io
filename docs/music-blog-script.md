@@ -98,16 +98,23 @@ cp "tracklsts/DJ Hulk - Mix176-LatinHouse-tracklist.txt" src/data/tracklists/
 
 ### Schritt 2: Hero-Image vorbereiten (optional)
 
-1. Exportiere das Bild aus Mixcloud als PNG
-2. Konvertiere zu WebP: `node scripts/create-webp.mjs`
-3. Oder manuell nach `public/tracklists/` kopieren:
-```bash
-cp "tracklists/" public/tracklists/
-```
+1. Exportiere das Bild aus Mixcloud als PNG nach `tracklists/`
+2. **Konvertiere zu WebP + resize auf 600px Breite** (Bild wird als 400px Thumbnail angezeigt):
+   ```bash
+   node scripts/create-webp.mjs -w 600 tracklists/Mixcloud-Post-Mix177.png
+   ```
+3. Das Script erzeugt `public/tracklists/Mixcloud-Post-Mix177.webp` (Leerzeichen → Bindestriche)
+
+**Warum 600px:** Das Bild wird auf der Website als 400×400 Thumbnail angezeigt. 600px Breite ist der optimale Kompromiss aus Retina-Qualität und Dateigröße. Standard 1920px wäre 14× überdimensioniert.
 
 **Wichtig:** WebP-Dateinamen dürfen KEINE Leerzeichen enthalten:
 - ✅ `Mixcloud-Post-Mix177.webp`
 - ❌ `Mixcloud Post Mix177.webp`
+
+**Batch-Verarbeitung** (alle PNGs in `tracklists/`):
+```bash
+node scripts/create-webp.mjs -t -w 600
+```
 
 ### Schritt 3: Build ausführen
 
