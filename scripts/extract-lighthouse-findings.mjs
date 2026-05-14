@@ -24,14 +24,12 @@ function fmt(ms) {
 }
 
 const categories = report.categories;
-const perf = categories.performance;
 const audits = report.audits;
 
 const lcp = audits['largest-contentful-paint'];
 const tbt = audits['total-blocking-time'];
 const cls = audits['cumulative-layout-shift'];
 const fcp = audits['first-contentful-paint'];
-const speedIndex = audits['speed-index'];
 const tti = audits['interactive'];
 
 const opportunities = Object.values(audits)
