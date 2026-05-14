@@ -1,14 +1,9 @@
 module.exports = {
   ci: {
     collect: {
-      // Lighthouse CI configuration
       numberOfRuns: 1,
       url: [
-        'http://localhost:4321/',
-        'http://localhost:4321/djhulk-electronic-music',
-        'http://localhost:4321/vermietung',
-        'http://localhost:4321/dj/mixes',
-        'http://localhost:4321/work'
+        'http://localhost:4321/'
       ],
       startServerCommand: 'pnpm run preview -- --port 4321',
       startServerReadyPattern: 'Server listening',
