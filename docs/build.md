@@ -21,6 +21,11 @@ pnpm run preview    # Preview production build
 - `pnpm run build` ist schnell (~15-20s)
 - Für frische Daten + SEO: `pnpm run build:full`
 
+## Fonts
+- **Self-hosted** via `@fontsource-variable/josefin-sans` + `@fontsource/play`
+- Importiert in `src/styles/global.css` (wird von Vite in Build gebundelt)
+- Kein externer Request zu Google Fonts mehr
+
 ## Output
 - `dist/` - statische HTML-Dateien
 - `public/sitemap.xml` - nach build:seo

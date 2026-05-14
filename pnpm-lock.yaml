@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@fontsource-variable/josefin-sans':
+        specifier: ^5.2.8
+        version: 5.2.8
+      '@fontsource/play':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@tailwindcss/vite':
         specifier: ^4.3.0
         version: 4.3.0(vite@7.3.3(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.8.4))
@@ -355,6 +361,12 @@ packages:
   '@eslint/plugin-kit@0.7.1':
     resolution: {integrity: sha512-rZAP3aVgB9ds9KOeUSL+zZ21hPmo8dh6fnIFwRQj5EAZl9gzR7wxYbYXYysAM8CTqGmUGyp2S4kUdV17MnGuWQ==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
+
+  '@fontsource-variable/josefin-sans@5.2.8':
+    resolution: {integrity: sha512-xt8EGt2/66JJV/mmWU2NxafIwXmDNdd1yi/bVZyRRMCtygHXPCldJrrjjDgOCJPyXbE7NWkc3g+5iE8uJJGbFA==}
+
+  '@fontsource/play@5.2.8':
+    resolution: {integrity: sha512-nYxAYZsWO7hEFEUWx/lZWaNhWfi34Pbi0Rb3vbxskeaVpele1I6Q5os0bgnL9pTBMNuiG6UX+e6tF/2AC8tvKA==}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -2891,6 +2903,10 @@ snapshots:
     dependencies:
       '@eslint/core': 1.2.1
       levn: 0.4.1
+
+  '@fontsource-variable/josefin-sans@5.2.8': {}
+
+  '@fontsource/play@5.2.8': {}
 
   '@humanfs/core@0.19.2':
     dependencies:
