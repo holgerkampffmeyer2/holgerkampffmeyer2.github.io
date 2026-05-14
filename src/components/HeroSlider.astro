@@ -68,20 +68,20 @@ const { slides, interval = 5000, id = "hero" } = Astro.props;
     </div>
   ))}
 
-  <button class="slider-nav prev" id="slider-prev">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <button class="slider-nav prev" id="slider-prev" aria-label="Vorheriger Slide">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
     </svg>
   </button>
-  <button class="slider-nav next" id="slider-next">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <button class="slider-nav next" id="slider-next" aria-label="Nächster Slide">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
     </svg>
   </button>
 
   <div class="slider-dots">
     {slides.map((_, index) => (
-      <div class={`slider-dot ${index === 0 ? "active" : ""}`} data-dot={index}></div>
+      <button class={`slider-dot ${index === 0 ? "active" : ""}`} data-dot={index} aria-label={`Slide ${index + 1}`}></button>
     ))}
   </div>
   <script is:inline define:vars={{ id, interval }}>

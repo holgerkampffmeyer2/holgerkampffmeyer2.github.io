@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "@fontsource-variable/josefin-sans";
-@import "@fontsource/play";
+@import "@fontsource/play/latin.css";
 
 @theme {
   --color-bg: #0a0a0f;
