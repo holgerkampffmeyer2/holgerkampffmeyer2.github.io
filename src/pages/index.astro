@@ -397,25 +397,4 @@ import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
   </section>
 
 <Footer />
-
-   <script is:inline>
-      var observerOptions = {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1
-      };
-
-      var observer = new IntersectionObserver(function(entries) {
-        for (var i = 0; i < entries.length; i++) {
-          if (entries[i].isIntersecting) {
-            entries[i].target.classList.add("visible");
-          }
-        }
-      }, observerOptions);
-
-      var animateElements = document.querySelectorAll(".animate-on-scroll");
-      for (var i = 0; i < animateElements.length; i++) {
-        observer.observe(animateElements[i]);
-      }
-   </script>
 </Layout>
