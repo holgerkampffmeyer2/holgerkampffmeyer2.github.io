@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   vite: {
@@ -13,6 +14,7 @@ export default defineConfig({
   build: {
     format: 'directory'
   },
+  integrations: [sitemap()],
   redirects: {
     '/dj': '/djhulk-electronic-music'
   }

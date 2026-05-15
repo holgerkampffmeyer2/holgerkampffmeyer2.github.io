@@ -17,6 +17,6 @@
 5. **Neuen Mix-Post erstellen**: Bei "neuen Post/Tracklist" → automatisch in `tracklists/` nach höchster Mix-Nummer suchen, Tracklist nach `src/data/tracklists/` kopieren, Bild (PNG→WebP) mit `node scripts/create-webp.mjs -w 600 <datei>` nach `public/tracklists/` konvertieren (resized auf 600px, da Thumbnail nur 400px), dann `pnpm run build:full` → commit → push
 
 ## Build-Commands
-- `pnpm run build` — nur Astro Build (schnell)
-- `pnpm run build:seo` — RSS + Sitemap generieren (nach build ausführen)
-- `pnpm run build:full` — Fetch Mixcloud + SEO + Build (für Mix-Posts)
+- `pnpm run build` — nur Astro Build (schnell, inkl. Sitemap via @astrojs/sitemap)
+- `pnpm run build:seo` — RSS + urllist.txt generieren (nach build ausführen)
+- `pnpm run build:full` — Fetch Mixcloud + RSS + Build (inkl. Sitemap) + urllist.txt (für Mix-Posts)

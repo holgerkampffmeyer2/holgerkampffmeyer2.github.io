@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "build:seo": "node scripts/generate-rss.mjs && node scripts/update-sitemap.mjs",
-    "build:full": "node scripts/fetch-mixcloud.mjs && node scripts/generate-rss.mjs && node scripts/update-sitemap.mjs && astro build",
+    "build:seo": "node scripts/generate-rss.mjs && node scripts/generate-urllist.mjs",
+    "build:full": "node scripts/fetch-mixcloud.mjs && node scripts/generate-rss.mjs && astro build && node scripts/generate-urllist.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "lint": "eslint src && node scripts/check-paths.mjs",
@@ -14,9 +14,11 @@
     "lint:fix": "eslint src --fix",
     "astro": "astro",
     "generate-rss": "node scripts/generate-rss.mjs",
+    "generate-urllist": "node scripts/generate-urllist.mjs",
     "bing-indexnow": "node scripts/bing-indexnow.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "@fontsource-variable/josefin-sans": "^5.2.8",
     "@fontsource/play": "^5.2.8",
     "@tailwindcss/vite": "^4.3.0",

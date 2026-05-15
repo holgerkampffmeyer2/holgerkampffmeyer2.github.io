@@ -1,9 +1,11 @@
 import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 
 const DEFAULT_IMG_DIRS = ['./img', './public/img', './public/assets'];
 const TRACKLIST_DIRS = ['./tracklists', './public/tracklists'];
+const CONCURRENCY = os.cpus().length;
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -12,7 +14,8 @@ function parseArgs() {
     width: 1920,
     quality: 80,
     recursive: false,
-    includeTracklists: false
+    includeTracklists: false,
+    concurrency: CONCURRENCY
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -25,6 +28,8 @@ function parseArgs() {
       options.recursive = true;
     } else if (arg === '-t' || arg === '--tracklists') {
       options.includeTracklists = true;
+    } else if (arg === '--concurrency') {
+      options.concurrency = parseInt(args[++i], 10) || CONCURRENCY;
     } else if (arg === '-h' || arg === '--help') {
       printHelp();
       process.exit(0);
@@ -45,6 +50,7 @@ Options:
   -q, --quality <num>   WebP quality 1-100 (default: 80)
   -r, --recursive      Process directories recursively
   -t, --tracklists     Also process tracklists/ directories
+  --concurrency <num>  Parallel tasks (default: CPU cores)
   -h, --help          Show this help
 
 Examples:
@@ -70,11 +76,11 @@ async function processFile(filePath, options) {
 
   try {
     const pipeline = sharp(filePath);
-    
+
     if (options.width > 0) {
       pipeline.resize(options.width, null, { withoutEnlargement: true });
     }
-    
+
     await pipeline
       .webp({ quality: options.quality })
       .toFile(webpPath);
@@ -99,18 +105,38 @@ async function processDir(dirPath, options, recursive = false) {
 
   let converted = 0;
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+  const tasks = [];
 
   for (const entry of entries) {
     const fullPath = path.join(dirPath, entry.name);
 
     if (entry.isDirectory() && recursive) {
-      converted += await processDir(fullPath, options, recursive);
+      tasks.push(processDir(fullPath, options, recursive));
     } else if (entry.isFile()) {
-      const processed = await processFile(fullPath, options);
-      if (processed) converted++;
+      tasks.push(processFile(fullPath, options));
     }
   }
 
+  const results = await Promise.all(tasks);
+  converted = results.reduce((sum, r) => sum + (r || 0), 0);
+
+  return converted;
+}
+
+async function processFilesWithConcurrency(files, options) {
+  let converted = 0;
+  const queue = [...files];
+
+  async function worker() {
+    while (queue.length > 0) {
+      const filePath = queue.shift();
+      const done = await processFile(filePath, options);
+      if (done) converted++;
+    }
+  }
+
+  const workers = Array.from({ length: Math.min(options.concurrency, files.length) }, () => worker());
+  await Promise.all(workers);
   return converted;
 }
 
@@ -146,23 +172,22 @@ async function main() {
       if (!fs.existsSync(imgDir)) continue;
 
       const files = fs.readdirSync(imgDir);
-      let dirConverted = 0;
+      const imageFiles = [];
 
       for (const file of files) {
         const filePath = path.join(imgDir, file);
         const stat = fs.statSync(filePath);
-
         if (stat.isFile()) {
-          const processed = await processFile(filePath, options);
-          if (processed) dirConverted++;
+          imageFiles.push(filePath);
         } else if (stat.isDirectory() && options.recursive) {
-          dirConverted += await processDir(filePath, options, true);
+          totalConverted += await processDir(filePath, options, true);
         }
       }
 
-      if (dirConverted > 0) {
-        console.log(`[${imgDir}] ${dirConverted} files converted`);
-        totalConverted += dirConverted;
+      if (imageFiles.length > 0) {
+        const converted = await processFilesWithConcurrency(imageFiles, options);
+        console.log(`[${imgDir}] ${converted} files converted`);
+        totalConverted += converted;
       }
     }
   }

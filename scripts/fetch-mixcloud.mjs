@@ -125,17 +125,23 @@ async function fetchMixcloud(force = false) {
     console.log(`✅ Updated mixcloud-data.json (${mixes.length} mixes)`);
 
     console.log('Processing blog posts with tracklists...');
-    const posts = [];
-    let i = 0;
-    for (const mix of data.data) {
-      const apiData = await fetchMixDetails(mix.key);
+
+    const detailsResults = await Promise.all(
+      data.data.map(mix => fetchMixDetails(mix.key))
+    );
+
+    const posts = data.data.map((mix, i) => {
+      const apiData = detailsResults[i];
       const mixNumber = extractMixNumber(mix.name);
       const tracklistFile = mixNumber ? findTracklistFile(mixNumber) : null;
       const tracklist = tracklistFile ? parseTracklist(tracklistFile) : [];
       const heroImage = mixNumber ? findHeroImage(mixNumber) : null;
       const useCases = deriveUseCases(mix.tags || []);
 
-      posts.push({
+      if (tracklistFile) console.log(`  ✅ Tracklist for Mix#${mixNumber}`);
+      if (heroImage) console.log(`  ✅ Hero for Mix#${mixNumber}`);
+
+      return {
         number: mixNumber,
         title: mix.name,
         key: mix.key,
@@ -150,12 +156,8 @@ async function fetchMixcloud(force = false) {
         tracklist,
         hasTracklist: tracklist.length > 0,
         heroImage
-      });
-
-      if (tracklistFile) console.log(`  ✅ Tracklist for Mix#${mixNumber}`);
-      if (heroImage) console.log(`  ✅ Hero for Mix#${mixNumber}`);
-      if (++i % 10 === 0) console.log(`  ... ${i}/${data.data.length}`);
-    }
+      };
+    });
 
     fs.writeFileSync(BLOG_DATA_PATH, JSON.stringify({ lastUpdated: new Date().toISOString(), posts }, null, 2));
     console.log(`\n✅ Updated blog-posts.json (${posts.length} posts, ${posts.filter(p => p.hasTracklist).length} with tracklists)`);
