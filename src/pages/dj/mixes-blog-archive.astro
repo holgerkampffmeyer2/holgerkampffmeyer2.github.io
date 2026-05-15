@@ -66,7 +66,7 @@ const breadcrumbLabel = useCaseFilter
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
-  { label: "Weekly DJ Mixes", href: "/dj/mixes" },
+  { label: "Weekly DJ Mixes", href: "/dj/mixes/" },
   { label: breadcrumbLabel }
 ];
 
@@ -81,8 +81,8 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
-    {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music"},
-    {"@type": "ListItem", "position": 3, "name": "Mix Archive", "item": "https://holger-kampffmeyer.de/dj/mixes-blog-archive"}
+    {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music/"},
+    {"@type": "ListItem", "position": 3, "name": "Mix Archive", "item": "https://holger-kampffmeyer.de/dj/mixes-blog-archive/"}
   ]
 };
 
@@ -91,7 +91,7 @@ const blogSchema = {
   "@type": "Blog",
   "name": "DJ Hulk Weekly Mixes Blog",
   "description": "Weekly electronic music DJ mixes by DJ Hulk with full tracklists. House, Tech House, Deep House, Latin House.",
-  "url": "https://holger-kampffmeyer.de/dj/mixes-blog-archive",
+  "url": "https://holger-kampffmeyer.de/dj/mixes-blog-archive/",
   "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
   "author": {
     "@type": "Person",
@@ -111,7 +111,7 @@ const collectionPageSchema = {
   "@type": "CollectionPage",
   "name": "DJ Hulk Mix Archive",
   "description": "Complete archive of DJ Hulk's electronic music mixes with tracklists - House, Tech House, Deep House, Latin House.",
-  "url": "https://holger-kampffmeyer.de/dj/mixes-blog-archive",
+  "url": "https://holger-kampffmeyer.de/dj/mixes-blog-archive/",
   "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
   "mainEntity": [blogSchema, {
     "@type": "MusicAlbum",
@@ -120,7 +120,7 @@ const collectionPageSchema = {
     "byArtist": {
       "@type": "Person",
       "name": "DJ Hulk",
-      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+"url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
     },
     "genre": ["House", "Tech House", "Deep House", "Latin House"],
     "numTracks": archivePosts.length
@@ -144,7 +144,7 @@ if (useCaseFilter) {
   image="/img/_81A4010.webp"
   jsonLd={jsonLd}
 >
-  <Navbar currentPage="/dj/mixes" />
+  <Navbar currentPage="/dj/mixes/" />
 
   <Breadcrumb segments={breadcrumbSegments} />
 

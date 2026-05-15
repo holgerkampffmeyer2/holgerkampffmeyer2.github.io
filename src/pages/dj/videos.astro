@@ -7,7 +7,7 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 
 const breadcrumbSegments = [
   { label: "Startseite", href: "/" },
-  { label: "DJ Hulk", href: "/djhulk-electronic-music" },
+  { label: "DJ Hulk", href: "/djhulk-electronic-music/" },
   { label: "Videos" }
 ];
 
@@ -102,13 +102,13 @@ const videoSchema = {
     "@type": "BreadcrumbList",
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
-      {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music"},
-      {"@type": "ListItem", "position": 3, "name": "Videos", "item": "https://holger-kampffmeyer.de/dj/videos"}
+      {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music/"},
+      {"@type": "ListItem", "position": 3, "name": "Videos", "item": "https://holger-kampffmeyer.de/dj/videos/"}
     ]
   }}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
-  <Navbar currentPage="/dj/videos" />
+  <Navbar currentPage="/dj/videos/" />
 
   <!-- Breadcrumb -->
   <Breadcrumb segments={breadcrumbSegments} />

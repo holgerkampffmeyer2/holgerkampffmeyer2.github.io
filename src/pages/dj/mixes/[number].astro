@@ -68,8 +68,8 @@ const pageDescription = post.description?.substring(0, 160) || `DJ Hulk Mix#${mi
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
-  { label: "DJ Hulk", href: "/djhulk-electronic-music" },
-  { label: "Weekly DJ Mixes", href: "/dj/mixes" },
+  { label: "DJ Hulk", href: "/djhulk-electronic-music/" },
+  { label: "Weekly DJ Mixes", href: "/dj/mixes/" },
   { label: `Mix#${mixNumber}` }
 ];
 
@@ -90,12 +90,12 @@ const jsonLd = [
     "author": {
       "@type": "Person",
       "name": "DJ Hulk",
-      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
     },
     "publisher": {
       "@type": "Person",
       "name": "DJ Hulk",
-      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
@@ -114,7 +114,7 @@ const jsonLd = [
     "producer": {
       "@type": "Person",
       "name": "DJ Hulk",
-      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
     },
     "image": post.picture
   },
@@ -122,7 +122,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "MusicGroup",
     "name": "DJ Hulk",
-    "url": "https://holger-kampffmeyer.de/djhulk-electronic-music",
+    "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/",
     "sameAs": [
       "https://www.mixcloud.com/holger-kampffmeyer/",
       "https://soundcloud.com/holger-kampffmeyer2",
@@ -152,7 +152,7 @@ const jsonLd = [
     }))
   }]}
 >
-  <Navbar currentPage="/dj/mixes" />
+  <Navbar currentPage="/dj/mixes/" />
 
   <Breadcrumb segments={breadcrumbSegments} />
 
@@ -192,7 +192,7 @@ const jsonLd = [
 
       {/* Back to overview */}
       <div class="flex flex-wrap justify-center gap-4 mt-10">
-        <a href="/dj/mixes" class="btn-secondary">
+        <a href="/dj/mixes/" class="btn-secondary">
           ← Back to Weekly DJ Mixes
         </a>
         <a href="/dj/mixes-blog-archive" class="btn-secondary">

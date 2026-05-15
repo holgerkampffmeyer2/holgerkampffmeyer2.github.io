@@ -8,7 +8,7 @@ import MixcloudWidget from '../../components/MixcloudWidget.astro';
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
-  { label: "DJ Hulk", href: "/djhulk-electronic-music" },
+  { label: "DJ Hulk", href: "/djhulk-electronic-music/" },
   { label: "Alle Mixes" }
 ];
 
@@ -75,8 +75,8 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
       "@type": "BreadcrumbList",
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
-        {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music"},
-        {"@type": "ListItem", "position": 3, "name": "All Mixes", "item": "https://holger-kampffmeyer.de/dj/mixes-all"}
+        {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music/"},
+        {"@type": "ListItem", "position": 3, "name": "All Mixes", "item": "https://holger-kampffmeyer.de/dj/mixes-all/"}
       ]
     },
     {
@@ -84,7 +84,7 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
       "@type": "MusicAlbum",
       "name": "All DJ Hulk Mixes",
       "description": "All weekly House, Tech House, Deep House and Latin House DJ mixes on Mixcloud by DJ Hulk.",
-      "url": "https://holger-kampffmeyer.de/dj/mixes-all",
+      "url": "https://holger-kampffmeyer.de/dj/mixes-all/",
       "image": "https://holger-kampffmeyer.de/img/em3f/DSC_2451.webp",
       "byArtist": {
         "@type": "Person",
@@ -98,7 +98,7 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
       "name": "DJ Hulk",
       "alternateName": "Holger Kampffmeyer",
       "jobTitle": "Electronic Music DJ",
-      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music",
+      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/",
       "sameAs": [
         "https://www.mixcloud.com/holger-kampffmeyer/",
         "https://soundcloud.com/holger-kampffmeyer2",
@@ -112,7 +112,7 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
     }
   ]}
 >
-  <Navbar currentPage="/dj/mixes" />
+  <Navbar currentPage="/dj/mixes/" />
 
   <!-- Breadcrumb -->
   <Breadcrumb segments={breadcrumbSegments} />
@@ -127,7 +127,7 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
       <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
         Browse all House & Tech House Mixes on Mixcloud
       </p>
-      <a href="/dj/mixes" class="btn-primary animate-fadeInUp stagger-4">
+      <a href="/dj/mixes/" class="btn-primary animate-fadeInUp stagger-4">
         Weekly DJ Mixes →
       </a>
     </div>

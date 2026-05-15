@@ -12,7 +12,7 @@ import PartyIcon from "../../components/icons/PartyIcon.astro";
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
-  { label: "DJ Hulk", href: "/djhulk-electronic-music" },
+  { label: "DJ Hulk", href: "/djhulk-electronic-music/" },
   { label: "Weekly DJ Mixes" }
 ];
 
@@ -56,12 +56,12 @@ const blogSchema = {
   "@type": "Blog",
   "name": "DJ Hulk Weekly Mixes Blog",
   "description": "Weekly electronic music DJ mixes by DJ Hulk with full tracklists. House, Tech House, Deep House, Latin House.",
-  "url": "https://holger-kampffmeyer.de/dj/mixes",
+  "url": "https://holger-kampffmeyer.de/dj/mixes/",
   "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
   "author": {
     "@type": "Person",
     "name": "DJ Hulk",
-    "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
+    "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
   },
   "blogPosts": postsWithTracklists.slice(0, 10).map(post => ({
     "@type": "BlogPosting",
@@ -95,8 +95,8 @@ function formatDate(dateStr: string) {
       "@type": "BreadcrumbList",
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
-        {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music"},
-        {"@type": "ListItem", "position": 3, "name": "Weekly DJ Mixes", "item": "https://holger-kampffmeyer.de/dj/mixes"}
+        {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music/"},
+        {"@type": "ListItem", "position": 3, "name": "Weekly DJ Mixes", "item": "https://holger-kampffmeyer.de/dj/mixes/"}
       ]
     },
     blogSchema,
@@ -105,7 +105,7 @@ function formatDate(dateStr: string) {
       "@type": "MusicPlaylist",
       "name": "DJ Hulk Weekly Mixes",
       "description": "Weekly electronic music DJ mixes by DJ Hulk with full tracklists. Specialized for gym, driving, work focus, and pre-party.",
-      "url": "https://holger-kampffmeyer.de/dj/mixes",
+      "url": "https://holger-kampffmeyer.de/dj/mixes/",
       "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
       "genre": ["House", "Tech House", "Deep House", "Latin House"],
       "numTracks": blogData.posts?.length || 0
@@ -130,7 +130,7 @@ function formatDate(dateStr: string) {
       "name": "DJ Hulk",
       "alternateName": "Holger Kampffmeyer",
       "jobTitle": "Electronic Music DJ",
-      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music",
+      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/",
       "sameAs": [
         "https://www.mixcloud.com/holger-kampffmeyer/",
         "https://soundcloud.com/holger-kampffmeyer2",
@@ -144,7 +144,7 @@ function formatDate(dateStr: string) {
     }
   ].filter(Boolean)}
 >
-  <Navbar currentPage="/dj/mixes" />
+  <Navbar currentPage="/dj/mixes/" />
 
   <Breadcrumb segments={breadcrumbSegments} />
 
@@ -348,10 +348,10 @@ function formatDate(dateStr: string) {
       )}
 
       <div class="text-center mt-12">
-        <a href="/dj/mixes-blog-archive" class="btn-secondary">
+        <a href="/dj/mixes-blog-archive/" class="btn-secondary">
           Mix Archive
         </a>
-        <a href="/dj/mixes-all" class="btn-primary ml-4">
+        <a href="/dj/mixes-all/" class="btn-primary ml-4">
           Full Mixcloud Library
         </a>
       </div>

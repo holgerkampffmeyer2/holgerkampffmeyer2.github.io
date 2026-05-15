@@ -16,6 +16,6 @@ export default defineConfig({
   },
   integrations: [sitemap()],
   redirects: {
-    '/dj': '/djhulk-electronic-music'
+    '/dj': '/djhulk-electronic-music/'
   }
 });

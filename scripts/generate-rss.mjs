@@ -11,15 +11,15 @@ const site = 'https://holger-kampffmeyer.de';
 
 const pageMeta = {
   '/': { title: 'DJ Hulk - Startseite', description: 'DJ Hulk - Musikanlagen, Lichttechnik, Verleih Stuttgart' },
-  '/djhulk-electronic-music': { title: 'DJ Hulk - Electronic Music', description: 'DJ Hulk - DJ für elektronische Musik aus Stuttgart' },
-  '/dj/mixes': { title: 'DJ Hulk - Mixes', description: 'Wöchentliche House und Tech House Mixes von DJ Hulk' },
-  '/dj/mixes-all': { title: 'DJ Hulk - All Mixes', description: 'Alle Mixes von DJ Hulk auf Mixcloud' },
-  '/dj/mixes-blog-archive': { title: 'DJ Hulk Mix Archive', description: 'Alle DJ Hulk Mixes - House, Tech House, Deep House mit Tracklists' },
-  '/dj/videos': { title: 'DJ Hulk - Videos', description: 'Event-Aufnahmen und Videos von DJ Hulk' },
-  '/dj/em3f': { title: 'DJ Hulk - Event Fotos', description: 'Fotos von Events und Festivals' },
-  '/vermietung': { title: 'Vermietung - Sound & Licht mieten', description: 'Vermietung von PA-Anlagen, Partyboxen und Lichttechnik in Stuttgart' },
-  '/work': { title: 'DJ Hulk - Work', description: 'DJ Hulk - Work und Projekte' },
-  '/links': { title: 'DJ Hulk - Links', description: 'Links zu Social Media und Partnerseiten' },
+  '/djhulk-electronic-music/': { title: 'DJ Hulk - Electronic Music', description: 'DJ Hulk - DJ für elektronische Musik aus Stuttgart' },
+  '/dj/mixes/': { title: 'DJ Hulk - Mixes', description: 'Wöchentliche House und Tech House Mixes von DJ Hulk' },
+  '/dj/mixes-all/': { title: 'DJ Hulk - All Mixes', description: 'Alle Mixes von DJ Hulk auf Mixcloud' },
+  '/dj/mixes-blog-archive/': { title: 'DJ Hulk Mix Archive', description: 'Alle DJ Hulk Mixes - House, Tech House, Deep House mit Tracklists' },
+  '/dj/videos/': { title: 'DJ Hulk - Videos', description: 'Event-Aufnahmen und Videos von DJ Hulk' },
+  '/dj/em3f/': { title: 'DJ Hulk - Event Fotos', description: 'Fotos von Events und Festivals' },
+  '/vermietung/': { title: 'Vermietung - Sound & Licht mieten', description: 'Vermietung von PA-Anlagen, Partyboxen und Lichttechnik in Stuttgart' },
+  '/work/': { title: 'DJ Hulk - Work', description: 'DJ Hulk - Work und Projekte' },
+  '/links/': { title: 'DJ Hulk - Links', description: 'Links zu Social Media und Partnerseiten' },
 };
 
 function escapeXml(str) {
@@ -74,7 +74,7 @@ function generateRss() {
         }
         if (pagePath === '//') pagePath = '/';
         
-        const pageKey = pagePath;
+        const pageKey = pagePath === '/' ? '/' : pagePath + '/';
         
         const shouldExclude = excludePages.some(ex => pagePath.includes(ex));
         if (shouldExclude) continue;
@@ -87,7 +87,7 @@ function generateRss() {
           items.push({
             id: pagePath,
             title: meta.title,
-            link: pagePath,
+            link: pageKey,
             description: meta.description,
             pubDate: pubDate,
             isPage: true
@@ -107,7 +107,7 @@ function generateRss() {
       items.push({
         id: `mix-${mix.key}`,
         title: mix.title,
-        link: '/dj/mixes',
+        link: '/dj/mixes/',
         description: `Neuer Mix auf Mixcloud: ${mix.title}`,
         pubDate: mix.created_time.split('T')[0],
         isMix: true
