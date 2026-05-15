@@ -40,6 +40,8 @@ const canonicalURL = new URL(canonicalPath || '/', Astro.site);
     <meta name="theme-color" content="#0a0a0f" />
     <meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow"} />
     
+    <title>{title}</title>
+    
     <!-- JSON-LD LocalBusiness -->
     <script is:inline type="application/ld+json">
       {
@@ -169,7 +171,6 @@ const canonicalURL = new URL(canonicalPath || '/', Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(image, Astro.site).href} />
     
-    <title>{title}</title>
   </head>
   <body class="min-h-screen">
     <slot />
