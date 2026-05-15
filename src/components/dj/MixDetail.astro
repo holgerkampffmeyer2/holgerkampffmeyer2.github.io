@@ -174,7 +174,7 @@ function formatDuration(seconds: number) {
     {/* Listen on Mixcloud */}
     {post.url && showNavigation && (
       <div class="flex flex-wrap gap-4 mb-8">
-        <a href={post.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-secondary)] transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-secondary)]">
+        <a href={post.url} target="_blank" rel="noopener noreferrer nofollow" class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-secondary)] transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-secondary)]">
           <MixcloudIcon class="w-5 h-5" />
           <span>Listen on Mixcloud</span>
         </a>

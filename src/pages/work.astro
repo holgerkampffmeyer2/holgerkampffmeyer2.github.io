@@ -89,7 +89,7 @@ const personSchema = {
               </div>
               <div class="flex-1">
                 <div class="flex items-center justify-between">
-                  <a href={project.url} target="_blank" class="font-bold text-lg hover:text-[var(--color-secondary)] transition-colors">
+                  <a href={project.url} target="_blank" rel="noopener noreferrer nofollow" class="font-bold text-lg hover:text-[var(--color-secondary)] transition-colors">
                     {project.name}
                   </a>
                   <ChevronDownIcon class="toggle-icon w-5 h-5 text-[var(--color-secondary)] transition-transform" />
@@ -97,7 +97,7 @@ const personSchema = {
                 <p class="text-[var(--color-text-muted)] text-sm mt-2">
                   {project.description}
                 </p>
-                <a href={project.url} target="_blank" class="inline-flex items-center gap-2 text-[var(--color-secondary)] text-sm mt-3 hover:underline">
+                <a href={project.url} target="_blank" rel="noopener noreferrer nofollow" class="inline-flex items-center gap-2 text-[var(--color-secondary)] text-sm mt-3 hover:underline">
                   <GitHubIcon class="w-4 h-4" />
                   View on GitHub
                 </a>
@@ -175,7 +175,7 @@ const personSchema = {
           
           <div class="space-y-4 text-[var(--color-text-muted)]">
             <p>
-              I work as Director DevOps for <a href="http://www.vector.com" target="_blank" class="text-[var(--color-secondary)] hover:underline">Vector</a>, a leading software company with 4000+ employees building tools for the automotive and embedded software industry.
+              I work as Director DevOps for <a href="http://www.vector.com" target="_blank" rel="noopener noreferrer nofollow" class="text-[var(--color-secondary)] hover:underline">Vector</a>, a leading software company with 4000+ employees building tools for the automotive and embedded software industry.
             </p>
             
             <p>My current focus areas:</p>
@@ -188,7 +188,7 @@ const personSchema = {
             </ul>
             
             <p class="mt-4">
-              Connect with me on <a href="https://www.xing.com/profile/Holger_Kampffmeyer" target="_blank" class="text-[var(--color-secondary)] hover:underline">Xing</a> or <a href="https://www.linkedin.com/in/holger-kampffmeyer-390b6789/" target="_blank" class="text-[var(--color-secondary)] hover:underline">LinkedIn</a>.
+               Connect with me on <a href="https://www.xing.com/profile/Holger_Kampffmeyer" target="_blank" rel="noopener noreferrer nofollow" class="text-[var(--color-secondary)] hover:underline">Xing</a> or <a href="https://www.linkedin.com/in/holger-kampffmeyer-390b6789/" target="_blank" rel="noopener noreferrer nofollow" class="text-[var(--color-secondary)] hover:underline">LinkedIn</a>.
             </p>
           </div>
         </div>
@@ -239,7 +239,7 @@ const personSchema = {
         <a
           href="https://www.linkedin.com/in/holger-kampffmeyer-390b6789/"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer nofollow"
           class="flex items-center gap-3 bg-[var(--color-surface)] px-6 py-4 rounded-xl hover:bg-[var(--color-primary)]/20 transition-all duration-300 group"
         >
           <LinkedInIcon class="w-8 h-8" />
@@ -248,7 +248,7 @@ const personSchema = {
         <a
           href="https://www.xing.com/profile/Holger_Kampffmeyer"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer nofollow"
           class="flex items-center gap-3 bg-[var(--color-surface)] px-6 py-4 rounded-xl hover:bg-[var(--color-primary)]/20 transition-all duration-300 group"
         >
           <XingIcon class="w-8 h-8" />
