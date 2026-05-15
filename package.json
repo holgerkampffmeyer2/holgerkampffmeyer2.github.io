@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "build:seo": "node scripts/generate-rss.mjs && node scripts/generate-urllist.mjs",
-    "build:full": "node scripts/fetch-mixcloud.mjs && node scripts/generate-rss.mjs && astro build && node scripts/generate-urllist.mjs",
+    "build:full": "node scripts/fetch-mixcloud.mjs && astro build && node scripts/generate-rss.mjs && node scripts/generate-urllist.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "lint": "eslint src && node scripts/check-paths.mjs",

@@ -3,24 +3,16 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT_DIR = path.join(__dirname, '..');
+const DIST_DIR = path.join(ROOT_DIR, 'dist');
+const PUBLIC_DIR = path.join(ROOT_DIR, 'public');
 
 const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const site = 'https://holger-kampffmeyer.de';
 
-const pageMeta = {
-  '/': { title: 'DJ Hulk - Startseite', description: 'DJ Hulk - Musikanlagen, Lichttechnik, Verleih Stuttgart' },
-  '/djhulk-electronic-music/': { title: 'DJ Hulk - Electronic Music', description: 'DJ Hulk - DJ für elektronische Musik aus Stuttgart' },
-  '/dj/mixes/': { title: 'DJ Hulk - Mixes', description: 'Wöchentliche House und Tech House Mixes von DJ Hulk' },
-  '/dj/mixes-all/': { title: 'DJ Hulk - All Mixes', description: 'Alle Mixes von DJ Hulk auf Mixcloud' },
-  '/dj/mixes-blog-archive/': { title: 'DJ Hulk Mix Archive', description: 'Alle DJ Hulk Mixes - House, Tech House, Deep House mit Tracklists' },
-  '/dj/videos/': { title: 'DJ Hulk - Videos', description: 'Event-Aufnahmen und Videos von DJ Hulk' },
-  '/dj/em3f/': { title: 'DJ Hulk - Event Fotos', description: 'Fotos von Events und Festivals' },
-  '/vermietung/': { title: 'Vermietung - Sound & Licht mieten', description: 'Vermietung von PA-Anlagen, Partyboxen und Lichttechnik in Stuttgart' },
-  '/work/': { title: 'DJ Hulk - Work', description: 'DJ Hulk - Work und Projekte' },
-  '/links/': { title: 'DJ Hulk - Links', description: 'Links zu Social Media und Partnerseiten' },
-};
+const excludePaths = ['/impressum', '/links'];
 
 function escapeXml(str) {
   return str
@@ -29,6 +21,10 @@ function escapeXml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&apos;');
+}
+
+function decodeHtmlEntities(str) {
+  return str.replace(/&#(\d+);/g, (_, code) => String.fromCharCode(code)).replace(/&amp;/g, '&');
 }
 
 function formatRssDate(dateStr) {
@@ -40,85 +36,79 @@ function formatRssDate(dateStr) {
   return `${dayName}, ${day} ${monthName} ${year} 00:00:00 GMT`;
 }
 
-function getFileDate(filePath) {
-  try {
-    return fs.statSync(filePath).mtime.toISOString().split('T')[0];
-  } catch {
-    return new Date().toISOString().split('T')[0];
-  }
+function extractMeta(html) {
+  const titleMatch = html.match(/<title>([^<]*)<\/title>/);
+  const descMatch = html.match(/<meta\s+name="description"\s+content="([^"]*)"/);
+  const title = titleMatch ? decodeHtmlEntities(titleMatch[1].trim()) : '';
+  const description = descMatch ? decodeHtmlEntities(descMatch[1].trim()) : '';
+  return { title, description };
 }
 
-function generateRss() {
-  const pagesDir = path.join(__dirname, '../src/pages');
-  const mixcloudDataPath = path.join(__dirname, '../src/data/mixcloud-data.json');
-  const outputPath = path.join(__dirname, '../public/rss.xml');
+function findHtmlPages() {
+  const pageMap = new Map();
 
-  const items = [];
+  function walkDir(dir, relativePrefix) {
+    if (!fs.existsSync(dir)) return;
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
 
-  const excludePages = ['impressum', 'links'];
+    let hasIndex = false;
+    for (const entry of entries) {
+      if (entry.isFile() && entry.name === 'index.html') {
+        hasIndex = true;
+        break;
+      }
+    }
 
-  function walkDir(dir) {
-    const files = fs.readdirSync(dir);
-    for (const file of files) {
-      const fullPath = path.join(dir, file);
-      const stat = fs.statSync(fullPath);
-      
-      if (stat.isDirectory()) {
-        walkDir(fullPath);
-      } else if (file.endsWith('.astro')) {
-        const relativePath = path.relative(pagesDir, fullPath);
-        // Convert index.astro to '/' and other pages to clean paths
-        let pagePath = '/' + relativePath.replace(/\.astro$/, '').replace(/\\/g, '/');
-        if (pagePath.endsWith('/index')) {
-          pagePath = pagePath.replace('/index', '') || '/';
+    if (hasIndex) {
+      const pagePath = relativePrefix || '/';
+      const shouldExclude = excludePaths.some(ex => pagePath.startsWith(ex));
+      if (!shouldExclude) {
+        const fullPath = path.join(dir, 'index.html');
+        const html = fs.readFileSync(fullPath, 'utf-8');
+        const meta = extractMeta(html);
+        if (!meta.title.startsWith('Redirecting')) {
+          const stat = fs.statSync(fullPath);
+          const pubDate = stat.mtime.toISOString().split('T')[0];
+          pageMap.set(pagePath, { path: pagePath, title: meta.title, description: meta.description, pubDate });
         }
-        if (pagePath === '//') pagePath = '/';
-        
-        const pageKey = pagePath === '/' ? '/' : pagePath + '/';
-        
-        const shouldExclude = excludePages.some(ex => pagePath.includes(ex));
-        if (shouldExclude) continue;
+      }
+    }
 
-        const gitDate = getFileDate(fullPath);
-        const pubDate = gitDate;
-        const meta = pageMeta[pageKey];
-        
-        if (meta) {
-          items.push({
-            id: pagePath,
-            title: meta.title,
-            link: pageKey,
-            description: meta.description,
-            pubDate: pubDate,
-            isPage: true
-          });
-        }
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        walkDir(path.join(dir, entry.name), `${relativePrefix}${entry.name}/`);
       }
     }
   }
 
-  walkDir(pagesDir);
+  walkDir(DIST_DIR, '/');
+  return [...pageMap.values()].sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+}
 
+function generateRss() {
+  if (!fs.existsSync(DIST_DIR)) {
+    console.error('❌ dist/ directory not found. Run `astro build` first.');
+    process.exit(1);
+  }
+
+  const items = findHtmlPages();
+
+  const mixcloudDataPath = path.join(ROOT_DIR, 'src/data/mixcloud-data.json');
   try {
     const mixcloudData = JSON.parse(fs.readFileSync(mixcloudDataPath, 'utf-8'));
     const mixes = mixcloudData.mixes || [];
-    
     for (const mix of mixes.slice(0, 10)) {
       items.push({
-        id: `mix-${mix.key}`,
+        path: '/dj/mixes/',
         title: mix.title,
-        link: '/dj/mixes/',
         description: `Neuer Mix auf Mixcloud: ${mix.title}`,
         pubDate: mix.created_time.split('T')[0],
-        isMix: true
+        isMix: true,
       });
     }
   } catch (e) {
     console.warn('⚠️ Could not read mixcloud data:', e.message);
   }
-
-  // Open Source projects removed from RSS - they contain external URLs (GitHub)
-  // which are not allowed in sitemaps used by Google Search Console
 
   items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
@@ -138,10 +128,10 @@ function generateRss() {
 
   for (const item of items) {
     const pubDate = formatRssDate(item.pubDate);
-    const category = item.isMix ? '[Mix]' : item.isOpenSource ? '[Open Source]' : '[Seite]';
-    const link = item.isOpenSource ? item.link : `${site}${item.link}`;
+    const category = item.isMix ? '[Mix]' : '[Seite]';
+    const link = `${site}${item.path}`;
     xml += `    <item>
-      <guid isPermaLink="false">${escapeXml(item.id)}</guid>
+      <guid isPermaLink="false">${escapeXml(item.isMix ? `mix-${item.title}` : item.path)}</guid>
       <title>${escapeXml(category + ' ' + item.title)}</title>
       <link>${escapeXml(link)}</link>
       <description>${escapeXml(item.description)}</description>
@@ -154,8 +144,13 @@ function generateRss() {
 </rss>
 `;
 
-  fs.writeFileSync(outputPath, xml);
-  console.log(`✅ RSS feed generated at public/rss.xml with ${items.length} items`);
+  const distPath = path.join(DIST_DIR, 'rss.xml');
+  fs.writeFileSync(distPath, xml);
+  console.log(`✅ RSS feed generated at dist/rss.xml with ${items.length} items`);
+
+  const publicPath = path.join(PUBLIC_DIR, 'rss.xml');
+  fs.writeFileSync(publicPath, xml);
+  console.log(`   → synced to public/rss.xml`);
 }
 
 generateRss();

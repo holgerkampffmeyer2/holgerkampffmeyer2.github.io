@@ -22,7 +22,10 @@ function findHtmlPages() {
       }
     }
     if (hasIndex) {
-      pages.push(`${baseUrl}${relativePrefix || '/'}`);
+      const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf-8');
+      if (!html.includes('noindex')) {
+        pages.push(`${baseUrl}${relativePrefix || '/'}`);
+      }
     }
     for (const entry of entries) {
       if (entry.isDirectory()) {
