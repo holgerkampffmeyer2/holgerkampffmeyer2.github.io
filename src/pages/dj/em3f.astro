@@ -92,6 +92,8 @@ const photos = [
             <img 
               src={photo} 
               alt={`DJ Hulk Event ${index + 1}`} 
+              loading="lazy"
+              decoding="async"
               class="w-full h-full object-cover hover:scale-110 transition-transform duration-500 cursor-pointer"
             />
           </div>

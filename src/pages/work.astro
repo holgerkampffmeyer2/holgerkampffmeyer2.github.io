@@ -85,7 +85,7 @@ const personSchema = {
               data-project={project.name}
             >
               <div class="w-20 h-20 bg-[var(--color-bg)] rounded-lg flex items-center justify-center shrink-0">
-                <img src={project.image} alt={project.imageAlt} class="w-20 h-20 rounded-lg object-cover">
+                <img src={project.image} alt={project.imageAlt} width="80" height="80" loading="lazy" decoding="async" class="w-20 h-20 rounded-lg object-cover">
               </div>
               <div class="flex-1">
                 <div class="flex items-center justify-between">

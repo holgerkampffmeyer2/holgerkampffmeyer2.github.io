@@ -78,7 +78,7 @@ function formatDuration(seconds: number) {
     {/* Hero Image */}
     {post.heroImage && (
       <div class="mb-6">
-        <img src={post.heroImage} alt={post.title} class="w-full h-48 md:h-64 lg:h-80 object-cover rounded-xl border border-[var(--color-border)]" />
+        <img src={post.heroImage} alt={post.title} loading="lazy" decoding="async" class="w-full h-48 md:h-64 lg:h-80 object-cover rounded-xl border border-[var(--color-border)]" />
       </div>
     )}
 

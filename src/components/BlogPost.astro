@@ -36,7 +36,7 @@ function formatDate(dateStr: string) {
 <div class="blog-post bg-[var(--color-surface)] rounded-xl overflow-hidden border border-[var(--color-border)]">
   {variant === 'full' && heroImage && (
     <div class="hero-image -mx-6 -mt-6 mb-4">
-      <img src={heroImage} alt={title} class="w-full h-64 md:h-72 lg:h-80 object-cover" />
+      <img src={heroImage} alt={title} loading="lazy" decoding="async" class="w-full h-64 md:h-72 lg:h-80 object-cover" />
     </div>
   )}
   
