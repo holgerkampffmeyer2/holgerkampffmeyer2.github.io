@@ -15,10 +15,6 @@ interface Slide {
   backgroundImage?: string;
   gradient?: string;
   ptClass?: string;
-  // For LCP optimization
-  backgroundImageWidth?: number;
-  backgroundImageHeight?: number;
-  backgroundImageBlurDataURL?: string;
   backgroundPosition?: string;
 }
 
@@ -33,43 +29,38 @@ const { slides, interval = 5000, id = "hero" } = Astro.props;
 
   <section id={id} class="hero-slider" data-interval={interval}>
   {slides.map((slide, index) => (
-    <div class={`slide slide-${index + 1} ${index === 0 ? "active" : ""}`} data-slide={index}>
-       <div
-         class="slide-content"
-         style={slide.backgroundImage
-           ? `
-             background-image: ${slide.gradient 
-               ? `${slide.gradient}, url("${slide.backgroundImage}")` 
-               : `url("${slide.backgroundImage}")`};
-             background-size: cover;
-             background-position: center ${slide.backgroundPosition || 'center'};
-             background-repeat: no-repeat;
-           `
-           : undefined
-         }
-       >
+    <div class={`slide ${index === 0 ? "active" : ""}`} data-slide={index}>
+      <img
+        src={slide.backgroundImage}
+        alt=""
+        class="hero-bg-img"
+        fetchpriority={index === 0 ? "high" : "low"}
+        loading={index === 0 ? "eager" : "lazy"}
+      />
+      <div class="slide-overlay" style={`background: ${slide.gradient || "linear-gradient(135deg, rgba(10, 10, 15, 0.85) 0%, rgba(249, 115, 22, 0.15) 100%)"};`}></div>
+      <div class="slide-content">
         <div class="container mx-auto px-4">
-          <div class={`max-w-3xl ${slide.ptClass || ""}`}>
+          <div class={`max-w-5xl ${slide.ptClass || ""}`}>
             {slide.category && (
               <span
-                class={`text-[${slide.categoryColor || "var(--color-secondary)"}] text-lg tracking-widest uppercase animate-fadeInUp stagger-1`}
+                class={`text-[${slide.categoryColor || "var(--color-secondary)"}] text-lg tracking-widest uppercase`}
               >
                 {slide.category}
               </span>
             )}
             {slide.titleTag === "h2" ? (
-              <h2 class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">
+              <h2 class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text">
                 {slide.title}
               </h2>
             ) : (
-              <h1 class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">
+              <h1 class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text">
                 {slide.title}
               </h1>
             )}
-            <p class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
+            <p class="text-[var(--color-text-muted)] text-xl md:text-2xl mb-8 max-w-4xl">
               {slide.description}
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 animate-fadeInUp stagger-4">
+            <div class="flex flex-col sm:flex-row gap-4">
               {slide.buttons.map((btn) => (
                 <a href={btn.href} class={btn.class || "btn-primary"}>{btn.text}</a>
               ))}
@@ -96,74 +87,66 @@ const { slides, interval = 5000, id = "hero" } = Astro.props;
       <button class={`slider-dot ${index === 0 ? "active" : ""}`} data-dot={index} aria-label={`Slide ${index + 1}`}></button>
     ))}
   </div>
-   <script is:inline define:vars={{ id, interval }}>
-   // Defer slider initialization to reduce blocking time
-   if (document.readyState === 'loading') {
-     document.addEventListener('DOMContentLoaded', initHeroSlider);
-   } else {
-     // Use setTimeout to yield to browser and reduce TBT
-     setTimeout(initHeroSlider, 0);
-   }
+  <script is:inline define:vars={{ id, interval }}>
+  (function() {
+    const section = document.getElementById(id);
+    if (!section) return;
+    
+    const slides = section.querySelectorAll(".slide");
+    const dots = section.querySelectorAll(".slider-dot");
+    const prevBtn = section.querySelector("#slider-prev");
+    const nextBtn = section.querySelector("#slider-next");
 
-   function initHeroSlider() {
-     const section = document.getElementById(id);
-     if (!section) return;
-     
-     const slides = section.querySelectorAll(".slide");
-     const dots = section.querySelectorAll(".slider-dot");
-     const prevBtn = section.querySelector("#slider-prev");
-     const nextBtn = section.querySelector("#slider-next");
+    if (!slides.length) return;
 
-     if (!slides.length) return;
+    let currentSlide = 0;
+    let slideInterval = null;
 
-     let currentSlide = 0;
-     let slideInterval = null;
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+      });
+      currentSlide = index;
+    }
 
-     function showSlide(index) {
-       slides.forEach((slide, i) => {
-         slide.classList.toggle("active", i === index);
-       });
-       dots.forEach((dot, i) => {
-         dot.classList.toggle("active", i === index);
-       });
-       currentSlide = index;
-     }
+    function nextSlide() {
+      showSlide((currentSlide + 1) % slides.length);
+    }
 
-     function nextSlide() {
-       showSlide((currentSlide + 1) % slides.length);
-     }
+    function prevSlide() {
+      showSlide((currentSlide - 1 + slides.length) % slides.length);
+    }
 
-     function prevSlide() {
-       showSlide((currentSlide - 1 + slides.length) % slides.length);
-     }
+    function startSlider() {
+      stopSlider();
+      slideInterval = setInterval(nextSlide, interval);
+    }
 
-     function startSlider() {
-       stopSlider();
-       slideInterval = setInterval(nextSlide, interval);
-     }
+    function stopSlider() {
+      if (slideInterval) clearInterval(slideInterval);
+    }
 
-     function stopSlider() {
-       if (slideInterval) clearInterval(slideInterval);
-     }
+    prevBtn?.addEventListener("click", () => {
+      prevSlide();
+      startSlider();
+    });
 
-     prevBtn?.addEventListener("click", () => {
-       prevSlide();
-       startSlider();
-     });
+    nextBtn?.addEventListener("click", () => {
+      nextSlide();
+      startSlider();
+    });
 
-     nextBtn?.addEventListener("click", () => {
-       nextSlide();
-       startSlider();
-     });
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        showSlide(i);
+        startSlider();
+      });
+    });
 
-     dots.forEach((dot, i) => {
-       dot.addEventListener("click", () => {
-         showSlide(i);
-         startSlider();
-       });
-     });
-
-     startSlider();
-   }
-   </script>
+    startSlider();
+  })();
+</script>
 </section>
