@@ -148,6 +148,7 @@ const canonicalURL = new URL(canonicalPath || '/', Astro.site);
     
     <!-- Preload LCP image (use preloadImage if set, otherwise skip if image is only used for OG) -->
     {preloadImage && <link rel="preload" as="image" href={preloadImage} />}
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/josefin-sans-variable.woff2" />
 
 
     

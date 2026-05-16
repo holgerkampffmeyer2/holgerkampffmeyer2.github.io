@@ -1,6 +1,13 @@
 @import "tailwindcss";
-@import "@fontsource-variable/josefin-sans";
-@import "@fontsource/play/latin.css";
+
+@font-face {
+  font-family: 'Josefin Sans Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 700;
+  src: url('/fonts/josefin-sans-variable.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
 
 @theme {
   --color-bg: #0a0a0f;
@@ -27,7 +34,8 @@ body {
 }
 
 .font-play {
-  font-family: 'Play', sans-serif;
+  font-family: 'Josefin Sans Variable', 'Josefin Sans', sans-serif;
+  font-weight: 700;
 }
 
 .hero-slider .slide-content {
@@ -406,57 +414,6 @@ body {
   }
 }
 
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes glowPulse {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 50px rgba(249, 115, 22, 0.6);
-  }
-}
-
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(30px);
@@ -472,32 +429,10 @@ body {
   animation: fadeInUp 0.8s ease forwards;
 }
 
-.animate-fadeInLeft {
-  animation: fadeInLeft 0.8s ease forwards;
-}
-
-.animate-fadeInRight {
-  animation: fadeInRight 0.8s ease forwards;
-}
-
-.animate-scaleIn {
-  animation: scaleIn 0.6s ease forwards;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-glowPulse {
-  animation: glowPulse 3s ease-in-out infinite;
-}
-
 .stagger-1 { animation-delay: 0.1s; }
 .stagger-2 { animation-delay: 0.2s; }
 .stagger-3 { animation-delay: 0.3s; }
 .stagger-4 { animation-delay: 0.4s; }
-.stagger-5 { animation-delay: 0.5s; }
-.stagger-6 { animation-delay: 0.6s; }
 
 /* Section backgrounds */
 .section-dark {
@@ -570,4 +505,13 @@ body {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll,
+  .animate-fadeInUp {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
 }
