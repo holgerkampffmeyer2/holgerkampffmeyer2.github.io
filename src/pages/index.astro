@@ -11,6 +11,11 @@ import SpotifyIcon from "../components/icons/SpotifyIcon.astro";
 import GitHubIcon from "../components/icons/GitHubIcon.astro";
 import YouTubeIcon from "../components/icons/YouTubeIcon.astro";
 import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
+import BieteSection from "../components/BieteSection.astro";
+import FAQSection from "../components/FAQSection.astro";
+import { getFaqsForPage, getFaqSchema } from "../data/faqs";
+
+const faqs = getFaqsForPage('index');
 ---
 
 <Layout
@@ -81,8 +86,8 @@ import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
         "https://www.youtube.com/@djhulk_de"
       ]
     },
-       ]}
-     >
+    getFaqSchema('index')
+  ]}>
   <Navbar currentPage="/" />
 
   <!-- Hero Slider Section -->
@@ -387,6 +392,13 @@ import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
         </a>
       </div>
 
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section-padding bg-[var(--color-bg)]">
+    <div class="max-w-4xl mx-auto">
+      <FAQSection faqs={faqs} />
     </div>
   </section>
 
