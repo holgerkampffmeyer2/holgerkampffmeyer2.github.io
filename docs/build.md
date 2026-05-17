@@ -1,15 +1,6 @@
 # Build & Deployment
 
-## Commands
-```bash
-pnpm run dev        # Development server
-pnpm run lint       # ESLint check (incl. path validation)
-pnpm run check      # TypeScript check
-pnpm run build      # Production build -> dist/ (inkl. Sitemap via @astrojs/sitemap)
-pnpm run build:seo  # RSS + urllist.txt generieren (nach build ausführen)
-pnpm run build:full # Full build + Mixcloud fetch + RSS + Sitemap + urllist.txt
-pnpm run preview    # Preview production build
-```
+Commands in `AGENTS.md`. Details siehe unten.
 
 ## Build-Prozess
 

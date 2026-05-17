@@ -5,9 +5,8 @@
 ## Schnellstart
 - [Build & Deployment](docs/build.md)
 - [Music Blog](docs/music-blog-script.md)
-- [Projekt-Info](docs/project.md)
-- [Git-Workflow](docs/git.md)
 - [Design & Architecture](docs/DESIGN.md)
+- [Git-Workflow](docs/git.md)
 
 ## Wichtige Regeln
 1. **DESIGN.md lesen** für Design/Details

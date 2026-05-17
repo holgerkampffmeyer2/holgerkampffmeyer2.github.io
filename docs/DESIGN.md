@@ -4,9 +4,10 @@
 
 ## Technologie-Stack
 
-- **Framework:** Astro 6.x (Static Site Generation)
+- **Framework:** Astro 6.x (Static Site Generation, `output: 'static'`)
 - **Styling:** Tailwind CSS 4.x + CSS Custom Properties (Theme-System)
 - **Deployment:** GitHub Pages
+- **Site-URL:** `https://holger-kampffmeyer.de` (gesetzt in `astro.config.mjs`)
 
 ---
 
@@ -145,7 +146,7 @@ pnpm run preview   # Preview
 
 ## SEO
 
-- JSON-LD: LocalBusiness, Person, FAQPage
+- JSON-LD: LocalBusiness, Person, FAQPage (vermietung.astro: 6 FAQs), VideoObject (dj/videos.astro: 8 Videos), AudioObject + BreadcrumbList (Mix-Seiten)
 - Open Graph Tags
 - Sitemap + RSS Feed
 - robots.txt erweitert für AI-Crawler
