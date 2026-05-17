@@ -23,8 +23,8 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 
 ### Neuen Mix-Post erstellen
 Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
-1. `docs/music-blog-script.md` lesen → Abschnitt "Neuen Mix hinzufügen"
-2. Schritte 1-6 ausführen
+1. [Music-Blog-Script](docs/music-blog-script.md) lesen → Abschnitt "Neuen Mix hinzufügen"
+2. Alle Schritte ausführen
 
 ## Build-Kommandos
 - `pnpm run build` — Production Build (Details: [docs/build.md](docs/build.md))
