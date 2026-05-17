@@ -1,4 +1,4 @@
-# DJ Hulk Website - Konzept & Struktur
+# DJ Hulk Website - Konzept, Struktur & Design
 
 > **Quick-Start:** [AGENTS.md](../AGENTS.md)
 
@@ -16,9 +16,8 @@
 ```
 src/
 ├── components/           # UI-Komponenten
-├── data/                 # Daten (faqs.ts, mixcloud-data.json)
+├── data/                 # Daten (faqs.json, mixcloud-data.json)
 ├── layouts/             # Layouts (Layout.astro)
-├── lib/                 # Utilities (faqUtils.ts)
 ├── pages/               # Routen
 │   ├── index.astro      # Startseite
 │   ├── djhulk-electronic-music.astro
@@ -75,7 +74,7 @@ src/
 Das Script in `Layout.astro` setzt synchron vor dem ersten Paint `data-theme` auf `<html>`.
 Ein Fallback-`<style>` Block definiert die CSS-Vars für alle Alternativ-Themes.
 
-### farbverarbeitung
+### Farbverarbeitung
 
 Statt hartcodierter `rgba()`-Werte wird durchgängig `color-mix()` verwendet:
 ```css
@@ -118,6 +117,26 @@ bleiben als Ausnahme erhalten.
 
 ---
 
+## Animation-Klassen
+
+- `.animate-on-scroll` – Fade-In bei Scroll (IntersectionObserver)
+- `.gradient-text` – Orange→Cyan Text-Gradient
+- `.event-card-glow` – Hover-Glow auf Event-Karten
+- `prefers-reduced-motion` in global.css unterstützt
+
+---
+
+## Bildkonventionen
+
+- **Format**: WebP primär
+- **Hero**: `public/img/header.webp` (1920px)
+- **Tracklists**: `public/tracklists/<name>.webp` (600px)
+- **Events/Galerie**: `public/img/events/<name>.webp`
+- **Batch-Konvertierung**: `node scripts/create-webp.mjs -w <px> <datei>`
+- **Optimierung**: `node scripts/optimize-images.mjs` (CLI: `-w`, `-q`, `--concurrency`)
+
+---
+
 ## Hero-Overlays
 
 Hero-Bereiche nutzen einen mehrschichtigen Gradient:
@@ -129,6 +148,14 @@ Hero-Bereiche nutzen einen mehrschichtigen Gradient:
 
 Zwei Varianten: `.hero-overlay` (default) und `.hero-overlay-secondary`
 (tauscht primary/secondary Glow-Positionen).
+
+---
+
+## Barrierefreiheit
+
+- `prefers-reduced-motion` bei allen Animationen
+- Bilder mit alt-Text
+- Farben nicht als einziges Mittel zur Informationsvermittlung
 
 ---
 
@@ -146,7 +173,7 @@ pnpm run preview   # Preview
 
 ## SEO
 
-- JSON-LD: LocalBusiness, Person, FAQPage (vermietung.astro: 6 FAQs), VideoObject (dj/videos.astro: 8 Videos), AudioObject + BreadcrumbList (Mix-Seiten)
+- JSON-LD: LocalBusiness, Person, FAQPage, VideoObject (8 Videos), AudioObject + BreadcrumbList (Mix-Seiten)
 - Open Graph Tags
 - Sitemap + RSS Feed
 - robots.txt erweitert für AI-Crawler
