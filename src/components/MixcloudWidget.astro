@@ -38,7 +38,7 @@ const linkSize = variant === 'card' ? 'text-xs' : 'text-sm';
 <div class="bg-[var(--color-surface)] rounded-xl overflow-hidden shadow-lg border border-[var(--color-border)]">
   <div class={wrapperClass} style={height && variant === 'featured' ? `height: ${height}` : undefined}>
     <iframe 
-      style="width: 100%; height: 100%; border: none;" 
+      class="iframe-fill"
       src={playerSrc}
       title={title}
        allow="encrypted-media; fullscreen; autoplay; idle-detection; web-share;"

@@ -93,30 +93,25 @@ import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
         title: "DJ Hulk",
         titleTag: "h1",
         category: "Electro, House, Tech House, Techno, DnB",
-        categoryColor: "var(--color-secondary)",
         description: "Stuttgarter DJ für elektronische Musik - House, Tech House, Techno, Drum n Bass",
         backgroundImage: "/img/header.webp",
-        gradient: "linear-gradient(135deg, rgba(10, 10, 15, 0.85) 0%, rgba(249, 115, 22, 0.2) 100%)",
         buttons: [{ text: "Mehr über DJ Hulk", href: "/djhulk-electronic-music/" }]
       },
       {
         title: "Mixes mit Tracklists",
         titleTag: "h2",
         category: "Weekly DJ Mixes",
-        categoryColor: "var(--color-secondary)",
         description: "Jeden Sonntag neuer Mix - House, Tech House, Deep House. Mit vollständiger Tracklist und optimiert für Gym, Drive, Work oder Party.",
         backgroundImage: "/tracklists/Mixcloud-Post-Mix169.webp",
-        gradient: "linear-gradient(135deg, rgba(10, 10, 15, 0.85) 0%, rgba(249, 115, 22, 0.2) 100%)",
         buttons: [{ text: "Zu den Mixes", href: "/dj/mixes/" }]
       },
       {
         title: "Work",
         titleTag: "h2",
         category: "DevOps & Platform Engineering",
-        categoryColor: "#22d3ee",
         description: "Holger Kampffmeyer - Director DevOps bei Vector. AI Agentic Development, Platform Engineering, Cloud Native.",
         backgroundImage: "/img/header-work-dark.webp",
-        gradient: "linear-gradient(135deg, rgba(10, 10, 15, 0.85) 0%, rgba(8, 145, 178, 0.2) 100%)",
+        overlayVariant: "secondary",
         buttons: [{ text: "Mehr erfahren", href: "/work/" }]
       }
     ]}
@@ -190,16 +185,16 @@ import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
           </p>
           <ul class="text-[var(--color-text-muted)] mb-6 space-y-2">
             <li class="flex items-center gap-2">
-              <span class="text-orange-500">▸</span> Gym Session - High Energy Workouts
+              <span class="text-[var(--color-primary)]">▸</span> Gym Session - High Energy Workouts
             </li>
             <li class="flex items-center gap-2">
-              <span class="text-orange-500">▸</span> Drive / Relax - Cruising Vibes
+              <span class="text-[var(--color-primary)]">▸</span> Drive / Relax - Cruising Vibes
             </li>
             <li class="flex items-center gap-2">
-              <span class="text-orange-500">▸</span> Focus / Work - Konzentration
+              <span class="text-[var(--color-primary)]">▸</span> Focus / Work - Konzentration
             </li>
             <li class="flex items-center gap-2">
-              <span class="text-orange-500">▸</span> Pre-Party - Party Warm-Up
+              <span class="text-[var(--color-primary)]">▸</span> Pre-Party - Party Warm-Up
             </li>
           </ul>
           <p class="text-[var(--color-text-muted)] mb-6">
@@ -324,9 +319,8 @@ import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
 
         <!-- Google Maps -->
       <div class="mt-12 w-full h-64 md:h-80 rounded-lg overflow-hidden">
-        <iframe 
+        <iframe class="iframe-googlemaps"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2633.5828618899773!2d9.15913277708782!3d48.69433947131032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799c318ddfada49%3A0x8c761bb0db8ae55e!2sHolger%20Kampffmeyer%20DJ%20Dienstleistungen!5e0!3m2!1sde!2sde!4v1773674458531!5m2!1sde!2sde"
-          style="border:0; width: 100%; height: 100%;" 
           allowfullscreen="" 
           loading="lazy" 
           referrerpolicy="no-referrer-when-downgrade" title="Google Maps - Holger Kampffmeyer DJ Dienstleistungen">

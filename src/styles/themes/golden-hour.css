@@ -1,0 +1,15 @@
+@theme {
+  --color-bg: #0a0a0f;
+  --color-surface: #1a1410;
+  --color-surface-hover: #35281e;
+  --color-primary: #f59e0b;
+  --color-primary-hover: #fbbf24;
+  --color-secondary: #fb923c;
+  --color-secondary-hover: #fdba74;
+  --color-accent: #d97706;
+  --color-text: #fefce8;
+  --color-text-muted: #9a9490;
+  --color-border: #292524;
+  --font-heading: 'Josefin Sans Variable', 'Josefin Sans', sans-serif;
+  --font-body: 'Josefin Sans Variable', 'Josefin Sans', sans-serif;
+}

@@ -83,7 +83,7 @@ function formatDate(dateStr: string) {
     {variant === 'full' && (
       <div class="player-compact mb-4">
         <iframe 
-          style="width: 100%; height: 150px; border: none; border-radius: 8px;" 
+          class="iframe-mixcloud-compact"
           src={`${src}&hide_tracklist=1`}
           title={title}
            allow="encrypted-media; fullscreen; autoplay; idle-detection; web-share;"
@@ -95,7 +95,7 @@ function formatDate(dateStr: string) {
     {variant === 'card' && (
       <div class="player-card mb-4">
         <iframe 
-          style="width: 100%; aspect-ratio: 16/9; border: none; border-radius: 8px;" 
+          class="iframe-mixcloud-card"
           src={`${src}&hide_tracklist=1`}
           title={title}
            allow="encrypted-media; fullscreen; autoplay; idle-detection; web-share;"
@@ -108,7 +108,7 @@ function formatDate(dateStr: string) {
       <div class="tracklist-section">
         <button 
           type="button" 
-          class="tracklist-toggle flex items-center gap-2 text-orange-500 hover:text-orange-400 transition-colors text-base font-bold w-full"
+          class="tracklist-toggle flex items-center gap-2 text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors text-base font-bold w-full"
           aria-expanded="false"
         >
           <svg class="tracklist-icon w-5 h-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">

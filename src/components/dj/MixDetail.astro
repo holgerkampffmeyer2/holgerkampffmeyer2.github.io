@@ -31,10 +31,10 @@ interface Props {
 const { post, isLatest = false, showNavigation = true } = Astro.props;
 
 const USECASE_CONFIG: Record<string, { label: string; icon: typeof GymIcon; color: string }> = {
-  gym: { label: 'Gym Session', icon: GymIcon, color: 'text-orange-500' },
-  drive: { label: 'Drive / Relax', icon: DriveIcon, color: 'text-orange-500' },
-  work: { label: 'Focus / Work', icon: WorkIcon, color: 'text-orange-500' },
-  party: { label: 'Pre-Party', icon: PartyIcon, color: 'text-orange-500' }
+  gym: { label: 'Gym Session', icon: GymIcon, color: 'text-[var(--color-primary)]' },
+  drive: { label: 'Drive / Relax', icon: DriveIcon, color: 'text-[var(--color-primary)]' },
+  work: { label: 'Focus / Work', icon: WorkIcon, color: 'text-[var(--color-primary)]' },
+  party: { label: 'Pre-Party', icon: PartyIcon, color: 'text-[var(--color-primary)]' }
 };
 
 function formatDate(dateStr: string) {
@@ -69,7 +69,7 @@ function formatDuration(seconds: number) {
         {post.title}
       </h1>
       {isLatest && (
-        <span class="shrink-0 bg-orange-500 text-white text-sm px-3 py-1 rounded font-medium self-start">
+        <span class="shrink-0 bg-[var(--color-primary)] text-white text-sm px-3 py-1 rounded font-medium self-start">
           Latest Mix
         </span>
       )}
@@ -86,7 +86,7 @@ function formatDuration(seconds: number) {
     <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-6">
       <div class="flex items-center gap-2">
         <span class="text-[var(--color-text-muted)] text-sm">Date:</span>
-        <span class="text-orange-500 font-medium bg-orange-500/10 px-3 py-1 rounded">
+        <span class="text-[var(--color-primary)] font-medium bg-[var(--color-primary)]/10 px-3 py-1 rounded">
           {post.created_time && formatDate(post.created_time)}
         </span>
       </div>
@@ -127,7 +127,7 @@ function formatDuration(seconds: number) {
         <h2 class="font-play text-lg font-bold">Mixcloud Player: Push play directly in your browser!</h2>
       </div>
       <iframe 
-        style="width: 100%; height: 220px; border: none;" 
+        class="iframe-mixcloud"
         src={`${post.src}&hide_tracklist=1`}
         title={post.title}
         allow="encrypted-media; fullscreen; autoplay; idle-detection; web-share;"

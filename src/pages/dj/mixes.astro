@@ -72,10 +72,10 @@ const blogSchema = {
 };
 
 const USECASE_CONFIG: Record<string, { label: string; icon: typeof GymIcon; color: string }> = {
-  gym: { label: 'Gym Session', icon: GymIcon, color: 'text-orange-500' },
-  drive: { label: 'Drive / Relax', icon: DriveIcon, color: 'text-orange-500' },
-  work: { label: 'Focus / Work', icon: WorkIcon, color: 'text-orange-500' },
-  party: { label: 'Pre-Party', icon: PartyIcon, color: 'text-orange-500' }
+  gym: { label: 'Gym Session', icon: GymIcon, color: 'text-[var(--color-primary)]' },
+  drive: { label: 'Drive / Relax', icon: DriveIcon, color: 'text-[var(--color-primary)]' },
+  work: { label: 'Focus / Work', icon: WorkIcon, color: 'text-[var(--color-primary)]' },
+  party: { label: 'Pre-Party', icon: PartyIcon, color: 'text-[var(--color-primary)]' }
 };
 
 function formatDate(dateStr: string) {
@@ -165,7 +165,7 @@ function formatDate(dateStr: string) {
           {latestPost.title}
         </h2>
         <p class="text-[var(--color-text-muted)] text-sm mb-4">
-          <span class="text-orange-500 font-medium bg-orange-500/10 px-2 py-0.5 rounded">{latestPost.created_time && formatDate(latestPost.created_time)}</span>
+          <span class="text-[var(--color-primary)] font-medium bg-[var(--color-primary)]/10 px-2 py-0.5 rounded">{latestPost.created_time && formatDate(latestPost.created_time)}</span>
         </p>
         <p class="text-[var(--color-text-muted)] text-lg max-w-2xl mb-6">
           {latestPost.description}
@@ -209,7 +209,7 @@ function formatDate(dateStr: string) {
               </div>
               <div class="player-section">
                 <iframe 
-                  style="width: 100%; height: 220px; border: none;" 
+                  class="iframe-mixcloud"
                   src={`${latestPost.src}&hide_tracklist=1`}
                   title={latestPost.title}
                   allow="encrypted-media; fullscreen; autoplay; idle-detection; web-share;"
@@ -266,19 +266,19 @@ function formatDate(dateStr: string) {
         </p>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
           <a href="/dj/mixes-blog-archive?useCase=gym" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
-            <GymIcon class="w-8 h-8 mx-auto mb-2 text-orange-500" />
+            <GymIcon class="w-8 h-8 mx-auto mb-2 text-[var(--color-primary)]" />
             <span class="text-[var(--color-text)] font-medium">Gym Session</span>
           </a>
           <a href="/dj/mixes-blog-archive?useCase=drive" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
-            <DriveIcon class="w-8 h-8 mx-auto mb-2 text-orange-500" />
+            <DriveIcon class="w-8 h-8 mx-auto mb-2 text-[var(--color-primary)]" />
             <span class="text-[var(--color-text)] font-medium">Drive / Relax</span>
           </a>
           <a href="/dj/mixes-blog-archive?useCase=work" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
-            <WorkIcon class="w-8 h-8 mx-auto mb-2 text-orange-500" />
+            <WorkIcon class="w-8 h-8 mx-auto mb-2 text-[var(--color-primary)]" />
             <span class="text-[var(--color-text)] font-medium">Focus / Work</span>
           </a>
           <a href="/dj/mixes-blog-archive?useCase=party" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
-            <PartyIcon class="w-8 h-8 mx-auto mb-2 text-orange-500" />
+            <PartyIcon class="w-8 h-8 mx-auto mb-2 text-[var(--color-primary)]" />
             <span class="text-[var(--color-text)] font-medium">Pre-Party</span>
           </a>
         </div>
@@ -296,7 +296,7 @@ function formatDate(dateStr: string) {
               {postsWithTracklists.map((post, idx) => (
                 <a 
                   href={`/dj/mixes/${post.number}`} 
-                  class={`snap-center shrink-0 w-64 md:w-72 bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors group ${idx === 0 ? 'ring-2 ring-orange-500' : ''}`}
+                  class={`snap-center shrink-0 w-64 md:w-72 bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors group ${idx === 0 ? 'ring-2 ring-[var(--color-primary)]' : ''}`}
                 >
                   <div class="relative aspect-video overflow-hidden">
                     <img 
@@ -307,7 +307,7 @@ function formatDate(dateStr: string) {
                       decoding="async"
                     />
                     {idx === 0 && (
-                      <span class="absolute top-2 left-2 bg-orange-500 text-white text-xs px-2 py-1 rounded font-medium">
+                      <span class="absolute top-2 left-2 latest-badge">
                         Latest
                       </span>
                     )}
@@ -316,7 +316,7 @@ function formatDate(dateStr: string) {
                     <h3 class="font-play font-semibold text-sm text-[var(--color-text)] line-clamp-2 mb-2">
                       {post.title}
                     </h3>
-                    <span class="text-xs text-orange-500 font-medium bg-orange-500/10 px-2 py-0.5 rounded">
+                    <span class="text-xs text-[var(--color-primary)] font-medium bg-[var(--color-primary)]/10 px-2 py-0.5 rounded">
                       {post.created_time && formatDate(post.created_time)}
                     </span>
                   </div>
@@ -390,7 +390,7 @@ function formatDate(dateStr: string) {
       <p class="text-[var(--color-text-muted)] mb-8">Weekly updated playlist with the best House Tunes!</p>
       
       <div class="rounded-xl overflow-hidden">
-        <iframe style="border-radius:12px; width: 100%; height: 352px; border: none;" src="https://open.spotify.com/embed/playlist/2IiSXnINIWdFMewY55iJWA?utm_source=generator" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe class="iframe-spotify" src="https://open.spotify.com/embed/playlist/2IiSXnINIWdFMewY55iJWA?utm_source=generator" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
     </div>
   </section>

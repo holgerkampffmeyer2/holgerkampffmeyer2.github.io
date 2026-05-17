@@ -1,16 +1,17 @@
 ---
 interface Props {
   image: string;
-  gradient: string;
   id?: string;
+  variant?: 'default' | 'secondary';
 }
-const { image, gradient, id } = Astro.props;
+const { image, id, variant = 'default' } = Astro.props;
+const overlayClass = variant === 'secondary' ? 'slide-overlay hero-overlay-secondary' : 'slide-overlay hero-overlay';
 ---
 <section class="hero-slider" id={id}>
   <div class="slide active">
     <div class="slide-content">
       <img src={image} alt="Hero image" width="1920" height="1080" class="hero-bg-img" />
-      <div class="slide-overlay" style={`background: ${gradient};`}></div>
+      <div class={overlayClass}></div>
       <div class="container mx-auto px-4">
         <slot />
       </div>
