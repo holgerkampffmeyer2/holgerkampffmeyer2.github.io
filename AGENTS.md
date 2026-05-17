@@ -15,9 +15,16 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 
 ## Schnellstart
 - [Build & Deployment](docs/build.md)
-- [Music Blog](docs/music-blog-script.md)
+- [Music Blog](docs/music-blog-script.md) — Workflow für neue Mix-Posts
 - [Design & Architecture](docs/DESIGN.md)
 - [Git-Workflow](docs/git.md)
+
+## Workflows
+
+### Neuen Mix-Post erstellen
+Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
+1. `docs/music-blog-script.md` lesen → Abschnitt "Neuen Mix hinzufügen"
+2. Schritte 1-6 ausführen
 
 ## Build-Kommandos
 - `pnpm run build` — Production Build (Details: [docs/build.md](docs/build.md))
