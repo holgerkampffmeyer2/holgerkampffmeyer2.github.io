@@ -23,7 +23,10 @@ src/
 │   ├── djhulk-electronic-music.astro
 │   ├── dj/
 │   │   ├── videos.astro
-│   │   ├── mixes.astro, mixes/[n].astro, mixes-all.astro
+│   │   ├── mixes.astro
+│   │   ├── mixes/[number].astro
+│   │   ├── mixes-all.astro
+│   │   ├── mixes-blog-archive.astro
 │   │   └── em3f.astro
 │   ├── vermietung.astro  # Landingpage mit Verweis → extern
 │   ├── work.astro
@@ -49,6 +52,9 @@ src/
 | /djhulk-electronic-music | DJ Hulk |
 | /dj/videos | Videos |
 | /dj/mixes | Mixes (pagiert) |
+| /dj/mixes/[n] | Single Mix mit Tracklist |
+| /dj/mixes-all | Alle Mixes |
+| /dj/mixes-blog-archive | Mixes Blog-Archiv |
 | /dj/em3f | Festival Fotos |
 | /vermietung | Vermietung Landingpage (Verweis → soundundlicht-stuttgart.de) |
 | /work | Work/Research |
