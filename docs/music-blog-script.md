@@ -62,7 +62,7 @@ Das Mapping liegt in `src/data/genre-use-case-mapping.json`:
 
 **Hero-Images** müssen in `public/tracklists/` liegen:
 - Format: WebP (wird aus PNG konvertiert)
-- Dateiname enthält Mix-Nummer: `Mixcloud-Post-Mix175.webp`
+- Dateiname enthält Mix-Nummer: `Mix175.webp`
 
 ### Manuell ausführen
 
@@ -72,8 +72,7 @@ node scripts/fetch-mixcloud.mjs --force
 
 ### Automatisch
 
-- `pnpm run build:data` - Fetch nur Mixcloud-Daten (--force)
-- `pnpm run build:full` - Vollständiger Build inkl. Mixcloud (cached, 24h)
+- `pnpm run build:full` - Vollständiger Build inkl. Mixcloud (cached, 24h — für neuen Mix `--force` nötig, siehe Schritt 4)
 - `pnpm run build` - Nur Astro Build (schnell, keine Datenfetch)
 
 ### RSS-Feed
@@ -83,64 +82,63 @@ Der RSS-Feed wird bei `pnpm run build:seo` oder `pnpm run build:full` generiert.
 
 ---
 
-## Neuen Mix hinzufügen (Schritt-für-Schritt)
+## Neuen Mix hinzufügen
 
-### Schritt 1: Tracklist vorbereiten
+### Schritt 1: Dateien bereitstellen
 
-1. Exportiere die Tracklist aus Rekordbox als Textdatei
-2. Dateiname muss die Mix-Nummer enthalten: `DJ Hulk - Mix{nummer}-{beschreibung}-tracklist.txt`
-3. Kopiere nach `src/data/tracklists/`
+User legt in `tracklists/` ab:
+- `.txt`-Datei mit `Mix<nummer>` im Namen (Tracklist)
+- `.png`/`.jpg`/`.jpeg`-Datei mit `Mix<nummer>` im Namen (Hero-Bild)
 
-Beispiel:
-```bash
-cp "tracklsts/DJ Hulk - Mix176-LatinHouse-tracklist.txt" src/data/tracklists/
-```
+Der Agent ermittelt `<nummer>` aus dem `Mix<nummer>`-Substring.  
+Die Schreibweise von Quelldateien ist flexibel — nur `Mix<nummer>` im Namen ist entscheidend.
 
-### Schritt 2: Hero-Image vorbereiten (optional)
+### Schritt 2: Tracklist kopieren
 
-1. Exportiere das Bild aus Mixcloud als PNG nach `tracklists/`
-2. **Konvertiere zu WebP + resize auf 600px Breite** (Bild wird als 400px Thumbnail angezeigt):
-   ```bash
-   node scripts/create-webp.mjs -w 600 tracklists/Mixcloud-Post-Mix177.png
-   ```
-3. Das Script erzeugt `public/tracklists/Mixcloud-Post-Mix177.webp` (Leerzeichen → Bindestriche)
-
-**Warum 600px:** Das Bild wird auf der Website als 400×400 Thumbnail angezeigt. 600px Breite ist der optimale Kompromiss aus Retina-Qualität und Dateigröße. Standard 1920px wäre 14× überdimensioniert.
-
-**Wichtig:** WebP-Dateinamen dürfen KEINE Leerzeichen enthalten:
-- ✅ `Mixcloud-Post-Mix177.webp`
-- ❌ `Mixcloud Post Mix177.webp`
-
-**Batch-Verarbeitung** (alle PNGs in `tracklists/`):
-```bash
-node scripts/create-webp.mjs -t -w 600
-```
-
-### Schritt 3: Build ausführen
+Finde die `.txt`-Datei mit `Mix<nummer>`, kopiere nach `src/data/tracklists/`:
 
 ```bash
-# Schnell: Nur Astro Build (keine Datenfetch)
-pnpm run build
-
-# Oder Full: Mit Mixcloud fetch (24h Cache)
-pnpm run build:full
+cp "tracklists/<original>.txt" "src/data/tracklists/DJ Hulk - Mix<nummer>-tracklist.txt"
 ```
 
-**Was passiert automatisch bei build:full:**
-1. Script holt neueste Mixes von Mixcloud API (wenn >24h vergangen)
-2. Tracklists werden zugeordnet
-3. Hero-Images werden zugeordnet
-4. `blog-posts.json` wird aktualisiert
-5. **Neue Seite `/dj/mixes/{nummer}.html` wird generiert**
-6. RSS-Feed wird aktualisiert
-7. Karussell auf `/dj/mixes` zeigt neuen Mix
+### Schritt 3: Bild konvertieren
 
-### Schritt 4: Überprüfen
+Finde die Bild-Datei mit `Mix<nummer>`, konvertiere zu WebP (1200px Breite):
 
-- Öffne `http://localhost:4321/dj/mixes/{nummer}` (im Dev-Modus)
+```bash
+node scripts/create-webp.mjs -w 1200 "tracklists/<original>.png"
+cp "tracklists/<original>.webp" "public/tracklists/Mix<nummer>.webp"
+```
+
+**Warum 1200px:** Das Hero-Bild wird auf der Mix-Detailseite bis zu 896px breit angezeigt (`max-w-4xl`)
+mit 320px Höhe (`lg:h-80`). 1200px liefert ausreichend Auflösung für Retina-Displays, ohne überdimensioniert zu sein.
+
+**Achtung:** WebP-Dateinamen dürfen KEINE Leerzeichen enthalten — das Script ersetzt Leerzeichen automatisch durch Bindestriche. Der finale Name in `public/tracklists/` sollte `Mix<nummer>.webp` sein.
+
+### Schritt 4: JSON + Build
+
+`build:full` hat einen 24h-Cache — für einen frischen Mix auf Mixcloud muss `--force` die API-Abfrage erzwingen:
+
+```bash
+node scripts/fetch-mixcloud.mjs --force && astro build && node scripts/generate-rss.mjs && node scripts/generate-urllist.mjs
+```
+
+**Was passiert dabei automatisch:**
+1. `fetch-mixcloud.mjs` holt neueste Mixes von Mixcloud API (erzwungen via `--force`)
+2. Tracklist aus `src/data/tracklists/` wird zugeordnet (Regex auf `Mix<nummer>`)
+3. Hero-Image aus `public/tracklists/` wird zugeordnet (Regex auf `Mix<nummer>`)
+4. `blog-posts.json` + `mixcloud-data.json` werden aktualisiert
+5. Astro baut die neue Seite `/dj/mixes/<nummer>.html`
+6. RSS-Feed + `urllist.txt` werden generiert
+
+### Schritt 5: Überprüfen
+
+- Öffne `http://localhost:4321/dj/mixes/<nummer>` (im Dev-Modus)
 - Prüfe ob Tracklist korrekt angezeigt wird
 - Prüfe ob Bild geladen wird
 - Verifiziere JSON-LD in den Page Source
+
+### Schritt 6: Commit + Push
 
 ---
 

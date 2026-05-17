@@ -30,7 +30,6 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 
 ## Wichtige Regeln
 1. Domain IMMER auf `holger-kampffmeyer.de` setzen
-2. **Neuen Mix-Post erstellen**: In `tracklists/` nach höchster Mix-Nummer suchen, Tracklist nach `src/data/tracklists/` kopieren, Bild (PNG→WebP) mit `node scripts/create-webp.mjs -w 600 <datei>` nach `public/tracklists/` konvertieren, dann `pnpm run build:full` → commit → push
 
 ## Definition of Done
 - Nach Quellcode-Änderungen: `pnpm run lint && pnpm run check && pnpm run build && pnpm run build:seo`
