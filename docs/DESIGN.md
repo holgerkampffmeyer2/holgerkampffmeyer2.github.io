@@ -88,25 +88,25 @@ Dadurch sind alle Schatten, Glows und Overlays automatisch theme-kompatibel.
 
 | Variable | Farbe | Rolle |
 |---|---|---|
-| `--color-primary` | `#f97316` Orange | Primäre CTA (Buttons, Badges, Scrollbar) |
-| `--color-primary-hover` | `#fb923c` Helles Orange | Button-Hover, Akzente |
-| `--color-secondary` | `#0891b2` Cyan | Sekundäre Akzente (Tags, Nav-Links) |
-| `--color-secondary-hover` | `#22d3ee` Helles Cyan | Hover-States |
-| `--color-accent` | `#818cf8` Indigo | Gradient-Partner, Secondary-Buttons |
-| `--color-bg` | `#0a0a0f` Dunkel | Hintergrund |
-| `--color-surface` | `#12121a` Dunkelgrau | Karten, Sektionen |
-| `--color-surface-hover` | `#1a1a25` | Hover auf Cards |
-| `--color-text` | `#f8fafc` Weiß | Text |
-| `--color-text-muted` | `#94a3b8` Graublau | Nebenfarbe |
-| `--color-border` | `#1e1e2e` | Rahmen |
+| `--color-primary` | <span style="display:inline-block;width:12px;height:12px;background:#f97316;border-radius:2px;"></span> `#f97316` Orange | Primäre CTA (Buttons, Badges, Scrollbar) |
+| `--color-primary-hover` | <span style="display:inline-block;width:12px;height:12px;background:#fb923c;border-radius:2px;"></span> `#fb923c` Helles Orange | Button-Hover, Akzente |
+| `--color-secondary` | <span style="display:inline-block;width:12px;height:12px;background:#0891b2;border-radius:2px;"></span> `#0891b2` Cyan | Sekundäre Akzente (Tags, Nav-Links) |
+| `--color-secondary-hover` | <span style="display:inline-block;width:12px;height:12px;background:#22d3ee;border-radius:2px;"></span> `#22d3ee` Helles Cyan | Hover-States |
+| `--color-accent` | <span style="display:inline-block;width:12px;height:12px;background:#818cf8;border-radius:2px;"></span> `#818cf8` Indigo | Gradient-Partner, Secondary-Buttons |
+| `--color-bg` | <span style="display:inline-block;width:12px;height:12px;background:#0a0a0f;border-radius:2px;border:1px solid #333;"></span> `#0a0a0f` Dunkel | Hintergrund |
+| `--color-surface` | <span style="display:inline-block;width:12px;height:12px;background:#12121a;border-radius:2px;border:1px solid #333;"></span> `#12121a` Dunkelgrau | Karten, Sektionen |
+| `--color-surface-hover` | <span style="display:inline-block;width:12px;height:12px;background:#1a1a25;border-radius:2px;border:1px solid #333;"></span> `#1a1a25` | Hover auf Cards |
+| `--color-text` | <span style="display:inline-block;width:12px;height:12px;background:#f8fafc;border-radius:2px;"></span> `#f8fafc` Weiß | Text |
+| `--color-text-muted` | <span style="display:inline-block;width:12px;height:12px;background:#94a3b8;border-radius:2px;"></span> `#94a3b8` Graublau | Nebenfarbe |
+| `--color-border` | <span style="display:inline-block;width:12px;height:12px;background:#1e1e2e;border-radius:2px;border:1px solid #333;"></span> `#1e1e2e` | Rahmen |
 
 ### Alternativ-Themes
 
 | Theme | Stimmung | URL |
 |---|---|---|
-| `deep-bass` | Kühl, Navy/Blau, professionell | `?theme=deep-bass` |
-| `electric-night` | Neon, Purple/Pink, clubartig | `?theme=electric-night` |
-| `golden-hour` | Warm, Amber/Gold, elegant | `?theme=golden-hour` |
+| `deep-bass` | <span style="display:inline-block;width:12px;height:12px;background:#2563eb;border-radius:2px;"></span> Kühl, Navy/Blau, professionell | `?theme=deep-bass` |
+| `electric-night` | <span style="display:inline-block;width:12px;height:12px;background:#a855f7;border-radius:2px;"></span> Neon, Purple/Pink, clubartig | `?theme=electric-night` |
+| `golden-hour` | <span style="display:inline-block;width:12px;height:12px;background:#f59e0b;border-radius:2px;"></span> Warm, Amber/Gold, elegant | `?theme=golden-hour` |
 
 ### Inline-Stile
 
