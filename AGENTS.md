@@ -2,20 +2,53 @@
 
 **Projekt:** DJ & Lichttechnik Website - holger-kampffmeyer.de
 
+## Projektkontext
+Persönliche Website von Holger Kampffmeyer – DJ, Lichttechniker und Event-Technik-Verleih.
+Primäres Ziel: DJ-Buchungen, Mixcloud-Reichweite, Work-Portfolio.
+Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
+
+## Tech-Stack
+- **Framework:** Astro 6.x (SSG, `output: 'static'`)
+- **Styling:** Tailwind CSS 4.x + CSS Custom Properties (Theme-System)
+- **Package-Manager:** pnpm
+- **Node-Version:** >=18
+
 ## Schnellstart
 - [Build & Deployment](docs/build.md)
 - [Music Blog](docs/music-blog-script.md)
 - [Design & Architecture](docs/DESIGN.md)
 - [Git-Workflow](docs/git.md)
 
-## Wichtige Regeln
-1. **DESIGN.md lesen** für Design/Details
-2. Domain IMMER auf `holger-kampffmeyer.de` setzen
-3. Nach Quellcode-Änderungen: lint → check → build → build:seo → commit → push
-4. Nach reinen .md Änderungen: direkt push (kein lint/check/build)
-5. **Neuen Mix-Post erstellen**: Bei "neuen Post/Tracklist" → automatisch in `tracklists/` nach höchster Mix-Nummer suchen, Tracklist nach `src/data/tracklists/` kopieren, Bild (PNG→WebP) mit `node scripts/create-webp.mjs -w 600 <datei>` nach `public/tracklists/` konvertieren (resized auf 600px, da Thumbnail nur 400px), dann `pnpm run build:full` → commit → push
-
-## Build-Commands
-- `pnpm run build` — nur Astro Build (schnell, inkl. Sitemap via @astrojs/sitemap)
+## Build-Kommandos
+- `pnpm run build` — Astro Build (schnell, inkl. Sitemap)
 - `pnpm run build:seo` — RSS + urllist.txt generieren (nach build ausführen)
-- `pnpm run build:full` — Fetch Mixcloud + RSS + Build (inkl. Sitemap) + urllist.txt (für Mix-Posts)
+- `pnpm run build:full` — Fetch Mixcloud + RSS + Build + urllist.txt (für Mix-Posts)
+- `pnpm run dev` — Dev server
+- `pnpm run preview` — Preview build
+- `pnpm run lint` — ESLint
+- `pnpm run check` — TypeScript
+
+## Wichtige Regeln
+1. Domain IMMER auf `holger-kampffmeyer.de` setzen
+2. **Neuen Mix-Post erstellen**: In `tracklists/` nach höchster Mix-Nummer suchen, Tracklist nach `src/data/tracklists/` kopieren, Bild (PNG→WebP) mit `node scripts/create-webp.mjs -w 600 <datei>` nach `public/tracklists/` konvertieren, dann `pnpm run build:full` → commit → push
+
+## Definition of Done
+- Nach Quellcode-Änderungen: `pnpm run lint && pnpm run check && pnpm run build && pnpm run build:seo`
+- Nach reinen .md Änderungen: direkt push (kein lint/check/build)
+- Keine offenen TODOs im finalen Code hinterlassen
+
+## Arbeitsweise
+- Kleine, nachvollziehbare Änderungen bevorzugen
+- Bestehende Patterns zuerst wiederverwenden, dann abstrahieren
+- Bei unklaren Anforderungen lieber vorhandene Komponenten erweitern statt neue Systeme einführen
+
+## Bereichsspezifische Hinweise
+- **`dj/mixes/[number].astro`**: AudioObject + BreadcrumbList Schema prüfen (Mix-Detailseite)
+- **`dj/mixes.astro`**: Blog + BlogPosting Schema prüfen (Mixes-Übersicht)
+- **`dj/mixes-blog-archive.astro`**: Blog-Archiv, kein eigenes JSON-LD nötig
+- **`vermietung.astro`**: Nur Weiterleitung zu soundundlicht, kein eigener Content
+
+## Sicherheit & Grenzen
+- Keine Analytics-, Consent- oder Payment-Integrationen ändern ohne explizite Anweisung
+- Keine Dependencies hinzufügen ohne Begründung und Zustimmung
+- Keine produktiven URLs hart codieren (Domain ist `holger-kampffmeyer.de`)
