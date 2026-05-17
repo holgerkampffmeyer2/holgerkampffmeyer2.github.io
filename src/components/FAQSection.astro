@@ -15,9 +15,7 @@ const { faqs } = Astro.props;
           </span>
           {faq.question}
         </summary>
-        <p class="text-[var(--color-text-muted)] mt-3 ml-9">
-          {faq.answer}
-        </p>
+        <p class="text-[var(--color-text-muted)] mt-3 ml-9" set:html={faq.answer} />
       </details>
     ))}
   </div>
