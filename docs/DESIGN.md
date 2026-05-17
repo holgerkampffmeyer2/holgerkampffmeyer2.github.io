@@ -179,7 +179,7 @@ pnpm run preview   # Preview
 
 ## SEO
 
-- JSON-LD: LocalBusiness, Person, FAQPage, VideoObject (8 Videos), AudioObject + BreadcrumbList (Mix-Seiten)
+- JSON-LD: LocalBusiness, Person, WebPage, FAQPage (Index), VideoObject (8 Videos), Blog + BlogPosting (Mixes-Übersicht), AudioObject + BreadcrumbList (Mix-Detailseiten)
 - Open Graph Tags
 - Sitemap + RSS Feed
 - robots.txt erweitert für AI-Crawler
