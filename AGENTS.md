@@ -20,9 +20,9 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 - [Git-Workflow](docs/git.md)
 
 ## Build-Kommandos
-- `pnpm run build` — Astro Build (schnell, inkl. Sitemap)
-- `pnpm run build:seo` — RSS + urllist.txt generieren (nach build ausführen)
-- `pnpm run build:full` — Fetch Mixcloud + RSS + Build + urllist.txt (für Mix-Posts)
+- `pnpm run build` — Production Build (Details: [docs/build.md](docs/build.md))
+- `pnpm run build:seo` — RSS + urllist.txt
+- `pnpm run build:full` — Fetch Mixcloud + Build + SEO (für Mix-Posts)
 - `pnpm run dev` — Dev server
 - `pnpm run preview` — Preview build
 - `pnpm run lint` — ESLint

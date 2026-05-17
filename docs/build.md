@@ -19,19 +19,6 @@ Commands in [AGENTS.md](../AGENTS.md). Details siehe unten.
 - `pnpm run build` ist schnell (~15-20s)
 - Für frische Daten + SEO: `pnpm run build:full`
 
-## Fonts
-- **Self-hosted** via `@fontsource-variable/josefin-sans`
-- `@font-face` deklariert in `src/styles/fonts.css` (separat ausgelagert)
-- `fonts.css` wird in `Layout.astro` + `global.css` importiert
-- Kein externer Request zu Google Fonts mehr
-
-## Theme-System
-- Farb-Theme definiert in `src/styles/themes/*.css` je Theme-Datei
-- Aktives Theme: `src/styles/themes/default.css` (via `@import` in `global.css`)
-- Theme-Wechsel via `?theme=<name>` URL-Parameter
-- Verfügbare Themes: `default`, `deep-bass`, `electric-night`, `golden-hour`
-- Alle Farben über `var(--color-*)` Custom Properties — keine hartcodierten rgba-Werte
-
 ## Output
 - `dist/` - statische HTML-Dateien
 - `dist/sitemap.xml` - generiert von @astrojs/sitemap während Build
