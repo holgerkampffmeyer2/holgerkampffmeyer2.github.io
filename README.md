@@ -10,4 +10,4 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 - **Vermietung:** FAQ-Schema (6 FAQs pro Seite, JSON-LD)
 - **dj/videos:** VideoObject-Schema (8 Videos)
 
-Weitere Informationen für Agenten in `AGENTS.md`.
+Weitere Informationen für Agenten in [AGENTS.md](AGENTS.md).

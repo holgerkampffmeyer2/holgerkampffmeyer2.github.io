@@ -1,6 +1,6 @@
 # DJ Hulk Website - Konzept & Struktur
 
-> **Quick-Start:** Siehe AGENTS.md
+> **Quick-Start:** [AGENTS.md](../AGENTS.md)
 
 ## Technologie-Stack
 

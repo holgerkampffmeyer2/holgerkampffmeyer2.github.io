@@ -1,6 +1,6 @@
 # Build & Deployment
 
-Commands in `AGENTS.md`. Details siehe unten.
+Commands in [AGENTS.md](../AGENTS.md). Details siehe unten.
 
 ## Build-Prozess
 
