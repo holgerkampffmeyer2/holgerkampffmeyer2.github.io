@@ -63,8 +63,10 @@ interface Props {
 const { post, prevPost, nextPost, isLatest } = Astro.props;
 
 const mixNumber = post.number;
-const pageTitle = `Mix#${mixNumber} - ${post.title} | DJ Hulk`;
-const pageDescription = post.description?.substring(0, 160) || `DJ Hulk Mix#${mixNumber} - House, Tech House, Deep House with full tracklist.`;
+let rawTitle = `Mix#${mixNumber} - ${post.title} - DJ Hulk Weekly Mix - House, Tech House, Deep House - Electronic Music`;
+const pageTitle = rawTitle.length > 60 ? rawTitle.substring(0, 60) : rawTitle;
+const baseDesc = `DJ Hulk Mix#${mixNumber} - ${post.title} - Electronic Music Mix with Tracklist. Enjoy House, Tech House, Deep House sets for gym, driving, work and pre-party. Free download and streaming on Mixcloud.`;
+const pageDescription = post.description ? (post.description.length > 160 ? post.description.substring(0, 160) : post.description) : baseDesc;
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },

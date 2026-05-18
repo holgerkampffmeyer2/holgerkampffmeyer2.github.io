@@ -29,15 +29,15 @@ const { slides, interval = 5000, id = "hero" } = Astro.props;
   <section id={id} class="hero-slider" data-interval={interval}>
   {slides.map((slide, index) => (
     <div class={`slide ${index === 0 ? "active" : ""}`} data-slide={index}>
-      <img
-        src={slide.backgroundImage}
-        alt=""
-        class="hero-bg-img"
-        width="1920"
-        height="1080"
-        fetchpriority={index === 0 ? "high" : "low"}
-        loading={index === 0 ? "eager" : "lazy"}
-      />
+       <img
+         src={slide.backgroundImage}
+         alt={slide.title}
+         class="hero-bg-img"
+         width="1920"
+         height="1080"
+         fetchpriority={index === 0 ? "high" : "low"}
+         loading={index === 0 ? "eager" : "lazy"}
+       />
       <div class={`slide-overlay ${slide.overlayVariant === 'secondary' ? 'hero-overlay-secondary' : 'hero-overlay'}`}></div>
       <div class="slide-content">
         <div class="container mx-auto px-4">
