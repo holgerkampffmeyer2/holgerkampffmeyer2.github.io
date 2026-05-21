@@ -49,10 +49,14 @@ Das Mapping liegt in `src/data/genre-use-case-mapping.json`:
 
 1. **API Call**: Holt 100 neueste Mixes von Mixcloud API
 2. **Mix-Details**: Für jeden Mix wird die API mit `?metadata=1` aufgerufen für vollständige Beschreibung
-  3. **Tracklist**: Sucht in `tracklists/` nach Dateien mit Pattern `*Mix{nummer}*tracklist*.txt`
-4. **Hero-Image**: Sucht in `public/tracklists/` nach `*Mix{nummer}*.webp`
-5. **Use-Cases**: Leitet aus Mixcloud-Tags ab (kann mehrere pro Mix sein)
-6. **Output**: Schreibt beide JSON-Dateien
+3. **Tracklist**: Sucht in `tracklists/` nach Dateien mit Suffix `-tracklist.txt`
+4. **Hero-Image**: Sucht in `public/tracklists/` nach `.webp` Dateien
+5. **Zuordnung**: Tracklists und Hero-Images werden **sequenziell nach Veröffentlichungsdatum** zugeordnet
+   - Neueste Tracklist → Neuester Mix
+   - Zweite Tracklist → Zweiter neuester Mix
+   - usw.
+6. **Use-Cases**: Leitet aus Mixcloud-Tags ab (kann mehrere pro Mix sein)
+7. **Output**: Schreibt beide JSON-Dateien
 
 ### Voraussetzungen
 
