@@ -10,6 +10,7 @@ import PartyIcon from "../../components/icons/PartyIcon.astro";
 
 interface BlogPostData {
   number: number | null;
+  index: number | null;
   title: string;
   key: string;
   url: string;
@@ -66,7 +67,7 @@ const breadcrumbLabel = useCaseFilter
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
-  { label: "Weekly DJ Mixes", href: "/dj/mixes/" },
+  { label: "Weekly DJ Mixes", href: "/dj/mixes" },
   { label: breadcrumbLabel }
 ];
 

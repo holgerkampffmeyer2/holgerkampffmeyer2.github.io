@@ -8,31 +8,31 @@ interface Props {
 
 const { currentPage = 'home' } = Astro.props;
 
-const navItems = [
-  { 
-    href: '/', 
-    label: 'Home' ,
-    hasDropdown: true,
-    items: [
-      { href: '/#djing', label: 'DJ Hulk' }
-    ]
-  },
-  { 
-    href: '/djhulk-electronic-music/', 
-    label: 'DJing',
-    hasDropdown: true,
-    items: [
-      { href: '/dj/mixes/', label: 'Weekly DJ Mixes' },
-      { href: '/dj/mixes-all/', label: 'All Mixes' },
-      { href: '/dj/videos/', label: 'Videos' },
-      { href: '/dj/em3f/', label: 'Fotos' }
-    ]
-  },
-  { href: '/vermietung/', label: 'Vermietung' },
-  { href: '/work/', label: 'Work' },
-  { href: '/links/', label: 'Links' },
-  { href: '/impressum/', label: 'Impressum', rel: 'nofollow' },
-];
+  const navItems = [
+    { 
+      href: '/', 
+      label: 'Home' ,
+      hasDropdown: true,
+      items: [
+        { href: '/#djing', label: 'DJ Hulk' }
+      ]
+    },
+    { 
+      href: '/djhulk-electronic-music', 
+      label: 'DJing',
+      hasDropdown: true,
+      items: [
+        { href: '/dj/mixes', label: 'Weekly DJ Mixes' },
+        { href: '/dj/mixes-all', label: 'All Mixes' },
+        { href: '/dj/videos', label: 'Videos' },
+        { href: '/dj/em3f', label: 'Fotos' }
+      ]
+    },
+    { href: '/vermietung', label: 'Vermietung' },
+    { href: '/work', label: 'Work' },
+    { href: '/links', label: 'Links' },
+    { href: '/impressum', label: 'Impressum', rel: 'nofollow' },
+  ];
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 bg-[var(--color-bg)]/90 backdrop-blur-md border-b border-[var(--color-border)]" aria-label="Main navigation">
@@ -47,11 +47,13 @@ const navItems = [
       <!-- Desktop Menu -->
       <div class="desktop-menu hidden md:flex items-center space-x-6">
         {navItems.map(item => {
-          const isActive = currentPage === item.href || 
-                          (currentPage.startsWith('/djhulk-electronic-music/') && item.href === '/djhulk-electronic-music/') ||
-                          (currentPage.startsWith('/dj/') && item.href === '/djhulk-electronic-music/') ||
-                          (currentPage.startsWith('/vermietung/') && item.href === '/vermietung/') ||
-                          (currentPage === '/' && item.href === '/');
+            const normalize = (path: string) => {
+                return path.replace(/\/+$/, '');
+            };
+            const isActive = normalize(currentPage) === normalize(item.href) ||
+                             normalize(currentPage).startsWith('/dj') && normalize(item.href) === '/djhulk-electronic-music' ||
+                             normalize(currentPage).startsWith('/vermietung') && normalize(item.href) === '/vermietung' ||
+                             normalize(currentPage) === '' && normalize(item.href) === '';
           
           return item.hasDropdown ? (
             <div class="relative group">

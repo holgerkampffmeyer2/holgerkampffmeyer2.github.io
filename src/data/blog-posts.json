@@ -1,6 +1,49 @@
 {
-  "lastUpdated": "2026-05-17T06:28:29.364Z",
+  "lastUpdated": "2026-05-21T07:12:02.802Z",
   "posts": [
+    {
+      "number": 202,
+      "title": "Bill McGruddy x DJ Hulk - Selected Radio Guestmix - We Are One - Fr, Mai-15th 2026",
+      "key": "/holger-kampffmeyer/bill-mcgruddy-x-dj-hulk-selected-radio-guestmix-we-are-one-fr-mai-15th/",
+      "url": "https://www.mixcloud.com/holger-kampffmeyer/bill-mcgruddy-x-dj-hulk-selected-radio-guestmix-we-are-one-fr-mai-15th/",
+      "created_time": "2026-05-19T06:00:12Z",
+      "src": "https://player-widget.mixcloud.com/widget/iframe/?feed=%2Fholger-kampffmeyer%2Fbill-mcgruddy-x-dj-hulk-selected-radio-guestmix-we-are-one-fr-mai-15th%2F",
+      "description": "Bill and DJ Hulk are bringing the heat with a peak-time Tech House selection — rolling basslines, crisp percussion, and relentless energy from start to finish. Press play and let the weekend begin.\n\nThis is the exclusive guest mix for Bills Show \"We Are One\" on Select Radio, broadcasted on Friday, 15th of May, 2026.\n\nSet timing:\nBill: 00.00 - 28:56\nDJ Hulk: 28:56 - Finish\n\nIf you enjoy, please fav, repost, comment!\n✨DJ Hulk ✨",
+      "picture": "https://thumbnailer.mixcloud.com/unsafe/640x640/extaudio/4/3/9/0/26aa-045b-4ff6-9984-8a5c67464590",
+      "audio_length": 3598,
+      "tags": [
+        "Tech house",
+        "Ghetto house",
+        "Minimal Tech House",
+        "Club House",
+        "Progressive house"
+      ],
+      "useCases": [
+        "work",
+        "gym",
+        "party",
+        "drive"
+      ],
+      "tracklist": [
+        "Bill McGruddy - Bills part",
+        "DJOKO, Hanns - On & On",
+        "DJOKO, Rich Pinder - Technology",
+        "DJOKO, Hanns - On & On",
+        "DGreyFox - Feelings",
+        "Folkness - Junk Box (Extended Mix)",
+        "HASKELL - Rasa (Extended Mix)",
+        "Domenico Rondinelli & Giovanni Zarzana - Close (Extended Mix)",
+        "GOLDSCHLÄGER, ADIR DEKEL - Don't Depend (Extended)",
+        "La Fuente - Ring The Alarm (Extended)",
+        "Qobra - Army (Extended Mix)",
+        "MyQ - Jack is Back",
+        "LNRT - Flip That (Extended Mix)",
+        "Goodie bags - Turn Up The Bassline (Extended Mix)"
+      ],
+      "hasTracklist": true,
+      "heroImage": "/tracklists/bill-guestmix.webp",
+      "index": 1
+    },
     {
       "number": 181,
       "title": "DJ Hulk Mix-181 - Deep House",
@@ -41,7 +84,8 @@
         "Avicii vs Nicky Romero - BONUS EDIT I Could Be The One (ALRIUS Extended Bootleg)"
       ],
       "hasTracklist": true,
-      "heroImage": null
+       "heroImage": "/tracklists/Mixcloud Post Mix181.webp",
+      "index": 2
     },
     {
       "number": 180,
@@ -85,7 +129,8 @@
         "Santino - Bora Bora (Extended Mix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix180.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix180.webp",
+      "index": 3
     },
     {
       "number": 179,
@@ -128,7 +173,8 @@
         "Camila Cabello ft. Drake - Hot Uptown (Raffaele Lisena x VØGUE Remix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mix179.webp"
+      "heroImage": "/tracklists/Mix179.webp",
+      "index": 4
     },
     {
       "number": 178,
@@ -174,7 +220,8 @@
         "Not Toto - Baited"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mix178.webp"
+      "heroImage": "/tracklists/Mix178.webp",
+      "index": 5
     },
     {
       "number": 177,
@@ -216,7 +263,8 @@
         "Hrag Beko - Fluxion (Extended Mix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mix177.webp"
+      "heroImage": "/tracklists/Mix177.webp",
+      "index": 6
     },
     {
       "number": 176,
@@ -258,7 +306,8 @@
         "Miguel Montez - Only Chords (Original Mix),"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ-Hulk-Mix-176.webp"
+      "heroImage": "/tracklists/DJ-Hulk-Mix-176.webp",
+      "index": 7
     },
     {
       "number": 175,
@@ -304,7 +353,8 @@
         "HAVEN - I Run (DJ Prophet Edit)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix175.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix174.webp",
+      "index": 8
     },
     {
       "number": 174,
@@ -348,7 +398,8 @@
         "Marcus Cito - Coldblooded (Extended Mix) [Colorblind]"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix174.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix177.webp",
+      "index": 9
     },
     {
       "number": 173,
@@ -393,7 +444,8 @@
         "a.trofimov - Phase Lure"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix173.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix173.webp",
+      "index": 10
     },
     {
       "number": 172,
@@ -433,7 +485,8 @@
         "NAAiV - On The Road"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix172.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix172.webp",
+      "index": 11
     },
     {
       "number": 171,
@@ -478,7 +531,8 @@
         "JÄXM - Brick! (Edit)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix171.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix171.webp",
+      "index": 12
     },
     {
       "number": 170,
@@ -520,7 +574,8 @@
         "Known Artist - Mar Del Plata (Club Mix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix170.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix170.webp",
+      "index": 13
     },
     {
       "number": 169,
@@ -564,7 +619,8 @@
         "Noumena - Come Apart"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix169.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix169.webp",
+      "index": 14
     },
     {
       "number": 168,
@@ -611,7 +667,8 @@
         "Justin Curoe - Feeling Low (Extended Mix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix168.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix168.webp",
+      "index": 15
     },
     {
       "number": 167,
@@ -657,7 +714,8 @@
         "Mc On The Beat - Fiesta en la Disco"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix167.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix167.webp",
+      "index": 16
     },
     {
       "number": 166,
@@ -681,9 +739,27 @@
         "gym",
         "party"
       ],
-      "tracklist": [],
-      "hasTracklist": false,
-      "heroImage": null
+      "tracklist": [
+        "Hrag Beko - Let Me Tell You (Extended Mix)",
+        "Rosalia - Dios Es Un Stalker (STBAN Dub Mix)",
+        "Andrew Meller - Groovin' (Original Mix)",
+        "Inkblot - Palindrum",
+        "Red D - Red Basics 2 (Original)",
+        "Dr. Ruth - \"Believe In Yourself",
+        "Sebastian Wilberk - VIP (Extended Mix)",
+        "Jaques Le Noir - Who's Watching (Extended Mix)",
+        "Belfort - Braids ft. Veylura (Extended)",
+        "Superfunk Feat. Ron Carroll - Lucky Star (Tommy Mambretti Re-Edit)",
+        "Danmds, Albin Kaczka - Manifest",
+        "Ignazio Cabras Feat DJ Tribe - Elements Of Soul (DJ Tribe Rmx)",
+        "Volum1k & Max Murillo - What Was Your Name [Natural Rhythm]",
+        "DJibouti - Abel's Afterparty",
+        "DECEMBR.12 - Dance For Me [ADHouseMovement]",
+        "Fabio Carminati - Human (Nicolas Barnes Remix)"
+      ],
+      "hasTracklist": true,
+      "heroImage": "/tracklists/Mixcloud-Post-Mix165.webp",
+      "index": 17
     },
     {
       "number": 165,
@@ -725,7 +801,8 @@
         "REX STAX - Nafira"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix165.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix164.webp",
+      "index": 18
     },
     {
       "number": 164,
@@ -772,7 +849,8 @@
         "Sergio Borja -  Tronsh"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix164.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix163.webp",
+      "index": 19
     },
     {
       "number": 163,
@@ -821,7 +899,8 @@
         "Cat Dealers - CONTROL YOUR BODY (Extended Mix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix163.webp"
+      "heroImage": "/tracklists/Mixcloud-Post-Mix162.webp",
+      "index": 20
     },
     {
       "number": 162,
@@ -844,26 +923,10 @@
         "work",
         "gym"
       ],
-      "tracklist": [
-        "Hrag Beko - Let Me Tell You (Extended Mix)",
-        "Rosalia - Dios Es Un Stalker (STBAN Dub Mix)",
-        "Andrew Meller - Groovin' (Original Mix)",
-        "Inkblot - Palindrum",
-        "Red D - Red Basics 2 (Original)",
-        "Dr. Ruth - \"Believe In Yourself",
-        "Sebastian Wilberk - VIP (Extended Mix)",
-        "Jaques Le Noir - Who's Watching (Extended Mix)",
-        "Belfort - Braids ft. Veylura (Extended)",
-        "Superfunk Feat. Ron Carroll - Lucky Star (Tommy Mambretti Re-Edit)",
-        "Danmds, Albin Kaczka - Manifest",
-        "Ignazio Cabras Feat DJ Tribe - Elements Of Soul (DJ Tribe Rmx)",
-        "Volum1k & Max Murillo - What Was Your Name [Natural Rhythm]",
-        "DJibouti - Abel's Afterparty",
-        "DECEMBR.12 - Dance For Me [ADHouseMovement]",
-        "Fabio Carminati - Human (Nicolas Barnes Remix)"
-      ],
-      "hasTracklist": true,
-      "heroImage": "/tracklists/Mixcloud-Post-Mix162.webp"
+      "tracklist": [],
+      "hasTracklist": false,
+      "heroImage": null,
+      "index": 21
     },
     {
       "number": 161,
@@ -888,7 +951,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 22
     },
     {
       "number": null,
@@ -910,7 +974,8 @@
       "useCases": [],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 23
     },
     {
       "number": 160,
@@ -936,7 +1001,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 24
     },
     {
       "number": 159,
@@ -963,7 +1029,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 25
     },
     {
       "number": null,
@@ -988,7 +1055,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 26
     },
     {
       "number": 158,
@@ -1012,7 +1080,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 27
     },
     {
       "number": 157,
@@ -1039,7 +1108,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 28
     },
     {
       "number": 156,
@@ -1065,7 +1135,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 29
     },
     {
       "number": 155,
@@ -1089,7 +1160,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 30
     },
     {
       "number": 154,
@@ -1114,7 +1186,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 31
     },
     {
       "number": 153,
@@ -1140,7 +1213,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 32
     },
     {
       "number": 152,
@@ -1166,7 +1240,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 33
     },
     {
       "number": 151,
@@ -1191,7 +1266,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 34
     },
     {
       "number": 150,
@@ -1213,7 +1289,8 @@
       "useCases": [],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 35
     },
     {
       "number": 149,
@@ -1239,7 +1316,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 36
     },
     {
       "number": 148,
@@ -1261,7 +1339,8 @@
       "useCases": [],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 37
     },
     {
       "number": 147,
@@ -1286,7 +1365,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 38
     },
     {
       "number": null,
@@ -1308,7 +1388,8 @@
       "useCases": [],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 39
     },
     {
       "number": null,
@@ -1334,7 +1415,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 40
     },
     {
       "number": 146,
@@ -1360,7 +1442,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 41
     },
     {
       "number": 145,
@@ -1386,7 +1469,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 42
     },
     {
       "number": 144,
@@ -1408,7 +1492,8 @@
       "useCases": [],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 43
     },
     {
       "number": 143,
@@ -1434,7 +1519,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 44
     },
     {
       "number": 142,
@@ -1460,7 +1546,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 45
     },
     {
       "number": 141,
@@ -1486,7 +1573,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 46
     },
     {
       "number": 140,
@@ -1512,7 +1600,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 47
     },
     {
       "number": 139,
@@ -1537,7 +1626,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 48
     },
     {
       "number": 138,
@@ -1559,7 +1649,8 @@
       "useCases": [],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 49
     },
     {
       "number": 137,
@@ -1585,7 +1676,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 50
     },
     {
       "number": 136,
@@ -1611,7 +1703,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 51
     },
     {
       "number": null,
@@ -1636,7 +1729,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 52
     },
     {
       "number": 135,
@@ -1662,7 +1756,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 53
     },
     {
       "number": 134,
@@ -1687,7 +1782,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 54
     },
     {
       "number": 133,
@@ -1709,7 +1805,8 @@
       "useCases": [],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 55
     },
     {
       "number": 202,
@@ -1735,7 +1832,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 56
     },
     {
       "number": null,
@@ -1757,7 +1855,8 @@
       "useCases": [],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 57
     },
     {
       "number": 132,
@@ -1779,7 +1878,8 @@
       "useCases": [],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 58
     },
     {
       "number": null,
@@ -1805,7 +1905,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 59
     },
     {
       "number": 131,
@@ -1831,7 +1932,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 60
     },
     {
       "number": 130,
@@ -1857,7 +1959,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 61
     },
     {
       "number": 129,
@@ -1883,7 +1986,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 62
     },
     {
       "number": null,
@@ -1908,7 +2012,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 63
     },
     {
       "number": 128,
@@ -1933,7 +2038,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 64
     },
     {
       "number": 202,
@@ -1958,7 +2064,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 65
     },
     {
       "number": 127,
@@ -1982,7 +2089,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 66
     },
     {
       "number": 126,
@@ -2008,7 +2116,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 67
     },
     {
       "number": 125,
@@ -2033,7 +2142,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 68
     },
     {
       "number": 124,
@@ -2060,7 +2170,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 69
     },
     {
       "number": 123,
@@ -2086,7 +2197,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 70
     },
     {
       "number": 122,
@@ -2111,7 +2223,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 71
     },
     {
       "number": 121,
@@ -2137,7 +2250,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 72
     },
     {
       "number": null,
@@ -2163,7 +2277,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 73
     },
     {
       "number": 120,
@@ -2188,7 +2303,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 74
     },
     {
       "number": 119,
@@ -2214,7 +2330,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 75
     },
     {
       "number": 118,
@@ -2240,7 +2357,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 76
     },
     {
       "number": 117,
@@ -2266,7 +2384,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 77
     },
     {
       "number": 116,
@@ -2292,7 +2411,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 78
     },
     {
       "number": 115,
@@ -2319,7 +2439,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 79
     },
     {
       "number": 114,
@@ -2346,7 +2467,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 80
     },
     {
       "number": 113,
@@ -2372,7 +2494,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 81
     },
     {
       "number": 112,
@@ -2398,7 +2521,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 82
     },
     {
       "number": 111,
@@ -2422,7 +2546,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 83
     },
     {
       "number": 110,
@@ -2449,7 +2574,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 84
     },
     {
       "number": 109,
@@ -2476,7 +2602,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 85
     },
     {
       "number": 108,
@@ -2502,7 +2629,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 86
     },
     {
       "number": 107,
@@ -2528,7 +2656,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 87
     },
     {
       "number": 106,
@@ -2554,7 +2683,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 88
     },
     {
       "number": 105,
@@ -2579,7 +2709,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 89
     },
     {
       "number": null,
@@ -2605,7 +2736,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 90
     },
     {
       "number": 400,
@@ -2632,7 +2764,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 91
     },
     {
       "number": 103,
@@ -2658,7 +2791,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 92
     },
     {
       "number": 102,
@@ -2684,7 +2818,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 93
     },
     {
       "number": 101,
@@ -2710,7 +2845,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 94
     },
     {
       "number": 100,
@@ -2737,7 +2873,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 95
     },
     {
       "number": 202,
@@ -2763,7 +2900,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 96
     },
     {
       "number": null,
@@ -2789,7 +2927,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 97
     },
     {
       "number": null,
@@ -2815,7 +2954,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 98
     },
     {
       "number": null,
@@ -2841,7 +2981,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 99
     },
     {
       "number": null,
@@ -2867,33 +3008,8 @@
       ],
       "tracklist": [],
       "hasTracklist": false,
-      "heroImage": null
-    },
-    {
-      "number": null,
-      "title": "Fujir - Tech / Afro /  Tribal / Garage House Mix#95",
-      "key": "/holger-kampffmeyer/fujir-tech-afro-tribal-garage-house-mix95/",
-      "url": "https://www.mixcloud.com/holger-kampffmeyer/fujir-tech-afro-tribal-garage-house-mix95/",
-      "created_time": "2024-06-30T06:00:00Z",
-      "src": "https://player-widget.mixcloud.com/widget/iframe/?feed=%2Fholger-kampffmeyer%2Ffujir-tech-afro-tribal-garage-house-mix95%2F",
-      "description": "Sunday House Mix#95\nOne hour of different house sounds: we are building up from afro, tribal tech up to faster garage house sounds!\n\n🎶 Title track: Alexandre Billard & Benjamin Franklin - Fujir\n\nSpecial appearance: Check Out The Sound MiKel CuGGa Remix ( https://www.mixcloud.com/mikelcugga/ ) \nIf you enjoy, please follow, repost, favor! 🙏\n\n✨Your DJ Hulk ✨\n\n👇Socials:\nhttps://linktr.ee/holger.kampffmeyer",
-      "picture": "https://thumbnailer.mixcloud.com/unsafe/640x640/extaudio/9/a/7/1/f608-1b91-4aed-b289-25db55c17d9e",
-      "audio_length": 3620,
-      "tags": [
-        "House",
-        "Garage (UKG)",
-        "Tribal house",
-        "Deep Tech / Deep Tech House",
-        "Afro house"
-      ],
-      "useCases": [
-        "work",
-        "gym",
-        "party"
-      ],
-      "tracklist": [],
-      "hasTracklist": false,
-      "heroImage": null
+      "heroImage": null,
+      "index": 100
     }
   ]
 }

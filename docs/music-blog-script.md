@@ -56,7 +56,7 @@ Das Mapping liegt in `src/data/genre-use-case-mapping.json`:
 
 ### Voraussetzungen
 
-**Tracklists** müssen in `src/data/tracklists/` liegen:
+**Tracklists** können im `tracklists/` Ordner abgelegt werden (keine manuelle Kopie nötig):
 - Dateiname enthält Mix-Nummer: `DJ Hulk - Mix175-TechHouse-tracklist.txt`
 - Format: Textdatei mit Tracklist (Artist - Track)
 
@@ -87,19 +87,18 @@ Der RSS-Feed wird bei `pnpm run build:seo` oder `pnpm run build:full` generiert.
 ### Schritt 1: Dateien bereitstellen
 
 User legt in `tracklists/` ab:
-- `.txt`-Datei mit `Mix<nummer>` im Namen (Tracklist)
-- `.png`/`.jpg`/`.jpeg`-Datei mit `Mix<nummer>` im Namen (Hero-Bild)
+- `.txt`-Datei mit `Mix<nummer>` im Namen (Tracklist) - z.B. "Mein Mix 181 Tracklist.txt"
+- `.png`/`.jpg`/`.jpeg`-Datei mit `Mix<nummer>` im Namen (Hero-Bild) - z.B. "Mix181-Cover.png"
 
-Der Agent ermittelt `<nummer>` aus dem `Mix<nummer>`-Substring.  
+Der Agent ermittelt `<nummer>` aus dem `Mix<nummer>`-Substring in der Datei.  
 Die Schreibweise von Quelldateien ist flexibel — nur `Mix<nummer>` im Namen ist entscheidend.
 
-### Schritt 2: Tracklist kopieren
+### Schritt 2: Keine manuelle Kopie nötig
 
-Finde die `.txt`-Datei mit `Mix<nummer>`, kopiere nach `src/data/tracklists/`:
-
-```bash
-cp "tracklists/<original>.txt" "src/data/tracklists/DJ Hulk - Mix<nummer>-tracklist.txt"
-```
+Das Script findet und ordnet Tracklist-Dateien automatisch zu:
+- Es erkennt die Mix-Nummer aus dem Dateinamen
+- Es passt die Tracklist automatisch dem entsprechenden Mix zu (basierend auf Veröffentlichungsdatum)
+- Keine Kopie in `src/data/tracklists/` mehr notwendig
 
 ### Schritt 3: Bild konvertieren
 

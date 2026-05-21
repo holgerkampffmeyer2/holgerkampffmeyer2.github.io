@@ -46,25 +46,77 @@ function extractMixNumber(title) {
   return match ? parseInt(match[1], 10) : null;
 }
 
-function findTracklistFile(mixNumber) {
+// Helper to extract a 3-digit number from a filename
+function extractNumberFromFilename(filename) {
+  const match = filename.match(/(\d{3})/);
+  return match ? parseInt(match[1], 10) : null;
+}
+
+// Find tracklist file for a given mixNumber, with fallback to most recent unused tracklist
+function findTracklistFile(mixNumber, usedTracklistFiles) {
   if (!fs.existsSync(TRACKLISTS_DIR)) return null;
-  const pattern = new RegExp(`(?:Mix[-#\\s]?|Techno\\s*|Partymix.*)${mixNumber}`, 'i');
+  
+  // First try: find by mixNumber in filename
+  let foundFile = null;
   for (const file of fs.readdirSync(TRACKLISTS_DIR)) {
-    if (pattern.test(file) && file.toLowerCase().includes('tracklist')) {
-      return path.join(TRACKLISTS_DIR, file);
+    if (usedTracklistFiles.has(file)) continue;
+    const fileNumber = extractNumberFromFilename(file);
+    if (fileNumber !== null && fileNumber === mixNumber && file.toLowerCase().includes('tracklist')) {
+      foundFile = file;
+      break;
     }
   }
+  if (foundFile) {
+    usedTracklistFiles.add(foundFile);
+    return path.join(TRACKLISTS_DIR, foundFile);
+  }
+  
+  // Second try: fallback to most recent unused tracklist file (by mtime)
+  const tracklistFiles = fs.readdirSync(TRACKLISTS_DIR)
+    .filter(file => !usedTracklistFiles.has(file) && file.toLowerCase().includes('tracklist'))
+    .map(file => ({ file, mtime: fs.statSync(path.join(TRACKLISTS_DIR, file)).mtime }))
+    .sort((a, b) => b.mtime - a.mtime); // newest first
+  
+  if (tracklistFiles.length > 0) {
+    const selected = tracklistFiles[0].file;
+    usedTracklistFiles.add(selected);
+    return path.join(TRACKLISTS_DIR, selected);
+  }
+  
   return null;
 }
 
-function findHeroImage(mixNumber) {
+// Find hero image for a given mixNumber, with fallback to most recent unused webp
+function findHeroImage(mixNumber, usedHeroFiles) {
   if (!mixNumber || !fs.existsSync(PUBLIC_TRACKLISTS_DIR)) return null;
-  const pattern = new RegExp(`(?:Mix[-#\\s]?|Techno\\s*|Partymix.*)${mixNumber}`, 'i');
+  
+  // First try: find by mixNumber in filename
+  let foundFile = null;
   for (const file of fs.readdirSync(PUBLIC_TRACKLISTS_DIR)) {
-    if (pattern.test(file) && file.toLowerCase().endsWith('.webp')) {
-      return `/tracklists/${file}`;
+    if (usedHeroFiles.has(file)) continue;
+    const fileNumber = extractNumberFromFilename(file);
+    if (fileNumber !== null && fileNumber === mixNumber && file.toLowerCase().endsWith('.webp')) {
+      foundFile = file;
+      break;
     }
   }
+  if (foundFile) {
+    usedHeroFiles.add(foundFile);
+    return `/tracklists/${foundFile}`;
+  }
+  
+  // Second try: fallback to most recent unused webp file (by mtime)
+  const heroFiles = fs.readdirSync(PUBLIC_TRACKLISTS_DIR)
+    .filter(file => !usedHeroFiles.has(file) && file.toLowerCase().endsWith('.webp'))
+    .map(file => ({ file, mtime: fs.statSync(path.join(PUBLIC_TRACKLISTS_DIR, file)).mtime }))
+    .sort((a, b) => b.mtime - a.mtime); // newest first
+  
+  if (heroFiles.length > 0) {
+    const selected = heroFiles[0].file;
+    usedHeroFiles.add(selected);
+    return `/tracklists/${selected}`;
+  }
+  
   return null;
 }
 
@@ -130,12 +182,16 @@ async function fetchMixcloud(force = false) {
       data.data.map(mix => fetchMixDetails(mix.key))
     );
 
+    // Track used files to avoid duplicates
+    const usedTracklistFiles = new Set();
+    const usedHeroFiles = new Set();
+    
     const posts = data.data.map((mix, i) => {
       const apiData = detailsResults[i];
       const mixNumber = extractMixNumber(mix.name);
-      const tracklistFile = mixNumber ? findTracklistFile(mixNumber) : null;
+      const tracklistFile = mixNumber ? findTracklistFile(mixNumber, usedTracklistFiles) : null;
       const tracklist = tracklistFile ? parseTracklist(tracklistFile) : [];
-      const heroImage = mixNumber ? findHeroImage(mixNumber) : null;
+      const heroImage = mixNumber ? findHeroImage(mixNumber, usedHeroFiles) : null;
       const useCases = deriveUseCases(mix.tags || []);
 
       if (tracklistFile) console.log(`  ✅ Tracklist for Mix#${mixNumber}`);
@@ -157,6 +213,14 @@ async function fetchMixcloud(force = false) {
         hasTracklist: tracklist.length > 0,
         heroImage
       };
+    });
+
+    // Sort posts by created_time (newest first)
+    posts.sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
+
+    // Add index field to each post based on sorted position
+    posts.forEach((post, index) => {
+      post.index = index + 1; // 1-based index
     });
 
     fs.writeFileSync(BLOG_DATA_PATH, JSON.stringify({ lastUpdated: new Date().toISOString(), posts }, null, 2));
