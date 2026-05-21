@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { spawn } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.join(__dirname, '..');
@@ -71,6 +72,61 @@ function parseTracklist(filePath) {
   }
 }
 
+/**
+ * Convert PNGs to WebP in the given directory using the create-webp.mjs script.
+ * @param {string} dirPath - Absolute path to the directory containing PNGs.
+ */
+async function convertPngsToWebp(dirPath) {
+  console.log(`Converting PNGs to WebP in ${dirPath}...`);
+  const args = [
+    path.join(ROOT_DIR, 'scripts', 'create-webp.mjs'),
+    dirPath
+  ];
+  const child = spawn('node', args, { stdio: ['ignore', 'pipe', 'pipe'] });
+  let stdout = '';
+  let stderr = '';
+  child.stdout.on('data', (data) => { stdout += data; });
+  child.stderr.on('data', (data) => { stderr += data; });
+  child.on('close', (code) => {
+    if (code !== 0) {
+      console.error(`Conversion failed:`, stderr);
+      process.exit(1);
+    }
+  });
+  await new Promise((resolve, reject) => {
+    child.on('close', (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`Process exited with code ${code}`));
+      }
+    });
+  });
+}
+
+/**
+ * Copy all .webp files from source directory to destination directory.
+ * @param {string} srcDir - Source directory.
+ * @param {string} destDir - Destination directory.
+ */
+function copyWebpFiles(srcDir, destDir) {
+  if (!fs.existsSync(srcDir)) {
+    console.warn(`Source directory not found: ${srcDir}`);
+    return;
+  }
+  if (!fs.existsSync(destDir)) {
+    fs.mkdirSync(destDir, { recursive: true });
+  }
+  const files = fs.readdirSync(srcDir);
+  const webpFiles = files.filter(f => path.extname(f) === '.webp');
+  console.log(`Copying ${webpFiles.length} WebP files from ${srcDir} to ${destDir}...`);
+  for (const file of webpFiles) {
+    const srcPath = path.join(srcDir, file);
+    const destPath = path.join(destDir, file);
+    fs.copyFileSync(srcPath, destPath);
+  }
+}
+
 async function fetchMixcloud(force = false) {
   if (!shouldFetch(force)) {
     console.log('⏭️  Skipping Mixcloud fetch (less than 24h since last fetch)');
@@ -97,13 +153,20 @@ async function fetchMixcloud(force = false) {
     fs.writeFileSync(SIMPLE_DATA_PATH, JSON.stringify({ lastUpdated: new Date().toISOString(), mixes }, null, 2));
     console.log(`✅ Updated mixcloud-data.json (${mixes.length} mixes)`);
 
-    console.log('Processing blog posts with tracklists...');
-
+    // Fetch details for each mix
+    console.log('Fetching details for each mix...');
     const detailsResults = await Promise.all(
       data.data.map(mix => fetchMixDetails(mix.key))
     );
 
-    // Get tracklist files sorted by mtime (newest first)
+    // Step 1: Convert PNGs to WebP in tracklists/
+    await convertPngsToWebp(TRACKLISTS_DIR);
+
+    // Step 2: Copy WebP files from tracklists/ to public/tracklists/
+    copyWebpFiles(TRACKLISTS_DIR, PUBLIC_TRACKLISTS_DIR);
+
+    // Step 3: Get tracklist files (.txt) and hero image files (.webp) from tracklists/ (now they are the source of truth)
+    // Note: We use tracklists/ for both because we have converted and copied, but the pairing logic uses the files in tracklists/.
     const tracklistFiles = fs.existsSync(TRACKLISTS_DIR)
       ? fs.readdirSync(TRACKLISTS_DIR)
           .filter(file => file.toLowerCase().includes('tracklist') && file.toLowerCase().endsWith('.txt'))
@@ -115,24 +178,24 @@ async function fetchMixcloud(force = false) {
           .sort((a, b) => b.mtime - a.mtime)
       : [];
 
-    // Get hero image files sorted by mtime (newest first)
-    const heroImageFiles = fs.existsSync(PUBLIC_TRACKLISTS_DIR)
-      ? fs.readdirSync(PUBLIC_TRACKLISTS_DIR)
+    const heroImageFiles = fs.existsSync(TRACKLISTS_DIR)
+      ? fs.readdirSync(TRACKLISTS_DIR)
           .filter(file => file.toLowerCase().endsWith('.webp'))
           .map(file => ({
             file,
-            path: path.join(PUBLIC_TRACKLISTS_DIR, file),
-            mtime: fs.statSync(path.join(PUBLIC_TRACKLISTS_DIR, file)).mtime
+            path: path.join(TRACKLISTS_DIR, file),
+            mtime: fs.statSync(path.join(TRACKLISTS_DIR, file)).mtime
           }))
           .sort((a, b) => b.mtime - a.mtime)
       : [];
 
+    // Step 4: Pair by index (after sorting by mtime descending)
     let tracklistIndex = 0;
     let heroImageIndex = 0;
-    
+
     const posts = data.data.map((mix, i) => {
       const apiData = detailsResults[i];
-      
+
       // Assign tracklist by index (newest tracklist to newest mix)
       let tracklist = [];
       let tracklistFile = null;
@@ -144,15 +207,16 @@ async function fetchMixcloud(force = false) {
           tracklistIndex++;
         }
       }
-      
+
       // Assign hero image by index (newest hero image to newest mix)
       let heroImage = null;
       if (heroImageIndex < heroImageFiles.length) {
+        // Note: We are using the file from tracklists/ but we have copied it to public/tracklists/ so the path is correct.
         heroImage = `/tracklists/${heroImageFiles[heroImageIndex].file}`;
         console.log(`  ✅ Hero image index ${heroImageIndex}`);
         heroImageIndex++;
       }
-      
+
       const useCases = deriveUseCases(mix.tags || []);
 
       return {
