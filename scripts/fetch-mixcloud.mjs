@@ -7,7 +7,7 @@ const ROOT_DIR = path.join(__dirname, '..');
 
 const SIMPLE_DATA_PATH = path.join(ROOT_DIR, 'src/data/mixcloud-data.json');
 const BLOG_DATA_PATH = path.join(ROOT_DIR, 'src/data/blog-posts.json');
-const TRACKLISTS_DIR = path.join(ROOT_DIR, 'src/data/tracklists');
+const TRACKLISTS_DIR = path.join(ROOT_DIR, 'tracklists');
 const PUBLIC_TRACKLISTS_DIR = path.join(ROOT_DIR, 'public/tracklists');
 const MAPPING_PATH = path.join(ROOT_DIR, 'src/data/genre-use-case-mapping.json');
 const TIMESTAMP_FILE = path.join(ROOT_DIR, 'node_modules/.mixcloud-fetch');

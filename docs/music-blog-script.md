@@ -49,7 +49,7 @@ Das Mapping liegt in `src/data/genre-use-case-mapping.json`:
 
 1. **API Call**: Holt 100 neueste Mixes von Mixcloud API
 2. **Mix-Details**: Für jeden Mix wird die API mit `?metadata=1` aufgerufen für vollständige Beschreibung
-3. **Tracklist**: Sucht in `src/data/tracklists/` nach Dateien mit Pattern `*Mix{nummer}*tracklist*.txt`
+  3. **Tracklist**: Sucht in `tracklists/` nach Dateien mit Pattern `*Mix{nummer}*tracklist*.txt`
 4. **Hero-Image**: Sucht in `public/tracklists/` nach `*Mix{nummer}*.webp`
 5. **Use-Cases**: Leitet aus Mixcloud-Tags ab (kann mehrere pro Mix sein)
 6. **Output**: Schreibt beide JSON-Dateien
@@ -124,7 +124,7 @@ node scripts/fetch-mixcloud.mjs --force && astro build && node scripts/generate-
 
 **Was passiert dabei automatisch:**
 1. `fetch-mixcloud.mjs` holt neueste Mixes von Mixcloud API (erzwungen via `--force`)
-2. Tracklist aus `src/data/tracklists/` wird zugeordnet (Regex auf `Mix<nummer>`)
+  2. Tracklist aus `tracklists/` wird zugeordnet (Regex auf `Mix<nummer>`)
 3. Hero-Image aus `public/tracklists/` wird zugeordnet (Regex auf `Mix<nummer>`)
 4. `blog-posts.json` + `mixcloud-data.json` werden aktualisiert
 5. Astro baut die neue Seite `/dj/mixes/<nummer>.html`
