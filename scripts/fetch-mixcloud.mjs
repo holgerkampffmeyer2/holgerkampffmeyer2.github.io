@@ -212,7 +212,9 @@ async function fetchMixcloud(force = false) {
       let heroImage = null;
       if (heroImageIndex < heroImageFiles.length) {
         // Note: We are using the file from tracklists/ but we have copied it to public/tracklists/ so the path is correct.
-        heroImage = `/tracklists/${heroImageFiles[heroImageIndex].file}`;
+        // We URL-encode the filename to handle spaces.
+        const encodedFileName = encodeURIComponent(heroImageFiles[heroImageIndex].file);
+        heroImage = `/tracklists/${encodedFileName}`;
         console.log(`  ✅ Hero image index ${heroImageIndex}`);
         heroImageIndex++;
       }
