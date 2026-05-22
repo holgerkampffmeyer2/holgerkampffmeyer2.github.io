@@ -11,4 +11,5 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 - **dj/videos:** VideoObject-Schema (8 Videos)
 
 Weitere Informationen für Agenten in [AGENTS.md](AGENTS.md).  
+Workflow für neue Mix-Posts: [Music Blog Script](docs/music-blog-script.md).  
 Projektstruktur und Architektur in [docs/DESIGN.md](docs/DESIGN.md).

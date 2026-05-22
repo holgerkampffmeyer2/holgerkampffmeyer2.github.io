@@ -47,14 +47,14 @@ Das Mapping liegt in `src/data/genre-use-case-mapping.json`:
 
 ### Workflow
 
-1. **API Call**: Holt 100 neueste Mixes von Mixcloud API
+1. **API Call**: Holt 100 neueste Mixe von Mixcloud API
 2. **Mix-Details**: Für jeden Mix wird die API mit `?metadata=1` aufgerufen für vollständige Beschreibung
 3. **Tracklist**: Sucht in `tracklists/` nach Dateien mit Suffix `-tracklist.txt`
-4. **Hero-Image**: Sucht in `public/tracklists/` nach `.webp` Dateien
-5. **Zuordnung**: Tracklists und Hero-Images werden **sequenziell nach Veröffentlichungsdatum** zugeordnet
-   - Neueste Tracklist → Neuester Mix
-   - Zweite Tracklist → Zweiter neuester Mix
-   - usw.
+4. **Hero-Image**: Sucht in `tracklists/` nach `.webp` Dateien (wird nach `public/tracklists/` kopiert)
+5. **Zuordnung**: Verwendet zweistufigen Matching-Algorithmus:
+   - **Stufe 1**: Exakte Zuordnung anhand Mix-Nummer (aus Titel/Key und Dateinamen)
+   - **Stufe 2**: Fuzzy-Matching-Fallback basierend auf längstem gemeinsamen Teilstring (für Mixes ohne klare Nummer)
+   - Nur Zuordnungen mit ausreichender Konfidenz (≥0.5) werden akzeptiert
 6. **Use-Cases**: Leitet aus Mixcloud-Tags ab (kann mehrere pro Mix sein)
 7. **Output**: Schreibt beide JSON-Dateien
 
@@ -64,8 +64,12 @@ Das Mapping liegt in `src/data/genre-use-case-mapping.json`:
 - Dateiname enthält Mix-Nummer: `DJ Hulk - Mix175-TechHouse-tracklist.txt`
 - Format: Textdatei mit Tracklist (Artist - Track)
 
-**Hero-Images** müssen in `public/tracklists/` liegen:
-- Format: WebP (wird aus PNG konvertiert)
+**Hero-Images** können im `tracklists/` Ordner abgelegt werden:
+- Format: Kann PNG, JPG, JPEG sein (wird automatisch zu WebP konvertiert und nach `public/tracklists/` kopiert)
+- Dateiname enthält Mix-Nummer: `DJ Hulk - Mix175-TechHouse.png`
+
+**Konvertierte Hero-Images** liegen in `public/tracklists/`:
+- Format: WebP (automatisch aus PNG/JPG/JPEG konvertiert)
 - Dateiname enthält Mix-Nummer: `Mix175.webp`
 
 ### Manuell ausführen
@@ -127,8 +131,8 @@ node scripts/fetch-mixcloud.mjs --force && astro build && node scripts/generate-
 ```
 
 **Was passiert dabei automatisch:**
-1. `fetch-mixcloud.mjs` holt neueste Mixes von Mixcloud API (erzwungen via `--force`)
-  2. Tracklist aus `tracklists/` wird zugeordnet (Regex auf `Mix<nummer>`)
+1. `fetch-mixcloud.mjs` holt neueste Mixe von Mixcloud API (erzwungen via `--force`)
+2. Tracklist aus `tracklists/` wird zugeordnet (Regex auf `Mix<nummer>`)
 3. Hero-Image aus `public/tracklists/` wird zugeordnet (Regex auf `Mix<nummer>`)
 4. `blog-posts.json` + `mixcloud-data.json` werden aktualisiert
 5. Astro baut die neue Seite `/dj/mixes/<nummer>.html`
