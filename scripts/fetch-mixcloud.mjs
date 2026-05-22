@@ -345,7 +345,7 @@ async function fetchMixcloud(force = false) {
       const apiData = mixWithDetails.apiData;
       
       // Try exact match by mix number first
-      const mixNumber = getMixNumberEnhanced(mix.title || '') || getMixNumberEnhanced(mix.key || '');
+      const mixNumber = getMixNumberEnhanced(mix.name || '') || getMixNumberEnhanced(mix.key || '');
       let pair = pairMapByMixNumber.get(mixNumber);
       
       // If no exact match found, use fuzzy matching as fallback
@@ -353,8 +353,8 @@ async function fetchMixcloud(force = false) {
         let bestConfidence = 0;
         let bestPair = null;
         
-        // Normalize mix title for comparison
-        const normalizedMixTitle = normalizeString(mix.title || '');
+        // Normalize mix name for comparison
+        const normalizedMixTitle = normalizeString(mix.name || '');
         
         // Find the pair with highest confidence using fuzzy matching
         for (const candidatePair of pairList) {

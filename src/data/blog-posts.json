@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-22T07:40:40.998Z",
+  "lastUpdated": "2026-05-22T16:45:20.439Z",
   "posts": [
     {
       "title": "Bill McGruddy x DJ Hulk - Selected Radio Guestmix - We Are One - Fr, Mai-15th 2026",
@@ -23,9 +23,24 @@
         "party",
         "drive"
       ],
-      "tracklist": [],
-      "hasTracklist": false,
-      "heroImage": null,
+      "tracklist": [
+        "Bill Mc Gruddy - Bills part",
+        "DJOKO, Hanns - On & On",
+        "DJOKO, Rich Pinder - Technology",
+        "DJOKO, Hanns - On & On",
+        "DGreyFox - Feelings",
+        "Folkness - Junk Box (Extended Mix)",
+        "HASKELL - Rasa (Extended Mix)",
+        "Domenico Rondinelli & Giovanni Zarzana - Close (Extended Mix)",
+        "GOLDSCHLÄGER, ADIR DEKEL - Don't Depend (Extended)",
+        "La Fuente - Ring The Alarm (Extended)",
+        "Qobra - Army (Extended Mix)",
+        "MyQ - Jack is Back",
+        "LNRT - Flip That (Extended Mix)",
+        "Goodie bags - Turn Up The Bassline (Extended Mix)"
+      ],
+      "hasTracklist": true,
+      "heroImage": "/tracklists/Bill%20McGruddy%20x%20DJ%20Hulk%20-%20Selected%20Radio%20Guestmix.webp",
       "index": 1,
       "number": 1
     },
@@ -68,7 +83,7 @@
         "Avicii vs Nicky Romero - BONUS EDIT I Could Be The One (ALRIUS Extended Bootleg)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix181.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix181.webp",
       "index": 2,
       "number": 2
     },
@@ -113,7 +128,7 @@
         "Santino - Bora Bora (Extended Mix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix180.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix180.webp",
       "index": 3,
       "number": 3
     },
@@ -157,7 +172,7 @@
         "Camila Cabello ft. Drake - Hot Uptown (Raffaele Lisena x VØGUE Remix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix179.webp",
+      "heroImage": "/tracklists/DJ%20Hulk%20Mix%20179.webp",
       "index": 4,
       "number": 4
     },
@@ -203,7 +218,7 @@
         "Not Toto - Baited"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix178.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix178.webp",
       "index": 5,
       "number": 5
     },
@@ -246,7 +261,7 @@
         "Hrag Beko - Fluxion (Extended Mix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix177.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix177.webp",
       "index": 6,
       "number": 6
     },
@@ -289,7 +304,7 @@
         "Miguel Montez - Only Chords (Original Mix),"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix176.webp",
+      "heroImage": "/tracklists/DJ%20Hulk%20Mix%20176.webp",
       "index": 7,
       "number": 7
     },
@@ -336,7 +351,7 @@
         "HAVEN - I Run (DJ Prophet Edit)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix175.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix175.webp",
       "index": 8,
       "number": 8
     },
@@ -381,7 +396,7 @@
         "Marcus Cito - Coldblooded (Extended Mix) [Colorblind]"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix174.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix174.webp",
       "index": 9,
       "number": 9
     },
@@ -427,7 +442,7 @@
         "a.trofimov - Phase Lure"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix173.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix173.webp",
       "index": 10,
       "number": 10
     },
@@ -468,7 +483,7 @@
         "NAAiV - On The Road"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix172.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix172.webp",
       "index": 11,
       "number": 11
     },
@@ -514,7 +529,7 @@
         "JÄXM - Brick! (Edit)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix171.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix171.webp",
       "index": 12,
       "number": 12
     },
@@ -557,7 +572,7 @@
         "Known Artist - Mar Del Plata (Club Mix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix170.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix170.webp",
       "index": 13,
       "number": 13
     },
@@ -602,7 +617,7 @@
         "Noumena - Come Apart"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix169.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix169.webp",
       "index": 14,
       "number": 14
     },
@@ -650,7 +665,7 @@
         "Justin Curoe - Feeling Low (Extended Mix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix168.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix168.webp",
       "index": 15,
       "number": 15
     },
@@ -697,7 +712,7 @@
         "Mc On The Beat - Fiesta en la Disco"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix167.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix167.webp",
       "index": 16,
       "number": 16
     },
@@ -767,7 +782,7 @@
         "REX STAX - Nafira"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix165.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix165.webp",
       "index": 18,
       "number": 18
     },
@@ -815,7 +830,7 @@
         "Sergio Borja -  Tronsh"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix164.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix164.webp",
       "index": 19,
       "number": 19
     },
@@ -865,7 +880,7 @@
         "Cat Dealers - CONTROL YOUR BODY (Extended Mix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix163.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix163.webp",
       "index": 20,
       "number": 20
     },
@@ -908,7 +923,7 @@
         "Fabio Carminati - Human (Nicolas Barnes Remix)"
       ],
       "hasTracklist": true,
-      "heroImage": "/tracklists/DJ%20Hulk%20-%20Mix162.webp",
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix162.webp",
       "index": 21,
       "number": 21
     },
