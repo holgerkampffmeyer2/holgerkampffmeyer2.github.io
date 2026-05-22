@@ -51,6 +51,34 @@ function deriveUseCases(tags) {
   return Array.from(useCases);
 }
 
+function computeConfidence(s, t) {
+  // s: tracklistBasename (string)
+  // t: hero image base name (string)
+  // Try to match by mix number first
+  const getMixNumber = (str) => {
+    const match = str.toLowerCase().match(/(?:mx|mix)[^\d]*(\d+)/i);
+    return match ? match[1] : null;
+  };
+  const sNum = getMixNumber(s);
+  const tNum = getMixNumber(t);
+  if (sNum && tNum && sNum === tNum) {
+    return 1.0; // exact match on mix number
+  }
+  // Fallback to longest common substring
+  let maxLen = 0;
+  for (let i = 0; i < s.length; i++) {
+    for (let j = i + 1; j <= s.length; j++) {
+      const substr = s.substring(i, j);
+      if (t.includes(substr)) {
+        if (substr.length > maxLen) {
+          maxLen = substr.length;
+        }
+      }
+    }
+  }
+  return maxLen / s.length;
+}
+
 async function fetchMixDetails(key) {
   try {
     const res = await fetch(`https://api.mixcloud.com${key}?metadata=1`);
@@ -159,14 +187,20 @@ async function fetchMixcloud(force = false) {
       data.data.map(mix => fetchMixDetails(mix.key))
     );
 
+    // Create an array of mixes with their details and created_time for sorting
+    const mixesWithDetails = data.data.map((mix, i) => ({
+      ...mix,
+      apiData: detailsResults[i],
+      index: i // keep original index if needed
+    }));
+
+    // Sort mixes by created_time (newest first)
+    mixesWithDetails.sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
+
     // Step 1: Convert PNGs to WebP in tracklists/
     await convertPngsToWebp(TRACKLISTS_DIR);
 
-    // Step 2: Copy WebP files from tracklists/ to public/tracklists/
-    copyWebpFiles(TRACKLISTS_DIR, PUBLIC_TRACKLISTS_DIR);
-
-    // Step 3: Get tracklist files (.txt) and hero image files (.webp) from tracklists/ (now they are the source of truth)
-    // Note: We use tracklists/ for both because we have converted and copied, but the pairing logic uses the files in tracklists/.
+    // Step 2: Get tracklist files (.txt) from tracklists/
     const tracklistFiles = fs.existsSync(TRACKLISTS_DIR)
       ? fs.readdirSync(TRACKLISTS_DIR)
           .filter(file => file.toLowerCase().includes('tracklist') && file.toLowerCase().endsWith('.txt'))
@@ -175,9 +209,10 @@ async function fetchMixcloud(force = false) {
             path: path.join(TRACKLISTS_DIR, file),
             mtime: fs.statSync(path.join(TRACKLISTS_DIR, file)).mtime
           }))
-          .sort((a, b) => b.mtime - a.mtime)
+          .sort((a, b) => b.mtime - a.mtime) // newest first
       : [];
 
+    // Get hero image files (.webp) from tracklists/ (after conversion)
     const heroImageFiles = fs.existsSync(TRACKLISTS_DIR)
       ? fs.readdirSync(TRACKLISTS_DIR)
           .filter(file => file.toLowerCase().endsWith('.webp'))
@@ -186,37 +221,204 @@ async function fetchMixcloud(force = false) {
             path: path.join(TRACKLISTS_DIR, file),
             mtime: fs.statSync(path.join(TRACKLISTS_DIR, file)).mtime
           }))
-          .sort((a, b) => b.mtime - a.mtime)
+          .sort((a, b) => b.mtime - a.mtime) // newest first
       : [];
 
-    // Step 4: Pair by index (after sorting by mtime descending)
-    let tracklistIndex = 0;
-    let heroImageIndex = 0;
+    // Step 3: For each tracklist, find a matching hero image.
+    // We want to pair each tracklist with its corresponding hero image.
+    const tracklistHeroPairs = [];
 
-    const posts = data.data.map((mix, i) => {
-      const apiData = detailsResults[i];
+    // Helper to extract mix number from a string (case-insensitive, allowing Mx or Mix, and any non-digit separators)
+    const getMixNumber = (str) => {
+      const match = str.toLowerCase().match(/(?:mx|mix)[^\d]*(\d+)/i);
+      return match ? match[1] : null;
+    };
 
-      // Assign tracklist by index (newest tracklist to newest mix)
-      let tracklist = [];
-      let tracklistFile = null;
-      if (tracklistIndex < tracklistFiles.length) {
-        tracklistFile = tracklistFiles[tracklistIndex].path;
-        tracklist = parseTracklist(tracklistFile);
-        if (tracklist.length > 0) {
-          console.log(`  ✅ Tracklist index ${tracklistIndex}`);
-          tracklistIndex++;
+    for (const tracklistInfo of tracklistFiles) {
+      const tracklistFilename = tracklistInfo.file;
+      const tracklistMixNum = getMixNumber(tracklistFilename);
+      let heroImageFile = null;
+      let heroImagePath = null;
+      let heroImageStat = null;
+      let confidence = 0;
+
+      if (tracklistMixNum) {
+        // Try to find hero image with the same mix number
+        for (const heroInfo of heroImageFiles) {
+          const heroMixNum = getMixNumber(heroInfo.file);
+          if (heroMixNum && heroMixNum === tracklistMixNum) {
+            heroImageFile = heroInfo.file;
+            heroImagePath = heroInfo.path;
+            heroImageStat = heroInfo.mtime;
+            confidence = 1.0;
+            break; // take the first match (should be only one)
+          }
         }
       }
 
-      // Assign hero image by index (newest hero image to newest mix)
+      if (!heroImageFile) {
+        // Fallback: match by basename (after removing -tracklist suffix and extension)
+        let basename = tracklistFilename.replace(/-tracklist/gi, '').replace('.txt', '');
+        // Look for hero image with the same basename and .webp extension
+        const heroFileName = basename + '.webp';
+        const heroPath = path.join(TRACKLISTS_DIR, heroFileName);
+        if (fs.existsSync(heroPath)) {
+          const heroStat = fs.statSync(heroPath);
+          heroImageFile = heroFileName;
+          heroImagePath = heroPath;
+          heroImageStat = heroStat;
+          confidence = 1.0;
+        } else {
+          // If still not found, we have a problem.
+          console.error(`No matching hero image (webp) found for tracklist "${tracklistInfo.file}".`);
+          process.exit(1);
+       }
+     }
+
+     tracklistHeroPairs.push({
+        tracklist: tracklistInfo,
+        heroImage: {
+          file: heroImageFile,
+          path: heroImagePath,
+          mtime: heroImageStat
+        },
+        confidence: confidence,
+        tracklistMixNum: tracklistMixNum,
+        heroImageMixNum: getMixNumber(heroImageFile)
+      });
+    }
+    
+    // Step 4: Sort the pairs by tracklist mtime (newest first) as per plan
+    tracklistHeroPairs.sort((a, b) => b.tracklist.mtime - a.tracklist.mtime);
+    
+    // Log the pairs for debugging
+    console.log('\n=== Tracklist-Hero Pairs (sorted by tracklist mtime, newest first) ===');
+    tracklistHeroPairs.forEach((pair, index) => {
+        console.log((index+1) + ': Tracklist: "' + pair.tracklist.file + '" (mix ' + (pair.tracklistMixNum || '?') + ') -> HeroImage: "' + pair.heroImage.file + '" (mix ' + (pair.heroImageMixNum || '?') + ') confidence=' + pair.confidence.toFixed(2));
+    });
+
+    // Step 5: Copy all WebP files from tracklists/ to public/tracklists/
+    copyWebpFiles(TRACKLISTS_DIR, PUBLIC_TRACKLISTS_DIR);
+
+    // Step 6: Enhanced matching - exact match by mix number first, then fuzzy fallback
+    
+    // Helper function to normalize strings for comparison
+    const normalizeString = (str) => 
+      str.toLowerCase()
+         .replace(/[^\w\s]/g, ' ')  // Replace punctuation with spaces
+         .replace(/\s+/g, ' ')      // Collapse multiple spaces
+         .trim();
+    
+    // Helper function to extract mix number with improved patterns
+    const getMixNumberEnhanced = (str) => {
+      // Try multiple patterns to capture mix numbers
+      const patterns = [
+        /(?:mx|mix)[^\d]*(\d+)/i,           // Original: mx178, Mix-178
+        /#\s*(\d+)/,                        // With hash: #178
+        /[^\d](\d{3,})(?=[^\d]|$)/          // Standalone 3+ digit numbers
+      ];
+      
+      for (const pattern of patterns) {
+        const match = str.toLowerCase().match(pattern);
+        if (match) return match[1];
+      }
+      return null;
+    };
+    
+    // Create maps for efficient lookup
+    const pairMapByMixNumber = new Map();  // Exact match by mix number
+    const pairList = [];                   // For fuzzy matching fallback
+    
+    for (const pair of tracklistHeroPairs) {
+      // Index by mix number for exact matches
+      const mixNum = pair.tracklistMixNum || pair.heroImageMixNum;
+      if (mixNum) {
+        pairMapByMixNumber.set(mixNum, pair);
+      }
+      // Keep list for fuzzy matching
+      pairList.push(pair);
+    }
+
+    // Step 7: Map mixes to posts using enhanced matching
+    const posts = mixesWithDetails.map((mixWithDetails) => {
+      const mix = mixWithDetails;
+      const apiData = mixWithDetails.apiData;
+      
+      // Try exact match by mix number first
+      const mixNumber = getMixNumberEnhanced(mix.title || '') || getMixNumberEnhanced(mix.key || '');
+      let pair = pairMapByMixNumber.get(mixNumber);
+      let matchMethod = 'exact';
+      let matchConfidence = 0;
+      
+      // If no exact match found, use fuzzy matching as fallback
+      if (!pair) {
+        matchMethod = 'fuzzy';
+        let bestConfidence = 0;
+        let bestPair = null;
+        
+        // Normalize mix title for comparison
+        const normalizedMixTitle = normalizeString(mix.title || '');
+        // console.log(`Normalized mix title for "${mix.title}":`, normalizedMixTitle);
+        
+        // Find the pair with highest confidence using fuzzy matching
+        for (const candidatePair of pairList) {
+          // Get tracklist basename without -tracklist suffix and extension
+          const tracklistBasename = candidatePair.tracklist.file
+            .replace(/-tracklist/gi, '')
+            .replace('.txt', '');
+          
+          // Debug: Ensure we have valid strings
+          if (!tracklistBasename || typeof tracklistBasename !== 'string') {
+            console.warn('Invalid tracklistBasename:', { tracklistBasename, candidatePair });
+            continue;
+          }
+          
+          const normalizedTracklistBasename = normalizeString(tracklistBasename);
+          // Debug: Ensure inputs to computeConfidence are strings
+          if (typeof normalizedMixTitle !== 'string' || typeof normalizedTracklistBasename !== 'string') {
+            console.warn('Invalid input to computeConfidence:', { 
+              normalizedMixTitle: typeof normalizedMixTitle, 
+              value: normalizedMixTitle,
+              normalizedTracklistBasename: typeof normalizedTracklistBasename,
+              value2: normalizedTracklistBasename
+            });
+            continue;
+          }
+          // console.log(`Comparing "${normalizedMixTitle}" with "${normalizedTracklistBasename}"`);
+          const confidence = computeConfidence(normalizedMixTitle, normalizedTracklistBasename);
+          
+          if (confidence > bestConfidence) {
+            bestConfidence = confidence;
+            bestPair = candidatePair;
+          }
+        }
+        
+        // Use best match if confidence is above threshold
+        if (bestConfidence >= 0.5) {
+          pair = bestPair;
+          matchConfidence = bestConfidence;
+        } else if (mixNumber) {
+          // Only warn if we had a mix number but poor fuzzy match
+          console.warn(`Warning: Low confidence match (${bestConfidence.toFixed(2)}) for mix "${mix.title}"`);
+        }
+        // If no mix number and poor match, silently continue (will get null pair)
+      } else {
+        matchConfidence = 1.0;  // Exact match has perfect confidence
+      }
+
+      // Process the selected pair
+      let tracklist = [];
       let heroImage = null;
-      if (heroImageIndex < heroImageFiles.length) {
-        // Note: We are using the file from tracklists/ but we have copied it to public/tracklists/ so the path is correct.
-        // We URL-encode the filename to handle spaces.
-        const encodedFileName = encodeURIComponent(heroImageFiles[heroImageIndex].file);
+      let hasTracklist = false;
+
+      if (pair) {
+        tracklist = parseTracklist(pair.tracklist.path);
+        hasTracklist = tracklist.length > 0;
+        const encodedFileName = encodeURIComponent(pair.heroImage.file);
         heroImage = `/tracklists/${encodedFileName}`;
-        console.log(`  ✅ Hero image index ${heroImageIndex}`);
-        heroImageIndex++;
+      } else if (mixNumber) {
+        // Log warning if we have a mix number but no matching pair
+        console.warn(`Warning: No matching tracklist/hero pair found for mix number "${mixNumber}" (title: "${mix.title}")`);
       }
 
       const useCases = deriveUseCases(mix.tags || []);
@@ -233,15 +435,12 @@ async function fetchMixcloud(force = false) {
         tags: (mix.tags || []).map(t => t.name),
         useCases,
         tracklist,
-        hasTracklist: tracklist.length > 0,
+        hasTracklist,
         heroImage
       };
     });
 
-    // Sort posts by created_time (newest first)
-    posts.sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
-
-    // Add index field to each post based on sorted position
+    // Add index field to each post based on sorted position (already sorted by created_time)
     // Use index as the mix number for routing purposes
     posts.forEach((post, index) => {
       post.index = index + 1; // 1-based index
