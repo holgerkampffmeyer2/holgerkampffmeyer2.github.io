@@ -347,18 +347,14 @@ async function fetchMixcloud(force = false) {
       // Try exact match by mix number first
       const mixNumber = getMixNumberEnhanced(mix.title || '') || getMixNumberEnhanced(mix.key || '');
       let pair = pairMapByMixNumber.get(mixNumber);
-      let matchMethod = 'exact';
-      let matchConfidence = 0;
       
       // If no exact match found, use fuzzy matching as fallback
       if (!pair) {
-        matchMethod = 'fuzzy';
         let bestConfidence = 0;
         let bestPair = null;
         
         // Normalize mix title for comparison
         const normalizedMixTitle = normalizeString(mix.title || '');
-        // console.log(`Normalized mix title for "${mix.title}":`, normalizedMixTitle);
         
         // Find the pair with highest confidence using fuzzy matching
         for (const candidatePair of pairList) {
@@ -369,22 +365,14 @@ async function fetchMixcloud(force = false) {
           
           // Debug: Ensure we have valid strings
           if (!tracklistBasename || typeof tracklistBasename !== 'string') {
-            console.warn('Invalid tracklistBasename:', { tracklistBasename, candidatePair });
             continue;
           }
           
           const normalizedTracklistBasename = normalizeString(tracklistBasename);
           // Debug: Ensure inputs to computeConfidence are strings
           if (typeof normalizedMixTitle !== 'string' || typeof normalizedTracklistBasename !== 'string') {
-            console.warn('Invalid input to computeConfidence:', { 
-              normalizedMixTitle: typeof normalizedMixTitle, 
-              value: normalizedMixTitle,
-              normalizedTracklistBasename: typeof normalizedTracklistBasename,
-              value2: normalizedTracklistBasename
-            });
             continue;
           }
-          // console.log(`Comparing "${normalizedMixTitle}" with "${normalizedTracklistBasename}"`);
           const confidence = computeConfidence(normalizedMixTitle, normalizedTracklistBasename);
           
           if (confidence > bestConfidence) {
@@ -396,14 +384,11 @@ async function fetchMixcloud(force = false) {
         // Use best match if confidence is above threshold
         if (bestConfidence >= 0.5) {
           pair = bestPair;
-          matchConfidence = bestConfidence;
         } else if (mixNumber) {
           // Only warn if we had a mix number but poor fuzzy match
           console.warn(`Warning: Low confidence match (${bestConfidence.toFixed(2)}) for mix "${mix.title}"`);
         }
         // If no mix number and poor match, silently continue (will get null pair)
-      } else {
-        matchConfidence = 1.0;  // Exact match has perfect confidence
       }
 
       // Process the selected pair
