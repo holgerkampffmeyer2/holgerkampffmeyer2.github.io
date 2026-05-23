@@ -6,20 +6,20 @@ import Breadcrumb from "../../../components/Breadcrumb.astro";
 import MixDetail from "../../../components/dj/MixDetail.astro";
 
 interface BlogPostData {
-  number: number | null;
-  title: string;
-  key: string;
-  url: string;
-  created_time: string;
-  src: string;
-  description: string;
-  picture: string;
-  audio_length: number;
-  tags: string[];
-  useCases: string[];
-  tracklist: string[];
-  hasTracklist: boolean;
-  heroImage?: string;
+   index: number | null;
+   title: string;
+   key: string;
+   url: string;
+   created_time: string;
+   src: string;
+   description: string;
+   picture: string;
+   audio_length: number;
+   tags: string[];
+   useCases: string[];
+   tracklist: string[];
+   hasTracklist: boolean;
+   heroImage?: string;
 }
 
 interface BlogData {
@@ -38,19 +38,19 @@ export async function getStaticPaths() {
     console.warn('Could not load blog-posts.json:', e);
   }
 
-  const postsWithTracklists = blogData.posts.filter((post: BlogPostData) => post.hasTracklist);
+   const postsWithTracklists = blogData.posts.filter((post: BlogPostData) => post.hasTracklist);
 
-  return postsWithTracklists.map((post: BlogPostData, index: number) => {
-    const currentIndex = index;
-    const prevPost = currentIndex < postsWithTracklists.length - 1 ? postsWithTracklists[currentIndex + 1] : null;
-    const nextPost = currentIndex > 0 ? postsWithTracklists[currentIndex - 1] : null;
-    const isLatest = index === 0;
+   return postsWithTracklists.map((post: BlogPostData, index: number) => {
+     const currentIndex = index;
+     const prevPost = currentIndex < postsWithTracklists.length - 1 ? postsWithTracklists[currentIndex + 1] : null;
+     const nextPost = currentIndex > 0 ? postsWithTracklists[currentIndex - 1] : null;
+     const isLatest = index === 0;
 
-    return {
-      params: { number: String(post.number) },
-      props: { post, prevPost, nextPost, isLatest }
-    };
-  });
+     return {
+       params: { number: String(post.index) },
+       props: { post, prevPost, nextPost, isLatest }
+     };
+   });
 }
 
 interface Props {
@@ -62,11 +62,11 @@ interface Props {
 
 const { post, prevPost, nextPost, isLatest } = Astro.props;
 
-const mixNumber = post.number;
-let rawTitle = `Mix#${mixNumber} - ${post.title} - DJ Hulk Weekly Mix - House, Tech House, Deep House - Electronic Music`;
-const pageTitle = rawTitle.length > 60 ? rawTitle.substring(0, 60) : rawTitle;
-const baseDesc = `DJ Hulk Mix#${mixNumber} - ${post.title} - Electronic Music Mix with Tracklist. Enjoy House, Tech House, Deep House sets for gym, driving, work and pre-party. Free download and streaming on Mixcloud.`;
-const pageDescription = post.description ? (post.description.length > 160 ? post.description.substring(0, 160) : post.description) : baseDesc;
+   const mixNumber = post.index;
+   let rawTitle = `Mix#${mixNumber} - ${post.title} - DJ Hulk Weekly Mix - House, Tech House, Deep House - Electronic Music`;
+   const pageTitle = rawTitle.length > 60 ? rawTitle.substring(0, 60) : rawTitle;
+   const baseDesc = `DJ Hulk Mix#${mixNumber} - ${post.title} - Electronic Music Mix with Tracklist. Enjoy House, Tech House, Deep House sets for gym, driving, work and pre-party. Free download and streaming on Mixcloud.`;
+   const pageDescription = post.description ? (post.description.length > 160 ? post.description.substring(0, 160) : post.description) : baseDesc;
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
@@ -166,29 +166,29 @@ const jsonLd = [
       {/* Navigation between mixes */}
       <div class="max-w-4xl mx-auto mt-12">
         <div class="flex flex-wrap justify-between gap-4">
-          {nextPost ? (
-            <a href={`/dj/mixes/${nextPost.number}`} class="flex items-center gap-3 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors group">
-              <svg class="w-5 h-5 text-[var(--color-secondary)] group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-              </svg>
-              <div class="text-left">
-                <span class="text-xs text-[var(--color-text-muted)] block">Previous</span>
-                <span class="font-medium text-[var(--color-text)]">Mix#{nextPost.number}</span>
-              </div>
-            </a>
-          ) : <div></div>}
-          
-          {prevPost ? (
-            <a href={`/dj/mixes/${prevPost.number}`} class="flex items-center gap-3 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors group">
-              <div class="text-right">
-                <span class="text-xs text-[var(--color-text-muted)] block">Next</span>
-                <span class="font-medium text-[var(--color-text)]">Mix#{prevPost.number}</span>
-              </div>
-              <svg class="w-5 h-5 text-[var(--color-secondary)] group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          ) : <div></div>}
+{nextPost ? (
+  <a href={`/dj/mixes/${nextPost.index}`} class="flex items-center gap-3 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors group">
+    <svg class="w-5 h-5 text-[var(--color-secondary)] group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+    <div class="text-left">
+      <span class="text-xs text-[var(--color-text-muted)] block">Previous</span>
+      <span class="font-medium text-[var(--color-text)]">Mix#{nextPost.index}</span>
+    </div>
+  </a>
+) : <div></div>}
+  
+{prevPost ? (
+  <a href={`/dj/mixes/${prevPost.index}`} class="flex items-center gap-3 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors group">
+    <div class="text-right">
+      <span class="text-xs text-[var(--color-text-muted)] block">Next</span>
+      <span class="font-medium text-[var(--color-text)]">Mix#{prevPost.index}</span>
+    </div>
+    <svg class="w-5 h-5 text-[var(--color-secondary)] group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </a>
+) : <div></div>}
         </div>
       </div>
 

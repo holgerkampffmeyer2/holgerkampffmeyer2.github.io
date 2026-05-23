@@ -17,21 +17,20 @@ const breadcrumbSegments = [
 ];
 
 interface BlogPostData {
-  number: number | null;
-  index: number | null;
-  title: string;
-  key: string;
-  url: string;
-  created_time: string;
-  src: string;
-  description: string;
-  picture: string;
-  audio_length: number;
-  tags: string[];
-  useCases: string[];
-  tracklist: string[];
-  hasTracklist: boolean;
-  heroImage?: string;
+   index: number | null;
+   title: string;
+   key: string;
+   url: string;
+   created_time: string;
+   src: string;
+   description: string;
+   picture: string;
+   audio_length: number;
+   tags: string[];
+   useCases: string[];
+   tracklist: string[];
+   hasTracklist: boolean;
+   heroImage?: string;
 }
 
 interface BlogData {
@@ -64,12 +63,12 @@ const blogSchema = {
     "name": "DJ Hulk",
     "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
   },
-  "blogPosts": postsWithTracklists.slice(0, 10).map(post => ({
-    "@type": "BlogPosting",
-    "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.number}`,
-    "headline": `Mix#${post.number} - ${post.title}`,
-    "datePublished": post.created_time
-  }))
+"blogPosts": postsWithTracklists.slice(0, 10).map(post => ({
+   "@type": "BlogPosting",
+   "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.index}`,
+   "headline": `Mix#${post.index} - ${post.title}`,
+   "datePublished": post.created_time
+ }))
 };
 
 const USECASE_CONFIG: Record<string, { label: string; icon: typeof GymIcon; color: string }> = {
@@ -296,7 +295,7 @@ function formatDate(dateStr: string) {
             <div class="flex gap-4 overflow-x-auto snap-x pb-4 px-1 -mx-1 scrollbar-hide carousel-scroll">
               {postsWithTracklists.map((post, idx) => (
                 <a 
-                  href={`/dj/mixes/${post.number}`} 
+                  href={`/dj/mixes/${post.index}`} 
                   class={`snap-center shrink-0 w-64 md:w-72 bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors group ${idx === 0 ? 'ring-2 ring-[var(--color-primary)]' : ''}`}
                 >
                   <div class="relative aspect-video overflow-hidden">

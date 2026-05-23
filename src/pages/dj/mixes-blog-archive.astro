@@ -9,21 +9,20 @@ import WorkIcon from "../../components/icons/WorkIcon.astro";
 import PartyIcon from "../../components/icons/PartyIcon.astro";
 
 interface BlogPostData {
-  number: number | null;
-  index: number | null;
-  title: string;
-  key: string;
-  url: string;
-  created_time: string;
-  src: string;
-  description: string;
-  picture: string;
-  audio_length: number;
-  tags: string[];
-  useCases: string[];
-  tracklist: string[];
-  hasTracklist: boolean;
-  heroImage?: string;
+   index: number | null;
+   title: string;
+   key: string;
+   url: string;
+   created_time: string;
+   src: string;
+   description: string;
+   picture: string;
+   audio_length: number;
+   tags: string[];
+   useCases: string[];
+   tracklist: string[];
+   hasTracklist: boolean;
+   heroImage?: string;
 }
 
 interface BlogData {
@@ -99,12 +98,12 @@ const blogSchema = {
     "name": "DJ Hulk",
     "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
   },
-  "blogPosts": archivePosts.slice(0, 10).map(post => ({
-    "@type": "BlogPosting",
-    "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.number}`,
-    "headline": `Mix#${post.number} - ${post.title}`,
-    "datePublished": post.created_time
-  }))
+   "blogPosts": archivePosts.slice(0, 10).map(post => ({
+     "@type": "BlogPosting",
+     "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.index}`,
+     "headline": `Mix#${post.index} - ${post.title}`,
+     "datePublished": post.created_time
+   }))
 };
 
 const collectionPageSchema = {
@@ -201,12 +200,12 @@ if (useCaseFilter) {
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="postsContainer">
         {archivePosts.map((post, index) => (
-          <a 
-            href={`/dj/mixes/${post.number}`}
-            class="post-item block bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors group"
-            data-usecases={JSON.stringify(post.useCases)}
-            data-index={index}
-          >
+           <a 
+             href={`/dj/mixes/${post.index}`}
+             class="post-item block bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors group"
+             data-usecases={JSON.stringify(post.useCases)}
+             data-index={index}
+           >
             <div class="aspect-video overflow-hidden">
               <img 
                 src={post.picture} 

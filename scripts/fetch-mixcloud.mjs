@@ -15,6 +15,29 @@ const TIMESTAMP_FILE = path.join(ROOT_DIR, 'node_modules/.mixcloud-fetch');
 
 const MIN_INTERVAL_MS = 24 * 60 * 60 * 1000;
 
+// Helper function to normalize strings for comparison
+const normalizeString = (str) => 
+  str.toLowerCase()
+     .replace(/[^\w\s]/g, ' ')  // Replace punctuation with spaces
+     .replace(/\s+/g, ' ')      // Collapse multiple spaces
+     .trim();
+
+// Helper function to extract mix number with improved patterns
+const getMixNumberEnhanced = (str) => {
+  // Try multiple patterns to capture mix numbers
+  const patterns = [
+    /(?:mx|mix)[^\d]*(\d+)/i,           // Original: mx178, Mix-178
+    /#\s*(\d+)/,                        // With hash: #178
+    /[^\d](\d{3,})(?=[^\d]|$)/          // Standalone 3+ digit numbers
+  ];
+  
+  for (const pattern of patterns) {
+    const match = str.toLowerCase().match(pattern);
+    if (match) return match[1];
+  }
+  return null;
+};
+
 function shouldFetch(force = false) {
   if (force) return true;
   if (!fs.existsSync(TIMESTAMP_FILE)) return true;
@@ -52,32 +75,28 @@ function deriveUseCases(tags) {
 }
 
 function computeConfidence(s, t) {
-  // s: tracklistBasename (string)
-  // t: hero image base name (string)
-  // Try to match by mix number first
-  const getMixNumber = (str) => {
-    const match = str.toLowerCase().match(/(?:mx|mix)[^\d]*(\d+)/i);
-    return match ? match[1] : null;
-  };
-  const sNum = getMixNumber(s);
-  const tNum = getMixNumber(t);
-  if (sNum && tNum && sNum === tNum) {
-    return 1.0; // exact match on mix number
-  }
-  // Fallback to longest common substring
-  let maxLen = 0;
-  for (let i = 0; i < s.length; i++) {
-    for (let j = i + 1; j <= s.length; j++) {
-      const substr = s.substring(i, j);
-      if (t.includes(substr)) {
-        if (substr.length > maxLen) {
-          maxLen = substr.length;
-        }
-      }
-    }
-  }
-  return maxLen / s.length;
-}
+   // s: tracklistBasename (string)
+   // t: hero image base name (string)
+   // Try to match by mix number first
+   const sNum = getMixNumberEnhanced(s);
+   const tNum = getMixNumberEnhanced(t);
+   if (sNum && tNum && sNum === tNum) {
+     return 1.0; // exact match on mix number
+   }
+   // Fallback to longest common substring
+   let maxLen = 0;
+   for (let i = 0; i < s.length; i++) {
+     for (let j = i + 1; j <= s.length; j++) {
+       const substr = s.substring(i, j);
+       if (t.includes(substr)) {
+         if (substr.length > maxLen) {
+           maxLen = substr.length;
+         }
+       }
+     }
+   }
+   return maxLen / s.length;
+ }
 
 async function fetchMixDetails(key) {
   try {
@@ -228,11 +247,9 @@ async function fetchMixcloud(force = false) {
     // We want to pair each tracklist with its corresponding hero image.
     const tracklistHeroPairs = [];
 
-    // Helper to extract mix number from a string (case-insensitive, allowing Mx or Mix, and any non-digit separators)
-    const getMixNumber = (str) => {
-      const match = str.toLowerCase().match(/(?:mx|mix)[^\d]*(\d+)/i);
-      return match ? match[1] : null;
-    };
+     // Helper to extract mix number from a string (case-insensitive, allowing Mx or Mix, and any non-digit separators)
+     // Using the enhanced version defined above
+     const getMixNumber = getMixNumberEnhanced;
 
     for (const tracklistInfo of tracklistFiles) {
       const tracklistFilename = tracklistInfo.file;
@@ -302,28 +319,7 @@ async function fetchMixcloud(force = false) {
 
     // Step 6: Enhanced matching - exact match by mix number first, then fuzzy fallback
     
-    // Helper function to normalize strings for comparison
-    const normalizeString = (str) => 
-      str.toLowerCase()
-         .replace(/[^\w\s]/g, ' ')  // Replace punctuation with spaces
-         .replace(/\s+/g, ' ')      // Collapse multiple spaces
-         .trim();
-    
-    // Helper function to extract mix number with improved patterns
-    const getMixNumberEnhanced = (str) => {
-      // Try multiple patterns to capture mix numbers
-      const patterns = [
-        /(?:mx|mix)[^\d]*(\d+)/i,           // Original: mx178, Mix-178
-        /#\s*(\d+)/,                        // With hash: #178
-        /[^\d](\d{3,})(?=[^\d]|$)/          // Standalone 3+ digit numbers
-      ];
-      
-      for (const pattern of patterns) {
-        const match = str.toLowerCase().match(pattern);
-        if (match) return match[1];
-      }
-      return null;
-    };
+
     
     // Create maps for efficient lookup
     const pairMapByMixNumber = new Map();  // Exact match by mix number
@@ -425,12 +421,11 @@ async function fetchMixcloud(force = false) {
       };
     });
 
-    // Add index field to each post based on sorted position (already sorted by created_time)
-    // Use index as the mix number for routing purposes
-    posts.forEach((post, index) => {
-      post.index = index + 1; // 1-based index
-      post.number = index + 1; // Use index as the number for routing
-    });
+     // Add index field to each post based on sorted position (already sorted by created_time)
+     // Use index as the mix number for routing purposes
+     posts.forEach((post, index) => {
+       post.index = index + 1; // 1-based index
+     });
 
     fs.writeFileSync(BLOG_DATA_PATH, JSON.stringify({ lastUpdated: new Date().toISOString(), posts }, null, 2));
     console.log(`\n✅ Updated blog-posts.json (${posts.length} posts, ${posts.filter(p => p.hasTracklist).length} with tracklists)`);
@@ -442,5 +437,22 @@ async function fetchMixcloud(force = false) {
   }
 }
 
-const force = process.argv.includes('--force') || process.argv.includes('-f');
-fetchMixcloud(force);
+export { 
+  fetchMixcloud, 
+  shouldFetch, 
+  updateTimestamp, 
+  loadMappings, 
+  deriveUseCases, 
+  computeConfidence, 
+  parseTracklist, 
+  convertPngsToWebp, 
+  copyWebpFiles,
+  normalizeString,
+  getMixNumberEnhanced
+};
+
+// Only run the main function when the script is executed directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const force = process.argv.includes('--force') || process.argv.includes('-f');
+  fetchMixcloud(force);
+}
