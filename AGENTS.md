@@ -35,6 +35,9 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 - `pnpm run lint` — ESLint
 - `pnpm run check` — TypeScript
 
+## Wartungsskripte
+- `node scripts/update-image-refs.mjs` — Ersetzt JPEG/PNG-Bildreferenzen durch WebP-Versionen (falls verfügbar) in allen .astro, .html, .css und .mjs Dateien
+
 ## Wichtige Regeln
 1. Domain IMMER auf `holger-kampffmeyer.de` setzen
 
