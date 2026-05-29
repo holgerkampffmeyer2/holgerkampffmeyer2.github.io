@@ -18,11 +18,11 @@
     "bing-indexnow": "node scripts/bing-indexnow.mjs"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/sitemap": "^3.7.3",
     "@fontsource-variable/josefin-sans": "^5.2.8",
     "@fontsource/play": "^5.2.8",
     "@tailwindcss/vite": "^4.3.0",
-    "astro": "^6.3.6",
+    "astro": "^6.4.2",
     "node-fetch": "^3.3.2",
     "tailwindcss": "^4.3.0"
   },
