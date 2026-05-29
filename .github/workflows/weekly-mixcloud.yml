@@ -14,15 +14,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
         
       - name: Setup pnpm
-        run: corepack enable && corepack prepare pnpm@9 --activate
+        run: corepack enable && corepack prepare pnpm@10 --activate
         
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'pnpm'
@@ -33,9 +33,6 @@ jobs:
       - name: Fetch latest Mixcloud data
         run: node scripts/fetch-mixcloud.mjs
         
-      - name: Generate RSS feed
-        run: node scripts/generate-rss.mjs
-        
       - name: Run ESLint
         run: pnpm run lint
         
@@ -43,6 +40,12 @@ jobs:
         run: pnpm run check
         
       - name: Build Astro site
+        run: pnpm run build
+
+      - name: Generate RSS & urllist
+        run: pnpm run build:seo
+
+      - name: Rebuild with SEO assets
         run: pnpm run build
         
       - uses: actions/upload-pages-artifact@v3
