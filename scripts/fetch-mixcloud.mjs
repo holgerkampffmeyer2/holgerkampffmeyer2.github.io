@@ -173,6 +173,33 @@ function copyWebpFiles(srcDir, destDir) {
   }
 }
 
+function escapeXml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+}
+
+function truncateText(str, maxLen) {
+  if (str.length <= maxLen) return str;
+  return str.substring(0, maxLen - 1) + '…';
+}
+
+function makeOgSvgOverlay(title, artist = 'DJ Hulk') {
+  const hasArtist = new RegExp(`^${artist}[\\s-]|by ${artist}|x ${artist}|${artist} x`, 'i').test(title);
+  const displayTitle = truncateText(hasArtist ? title : `${artist} - ${title}`, 55);
+  const safeTitle = escapeXml(displayTitle);
+  return Buffer.from(`
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0a0f" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="420" width="1200" height="210" fill="url(#g)"/>
+  <text x="60" y="505" font-family="sans-serif" font-size="34" font-weight="bold" fill="#f8fafc">${safeTitle}</text>
+  <text x="60" y="560" font-family="sans-serif" font-size="24" fill="#f97316" font-weight="bold">▶ Listn to this mix!</text>
+</svg>`);
+}
+
 /**
  * Generate OG images (1200×630 WebP) for all posts that have a picture.
  * Skips existing files; sets post.ogImage in-place.
@@ -206,9 +233,11 @@ async function generateOgImages(posts) {
         continue;
       }
       const buffer = Buffer.from(await response.arrayBuffer());
+      const svgOverlay = makeOgSvgOverlay(post.title);
 
       await sharp(buffer)
         .resize(1200, 630, { fit: 'contain', background: { r: 10, g: 10, b: 15, alpha: 1 } })
+        .composite([{ input: svgOverlay, top: 0, left: 0 }])
         .webp({ quality: 85 })
         .toFile(ogPath);
 
