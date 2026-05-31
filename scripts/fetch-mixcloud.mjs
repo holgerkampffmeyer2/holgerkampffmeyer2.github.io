@@ -42,7 +42,12 @@ function shouldFetch(force = false) {
   if (force) return true;
   if (!fs.existsSync(TIMESTAMP_FILE)) return true;
   const lastFetch = parseInt(fs.readFileSync(TIMESTAMP_FILE, 'utf-8'));
-  return (Date.now() - lastFetch) > MIN_INTERVAL_MS;
+  const elapsed = Date.now() - lastFetch;
+  if (elapsed <= MIN_INTERVAL_MS) {
+    const hoursAgo = Math.round(elapsed / 360000) / 10;
+    console.log(`⏭️  Skipping Mixcloud fetch (data is ${hoursAgo}h old, <24h since last fetch)`);
+  }
+  return elapsed > MIN_INTERVAL_MS;
 }
 
 function updateTimestamp() {
@@ -176,7 +181,6 @@ function copyWebpFiles(srcDir, destDir) {
 
 async function fetchMixcloud(force = false) {
   if (!shouldFetch(force)) {
-    console.log('⏭️  Skipping Mixcloud fetch (less than 24h since last fetch)');
     return;
   }
 
@@ -382,7 +386,7 @@ async function fetchMixcloud(force = false) {
           pair = bestPair;
         } else if (mixNumber) {
           // Only warn if we had a mix number but poor fuzzy match
-          console.warn(`Warning: Low confidence match (${bestConfidence.toFixed(2)}) for mix "${mix.title}"`);
+          console.warn(`Warning: Low confidence match (${bestConfidence.toFixed(2)}) for mix "${mix.name}"`);
         }
         // If no mix number and poor match, silently continue (will get null pair)
       }
@@ -399,7 +403,7 @@ async function fetchMixcloud(force = false) {
         heroImage = `/tracklists/${encodedFileName}`;
       } else if (mixNumber) {
         // Log warning if we have a mix number but no matching pair
-        console.warn(`Warning: No matching tracklist/hero pair found for mix number "${mixNumber}" (title: "${mix.title}")`);
+        console.warn(`Warning: No matching tracklist/hero pair found for mix number "${mixNumber}" (title: "${mix.name}")`);
       }
 
       const useCases = deriveUseCases(mix.tags || []);
