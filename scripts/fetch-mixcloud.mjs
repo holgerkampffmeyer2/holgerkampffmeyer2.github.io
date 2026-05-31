@@ -180,6 +180,18 @@ async function fetchMixcloud(force = false) {
   console.log('Fetching latest mixes from Mixcloud...');
   loadMappings();
 
+  let existingSimpleMixes = [];
+  let existingPosts = [];
+  try {
+    const existingSimple = JSON.parse(fs.readFileSync(SIMPLE_DATA_PATH, 'utf-8'));
+    existingSimpleMixes = existingSimple.mixes || [];
+  } catch {}
+  try {
+    const existingBlog = JSON.parse(fs.readFileSync(BLOG_DATA_PATH, 'utf-8'));
+    existingPosts = existingBlog.posts || [];
+  } catch {}
+  console.log(`📂 Existing data: ${existingSimpleMixes.length} mixes, ${existingPosts.length} blog posts`);
+
   try {
     const res = await fetch('https://api.mixcloud.com/holger-kampffmeyer/cloudcasts/?limit=100');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -194,8 +206,14 @@ async function fetchMixcloud(force = false) {
       src: `https://player-widget.mixcloud.com/widget/iframe/?feed=${encodeURIComponent(mix.key)}`
     }));
 
-    fs.writeFileSync(SIMPLE_DATA_PATH, JSON.stringify({ lastUpdated: new Date().toISOString(), mixes }, null, 2));
-    console.log(`✅ Updated mixcloud-data.json (${mixes.length} mixes)`);
+    const simpleMap = new Map();
+    for (const m of existingSimpleMixes) simpleMap.set(m.key, m);
+    for (const m of mixes) simpleMap.set(m.key, m);
+    const mergedSimpleMixes = Array.from(simpleMap.values())
+      .sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
+
+    fs.writeFileSync(SIMPLE_DATA_PATH, JSON.stringify({ lastUpdated: new Date().toISOString(), mixes: mergedSimpleMixes }, null, 2));
+    console.log(`✅ Updated mixcloud-data.json (${mergedSimpleMixes.length} mixes, ${mixes.length} from API)`);
 
     // Fetch details for each mix
     console.log('Fetching details for each mix...');
@@ -419,10 +437,14 @@ async function fetchMixcloud(force = false) {
       };
     });
 
-     // Posts are already sorted newest-first from the API response
+     const postMap = new Map();
+     for (const p of existingPosts) postMap.set(p.key, p);
+     for (const p of posts) postMap.set(p.key, p);
+     const mergedPosts = Array.from(postMap.values())
+       .sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
 
-    fs.writeFileSync(BLOG_DATA_PATH, JSON.stringify({ lastUpdated: new Date().toISOString(), posts }, null, 2));
-    console.log(`\n✅ Updated blog-posts.json (${posts.length} posts, ${posts.filter(p => p.hasTracklist).length} with tracklists)`);
+    fs.writeFileSync(BLOG_DATA_PATH, JSON.stringify({ lastUpdated: new Date().toISOString(), posts: mergedPosts }, null, 2));
+    console.log(`\n✅ Updated blog-posts.json (${mergedPosts.length} posts, ${mergedPosts.filter(p => p.hasTracklist).length} with tracklists, ${posts.length} from API)`);
     updateTimestamp();
 
   } catch (e) {
