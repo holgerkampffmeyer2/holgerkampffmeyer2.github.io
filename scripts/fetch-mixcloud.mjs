@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { spawn } from 'child_process';
+import sharp from 'sharp';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.join(__dirname, '..');
@@ -170,6 +171,55 @@ function copyWebpFiles(srcDir, destDir) {
     const destPath = path.join(destDir, file);
     fs.copyFileSync(srcPath, destPath);
   }
+}
+
+/**
+ * Generate OG images (1200×630 WebP) for all posts that have a picture.
+ * Skips existing files; sets post.ogImage in-place.
+ */
+async function generateOgImages(posts) {
+  const ogDir = path.join(ROOT_DIR, 'public', 'og');
+  if (!fs.existsSync(ogDir)) {
+    fs.mkdirSync(ogDir, { recursive: true });
+    console.log(`📁 Created OG images directory: ${ogDir}`);
+  }
+
+  let generated = 0;
+  let skipped = 0;
+
+  for (const post of posts) {
+    if (!post.picture) continue;
+
+    const ogFilename = `${post.slug}.webp`;
+    const ogPath = path.join(ogDir, ogFilename);
+
+    if (fs.existsSync(ogPath)) {
+      post.ogImage = `/og/${ogFilename}`;
+      skipped++;
+      continue;
+    }
+
+    try {
+      const response = await fetch(post.picture);
+      if (!response.ok) {
+        console.warn(`  ⚠️  Failed to fetch image for ${post.slug}: HTTP ${response.status}`);
+        continue;
+      }
+      const buffer = Buffer.from(await response.arrayBuffer());
+
+      await sharp(buffer)
+        .resize(1200, 630, { fit: 'contain', background: { r: 10, g: 10, b: 15, alpha: 1 } })
+        .webp({ quality: 85 })
+        .toFile(ogPath);
+
+      post.ogImage = `/og/${ogFilename}`;
+      generated++;
+    } catch (e) {
+      console.warn(`  ⚠️  Failed to generate OG image for ${post.slug}: ${e.message}`);
+    }
+  }
+
+  console.log(`🖼️  OG images: ${generated} generated, ${skipped} skipped (${posts.length} total posts)`);
 }
 
 async function fetchMixcloud(force = false) {
@@ -440,8 +490,10 @@ async function fetchMixcloud(force = false) {
      const postMap = new Map();
      for (const p of existingPosts) postMap.set(p.key, p);
      for (const p of posts) postMap.set(p.key, p);
-     const mergedPosts = Array.from(postMap.values())
-       .sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
+      const mergedPosts = Array.from(postMap.values())
+        .sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
+
+    await generateOgImages(mergedPosts);
 
     fs.writeFileSync(BLOG_DATA_PATH, JSON.stringify({ lastUpdated: new Date().toISOString(), posts: mergedPosts }, null, 2));
     console.log(`\n✅ Updated blog-posts.json (${mergedPosts.length} posts, ${mergedPosts.filter(p => p.hasTracklist).length} with tracklists, ${posts.length} from API)`);
@@ -464,7 +516,8 @@ export {
   convertPngsToWebp, 
   copyWebpFiles,
   normalizeString,
-  extractMixNumber
+  extractMixNumber,
+  generateOgImages
 };
 
 // Only run the main function when the script is executed directly

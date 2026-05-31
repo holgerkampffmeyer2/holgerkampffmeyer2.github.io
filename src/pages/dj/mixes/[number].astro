@@ -21,6 +21,7 @@ interface BlogPostData {
    tracklist: string[];
    hasTracklist: boolean;
    heroImage?: string;
+   ogImage?: string;
 }
 
 interface BlogData {
@@ -144,7 +145,12 @@ const jsonLd = [
 <Layout
   title={pageTitle}
   description={pageDescription}
-  image={post.picture}
+  image={post.ogImage || post.picture}
+  ogTitle={curDisplay.label}
+  ogType="music.playlist"
+  ogImageWidth={1200}
+  ogImageHeight={630}
+  twitterPlayerUrl={post.src}
   jsonLd={[...jsonLd, {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

@@ -6,7 +6,7 @@ Die "Mixes with Tracklists" Seite präsentiert wöchentliche DJ-Mixes von DJ Hul
 
 **Seitenstruktur:**
 - `/dj/mixes` - Übersichtsseite mit neuestem Mix, Karussell und Filter nach Stimmung
-- `/dj/mixes/{nummer}` - Einzelne Mix-Seite mit Player und Tracklist (z.B. `/dj/mixes/176`)
+- `/dj/mixes/{slug}` - Einzelne Mix-Seite mit Player und Tracklist (z.B. `/dj/mixes/dj-hulk-mix183-hypnotic-deep-tech`)
 - `/dj/mixes-blog-archive` - Komprimierte Archiv-Ansicht aller Mixes
 
 ## Script: `scripts/fetch-mixcloud.mjs`
@@ -135,12 +135,13 @@ node scripts/fetch-mixcloud.mjs --force && astro build && node scripts/generate-
 2. Tracklist aus `tracklists/` wird zugeordnet (Regex auf `Mix<nummer>`)
 3. Hero-Image aus `public/tracklists/` wird zugeordnet (Regex auf `Mix<nummer>`)
 4. `blog-posts.json` + `mixcloud-data.json` werden aktualisiert
-5. Astro baut die neue Seite `/dj/mixes/<nummer>.html`
-6. RSS-Feed + `urllist.txt` werden generiert
+5. OG-Vorschaubilder (1200×630 WebP) werden aus Mixcloud-Covers generiert → `public/og/{slug}.webp`
+6. Astro baut die neue Seite `/dj/mixes/<slug>.html`
+7. RSS-Feed + `urllist.txt` werden generiert
 
 ### Schritt 5: Überprüfen
 
-- Öffne `http://localhost:4321/dj/mixes/<nummer>` (im Dev-Modus)
+- Öffne `http://localhost:4321/dj/mixes/<slug>` (im Dev-Modus)
 - Prüfe ob Tracklist korrekt angezeigt wird
 - Prüfe ob Bild geladen wird
 - Verifiziere JSON-LD in den Page Source
@@ -163,7 +164,7 @@ Jede Mix-Seite erhält automatisch:
 - `BreadcrumbList` - Navigation
 - `Person` - DJ Hulk als Produzent
 
-**Canonical URL:** `https://holger-kampffmeyer.de/dj/mixes/{nummer}`
+**Canonical URL:** `https://holger-kampffmeyer.de/dj/mixes/{slug}`
 
 ---
 
@@ -171,25 +172,30 @@ Jede Mix-Seite erhält automatisch:
 
 ### /dj/mixes (Übersicht)
 - Neuester Mix (vollständig mit Player + Tracklist)
-- Filter-Kategorien (Gym, Drive, Work, Party)
-- Karussell mit allen Mixes (verlinkt auf einzelne Seiten)
-- Buttons zu Archive und vollständiger Mixcloud-Bibliothek
+- Filter-Kategorien → verlinken auf `/dj/mixes-blog-archive?useCase=gym|drive|work|party`
+- Karussell mit allen Mixes → verlinkt auf `/dj/mixes/{slug}`
+- Button "Mix Archive" → `/dj/mixes-blog-archive`
+- Button "Full Mixcloud Library" → `/dj/mixes-all`
+- Mixcloud Profile → `https://www.mixcloud.com/holger-kampffmeyer/`
+- SoundCloud Profile → `https://soundcloud.com/holger-kampffmeyer2`
 - Spotify Playlist
 
-### /dj/mixes/{nummer} (Einzelne Mix-Seite)
+### /dj/mixes/{slug} (Einzelne Mix-Seite)
 - Titel + Datum (orange Badge) + "Latest" Badge (wenn neuester)
 - Genre Tags
 - Use-Case Icons (Gym, Drive, Work, Party)
 - Mixcloud Player
 - Tracklist-Tabelle (Artist | Title)
-- Prev/Next Navigation zwischen Mixes
+- Prev/Next Navigation zwischen Mixes → `/dj/mixes/{prevPost.slug}` / `/dj/mixes/{nextPost.slug}`
+- Button "Back to Weekly DJ Mixes" → `/dj/mixes`
+- Button "View Archive" → `/dj/mixes-blog-archive`
 - Vollständige SEO-Optimierung
 
 ### /dj/mixes-blog-archive (Archiv)
 - Kompakte Listenansicht
-- Filter nach Use-Case
-- Titel, Datum, Tags pro Eintrag
-- Link zur einzelnen Mix-Seite
+- Filter-Buttons (All, Gym, Drive, Work, Party) → `/dj/mixes-blog-archive?useCase=...`
+- Titel, Datum, Tags pro Eintrag → verlinkt auf `/dj/mixes/{slug}`
+- Button "Back to Weekly DJ Mixes" → `/dj/mixes`
 
 ---
 

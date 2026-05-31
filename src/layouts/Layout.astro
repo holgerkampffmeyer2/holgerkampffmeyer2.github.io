@@ -12,6 +12,20 @@ interface Props {
   jsonLd?: object | object[];
   /** image URL to preload for LCP (defaults to image) */
   preloadImage?: string;
+  /** Open Graph type (default: website) */
+  ogType?: string;
+  /** OG image width (default: 1200) */
+  ogImageWidth?: number;
+  /** OG image height (default: 630) */
+  ogImageHeight?: number;
+  /** OG title override (falls back to title) */
+  ogTitle?: string;
+  /** Twitter player URL (enables player card) */
+  twitterPlayerUrl?: string;
+  /** Twitter player width (default: 480) */
+  twitterPlayerWidth?: number;
+  /** Twitter player height (default: 480) */
+  twitterPlayerHeight?: number;
 }
 
 const { 
@@ -20,7 +34,14 @@ const {
   image = "/img/djhulk_logo.webp",
   noIndex = false,
   jsonLd,
-  preloadImage
+  preloadImage,
+  ogType = "website",
+  ogImageWidth = 1200,
+  ogImageHeight = 630,
+  ogTitle,
+  twitterPlayerUrl,
+  twitterPlayerWidth = 480,
+  twitterPlayerHeight = 480,
 } = Astro.props;
 
 let canonicalPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/');
@@ -216,24 +237,30 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
 
     
     <!-- Open Graph -->
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={ogTitle || title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={new URL(image, Astro.site).href} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="DJ Hulk - Holger Kampffmeyer" />
+    <meta property="og:image:width" content={ogImageWidth.toString()} />
+    <meta property="og:image:height" content={ogImageHeight.toString()} />
+    <meta property="og:image:alt" content={ogTitle || "DJ Hulk - Holger Kampffmeyer"} />
     <meta property="og:locale" content="de_DE" />
     <meta property="og:site_name" content="DJ Hulk - Holger Kampffmeyer" />
+    {ogType === "music.playlist" && <meta property="music:musician" content="https://www.mixcloud.com/holger-kampffmeyer/" />}
     
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content={twitterPlayerUrl ? "player" : "summary_large_image"} />
     <meta name="twitter:site" content="@djhulk_de" />
     <meta name="twitter:creator" content="@djhulk_de" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content={ogTitle || title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(image, Astro.site).href} />
+    {twitterPlayerUrl && <>
+      <meta name="twitter:player" content={twitterPlayerUrl} />
+      <meta name="twitter:player:width" content={twitterPlayerWidth.toString()} />
+      <meta name="twitter:player:height" content={twitterPlayerHeight.toString()} />
+    </>}
     
   </head>
   <body class="min-h-screen">
