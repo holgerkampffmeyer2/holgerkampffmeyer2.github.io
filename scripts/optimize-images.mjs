@@ -71,7 +71,6 @@ function findImages(rootDir) {
 }
 
 async function processImage(filePath, options) {
-  const ext = path.extname(filePath).toLowerCase();
   const baseName = path.basename(filePath);
   const webpPath = filePath.replace(/\.(jpe?g|png)$/i, '.webp');
 

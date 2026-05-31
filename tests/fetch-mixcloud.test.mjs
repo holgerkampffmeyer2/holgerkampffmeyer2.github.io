@@ -3,7 +3,6 @@ import { describe, it, expect } from 'vitest';
 // Test the pure functions that don't require complex mocking
 import { 
   computeConfidence, 
-  deriveUseCases,
   normalizeString,
   extractMixNumber
 } from '../scripts/fetch-mixcloud.mjs';

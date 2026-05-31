@@ -37,13 +37,6 @@ const opportunities = Object.values(audits)
   .sort((a, b) => (b.details?.overallSavingsMs || 0) - (a.details?.overallSavingsMs || 0))
   .slice(0, 5);
 
-const largestResources = Object.values(audits)
-  .filter(a => a.id === 'total-byte-weight' && a.details?.items)
-  .flatMap(a => a.details.items || [])
-  .filter(i => i.transferSize)
-  .sort((a, b) => (b.transferSize || 0) - (a.transferSize || 0))
-  .slice(0, 5);
-
 const allItems = Object.values(audits)
   .filter(a => a.details?.items && a.id !== 'total-byte-weight' && a.id !== 'resource-summary')
   .flatMap(a => a.details.items || [])
