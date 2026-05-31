@@ -93,21 +93,21 @@ function generateRss() {
 
   const items = findHtmlPages();
 
-  const mixcloudDataPath = path.join(ROOT_DIR, 'src/data/mixcloud-data.json');
+  const blogDataPath = path.join(ROOT_DIR, 'src/data/blog-posts.json');
   try {
-    const mixcloudData = JSON.parse(fs.readFileSync(mixcloudDataPath, 'utf-8'));
-    const mixes = mixcloudData.mixes || [];
-    for (const mix of mixes.slice(0, 10)) {
+    const blogData = JSON.parse(fs.readFileSync(blogDataPath, 'utf-8'));
+    const posts = blogData.posts || [];
+    for (const post of posts.slice(0, 10)) {
       items.push({
-        path: '/dj/mixes/',
-        title: mix.title,
-        description: `Neuer Mix auf Mixcloud: ${mix.title}`,
-        pubDate: mix.created_time.split('T')[0],
+        path: `/dj/mixes/${post.slug}/`,
+        title: post.title,
+        description: post.description || `Neuer Mix auf Mixcloud: ${post.title}`,
+        pubDate: post.created_time.split('T')[0],
         isMix: true,
       });
     }
   } catch (e) {
-    console.warn('⚠️ Could not read mixcloud data:', e.message);
+    console.warn('⚠️ Could not read blog-posts.json:', e.message);
   }
 
   items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
@@ -131,7 +131,7 @@ function generateRss() {
     const category = item.isMix ? '[Mix]' : '[Seite]';
     const link = `${site}${item.path}`;
     xml += `    <item>
-      <guid isPermaLink="false">${escapeXml(item.isMix ? `mix-${item.title}` : item.path)}</guid>
+      <guid isPermaLink="true">${escapeXml(link)}</guid>
       <title>${escapeXml(category + ' ' + item.title)}</title>
       <link>${escapeXml(link)}</link>
       <description>${escapeXml(item.description)}</description>
@@ -153,4 +153,9 @@ function generateRss() {
   console.log(`   → synced to public/rss.xml`);
 }
 
-generateRss();
+export { escapeXml, decodeHtmlEntities, formatRssDate, extractMeta };
+
+// Run when executed directly
+if (process.argv[1] && import.meta.url === `file://${process.argv[1]}`) {
+  generateRss();
+}
