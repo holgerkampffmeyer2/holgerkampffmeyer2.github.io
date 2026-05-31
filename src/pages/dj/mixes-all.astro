@@ -5,6 +5,7 @@ import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import MixcloudWidget from '../../components/MixcloudWidget.astro';
+import { getDjPersonSchema } from '../../utils/dj-schema.js';
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
@@ -66,6 +67,7 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
 ---
 
 <Layout 
+  noSiteJsonLd
   title="All DJ Mixes - DJ Hulk Mixcloud Archive"
   description="All DJ Hulk mixes on Mixcloud. Weekly House, Tech House, Deep House & Latin House DJ mixes. Browse all Mixcloud mixes. Free DJ mixes download."
   image="/img/em3f/DSC_2451.webp"
@@ -92,24 +94,7 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
       },
       "genre": ["House", "Tech House", "Deep House", "Latin House"]
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "DJ Hulk",
-      "alternateName": "Holger Kampffmeyer",
-      "jobTitle": "Electronic Music DJ",
-      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/",
-      "sameAs": [
-        "https://www.mixcloud.com/holger-kampffmeyer/",
-        "https://soundcloud.com/holger-kampffmeyer2",
-        "https://open.spotify.com/user/11131869179",
-        "https://www.youtube.com/@djhulk_de",
-        "https://www.instagram.com/djhulk_de",
-        "https://www.facebook.com/holger.kampffmeyer",
-        "https://www.linkedin.com/in/holger-kampffmeyer-390b6789/",
-        "https://de.ra.co/dj/djhulk"
-      ]
-    }
+    getDjPersonSchema()
   ]}
 >
   <Navbar currentPage="/dj/mixes/" />

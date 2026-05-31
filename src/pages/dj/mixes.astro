@@ -9,6 +9,7 @@ import GymIcon from "../../components/icons/GymIcon.astro";
 import DriveIcon from "../../components/icons/DriveIcon.astro";
 import WorkIcon from "../../components/icons/WorkIcon.astro";
 import PartyIcon from "../../components/icons/PartyIcon.astro";
+import { getDjPersonSchema } from "../../utils/dj-schema.js";
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
@@ -86,6 +87,7 @@ function formatDate(dateStr: string) {
 ---
 
 <Layout
+  noSiteJsonLd
    title="Weekly DJ Mixes - DJ Hulk - House, Tech House, Deep House"
    description="Every Sunday new DJ mix on Mixcloud by DJ Hulk. House, Tech House, Deep House with tracklists. Perfect for gym, driving, work, or pre-party."
    image="/img/_81A4010.webp"
@@ -124,24 +126,7 @@ function formatDate(dateStr: string) {
         "name": "DJ Hulk"
       }
     } : null,
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "DJ Hulk",
-      "alternateName": "Holger Kampffmeyer",
-      "jobTitle": "Electronic Music DJ",
-      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/",
-      "sameAs": [
-        "https://www.mixcloud.com/holger-kampffmeyer/",
-        "https://soundcloud.com/holger-kampffmeyer2",
-        "https://open.spotify.com/user/11131869179",
-        "https://www.youtube.com/@djhulk_de",
-        "https://www.instagram.com/djhulk_de",
-        "https://www.facebook.com/holger.kampffmeyer",
-        "https://www.linkedin.com/in/holger-kampffmeyer-390b6789/",
-        "https://de.ra.co/dj/djhulk"
-      ]
-    }
+    getDjPersonSchema()
   ].filter(Boolean)}
 >
   <Navbar currentPage="/dj/mixes/" />

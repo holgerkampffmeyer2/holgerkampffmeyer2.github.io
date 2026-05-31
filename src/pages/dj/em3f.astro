@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar.astro';
 import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import { getDjPersonSchema } from '../../utils/dj-schema.js';
 
 const breadcrumbSegments = [
   { label: "Startseite", href: "/" },
@@ -42,10 +43,11 @@ const photos = [
 ---
 
 <Layout 
+  noSiteJsonLd
    title="DJ Fotos - Electronic Music Family and Friends Festival"
    description="Fotos vom Electronic Music Family and Friends Festival (EM3F). DJ Hulk's Festival-Fotogalerie mit Eindrücken vom Event. Jetzt ansehen und inspirieren lassen!"
   image="/img/tomatefestival.webp"
-  jsonLd={breadcrumbSchema}
+  jsonLd={[breadcrumbSchema, getDjPersonSchema()]}
 >
   <Navbar currentPage="/dj/em3f/" />
 

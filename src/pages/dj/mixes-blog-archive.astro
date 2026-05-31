@@ -7,6 +7,7 @@ import GymIcon from "../../components/icons/GymIcon.astro";
 import DriveIcon from "../../components/icons/DriveIcon.astro";
 import WorkIcon from "../../components/icons/WorkIcon.astro";
 import PartyIcon from "../../components/icons/PartyIcon.astro";
+import { getDjPersonSchema } from "../../utils/dj-schema.js";
 
 interface BlogPostData {
    slug: string;
@@ -127,7 +128,7 @@ const collectionPageSchema = {
   }]
 };
 
-const jsonLd: any[] = [collectionPageSchema, breadcrumbSchema];
+const jsonLd: any[] = [collectionPageSchema, breadcrumbSchema, getDjPersonSchema()];
 if (useCaseFilter) {
   jsonLd.push({
     "@context": "https://schema.org",
@@ -139,6 +140,7 @@ if (useCaseFilter) {
 ---
 
 <Layout
+  noSiteJsonLd
   title="Mix Archive - DJ Hulk Weekly DJ Mixes"
   description="Browse all DJ Hulk weekly mixes with tracklists. Filter by mood: gym, drive, work or pre-party. House, Tech House, Deep House, Latin House."
   image="/img/_81A4010.webp"

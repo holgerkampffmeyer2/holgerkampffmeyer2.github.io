@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar.astro';
 import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import { getDjPersonSchema } from '../../utils/dj-schema.js';
 
 const breadcrumbSegments = [
   { label: "Startseite", href: "/" },
@@ -94,10 +95,12 @@ const videoSchema = {
 ---
 
 <Layout
+  noSiteJsonLd
    title="Videos - DJ Hulk - YouTube Videos und Event-Aufnahmen"
    description="Videos von DJ Hulk - Event-Aufnahmen, Aftermovies, Party-Sessions und Live-Mitschnitte auf YouTube. Entdecke meine besten Mixes und Event-Highlights."
    image="/img/_81A4218.webp"
-  jsonLd={{
+  jsonLd={[
+    {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
@@ -105,7 +108,9 @@ const videoSchema = {
       {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music/"},
       {"@type": "ListItem", "position": 3, "name": "Videos", "item": "https://holger-kampffmeyer.de/dj/videos/"}
     ]
-  }}
+    },
+    getDjPersonSchema()
+  ]}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
   <Navbar currentPage="/dj/videos/" />

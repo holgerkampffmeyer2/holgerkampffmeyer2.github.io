@@ -5,6 +5,7 @@ import Footer from "../../../components/Footer.astro";
 import Breadcrumb from "../../../components/Breadcrumb.astro";
 import MixDetail from "../../../components/dj/MixDetail.astro";
 import { getMixDisplay } from "../../../utils/mix-display.js";
+import { getDjPersonSchema } from "../../../utils/dj-schema.js";
 
 interface BlogPostData {
    slug: string;
@@ -143,6 +144,7 @@ const jsonLd = [
 ---
 
 <Layout
+  noSiteJsonLd
   title={pageTitle}
   description={pageDescription}
   image={post.ogImage || post.picture}
@@ -151,7 +153,7 @@ const jsonLd = [
   ogImageWidth={1200}
   ogImageHeight={630}
   twitterPlayerUrl={post.src}
-  jsonLd={[...jsonLd, {
+  jsonLd={[getDjPersonSchema(), ...jsonLd, {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": breadcrumbSegments.map((segment, index) => ({

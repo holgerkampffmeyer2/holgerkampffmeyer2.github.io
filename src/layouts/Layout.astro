@@ -20,6 +20,8 @@ interface Props {
   ogImageHeight?: number;
   /** OG title override (falls back to title) */
   ogTitle?: string;
+  /** suppress default LocalBusiness schema */
+  noSiteJsonLd?: boolean;
   /** Twitter player URL (enables player card) */
   twitterPlayerUrl?: string;
   /** Twitter player width (default: 480) */
@@ -39,6 +41,7 @@ const {
   ogImageWidth = 1200,
   ogImageHeight = 630,
   ogTitle,
+  noSiteJsonLd,
   twitterPlayerUrl,
   twitterPlayerWidth = 480,
   twitterPlayerHeight = 480,
@@ -72,6 +75,7 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
     
     <title>{title}</title>
     
+    {!noSiteJsonLd && (
     <!-- JSON-LD LocalBusiness -->
     <script is:inline type="application/ld+json">
       {
@@ -112,6 +116,7 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
         ]
       }
     </script>
+    )}
 
     <!-- JSON-LD SiteNavigationElement as ItemList -->
     <script is:inline type="application/ld+json">
