@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar.astro";
-import Footer from "../components/Footer.astro";
+import { getDjPersonSchema } from "../utils/dj-schema.js";
 
 import FacebookIcon from "../components/icons/FacebookIcon.astro";
 import InstagramIcon from "../components/icons/InstagramIcon.astro";
@@ -16,7 +15,6 @@ import EmailIcon from "../components/icons/EmailIcon.astro";
 import SoundCloudIcon from "../components/icons/SoundCloudIcon.astro";
 import GitHubIcon from "../components/icons/GitHubIcon.astro";
 import VolumeUpIcon from "../components/icons/VolumeUpIcon.astro";
-import RSSIcon from "../components/icons/RSSIcon.astro";
 
 const links = [
   {
@@ -120,82 +118,82 @@ const links = [
 ];
 ---
 
-<Layout 
-   title="Links - DJ Hulk: Social Media & Kontakt"
-   description="Alle wichtigen Links zu DJ Hulk: Social Media, Mixcloud, Spotify, YouTube, SoundCloud und Kontaktinformationen. Folge ihm auf allen Plattformen."
-   jsonLd={{
-   "@context": "https://schema.org",
-   "@type": "BreadcrumbList",
-   "itemListElement": [
-     {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
-     {"@type": "ListItem", "position": 2, "name": "Links", "item": "https://holger-kampffmeyer.de/links/"}
-   ]
-   }}
+<Layout
+  title="DJ Hulk | Alle wichtigen Social-Media-Links & Kontakt"
+  description="Alle wichtigen Links zu DJ Hulk: Instagram, Mixcloud, Spotify, YouTube, SoundCloud, Facebook und mehr. Folge DJ Hulk auf allen Plattformen."
+  ogTitle="DJ Hulk — alle wichtigen Links"
+  image="/img/_81A4010.webp"
+  noSiteJsonLd
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
+        {"@type": "ListItem", "position": 2, "name": "Links", "item": "https://holger-kampffmeyer.de/links/"}
+      ]
+    },
+    getDjPersonSchema()
+  ]}
 >
-  <Navbar currentPage="/links/" />
-
-  <section class="min-h-screen pt-24 pb-16 hero-gradient">
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="text-center mb-16">
-        <h1 class="font-play text-4xl md:text-6xl font-bold mb-4 gradient-text">
-          All Links
+  <section class="min-h-screen bg-[var(--color-bg)] py-12 md:py-16">
+    <div class="max-w-sm mx-auto px-4">
+      <div class="text-center mb-10">
+        <img
+          src="/img/_81A4010.webp"
+          alt="DJ Hulk"
+          class="w-28 h-28 rounded-full mx-auto mb-5 border-2 border-[var(--color-primary)] object-cover shadow-lg"
+          width="112"
+          height="112"
+          loading="eager"
+        />
+        <h1 class="font-play text-3xl font-bold gradient-text mb-1">
+          DJ Hulk
         </h1>
-        <p class="text-[var(--color-text-muted)] text-lg max-w-2xl mx-auto">
-          Here you find all my profiles, music platforms and contact options.
+        <p class="text-[var(--color-text-muted)] text-sm">
+          Electronic Music DJ aus Stuttgart
         </p>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+      <div class="flex flex-col gap-3">
         {links.map((link) => (
           <a
             href={link.url}
             target="_blank"
-            rel="noopener noreferrer nofollow"
-            class="group relative bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-6 hover:border-[var(--color-primary)] transition-all duration-300 hover:transform hover:-translate-y-1 card-glow flex flex-col items-center text-center"
+            rel="noopener noreferrer"
+            class="flex items-center gap-4 w-full bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl px-5 py-4 hover:border-[var(--color-primary)] hover:bg-[var(--color-surface-hover)] transition-all duration-200 hover:-translate-y-0.5 group"
           >
-            <div 
-              class="w-16 h-16 rounded-full flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+            <div
+              class="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
               style={`background-color: ${link.color}20`}
             >
-              <link.icon class={`w-8 h-8`} />
+              <link.icon class="w-5 h-5" />
             </div>
-            
-            <h2 class="font-bold text-lg mb-2 text-[var(--color-text)] group-hover:text-[var(--color-secondary)] transition-colors">
-              {link.name}
-            </h2>
-            
-            <p class="text-sm text-[var(--color-text-muted)] line-clamp-2">
-              {link.description}
-            </p>
-
-            <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-[var(--color-primary)]/5 to-[var(--color-secondary)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div class="flex-1 min-w-0">
+              <span class="font-semibold text-[var(--color-text)] group-hover:text-[var(--color-secondary)] transition-colors block">
+                {link.name}
+              </span>
+              {link.description && (
+                <span class="text-xs text-[var(--color-text-muted)] truncate block mt-0.5">
+                  {link.description}
+                </span>
+              )}
+            </div>
+            <svg class="w-5 h-5 text-[var(--color-text-muted)] shrink-0 group-hover:text-[var(--color-primary)] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
           </a>
         ))}
       </div>
 
-      <div class="mt-16 text-center">
-        <p class="text-[var(--color-text-muted)] mb-4">
-          Oder zurück zur <a href="/" class="text-[var(--color-secondary)] hover:underline">Startseite</a>
-        </p>
-<a 
-           href="/rss.xml" 
-           class="inline-flex items-center gap-2 text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] transition-colors"
-         >
-           <RSSIcon class="h-5 w-5" />
-           RSS Feed abonnieren
-         </a>
+      <div class="mt-10 text-center">
+        <a
+          href="/"
+          class="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] transition-colors"
+        >
+          holger-kampffmeyer.de
+        </a>
       </div>
     </div>
   </section>
-
-  <Footer />
 </Layout>
-
-<style>
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-</style>
