@@ -9,7 +9,7 @@ import WorkIcon from "../../components/icons/WorkIcon.astro";
 import PartyIcon from "../../components/icons/PartyIcon.astro";
 
 interface BlogPostData {
-   index: number | null;
+   slug: string;
    title: string;
    key: string;
    url: string;
@@ -100,8 +100,8 @@ const blogSchema = {
   },
    "blogPosts": archivePosts.slice(0, 10).map(post => ({
      "@type": "BlogPosting",
-     "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.index}`,
-     "headline": `Mix#${post.index} - ${post.title}`,
+     "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.slug}`,
+      "headline": post.title,
      "datePublished": post.created_time
    }))
 };
@@ -201,7 +201,7 @@ if (useCaseFilter) {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="postsContainer">
         {archivePosts.map((post, index) => (
            <a 
-             href={`/dj/mixes/${post.index}`}
+             href={`/dj/mixes/${post.slug}`}
              class="post-item block bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors group"
              data-usecases={JSON.stringify(post.useCases)}
              data-index={index}

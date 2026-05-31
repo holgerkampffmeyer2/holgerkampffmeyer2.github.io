@@ -22,20 +22,13 @@ const normalizeString = (str) =>
      .replace(/\s+/g, ' ')      // Collapse multiple spaces
      .trim();
 
-// Helper function to extract mix number with improved patterns
-const getMixNumberEnhanced = (str) => {
-  // Try multiple patterns to capture mix numbers
-  const patterns = [
-    /(?:mx|mix)[^\d]*(\d+)/i,           // Original: mx178, Mix-178
-    /#\s*(\d+)/,                        // With hash: #178
-    /[^\d](\d{3,})(?=[^\d]|$)/          // Standalone 3+ digit numbers
-  ];
-  
-  for (const pattern of patterns) {
-    const match = str.toLowerCase().match(pattern);
-    if (match) return match[1];
-  }
-  return null;
+// Extract mix number from filenames/titles for file matching only (tracklist ↔ hero).
+// Returns null if no number found. NOT used for URL generation.
+const extractMixNumber = (str) => {
+  if (!str) return null;
+  const s = str.toLowerCase();
+  const m = s.match(/\b(?:mx|mix)[^\d]*(\d+)/) || s.match(/#\s*(\d+)/) || s.match(/[^\d](\d{3,})(?=[^\d]|$)/);
+  return m?.[1] ?? null;
 };
 
 function shouldFetch(force = false) {
@@ -83,8 +76,8 @@ function computeConfidence(s, t) {
    // s: tracklistBasename (string)
    // t: hero image base name (string)
    // Try to match by mix number first
-   const sNum = getMixNumberEnhanced(s);
-   const tNum = getMixNumberEnhanced(t);
+    const sNum = extractMixNumber(s);
+    const tNum = extractMixNumber(t);
    if (sNum && tNum && sNum === tNum) {
      return 1.0; // exact match on mix number
    }
@@ -253,7 +246,7 @@ async function fetchMixcloud(force = false) {
 
      // Helper to extract mix number from a string (case-insensitive, allowing Mx or Mix, and any non-digit separators)
      // Using the enhanced version defined above
-     const getMixNumber = getMixNumberEnhanced;
+      const getMixNumber = extractMixNumber;
 
     for (const tracklistInfo of tracklistFiles) {
       const tracklistFilename = tracklistInfo.file;
@@ -345,7 +338,7 @@ async function fetchMixcloud(force = false) {
       const apiData = mixWithDetails.apiData;
       
       // Try exact match by mix number first
-      const mixNumber = getMixNumberEnhanced(mix.name || '') || getMixNumberEnhanced(mix.key || '');
+      const mixNumber = extractMixNumber(mix.name || '') || extractMixNumber(mix.key || '');
       let pair = pairMapByMixNumber.get(mixNumber);
       
       // If no exact match found, use fuzzy matching as fallback
@@ -412,6 +405,7 @@ async function fetchMixcloud(force = false) {
         title: mix.name,
         key: mix.key,
         url: mix.url,
+        slug: mix.key.split('/').filter(Boolean).pop(),
         created_time: mix.created_time,
         src: `https://player-widget.mixcloud.com/widget/iframe/?feed=${encodeURIComponent(mix.key)}`,
         description: apiData?.description || '',
@@ -425,11 +419,7 @@ async function fetchMixcloud(force = false) {
       };
     });
 
-     // Add index field to each post based on sorted position (already sorted by created_time)
-     // Use index as the mix number for routing purposes
-     posts.forEach((post, index) => {
-       post.index = index + 1; // 1-based index
-     });
+     // Posts are already sorted newest-first from the API response
 
     fs.writeFileSync(BLOG_DATA_PATH, JSON.stringify({ lastUpdated: new Date().toISOString(), posts }, null, 2));
     console.log(`\n✅ Updated blog-posts.json (${posts.length} posts, ${posts.filter(p => p.hasTracklist).length} with tracklists)`);
@@ -452,7 +442,7 @@ export {
   convertPngsToWebp, 
   copyWebpFiles,
   normalizeString,
-  getMixNumberEnhanced
+  extractMixNumber
 };
 
 // Only run the main function when the script is executed directly

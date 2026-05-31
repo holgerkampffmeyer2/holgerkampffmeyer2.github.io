@@ -4,9 +4,10 @@ import Navbar from "../../../components/Navbar.astro";
 import Footer from "../../../components/Footer.astro";
 import Breadcrumb from "../../../components/Breadcrumb.astro";
 import MixDetail from "../../../components/dj/MixDetail.astro";
+import { getMixDisplay } from "../../../utils/mix-display.js";
 
 interface BlogPostData {
-   index: number | null;
+   slug: string;
    title: string;
    key: string;
    url: string;
@@ -47,7 +48,7 @@ export async function getStaticPaths() {
      const isLatest = index === 0;
 
      return {
-       params: { number: String(post.index) },
+        params: { number: post.slug },
        props: { post, prevPost, nextPost, isLatest }
      };
    });
@@ -62,17 +63,18 @@ interface Props {
 
 const { post, prevPost, nextPost, isLatest } = Astro.props;
 
-   const mixNumber = post.index;
-   let rawTitle = `Mix#${mixNumber} - ${post.title} - DJ Hulk Weekly Mix - House, Tech House, Deep House - Electronic Music`;
-   const pageTitle = rawTitle.length > 60 ? rawTitle.substring(0, 60) : rawTitle;
-   const baseDesc = `DJ Hulk Mix#${mixNumber} - ${post.title} - Electronic Music Mix with Tracklist. Enjoy House, Tech House, Deep House sets for gym, driving, work and pre-party. Free download and streaming on Mixcloud.`;
-   const pageDescription = post.description ? (post.description.length > 160 ? post.description.substring(0, 160) : post.description) : baseDesc;
+const curDisplay = getMixDisplay(post.key, post.title);
+const prefix = curDisplay.mixNum ? `Mix#${curDisplay.mixNum} - ` : '';
+let rawTitle = `${prefix}${post.title} - DJ Hulk Weekly Mix - House, Tech House, Deep House - Electronic Music`;
+const pageTitle = rawTitle.length > 60 ? rawTitle.substring(0, 60) : rawTitle;
+const baseDesc = `${prefix}${post.title} - Electronic Music Mix with Tracklist. Enjoy House, Tech House, Deep House sets for gym, driving, work and pre-party. Free download and streaming on Mixcloud.`;
+const pageDescription = post.description ? (post.description.length > 160 ? post.description.substring(0, 160) : post.description) : baseDesc;
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
   { label: "DJ Hulk", href: "/djhulk-electronic-music/" },
   { label: "Weekly DJ Mixes", href: "/dj/mixes/" },
-  { label: `Mix#${mixNumber}` }
+  { label: curDisplay.label }
 ];
 
 function formatDuration(seconds: number) {
@@ -85,7 +87,7 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": `Mix#${mixNumber} - ${post.title}`,
+    "headline": `${prefix}${post.title}`,
     "description": post.description?.substring(0, 500) || "",
     "image": post.picture,
     "datePublished": post.created_time,
@@ -101,13 +103,13 @@ const jsonLd = [
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://holger-kampffmeyer.de/dj/mixes/${mixNumber}`
+      "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.slug}`
     }
   },
   {
     "@context": "https://schema.org",
     "@type": "AudioObject",
-    "name": `Mix#${mixNumber} - ${post.title}`,
+    "name": `${prefix}${post.title}`,
     "description": post.description?.substring(0, 500) || "",
     "contentUrl": post.url,
     "duration": post.audio_length ? formatDuration(post.audio_length) : undefined,
@@ -167,22 +169,22 @@ const jsonLd = [
       <div class="max-w-4xl mx-auto mt-12">
         <div class="flex flex-wrap justify-between gap-4">
 {nextPost ? (
-  <a href={`/dj/mixes/${nextPost.index}`} class="flex items-center gap-3 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors group">
+  <a href={`/dj/mixes/${nextPost.slug}`} class="flex items-center gap-3 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors group">
     <svg class="w-5 h-5 text-[var(--color-secondary)] group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
     </svg>
     <div class="text-left">
       <span class="text-xs text-[var(--color-text-muted)] block">Previous</span>
-      <span class="font-medium text-[var(--color-text)]">Mix#{nextPost.index}</span>
+      <span class="font-medium text-[var(--color-text)]">{getMixDisplay(nextPost.key, nextPost.title).label}</span>
     </div>
   </a>
 ) : <div></div>}
-  
+
 {prevPost ? (
-  <a href={`/dj/mixes/${prevPost.index}`} class="flex items-center gap-3 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors group">
+  <a href={`/dj/mixes/${prevPost.slug}`} class="flex items-center gap-3 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors group">
     <div class="text-right">
       <span class="text-xs text-[var(--color-text-muted)] block">Next</span>
-      <span class="font-medium text-[var(--color-text)]">Mix#{prevPost.index}</span>
+      <span class="font-medium text-[var(--color-text)]">{getMixDisplay(prevPost.key, prevPost.title).label}</span>
     </div>
     <svg class="w-5 h-5 text-[var(--color-secondary)] group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />

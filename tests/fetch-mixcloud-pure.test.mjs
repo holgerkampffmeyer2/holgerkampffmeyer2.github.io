@@ -4,7 +4,7 @@ import { describe, it, expect } from 'vitest';
 import { 
   computeConfidence, 
   normalizeString,
-  getMixNumberEnhanced
+  extractMixNumber
 } from '../scripts/fetch-mixcloud.mjs';
 
 describe('fetch-mixcloud.mjs pure functions', () => {
@@ -54,25 +54,29 @@ describe('fetch-mixcloud.mjs pure functions', () => {
     });
   });
 
-  describe('getMixNumberEnhanced', () => {
+  describe('extractMixNumber', () => {
     it('should extract mix number with mx prefix', () => {
-      expect(getMixNumberEnhanced('mx178_something')).toBe('178');
-      expect(getMixNumberEnhanced('Mix-178')).toBe('178');
+      expect(extractMixNumber('mx178_something')).toBe('178');
+      expect(extractMixNumber('Mix-178')).toBe('178');
     });
 
     it('should extract mix number with hash', () => {
-      expect(getMixNumberEnhanced('#178')).toBe('178');
-      expect(getMixNumberEnhanced('Track #178')).toBe('178');
+      expect(extractMixNumber('#178')).toBe('178');
+      expect(extractMixNumber('Track #178')).toBe('178');
     });
 
     it('should extract standalone 3+ digit number', () => {
-      expect(getMixNumberEnhanced('Some 178 Text')).toBe('178');
-      expect(getMixNumberEnhanced('Year 2023')).toBe('2023');
+      expect(extractMixNumber('Some 178 Text')).toBe('178');
+      expect(extractMixNumber('Year 2023')).toBe('2023');
+    });
+
+    it('should NOT match "mix" inside words like Guestmix', () => {
+      expect(extractMixNumber('Bill McGruddy x DJ Hulk - Selected Radio Guestmix')).toBeNull();
     });
 
     it('should return null for no match', () => {
-      expect(getMixNumberEnhanced('No numbers here')).toBeNull();
-      expect(getMixNumberEnhanced('ab12')).toBeNull(); // only 2 digits
+      expect(extractMixNumber('No numbers here')).toBeNull();
+      expect(extractMixNumber('ab12')).toBeNull(); // only 2 digits
     });
   });
 });

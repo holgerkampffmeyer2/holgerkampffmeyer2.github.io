@@ -17,7 +17,7 @@ const breadcrumbSegments = [
 ];
 
 interface BlogPostData {
-   index: number | null;
+   slug: string;
    title: string;
    key: string;
    url: string;
@@ -65,8 +65,8 @@ const blogSchema = {
   },
 "blogPosts": postsWithTracklists.slice(0, 10).map(post => ({
    "@type": "BlogPosting",
-   "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.index}`,
-   "headline": `Mix#${post.index} - ${post.title}`,
+   "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.slug}`,
+   "headline": post.title,
    "datePublished": post.created_time
  }))
 };
@@ -295,7 +295,7 @@ function formatDate(dateStr: string) {
             <div class="flex gap-4 overflow-x-auto snap-x pb-4 px-1 -mx-1 scrollbar-hide carousel-scroll">
               {postsWithTracklists.map((post, idx) => (
                 <a 
-                  href={`/dj/mixes/${post.index}`} 
+                  href={`/dj/mixes/${post.slug}`} 
                   class={`snap-center shrink-0 w-64 md:w-72 bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors group ${idx === 0 ? 'ring-2 ring-[var(--color-primary)]' : ''}`}
                 >
                   <div class="relative aspect-video overflow-hidden">
