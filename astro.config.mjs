@@ -15,6 +15,7 @@ export default defineConfig({
   integrations: [sitemap()],
   redirects: {
   '/dj/': '/djhulk-electronic-music',
+  '/vermietung.html': 'https://soundundlicht-stuttgart.de/vermietung/',
   '/vermietung/djpaket-fildern/': 'https://soundundlicht-stuttgart.de/vermietung/djpaket-fildern/',
   '/vermietung/jbl-partybox-300-320/': 'https://soundundlicht-stuttgart.de/vermietung/jbl-partybox-300-320/',
   '/vermietung/kls-laser-bar/': 'https://soundundlicht-stuttgart.de/vermietung/kls-laser-bar/',
