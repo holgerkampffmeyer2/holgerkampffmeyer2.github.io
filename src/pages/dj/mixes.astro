@@ -68,7 +68,13 @@ const blogSchema = {
    "@type": "BlogPosting",
    "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.slug}`,
    "headline": post.title,
-   "datePublished": post.created_time
+   "image": post.picture,
+   "datePublished": post.created_time,
+   "author": {
+     "@type": "Person",
+     "name": "DJ Hulk",
+     "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
+   }
  }))
 };
 
@@ -99,6 +105,45 @@ function formatDate(dateStr: string) {
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
         {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music/"},
         {"@type": "ListItem", "position": 3, "name": "Weekly DJ Mixes", "item": "https://holger-kampffmeyer.de/dj/mixes"}
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Weekly DJ Mixes - DJ Hulk - House, Tech House, Deep House",
+      "description": "Every Sunday new DJ mix on Mixcloud by DJ Hulk. House, Tech House, Deep House with tracklists. Perfect for gym, driving, work, or pre-party.",
+      "url": "https://holger-kampffmeyer.de/dj/mixes/"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "DJ Hulk - Holger Kampffmeyer",
+      "description": "Electronic Music DJ aus Stuttgart. DJ Buchung für Events, Festivals und private Parties. House, Tech House, Drum n Bass.",
+      "url": "https://holger-kampffmeyer.de",
+      "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
+      "priceRange": "€€",
+      "telephone": "+49-171-1467491",
+      "email": "holger.kampffmeyer+dj@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Magellanstraße 4",
+        "addressLocality": "Leinfelden-Echterdingen",
+        "postalCode": "70771",
+        "addressRegion": "Baden-Württemberg",
+        "addressCountry": "DE"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "Baden-Württemberg"
+      },
+      "sameAs": [
+        "https://www.facebook.com/holger.kampffmeyer",
+        "https://www.instagram.com/djhulk_de",
+        "https://www.youtube.com/@djhulk_de",
+        "https://www.mixcloud.com/holger-kampffmeyer/",
+        "https://soundcloud.com/djhulk",
+        "https://open.spotify.com/user/11131869179",
+        "https://de.ra.co/dj/djhulk"
       ]
     },
     blogSchema,
