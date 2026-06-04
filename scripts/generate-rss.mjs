@@ -110,6 +110,17 @@ function generateRss() {
     console.warn('⚠️ Could not read blog-posts.json:', e.message);
   }
 
+  const seen = new Set();
+  const deduped = [];
+  for (const item of items) {
+    if (!seen.has(item.path)) {
+      seen.add(item.path);
+      deduped.push(item);
+    }
+  }
+  items.length = 0;
+  items.push(...deduped);
+
   items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
   const today = new Date();
