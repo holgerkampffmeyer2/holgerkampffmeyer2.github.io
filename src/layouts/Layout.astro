@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/fonts.css';
+import { localBusinessJsonLd, siteNavigationJsonLd } from '../data/jsonLd';
 
 interface Props {
   title: string;
@@ -75,107 +76,25 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
     
     <title>{title}</title>
     
-    {!noSiteJsonLd && (
-    <script is:inline type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "DJ Hulk - Holger Kampffmeyer",
-        "description": "Verleih von Musikanlagen, Partyboxen, Lichttechnik und Tontechnik im Großraum Stuttgart. Electronic Music DJ für Events, Feiern und Hochzeiten.",
-        "url": "https://holger-kampffmeyer.de",
-        "image": "https://holger-kampffmeyer.de/img/header.webp",
-        "priceRange": "€€",
-        "telephone": "+491711467491",
-        "email": "holger.kampffmeyer+dj@gmail.com",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Magellanstraße 4",
-          "addressLocality": "Leinfelden-Echterdingen",
-          "postalCode": "70771",
-          "addressRegion": "Baden-Württemberg",
-          "addressCountry": "DE"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": "48.6938",
-          "longitude": "9.1539"
-        },
-        "openingHours": "Mo-Su 09:00-20:00",
-        "areaServed": {
-          "@type": "State",
-          "name": "Baden-Württemberg"
-        },
-        "sameAs": [
-          "https://www.facebook.com/holger.kampffmeyer",
-          "https://www.instagram.com/djhulk_de",
-          "https://www.youtube.com/@djhulk_de",
-          "https://www.mixcloud.com/holger-kampffmeyer/",
-          "https://soundcloud.com/djhulk",
-          "https://open.spotify.com/user/11131869179",
-          "https://github.com/holgerkampffmeyer2",
-          "https://soundundlicht-stuttgart.de"
-        ]
+    {!noSiteJsonLd && (<>
+    <!-- JSON-LD WebPage -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": title,
+      "description": description,
+      "url": canonicalURL.href,
+      "mainEntity": {
+        "@id": "https://holger-kampffmeyer.de/#dj"
       }
-    </script>
-    )}
+    })} />
+
+    <!-- Schema.org LocalBusiness -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessJsonLd)} />
 
     <!-- JSON-LD SiteNavigationElement as ItemList -->
-    <script is:inline type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "SiteNavigationElement",
-            "position": 1,
-            "name": "Home",
-            "url": "https://holger-kampffmeyer.de/"
-          },
-          {
-            "@type": "SiteNavigationElement",
-            "position": 2,
-            "name": "DJ Hulk",
-            "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
-          },
-          {
-            "@type": "SiteNavigationElement",
-            "position": 3,
-            "name": "Vermietung",
-            "url": "https://holger-kampffmeyer.de/vermietung/"
-          },
-          {
-            "@type": "SiteNavigationElement",
-            "position": 4,
-            "name": "DJ Mixes",
-            "url": "https://holger-kampffmeyer.de/dj/mixes/"
-          },
-          {
-            "@type": "SiteNavigationElement",
-            "position": 5,
-            "name": "Videos",
-            "url": "https://holger-kampffmeyer.de/dj/videos/"
-          },
-          {
-            "@type": "SiteNavigationElement",
-            "position": 6,
-            "name": "Work",
-            "url": "https://holger-kampffmeyer.de/work/"
-          },
-          {
-            "@type": "SiteNavigationElement",
-            "position": 7,
-            "name": "Links",
-            "url": "https://holger-kampffmeyer.de/links/"
-          },
-          {
-            "@type": "SiteNavigationElement",
-            "position": 8,
-            "name": "Impressum",
-            "url": "https://holger-kampffmeyer.de/impressum/"
-          }
-        ]
-      }
-    </script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(siteNavigationJsonLd)} />
+    </>)}
     {jsonLd && (
       Array.isArray(jsonLd) ? jsonLd : [jsonLd]
     ).map(item => (
