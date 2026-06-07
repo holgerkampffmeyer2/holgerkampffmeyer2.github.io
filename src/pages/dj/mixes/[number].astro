@@ -20,9 +20,8 @@ interface BlogPostData {
    tags: string[];
    useCases: string[];
    tracklist: string[];
-   hasTracklist: boolean;
-   heroImage?: string;
-   ogImage?: string;
+    hasTracklist: boolean;
+    heroImage?: string;
 }
 
 interface BlogData {
@@ -147,11 +146,11 @@ const jsonLd = [
   noSiteJsonLd
   title={pageTitle}
   description={pageDescription}
-  image={post.ogImage || post.picture}
+  image={post.picture}
   ogTitle={`DJ Hulk - ${curDisplay.label}`}
   ogType="music.playlist"
-  ogImageWidth={1200}
-  ogImageHeight={630}
+  ogImageWidth={640}
+  ogImageHeight={640}
   twitterPlayerUrl={post.src}
   jsonLd={[getDjPersonSchema(), ...jsonLd, {
     "@context": "https://schema.org",
