@@ -562,12 +562,13 @@ const djPerson = getDjPersonSchema();
     }
 
     function initPosition() {
+      if (!track) return;
       updateSetWidth();
       track.scrollLeft = setWidth;
     }
 
     track.addEventListener("scroll", function () {
-      if (isJumping) return;
+      if (!track || isJumping) return;
       updateSetWidth();
       if (setWidth <= 0) return;
       if (track.scrollLeft >= setWidth * 2 - 5) {
@@ -586,11 +587,13 @@ const djPerson = getDjPersonSchema();
     });
 
     document.querySelector("[data-events-next]")?.addEventListener("click", function () {
+      if (!track) return;
       updateSetWidth();
       track.scrollBy({ left: 280, behavior: "smooth" });
     });
 
     document.querySelector("[data-events-prev]")?.addEventListener("click", function () {
+      if (!track) return;
       updateSetWidth();
       track.scrollBy({ left: -280, behavior: "smooth" });
     });
