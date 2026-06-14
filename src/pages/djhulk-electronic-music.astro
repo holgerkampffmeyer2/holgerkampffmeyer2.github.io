@@ -550,14 +550,14 @@ const djPerson = getDjPersonSchema();
     var carousel = document.querySelector("[data-events-carousel]");
     if (!track || !carousel) return;
 
-    var total = parseInt(carousel.getAttribute("data-events-count")) || 0;
+    var total = parseInt(carousel.getAttribute("data-events-count") ?? "0") || 0;
     var gap = 16;
     var setWidth = 0;
     var isJumping = false;
 
     function updateSetWidth() {
       if (!track || track.children.length === 0) return;
-      var first = track.children[0];
+      var first = track.children[0] as HTMLElement;
       setWidth = (first.offsetWidth + gap) * total;
     }
 
