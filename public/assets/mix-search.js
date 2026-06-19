@@ -89,7 +89,9 @@
     results.forEach(function (item, i) {
       var el = document.createElement('a');
       el.className = 'mix-search-item';
-      el.href = '/dj/mixes/' + item.slug;
+      var safeSlug = encodeURIComponent(String(item.slug || '').replace(/[^a-zA-Z0-9_-]/g, ''));
+      var safeHref = '/dj/mixes/' + safeSlug;
+      el.href = safeHref;
       el.setAttribute('data-index', i);
 
       var snippetHtml = '';
@@ -108,7 +110,7 @@
 
       el.addEventListener('mousedown', function (e) {
         e.preventDefault();
-        window.location.href = el.href;
+        window.location.href = safeHref;
       });
 
       list.appendChild(el);
