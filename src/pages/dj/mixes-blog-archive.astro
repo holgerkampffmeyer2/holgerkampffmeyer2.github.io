@@ -61,6 +61,15 @@ const USECASE_CONFIG: Record<string, { label: string; icon: typeof GymIcon; colo
   party: { label: 'Pre-Party', icon: PartyIcon, color: 'text-[var(--color-primary)]' }
 };
 
+const searchablePosts = archivePosts.map(post => ({
+  slug: post.slug,
+  title: post.title,
+  picture: post.picture,
+  description: post.description?.substring(0, 300) || '',
+  tags: post.tags,
+  tracklist: post.tracklist || []
+}));
+
 const breadcrumbLabel = useCaseFilter 
   ? `Archive - ${USE_CASE_LABELS[useCaseFilter] || useCaseFilter}`
   : 'Mix Archive';
@@ -163,6 +172,15 @@ if (useCaseFilter) {
 
   <section class="section-padding bg-[var(--color-bg)]">
     <div class="max-w-6xl mx-auto px-4">
+      <script id="mixSearchData" type="application/json" set:html={JSON.stringify(searchablePosts)}></script>
+
+      <div class="mix-search-wrapper mb-6">
+        <svg class="mix-search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input type="search" data-mix-search placeholder="Search by artist, title, or keyword..." aria-label="Search mixes" />
+      </div>
+
       <div class="flex flex-wrap gap-3 mb-8" id="filterButtons">
         <a
           href="/dj/mixes-blog-archive"
@@ -206,6 +224,7 @@ if (useCaseFilter) {
              href={`/dj/mixes/${post.slug}`}
              class="post-item block bg-[var(--color-surface)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors group"
              data-usecases={JSON.stringify(post.useCases)}
+             data-slug={post.slug}
              data-index={index}
            >
             <div class="aspect-video overflow-hidden">
@@ -290,5 +309,6 @@ if (useCaseFilter) {
 
   <Footer />
 
+  <script src="/assets/mix-search.js" defer></script>
   <script is:inline src="/assets/archive-pagination.js" defer></script>
 </Layout>
