@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import sitemap from '@astrojs/sitemap';
+import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
 
 export default defineConfig({
   vite: {
@@ -17,15 +17,14 @@ export default defineConfig({
       const url = new URL(item.url);
       const path = decodeURIComponent(url.pathname);
       const now = new Date().toISOString();
-      let priority = 0.5;
-      let changefreq = 'monthly';
-      if (path === '/') { priority = 1.0; changefreq = 'weekly'; }
-      else if (path.startsWith('/dj/mixes') && path !== '/dj/mixes-all' && path !== '/dj/mixes-blog-archive') { priority = 0.8; changefreq = 'weekly'; }
-      else if (path === '/djhulk-electronic-music') { priority = 0.8; changefreq = 'weekly'; }
-      else if (path === '/work' || path === '/dj/videos' || path === '/dj/em3f') { priority = 0.6; }
-      else if (path === '/links') { priority = 0.5; }
-      else if (path === '/impressum' || path.startsWith('/vermietung')) { priority = 0.3; changefreq = 'yearly'; }
-      return { ...item, changefreq, lastmod: now, priority };
+      const out = { ...item, lastmod: now, priority: 0.5, changefreq: ChangeFreqEnum.MONTHLY };
+      if (path === '/') { out.priority = 1.0; out.changefreq = ChangeFreqEnum.WEEKLY; }
+      else if (path.startsWith('/dj/mixes') && path !== '/dj/mixes-all' && path !== '/dj/mixes-blog-archive') { out.priority = 0.8; out.changefreq = ChangeFreqEnum.WEEKLY; }
+      else if (path === '/djhulk-electronic-music') { out.priority = 0.8; out.changefreq = ChangeFreqEnum.WEEKLY; }
+      else if (path === '/work' || path === '/dj/videos' || path === '/dj/em3f') { out.priority = 0.6; }
+      else if (path === '/links') { out.priority = 0.5; }
+      else if (path === '/impressum' || path.startsWith('/vermietung')) { out.priority = 0.3; out.changefreq = ChangeFreqEnum.YEARLY; }
+      return out;
     }
   })],
   redirects: {
