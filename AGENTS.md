@@ -38,6 +38,9 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 ## Wartungsskripte
 - `node scripts/update-image-refs.mjs` — Ersetzt JPEG/PNG-Bildreferenzen durch WebP-Versionen (falls verfügbar) in allen .astro, .html, .css und .mjs Dateien
 
+## IndexNow
+- `pnpm run indexnow-submit` — Sendet alle URLs aus `public/urllist.txt` an die IndexNow API (Bing). Wird nach `build:seo` ausgeführt.
+
 ## Wichtige Regeln
 1. Domain IMMER auf `holger-kampffmeyer.de` setzen
 
