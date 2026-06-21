@@ -12,7 +12,22 @@ export default defineConfig({
   base: '/',
   output: 'static',
   trailingSlash: 'never',
-  integrations: [sitemap()],
+  integrations: [sitemap({
+    serialize(item) {
+      const url = new URL(item.url);
+      const path = decodeURIComponent(url.pathname);
+      const now = new Date().toISOString();
+      let priority = 0.5;
+      let changefreq = 'monthly';
+      if (path === '/') { priority = 1.0; changefreq = 'weekly'; }
+      else if (path.startsWith('/dj/mixes') && path !== '/dj/mixes-all' && path !== '/dj/mixes-blog-archive') { priority = 0.8; changefreq = 'weekly'; }
+      else if (path === '/djhulk-electronic-music') { priority = 0.8; changefreq = 'weekly'; }
+      else if (path === '/work' || path === '/dj/videos' || path === '/dj/em3f') { priority = 0.6; }
+      else if (path === '/links') { priority = 0.5; }
+      else if (path === '/impressum' || path.startsWith('/vermietung')) { priority = 0.3; changefreq = 'yearly'; }
+      return { ...item, changefreq, lastmod: now, priority };
+    }
+  })],
   redirects: {
   '/dj/': '/djhulk-electronic-music',
   '/vermietung.html': 'https://soundundlicht-stuttgart.de/vermietung/',
