@@ -29,6 +29,8 @@ export default defineConfig({
   })],
   redirects: {
   '/dj/': '/djhulk-electronic-music',
+  '/dj/mixes/': '/dj/mixes-all',
+  '/dj/mixes.html': '/dj/mixes-all',
   '/vermietung.html': 'https://soundundlicht-stuttgart.de/vermietung/',
   '/vermietung/djpaket-fildern/': 'https://soundundlicht-stuttgart.de/vermietung/djpaket-fildern/',
   '/vermietung/jbl-partybox-300-320/': 'https://soundundlicht-stuttgart.de/vermietung/jbl-partybox-300-320/',
