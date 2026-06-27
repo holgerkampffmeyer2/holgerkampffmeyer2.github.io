@@ -37,6 +37,12 @@ export default defineConfig({
   '/vermietung/led-bossfx-nebelmaschine/': 'https://soundundlicht-stuttgart.de/vermietung/led-bossfx-nebelmaschine/',
   '/vermietung/partylicht-moving-head/': 'https://soundundlicht-stuttgart.de/vermietung/partylicht-moving-head/',
   '/vermietung/partypaket-stuttgart/': 'https://soundundlicht-stuttgart.de/vermietung/partypaket-stuttgart/',
-  '/vermietung/veranstaltungspaket-stuttgart/': 'https://soundundlicht-stuttgart.de/vermietung/veranstaltungspaket-stuttgart/'
+  '/vermietung/veranstaltungspaket-stuttgart/': 'https://soundundlicht-stuttgart.de/vermietung/veranstaltungspaket-stuttgart/',
+  '/vermietung/partylicht-moving-head.html': 'https://soundundlicht-stuttgart.de/vermietung/partylicht-moving-head/',
+  '/vermietung/led-bossfx-nebelmaschine.html': 'https://soundundlicht-stuttgart.de/vermietung/led-bossfx-nebelmaschine/',
+  '/vermietung/jbl-partybox-300-320.html': 'https://soundundlicht-stuttgart.de/vermietung/jbl-partybox-300-320/',
+  '/vermietung/kls-laser-bar.html': 'https://soundundlicht-stuttgart.de/vermietung/kls-laser-bar/',
+  '/vermietung/ld-maui-28g3.html': 'https://soundundlicht-stuttgart.de/vermietung/ld-maui-28g3/',
+  '/vermietung/djpaket-fildern.html': 'https://soundundlicht-stuttgart.de/vermietung/djpaket-fildern/'
   }
 });
