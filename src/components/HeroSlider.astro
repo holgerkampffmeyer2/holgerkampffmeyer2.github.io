@@ -37,16 +37,15 @@ const slidesWithMeta = slides.map(s => ({
   {slidesWithMeta.map((slide, index) => (
     <div class={`slide ${index === 0 ? "active" : ""}`} data-slide={index}>
       {slide.isOptimized ? (
-        <Picture
-          src={slide.backgroundImage as ImageMetadata}
-          formats={['avif', 'webp']}
-          alt={slide.title}
-          class="hero-bg-img"
-          loading={index === 0 ? "eager" : "lazy"}
-          fetchpriority={index === 0 ? "high" : "low"}
-          widths={[640, 1024, 1920]}
-          sizes="100vw"
-        />
+<Picture
+           src={slide.backgroundImage as ImageMetadata}
+           formats={['avif', 'webp']}
+           alt={slide.title}
+           class="hero-bg-img"
+           loading={index === 0 ? "eager" : "lazy"}
+           fetchpriority={index === 0 ? "high" : "low"}
+           widths={[640, 1024, 1920]}
+         />
       ) : (
        <img
          src={slide.backgroundImage as string}

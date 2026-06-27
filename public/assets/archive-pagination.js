@@ -105,7 +105,7 @@
     url.searchParams.set('page', page);
     window.history.replaceState({}, '', url);
 
-    if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    
     renderPageNumbers(filteredTotalPages);
   }
 

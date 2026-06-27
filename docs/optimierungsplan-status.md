@@ -92,18 +92,17 @@ Kein Bedarf — keine großen Inline-Scripts vorhanden.
 ## Phase 9: Build-Output verkleinern ❌
 
 ### 9A: Build-Größe analysieren ❌
-- **~58MB gesamt** (nach Phase-6-Bereinigung)
-- Größter Treiber: astro:assets generiert viele Varianten pro Bild
-- **Prüfen:** Sind alle Bildvarianten nötig? `widths`-Angaben optimieren?
-
 ## Phase 10: Redirect-Korrektur ✅
 
 ### 10A: /dj/mixes/ Redirect gefixt ✅
-- **Problem:** `/dj/mixes/` → `/dj/mixes-all` leitete Weekly Mixes fälschlich auf All Mixes um
-- **Ursache:** Redirect erzeugte `dist/dj/mixes/index.html` als Redirect-Seite, die die eigentliche Seite überschrieb
-- **Fix:** Beide problematischen Redirects entfernt:
-  - `/dj/mixes/` → `/dj/mixes-all` ❌ entfernt (war der Fehler)
-  - `/dj/mixes/` → `/dj/mixes` ❌ entfernt (erzeugte self-redirect-Konflikt)
-  - `/dj/mixes.html` → `/dj/mixes-all` ❌ entfernt (Verzeichnis/Datei-Konflikt)
-- **Lösung:** `trailingSlash: 'never'` kümmert sich automatisch um Slash-Handling
-- **Build:** 36 pages (vorher 35) — Weekly Mixes jetzt korrekt generiert
+- **Problem:** Auf Grund gleichnamiger Datei und Verzeichnis (`src/pages/dj/mixes.astro` und `src/pages/dj/mixes/`) entstand ein Konflikt beim Build mit `trailingSlash: 'never'`.
+- **Lösung:** Umbenennung von `mixes.astro` zu `mixes-weekly.astro` und Einrichtung eines Redirects von `/dj/mixes` nach `/dj/mixes-weekly` für Rückwärtskompatibilität.
+- **Zusatz:** Die Seite `dj/mixes-all` wurde entfernt und ihre Funktionalität (Hero-Design) in `dj/mixes-blog-archive` integriert, sodass die Archivansicht mit Tracklisten jetzt das bevorzugte Layout verwendet.
+- **Umsetzung:**
+   - Umbenennung der Datei: `git mv src/pages/dj/mixes.astro src/pages/dj/mixes-weekly.astro`
+   - Aktualisierung aller internen Links und Metadaten (Navbar, mixes-all, mixes-blog-archive, JSON-LD, etc.)
+   - Hinzufügen des Redirects in `astro.config.mjs`: `'/dj/mixes': '/dj/mixes-weekly'`
+   - Entfernen von `src/pages/dj/mixes-all.astro`
+   - Erweiterung von `src/pages/dj/mixes-blog-archive.astro` um das Hero-Element von `mixes-all` (Bild, Titel, Beschreibung, CTA-Button) und Aktualisierung der JSON-LD-Metadaten.
+   - Hinzufügen eines Redirects von `/dj/mixes/all` nach `/dj/mixes-blog-archive` für Rückwärtskompatibilität.
+- **Ergebnis:** Keine Namenskonflikte mehr, korrektes Routing für alle Seiten, alte URLs werden automatisch weitergeleitet, und die Archivansicht vereint das ansprechende Hero-Design mit der nützlichen Tracklisten-Funktionalität.

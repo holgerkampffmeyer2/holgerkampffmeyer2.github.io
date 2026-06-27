@@ -6,11 +6,15 @@
   var SNIPPET_PAD = 30;
 
   var searchData = [];
+
+  // Debug log
+  console.log('mix-search.js loaded');
   var overlay = null;
   var input = null;
   var selectedIndex = -1;
   var debounceTimer = null;
   var currentQuery = '';
+var scrollYOnFocus = null;
 
   function escapeHtml(str) {
     if (!str) return '';
@@ -197,26 +201,42 @@
   }
 
   function onFocus() {
+    var scrollYOnFocus = window.scrollY;
     var val = input.value.trim();
     if (val.length >= 2) {
       showResults(val);
     }
-  }
+    setTimeout(function () {
+if (window.scrollY !== scrollYOnFocus) {
+         window.scrollTo(0, scrollYOnFocus);
+       }
+     }, 0);
+   }
 
-  function init() {
-    var script = document.getElementById('mixSearchData');
-    input = document.querySelector('[data-mix-search]');
-    if (!script || !input) return;
+function init() {
+     var script = document.getElementById('mixSearchData');
+     input = document.querySelector('[data-mix-search]');
+     if (!script || !input) {
+       console.log('mix-search: script or input not found');
+       return;
+     }
 
-    try {
-      searchData = JSON.parse(script.textContent);
-    } catch (e) {
-      return;
-    }
+try {
+          searchData = JSON.parse(script.textContent);
+          console.log('mix-search: data loaded, items:', searchData.length);
+        } catch (e) {
+          console.log('mix-search: JSON parse error', e);
+          return;
+        }
 
     overlay = document.createElement('div');
     overlay.className = 'mix-search-overlay';
     overlay.style.display = 'none';
+    overlay.style.position = 'absolute';
+    overlay.style.top = '100%';
+    overlay.style.left = '0';
+    overlay.style.right = '0';
+    overlay.style.zIndex = '1000';
     var wrapper = input.parentElement;
     wrapper.style.position = 'relative';
     wrapper.appendChild(overlay);

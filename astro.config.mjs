@@ -37,8 +37,11 @@ export default defineConfig({
   })],
   redirects: {
   '/dj/': '/djhulk-electronic-music',
-  '/mixes/': '/dj/mixes-all',
-  '/mixes.html': '/dj/mixes-all',
+    '/dj/mixes': '/dj/mixes-weekly',
+    '/dj/mixes/all': '/dj/mixes-blog-archive',
+    'dj/mixes.html': '/dj/mixes-weekly',
+  '/mixes': '/dj/mixes-weekly',
+  '/mixes.html': '/dj/mixes-weekly',
 
   '/vermietung.html': 'https://soundundlicht-stuttgart.de/vermietung/',
   '/vermietung/djpaket-fildern/': 'https://soundundlicht-stuttgart.de/vermietung/djpaket-fildern/',

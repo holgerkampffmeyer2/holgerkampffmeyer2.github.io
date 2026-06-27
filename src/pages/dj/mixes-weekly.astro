@@ -65,7 +65,7 @@ const blogSchema = {
   "@type": "Blog",
   "name": "DJ Hulk Weekly Mixes Blog",
   "description": "Weekly electronic music DJ mixes by DJ Hulk with full tracklists. House, Tech House, Deep House, Latin House.",
-  "url": "https://holger-kampffmeyer.de/dj/mixes/",
+  "url": "https://holger-kampffmeyer.de/dj/mixes-weekly/",
   "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
   "author": {
     "@type": "Person",
@@ -112,7 +112,7 @@ function formatDate(dateStr: string) {
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
         {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music/"},
-        {"@type": "ListItem", "position": 3, "name": "Weekly DJ Mixes", "item": "https://holger-kampffmeyer.de/dj/mixes"}
+        {"@type": "ListItem", "position": 3, "name": "Weekly DJ Mixes", "item": "https://holger-kampffmeyer.de/dj/mixes-weekly/"}
       ]
     },
     {
@@ -120,7 +120,7 @@ function formatDate(dateStr: string) {
       "@type": "WebPage",
       "name": "Weekly DJ Mixes - DJ Hulk - House, Tech House, Deep House",
       "description": "Every Sunday new DJ mix on Mixcloud by DJ Hulk. House, Tech House, Deep House with tracklists. Perfect for gym, driving, work, or pre-party.",
-      "url": "https://holger-kampffmeyer.de/dj/mixes/"
+      "url": "https://holger-kampffmeyer.de/dj/mixes-weekly/"
     },
     {
       "@context": "https://schema.org",
@@ -160,7 +160,7 @@ function formatDate(dateStr: string) {
       "@type": "MusicPlaylist",
       "name": "DJ Hulk Weekly Mixes",
       "description": "Weekly electronic music DJ mixes by DJ Hulk with full tracklists. Specialized for gym, driving, work focus, and pre-party.",
-      "url": "https://holger-kampffmeyer.de/dj/mixes/",
+      "url": "https://holger-kampffmeyer.de/dj/mixes-weekly/",
       "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
       "genre": ["House", "Tech House", "Deep House", "Latin House"],
       "numTracks": blogData.posts?.length || 0
@@ -182,7 +182,7 @@ function formatDate(dateStr: string) {
     getDjPersonSchema()
   ].filter(Boolean)}
 >
-  <Navbar currentPage="/dj/mixes/" />
+  <Navbar currentPage="/dj/mixes-weekly/" />
 
   <Breadcrumb segments={breadcrumbSegments} />
 
@@ -399,9 +399,9 @@ function formatDate(dateStr: string) {
          <a href="/dj/mixes-blog-archive" class="btn-secondary">
            Mix Archive
          </a>
-         <a href="/dj/mixes-all" class="btn-primary ml-4">
-           Full Mixcloud Library
-         </a>
+<a href="/dj/mixes-blog-archive" class="btn-primary ml-4">
+            Full Mixcloud Library
+          </a>
        </div>
 
       <div class="mt-12 text-center">

@@ -8,6 +8,8 @@ import DriveIcon from "../../components/icons/DriveIcon.astro";
 import WorkIcon from "../../components/icons/WorkIcon.astro";
 import PartyIcon from "../../components/icons/PartyIcon.astro";
 import { getDjPersonSchema } from "../../utils/dj-schema.js";
+import Hero from "../../components/Hero.astro";
+import heroImg from "../../assets/img/em3f/DSC_2451.webp";
 
 interface BlogPostData {
    slug: string;
@@ -76,7 +78,7 @@ const breadcrumbLabel = useCaseFilter
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
-  { label: "Weekly DJ Mixes", href: "/dj/mixes" },
+  { label: "Weekly DJ Mixes", href: "/dj/mixes-weekly" },
   { label: breadcrumbLabel }
 ];
 
@@ -159,16 +161,38 @@ if (useCaseFilter) {
 
   <Breadcrumb segments={breadcrumbSegments} />
 
-  <section class="pt-8 pb-16">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <h1 class="font-play text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text">
-        Mix Archive {useCaseFilter ? <span class="text-2xl text-[var(--color-primary)]">({USE_CASE_LABELS[useCaseFilter] || useCaseFilter})</span> : ''}
-      </h1>
-      <p class="text-[var(--color-text-muted)] text-lg">
-        All DJ mixes with tracklists. Filter by mood to find your perfect mix.
+  <Hero
+    image={heroImg}
+  >
+    <div class="max-w-3xl pt-32 text-center">
+      <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">All Mixcloud Mixes</span>
+      <h1 class="font-play text-5xl md:text-7xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">All DJ Mixes</h1>
+      <p class="text-[var(--color-text-muted)] text-xl mb-8 max-w-2xl animate-fadeInUp stagger-3">
+        Browse all House & Tech House Mixes on Mixcloud
       </p>
+      <a href="/dj/mixes-weekly" class="btn-primary animate-fadeInUp stagger-4">
+        Weekly DJ Mixes →
+      </a>
     </div>
-  </section>
+  </Hero>
+<style>
+  .hero-slider {
+    position: relative;
+    aspect-ratio: 1287 / 859;
+  }
+  .slide-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
 
   <section class="section-padding bg-[var(--color-bg)]">
     <div class="max-w-6xl mx-auto px-4">
@@ -300,7 +324,7 @@ if (useCaseFilter) {
       </div>
 
       <div class="text-center mt-12">
-        <a href="/dj/mixes" class="btn-secondary">
+        <a href="/dj/mixes-weekly" class="btn-secondary">
           ← Back to Weekly DJ Mixes
         </a>
       </div>

@@ -15,16 +15,15 @@ const isOptimized = typeof image !== 'string';
   <div class="slide active">
     <div class="slide-content">
       {isOptimized ? (
-        <Picture
-          src={image}
-          formats={['avif', 'webp']}
-          alt="Hero image"
-          loading="eager"
-          fetchpriority="high"
-          class="hero-bg-img"
-          widths={[640, 1024, 1920]}
-          sizes="100vw"
-        />
+<Picture
+        src={image}
+        formats={['avif', 'webp']}
+        alt="Hero image"
+        loading="eager"
+        fetchpriority="high"
+        class="hero-bg-img"
+        widths={[640, 1024, 1920]}
+      />
       ) : (
         <img src={image} alt="Hero image" width="1920" height="1080" class="hero-bg-img" loading="eager" fetchpriority="high" />
       )}
