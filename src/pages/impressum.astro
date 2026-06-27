@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
+import heroImg from '../assets/img/team-bg.webp';
 import Footer from '../components/Footer.astro';
 ---
 <Layout 
@@ -20,7 +21,7 @@ import Footer from '../components/Footer.astro';
   <Navbar currentPage="/impressum/" />
 
   <Hero 
-    image="/img/team-bg.webp"
+    image={heroImg}
   >
     <div class="max-w-3xl pt-32 text-center">
       <h1 class="font-play text-5xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-text animate-fadeInUp stagger-2">Impressum</h1>

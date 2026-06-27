@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Hero from '../../components/Hero.astro';
+import heroImg from '../../assets/img/tomatefestival.webp';
 import Footer from '../../components/Footer.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import { getDjPersonSchema } from '../../utils/dj-schema.js';
@@ -55,7 +56,7 @@ const photos = [
   <Breadcrumb segments={breadcrumbSegments} />
 
   <Hero 
-  image="/img/tomatefestival.webp"
+  image={heroImg}
   >
     <div class="max-w-3xl pt-32 text-center">
       <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">Electronic Music Family and Friends Festival</span>

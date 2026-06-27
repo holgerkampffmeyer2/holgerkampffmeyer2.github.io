@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:images": "node scripts/optimize-images.mjs",
     "build:seo": "node scripts/generate-rss.mjs && node scripts/generate-urllist.mjs",
-    "build:full": "node scripts/fetch-mixcloud.mjs && astro build && node scripts/generate-rss.mjs && node scripts/generate-urllist.mjs",
+    "build:full": "node scripts/fetch-mixcloud.mjs && node scripts/optimize-images.mjs && astro build && node scripts/generate-rss.mjs && node scripts/generate-urllist.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "lint": "NODE_OPTIONS=--max-old-space-size=1536 eslint src --ext .ts,.tsx,.astro --format json --cache --cache-location .eslintcache",
@@ -19,10 +20,8 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
-    "@fontsource-variable/josefin-sans": "^5.2.8",
-    "@fontsource/play": "^5.2.8",
     "@tailwindcss/vite": "^4.3.0",
-    "astro": "^6.4.8",
+    "astro": "^7.0.0",
     "node-fetch": "^3.3.2",
     "tailwindcss": "^4.3.0"
   },

@@ -13,7 +13,7 @@ const CONCURRENCY = os.cpus().length;
 function parseArgs() {
   const args = process.argv.slice(2);
   const options = {
-    dirs: [path.join(PUBLIC_DIR, 'img'), path.join(PUBLIC_DIR, 'tracklists')],
+    dirs: [path.join(PUBLIC_DIR, 'img'), path.join(PUBLIC_DIR, 'tracklists'), path.join(PUBLIC_DIR, 'assets')],
     width: 1920,
     height: null,
     fit: 'inside',

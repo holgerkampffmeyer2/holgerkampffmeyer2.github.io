@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Hero from '../../components/Hero.astro';
+import heroImg from '../../assets/img/em3f/DSC_2451.webp';
 import Footer from '../../components/Footer.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import MixcloudWidget from '../../components/MixcloudWidget.astro';
@@ -144,7 +145,7 @@ const totalPages = Math.ceil(otherMixes.length / ITEMS_PER_PAGE);
   <Breadcrumb segments={breadcrumbSegments} />
 
   <Hero
-    image="/img/em3f/DSC_2451.webp"
+    image={heroImg}
   >
     <div class="max-w-3xl pt-32 text-center">
       <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase animate-fadeInUp">All Mixcloud Mixes</span>

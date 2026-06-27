@@ -1,7 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { getDjPersonSchema } from "../utils/dj-schema.js";
-
+import { Picture } from 'astro:assets';
+import profileImg from '../assets/img/_81A4010.webp';
+import Layout from '../layouts/Layout.astro';
+import { getDjPersonSchema } from '../utils/dj-schema.js';
 import FacebookIcon from "../components/icons/FacebookIcon.astro";
 import InstagramIcon from "../components/icons/InstagramIcon.astro";
 import YouTubeIcon from "../components/icons/YouTubeIcon.astro";
@@ -28,86 +29,80 @@ const links = [
     name: "DJ Hulks Website",
     url: "https://holger-kampffmeyer.de/",
     icon: DjHulkIcon,
-    description: "Official Website of DJ Hulk - All Information, Weekly Updated Mixes, Gigs and Contact"
-  },
-  {
-    name: "Instagram",
-    url: "https://www.instagram.com/djhulk_de",
-    icon: InstagramIcon,
-    description: "DJ Hulk on Instagram - Party photos, Events and Behind the Scenes"
-  },
-  {
-    name: "Facebook",
-    url: "https://www.facebook.com/holger.kampffmeyer",
-    icon: FacebookIcon,
-    description: "Facebook profile of Holger Kampffmeyer"
-  },
-  {
-    name: "YouTube",
-    url: "https://www.youtube.com/@djhulk_de",
-    icon: YouTubeIcon,
-    description: "DJ Hulk YouTube Channel - Videos, Aftermovies and Party Sessions"
+    description: "DJ Hulk - Electronic Music DJ aus Stuttgart"
   },
   {
     name: "Mixcloud",
     url: "https://www.mixcloud.com/holger-kampffmeyer/",
     icon: MixcloudIcon,
-    description: "Weekly DJ Mixes - Tech House, Deep House, Afro House. New mix every Sunday!"
+    description: "Weekly DJ Mixes - House, Tech House & mehr"
   },
   {
-    name: "Spotify Playlist",
-    url: "https://open.spotify.com/playlist/2IiSXnINIWdFMewY55iJWA?utm_source=generator",
+    name: "Instagram",
+    url: "https://www.instagram.com/djhulk_de/",
+    icon: InstagramIcon,
+    description: "Neueste Updates & Stories"
+  },
+  {
+    name: "Facebook",
+    url: "https://www.facebook.com/djhulk.de",
+    icon: FacebookIcon,
+    description: "Events & News"
+  },
+  {
+    name: "YouTube",
+    url: "https://www.youtube.com/@djhulk_de",
+    icon: YouTubeIcon,
+    description: "Video-Mitschnitte & Aftermovies"
+  },
+  {
+    name: "Spotify",
+    url: "https://open.spotify.com/playlist/4u1RndvAi8kTQs85zhc8z4",
     icon: SpotifyIcon,
-    description: "Weekly updated House Music Playlist"
+    description: "Aktuelle Playlist"
   },
   {
     name: "SoundCloud",
-    url: "https://soundcloud.com/holger-kampffmeyer2",
+    url: "https://soundcloud.com/dj-hulk-337680700",
     icon: SoundCloudIcon,
-    description: "SoundCloud profile - Sets and productions"
-  },
-  {
-    name: "Resident Advisor",
-    url: "https://de.ra.co/dj/djhulk",
-    icon: ResidentAdvisorIcon,
-    description: "Resident Advisor Profile - Gigs, Biography and Mixes"
-  },
-  {
-    name: "365 FM Radio",
-    url: "https://www.365fmradio.de/",
-    icon: RadioIcon,
-    description: "365 FM Radio - Electronic Music 24/7. Resident DJ with Live Sessions on weekends"
-  },
-  {
-    name: "CouchRadio",
-    url: "https://www.couchradio.ch/",
-    icon: RadioIcon,
-    description: "CouchRadio - Finest Deep House, Progressive, Vocal, Tech House 24/7. Resident DJ."
-  },
-  {
-    name: "GitHub",
-    url: "https://github.com/holgerkampffmeyer2/wav-to-aac-converter",
-    icon: GitHubIcon,
-    description: "Open Source Project - AI-powered Music WAV to MP3 Optimizer"
+    description: "Audiostreams & Uploads"
   },
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com/in/holger-kampffmeyer-390b6789/",
+    url: "https://www.linkedin.com/in/holgerkampffmeyer/",
     icon: LinkedInIcon,
-    description: "LinkedIn Profile - IT Professional, DevOps, Team Manager"
+    description: "Berufliches Netzwerk"
   },
   {
-    name: "XING",
-    url: "https://www.xing.com/profile/Holger_Kampffmeyer",
+    name: "Xing",
+    url: "https://www.xing.com/profile/Holger_Kampffmeyer3/",
     icon: XingIcon,
-    description: "XING Profile - Professional Network"
-  }, 
-  {
-    name: "Email",
-    url: "mailto:holger.kampffmeyer+dj@gmail.com",
-    icon: EmailIcon,
-    description: "Email for DJ services and tech rental inquiries"
+    description: "Business-Profil"
   },
+  {
+    name: "GitHub",
+    url: "https://github.com/holgerkampffmeyer2",
+    icon: GitHubIcon,
+    description: "Open Source - DJ Tools & DevOps"
+  },
+  {
+    name: "Resident Advisor",
+    url: "https://ra.co/dj/djhulk",
+    icon: ResidentAdvisorIcon,
+    description: "DJ Profil & Events"
+  },
+  {
+    name: "Radio 365 FM",
+    url: "https://www.365fmradio.de/",
+    icon: RadioIcon,
+    description: "DJ Hulk bei 365 FM Radio"
+  },
+  {
+    name: "E-Mail",
+    url: "mailto:holger.kampffmeyer@web.de",
+    icon: EmailIcon,
+    description: "Kontakt - Buchungen & Anfragen"
+  }
 ];
 ---
 
@@ -131,13 +126,14 @@ const links = [
   <section class="min-h-screen bg-[var(--color-bg)] py-12 md:py-16">
     <div class="max-w-sm mx-auto px-4">
       <div class="text-center mb-10">
-        <img
-          src="/img/_81A4010.webp"
+        <Picture
+          src={profileImg}
+          formats={['avif', 'webp']}
           alt="DJ Hulk"
           class="w-28 h-28 rounded-full mx-auto mb-5 border-2 border-[var(--color-primary)] object-cover shadow-lg"
-          width="112"
-          height="112"
           loading="eager"
+          fetchpriority="high"
+          widths={[112]}
         />
         <h1 class="font-play text-3xl font-bold gradient-text mb-1">
           DJ Hulk

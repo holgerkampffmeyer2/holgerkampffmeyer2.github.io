@@ -2,6 +2,10 @@
 @import "./fonts.css";
 @import "./themes/default.css";
 
+@view-transition {
+  navigation: auto;
+}
+
 html {
   scroll-behavior: smooth;
 }

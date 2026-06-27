@@ -3,6 +3,16 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import HeroSlider from "../components/HeroSlider.astro";
+import sliderImg1 from "../assets/img/header.webp";
+import sliderImg2 from "../assets/img/Mixcloud Post Mix169.webp";
+import sliderImg3 from "../assets/img/header-work-dark.webp";
+import sliderImg4 from "../assets/img/vermietung.webp";
+import { Picture } from 'astro:assets';
+import djImg1 from "../assets/img/DSC_2311.webp";
+import djImg2 from "../assets/img/_81A4010-sm.webp";
+import mixPic1 from "../assets/img/Mix183.webp";
+import mixPic2 from "../assets/img/Mixcloud Post Mix174.webp";
+import toolsImg from "../assets/img/organize_mp3s.webp";
 import EmailIcon from "../components/icons/EmailIcon.astro";
 import FacebookIcon from "../components/icons/FacebookIcon.astro";
 import InstagramIcon from "../components/icons/InstagramIcon.astro";
@@ -114,35 +124,35 @@ const faqs = getFaqsForPage('index');
          titleTag: "h1",
          category: "Electro, House, Tech House, Techno, DnB",
          description: "Stuttgarter DJ für elektronische Musik - House, Tech House, Techno, Drum n Bass",
-         backgroundImage: "/img/header.webp",
-         buttons: [{ text: "Mehr über DJ Hulk", href: "/djhulk-electronic-music" }]
-       },
-       {
-         title: "Mixes mit Tracklists",
-         titleTag: "h2",
-         category: "Weekly DJ Mixes",
-         description: "Jeden Sonntag neuer Mix - House, Tech House, Deep House. Mit vollständiger Tracklist und optimiert für Gym, Drive, Work oder Party.",
-          backgroundImage: "/tracklists/Mixcloud%20Post%20Mix169.webp",
-         buttons: [{ text: "Zu den Mixes", href: "/dj/mixes" }]
-       },
-        {
-          title: "Work",
-          titleTag: "h2",
-          category: "DevOps & Platform Engineering",
-          description: "Holger Kampffmeyer - Director DevOps bei Vector. AI Agentic Development, Platform Engineering, Cloud Native.",
-          backgroundImage: "/img/header-work-dark.webp",
-          overlayVariant: "secondary",
-          buttons: [{ text: "Mehr erfahren", href: "/work" }]
+         backgroundImage: sliderImg1,
+          buttons: [{ text: "Mehr über DJ Hulk", href: "/djhulk-electronic-music" }]
         },
         {
-          title: "Technik mieten",
+          title: "Mixes mit Tracklists",
           titleTag: "h2",
-          category: "Vermietung",
-          description: "PA-Anlagen, Partyboxen, Lichttechnik und DJ-Equipment für deine Veranstaltung in Stuttgart und Umgebung.",
-          backgroundImage: "/img/vermietung.webp",
-          overlayVariant: "secondary",
-          buttons: [{ text: "Zur Vermietung", href: "https://soundundlicht-stuttgart.de/vermietung/" }]
-        }
+          category: "Weekly DJ Mixes",
+          description: "Jeden Sonntag neuer Mix - House, Tech House, Deep House. Mit vollständiger Tracklist und optimiert für Gym, Drive, Work oder Party.",
+           backgroundImage: sliderImg2,
+          buttons: [{ text: "Zu den Mixes", href: "/dj/mixes" }]
+        },
+         {
+           title: "Work",
+           titleTag: "h2",
+           category: "DevOps & Platform Engineering",
+           description: "Holger Kampffmeyer - Director DevOps bei Vector. AI Agentic Development, Platform Engineering, Cloud Native.",
+           backgroundImage: sliderImg3,
+           overlayVariant: "secondary",
+           buttons: [{ text: "Mehr erfahren", href: "/work" }]
+         },
+         {
+           title: "Technik mieten",
+           titleTag: "h2",
+           category: "Vermietung",
+           description: "PA-Anlagen, Partyboxen, Lichttechnik und DJ-Equipment für deine Veranstaltung in Stuttgart und Umgebung.",
+           backgroundImage: sliderImg4,
+           overlayVariant: "secondary",
+           buttons: [{ text: "Zur Vermietung", href: "https://soundundlicht-stuttgart.de/vermietung/" }]
+         }
       ]}
   />
 
@@ -175,21 +185,23 @@ const faqs = getFaqsForPage('index');
         </div>
 
          <div class="grid grid-cols-2 gap-4">
-           <img
-             src="/img/DSC_2311.webp"
+           <Picture
+             src={djImg1}
+             formats={['avif', 'webp']}
              alt="DJ Hulk"
-             width="400"
-             height="400"
              loading="lazy"
              class="rounded-xl w-full aspect-square object-cover hover:ring-2 hover:ring-[var(--color-secondary)] hover:scale-[1.02] transition-all duration-300 animate-on-scroll stagger-1"
+             widths={[400, 800]}
+             sizes="(max-width: 768px) 50vw, 400px"
            />
-           <img
-             src="/img/_81A4010-sm.webp"
+           <Picture
+             src={djImg2}
+             formats={['avif', 'webp']}
              alt="DJ Hulk"
-             width="400"
-             height="400"
              loading="lazy"
              class="rounded-xl w-full aspect-square object-cover hover:ring-2 hover:ring-[var(--color-secondary)] hover:scale-[1.02] transition-all duration-300 animate-on-scroll stagger-2"
+             widths={[400, 800]}
+             sizes="(max-width: 768px) 50vw, 400px"
            />
          </div>
       </div>
@@ -236,21 +248,23 @@ const faqs = getFaqsForPage('index');
         </div>
 
          <div class="grid grid-cols-2 gap-4">
-           <img
-               src="/tracklists/Mix183.webp"
+           <Picture
+             src={mixPic1}
+             formats={['avif', 'webp']}
              alt="DJ Hulk Mix on Mixcloud"
-             width="400"
-             height="400"
              loading="lazy"
              class="rounded-xl w-full aspect-square object-cover hover:ring-2 hover:ring-[var(--color-secondary)] hover:scale-[1.02] transition-all duration-300 animate-on-scroll stagger-1"
+             widths={[400, 800]}
+             sizes="(max-width: 768px) 50vw, 400px"
            />
-           <img
-               src="/tracklists/Mixcloud%20Post%20Mix174.webp"
+           <Picture
+             src={mixPic2}
+             formats={['avif', 'webp']}
              alt="DJ Hulk Mix on Mixcloud"
-             width="400"
-             height="400"
              loading="lazy"
              class="rounded-xl w-full aspect-square object-cover hover:ring-2 hover:ring-[var(--color-secondary)] hover:scale-[1.02] transition-all duration-300 animate-on-scroll stagger-2"
+             widths={[400, 800]}
+             sizes="(max-width: 768px) 50vw, 400px"
            />
          </div>
       </div>
@@ -296,12 +310,14 @@ const faqs = getFaqsForPage('index');
         </div>
 
         <div class="grid grid-cols-1 gap-4">
-          <img
-            src="/assets/organize_mp3s.webp"
+          <Picture
+            src={toolsImg}
+            formats={['avif', 'webp']}
             alt="DJ Tools Open Source Projects"
-            width="640"
-            height="360"
+            loading="lazy"
             class="rounded-xl w-full aspect-video object-cover hover:ring-2 hover:ring-[var(--color-secondary)] hover:scale-[1.02] transition-all duration-300 animate-on-scroll"
+            widths={[640, 1280]}
+            sizes="(max-width: 768px) 100vw, 640px"
           />
         </div>
       </div>

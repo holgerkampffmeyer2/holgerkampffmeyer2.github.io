@@ -159,7 +159,13 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
     {preloadImage && <link rel="preload" as="image" href={preloadImage} />}
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/josefin-sans-variable.woff2" />
 
-
+    <!-- Preconnect to external origins -->
+    <link rel="preconnect" href="https://www.mixcloud.com" crossorigin />
+    <link rel="preconnect" href="https://www.youtube.com" crossorigin />
+    <link rel="preconnect" href="https://www.google.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.mixcloud.com" />
+    <link rel="dns-prefetch" href="https://www.youtube.com" />
+    <link rel="dns-prefetch" href="https://www.google.com" />
     
     <!-- Open Graph -->
     <meta property="og:title" content={ogTitle || title} />

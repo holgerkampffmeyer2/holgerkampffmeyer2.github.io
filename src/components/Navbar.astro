@@ -1,4 +1,6 @@
 ---
+import { Picture } from 'astro:assets';
+import logoImg from '../assets/img/djhulk_logo.webp';
 import ChevronDownIcon from "./icons/ChevronDownIcon.astro";
 import MenuIcon from "./icons/MenuIcon.astro";
 
@@ -40,7 +42,7 @@ const { currentPage = 'home' } = Astro.props;
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
       <a href="/" class="flex items-center space-x-3">
-        <img src="/img/djhulk_logo.webp" alt="DJ Hulk Logo" width="48" height="48" decoding="async" class="h-12" />
+        <Picture src={logoImg} formats={['avif', 'webp']} alt="DJ Hulk Logo" loading="eager" class="h-12 w-12" />
         <span class="font-play text-xl font-bold hidden sm:block">DJ Hulk (Holger Kampffmeyer)</span>
       </a>
       

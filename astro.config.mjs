@@ -4,8 +4,16 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
 
 export default defineConfig({
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        webp: { effort: 6 },
+        avif: { effort: 4 },
+      },
+    },
+  },
   vite: {
-    // @ts-ignore - Type mismatch between Astro's bundled Vite and the project's Vite version
     plugins: [tailwindcss()]
   },
   site: 'https://holger-kampffmeyer.de',
@@ -29,9 +37,9 @@ export default defineConfig({
   })],
   redirects: {
   '/dj/': '/djhulk-electronic-music',
-  '/dj/mixes/': '/dj/mixes-all',
   '/mixes/': '/dj/mixes-all',
-  '/dj/mixes.html': '/dj/mixes-all',
+  '/mixes.html': '/dj/mixes-all',
+
   '/vermietung.html': 'https://soundundlicht-stuttgart.de/vermietung/',
   '/vermietung/djpaket-fildern/': 'https://soundundlicht-stuttgart.de/vermietung/djpaket-fildern/',
   '/vermietung/jbl-partybox-300-320/': 'https://soundundlicht-stuttgart.de/vermietung/jbl-partybox-300-320/',
