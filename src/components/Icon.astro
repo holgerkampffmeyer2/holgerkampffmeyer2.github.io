@@ -190,4 +190,4 @@ if (!icon) throw new Error(`Unknown icon: "${name}"`);
 const cls = className || DEFAULTS[name] || "w-6 h-6";
 ---
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox={icon.viewBox} class={cls} role={icon.role} set:html={icon.inner} />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox={icon.viewBox} class={cls} role={icon.role as any} set:html={icon.inner} />
