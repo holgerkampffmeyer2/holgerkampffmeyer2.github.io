@@ -597,65 +597,64 @@ const djPerson = getDjPersonSchema();
     </section>
 
     <Footer />
-</Layout>
+    <script src="/assets/mix-search.js" defer></script>
+    <script>
+      (function () {
+        var track = document.querySelector("[data-events-track]");
+        var carousel = document.querySelector("[data-events-carousel]");
+        if (!track || !carousel) return;
 
-<script src="/assets/mix-search.js" defer></script>
-<script>
-  (function () {
-    var track = document.querySelector("[data-events-track]");
-    var carousel = document.querySelector("[data-events-carousel]");
-    if (!track || !carousel) return;
+        var total = parseInt(carousel.getAttribute("data-events-count") ?? "0") || 0;
+        var gap = 16;
+        var setWidth = 0;
+        var isJumping = false;
 
-    var total = parseInt(carousel.getAttribute("data-events-count") ?? "0") || 0;
-    var gap = 16;
-    var setWidth = 0;
-    var isJumping = false;
+        function updateSetWidth() {
+          if (!track || track.children.length === 0) return;
+          var first = track.children[0] as HTMLElement;
+          setWidth = (first.offsetWidth + gap) * total;
+        }
 
-    function updateSetWidth() {
-      if (!track || track.children.length === 0) return;
-      var first = track.children[0] as HTMLElement;
-      setWidth = (first.offsetWidth + gap) * total;
-    }
+        function initPosition() {
+          if (!track) return;
+          updateSetWidth();
+          track.scrollLeft = setWidth;
+        }
 
-    function initPosition() {
-      if (!track) return;
-      updateSetWidth();
-      track.scrollLeft = setWidth;
-    }
-
-    track.addEventListener("scroll", function () {
-      if (!track || isJumping) return;
-      updateSetWidth();
-      if (setWidth <= 0) return;
-      if (track.scrollLeft >= setWidth * 2 - 5) {
-        isJumping = true;
-        track.scrollLeft = track.scrollLeft - setWidth;
-        requestAnimationFrame(function () {
-          isJumping = false;
+        track.addEventListener("scroll", function () {
+          if (!track || isJumping) return;
+          updateSetWidth();
+          if (setWidth <= 0) return;
+          if (track.scrollLeft >= setWidth * 2 - 5) {
+            isJumping = true;
+            track.scrollLeft = track.scrollLeft - setWidth;
+            requestAnimationFrame(function () {
+              isJumping = false;
+            });
+          } else if (track.scrollLeft <= 5) {
+            isJumping = true;
+            track.scrollLeft = track.scrollLeft + setWidth;
+            requestAnimationFrame(function () {
+              isJumping = false;
+            });
+          }
         });
-      } else if (track.scrollLeft <= 5) {
-        isJumping = true;
-        track.scrollLeft = track.scrollLeft + setWidth;
-        requestAnimationFrame(function () {
-          isJumping = false;
+
+        document.querySelector("[data-events-next]")?.addEventListener("click", function () {
+          if (!track) return;
+          updateSetWidth();
+          track.scrollBy({ left: 280, behavior: "smooth" });
         });
-      }
-    });
 
-    document.querySelector("[data-events-next]")?.addEventListener("click", function () {
-      if (!track) return;
-      updateSetWidth();
-      track.scrollBy({ left: 280, behavior: "smooth" });
-    });
+        document.querySelector("[data-events-prev]")?.addEventListener("click", function () {
+          if (!track) return;
+          updateSetWidth();
+          track.scrollBy({ left: -280, behavior: "smooth" });
+        });
 
-    document.querySelector("[data-events-prev]")?.addEventListener("click", function () {
-      if (!track) return;
-      updateSetWidth();
-      track.scrollBy({ left: -280, behavior: "smooth" });
-    });
-
-    window.addEventListener("resize", initPosition);
-    document.addEventListener("astro:page-load", initPosition);
-    initPosition();
-  })();
-</script>
+        window.addEventListener("resize", initPosition);
+        document.addEventListener("astro:page-load", initPosition);
+        initPosition();
+      })();
+    </script>
+  </Layout>

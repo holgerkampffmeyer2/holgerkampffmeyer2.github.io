@@ -101,7 +101,7 @@ function formatDuration(seconds: number) {
 
     {/* Description */}
     {post.description && (
-      <p class="text-[var(--color-text-muted)] text-lg mb-6 max-w-2xl" set:html={post.description.replace(/\n/g, '<br/>')}></p>
+      <p class="text-[var(--color-text-muted)] text-lg mb-6 max-w-2xl" set:html={post.description.replace(/\n/g, '<br>')}></p>
     )}
 
     {/* Use Cases */}
