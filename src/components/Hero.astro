@@ -23,6 +23,7 @@ const isOptimized = typeof image !== 'string';
         fetchpriority="high"
         class="hero-bg-img"
         widths={[640, 1024, 1920]}
+        sizes="100vw"
       />
       ) : (
         <img src={image} alt="Hero image" width="1920" height="1080" class="hero-bg-img" loading="eager" fetchpriority="high" />

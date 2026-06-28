@@ -258,21 +258,23 @@ const djPerson = getDjPersonSchema();
 
 <div class="grid grid-cols-2 gap-4">
            <Picture
-             src={djImg1}
-             formats={['avif', 'webp']}
-             alt="DJ Hulk Stuttgart Tech House"
-             loading="lazy"
-             class="rounded-img object-cover aspect-square animate-on-scroll stagger-1"
-             widths={[400, 800]}
-           />
-           <Picture
-             src={djImg2}
-             formats={['avif', 'webp']}
-             alt="DJ Hulk Stuttgart Tech House"
-             loading="lazy"
-             class="rounded-img object-cover aspect-square animate-on-scroll stagger-2"
-             widths={[400, 800]}
-           />
+              src={djImg1}
+              formats={['avif', 'webp']}
+              alt="DJ Hulk Stuttgart Tech House"
+              loading="lazy"
+              class="rounded-img object-cover aspect-square animate-on-scroll stagger-1"
+              widths={[400, 800]}
+              sizes="(min-width: 1024px) 25vw, 100vw"
+            />
+            <Picture
+              src={djImg2}
+              formats={['avif', 'webp']}
+              alt="DJ Hulk Stuttgart Tech House"
+              loading="lazy"
+              class="rounded-img object-cover aspect-square animate-on-scroll stagger-2"
+              widths={[400, 800]}
+              sizes="(min-width: 1024px) 25vw, 100vw"
+            />
          </div>
       </div>
     </div>
@@ -335,7 +337,7 @@ const djPerson = getDjPersonSchema();
       </div>
 
       <div class="text-center animate-on-scroll">
-        <a href="/dj/mixes" class="btn-primary">Alle Mixes ansehen</a>
+        <a href="/dj/mixes-weekly" class="btn-primary">Alle Mixes ansehen</a>
       </div>
     </div>
   </section>
@@ -458,7 +460,7 @@ const djPerson = getDjPersonSchema();
             <div class="bg-[var(--color-bg)] rounded-xl p-6 hover:scale-[1.02] transition-transform group">
               <div class="space-y-4">
                 <p class="text-[var(--color-text-muted)] font-medium text-center">Ehrenmitglied beim Verein 365 FM Radio:</p>
-                  <Picture src={certImg} formats={['avif', 'webp']} alt="Ehrenurkunde 365 FM Radio" loading="lazy" class="rounded-lg hover:scale-[1.02] transition-transform max-w-xs sm:max-w-md mx-auto" widths={[400]} />
+                  <Picture src={certImg} formats={['avif', 'webp']} alt="Ehrenurkunde 365 FM Radio" loading="lazy" class="rounded-lg hover:scale-[1.02] transition-transform max-w-xs sm:max-w-md mx-auto" widths={[400]} sizes="(min-width: 640px) 448px, 320px" />
               </div>
             </div>
           </a>

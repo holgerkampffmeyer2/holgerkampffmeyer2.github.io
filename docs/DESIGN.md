@@ -51,9 +51,9 @@ src/
 | / | Startseite |
 | /djhulk-electronic-music | DJ Hulk |
 | /dj/videos | Videos |
-| /dj/mixes | Mixes (pagiert) |
+| /dj/mixes-weekly | Mixes (Übersicht) |
 | /dj/mixes/[n] | Single Mix mit Tracklist |
-| /dj/mixes-all | Alle Mixes |
+| /dj/mixes-blog-archive | Alle Mixes (Blog-Archiv) |
 | /dj/mixes-blog-archive | Mixes Blog-Archiv |
 | /dj/em3f | Festival Fotos |
 | /vermietung | Vermietung Landingpage (Verweis → soundundlicht-stuttgart.de) |

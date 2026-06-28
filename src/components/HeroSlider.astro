@@ -45,6 +45,7 @@ const slidesWithMeta = slides.map(s => ({
            loading={index === 0 ? "eager" : "lazy"}
            fetchpriority={index === 0 ? "high" : "low"}
            widths={[640, 1024, 1920]}
+           sizes="100vw"
          />
       ) : (
        <img

@@ -56,7 +56,7 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 
 ## Bereichsspezifische Hinweise
 - **`dj/mixes/[number].astro`**: AudioObject + BreadcrumbList Schema prüfen (Mix-Detailseite)
-- **`dj/mixes.astro`**: Blog + BlogPosting Schema prüfen (Mixes-Übersicht)
+- **`dj/mixes-weekly.astro`**: Blog + BlogPosting Schema prüfen (Mixes-Übersicht)
 - **`dj/mixes-blog-archive.astro`**: Blog-Archiv, kein eigenes JSON-LD nötig
 - **`vermietung.astro`**: Nur Weiterleitung zu soundundlicht, kein eigener Content
 

@@ -133,7 +133,7 @@ const faqs = getFaqsForPage('index');
           category: "Weekly DJ Mixes",
           description: "Jeden Sonntag neuer Mix - House, Tech House, Deep House. Mit vollständiger Tracklist und optimiert für Gym, Drive, Work oder Party.",
            backgroundImage: sliderImg2,
-          buttons: [{ text: "Zu den Mixes", href: "/dj/mixes" }]
+          buttons: [{ text: "Zu den Mixes", href: "/dj/mixes-weekly" }]
         },
          {
            title: "Work",
@@ -192,6 +192,7 @@ const faqs = getFaqsForPage('index');
               loading="lazy"
               class="rounded-xl w-full aspect-square object-cover hover:ring-2 hover:ring-[var(--color-secondary)] hover:scale-[1.02] transition-all duration-300 animate-on-scroll stagger-1"
               widths={[400, 800]}
+              sizes="(min-width: 1024px) 25vw, 100vw"
             />
             <Picture
               src={djImg2}
@@ -200,6 +201,7 @@ const faqs = getFaqsForPage('index');
               loading="lazy"
               class="rounded-xl w-full aspect-square object-cover hover:ring-2 hover:ring-[var(--color-secondary)] hover:scale-[1.02] transition-all duration-300 animate-on-scroll stagger-2"
               widths={[400, 800]}
+              sizes="(min-width: 1024px) 25vw, 100vw"
             />
           </div>
       </div>
@@ -253,6 +255,7 @@ const faqs = getFaqsForPage('index');
               loading="lazy"
               class="rounded-xl w-full aspect-square object-cover hover:ring-2 hover:ring-[var(--color-secondary)] hover:scale-[1.02] transition-all duration-300 animate-on-scroll stagger-1"
               widths={[400, 800]}
+              sizes="(min-width: 1024px) 25vw, 100vw"
             />
             <Picture
               src={mixPic2}
@@ -261,6 +264,7 @@ const faqs = getFaqsForPage('index');
               loading="lazy"
               class="rounded-xl w-full aspect-square object-cover hover:ring-2 hover:ring-[var(--color-secondary)] hover:scale-[1.02] transition-all duration-300 animate-on-scroll stagger-2"
               widths={[400, 800]}
+              sizes="(min-width: 1024px) 25vw, 100vw"
             />
           </div>
       </div>
@@ -306,14 +310,15 @@ const faqs = getFaqsForPage('index');
         </div>
 
 <div class="grid grid-cols-1 gap-4">
-           <Picture
-             src={toolsImg}
-             formats={['avif', 'webp']}
-             alt="DJ Tools Open Source Projects"
-             loading="lazy"
-             class="rounded-xl w-full aspect-video object-cover hover:ring-2 hover:ring-[var(--color-secondary)] hover:scale-[1.02] transition-all duration-300 animate-on-scroll"
-             widths={[640, 1280]}
-           />
+            <Picture
+              src={toolsImg}
+              formats={['avif', 'webp']}
+              alt="DJ Tools Open Source Projects"
+              loading="lazy"
+              class="rounded-xl w-full aspect-video object-cover hover:ring-2 hover:ring-[var(--color-secondary)] hover:scale-[1.02] transition-all duration-300 animate-on-scroll"
+              widths={[640, 1280]}
+              sizes="(min-width: 1024px) 50vw, 100vw"
+            />
          </div>
       </div>
     </div>

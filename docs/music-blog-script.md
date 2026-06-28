@@ -5,14 +5,14 @@
 Die "Mixes with Tracklists" Seite präsentiert wöchentliche DJ-Mixes von DJ Hulk mit vollständigen Tracklists.
 
 **Seitenstruktur:**
-- `/dj/mixes` - Übersichtsseite mit neuestem Mix, Karussell und Filter nach Stimmung
+- `/dj/mixes-weekly` - Übersichtsseite mit neuestem Mix, Karussell und Filter nach Stimmung
 - `/dj/mixes/{slug}` - Einzelne Mix-Seite mit Player und Tracklist (z.B. `/dj/mixes/dj-hulk-mix183-hypnotic-deep-tech`)
 - `/dj/mixes-blog-archive` - Komprimierte Archiv-Ansicht aller Mixes
 
 ## Script: `scripts/fetch-mixcloud.mjs`
 
 Dieses Script holt die neuesten 100 Mixes von Mixcloud und erstellt beide Daten-Dateien:
-- `mixcloud-data.json` - Einfache Liste für `/dj/mixes-all`
+- `mixcloud-data.json` - Einfache Liste für `/dj/mixes-weekly`
 - `blog-posts.json` - Vollständige Daten mit Tracklists für Music Blog
 
 ### Genre → Use-Case Mapping
@@ -170,12 +170,12 @@ Jede Mix-Seite erhält automatisch:
 
 ## Seiten-Struktur
 
-### /dj/mixes (Übersicht)
+### /dj/mixes-weekly (Übersicht)
 - Neuester Mix (vollständig mit Player + Tracklist)
 - Filter-Kategorien → verlinken auf `/dj/mixes-blog-archive?useCase=gym|drive|work|party`
 - Karussell mit allen Mixes → verlinkt auf `/dj/mixes/{slug}`
 - Button "Mix Archive" → `/dj/mixes-blog-archive`
-- Button "Full Mixcloud Library" → `/dj/mixes-all`
+- Button "Full Mixcloud Library" → `/dj/mixes-blog-archive`
 - Mixcloud Profile → `https://www.mixcloud.com/holger-kampffmeyer/`
 - SoundCloud Profile → `https://soundcloud.com/holger-kampffmeyer2`
 - Spotify Playlist
@@ -187,7 +187,7 @@ Jede Mix-Seite erhält automatisch:
 - Mixcloud Player
 - Tracklist-Tabelle (Artist | Title)
 - Prev/Next Navigation zwischen Mixes → `/dj/mixes/{prevPost.slug}` / `/dj/mixes/{nextPost.slug}`
-- Button "Back to Weekly DJ Mixes" → `/dj/mixes`
+- Button "Back to Weekly DJ Mixes" → `/dj/mixes-weekly`
 - Button "View Archive" → `/dj/mixes-blog-archive`
 - Vollständige SEO-Optimierung
 
@@ -195,7 +195,7 @@ Jede Mix-Seite erhält automatisch:
 - Kompakte Listenansicht
 - Filter-Buttons (All, Gym, Drive, Work, Party) → `/dj/mixes-blog-archive?useCase=...`
 - Titel, Datum, Tags pro Eintrag → verlinkt auf `/dj/mixes/{slug}`
-- Button "Back to Weekly DJ Mixes" → `/dj/mixes`
+- Button "Back to Weekly DJ Mixes" → `/dj/mixes-weekly`
 
 ---
 
