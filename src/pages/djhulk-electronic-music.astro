@@ -3,19 +3,12 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import { Picture } from 'astro:assets';
 import Hero from "../components/Hero.astro";
-import heroImg from "../assets/img/_81A4010.webp";
-import djImg1 from "../assets/img/DSC_2311.webp";
-import djImg2 from "../assets/img/_P8A4017.webp";
-import certImg from "../assets/img/463B18D9-C20F-486C-8787-7543C1D9931F.webp";
+import heroImg from "../assets/img/_81A4010.jpg";
+import djImg1 from "../assets/img/DSC_2311.jpg";
+import djImg2 from "../assets/img/_P8A4017.jpg";
+import certImg from "../assets/img/463B18D9-C20F-486C-8787-7543C1D9931F.jpg";
 import Footer from "../components/Footer.astro";
-import RadioIcon from "../components/icons/RadioIcon.astro";
-import EmailIcon from "../components/icons/EmailIcon.astro";
-import FacebookIcon from "../components/icons/FacebookIcon.astro";
-import InstagramIcon from "../components/icons/InstagramIcon.astro";
-import MixcloudIcon from "../components/icons/MixcloudIcon.astro";
-import SpotifyIcon from "../components/icons/SpotifyIcon.astro";
-import YouTubeIcon from "../components/icons/YouTubeIcon.astro";
-import ResidentAdvisorIcon from "../components/icons/ResidentAdvisorIcon.astro";
+import Icon from "../components/Icon.astro";
 import MixcloudWidget from "../components/MixcloudWidget.astro";
 import { getDjPersonSchema } from "../utils/dj-schema.js";
 import { events } from "../data/events";
@@ -416,7 +409,7 @@ const djPerson = getDjPersonSchema();
           >
             <div class="flex items-center gap-4 mb-4">
               <div class="w-12 h-12 bg-[var(--color-primary)] rounded-lg flex items-center justify-center">
-                <RadioIcon class="h-6 w-6 text-white" />
+                <Icon name="radio" class="h-6 w-6 text-white" />
               </div>
               <div>
                 <h3 class="font-play text-xl font-bold group-hover:text-[var(--color-secondary)] transition-colors">
@@ -439,7 +432,7 @@ const djPerson = getDjPersonSchema();
          >
            <div class="flex items-center gap-4 mb-4">
              <div class="w-12 h-12 bg-[var(--color-primary)] rounded-lg flex items-center justify-center">
-               <RadioIcon class="h-6 w-6 text-white" />
+               <Icon name="radio" class="h-6 w-6 text-white" />
              </div>
              <div>
                <h3 class="font-play text-xl font-bold group-hover:text-[var(--color-secondary)] transition-colors">
@@ -474,7 +467,7 @@ const djPerson = getDjPersonSchema();
         <div class="text-center animate-on-scroll">
           <div class="flex justify-center mb-4">
             <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center">
-              <ResidentAdvisorIcon class="w-10 h-10" />
+              <Icon name="resident-advisor" class="w-10 h-10" />
             </div>
           </div>
           <span
@@ -545,7 +538,7 @@ const djPerson = getDjPersonSchema();
             href="mailto:holger.kampffmeyer+dj@gmail.com"
             class="btn-primary flex items-center justify-center gap-2"
           >
-            <EmailIcon class="h-5 w-5" />
+            <Icon name="email" class="h-5 w-5" />
             holger.kampffmeyer+dj@gmail.com
           </a>
         </div>
@@ -558,7 +551,7 @@ const djPerson = getDjPersonSchema();
             rel="noopener noreferrer nofollow"
             class="social-link"
           >
-            <FacebookIcon class="h-7 w-7" />
+            <Icon name="facebook" class="h-7 w-7" />
           </a>
           <a
             href="https://www.instagram.com/djhulk_de"
@@ -566,7 +559,7 @@ const djPerson = getDjPersonSchema();
             rel="noopener noreferrer nofollow"
             class="social-link"
           >
-            <InstagramIcon class="h-7 w-7" />
+            <Icon name="instagram" class="h-7 w-7" />
           </a>
           <a
             href="https://www.mixcloud.com/holger-kampffmeyer/"
@@ -574,7 +567,7 @@ const djPerson = getDjPersonSchema();
             rel="noopener noreferrer nofollow"
             class="social-link"
           >
-            <MixcloudIcon class="h-7 w-7" />
+            <Icon name="mixcloud" class="h-7 w-7" />
           </a>
           <a
             href="https://open.spotify.com/user/11131869179?si=712b7425643f4f3e"
@@ -582,7 +575,7 @@ const djPerson = getDjPersonSchema();
             rel="noopener noreferrer nofollow"
             class="social-link"
           >
-            <SpotifyIcon class="h-7 w-7" />
+            <Icon name="spotify" class="h-7 w-7" />
           </a>
           <a
             href="https://www.youtube.com/@djhulk_de"
@@ -590,7 +583,7 @@ const djPerson = getDjPersonSchema();
             rel="noopener noreferrer nofollow"
             class="social-link"
           >
-            <YouTubeIcon class="h-7 w-7" />
+            <Icon name="youtube" class="h-7 w-7" />
           </a>
         </div>
       </div>

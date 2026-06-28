@@ -2,12 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
-import heroImg from '../assets/img/header-work.webp';
+import heroImg from '../assets/img/header-work.jpg';
 import Footer from '../components/Footer.astro';
-import LinkedInIcon from '../components/icons/LinkedInIcon.astro';
-import XingIcon from '../components/icons/XingIcon.astro';
-import GitHubIcon from '../components/icons/GitHubIcon.astro';
-import ChevronDownIcon from '../components/icons/ChevronDownIcon.astro';
+import Icon from '../components/Icon.astro';
 import openSourceProjects from '../data/open-source-projects.json';
 
 const personSchema = {
@@ -93,13 +90,13 @@ const personSchema = {
                   <a href={project.url} target="_blank" rel="noopener noreferrer nofollow" class="font-bold text-lg hover:text-[var(--color-secondary)] transition-colors">
                     {project.name}
                   </a>
-                  <ChevronDownIcon class="toggle-icon w-5 h-5 text-[var(--color-secondary)] transition-transform" />
+                  <Icon name="chevron-down" class="toggle-icon w-5 h-5 text-[var(--color-secondary)] transition-transform" />
                 </div>
                 <p class="text-[var(--color-text-muted)] text-sm mt-2">
                   {project.description}
                 </p>
                 <a href={project.url} target="_blank" rel="noopener noreferrer nofollow" class="inline-flex items-center gap-2 text-[var(--color-secondary)] text-sm mt-3 hover:underline">
-                  <GitHubIcon class="w-4 h-4" />
+                  <Icon name="github" class="w-4 h-4" />
                   View on GitHub
                 </a>
               </div>
@@ -243,7 +240,7 @@ const personSchema = {
           rel="noopener noreferrer nofollow"
           class="flex items-center gap-3 bg-[var(--color-surface)] px-6 py-4 rounded-xl hover:bg-[var(--color-primary)]/20 transition-all duration-300 group"
         >
-          <LinkedInIcon class="w-8 h-8" />
+          <Icon name="linkedin" class="w-8 h-8" />
           <span class="font-bold group-hover:text-[var(--color-secondary)] transition-colors">LinkedIn</span>
         </a>
         <a
@@ -252,7 +249,7 @@ const personSchema = {
           rel="noopener noreferrer nofollow"
           class="flex items-center gap-3 bg-[var(--color-surface)] px-6 py-4 rounded-xl hover:bg-[var(--color-primary)]/20 transition-all duration-300 group"
         >
-          <XingIcon class="w-8 h-8" />
+          <Icon name="xing" class="w-8 h-8" />
           <span class="font-bold group-hover:text-[var(--color-secondary)] transition-colors">XING</span>
         </a>
       </div>

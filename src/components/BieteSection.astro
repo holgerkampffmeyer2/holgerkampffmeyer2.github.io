@@ -1,9 +1,5 @@
 ---
-import VolumeUpIcon from "./icons/VolumeUpIcon.astro";
-import LightBulbIcon from "./icons/LightBulbIcon.astro";
-import PackageIcon from "./icons/PackageIcon.astro";
-import ShieldCheckIcon from "./icons/ShieldCheckIcon.astro";
-import CheckIcon from "./icons/CheckIcon.astro";
+import Icon from "./Icon.astro";
 ---
 <div class="mt-16">
   <h2 class="font-play text-2xl md:text-3xl font-bold text-center mb-10">
@@ -12,7 +8,7 @@ import CheckIcon from "./icons/CheckIcon.astro";
   <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
     <div class="bg-[var(--color-bg)] p-6 rounded-xl">
       <div class="w-12 h-12 bg-[var(--color-primary)]/20 rounded-lg flex items-center justify-center mb-4 text-[var(--color-primary)]">
-        <VolumeUpIcon class="w-6 h-6" />
+        <Icon name="volume-up" class="w-6 h-6" />
       </div>
       <h3 class="font-bold text-lg mb-2">PA-Anlagen & Partyboxen</h3>
       <p class="text-[var(--color-text-muted)] text-sm">
@@ -21,7 +17,7 @@ import CheckIcon from "./icons/CheckIcon.astro";
     </div>
     <div class="bg-[var(--color-bg)] p-6 rounded-xl">
       <div class="w-12 h-12 bg-[var(--color-primary)]/20 rounded-lg flex items-center justify-center mb-4 text-[var(--color-primary)]">
-        <LightBulbIcon class="w-6 h-6" />
+        <Icon name="light-bulb" class="w-6 h-6" />
       </div>
       <h3 class="font-bold text-lg mb-2">Lichttechnik</h3>
       <p class="text-[var(--color-text-muted)] text-sm">
@@ -30,7 +26,7 @@ import CheckIcon from "./icons/CheckIcon.astro";
     </div>
     <div class="bg-[var(--color-bg)] p-6 rounded-xl">
       <div class="w-12 h-12 bg-[var(--color-primary)]/20 rounded-lg flex items-center justify-center mb-4 text-[var(--color-primary)]">
-        <PackageIcon class="w-6 h-6" />
+        <Icon name="package" class="w-6 h-6" />
       </div>
       <h3 class="font-bold text-lg mb-2">Komplettpakete</h3>
       <p class="text-[var(--color-text-muted)] text-sm">
@@ -39,24 +35,24 @@ import CheckIcon from "./icons/CheckIcon.astro";
     </div>
     <div class="bg-[var(--color-bg)] p-6 rounded-xl">
       <div class="w-12 h-12 bg-[var(--color-primary)]/20 rounded-lg flex items-center justify-center mb-4 text-[var(--color-primary)]">
-        <ShieldCheckIcon class="w-6 h-6" />
+        <Icon name="shield-check" class="w-6 h-6" />
       </div>
       <h3 class="font-bold text-lg mb-2">Warum bei mir mieten?</h3>
       <ul class="text-[var(--color-text-muted)] text-sm space-y-2">
         <li class="flex items-center gap-2">
-          <CheckIcon class="check-icon" />
+          <Icon name="check" class="check-icon" />
           Einfache Abholung in Stuttgart & Umgebung. 
         </li>
         <li class="flex items-center gap-2">
-          <CheckIcon class="check-icon" />
+          <Icon name="check" class="check-icon" />
           Persönliche Beratung. 
         </li>
         <li class="flex items-center gap-2">
-          <CheckIcon class="check-icon" />
+          <Icon name="check" class="check-icon" />
           Faire Preise. 
         </li>
         <li class="flex items-center gap-2">
-          <CheckIcon class="check-icon" />
+          <Icon name="check" class="check-icon" />
           Leistungsstarke Technik für kleine und große Events.
         </li>
       </ul>

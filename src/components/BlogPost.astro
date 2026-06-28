@@ -1,8 +1,5 @@
 ---
-import GymIcon from './icons/GymIcon.astro';
-import DriveIcon from './icons/DriveIcon.astro';
-import WorkIcon from './icons/WorkIcon.astro';
-import PartyIcon from './icons/PartyIcon.astro';
+import Icon from './Icon.astro';
 
 interface Props {
   src: string;
@@ -19,11 +16,11 @@ interface Props {
 
 const { src, title, description, url, createdTime, heroImage, tags = [], useCases = [], tracklist = [], variant = 'card' } = Astro.props;
 
-const USECASE_CONFIG: Record<string, { label: string; icon: typeof GymIcon; color: string }> = {
-  gym: { label: 'Gym Session', icon: GymIcon, color: 'text-[var(--color-primary)]' },
-  drive: { label: 'Drive / Relax', icon: DriveIcon, color: 'text-[var(--color-secondary)]' },
-  work: { label: 'Focus / Work', icon: WorkIcon, color: 'text-[var(--color-text)]' },
-  party: { label: 'Pre-Party', icon: PartyIcon, color: 'text-[var(--color-accent)]' }
+const USECASE_CONFIG: Record<string, { label: string; icon: string; color: string }> = {
+  gym: { label: 'Gym Session', icon: 'gym', color: 'text-[var(--color-primary)]' },
+  drive: { label: 'Drive / Relax', icon: 'drive', color: 'text-[var(--color-secondary)]' },
+  work: { label: 'Focus / Work', icon: 'work', color: 'text-[var(--color-text)]' },
+  party: { label: 'Pre-Party', icon: 'party', color: 'text-[var(--color-accent)]' }
 };
 
 function formatDate(dateStr: string) {
@@ -58,10 +55,9 @@ function formatDate(dateStr: string) {
         <div class="flex flex-wrap gap-2 mt-2">
           {useCases.map(useCase => {
             const config = USECASE_CONFIG[useCase];
-            const IconComponent = config?.icon;
             return (
               <span class="inline-flex items-center gap-2 px-3 py-1 bg-[var(--color-bg)] rounded-full text-sm text-[var(--color-text)]">
-                {IconComponent && <IconComponent class={`w-4 h-4 ${config?.color || ''}`} />}
+                {config?.icon && <Icon name={config.icon} class={`w-4 h-4 ${config?.color || ''}`} />}
                 <span>{config?.label || useCase}</span>
               </span>
             );

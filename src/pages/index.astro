@@ -3,24 +3,17 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import HeroSlider from "../components/HeroSlider.astro";
-import sliderImg1 from "../assets/img/header.webp";
-import sliderImg2 from "../assets/img/Mixcloud Post Mix169.webp";
-import sliderImg3 from "../assets/img/header-work-dark.webp";
-import sliderImg4 from "../assets/img/vermietung.webp";
+import sliderImg1 from "../assets/img/header.jpg";
+import sliderImg2 from "../assets/img/Mixcloud Post Mix169.jpg";
+import sliderImg3 from "../assets/img/header-work-dark.jpg";
+import sliderImg4 from "../assets/img/vermietung.jpg";
 import { Picture } from 'astro:assets';
-import djImg1 from "../assets/img/DSC_2311.webp";
-import djImg2 from "../assets/img/_81A4010-sm.webp";
-import mixPic1 from "../assets/img/Mix183.webp";
-import mixPic2 from "../assets/img/Mixcloud Post Mix174.webp";
-import toolsImg from "../assets/img/organize_mp3s.webp";
-import EmailIcon from "../components/icons/EmailIcon.astro";
-import FacebookIcon from "../components/icons/FacebookIcon.astro";
-import InstagramIcon from "../components/icons/InstagramIcon.astro";
-import MixcloudIcon from "../components/icons/MixcloudIcon.astro";
-import SpotifyIcon from "../components/icons/SpotifyIcon.astro";
-import GitHubIcon from "../components/icons/GitHubIcon.astro";
-import YouTubeIcon from "../components/icons/YouTubeIcon.astro";
-import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
+import djImg1 from "../assets/img/DSC_2311.jpg";
+import djImg2 from "../assets/img/_81A4010-sm.jpg";
+import mixPic1 from "../assets/img/Mix183.jpg";
+import mixPic2 from "../assets/img/Mixcloud Post Mix174.jpg";
+import toolsImg from "../assets/img/organize_mp3s.jpg";
+import Icon from "../components/Icon.astro";
 import FAQSection from "../components/FAQSection.astro";
 import { getFaqsForPage, getFaqSchema } from "../data/faqs";
 
@@ -344,7 +337,7 @@ const faqs = getFaqsForPage('index');
           href="mailto:holger.kampffmeyer+dj@gmail.com"
           class="btn-primary flex items-center justify-center gap-2"
         >
-          <EmailIcon class="h-5 w-5" />
+          <Icon name="email" class="h-5 w-5" />
           holger.kampffmeyer+dj@gmail.com
         </a>
         <a
@@ -380,7 +373,7 @@ const faqs = getFaqsForPage('index');
           rel="noopener noreferrer nofollow"
           class="social-link"
         >
-          <FacebookIcon class="h-7 w-7" />
+          <Icon name="facebook" class="h-7 w-7" />
         </a>
         <a
           href="https://www.instagram.com/djhulk_de"
@@ -388,7 +381,7 @@ const faqs = getFaqsForPage('index');
           rel="noopener noreferrer nofollow"
           class="social-link"
         >
-          <InstagramIcon class="h-7 w-7" />
+          <Icon name="instagram" class="h-7 w-7" />
         </a>
         <a
           href="https://www.mixcloud.com/holger-kampffmeyer/"
@@ -396,7 +389,7 @@ const faqs = getFaqsForPage('index');
           rel="noopener noreferrer nofollow"
           class="social-link"
         >
-          <MixcloudIcon class="h-7 w-7" />
+          <Icon name="mixcloud" class="h-7 w-7" />
         </a>
         <a
           href="https://open.spotify.com/user/11131869179?si=712b7425643f4f3e"
@@ -404,7 +397,7 @@ const faqs = getFaqsForPage('index');
           rel="noopener noreferrer nofollow"
           class="social-link"
         >
-          <SpotifyIcon class="h-7 w-7" />
+          <Icon name="spotify" class="h-7 w-7" />
         </a>
         <a
           href="https://www.youtube.com/@djhulk_de"
@@ -412,7 +405,7 @@ const faqs = getFaqsForPage('index');
           rel="noopener noreferrer nofollow"
           class="social-link"
         >
-          <YouTubeIcon class="h-7 w-7" />
+          <Icon name="youtube" class="h-7 w-7" />
         </a>
         <a
           href="https://www.linkedin.com/in/holger-kampffmeyer-390b6789/"
@@ -420,7 +413,7 @@ const faqs = getFaqsForPage('index');
           rel="noopener noreferrer nofollow"
           class="social-link"
         >
-          <LinkedInIcon class="h-7 w-7" />
+          <Icon name="linkedin" class="h-7 w-7" />
         </a>
         <a
           href="https://github.com/holgerkampffmeyer2/"
@@ -428,7 +421,7 @@ const faqs = getFaqsForPage('index');
           rel="noopener noreferrer nofollow"
           class="social-link"
         >
-          <GitHubIcon class="h-7 w-7" />
+          <Icon name="github" class="h-7 w-7" />
         </a>
       </div>
 

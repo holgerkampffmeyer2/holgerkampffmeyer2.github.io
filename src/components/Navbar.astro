@@ -1,8 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import logoImg from '../assets/img/djhulk_logo.webp';
-import ChevronDownIcon from "./icons/ChevronDownIcon.astro";
-import MenuIcon from "./icons/MenuIcon.astro";
+import Icon from "./Icon.astro";
 
 interface Props {
   currentPage?: string;
@@ -16,7 +15,9 @@ const { currentPage = 'home' } = Astro.props;
       label: 'Home' ,
       hasDropdown: true,
       items: [
-        { href: '/#djing', label: 'DJ Hulk' }
+        { href: '/#djing', label: 'DJ Hulk' },
+        { href: '/#mixes', label: 'Weekly Mixes' },
+        { href: '/#opensource', label: 'Open Source Projects' }
       ]
     },
     { 
@@ -68,7 +69,7 @@ const { currentPage = 'home' } = Astro.props;
                 ]}
               >
                 {item.label}
-                <ChevronDownIcon class="h-4 w-4" />
+                <Icon name="chevron-down" class="h-4 w-4" />
               </a>
               <div class="absolute top-full left-0 mt-2 w-48 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 {item.items?.map(subItem => (
@@ -95,7 +96,7 @@ const { currentPage = 'home' } = Astro.props;
       
 <!-- Mobile Menu Button -->
   <button id="mobile-menu-btn" class="md:hidden text-[var(--color-text)] p-2" aria-label="Toggle mobile menu">
-        <MenuIcon class="h-8 w-8" />
+        <Icon name="menu" class="h-8 w-8" />
       </button>
     </div>
   </div>

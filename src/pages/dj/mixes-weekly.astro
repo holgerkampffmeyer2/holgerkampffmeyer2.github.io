@@ -3,12 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
-import MixcloudIcon from "../../components/icons/MixcloudIcon.astro";
-import SoundCloudIcon from "../../components/icons/SoundCloudIcon.astro";
-import GymIcon from "../../components/icons/GymIcon.astro";
-import DriveIcon from "../../components/icons/DriveIcon.astro";
-import WorkIcon from "../../components/icons/WorkIcon.astro";
-import PartyIcon from "../../components/icons/PartyIcon.astro";
+import Icon from "../../components/Icon.astro";
 import { getDjPersonSchema } from "../../utils/dj-schema.js";
 
 const breadcrumbSegments = [
@@ -86,11 +81,11 @@ const blogSchema = {
  }))
 };
 
-const USECASE_CONFIG: Record<string, { label: string; icon: typeof GymIcon; color: string }> = {
-  gym: { label: 'Gym Session', icon: GymIcon, color: 'text-[var(--color-primary)]' },
-  drive: { label: 'Drive / Relax', icon: DriveIcon, color: 'text-[var(--color-primary)]' },
-  work: { label: 'Focus / Work', icon: WorkIcon, color: 'text-[var(--color-primary)]' },
-  party: { label: 'Pre-Party', icon: PartyIcon, color: 'text-[var(--color-primary)]' }
+const USECASE_CONFIG: Record<string, { label: string; icon: string; color: string }> = {
+  gym: { label: 'Gym Session', icon: 'gym', color: 'text-[var(--color-primary)]' },
+  drive: { label: 'Drive / Relax', icon: 'drive', color: 'text-[var(--color-primary)]' },
+  work: { label: 'Focus / Work', icon: 'work', color: 'text-[var(--color-primary)]' },
+  party: { label: 'Pre-Party', icon: 'party', color: 'text-[var(--color-primary)]' }
 };
 
 function formatDate(dateStr: string) {
@@ -228,10 +223,9 @@ function formatDate(dateStr: string) {
             <div class="flex flex-wrap gap-2">
               {latestPost.useCases.map(useCase => {
                 const config = USECASE_CONFIG[useCase];
-                const IconComponent = config?.icon;
                 return (
                   <span class="inline-flex items-center gap-2 px-3 py-1 bg-[var(--color-surface)] rounded-full text-sm border border-[var(--color-border)]">
-                    {IconComponent && <IconComponent class={`w-4 h-4 ${config?.color || ''}`} />}
+                    {config?.icon && <Icon name={config.icon} class={`w-4 h-4 ${config?.color || ''}`} />}
                     <span class="text-[var(--color-text)]">{config?.label || useCase}</span>
                   </span>
                 );
@@ -304,19 +298,19 @@ function formatDate(dateStr: string) {
         </p>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
           <a href="/dj/mixes-blog-archive?useCase=gym" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
-            <GymIcon class="w-8 h-8 mx-auto mb-2 text-[var(--color-primary)]" />
+            <Icon name="gym" class="w-8 h-8 mx-auto mb-2 text-[var(--color-primary)]" />
             <span class="text-[var(--color-text)] font-medium">Gym Session</span>
           </a>
           <a href="/dj/mixes-blog-archive?useCase=drive" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
-            <DriveIcon class="w-8 h-8 mx-auto mb-2 text-[var(--color-primary)]" />
+            <Icon name="drive" class="w-8 h-8 mx-auto mb-2 text-[var(--color-primary)]" />
             <span class="text-[var(--color-text)] font-medium">Drive / Relax</span>
           </a>
           <a href="/dj/mixes-blog-archive?useCase=work" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
-            <WorkIcon class="w-8 h-8 mx-auto mb-2 text-[var(--color-primary)]" />
+            <Icon name="work" class="w-8 h-8 mx-auto mb-2 text-[var(--color-primary)]" />
             <span class="text-[var(--color-text)] font-medium">Focus / Work</span>
           </a>
           <a href="/dj/mixes-blog-archive?useCase=party" class="bg-[var(--color-surface)] p-4 rounded-lg border border-[var(--color-border)] text-center hover:border-[var(--color-primary)] transition-colors block">
-            <PartyIcon class="w-8 h-8 mx-auto mb-2 text-[var(--color-primary)]" />
+            <Icon name="party" class="w-8 h-8 mx-auto mb-2 text-[var(--color-primary)]" />
             <span class="text-[var(--color-text)] font-medium">Pre-Party</span>
           </a>
         </div>
@@ -413,7 +407,7 @@ function formatDate(dateStr: string) {
             rel="noopener noreferrer nofollow"
             class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors"
           >
-            <MixcloudIcon class="w-5 h-5" />
+            <Icon name="mixcloud" class="w-5 h-5" />
             <span>Mixcloud</span>
           </a>
           <a 
@@ -422,7 +416,7 @@ function formatDate(dateStr: string) {
             rel="noopener noreferrer nofollow"
             class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors"
           >
-            <SoundCloudIcon class="w-5 h-5" />
+            <Icon name="soundcloud" class="w-5 h-5" />
             <span>SoundCloud</span>
           </a>
         </div>

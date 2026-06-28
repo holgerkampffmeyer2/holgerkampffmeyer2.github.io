@@ -1,9 +1,5 @@
 ---
-import GymIcon from '../icons/GymIcon.astro';
-import DriveIcon from '../icons/DriveIcon.astro';
-import WorkIcon from '../icons/WorkIcon.astro';
-import PartyIcon from '../icons/PartyIcon.astro';
-import MixcloudIcon from '../icons/MixcloudIcon.astro';
+import Icon from '../Icon.astro';
 
 interface BlogPostData {
    title: string;
@@ -29,11 +25,11 @@ interface Props {
 
 const { post, isLatest = false, showNavigation = true } = Astro.props;
 
-const USECASE_CONFIG: Record<string, { label: string; icon: typeof GymIcon; color: string }> = {
-  gym: { label: 'Gym Session', icon: GymIcon, color: 'text-[var(--color-primary)]' },
-  drive: { label: 'Drive / Relax', icon: DriveIcon, color: 'text-[var(--color-primary)]' },
-  work: { label: 'Focus / Work', icon: WorkIcon, color: 'text-[var(--color-primary)]' },
-  party: { label: 'Pre-Party', icon: PartyIcon, color: 'text-[var(--color-primary)]' }
+const USECASE_CONFIG: Record<string, { label: string; icon: string; color: string }> = {
+  gym: { label: 'Gym Session', icon: 'gym', color: 'text-[var(--color-primary)]' },
+  drive: { label: 'Drive / Relax', icon: 'drive', color: 'text-[var(--color-primary)]' },
+  work: { label: 'Focus / Work', icon: 'work', color: 'text-[var(--color-primary)]' },
+  party: { label: 'Pre-Party', icon: 'party', color: 'text-[var(--color-primary)]' }
 };
 
 function formatDate(dateStr: string) {
@@ -109,10 +105,9 @@ function formatDuration(seconds: number) {
       <div class="flex flex-wrap gap-3 mb-8">
         {post.useCases.map(useCase => {
           const config = USECASE_CONFIG[useCase];
-          const IconComponent = config?.icon;
           return (
             <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--color-surface)] rounded-full text-sm border border-[var(--color-border)]">
-              {IconComponent && <IconComponent class={`w-4 h-4 ${config?.color || ''}`} />}
+              {config?.icon && <Icon name={config.icon} class={`w-4 h-4 ${config?.color || ''}`} />}
               <span class="text-[var(--color-text)]">{config?.label || useCase}</span>
             </span>
           );
@@ -174,7 +169,7 @@ function formatDuration(seconds: number) {
     {post.url && showNavigation && (
       <div class="flex flex-wrap gap-4 mb-8">
         <a href={post.url} target="_blank" rel="noopener noreferrer nofollow" class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-secondary)] transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-secondary)]">
-          <MixcloudIcon class="w-5 h-5" />
+          <Icon name="mixcloud" class="w-5 h-5" />
           <span>Listen on Mixcloud</span>
         </a>
       </div>

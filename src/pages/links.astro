@@ -1,106 +1,93 @@
 ---
 import { Picture } from 'astro:assets';
-import profileImg from '../assets/img/_81A4010.webp';
+import profileImg from '../assets/img/_81A4010.jpg';
 import Layout from '../layouts/Layout.astro';
 import { getDjPersonSchema } from '../utils/dj-schema.js';
-import FacebookIcon from "../components/icons/FacebookIcon.astro";
-import InstagramIcon from "../components/icons/InstagramIcon.astro";
-import YouTubeIcon from "../components/icons/YouTubeIcon.astro";
-import MixcloudIcon from "../components/icons/MixcloudIcon.astro";
-import SpotifyIcon from "../components/icons/SpotifyIcon.astro";
-import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
-import XingIcon from "../components/icons/XingIcon.astro";
-import ResidentAdvisorIcon from "../components/icons/ResidentAdvisorIcon.astro";
-import RadioIcon from "../components/icons/RadioIcon.astro";
-import EmailIcon from "../components/icons/EmailIcon.astro";
-import SoundCloudIcon from "../components/icons/SoundCloudIcon.astro";
-import GitHubIcon from "../components/icons/GitHubIcon.astro";
-import DjHulkIcon from "../components/icons/DjHulkIcon.astro";
-import VolumeUpIcon from "../components/icons/VolumeUpIcon.astro";
+import Icon from "../components/Icon.astro";
 
 const links = [
   {
     name: "Sound & Licht Stuttgart",
     url: "https://soundundlicht-stuttgart.de/",
-    icon: VolumeUpIcon,
+    icon: "volume-up",
     description: "Vermietung von PA-Anlagen, Partyboxen, Lichttechnik und DJ-Equipment in Stuttgart"
   },
   {
     name: "DJ Hulks Website",
     url: "https://holger-kampffmeyer.de/",
-    icon: DjHulkIcon,
+    icon: "dj-hulk",
     description: "DJ Hulk - Electronic Music DJ aus Stuttgart"
   },
   {
     name: "Mixcloud",
     url: "https://www.mixcloud.com/holger-kampffmeyer/",
-    icon: MixcloudIcon,
+    icon: "mixcloud",
     description: "Weekly DJ Mixes - House, Tech House & mehr"
   },
   {
     name: "Instagram",
     url: "https://www.instagram.com/djhulk_de/",
-    icon: InstagramIcon,
+    icon: "instagram",
     description: "Neueste Updates & Stories"
   },
   {
     name: "Facebook",
     url: "https://www.facebook.com/djhulk.de",
-    icon: FacebookIcon,
+    icon: "facebook",
     description: "Events & News"
   },
   {
     name: "YouTube",
     url: "https://www.youtube.com/@djhulk_de",
-    icon: YouTubeIcon,
+    icon: "youtube",
     description: "Video-Mitschnitte & Aftermovies"
   },
   {
     name: "Spotify",
     url: "https://open.spotify.com/playlist/4u1RndvAi8kTQs85zhc8z4",
-    icon: SpotifyIcon,
+    icon: "spotify",
     description: "Aktuelle Playlist"
   },
   {
     name: "SoundCloud",
     url: "https://soundcloud.com/dj-hulk-337680700",
-    icon: SoundCloudIcon,
+    icon: "soundcloud",
     description: "Audiostreams & Uploads"
   },
   {
     name: "LinkedIn",
     url: "https://www.linkedin.com/in/holgerkampffmeyer/",
-    icon: LinkedInIcon,
+    icon: "linkedin",
     description: "Berufliches Netzwerk"
   },
   {
     name: "Xing",
     url: "https://www.xing.com/profile/Holger_Kampffmeyer3/",
-    icon: XingIcon,
+    icon: "xing",
     description: "Business-Profil"
   },
   {
     name: "GitHub",
     url: "https://github.com/holgerkampffmeyer2",
-    icon: GitHubIcon,
+    icon: "github",
     description: "Open Source - DJ Tools & DevOps"
   },
   {
     name: "Resident Advisor",
     url: "https://ra.co/dj/djhulk",
-    icon: ResidentAdvisorIcon,
+    icon: "resident-advisor",
     description: "DJ Profil & Events"
   },
   {
     name: "Radio 365 FM",
     url: "https://www.365fmradio.de/",
-    icon: RadioIcon,
+    icon: "radio",
     description: "DJ Hulk bei 365 FM Radio"
   },
   {
     name: "E-Mail",
     url: "mailto:holger.kampffmeyer@web.de",
-    icon: EmailIcon,
+    icon: "email",
     description: "Kontakt - Buchungen & Anfragen"
   }
 ];
@@ -156,7 +143,7 @@ const links = [
               class="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
               style="background-color: color-mix(in srgb, var(--color-secondary) 20%, transparent)"
             >
-              <link.icon class="w-5 h-5" />
+              <Icon name={link.icon} class="w-5 h-5" />
             </div>
             <div class="flex-1 min-w-0">
               <span class="font-semibold text-[var(--color-text)] group-hover:text-[var(--color-secondary)] transition-colors block">

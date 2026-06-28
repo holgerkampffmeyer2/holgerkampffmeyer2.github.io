@@ -1,5 +1,5 @@
 ---
-import RSSIcon from "./icons/RSSIcon.astro";
+import Icon from "./Icon.astro";
 const currentYear = new Date().getFullYear();
 ---
 
@@ -26,7 +26,7 @@ const currentYear = new Date().getFullYear();
             href="/rss.xml"
             class="inline-flex items-center gap-2 text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] transition-colors"
           >
-            <RSSIcon class="h-5 w-5" />
+            <Icon name="rss" class="h-5 w-5" />
             RSS Feed abonnieren
           </a>
         </p>
