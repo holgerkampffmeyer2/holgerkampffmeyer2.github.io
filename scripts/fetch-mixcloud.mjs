@@ -112,7 +112,7 @@ function parseTracklist(filePath) {
     return fs.readFileSync(filePath, 'utf-8')
       .split('\n')
       .filter(line => line.trim())
-      .map(line => line.trim().replace(/^\d+\.\s*/, '').replace(/\s*\d{2}:\d{2}:\d{2}\s*$/, ''));
+      .map(line => line.trim().replace(/^\d+\.\s*/, '').replace(/\s*\d{2}:\d{2}:\d{2}\s*$/, '').normalize('NFC'));
   } catch {
     return [];
   }
@@ -507,10 +507,10 @@ async function fetchMixcloud(force = false) {
         slug: mix.key.split('/').filter(Boolean).pop(),
         created_time: mix.created_time,
         src: `https://player-widget.mixcloud.com/widget/iframe/?feed=${encodeURIComponent(mix.key)}`,
-        description: apiData?.description || '',
+        description: (apiData?.description || '').normalize('NFC'),
         picture: mix.pictures?.['640wx640h'] || '',
         audio_length: mix.audio_length,
-        tags: (mix.tags || []).map(t => t.name),
+        tags: (mix.tags || []).map(t => t.name.normalize('NFC')),
         useCases,
         tracklist,
         hasTracklist,
