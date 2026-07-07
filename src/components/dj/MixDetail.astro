@@ -1,5 +1,6 @@
 ---
 import Icon from '../Icon.astro';
+import { USECASE_CONFIG } from '../../data/usecase-config';
 
 interface BlogPostData {
    title: string;
@@ -24,13 +25,6 @@ interface Props {
 }
 
 const { post, isLatest = false, showNavigation = true } = Astro.props;
-
-const USECASE_CONFIG: Record<string, { label: string; icon: string; color: string }> = {
-  gym: { label: 'Gym Session', icon: 'gym', color: 'text-[var(--color-primary)]' },
-  drive: { label: 'Drive / Relax', icon: 'drive', color: 'text-[var(--color-primary)]' },
-  work: { label: 'Focus / Work', icon: 'work', color: 'text-[var(--color-primary)]' },
-  party: { label: 'Pre-Party', icon: 'party', color: 'text-[var(--color-primary)]' }
-};
 
 function formatDate(dateStr: string) {
   if (!dateStr) return '';

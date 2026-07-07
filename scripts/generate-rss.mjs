@@ -7,12 +7,18 @@ const ROOT_DIR = path.join(__dirname, '..');
 const DIST_DIR = path.join(ROOT_DIR, 'dist');
 const PUBLIC_DIR = path.join(ROOT_DIR, 'public');
 
-const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
 const site = 'https://holger-kampffmeyer.de';
 
-const excludePaths = ['/impressum', '/links'];
+const PAGES = [
+  { path: '/',                     title: 'DJ Hulk - Electronic Music DJ aus Stuttgart',                               pubDate: '2026-01-01' },
+  { path: '/djhulk-electronic-music/', title: 'DJ Hulk - Electronic Music DJ Stuttgart',                                pubDate: '2026-01-01' },
+  { path: '/dj/mixes-weekly/',     title: 'Weekly DJ Mixes - DJ Hulk - House, Tech House, Deep House',                 pubDate: '2026-01-01' },
+  { path: '/dj/mixes-blog-archive/', title: 'Mix Archive - DJ Hulk Weekly DJ Mixes',                                   pubDate: '2026-01-01' },
+  { path: '/dj/videos/',           title: 'Videos - DJ Hulk - YouTube Videos und Event-Aufnahmen',                     pubDate: '2026-01-01' },
+  { path: '/dj/em3f/',             title: 'EM3F Electronic Music Family and Friends Festival Stuttgart',                pubDate: '2026-06-01' },
+  { path: '/work/',                title: 'Holger Kampffmeyer - Director DevOps, AI & Platform Engineering',            pubDate: '2026-01-01' },
+  { path: '/links/',               title: 'DJ Hulk | Alle wichtigen Social-Media-Links & Kontakt',                      pubDate: '2026-01-01' },
+];
 
 function escapeXml(str) {
   return str
@@ -23,12 +29,10 @@ function escapeXml(str) {
     .replace(/'/g, '&apos;');
 }
 
-function decodeHtmlEntities(str) {
-  return str.replace(/&#(\d+);/g, (_, code) => String.fromCharCode(code)).replace(/&amp;/g, '&');
-}
-
 function formatRssDate(dateStr) {
   const date = new Date(dateStr);
+  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const dayName = dayNames[date.getUTCDay()];
   const day = String(date.getUTCDate()).padStart(2, '0');
   const monthName = monthNames[date.getUTCMonth()];
@@ -36,72 +40,28 @@ function formatRssDate(dateStr) {
   return `${dayName}, ${day} ${monthName} ${year} 00:00:00 GMT`;
 }
 
-function extractMeta(html) {
-  const titleMatch = html.match(/<title>([^<]*)<\/title>/);
-  const descMatch = html.match(/<meta\s+name="description"\s+content="([^"]*)"/);
-  const title = titleMatch ? decodeHtmlEntities(titleMatch[1].trim()) : '';
-  const description = descMatch ? decodeHtmlEntities(descMatch[1].trim()) : '';
-  return { title, description };
-}
-
-function findHtmlPages() {
-  const pageMap = new Map();
-
-  function walkDir(dir, relativePrefix) {
-    if (!fs.existsSync(dir)) return;
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
-
-    let hasIndex = false;
-    for (const entry of entries) {
-      if (entry.isFile() && entry.name === 'index.html') {
-        hasIndex = true;
-        break;
-      }
-    }
-
-    if (hasIndex) {
-      const pagePath = relativePrefix || '/';
-      const shouldExclude = excludePaths.some(ex => pagePath.startsWith(ex));
-      if (!shouldExclude) {
-        const fullPath = path.join(dir, 'index.html');
-        const html = fs.readFileSync(fullPath, 'utf-8');
-        const meta = extractMeta(html);
-        if (!meta.title.startsWith('Redirecting')) {
-          const stat = fs.statSync(fullPath);
-          const pubDate = stat.mtime.toISOString().split('T')[0];
-          pageMap.set(pagePath, { path: pagePath, title: meta.title, description: meta.description, pubDate });
-        }
-      }
-    }
-
-    for (const entry of entries) {
-      if (entry.isDirectory()) {
-        walkDir(path.join(dir, entry.name), `${relativePrefix}${entry.name}/`);
-      }
-    }
-  }
-
-  walkDir(DIST_DIR, '/');
-  return [...pageMap.values()].sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-}
-
 function generateRss() {
-  if (!fs.existsSync(DIST_DIR)) {
-    console.error('❌ dist/ directory not found. Run `astro build` first.');
-    process.exit(1);
-  }
+  const items = [];
 
-  const items = findHtmlPages();
+  for (const page of PAGES) {
+    items.push({
+      path: page.path,
+      title: page.title,
+      description: '',
+      pubDate: page.pubDate,
+      isMix: false,
+    });
+  }
 
   const blogDataPath = path.join(ROOT_DIR, 'src/data/blog-posts.json');
   try {
     const blogData = JSON.parse(fs.readFileSync(blogDataPath, 'utf-8'));
     const posts = blogData.posts || [];
-    for (const post of posts.slice(0, 10)) {
+    for (const post of posts) {
       items.push({
         path: `/dj/mixes/${post.slug}/`,
         title: post.title,
-        description: post.description || `Neuer Mix auf Mixcloud: ${post.title}`,
+        description: post.description || '',
         pubDate: post.created_time.split('T')[0],
         isMix: true,
       });
@@ -109,17 +69,6 @@ function generateRss() {
   } catch (e) {
     console.warn('⚠️ Could not read blog-posts.json:', e.message);
   }
-
-  const seen = new Set();
-  const deduped = [];
-  for (const item of items) {
-    if (!seen.has(item.path)) {
-      seen.add(item.path);
-      deduped.push(item);
-    }
-  }
-  items.length = 0;
-  items.push(...deduped);
 
   items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
@@ -155,18 +104,17 @@ function generateRss() {
 </rss>
 `;
 
-  const distPath = path.join(DIST_DIR, 'rss.xml');
-  fs.writeFileSync(distPath, xml);
-  console.log(`✅ RSS feed generated at dist/rss.xml with ${items.length} items`);
+  if (fs.existsSync(DIST_DIR)) {
+    fs.writeFileSync(path.join(DIST_DIR, 'rss.xml'), xml);
+    console.log(`✅ RSS feed generated at dist/rss.xml with ${items.length} items`);
+  }
 
-  const publicPath = path.join(PUBLIC_DIR, 'rss.xml');
-  fs.writeFileSync(publicPath, xml);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'rss.xml'), xml);
   console.log(`   → synced to public/rss.xml`);
 }
 
-export { escapeXml, decodeHtmlEntities, formatRssDate, extractMeta };
+export { escapeXml, formatRssDate };
 
-// Run when executed directly
 if (process.argv[1] && import.meta.url === `file://${process.argv[1]}`) {
   generateRss();
 }

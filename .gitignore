@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 # cache
 .eslintcache
+
+# serena AI tool cache
+.serena/

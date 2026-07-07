@@ -346,7 +346,7 @@ const djPerson = getDjPersonSchema();
 
           <div class="relative animate-on-scroll" data-events-carousel data-events-count={events.length}>
             <div class="flex gap-4 overflow-x-auto snap-x pb-4 px-1 -mx-1 scrollbar-hide" data-events-track>
-              {[...events, ...events, ...events].map((event) => (
+              {[...events, ...events].map((event) => (
                 <article class="snap-center shrink-0 w-56 md:w-64 bg-[var(--color-bg)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors">
                   <a href={event.image} target="_blank" class="block flex flex-col h-full">
                     <div class="bg-black h-36 overflow-hidden flex items-center justify-center">

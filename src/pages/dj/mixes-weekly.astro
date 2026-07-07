@@ -5,6 +5,7 @@ import Footer from "../../components/Footer.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import Icon from "../../components/Icon.astro";
 import { getDjPersonSchema } from "../../utils/dj-schema.js";
+import { USECASE_CONFIG } from "../../data/usecase-config";
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
@@ -55,38 +56,19 @@ const searchablePosts = (blogData.posts || []).filter(post => post.hasTracklist)
   tracklist: post.tracklist || []
 }));
 
-const blogSchema = {
+const blogPostingSchema = postsWithTracklists.slice(0, 10).map(post => ({
   "@context": "https://schema.org",
-  "@type": "Blog",
-  "name": "DJ Hulk Weekly Mixes Blog",
-  "description": "Weekly electronic music DJ mixes by DJ Hulk with full tracklists. House, Tech House, Deep House, Latin House.",
-  "url": "https://holger-kampffmeyer.de/dj/mixes-weekly/",
-  "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
+  "@type": "BlogPosting",
+  "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.slug}`,
+  "headline": post.title,
+  "image": post.picture,
+  "datePublished": post.created_time,
   "author": {
     "@type": "Person",
     "name": "DJ Hulk",
     "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
-  },
-"blogPosts": postsWithTracklists.slice(0, 10).map(post => ({
-   "@type": "BlogPosting",
-   "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.slug}`,
-   "headline": post.title,
-   "image": post.picture,
-   "datePublished": post.created_time,
-   "author": {
-     "@type": "Person",
-     "name": "DJ Hulk",
-     "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
-   }
- }))
-};
-
-const USECASE_CONFIG: Record<string, { label: string; icon: string; color: string }> = {
-  gym: { label: 'Gym Session', icon: 'gym', color: 'text-[var(--color-primary)]' },
-  drive: { label: 'Drive / Relax', icon: 'drive', color: 'text-[var(--color-primary)]' },
-  work: { label: 'Focus / Work', icon: 'work', color: 'text-[var(--color-primary)]' },
-  party: { label: 'Pre-Party', icon: 'party', color: 'text-[var(--color-primary)]' }
-};
+  }
+}));
 
 function formatDate(dateStr: string) {
   if (!dateStr) return '';
@@ -96,7 +78,6 @@ function formatDate(dateStr: string) {
 ---
 
 <Layout
-  noSiteJsonLd
    title="Weekly DJ Mixes - DJ Hulk - House, Tech House, Deep House"
    description="Every Sunday new DJ mix on Mixcloud by DJ Hulk. House, Tech House, Deep House with tracklists. Perfect for gym, driving, work, or pre-party."
    image="/img/_81A4010.webp"
@@ -112,46 +93,6 @@ function formatDate(dateStr: string) {
     },
     {
       "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Weekly DJ Mixes - DJ Hulk - House, Tech House, Deep House",
-      "description": "Every Sunday new DJ mix on Mixcloud by DJ Hulk. House, Tech House, Deep House with tracklists. Perfect for gym, driving, work, or pre-party.",
-      "url": "https://holger-kampffmeyer.de/dj/mixes-weekly/"
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "DJ Hulk - Holger Kampffmeyer",
-      "description": "Electronic Music DJ aus Stuttgart. DJ Buchung für Events, Festivals und private Parties. House, Tech House, Drum n Bass.",
-      "url": "https://holger-kampffmeyer.de",
-      "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
-      "priceRange": "€€",
-      "telephone": "+49-171-1467491",
-      "email": "holger.kampffmeyer+dj@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Magellanstraße 4",
-        "addressLocality": "Leinfelden-Echterdingen",
-        "postalCode": "70771",
-        "addressRegion": "Baden-Württemberg",
-        "addressCountry": "DE"
-      },
-      "areaServed": {
-        "@type": "State",
-        "name": "Baden-Württemberg"
-      },
-      "sameAs": [
-        "https://www.facebook.com/holger.kampffmeyer",
-        "https://www.instagram.com/djhulk_de",
-        "https://www.youtube.com/@djhulk_de",
-        "https://www.mixcloud.com/holger-kampffmeyer/",
-        "https://soundcloud.com/djhulk",
-        "https://open.spotify.com/user/11131869179",
-        "https://de.ra.co/dj/djhulk"
-      ]
-    },
-    blogSchema,
-    {
-      "@context": "https://schema.org",
       "@type": "MusicPlaylist",
       "name": "DJ Hulk Weekly Mixes",
       "description": "Weekly electronic music DJ mixes by DJ Hulk with full tracklists. Specialized for gym, driving, work focus, and pre-party.",
@@ -160,6 +101,7 @@ function formatDate(dateStr: string) {
       "genre": ["House", "Tech House", "Deep House", "Latin House"],
       "numTracks": blogData.posts?.length || 0
     },
+    ...blogPostingSchema,
     latestPost ? {
       "@context": "https://schema.org",
       "@type": "AudioObject",

@@ -5,6 +5,7 @@ import Footer from "../../components/Footer.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import Icon from "../../components/Icon.astro";
 import { getDjPersonSchema } from "../../utils/dj-schema.js";
+import { USECASE_CONFIG, USE_CASE_LABELS } from "../../data/usecase-config";
 import Hero from "../../components/Hero.astro";
 import heroImg from "../../assets/img/em3f/DSC_2451.jpg";
 
@@ -46,19 +47,6 @@ const ITEMS_PER_PAGE = 12;
 const totalPages = Math.ceil(archivePosts.length / ITEMS_PER_PAGE);
 
 const useCaseFilter = Astro.url.searchParams.get('useCase');
-const USE_CASE_LABELS: Record<string, string> = {
-  gym: 'Gym Session',
-  drive: 'Drive / Relax',
-  work: 'Focus / Work',
-  party: 'Pre-Party'
-};
-
-const USECASE_CONFIG: Record<string, { label: string; icon: string; color: string }> = {
-  gym: { label: 'Gym Session', icon: 'gym', color: 'text-[var(--color-primary)]' },
-  drive: { label: 'Drive / Relax', icon: 'drive', color: 'text-[var(--color-primary)]' },
-  work: { label: 'Focus / Work', icon: 'work', color: 'text-[var(--color-primary)]' },
-  party: { label: 'Pre-Party', icon: 'party', color: 'text-[var(--color-primary)]' }
-};
 
 const searchablePosts = archivePosts.map(post => ({
   slug: post.slug,
@@ -136,7 +124,7 @@ const collectionPageSchema = {
   }]
 };
 
-const jsonLd: any[] = [collectionPageSchema, breadcrumbSchema, getDjPersonSchema()];
+const jsonLd: object[] = [collectionPageSchema, breadcrumbSchema, getDjPersonSchema()];
 if (useCaseFilter) {
   jsonLd.push({
     "@context": "https://schema.org",

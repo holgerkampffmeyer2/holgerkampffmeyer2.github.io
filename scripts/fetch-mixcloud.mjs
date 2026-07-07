@@ -343,13 +343,9 @@ async function fetchMixcloud(force = false) {
     // We want to pair each tracklist with its corresponding hero image.
     const tracklistHeroPairs = [];
 
-     // Helper to extract mix number from a string (case-insensitive, allowing Mx or Mix, and any non-digit separators)
-     // Using the enhanced version defined above
-      const getMixNumber = extractMixNumber;
-
     for (const tracklistInfo of tracklistFiles) {
       const tracklistFilename = tracklistInfo.file;
-      const tracklistMixNum = getMixNumber(tracklistFilename);
+      const tracklistMixNum = extractMixNumber(tracklistFilename);
       let heroImageFile = null;
       let heroImagePath = null;
       let heroImageStat = null;
@@ -358,7 +354,7 @@ async function fetchMixcloud(force = false) {
       if (tracklistMixNum) {
         // Try to find hero image with the same mix number
         for (const heroInfo of heroImageFiles) {
-          const heroMixNum = getMixNumber(heroInfo.file);
+          const heroMixNum = extractMixNumber(heroInfo.file);
           if (heroMixNum && heroMixNum === tracklistMixNum) {
             heroImageFile = heroInfo.file;
             heroImagePath = heroInfo.path;
@@ -397,7 +393,7 @@ async function fetchMixcloud(force = false) {
         },
         confidence: confidence,
         tracklistMixNum: tracklistMixNum,
-        heroImageMixNum: getMixNumber(heroImageFile)
+        heroImageMixNum: extractMixNumber(heroImageFile)
       });
     }
     
