@@ -555,7 +555,16 @@ async function fetchMixcloud(force = false) {
 
      const postMap = new Map();
      for (const p of existingPosts) postMap.set(p.key, p);
-     for (const p of posts) postMap.set(p.key, p);
+     for (const p of posts) {
+       const existing = postMap.get(p.key);
+       // Preserve existing tracklist/heroImage if new one is empty
+       if (existing && existing.hasTracklist && !p.hasTracklist) {
+         p.tracklist = existing.tracklist;
+         p.hasTracklist = existing.hasTracklist;
+         p.heroImage = existing.heroImage;
+       }
+       postMap.set(p.key, p);
+     }
       const mergedPosts = Array.from(postMap.values())
         .sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
 
