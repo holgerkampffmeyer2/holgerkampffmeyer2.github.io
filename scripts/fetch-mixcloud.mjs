@@ -32,6 +32,34 @@ const extractMixNumber = (str) => {
   return m?.[1] ?? null;
 };
 
+// Extract date from filename for date-based matching (fallback when no mix number).
+// Supports: YYYY-MM-DD, "July 26", "Jul 2026", etc.
+const MONTH_MAP = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+
+const extractDateFromFilename = (filename) => {
+  if (!filename) return null;
+  const s = filename.toLowerCase();
+  // Try YYYY-MM-DD first
+  const isoMatch = s.match(/(\d{4})-(\d{2})-(\d{2})/);
+  if (isoMatch) return new Date(parseInt(isoMatch[1]), parseInt(isoMatch[2]) - 1, parseInt(isoMatch[3]));
+  // Try "month YY" or "month YYYY" (e.g. "July 26", "Jul 2026")
+  const monthMatch = s.match(/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*[\s'`-]*(\d{2,4})/i);
+  if (monthMatch) {
+    const month = MONTH_MAP[monthMatch[1].substring(0, 3)];
+    let year = parseInt(monthMatch[2]);
+    if (year < 100) year += 2000;
+    if (month !== undefined && !isNaN(year)) return new Date(year, month, 1);
+  }
+  return null;
+};
+
+// Check if two dates are within N days of each other
+const datesWithinDays = (d1, d2, days = 3) => {
+  if (!d1 || !d2) return false;
+  const diff = Math.abs(d1.getTime() - d2.getTime());
+  return diff <= days * 24 * 60 * 60 * 1000;
+};
+
 function shouldFetch(force = false) {
   if (force) return true;
   if (!fs.existsSync(TIMESTAMP_FILE)) return true;
@@ -472,11 +500,22 @@ async function fetchMixcloud(force = false) {
         // Use best match if confidence is above threshold
         if (bestConfidence >= 0.5) {
           pair = bestPair;
-        } else if (mixNumber) {
-          // Only warn if we had a mix number but poor fuzzy match
-          console.warn(`Warning: Low confidence match (${bestConfidence.toFixed(2)}) for mix "${mix.name}"`);
+        } else {
+          // Fallback: date-based matching (±3 days) for mixes without mix number
+          const mixDate = new Date(mix.created_time);
+          for (const candidatePair of pairList) {
+            const tracklistDate = extractDateFromFilename(candidatePair.tracklist.file);
+            if (datesWithinDays(tracklistDate, mixDate, 3)) {
+              pair = candidatePair;
+              console.log(`📅 Date-match: "${candidatePair.tracklist.file}" → "${mix.name}" (within 3 days)`);
+              break;
+            }
+          }
+          if (!pair && mixNumber) {
+            // Only warn if we had a mix number but no match found
+            console.warn(`Warning: No match found for mix "${mix.name}" (confidence=${bestConfidence.toFixed(2)})`);
+          }
         }
-        // If no mix number and poor match, silently continue (will get null pair)
       }
 
       // Process the selected pair
@@ -544,6 +583,8 @@ export {
   copyWebpFiles,
   normalizeString,
   extractMixNumber,
+  extractDateFromFilename,
+  datesWithinDays,
   generateOgImages
 };
 

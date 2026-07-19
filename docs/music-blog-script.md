@@ -101,6 +101,23 @@ User legt in `tracklists/` ab:
 Der Agent ermittelt `<nummer>` aus dem `Mix<nummer>`-Substring in der Datei.  
 Die Schreibweise von Quelldateien ist flexibel — nur `Mix<nummer>` im Namen ist entscheidend.
 
+### Spezialfälle: Mixes ohne Mix-Nummer
+
+Manche Mixes (b2b, Guestmix, etc.) haben keine Mix-Nummer. Für diese gelten andere Dateinamen-Konventionen:
+
+**Tracklist:**
+- Format: `<Artist> b2B <Artist>-<YYYY-MM-DD>-tracklist.txt`
+- Beispiel: `DJ Hulk b2B BigT-2026-07-11-tracklist.txt`
+
+**Hero-Image:**
+- Format: `<slug>.webp` in `public/tracklists/`
+- Beispiel: `dj-hulk-b2b-bigt-beach-house-july-26.webp`
+
+**Automatische Zuordnung:**
+Das Script ordnet Dateien automatisch zu wenn:
+- Fuzzy-Matching ≥ 0.5 (basiert auf Dateinamen-Ähnlichkeit), ODER
+- Tracklist-Datum ±3 Tage vom Mix-Veröffentlichungsdatum liegt (Datum-basiertes Fallback)
+
 ### Schritt 2: Keine manuelle Kopie nötig
 
 Das Script findet und ordnet Tracklist-Dateien automatisch zu:
