@@ -8,7 +8,7 @@ Primäres Ziel: DJ-Buchungen, Mixcloud-Reichweite, Work-Portfolio.
 Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 
 ## Tech-Stack
-- **Framework:** Astro 6.x (SSG, `output: 'static'`)
+- **Framework:** Astro 7.x (SSG, `output: 'static'`)
 - **Styling:** Tailwind CSS 4.x + CSS Custom Properties (Theme-System)
 - **Package-Manager:** pnpm
 - **Node-Version:** >=18
@@ -54,6 +54,22 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 - Kleine, nachvollziehbare Änderungen bevorzugen
 - Bestehende Patterns zuerst wiederverwenden, dann abstrahieren
 - Bei unklaren Anforderungen lieber vorhandene Komponenten erweitern statt neue Systeme einführen
+
+## OpenSpec Feature Development
+
+This project uses OpenSpec for spec-driven development. To define and implement future features:
+
+1. **Create a new change**:
+   ```bash
+   openspec new change "<feature-name>"
+   ```
+2. **Define artifacts**: Fill in `proposal.md`, `design.md`, `tasks.md`, and delta specs under `openspec/changes/<feature-name>/specs/`.
+3. **Apply & Implement**: Implement the feature according to the specs and tasks.
+4. **Archive & Sync**:
+   ```bash
+   openspec archive <feature-name> -y
+   ```
+
 
 ## Bereichsspezifische Hinweise
 - **`dj/mixes/[number].astro`**: AudioObject + BreadcrumbList Schema prüfen (Mix-Detailseite)
