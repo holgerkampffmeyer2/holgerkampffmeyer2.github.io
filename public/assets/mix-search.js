@@ -13,8 +13,7 @@
   var input = null;
   var selectedIndex = -1;
   var debounceTimer = null;
-  var currentQuery = '';
-var scrollYOnFocus = null;
+
 
   function escapeHtml(str) {
     if (!str) return '';
@@ -126,7 +125,6 @@ var scrollYOnFocus = null;
   }
 
   function showResults(query) {
-    currentQuery = query;
     var q = query.toLowerCase();
     var results = [];
 

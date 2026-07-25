@@ -30,8 +30,6 @@
   var pageInfo = document.getElementById('pageInfo');
   var pageNumbers = document.getElementById('pageNumbers');
 
-  var noResultsMsg = null;
-
   function computeFilteredItems() {
     var byUseCase = useCase
       ? allItems.filter(function (item) {

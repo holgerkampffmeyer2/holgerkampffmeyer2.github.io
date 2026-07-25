@@ -258,7 +258,7 @@ function formatDate(dateStr: string) {
         </div>
       </div>
 
-      <script id="mixSearchData" type="application/json" set:html={JSON.stringify(searchablePosts)}></script>
+      <script is:inline id="mixSearchData" type="application/json" set:html={JSON.stringify(searchablePosts)}></script>
 
       <div class="mix-search-wrapper max-w-xl mx-auto mt-16 mb-6">
         <svg class="mix-search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -378,6 +378,6 @@ function formatDate(dateStr: string) {
     </div>
   </section>
 
-  <script src="/assets/mix-search.js" defer></script>
+  <script is:inline src="/assets/mix-search.js" defer></script>
   <Footer />
 </Layout>

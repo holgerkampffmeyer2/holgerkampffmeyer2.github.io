@@ -181,7 +181,7 @@ if (useCaseFilter) {
 
   <section class="section-padding bg-[var(--color-bg)]">
     <div class="max-w-6xl mx-auto px-4">
-      <script id="mixSearchData" type="application/json" set:html={JSON.stringify(searchablePosts)}></script>
+      <script is:inline id="mixSearchData" type="application/json" set:html={JSON.stringify(searchablePosts)}></script>
 
       <div class="mix-search-wrapper mb-6">
         <svg class="mix-search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -317,6 +317,6 @@ if (useCaseFilter) {
 
   <Footer />
 
-  <script src="/assets/mix-search.js" defer></script>
+  <script is:inline src="/assets/mix-search.js" defer></script>
   <script is:inline src="/assets/archive-pagination.js" defer></script>
 </Layout>

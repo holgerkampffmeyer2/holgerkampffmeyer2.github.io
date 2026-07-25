@@ -310,7 +310,7 @@ const djPerson = getDjPersonSchema();
         </p>
       </div>
 
-      <script id="mixSearchData" type="application/json" set:html={JSON.stringify(searchablePosts)}></script>
+      <script is:inline id="mixSearchData" type="application/json" set:html={JSON.stringify(searchablePosts)}></script>
 
       {latestMix && (
         <MixcloudWidget 
@@ -590,7 +590,7 @@ const djPerson = getDjPersonSchema();
     </section>
 
     <Footer />
-    <script src="/assets/mix-search.js" defer></script>
+    <script is:inline src="/assets/mix-search.js" defer></script>
     <script>
       (function () {
         var track = document.querySelector("[data-events-track]");
