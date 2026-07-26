@@ -1,6 +1,54 @@
 {
-  "lastUpdated": "2026-07-19T08:26:16.997Z",
+  "lastUpdated": "2026-07-26T08:22:10.247Z",
   "posts": [
+    {
+      "title": "DJ Hulk - Mix190 | Latin Afro Tribal House",
+      "key": "/holger-kampffmeyer/dj-hulk-mix190-latin-afro-tribal-house/",
+      "url": "https://www.mixcloud.com/holger-kampffmeyer/dj-hulk-mix190-latin-afro-tribal-house/",
+      "slug": "dj-hulk-mix190-latin-afro-tribal-house",
+      "created_time": "2026-07-26T06:30:13Z",
+      "src": "https://player-widget.mixcloud.com/widget/iframe/?feed=%2Fholger-kampffmeyer%2Fdj-hulk-mix190-latin-afro-tribal-house%2F",
+      "description": "From the sun-soaked streets of Latin America to the deepest Afro house grooves, Mix-190 is a high-energy ride through tribal percussion, infectious vocal hooks, and dancefloor-driven beats. Expect unexpected mashups, Latin flair, and non-stop rhythm.\n\nIf you enjoy, please fav, repost, comment!\n✨DJ Hulk ✨",
+      "picture": "https://thumbnailer.mixcloud.com/unsafe/640x640/extaudio/9/f/1/b/1afc-d5bc-4e1d-9322-ce9e1851576d",
+      "audio_length": 3668,
+      "tags": [
+        "Afro house",
+        "Latin house",
+        "Tribal house",
+        "Club House",
+        "Tech house"
+      ],
+      "useCases": [
+        "party",
+        "drive",
+        "work",
+        "gym"
+      ],
+      "tracklist": [
+        "HORATIO & MANUEL ALICANTE - LA COLEGIALA",
+        "HORATIO & KEV SCOTT - GO ENGLAND GO",
+        "ALEX LUCKYSTRIKE - Vamos (EXTENDED MIX)",
+        "MattLok - Drop The Sinulog Island Drums (MattLok's Original VIP Mix)",
+        "Rohm & Emperia - Look it (Dub)",
+        "merchant & Marlon Roudette - Spotlight (Extended Mix)",
+        "Kenn Colt, Future Identity - NEVER ENOUGH (Extended Mix)",
+        "Tom Enzy - Pull Me Away (Extended Dub Mix)",
+        "REX STAX - Lies (Extended)",
+        "Stromae - Alors On Dance (Dave Ruthwell Tribal Edit)",
+        "Roberto Tropea, Solarys - Let the Sunshine",
+        "El Alfa, Nfasis - Este (Andrea Fiusco Remix)",
+        "Delayz & Cicchini - Baila (Extended Mix)",
+        "Ian Oliver x Ludacris - Stand Up Vs Bucovina (Los Padres Mashup)",
+        "Agent Greg - Speck Of Drum (Extended Mix)",
+        "JAY-Z, Kanye West - Ni**as in Paris (Kev Lavigne ID by Rivoli Remix)",
+        "Mike Towers X Bad Bunny - Adivino (C-Mireles Afro Edit)",
+        "Zhu - Faded (Markuss sunrise edit)",
+        "Veeco - New Generation (Arbey Gonzalez Remix)"
+      ],
+      "hasTracklist": true,
+      "heroImage": "/tracklists/Mixcloud%20Post%20Mix190.webp",
+      "ogImage": "/og/dj-hulk-mix190-latin-afro-tribal-house.webp"
+    },
     {
       "title": "DJ Hulk b2B BigT - Beach House July ´26",
       "key": "/holger-kampffmeyer/dj-hulk-b2b-bigt-beach-house-july-26/",
@@ -19,8 +67,8 @@
         "House"
       ],
       "useCases": [
-        "drive",
-        "party"
+        "work",
+        "gym"
       ],
       "tracklist": [
         "PROTECTTHEVIBE - Head In The Net (Extended Mix)",
