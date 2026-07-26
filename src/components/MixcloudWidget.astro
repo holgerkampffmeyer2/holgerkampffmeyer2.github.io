@@ -1,4 +1,6 @@
 ---
+import { formatDate } from '../utils/format';
+
 interface Props {
   src: string;
   title: string;
@@ -13,12 +15,6 @@ interface Props {
 const { src, title, description, url, createdTime, height, variant = 'card', headingLevel } = Astro.props;
 
 const Tag = headingLevel || (variant === 'featured' ? 'h2' : 'h4');
-
-function formatDate(dateStr: string) {
-  if (!dateStr) return '';
-  const date = new Date(dateStr);
-  return date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-}
 
 function addPlayerParam(baseSrc: string, param: string): string {
   const separator = baseSrc.includes('?') ? '&' : '?';

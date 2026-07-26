@@ -13,47 +13,10 @@ import MixcloudWidget from "../components/MixcloudWidget.astro";
 import { getDjPersonSchema } from "../utils/dj-schema.js";
 import { events } from "../data/events";
 import SectionNav from "../components/SectionNav.astro";
+import { loadBlogPosts, createSearchablePosts } from "../utils/blog-data";
 
-interface BlogPostData {
-   slug: string;
-   title: string;
-   key: string;
-   url: string;
-   created_time: string;
-   src: string;
-   description: string;
-   picture: string;
-   audio_length: number;
-   tags: string[];
-   useCases: string[];
-   tracklist: string[];
-   hasTracklist: boolean;
-   heroImage?: string;
-}
-
-interface BlogData {
-  posts: BlogPostData[];
-}
-
-let blogData: BlogData = { posts: [] };
-
-try {
-  const blogImported = await import("../data/blog-posts.json");
-  if (blogImported && blogImported.default && Array.isArray(blogImported.default.posts)) {
-    blogData = blogImported.default as unknown as BlogData;
-  }
-} catch (e) {
-  console.warn('Could not load blog-posts.json:', e);
-}
-
-const searchablePosts = (blogData.posts || []).filter(post => post.hasTracklist).map(post => ({
-  slug: post.slug,
-  title: post.title,
-  picture: post.picture,
-  description: post.description?.substring(0, 300) || '',
-  tags: post.tags,
-  tracklist: post.tracklist || []
-}));
+const allPosts = await loadBlogPosts();
+const searchablePosts = createSearchablePosts(allPosts);
 
 interface MixcloudMix {
   title: string;

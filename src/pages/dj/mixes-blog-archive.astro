@@ -8,54 +8,18 @@ import { getDjPersonSchema } from "../../utils/dj-schema.js";
 import { USECASE_CONFIG, USE_CASE_LABELS } from "../../data/usecase-config";
 import Hero from "../../components/Hero.astro";
 import heroImg from "../../assets/img/em3f/DSC_2451.jpg";
+import { loadBlogPosts, createSearchablePosts } from "../../utils/blog-data";
+import { formatDate } from "../../utils/format";
 
-interface BlogPostData {
-   slug: string;
-   title: string;
-   key: string;
-   url: string;
-   created_time: string;
-   src: string;
-   description: string;
-   picture: string;
-   audio_length: number;
-   tags: string[];
-   useCases: string[];
-   tracklist: string[];
-   hasTracklist: boolean;
-   heroImage?: string;
-}
-
-interface BlogData {
-  posts: BlogPostData[];
-}
-
-let blogData: BlogData = { posts: [] };
-
-try {
-  const imported = await import("../../data/blog-posts.json");
-  if (imported && imported.default && Array.isArray(imported.default.posts)) {
-    blogData = imported.default as unknown as BlogData;
-  }
-} catch (e) {
-  console.warn('Could not load blog-posts.json:', e);
-}
-
-const archivePosts = blogData.posts ? blogData.posts.filter(post => post.hasTracklist).slice(1) : [];
+const allPosts = await loadBlogPosts();
+const archivePosts = allPosts.filter(post => post.hasTracklist).slice(1);
 
 const ITEMS_PER_PAGE = 12;
 const totalPages = Math.ceil(archivePosts.length / ITEMS_PER_PAGE);
 
 const useCaseFilter = Astro.url.searchParams.get('useCase');
 
-const searchablePosts = archivePosts.map(post => ({
-  slug: post.slug,
-  title: post.title,
-  picture: post.picture,
-  description: post.description?.substring(0, 300) || '',
-  tags: post.tags,
-  tracklist: post.tracklist || []
-}));
+const searchablePosts = createSearchablePosts(allPosts).slice(1);
 
 const breadcrumbLabel = useCaseFilter 
   ? `Archive - ${USE_CASE_LABELS[useCaseFilter] || useCaseFilter}`
@@ -66,12 +30,6 @@ const breadcrumbSegments = [
   { label: "Weekly DJ Mixes", href: "/dj/mixes-weekly" },
   { label: breadcrumbLabel }
 ];
-
-function formatDate(dateStr: string) {
-  if (!dateStr) return '';
-  const date = new Date(dateStr);
-  return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
-}
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",

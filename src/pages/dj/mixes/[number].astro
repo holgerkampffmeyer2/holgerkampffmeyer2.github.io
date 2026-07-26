@@ -6,42 +6,12 @@ import Breadcrumb from "../../../components/Breadcrumb.astro";
 import MixDetail from "../../../components/dj/MixDetail.astro";
 import { getMixDisplay } from "../../../utils/mix-display.js";
 import { getDjPersonSchema } from "../../../utils/dj-schema.js";
-
-interface BlogPostData {
-   slug: string;
-   title: string;
-   key: string;
-   url: string;
-   created_time: string;
-   src: string;
-   description: string;
-   picture: string;
-   audio_length: number;
-   tags: string[];
-   useCases: string[];
-   tracklist: string[];
-    hasTracklist: boolean;
-    heroImage?: string;
-    ogImage?: string;
-}
-
-interface BlogData {
-  posts: BlogPostData[];
-}
+import type { BlogPostData } from "../../../types/blog";
+import { loadBlogPosts } from "../../../utils/blog-data";
 
 export async function getStaticPaths() {
-  let blogData: BlogData = { posts: [] };
-
-  try {
-    const imported = await import("../../../data/blog-posts.json");
-    if (imported && imported.default && Array.isArray(imported.default.posts)) {
-      blogData = imported.default as unknown as BlogData;
-    }
-  } catch (e) {
-    console.warn('Could not load blog-posts.json:', e);
-  }
-
-   const postsWithTracklists = blogData.posts.filter((post: BlogPostData) => post.hasTracklist);
+  const allPosts = await loadBlogPosts();
+  const postsWithTracklists = allPosts.filter((post: BlogPostData) => post.hasTracklist);
 
    return postsWithTracklists.map((post: BlogPostData, index: number) => {
      const currentIndex = index;

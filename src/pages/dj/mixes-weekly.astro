@@ -6,6 +6,8 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
 import Icon from "../../components/Icon.astro";
 import { getDjPersonSchema } from "../../utils/dj-schema.js";
 import { USECASE_CONFIG } from "../../data/usecase-config";
+import { loadBlogPosts, createSearchablePosts } from "../../utils/blog-data";
+import { formatDate } from "../../utils/format";
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
@@ -13,48 +15,10 @@ const breadcrumbSegments = [
   { label: "Weekly DJ Mixes" }
 ];
 
-interface BlogPostData {
-   slug: string;
-   title: string;
-   key: string;
-   url: string;
-   created_time: string;
-   src: string;
-   description: string;
-   picture: string;
-   audio_length: number;
-   tags: string[];
-   useCases: string[];
-   tracklist: string[];
-   hasTracklist: boolean;
-   heroImage?: string;
-}
-
-interface BlogData {
-  posts: BlogPostData[];
-}
-
-let blogData: BlogData = { posts: [] };
-
-try {
-  const imported = await import("../../data/blog-posts.json");
-  if (imported && imported.default && Array.isArray(imported.default.posts)) {
-    blogData = imported.default as unknown as BlogData;
-  }
-} catch (e) {
-  console.warn('Could not load blog-posts.json:', e);
-}
-
-const latestPost = blogData.posts && blogData.posts.length > 0 ? blogData.posts[0] : null;
-const postsWithTracklists = blogData.posts ? blogData.posts.filter(post => post.hasTracklist) : [];
-const searchablePosts = (blogData.posts || []).filter(post => post.hasTracklist).map(post => ({
-  slug: post.slug,
-  title: post.title,
-  picture: post.picture,
-  description: post.description?.substring(0, 300) || '',
-  tags: post.tags,
-  tracklist: post.tracklist || []
-}));
+const allPosts = await loadBlogPosts();
+const latestPost = allPosts.length > 0 ? allPosts[0] : null;
+const postsWithTracklists = allPosts.filter(post => post.hasTracklist);
+const searchablePosts = createSearchablePosts(allPosts);
 
 const blogPostingSchema = postsWithTracklists.slice(0, 10).map(post => ({
   "@context": "https://schema.org",
@@ -69,12 +33,6 @@ const blogPostingSchema = postsWithTracklists.slice(0, 10).map(post => ({
     "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
   }
 }));
-
-function formatDate(dateStr: string) {
-  if (!dateStr) return '';
-  const date = new Date(dateStr);
-  return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
-}
 ---
 
 <Layout
@@ -99,7 +57,7 @@ function formatDate(dateStr: string) {
       "url": "https://holger-kampffmeyer.de/dj/mixes-weekly/",
       "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
       "genre": ["House", "Tech House", "Deep House", "Latin House"],
-      "numTracks": blogData.posts?.length || 0
+      "numTracks": allPosts.length || 0
     },
     ...blogPostingSchema,
     latestPost ? {

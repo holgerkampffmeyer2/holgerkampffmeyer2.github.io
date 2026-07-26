@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import { USECASE_CONFIG } from '../data/usecase-config';
+import { formatDate } from '../utils/format';
 
 interface Props {
   src: string;
@@ -16,12 +17,6 @@ interface Props {
 }
 
 const { src, title, description, url, createdTime, heroImage, tags = [], useCases = [], tracklist = [], variant = 'card' } = Astro.props;
-
-function formatDate(dateStr: string) {
-  if (!dateStr) return '';
-  const date = new Date(dateStr);
-  return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
-}
 ---
 
 <div class="blog-post bg-[var(--color-surface)] rounded-xl overflow-hidden border border-[var(--color-border)]">
