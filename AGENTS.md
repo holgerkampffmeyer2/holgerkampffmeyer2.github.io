@@ -36,6 +36,15 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 - `pnpm run lint` — ESLint
 - `pnpm run check` — TypeScript
 
+## CLI-Proxy `rtk`
+
+- Befehle können über den Proxy `rtk` (z.B. `rtk lint`, `rtk pnpm run build`) gefiltert werden.
+- **Falls `rtk <cmd>` fehlerhaft/leer läuft** (z.B. `ESLint output (JSON parse failed: EOF ...)`), den Proxy deaktivieren und den Befehl direkt ausführen:
+  ```bash
+  RTK_DISABLED=1 pnpm run lint
+  ```
+- `RTK_DISABLED=1` schaltet die Hook-/Proxy-Funktion von rtk komplett ab (kein Wrapping, volle Rohausgabe).
+
 ## Wartungsskripte
 - `node scripts/update-image-refs.mjs` — Ersetzt JPEG/PNG-Bildreferenzen durch WebP-Versionen (falls verfügbar) in allen .astro, .html, .css und .mjs Dateien
 
