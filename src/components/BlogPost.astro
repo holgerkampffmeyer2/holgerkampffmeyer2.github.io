@@ -35,7 +35,7 @@ const { src, title, description, url, createdTime, heroImage, tags = [], useCase
     </div>
     
     {description && (
-      <div class="description text-[var(--color-text-muted)] mb-4" set:html={description.replace(/\n/g, '<br>')}></div>
+      <div class="description text-[var(--color-text-muted)] mb-4 whitespace-pre-wrap">{description}</div>
     )}
     
     {useCases.length > 0 && (

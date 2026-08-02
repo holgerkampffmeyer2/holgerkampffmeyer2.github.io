@@ -47,7 +47,7 @@ const linkSize = variant === 'card' ? 'text-xs' : 'text-sm';
       <p class={`text-[var(--color-text-muted)] mb-2 ${infoSize}`}>{formatDate(createdTime)}</p>
     )}
     {description && (
-      <div class={`text-[var(--color-text-muted)] leading-relaxed mb-3 mix-description ${infoSize}`} set:html={description}></div>
+      <div class={`text-[var(--color-text-muted)] leading-relaxed mb-3 mix-description ${infoSize} whitespace-pre-wrap`}>{description}</div>
     )}
     {url && (
       <a href={url} target="_blank" rel="noopener noreferrer nofollow" class={`inline-flex items-center gap-2 text-[var(--color-secondary)] hover:text-[var(--color-primary)] transition-colors font-medium ${linkSize}`}>
