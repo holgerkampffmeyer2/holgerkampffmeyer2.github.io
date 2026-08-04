@@ -32,8 +32,9 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 
 ## CLI-Proxy `rtk`
 
-- Befehle können über den Proxy `rtk` (z.B. `rtk lint`, `rtk pnpm run build`) gefiltert werden.
-- **Falls `rtk <cmd>` fehlerhaft/leer läuft** (z.B. `ESLint output (JSON parse failed: EOF ...)`), den Proxy deaktivieren und den Befehl direkt ausführen:
+- Befehle können über den Proxy `rtk` (z.B. `rtk pnpm run build`, `rtk pnpm run lint`) gefiltert werden.
+- **Veralteter Workaround:** Der direkte Subcommand `rtk lint` hat einen JSON-Parse-Bug (`ESLint output (JSON parse failed: EOF ...)`). Stattdessen `rtk pnpm run lint` verwenden (funktioniert).
+- Falls `rtk <cmd>` dennoch fehlerhaft/leer läuft:
   ```bash
   RTK_DISABLED=1 pnpm run lint
   ```
