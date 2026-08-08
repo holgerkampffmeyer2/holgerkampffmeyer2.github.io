@@ -38,6 +38,7 @@ export default defineConfig({
   redirects: {
     '/dj/': '/djhulk-electronic-music',
     '/dj/mixes': '/dj/mixes-weekly',
+    '/dj/mixes-all': '/dj/mixes-blog-archive',
     '/dj/mixes/all': '/dj/mixes-blog-archive',
     'dj/mixes.html': '/dj/mixes-weekly',
     '/mixes': '/dj/mixes-weekly',
