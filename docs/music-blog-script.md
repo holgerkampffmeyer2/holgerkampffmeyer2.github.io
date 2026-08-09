@@ -156,6 +156,10 @@ node scripts/fetch-mixcloud.mjs --force && astro build && node scripts/generate-
 6. Astro baut die neue Seite `/dj/mixes/<slug>.html`
 7. RSS-Feed + `urllist.txt` werden generiert
 
+**Automatisch auf /links:** Die Seite `/links` zeigt den neuesten Mix automatisch als Mini-Player oben
+(`MixcloudWidget variant="featured"` in `src/pages/links.astro`, liest `mixes[0]` aus `mixcloud-data.json`).
+Nach dem Fetch ersetzt der neue Mix dort den vorherigen — kein manuelles Update nötig.
+
 ### Schritt 5: Überprüfen
 
 - Öffne `http://localhost:4321/dj/mixes/<slug>` (im Dev-Modus)

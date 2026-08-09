@@ -97,6 +97,10 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 2. **Bei b2b/Guestmix:** Abschnitt "Mixes ohne Mix-Nummer" beachten (Dateinamen-Konvention + Datum-basiertes Matching)
 3. Alle Schritte ausführen
 
+**Achtung:** `/links` zeigt automatisch den neuesten Mix aus `mixcloud-data.json` als Mini-Player
+(`MixcloudWidget variant="featured"` in `src/pages/links.astro`, liest `mixes[0]`). Nach dem Mixcloud-Fetch
+(`fetch-mixcloud.mjs` / `build:full`) ersetzt der neue Mix dort den vorherigen — kein manuelles Update nötig.
+
 ## Wartungsskripte
 - `node scripts/update-image-refs.mjs` — Ersetzt JPEG/PNG-Bildreferenzen durch WebP-Versionen (falls verfügbar) in allen .astro, .html, .css und .mjs Dateien
 
