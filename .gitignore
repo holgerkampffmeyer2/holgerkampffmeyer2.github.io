@@ -29,5 +29,8 @@ pnpm-debug.log*
 # cache
 .eslintcache
 
+# lighthouse ci output
+.lighthouseci/
+
 # serena AI tool cache
 .serena/
