@@ -4,8 +4,9 @@
 
 ## Technologie-Stack
 
-- **Framework:** Astro 6.x (Static Site Generation, `output: 'static'`)
+- **Framework:** Astro 7.x (Static Site Generation, `output: 'static'`)
 - **Styling:** Tailwind CSS 4.x + CSS Custom Properties (Theme-System)
+- **Language:** TypeScript
 - **Deployment:** GitHub Pages
 - **Site-URL:** `https://holger-kampffmeyer.de` (gesetzt in `astro.config.mjs`)
 
@@ -16,30 +17,32 @@
 ```
 src/
 ├── components/           # UI-Komponenten
-├── data/                 # Daten (faqs.json, mixcloud-data.json)
+├── data/                 # Daten (faqs.json, mixcloud-data.json, blog-posts.json)
 ├── layouts/             # Layouts (Layout.astro)
 ├── pages/               # Routen
 │   ├── index.astro      # Startseite
 │   ├── djhulk-electronic-music.astro
 │   ├── dj/
 │   │   ├── videos.astro
-│   │   ├── mixes.astro
-│   │   ├── mixes/[number].astro
-│   │   ├── mixes-all.astro
+│   │   ├── mixes-weekly.astro
+│   │   ├── mixes/
+│   │   │   └── [number].astro  # Dynamische Mix-Detailseiten
 │   │   ├── mixes-blog-archive.astro
 │   │   └── em3f.astro
 │   ├── vermietung.astro  # Landingpage mit Verweis → extern
 │   ├── work.astro
 │   ├── links.astro
 │   └── impressum.astro
-└── styles/
-    ├── global.css         # Komponent-Styles, Utility-Klassen
-    ├── fonts.css          # @font-face Deklarationen
-    └── themes/
-        ├── default.css    # Standard-Theme (primary=orange, secondary=cyan)
-        ├── deep-bass.css  # Navy/Blau
-        ├── electric-night.css  # Purple/Pink/Neon
-        └── golden-hour.css     # Amber/Gold/terrakotta
+├── styles/
+│   ├── global.css         # Komponent-Styles, Utility-Klassen
+│   ├── fonts.css          # @font-face Deklarationen
+│   └── themes/
+│       ├── default.css    # Standard-Theme (primary=orange, secondary=cyan)
+│       ├── deep-bass.css  # Navy/Blau
+│       ├── electric-night.css  # Purple/Pink/Neon
+│       └── golden-hour.css     # Amber/Gold/terrakotta
+├── types/               # TypeScript Typdefinitionen
+└── utils/               # Hilfsfunktionen
 ```
 
 ---
@@ -52,8 +55,7 @@ src/
 | /djhulk-electronic-music | DJ Hulk |
 | /dj/videos | Videos |
 | /dj/mixes-weekly | Mixes (Übersicht) |
-| /dj/mixes/[n] | Single Mix mit Tracklist |
-| /dj/mixes-blog-archive | Alle Mixes (Blog-Archiv) |
+| /dj/mixes/[slug] | Single Mix mit Tracklist (dynamisch) |
 | /dj/mixes-blog-archive | Mixes Blog-Archiv |
 | /dj/em3f | Festival Fotos |
 | /vermietung | Vermietung Landingpage (Verweis → soundundlicht-stuttgart.de) |
@@ -168,18 +170,30 @@ Zwei Varianten: `.hero-overlay` (default) und `.hero-overlay-secondary`
 ## Build-Skripte
 
 ```bash
-pnpm run dev        # Development
+pnpm run dev        # Development Server
 pnpm run lint      # ESLint
-pnpm run build     # Production (nur Astro, schnell)
-pnpm run build:seo  # RSS + Sitemap generieren
-pnpm run preview   # Preview
+pnpm run check     # TypeScript
+pnpm run build     # Production Build (nur Astro, schnell)
+pnpm run build:seo # RSS + urllist.txt generieren
+pnpm run build:full # Fetch Mixcloud + Optimize Images + Build + SEO
+pnpm run preview   # Preview Build
 ```
+
+## Wartungsskripte
+- `node scripts/fetch-mixcloud.mjs` — Mixcloud-Daten abrufen (24h Cache, `--force` für frische Daten)
+- `node scripts/optimize-images.mjs` — Bilder optimieren
+- `node scripts/generate-rss.mjs` — RSS-Feed generieren
+- `node scripts/generate-urllist.mjs` — urllist.txt generieren
+- `node scripts/indexnow-submit.mjs` — URLs an IndexNow API senden
+- `node scripts/update-image-refs.mjs` — JPEG/PNG-Referenzen durch WebP ersetzen
 
 ---
 
 ## SEO
 
-- JSON-LD: LocalBusiness, Person, WebPage, FAQPage (Index), VideoObject (8 Videos), Blog + BlogPosting (Mixes-Übersicht), AudioObject + BreadcrumbList (Mix-Detailseiten)
-- Open Graph Tags
-- Sitemap + RSS Feed
-- robots.txt erweitert für AI-Crawler
+- **JSON-LD:** LocalBusiness, Person, WebPage, FAQPage (Index), VideoObject (Videos), BlogPosting (Mixes-Übersicht), MusicPlaylist, AudioObject + BreadcrumbList (Mix-Detailseiten)
+- **Open Graph Tags:** inkl. spezielle Tags für Mix-Seiten (og:title, og:type=music.playlist, og:image 1200×630)
+- **Sitemap:** Automatisch generiert via @astrojs/sitemap mit Prioritäten (Mix-Seiten: 0.8, Startseite: 1.0)
+- **RSS Feed:** Generiert aus blog-posts.json (neueste 10 Mixes)
+- **urllist.txt:** Für IndexNow API (Bing)
+- **robots.txt:** Erweitert für AI-Crawler

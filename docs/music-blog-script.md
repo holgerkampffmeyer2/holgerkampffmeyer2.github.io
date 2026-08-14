@@ -125,32 +125,41 @@ Das Script findet und ordnet Tracklist-Dateien automatisch zu:
 - Es passt die Tracklist automatisch dem entsprechenden Mix zu (basierend auf Veröffentlichungsdatum)
 - Keine Kopie in `src/data/tracklists/` mehr notwendig
 
-### Schritt 3: Bild konvertieren
+### Schritt 3: Bild konvertieren (optional - wird automatisch erledigt)
 
-Finde die Bild-Datei mit `Mix<nummer>`, konvertiere zu WebP (1200px Breite):
+Das `fetch-mixcloud.mjs` Script konvertiert Bilder automatisch:
+- Sucht nach PNG/JPG/JPEG Dateien mit `Mix<nummer>` im Namen in `tracklists/`
+- Konvertiert zu WebP (1200px Breite) → `public/tracklists/Mix<nummer>.webp`
+- **Manuell nur nötig wenn:** Bild bereits in `tracklists/` liegt und nicht automatisch gefunden wird
 
+Manuelle Konvertierung (falls nötig):
 ```bash
 node scripts/create-webp.mjs -w 1200 "tracklists/<original>.png"
 cp "tracklists/<original>.webp" "public/tracklists/Mix<nummer>.webp"
 ```
 
 **Warum 1200px:** Das Hero-Bild wird auf der Mix-Detailseite bis zu 896px breit angezeigt (`max-w-4xl`)
-mit 320px Höhe (`lg:h-80`). 1200px liefert ausreichend Auflösung für Retina-Displays, ohne überdimensioniert zu sein.
+mit 320px Höhe (`lg:h-80`). 1200px liefert ausreichend Auflösung für Retina-Displays.
 
-**Achtung:** WebP-Dateinamen dürfen KEINE Leerzeichen enthalten — das Script ersetzt Leerzeichen automatisch durch Bindestriche. Der finale Name in `public/tracklists/` sollte `Mix<nummer>.webp` sein.
+**Achtung:** WebP-Dateinamen dürfen KEINE Leerzeichen enthalten — das Script ersetzt Leerzeichen automatisch durch Bindestriche.
 
 ### Schritt 4: JSON + Build
 
-`build:full` hat einen 24h-Cache — für einen frischen Mix auf Mixcloud muss `--force` die API-Abfrage erzwingen:
+`build:full` hat einen **24h-Cache** — für einen frischen Mix auf Mixcloud muss `--force` die API-Abfrage erzwingen:
 
 ```bash
 node scripts/fetch-mixcloud.mjs --force && astro build && node scripts/generate-rss.mjs && node scripts/generate-urllist.mjs
 ```
 
+**Oder einfach:**
+```bash
+pnpm run build:full  # ACHTUNG: Nutzt Cache! Für neue Mixes: --force nötig
+```
+
 **Was passiert dabei automatisch:**
 1. `fetch-mixcloud.mjs` holt neueste Mixe von Mixcloud API (erzwungen via `--force`)
 2. Tracklist aus `tracklists/` wird zugeordnet (Regex auf `Mix<nummer>`)
-3. Hero-Image aus `public/tracklists/` wird zugeordnet (Regex auf `Mix<nummer>`)
+3. Hero-Image aus `tracklists/` wird gefunden, konvertiert und nach `public/tracklists/` kopiert
 4. `blog-posts.json` + `mixcloud-data.json` werden aktualisiert
 5. OG-Vorschaubilder (1200×630 WebP) werden aus Mixcloud-Covers generiert → `public/og/{slug}.webp`
 6. Astro baut die neue Seite `/dj/mixes/<slug>.html`
@@ -175,17 +184,25 @@ Nach dem Fetch ersetzt der neue Mix dort den vorherigen — kein manuelles Updat
 
 Jede Mix-Seite erhält automatisch:
 
-**Title:** `Mix#176 - Latin House / Tech House by DJ Hulk | DJ Hulk`
+**Title:** `Mix#176 - Latin House / Tech House by DJ Hulk | DJ Hulk` (max 60 Zeichen)
 
-**Description:** Erste 160 Zeichen der Mix-Beschreibung
+**Description:** Erste 160 Zeichen der Mix-Beschreibung (Fallback: Generische Beschreibung)
 
 **JSON-LD (Structured Data):**
-- `AudioObject` - Mix-Details (Titel, Beschreibung, Dauer, Datum)
-- `MusicGroup` - DJ Hulk als Musiker/Produzent
-- `BreadcrumbList` - Navigation
+- `AudioObject` - Mix-Details (Titel, Beschreibung, Dauer, Datum, Genre, Producer)
+- `BlogPosting` - Mix als Blog-Post (Headline, Description, DatePublished, Author)
+- `BreadcrumbList` - Navigation (Home → DJ Hulk → Weekly DJ Mixes → Mix-Titel)
 - `Person` - DJ Hulk als Produzent
 
+**Open Graph:**
+- `og:title` - DJ Hulk - Mix-Titel
+- `og:type` - music.playlist
+- `og:image` - 1200×630 WebP Bild aus `public/og/{slug}.webp`
+- `twitter:player` - Mixcloud Player URL
+
 **Canonical URL:** `https://holger-kampffmeyer.de/dj/mixes/{slug}`
+
+**Sitemap:** Priorität 0.8, changefreq: WEEKLY
 
 ---
 
@@ -194,27 +211,28 @@ Jede Mix-Seite erhält automatisch:
 ### /dj/mixes-weekly (Übersicht)
 - Neuester Mix (vollständig mit Player + Tracklist)
 - Filter-Kategorien → verlinken auf `/dj/mixes-blog-archive?useCase=gym|drive|work|party`
+- Suchfunktion (Client-seitig) für Mixes nach Artist, Titel oder Keyword
 - Karussell mit allen Mixes → verlinkt auf `/dj/mixes/{slug}`
 - Button "Mix Archive" → `/dj/mixes-blog-archive`
 - Button "Full Mixcloud Library" → `/dj/mixes-blog-archive`
-- Mixcloud Profile → `https://www.mixcloud.com/holger-kampffmeyer/`
-- SoundCloud Profile → `https://soundcloud.com/holger-kampffmeyer2`
-- Spotify Playlist
+- Externe Links: Mixcloud, SoundCloud
+- Spotify Playlist Embed
 
 ### /dj/mixes/{slug} (Einzelne Mix-Seite)
 - Titel + Datum (orange Badge) + "Latest" Badge (wenn neuester)
 - Genre Tags
 - Use-Case Icons (Gym, Drive, Work, Party)
-- Mixcloud Player
+- Mixcloud Player (Tracklist ausgeblendet)
 - Tracklist-Tabelle (Artist | Title)
 - Prev/Next Navigation zwischen Mixes → `/dj/mixes/{prevPost.slug}` / `/dj/mixes/{nextPost.slug}`
 - Button "Back to Weekly DJ Mixes" → `/dj/mixes-weekly`
 - Button "View Archive" → `/dj/mixes-blog-archive`
-- Vollständige SEO-Optimierung
+- **SEO:** AudioObject + BreadcrumbList + BlogPosting Schema, Open Graph Tags (og:type=music.playlist)
 
 ### /dj/mixes-blog-archive (Archiv)
 - Kompakte Listenansicht
 - Filter-Buttons (All, Gym, Drive, Work, Party) → `/dj/mixes-blog-archive?useCase=...`
+- Pagination (6 Mixes pro Seite)
 - Titel, Datum, Tags pro Eintrag → verlinkt auf `/dj/mixes/{slug}`
 - Button "Back to Weekly DJ Mixes" → `/dj/mixes-weekly`
 
