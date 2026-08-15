@@ -7,7 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.join(__dirname, '..');
 const CACHE_PATH = path.join(ROOT_DIR, '.lastmod-cache.json');
 const BLOG_DATA_PATH = path.join(ROOT_DIR, 'src/data/blog-posts.json');
-const CONCURRENCY = 16;
+const CONCURRENCY = 32;
 
 let cache = null;
 
