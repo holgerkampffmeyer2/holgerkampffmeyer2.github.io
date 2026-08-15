@@ -5,6 +5,9 @@ dist/
 
 # generated content
 public/rss.xml
+
+# generated lastmod cache
+.lastmod-cache.json
 # src/data/mixcloud-data.json - jetzt getrackt
 
 # dependencies

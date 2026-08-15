@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
+import { getMixDate, lastModifiedFor, resolveSourceFiles } from './scripts/lastmod.mjs';
 
 export default defineConfig({
   image: {
@@ -24,8 +25,11 @@ export default defineConfig({
     serialize(item) {
       const url = new URL(item.url);
       const path = decodeURIComponent(url.pathname);
-      const now = new Date().toISOString();
-      const out = { ...item, lastmod: now, priority: 0.5, changefreq: ChangeFreqEnum.MONTHLY };
+      const trim = path.replace(/^\/|\/$/g, '');
+      const lastmod = trim.startsWith('dj/mixes/')
+        ? getMixDate(trim.slice('dj/mixes/'.length))
+        : lastModifiedFor(resolveSourceFiles(path));
+      const out = { ...item, lastmod: lastmod || new Date().toISOString(), priority: 0.5, changefreq: ChangeFreqEnum.MONTHLY };
       if (path === '/') { out.priority = 1.0; out.changefreq = ChangeFreqEnum.WEEKLY; }
       else if (path.startsWith('/dj/mixes') && path !== '/dj/mixes-all' && path !== '/dj/mixes-blog-archive') { out.priority = 0.8; out.changefreq = ChangeFreqEnum.WEEKLY; }
       else if (path === '/djhulk-electronic-music') { out.priority = 0.8; out.changefreq = ChangeFreqEnum.WEEKLY; }

@@ -1,3 +1,4 @@
+import { lastModifiedFor, resolveSourceFiles } from './lastmod.mjs';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -48,7 +49,7 @@ function generateRss() {
       path: page.path,
       title: page.title,
       description: '',
-      pubDate: page.pubDate,
+      pubDate: lastModifiedFor(resolveSourceFiles(page.path)) || page.pubDate,
       isMix: false,
     });
   }
