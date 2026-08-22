@@ -1,6 +1,21 @@
 {
   "projects": [
     {
+      "name": "ai-music-checker",
+      "description": "Forensic heuristic tool to estimate AI-generation likelihood of music files (MP3/WAV/FLAC/AIFF). Combines technical signal analysis, metadata inspection, and optional online context research.",
+      "url": "https://github.com/holgerkampffmeyer2/ai-music-checker",
+      "image": "/assets/ai-music-checker.webp",
+      "imageAlt": "AI Music Checker",
+      "features": [
+        "Technical signal analysis (FFT, spectral, dynamics, stereo)",
+        "Metadata inspection (watermarks, tags, cover provenance)",
+        "Online context research (MusicBrainz, Discogs, Community DB)",
+        "Heuristic scoring with verdict bands",
+        "CLI with JSON output and batch processing",
+        "Heavy signals (phase coherence, transients) optional"
+      ]
+    },
+    {
       "name": "remotion_teaser",
       "description": "AI Agent powered tool for creating video teasers for DJ Mixes using Remotion. Automated teaser video generation with random templates and variations.",
       "url": "https://github.com/holgerkampffmeyer2/remotion_teaser",
