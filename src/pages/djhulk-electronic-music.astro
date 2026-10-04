@@ -570,12 +570,22 @@ const djPerson = getDjPersonSchema();
     <Footer />
     <script is:inline src="/assets/mix-search.js" defer></script>
     <script>
+      import {
+        computeItemStep,
+        computeSetWidth,
+        computeMaxScrollLeft,
+        computeInitScrollLeft,
+        resolveScrollJump,
+        wrapScrollTarget,
+      } from "../utils/carousel-scroll.js";
+
       (function () {
-        var track = document.querySelector("[data-events-track]");
+        var track = document.querySelector("[data-events-track]") as HTMLElement | null;
         var carousel = document.querySelector("[data-events-carousel]");
         if (!track || !carousel) return;
 
         var total = parseInt(carousel.getAttribute("data-events-count") ?? "0") || 0;
+        // muss zum Tailwind-gap auf der Spur passen (gap-5 = 20px)
         var gap = 20;
         var setWidth = 0;
         var itemStep = 0;
@@ -584,33 +594,53 @@ const djPerson = getDjPersonSchema();
         function updateSetWidth() {
           if (!track || track.children.length === 0) return;
           var first = track.children[0] as HTMLElement;
-          itemStep = first.offsetWidth + gap;
-          setWidth = itemStep * total;
+          itemStep = computeItemStep(first.offsetWidth, gap);
+          setWidth = computeSetWidth(itemStep, total);
+        }
+
+        function maxScrollLeft() {
+          return computeMaxScrollLeft(track?.scrollWidth ?? 0, track?.clientWidth ?? 0);
+        }
+
+        // setzt scrollLeft ohne CSS-Snap, damit die Position exakt erhalten bleibt
+        function setScrollLeft(target: number) {
+          if (!track) return;
+          isJumping = true;
+          track.style.scrollSnapType = "none";
+          track.scrollLeft = target;
+          requestAnimationFrame(function () {
+            if (!track) return;
+            track.style.scrollSnapType = "";
+            isJumping = false;
+          });
+        }
+
+        // springt um eine volle Carousel-Breite, damit das Layout unveraendert bleibt
+        function jumpBy(delta: number) {
+          if (!track || setWidth <= 0) return;
+          var target = wrapScrollTarget({
+            current: track.scrollLeft,
+            delta: delta,
+            setWidth: setWidth,
+            maxScrollLeft: maxScrollLeft(),
+          });
+          if (target === null) return;
+          setScrollLeft(target);
         }
 
         function initPosition() {
           if (!track) return;
           updateSetWidth();
-          track.scrollLeft = setWidth;
+          setScrollLeft(computeInitScrollLeft(setWidth, maxScrollLeft()));
         }
 
         track.addEventListener("scroll", function () {
           if (!track || isJumping) return;
           updateSetWidth();
           if (setWidth <= 0) return;
-          if (track.scrollLeft >= setWidth * 2 - 5) {
-            isJumping = true;
-            track.scrollLeft = track.scrollLeft - setWidth;
-            requestAnimationFrame(function () {
-              isJumping = false;
-            });
-          } else if (track.scrollLeft <= 5) {
-            isJumping = true;
-            track.scrollLeft = track.scrollLeft + setWidth;
-            requestAnimationFrame(function () {
-              isJumping = false;
-            });
-          }
+          var jump = resolveScrollJump(track.scrollLeft, maxScrollLeft());
+          if (jump === "back") jumpBy(-setWidth);
+          else if (jump === "forward") jumpBy(setWidth);
         });
 
         document.querySelector("[data-events-next]")?.addEventListener("click", function () {
