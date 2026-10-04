@@ -44,8 +44,32 @@ sonst wertet GitHub die Alerts nicht neu aus und sie bleiben offen.
 - `astro.config.mjs` ein `image.remotePatterns` oder `image.domains` bekommt, oder
 - eine externe Bildquelle in `<Image>`/`<Picture>` verwendet wird.
 
-Dann `pnpm.overrides` in `package.json`:
-`{ "pnpm": { "overrides": { "http-cache-semantics": "^4.3.0" } } }`
+Dann `overrides` in [`pnpm-workspace.yaml`](../pnpm-workspace.yaml) — **nicht** in `package.json`:
+
+```yaml
+overrides:
+  http-cache-semantics: ">=4.3.0"
+```
+
+## Overrides richtig setzen
+
+Overrides stehen in `pnpm-workspace.yaml` unter `overrides:`. Die untere Grenze
+einer Range **muss die gepatchte Version sein**, nicht die verwundbare.
+
+| Eintrag | Patch-Fuss | korrekt |
+|---|---|---|
+| `brace-expansion: ">=5.0.12"` | 5.0.12 (GHSA-q2hr-2g5m-vwhr) | ja |
+| `fast-uri: ">=4.1.5"` | 4.1.5 (GHSA-jvvf-x445-j334) | ja |
+| `yaml: "2.8.4"` | 2.8.3 (GHSA-48c2-rrv3-qjmp) | ja, exakter Pin |
+
+`">=5.0.9"` hätte 5.0.9–5.0.11 weiterhin erlaubt, `">=4.1.3"` hätte 4.1.3–4.1.4
+erlaubt — beide vollständig verwundbar. Ein `>=` vom verwundbaren Fuß aus sieht
+abgesichert aus, garantiert den Fix aber nicht.
+
+Für transitive Alerts gilt zusätzlich: Dependabot erstellt **kein** PR, wenn der
+Parent kein Update bekommt. Ein Override wirkt erst, wenn das Lockfile neu
+aufgelöst **und gepusht** ist.
+
 
 ## Smoke-Test
 
