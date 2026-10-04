@@ -18,6 +18,14 @@ import { loadBlogPosts, createSearchablePosts } from "../utils/blog-data";
 const allPosts = await loadBlogPosts();
 const searchablePosts = createSearchablePosts(allPosts);
 
+// neueste Veranstaltung zuerst (Datum im Format DD.MM.YYYY)
+function eventTimestamp(date: string): number {
+  const [day, month, year] = date.split(".").map(Number);
+  return year * 10000 + month * 100 + day;
+}
+
+const sortedEvents = [...events].sort((a, b) => eventTimestamp(b.date) - eventTimestamp(a.date));
+
 interface MixcloudMix {
   title: string;
   key: string;
@@ -307,18 +315,25 @@ const djPerson = getDjPersonSchema();
             <p class="text-[var(--color-text-muted)] max-w-2xl mx-auto">Eine Auswahl vergangener Gigs, Festivals und Clubnächte. </p>
           </div>
 
-          <div class="relative animate-on-scroll" data-events-carousel data-events-count={events.length}>
-            <div class="flex gap-4 overflow-x-auto snap-x pb-4 px-1 -mx-1 scrollbar-hide" data-events-track>
-              {[...events, ...events].map((event) => (
-                <article class="snap-center shrink-0 w-56 md:w-64 bg-[var(--color-bg)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors">
-                  <a href={event.image} target="_blank" class="block flex flex-col h-full">
-                    <div class="bg-black h-36 overflow-hidden flex items-center justify-center">
-                      <img src={event.image} alt={event.title} class="w-full h-full object-cover" loading="lazy" decoding="async" />
+          <div class="relative animate-on-scroll" data-events-carousel data-events-count={sortedEvents.length}>
+            <div class="flex gap-5 overflow-x-auto snap-x pb-4 px-1 -mx-1 scrollbar-hide" data-events-track>
+              {[...sortedEvents, ...sortedEvents].map((event) => (
+                <article class="snap-center shrink-0 w-64 md:w-80 bg-[var(--color-bg)] rounded-xl border border-[var(--color-border)] overflow-hidden hover:border-[var(--color-primary)] transition-colors">
+                  <a href={event.image} target="_blank" rel="noopener" class="block flex flex-col h-full">
+                    <div class="bg-black aspect-[3/4] overflow-hidden flex items-center justify-center p-2">
+                      <img
+                        src={event.image}
+                        alt={`Flyer: ${event.title}, ${event.date}, ${event.location}`}
+                        class="w-full h-full object-contain"
+                        loading="lazy"
+                        decoding="async"
+                      />
                     </div>
-                    <div class="p-2.5 flex-1 flex flex-col justify-center">
-                      <h3 class="font-play font-semibold text-xs text-[var(--color-text)] line-clamp-1">{event.title}</h3>
-                      <div class="text-[var(--color-text-muted)] text-[10px] leading-tight mt-1">{event.date} · {event.location}</div>
-                      <p class="text-[var(--color-text-muted)] text-[10px] leading-tight mt-1 line-clamp-1">{event.description}</p>
+                    <div class="p-4 flex-1 flex flex-col">
+                      <h3 class="font-play font-semibold text-sm text-[var(--color-text)] leading-snug">{event.title}</h3>
+                      <div class="text-[var(--color-secondary)] text-xs font-medium mt-2">{event.date}</div>
+                      <div class="text-[var(--color-text-muted)] text-xs mt-0.5">{event.location}</div>
+                      <p class="text-[var(--color-text-muted)] text-xs leading-relaxed mt-3">{event.description}</p>
                     </div>
                   </a>
                 </article>
@@ -561,14 +576,16 @@ const djPerson = getDjPersonSchema();
         if (!track || !carousel) return;
 
         var total = parseInt(carousel.getAttribute("data-events-count") ?? "0") || 0;
-        var gap = 16;
+        var gap = 20;
         var setWidth = 0;
+        var itemStep = 0;
         var isJumping = false;
 
         function updateSetWidth() {
           if (!track || track.children.length === 0) return;
           var first = track.children[0] as HTMLElement;
-          setWidth = (first.offsetWidth + gap) * total;
+          itemStep = first.offsetWidth + gap;
+          setWidth = itemStep * total;
         }
 
         function initPosition() {
@@ -599,13 +616,13 @@ const djPerson = getDjPersonSchema();
         document.querySelector("[data-events-next]")?.addEventListener("click", function () {
           if (!track) return;
           updateSetWidth();
-          track.scrollBy({ left: 280, behavior: "smooth" });
+          track.scrollBy({ left: itemStep, behavior: "smooth" });
         });
 
         document.querySelector("[data-events-prev]")?.addEventListener("click", function () {
           if (!track) return;
           updateSetWidth();
-          track.scrollBy({ left: -280, behavior: "smooth" });
+          track.scrollBy({ left: -itemStep, behavior: "smooth" });
         });
 
         window.addEventListener("resize", initPosition);
