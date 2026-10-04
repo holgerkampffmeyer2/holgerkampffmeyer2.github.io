@@ -12,11 +12,11 @@ export const events: EventItem[] = [
   {
     id: "20-jahre-propp",
     title: "20 Jahre Propp Friseure",
-    date: "14.10.2022",
+    date: "24.10.2025",
     location: "Propp Friseursalon",
     description: "Jubiläumsparty und Firmenfest mit DJ Hulk.",
     image: "/img/events/Poster-20-Jahre-Propp-v2.webp",
-    year: 2022,
+    year: 2025,
   },
   {
     id: "boho-vibes",
