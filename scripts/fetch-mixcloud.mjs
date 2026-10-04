@@ -16,6 +16,14 @@ const TIMESTAMP_FILE = path.join(ROOT_DIR, 'node_modules/.mixcloud-fetch');
 
 const MIN_INTERVAL_MS = 24 * 60 * 60 * 1000;
 
+// Mixcloud accounts that are scanned for DJ Hulk mixes.
+// holger-kampffmeyer - own uploads
+// 365fmradio         - label/radio account, only DJ Hulk guest mixes are relevant
+const MIXCLOUD_SOURCES = [
+  { user: 'holger-kampffmeyer' },
+  { user: '365fmradio', match: /dj\s*hulk/i }
+];
+
 // Helper function to normalize strings for comparison
 const normalizeString = (str) => 
   str.toLowerCase()
@@ -132,6 +140,31 @@ async function fetchMixDetails(key) {
   } catch {
     return null;
   }
+}
+
+// Fetch the latest cloudcasts of one Mixcloud account, optionally filtered by title.
+async function fetchSource({ user, match }) {
+  try {
+    const res = await fetch(`https://api.mixcloud.com/${user}/cloudcasts/?limit=100`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const cloudcasts = data.data || [];
+    const filtered = match ? cloudcasts.filter(m => match.test(m.name || '')) : cloudcasts;
+    console.log(`  ${user}: ${filtered.length}/${cloudcasts.length} mixes${match ? ' (filtered)' : ''}`);
+    return filtered;
+  } catch (e) {
+    console.warn(`⚠️  Failed to fetch cloudcasts for "${user}": ${e.message}`);
+    return [];
+  }
+}
+
+// Collect mixes from all configured sources, newest first, without duplicates.
+async function fetchAllSources() {
+  const results = await Promise.all(MIXCLOUD_SOURCES.map(fetchSource));
+  const byKey = new Map();
+  for (const cloudcast of results.flat()) byKey.set(cloudcast.key, cloudcast);
+  return Array.from(byKey.values())
+    .sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
 }
 
 function parseTracklist(filePath) {
@@ -302,12 +335,10 @@ async function fetchMixcloud(force = false) {
   console.log(`📂 Existing data: ${existingSimpleMixes.length} mixes, ${existingPosts.length} blog posts`);
 
   try {
-    const res = await fetch('https://api.mixcloud.com/holger-kampffmeyer/cloudcasts/?limit=100');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    if (!data.data?.length) throw new Error('No data from Mixcloud');
+    const cloudcasts = await fetchAllSources();
+    if (!cloudcasts.length) throw new Error('No data from Mixcloud');
 
-    const mixes = data.data.map(mix => ({
+    const mixes = cloudcasts.map(mix => ({
       title: mix.name,
       key: mix.key,
       url: mix.url,
@@ -327,11 +358,11 @@ async function fetchMixcloud(force = false) {
     // Fetch details for each mix
     console.log('Fetching details for each mix...');
     const detailsResults = await Promise.all(
-      data.data.map(mix => fetchMixDetails(mix.key))
+      cloudcasts.map(mix => fetchMixDetails(mix.key))
     );
 
     // Create an array of mixes with their details and created_time for sorting
-    const mixesWithDetails = data.data.map((mix, i) => ({
+    const mixesWithDetails = cloudcasts.map((mix, i) => ({
       ...mix,
       apiData: detailsResults[i],
       index: i // keep original index if needed
@@ -594,7 +625,10 @@ export {
   extractMixNumber,
   extractDateFromFilename,
   datesWithinDays,
-  generateOgImages
+  fetchSource,
+  fetchAllSources,
+  generateOgImages,
+  MIXCLOUD_SOURCES
 };
 
 // Only run the main function when the script is executed directly

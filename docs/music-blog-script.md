@@ -47,7 +47,9 @@ Das Mapping liegt in `src/data/genre-use-case-mapping.json`:
 
 ### Workflow
 
-1. **API Call**: Holt 100 neueste Mixe von Mixcloud API
+1. **API Call**: Holt die neuesten 100 Mixes von allen konfigurierten Mixcloud-Accounts (`MIXCLOUD_SOURCES` in `scripts/fetch-mixcloud.mjs`):
+   - `holger-kampffmeyer` — eigene Uploads
+   - `365fmradio` — Label-/Radio-Account; es werden nur Mixes mit "DJ Hulk" im Titel übernommen (`match`-Filter)
 2. **Mix-Details**: Für jeden Mix wird die API mit `?metadata=1` aufgerufen für vollständige Beschreibung
 3. **Tracklist**: Sucht in `tracklists/` nach Dateien mit Suffix `-tracklist.txt`
 4. **Hero-Image**: Sucht in `tracklists/` nach `.webp` Dateien (wird nach `public/tracklists/` kopiert)
@@ -113,8 +115,18 @@ Manche Mixes (b2b, Guestmix, etc.) haben keine Mix-Nummer. Für diese gelten and
 - Format: `<slug>.webp` in `public/tracklists/`
 - Beispiel: `dj-hulk-b2b-bigt-beach-house-july-26.webp`
 
+**Beispiel Gastmix-Serie (Turtle Friends Mix Serie):**
+- Mix liegt auf einem anderen Account (`/365fmradio/...`), nicht auf `holger-kampffmeyer`
+- Wird trotzdem verarbeitet, weil `365fmradio` als Quelle in `MIXCLOUD_SOURCES` hinterlegt ist
+- Dateinamen: `01 DJ Hulk - Turtle Friends Mix Sept 26 - DnB-tracklist.txt` + gleichnamige `.png`
+- Zuordnung über die Mix-Nummer: `extractMixNumber` liest aus beiden Dateinamen sowie aus dem
+  Mixcloud-Titel `Turtle Friends Mix Serie / DJ Hulk (26.09.2026)` die `26` (Tageszahl im Datum) —
+  dadurch greift der Nummer-Match. `getMixDisplay` erkennt dagegen Datumsstempel wie `26092026`
+  im Slug nicht als Mix-Nummer, damit kein `Mix#26092026` im Label steht.
+
 **Automatische Zuordnung:**
 Das Script ordnet Dateien automatisch zu wenn:
+- Mix-Nummer in Tracklist-/Hero-Dateiname UND Mixcloud-Titel/Key übereinstimmt, ODER
 - Fuzzy-Matching ≥ 0.5 (basiert auf Dateinamen-Ähnlichkeit), ODER
 - Tracklist-Datum ±3 Tage vom Mix-Veröffentlichungsdatum liegt (Datum-basiertes Fallback)
 

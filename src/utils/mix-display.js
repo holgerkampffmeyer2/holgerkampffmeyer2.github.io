@@ -1,6 +1,8 @@
 export function getMixDisplay(key, title) {
   const slug = key.split('/').filter(Boolean).pop()
-  let match = slug.match(/\b(?:mx|mix)[^\d]*(\d+)/i)
+  // {1,4} + (?!\d) so date stamps in slugs (e.g. turtle-friends-mix-serie-dj-hulk-26092026)
+  // are not mistaken for a mix number
+  let match = slug.match(/\b(?:mx|mix)[^\d]*(\d{1,4})(?!\d)/i)
   const mixNum = match?.[1] ?? title.match(/#\s*(\d+)/)?.[1] ?? null
 
   if (!mixNum) {

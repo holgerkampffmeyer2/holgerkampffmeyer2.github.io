@@ -81,4 +81,14 @@ export const events: EventItem[] = [
     image: "/img/events/Entdeckerfest2026.webp",
     year: 2026,
   },
+  {
+    id: "schmellbackyard-crosslauf-2026",
+    title: "Schmellbackyard Crosslauf",
+    date: "03.10.2026",
+    location: "Schmellbachtal, Leinfelden-Echterdingen",
+    description:
+      "Crosslauf im Schmellbachtal, bei dem ich die Veranstaltungstechnik für Sound und Licht gestellt und das Event musikalisch begleitet habe.",
+    image: "/img/events/schmellbackyard-oct26.webp",
+    year: 2026,
+  },
 ];

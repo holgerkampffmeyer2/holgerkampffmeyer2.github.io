@@ -1,7 +1,7 @@
 {
   "mappings": [
     {
-      "genres": ["drum & bass", "dnb", "jungle", "raptor", "ragga", "liquid", "dark", "atmospheric"],
+      "genres": ["drum & bass", "drum and bass", "dnb", "liquid dnb", "neurofunk", "jungle", "raptor", "ragga", "liquid", "dark", "atmospheric"],
       "useCases": ["gym"]
     },
     {
