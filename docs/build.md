@@ -16,6 +16,11 @@ Commands in [AGENTS.md](../AGENTS.md). Details siehe unten.
 1. `node scripts/generate-rss.mjs` → RSS-Feed aktualisieren
 2. `node scripts/generate-urllist.mjs` → urllist.txt generieren
 
+## Paketmanager
+- Version ist in `package.json` als `packageManager` gepinnt (`pnpm@12.4.2`) und gilt für lokal und CI gleichermaßen.
+- Corepack installiert die gepinnte Version beim ersten Aufruf. Ein Workflow braucht dafür nur `corepack enable` — kein `corepack prepare` mit eigener Versionsangabe.
+- **Major-Wechsel:** `node_modules` einmalig mit `rm -rf node_modules && pnpm install` neu aufbauen. Sonst verlangt pnpm einen Purge, der ohne TTY abbricht (`ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`).
+
 ## Caching
 - Mixcloud-Script: 24h Cache (`node_modules/.mixcloud-fetch`), Details-Requests parallelisiert
 - **Wichtig:** Für neue Mixes auf Mixcloud muss `--force` verwendet werden: `node scripts/fetch-mixcloud.mjs --force`
