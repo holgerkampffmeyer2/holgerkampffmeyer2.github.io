@@ -11,53 +11,95 @@ permissions:
   id-token: write
 
 jobs:
+  # Kritischer Pfad: holt das Live-Ergebnis. Laeuft parallel zu 'check'.
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      
+
       - name: Setup pnpm
         run: corepack enable && corepack prepare pnpm@10 --activate
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: 'pnpm'
-      
+
       - name: Install dependencies
         run: pnpm install
 
       - name: Fetch Mixcloud data
         run: node scripts/fetch-mixcloud.mjs --force
-      
-      - name: Run ESLint
-        run: pnpm run lint
-      
-      - name: TypeScript check
-        run: pnpm run check
-      
+
+      # build:seo schreibt direkt nach dist/, ein zweiter Build ist nicht noetig
       - name: Build Astro site
         run: pnpm run build
 
       - name: Generate RSS & Sitemap
         run: pnpm run build:seo
 
-      - name: Rebuild with SEO assets
-        run: pnpm run build
+      - name: Smoke test dist/
+        run: node scripts/smoke-dist.mjs
 
       - uses: actions/upload-pages-artifact@v5
         with:
           path: ./dist
+
+  # Blockiert den Deploy, laeuft aber parallel zum Build.
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        run: corepack enable && corepack prepare pnpm@10 --activate
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: TypeScript check
+        run: pnpm run check
+
+  # Schnelle Checks, blockieren den Deploy nicht. Eigener Job, damit die
+  # Laufzeit von check nicht durch Tests und Lint verlaengert wird.
+  fast-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        run: corepack enable && corepack prepare pnpm@10 --activate
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Unit tests
+        run: npx vitest run
+
+      - name: Run ESLint
+        run: pnpm run lint
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build, check]
     steps:
       - uses: actions/deploy-pages@v5
         id: deployment
