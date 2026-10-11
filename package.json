@@ -22,7 +22,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.3.5",
+    "astro": "^7.3.8",
     "node-fetch": "^3.3.2",
     "tailwindcss": "^4.3.3"
   },
@@ -36,10 +36,8 @@
     "eslint": "^10.12.0",
     "eslint-plugin-astro": "^1.7.0",
     "globals": "^17.13.0",
-    "js-yaml": "4.3.2",
     "playwright": "^1.63.0",
     "sharp": "^0.35.5",
-    "smol-toml": "1.7.1",
     "svgo": "4.1.0",
     "typescript": "^5.9.3",
     "vitest": "^4.1.11"
