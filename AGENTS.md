@@ -30,6 +30,10 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 - `pnpm run lint:fix` — ESLint mit Auto-Fix
 - `pnpm run check` — TypeScript
 - `pnpm test` — Unit-Tests (Vitest)
+- `pnpm run label:research` — Label-Recherche (CUE-Tags + MusicBrainz) → label-research.json
+- `pnpm run label:apply` — Label-Vorschläge in src/data/labels.json mergen
+- `pnpm run label:urls` — Label-URLs recherchieren (MusicBrainz + Patterns) → label-url-proposals.json
+- `pnpm run label:urls:apply` — Label-URLs in labels.json mergen
 
 ## Git-Workflow
 - Conventional Commits: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `ci:`

@@ -260,6 +260,29 @@ pnpm run label:apply             # schreibt src/data/labels.json
   bereits gesetzte Track-Zuordnungen).
 - Nach dem Übernehmen `pnpm run build` ausführen; die Label-Spalte erscheint pro Mix automatisch.
 
+### Label-URLs recherchieren & pflegen
+
+Für Labels ohne Website gibt es einen separaten Schritt:
+
+```bash
+# 1. URLs finden (MusicBrainz official homepage + Domain-Patterns + HEAD-Check)
+pnpm run label:urls
+# → label-url-proposals.json + label-url-proposals-report.md
+
+# 2. Optional: Quality-Check (HTML-Content prüfen, Domain-Parking filtern)
+node scripts/label-url-quality.mjs
+# → label-url-quality-report.json/.md
+
+# 3. Vorschläge prüfen/korrigieren (label-url-proposals.json editieren), dann übernehmen
+pnpm run label:urls:apply --dry-run
+pnpm run label:urls:apply
+```
+
+- `label:urls` nutzt MusicBrainz "official homepage" Relation + heuristische Domain-Patterns
+- `label-url-quality.mjs` prüft HTML-Content auf Musik-Keywords und filtert Domain-Parking/Verkauf
+- Review-Artefakte (`label-url-proposals.json`, Reports) sind gitignored
+- `label:urls:apply` merged **nur** die `url`-Felder, Track-Zuordnungen bleiben unberührt
+
 ---
 
 ## SEO-Optimierung
