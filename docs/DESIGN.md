@@ -138,7 +138,7 @@ bleiben als Ausnahme erhalten.
 
 - **Format**: WebP primär
 - **Hero**: `public/img/header.webp` (1920px)
-- **Tracklists**: `public/tracklists/<name>.webp` (600px)
+- **Tracklists**: `public/tracklists/<name>.webp` (create-webp-Default bis 1920px, ohne Hochskalierung; Mixcloud-Cover 1200px)
 - **Events/Galerie**: `public/img/events/<name>.webp`
 - **Batch-Konvertierung**: `node scripts/create-webp.mjs -w <px> <datei>`
 - **Optimierung**: `node scripts/optimize-images.mjs` (CLI: `-w`, `-q`, `--concurrency`)

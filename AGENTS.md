@@ -11,7 +11,7 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 - **Framework:** Astro 7.x (SSG, `output: 'static'`)
 - **Styling:** Tailwind CSS 4.x + CSS Custom Properties (Theme-System)
 - **Package-Manager:** pnpm
-- **Node-Version:** >=18
+- **Node-Version:** >=22.12.0 (Astro 7.3.8; CI pinnt Node 24)
 - **Tests:** Vitest (Unit)
 
 ## Schnellstart / Docs
@@ -30,16 +30,6 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 - `pnpm run lint:fix` — ESLint mit Auto-Fix
 - `pnpm run check` — TypeScript
 - `pnpm test` — Unit-Tests (Vitest)
-
-## CLI-Proxy `rtk`
-
-- Befehle können über den Proxy `rtk` (z.B. `rtk pnpm run build`, `rtk pnpm run lint`) gefiltert werden.
-- **Veralteter Workaround:** Der direkte Subcommand `rtk lint` hat einen JSON-Parse-Bug (`ESLint output (JSON parse failed: EOF ...)`). Stattdessen `rtk pnpm run lint` verwenden (funktioniert).
-- Falls `rtk <cmd>` dennoch fehlerhaft/leer läuft:
-  ```bash
-  RTK_DISABLED=1 pnpm run lint
-  ```
-- `RTK_DISABLED=1` schaltet die Hook-/Proxy-Funktion von rtk komplett ab (kein Wrapping, volle Rohausgabe).
 
 ## Git-Workflow
 - Conventional Commits: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `ci:`
@@ -72,7 +62,7 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 - Produktive URLs hart codieren (Domain ist `holger-kampffmeyer.de`)
 
 ## Wissen & Referenzen
-- `docs/` — Projekt-Doku (Build, Music Blog, Design, Git-Workflow)
+- `docs/` — Projekt-Doku (Build, Music Blog, Design, Git-Workflow, Security)
 - `openspec/` — Feature-Specs (OpenSpec)
 - `.serena/memories/` — persistentes Projektwissen (Tech-Stack, Konventionen); vor größeren Änderungen relevante Memories lesen
 
