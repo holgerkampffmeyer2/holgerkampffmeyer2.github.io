@@ -14,6 +14,14 @@ label-research.json
 label-research-report.md
 .label-tag-cache.json
 .label-lookup-cache.json
+label-urls.json
+label-urls-report.md
+label-url-proposals.json
+label-url-proposals-report.md
+label-url-proposals-cleaned.json
+label-url-quality-report.json
+label-url-quality-report.md
+.label-url-cache.json
 # src/data/mixcloud-data.json - jetzt getrackt
 
 # dependencies

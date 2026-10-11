@@ -19,7 +19,9 @@
     "generate-urllist": "node scripts/generate-urllist.mjs",
     "indexnow-submit": "node scripts/indexnow-submit.mjs",
     "label:research": "node scripts/label-research.mjs",
-    "label:apply": "node scripts/label-apply.mjs"
+    "label:apply": "node scripts/label-apply.mjs",
+    "label:urls": "node scripts/label-urls.mjs",
+    "label:urls:apply": "node scripts/label-apply.mjs --urls label-urls.json"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
