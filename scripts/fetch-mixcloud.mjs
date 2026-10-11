@@ -36,7 +36,7 @@ const normalizeString = (str) =>
 const extractMixNumber = (str) => {
   if (!str) return null;
   const s = str.toLowerCase();
-  const m = s.match(/\b(?:mx|mix)[^\d]*(\d+)/) || s.match(/#\s*(\d+)/) || s.match(/[^\d](\d{3,})(?=[^\d]|$)/);
+  const m = s.match(/\b(?:mx|mix)[^\d]*(\d+)/) || s.match(/#\s*(\d+)/);
   return m?.[1] ?? null;
 };
 

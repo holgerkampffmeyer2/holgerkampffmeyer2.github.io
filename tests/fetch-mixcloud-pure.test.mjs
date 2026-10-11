@@ -21,8 +21,8 @@ describe('fetch-mixcloud.mjs pure functions', () => {
       expect(computeConfidence('Track #123', 'Hero #123.webp')).toBe(1.0);
     });
 
-    it('should return 1.0 for standalone number', () => {
-      expect(computeConfidence('Some 456 Text', 'Other 456 Hero.webp')).toBe(1.0);
+    it('should return 1.0 for exact mix number match in free text', () => {
+      expect(computeConfidence('Some Mix 456', 'Other Mix 456 Hero.webp')).toBe(1.0);
     });
 
     it('should return a value between 0 and 1 for partial match', () => {
@@ -65,9 +65,16 @@ describe('fetch-mixcloud.mjs pure functions', () => {
       expect(extractMixNumber('Track #178')).toBe('178');
     });
 
-    it('should extract standalone 3+ digit number', () => {
-      expect(extractMixNumber('Some 178 Text')).toBe('178');
-      expect(extractMixNumber('Year 2023')).toBe('2023');
+    it('should extract mix number from mix-prefixed strings (any digit count)', () => {
+      expect(extractMixNumber('Mix1000')).toBe('1000');
+      expect(extractMixNumber('Mix 1000')).toBe('1000');
+      expect(extractMixNumber('mix-1000')).toBe('1000');
+    });
+
+    it('should NOT treat bare/standalone numbers as mix numbers', () => {
+      expect(extractMixNumber('Some 178 Text')).toBeNull();
+      expect(extractMixNumber('Year 2023')).toBeNull();
+      expect(extractMixNumber('BigT B2B Hulk - Funky House Oct 2026')).toBeNull();
     });
 
     it('should NOT match "mix" inside words like Guestmix', () => {
