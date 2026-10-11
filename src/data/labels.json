@@ -1,0 +1,1580 @@
+{
+  "labels": {
+    "non-stop-film-trailer-sampler": {
+      "name": "Non𝄞Stop Film Trailer Sampler",
+      "url": ""
+    },
+    "natural-rhythm": {
+      "name": "Natural Rhythm",
+      "url": ""
+    },
+    "lapsus-music": {
+      "name": "Lapsus Music",
+      "url": ""
+    },
+    "like-that-underground": {
+      "name": "Like That Underground",
+      "url": ""
+    },
+    "gods-of-madness-recordings": {
+      "name": "Gods Of Madness Recordings",
+      "url": ""
+    },
+    "club-whatever": {
+      "name": "Club Whatever",
+      "url": ""
+    },
+    "toolroom-trax": {
+      "name": "Toolroom Trax",
+      "url": ""
+    },
+    "moom-sound": {
+      "name": "Moom Sound",
+      "url": ""
+    },
+    "exx-muzik": {
+      "name": "Exx Muzik",
+      "url": ""
+    },
+    "till-am-records": {
+      "name": "TILL:AM Records",
+      "url": ""
+    },
+    "waldliebe-familien": {
+      "name": "Waldliebe Familien",
+      "url": ""
+    },
+    "adesso-music": {
+      "name": "Adesso Music",
+      "url": ""
+    },
+    "tankfloor": {
+      "name": "Tankfloor",
+      "url": ""
+    },
+    "switch-records": {
+      "name": "Switch Records",
+      "url": ""
+    },
+    "groove-society": {
+      "name": "Groove Society",
+      "url": ""
+    },
+    "crossfade-sounds": {
+      "name": "Crossfade Sounds",
+      "url": ""
+    },
+    "rye-51-records": {
+      "name": "Rye 51 Records",
+      "url": ""
+    },
+    "free-dl": {
+      "name": "FREE DL",
+      "url": ""
+    },
+    "miyu-records": {
+      "name": "MIYU RECORDS",
+      "url": ""
+    },
+    "freerep01": {
+      "name": "FREEREP01",
+      "url": ""
+    },
+    "incorrect-music": {
+      "name": "Incorrect Music",
+      "url": ""
+    },
+    "come-together": {
+      "name": "Come Together",
+      "url": ""
+    },
+    "anto-recordings": {
+      "name": "Anto Recordings",
+      "url": ""
+    },
+    "bulk-mstr": {
+      "name": "BULK.MSTR",
+      "url": ""
+    },
+    "disposable-records": {
+      "name": "Disposable Records",
+      "url": ""
+    },
+    "toolroom-records": {
+      "name": "Toolroom Records",
+      "url": ""
+    },
+    "cafe-de-anatolia": {
+      "name": "Cafe De Anatolia",
+      "url": ""
+    },
+    "the-myth-of-nyx": {
+      "name": "The Myth of NYX",
+      "url": ""
+    },
+    "d-vision": {
+      "name": "d:vision",
+      "url": ""
+    },
+    "she-s-super-deep": {
+      "name": "She's Super Deep",
+      "url": ""
+    },
+    "parallel-romance": {
+      "name": "Parallel Romance",
+      "url": ""
+    },
+    "ayohn-music": {
+      "name": "AYOHN Music",
+      "url": ""
+    },
+    "gdb-records": {
+      "name": "GDB Records",
+      "url": ""
+    },
+    "feel-hype": {
+      "name": "Feel Hype",
+      "url": ""
+    },
+    "circoloco-records": {
+      "name": "CircoLoco Records",
+      "url": ""
+    },
+    "xploded-music": {
+      "name": "Xploded Music",
+      "url": ""
+    },
+    "afrotherapy": {
+      "name": "Afrotherapy",
+      "url": ""
+    },
+    "pias-electronique": {
+      "name": "PIAS Électronique",
+      "url": ""
+    },
+    "big-top-amsterdam": {
+      "name": "Big Top Amsterdam",
+      "url": ""
+    },
+    "attraction-market": {
+      "name": "Attraction Market",
+      "url": ""
+    },
+    "helix-records": {
+      "name": "Helix Records",
+      "url": ""
+    },
+    "night-bass": {
+      "name": "Night Bass",
+      "url": ""
+    },
+    "insomniac-records": {
+      "name": "Insomniac Records",
+      "url": ""
+    },
+    "rushin-records": {
+      "name": "RUSHIN RECORDS",
+      "url": ""
+    },
+    "knowledge-magazine": {
+      "name": "Knowledge Magazine",
+      "url": ""
+    },
+    "honirika-music": {
+      "name": "HONIRIKA MUSIC",
+      "url": ""
+    },
+    "ukf": {
+      "name": "UKF",
+      "url": ""
+    },
+    "soave-dusk": {
+      "name": "Soave Dusk",
+      "url": ""
+    },
+    "outside-romania": {
+      "name": "Outside Romania",
+      "url": ""
+    },
+    "bellosguardo": {
+      "name": "Bellosguardo",
+      "url": ""
+    },
+    "together-we-re-louder": {
+      "name": "TOGETHER WE'RE LOUDER",
+      "url": ""
+    },
+    "cas-music": {
+      "name": "CAS Music",
+      "url": ""
+    },
+    "kawaii-bounce": {
+      "name": "kawaii bounce",
+      "url": ""
+    },
+    "secret-floor-inc": {
+      "name": "Secret Floor Inc.",
+      "url": ""
+    },
+    "killer-mushrooms": {
+      "name": "Killer Mushrooms",
+      "url": ""
+    },
+    "goodside": {
+      "name": "GOODSIDE",
+      "url": ""
+    },
+    "crypto-ravers": {
+      "name": "CRYPTO RAVERS",
+      "url": ""
+    },
+    "cat-house-records": {
+      "name": "Cat House Records",
+      "url": ""
+    },
+    "tomorrowland-music": {
+      "name": "Tomorrowland Music",
+      "url": ""
+    },
+    "moonshine-music": {
+      "name": "Moonshine Music",
+      "url": ""
+    },
+    "dark-roast-records": {
+      "name": "Dark Roast Records",
+      "url": ""
+    },
+    "electronic-nature": {
+      "name": "Electronic Nature",
+      "url": ""
+    },
+    "myth-of-nyx": {
+      "name": "Myth of NYX",
+      "url": ""
+    },
+    "all-ways-dance": {
+      "name": "All Ways Dance",
+      "url": ""
+    },
+    "paraiso": {
+      "name": "Paraíso",
+      "url": ""
+    },
+    "yayo-records": {
+      "name": "YAYO Records",
+      "url": ""
+    },
+    "toucan-sounds": {
+      "name": "toucan sounds",
+      "url": ""
+    },
+    "48k-perfecto-records": {
+      "name": "48k / Perfecto Records",
+      "url": ""
+    },
+    "size-records": {
+      "name": "SIZE Records",
+      "url": ""
+    },
+    "sounds-direct": {
+      "name": "Sounds Direct",
+      "url": ""
+    },
+    "forward-music": {
+      "name": "Forward Music",
+      "url": ""
+    },
+    "uprise-music": {
+      "name": "Uprise Music",
+      "url": ""
+    },
+    "tikuna-trax": {
+      "name": "Tikuna Trax",
+      "url": ""
+    },
+    "stealth-records": {
+      "name": "STEALTH RECORDS",
+      "url": ""
+    },
+    "quanticman-records": {
+      "name": "QUANTICMAN RECORDS",
+      "url": ""
+    },
+    "satsuma-music": {
+      "name": "Satsuma Music",
+      "url": ""
+    },
+    "dazz": {
+      "name": "DAZZ",
+      "url": ""
+    },
+    "dogmatta-records": {
+      "name": "DogMatta Records",
+      "url": ""
+    },
+    "abu-dhabi-house-movement": {
+      "name": "Abu Dhabi House Movement",
+      "url": ""
+    },
+    "rf-digital-factory": {
+      "name": "RF Digital Factory",
+      "url": ""
+    },
+    "way-of-house": {
+      "name": "Way Of House",
+      "url": ""
+    },
+    "mk837": {
+      "name": "MK837",
+      "url": ""
+    },
+    "jaded-recordings": {
+      "name": "Jaded Recordings",
+      "url": ""
+    },
+    "braslive-records": {
+      "name": "Braslive Records",
+      "url": ""
+    },
+    "immortrance-recordings": {
+      "name": "Immortrance Recordings",
+      "url": ""
+    },
+    "area-verde": {
+      "name": "Area Verde",
+      "url": ""
+    },
+    "club-level-records": {
+      "name": "Club Level Records",
+      "url": ""
+    },
+    "groovy-bone": {
+      "name": "Groovy Bone",
+      "url": ""
+    },
+    "legent-music": {
+      "name": "Legent Music",
+      "url": ""
+    },
+    "mixmania-records": {
+      "name": "Mixmania Records",
+      "url": ""
+    },
+    "exx-chill": {
+      "name": "Exx Chill",
+      "url": ""
+    },
+    "grandmother-s-room": {
+      "name": "Grandmother's Room",
+      "url": ""
+    },
+    "parade-records": {
+      "name": "PARADE Records",
+      "url": ""
+    },
+    "storm-music-group": {
+      "name": "Storm Music Group",
+      "url": ""
+    },
+    "jinns-and-tonic": {
+      "name": "Jinns and Tonic",
+      "url": ""
+    },
+    "ministry-of-sound": {
+      "name": "Ministry of Sound",
+      "url": ""
+    },
+    "eight0eight-records": {
+      "name": "Eight0Eight Records",
+      "url": ""
+    },
+    "copyright-control": {
+      "name": "copyright control",
+      "url": ""
+    },
+    "jackfruit-recordings": {
+      "name": "Jackfruit Recordings",
+      "url": ""
+    },
+    "ovo-sound": {
+      "name": "OVO Sound",
+      "url": ""
+    },
+    "spectrum": {
+      "name": "Spectrum",
+      "url": ""
+    },
+    "galactica": {
+      "name": "Galactica",
+      "url": ""
+    },
+    "the-first-call": {
+      "name": "The First Call",
+      "url": ""
+    },
+    "tonspiel": {
+      "name": "TONSPIEL",
+      "url": ""
+    },
+    "tsafree003": {
+      "name": "TSAFREE003",
+      "url": ""
+    },
+    "insectorama": {
+      "name": "Insectorama",
+      "url": ""
+    },
+    "qulaqas-records": {
+      "name": "QulaqAs Records",
+      "url": ""
+    },
+    "elegie-remash": {
+      "name": "Elegie Remash",
+      "url": ""
+    },
+    "funk-you": {
+      "name": "FUNK YOU",
+      "url": ""
+    },
+    "audio-stage-records": {
+      "name": "Audio Stage Records",
+      "url": ""
+    },
+    "virgin-records": {
+      "name": "Virgin Records",
+      "url": ""
+    },
+    "one-seven-music": {
+      "name": "One Seven Music",
+      "url": ""
+    },
+    "physical-presents": {
+      "name": "Physical Presents",
+      "url": ""
+    },
+    "sink-or-swim": {
+      "name": "Sink or Swim",
+      "url": ""
+    },
+    "angelfin-records": {
+      "name": "Angelfin Records",
+      "url": ""
+    },
+    "warner-records": {
+      "name": "Warner Records",
+      "url": ""
+    },
+    "funkshway": {
+      "name": "Funkshway",
+      "url": ""
+    },
+    "erase-records": {
+      "name": "Erase Records",
+      "url": ""
+    },
+    "afro-tech-muzik": {
+      "name": "Afro Tech Muzik",
+      "url": ""
+    },
+    "purple-love-records": {
+      "name": "Purple Love Records",
+      "url": ""
+    },
+    "palm-tree-records": {
+      "name": "Palm Tree Records",
+      "url": ""
+    },
+    "powpow-music": {
+      "name": "POWPOW Music",
+      "url": ""
+    },
+    "la-pera-records": {
+      "name": "LA PERA RECORDS",
+      "url": ""
+    },
+    "balearic-vibes-records": {
+      "name": "Balearic Vibes Records",
+      "url": ""
+    },
+    "island-berlin": {
+      "name": "Island Berlin",
+      "url": ""
+    },
+    "i-eat-mangos": {
+      "name": "I Eat Mangos",
+      "url": ""
+    },
+    "city-stars-records": {
+      "name": "City Stars Records",
+      "url": ""
+    },
+    "people-want-to-dance": {
+      "name": "People Want To Dance",
+      "url": ""
+    },
+    "revealed-recordings": {
+      "name": "Revealed Recordings",
+      "url": ""
+    },
+    "funfair-records": {
+      "name": "Funfair Records",
+      "url": ""
+    },
+    "blu-music": {
+      "name": "BLU MUSIC",
+      "url": ""
+    },
+    "his-hertz-records": {
+      "name": "His&Hertz Records",
+      "url": ""
+    },
+    "ibizaholic-records": {
+      "name": "IBIZAHOLIC RECORDS",
+      "url": ""
+    },
+    "shodan-records": {
+      "name": "Shodan Records",
+      "url": ""
+    },
+    "house-of-horatio": {
+      "name": "House Of Horatio",
+      "url": ""
+    },
+    "frcst": {
+      "name": "FRCST",
+      "url": ""
+    },
+    "in-rotation": {
+      "name": "IN / ROTATION",
+      "url": ""
+    },
+    "house-for-artists-sony-music-de": {
+      "name": "House For Artists / Sony Music DE",
+      "url": ""
+    },
+    "milk-honey-records": {
+      "name": "Milk & Honey Records",
+      "url": ""
+    },
+    "houseklange-records": {
+      "name": "Houseklänge Records",
+      "url": ""
+    },
+    "game-of-tones": {
+      "name": "Game Of Tones",
+      "url": ""
+    },
+    "jay-z": {
+      "name": "Jay‐Z",
+      "url": ""
+    },
+    "sweat-it-out": {
+      "name": "Sweat It Out",
+      "url": ""
+    },
+    "numana-music": {
+      "name": "Numana Music",
+      "url": ""
+    },
+    "coppados": {
+      "name": "COPPADOS",
+      "url": ""
+    },
+    "black-book-records": {
+      "name": "Black Book Records",
+      "url": ""
+    },
+    "three-six-zero-recordings": {
+      "name": "Three Six Zero Recordings",
+      "url": ""
+    },
+    "armada-music": {
+      "name": "Armada Music",
+      "url": ""
+    },
+    "whore-house": {
+      "name": "Whore House",
+      "url": ""
+    },
+    "arkade": {
+      "name": "Arkade",
+      "url": ""
+    },
+    "producciones-ale-kuma": {
+      "name": "Producciones Alé Kumá",
+      "url": ""
+    },
+    "pyro-records-feels-like-home-records": {
+      "name": "Pyro Records / Feels Like Home Records",
+      "url": ""
+    },
+    "endless-city-records": {
+      "name": "Endless City Records",
+      "url": ""
+    },
+    "what-ya-need": {
+      "name": "What Ya Need",
+      "url": ""
+    },
+    "full-colour-records": {
+      "name": "Full Colour Records",
+      "url": ""
+    },
+    "heldeep-records": {
+      "name": "Heldeep Records",
+      "url": ""
+    },
+    "bootshaus-music": {
+      "name": "BOOTSHAUS MUSIC",
+      "url": ""
+    },
+    "box-of-cats": {
+      "name": "Box of Cats",
+      "url": ""
+    },
+    "upmotion-records": {
+      "name": "UPMotion Records",
+      "url": ""
+    },
+    "ingate-records": {
+      "name": "INGATE RECORDS",
+      "url": ""
+    },
+    "tierra-sounds": {
+      "name": "TIERRA SOUNDS",
+      "url": ""
+    },
+    "ismos": {
+      "name": "ISMOS",
+      "url": ""
+    },
+    "hysteria-records": {
+      "name": "Hysteria Records",
+      "url": ""
+    },
+    "zeitgeist-for-intercord-records": {
+      "name": "Zeitgeist for Intercord Records",
+      "url": ""
+    },
+    "blacksoul-music": {
+      "name": "Blacksoul Music",
+      "url": ""
+    },
+    "non-friction-records": {
+      "name": "Non-Friction Records",
+      "url": ""
+    },
+    "inside-groovebox": {
+      "name": "Inside Groovebox",
+      "url": ""
+    },
+    "spinnin-records": {
+      "name": "Spinnin' Records",
+      "url": ""
+    },
+    "3music": {
+      "name": "3musiC",
+      "url": ""
+    },
+    "people-want-to-dance-club-sweat": {
+      "name": "PEOPLE WANT TO DANCE / Club Sweat",
+      "url": ""
+    },
+    "la-perle-records": {
+      "name": "La Perle Records",
+      "url": ""
+    },
+    "welove-recordings": {
+      "name": "WeLove Recordings",
+      "url": ""
+    },
+    "colorblind": {
+      "name": "Colorblind",
+      "url": ""
+    },
+    "sol-selectas": {
+      "name": "Sol Selectas",
+      "url": ""
+    },
+    "so-kool": {
+      "name": "SO KOOL",
+      "url": ""
+    },
+    "broke-records": {
+      "name": "broke records",
+      "url": ""
+    },
+    "uncut-grooves": {
+      "name": "Uncut Grooves",
+      "url": ""
+    },
+    "crash-your-sound": {
+      "name": "Crash Your Sound",
+      "url": ""
+    },
+    "astral-708-records": {
+      "name": "Astral 708 Records",
+      "url": ""
+    },
+    "kontor-records": {
+      "name": "Kontor Records",
+      "url": ""
+    },
+    "manic-people": {
+      "name": "MANIC PEOPLE",
+      "url": ""
+    },
+    "sub-religion-records": {
+      "name": "Sub Religion Records",
+      "url": ""
+    },
+    "nasty-tracks": {
+      "name": "Nasty Tracks",
+      "url": ""
+    },
+    "magik-muzik": {
+      "name": "Magik Muzik",
+      "url": ""
+    },
+    "defected": {
+      "name": "Defected",
+      "url": ""
+    },
+    "drunkwraps": {
+      "name": "DRUNKWRAPS",
+      "url": ""
+    },
+    "trust-the-machine": {
+      "name": "Trust The Machine",
+      "url": ""
+    },
+    "this-ain-t-bristol": {
+      "name": "This Ain't Bristol",
+      "url": ""
+    },
+    "saved-records": {
+      "name": "Saved Records",
+      "url": ""
+    },
+    "marba-records": {
+      "name": "Marba Records",
+      "url": ""
+    },
+    "poison-777": {
+      "name": "Poison 777",
+      "url": ""
+    },
+    "black-vinyl-records": {
+      "name": "Black Vinyl Records",
+      "url": ""
+    },
+    "offish-productions": {
+      "name": "Offish Productions",
+      "url": ""
+    },
+    "sonar-depth-records": {
+      "name": "Sonar Depth Records",
+      "url": ""
+    },
+    "soul-n-pepa": {
+      "name": "Soul N Pepa",
+      "url": ""
+    },
+    "union-records": {
+      "name": "UNION Records",
+      "url": ""
+    },
+    "revival-records": {
+      "name": "Revival Records",
+      "url": ""
+    },
+    "karess-records": {
+      "name": "KARESS RECORDS",
+      "url": ""
+    },
+    "electronic-rapture": {
+      "name": "Electronic Rapture",
+      "url": ""
+    },
+    "stig-records": {
+      "name": "Stig Records",
+      "url": ""
+    },
+    "musical-freedom": {
+      "name": "Musical Freedom",
+      "url": ""
+    },
+    "protectthevibe-music": {
+      "name": "PROTECTTHEVIBE.MUSIC",
+      "url": ""
+    },
+    "cuff": {
+      "name": "CUFF",
+      "url": ""
+    },
+    "ignescent": {
+      "name": "Ignescent",
+      "url": ""
+    },
+    "gemstone-records": {
+      "name": "Gemstone Records",
+      "url": ""
+    },
+    "truth-x-lies": {
+      "name": "Truth x Lies",
+      "url": ""
+    },
+    "ants-on-mars": {
+      "name": "Ants On Mars",
+      "url": ""
+    },
+    "chakra-records": {
+      "name": "Chakra Records",
+      "url": ""
+    },
+    "rhyme-records": {
+      "name": "RHYME-RECORDS",
+      "url": ""
+    },
+    "bmg": {
+      "name": "BMG",
+      "url": ""
+    },
+    "ritmin-records": {
+      "name": "Ritmin Records",
+      "url": ""
+    },
+    "columbia": {
+      "name": "Columbia",
+      "url": ""
+    },
+    "sc-entertainment": {
+      "name": "SC Entertainment",
+      "url": ""
+    },
+    "another-rhythm": {
+      "name": "Another Rhythm",
+      "url": ""
+    },
+    "loungespirit": {
+      "name": "LOUNGESPIRIT",
+      "url": ""
+    },
+    "theory-x": {
+      "name": "Theory X",
+      "url": ""
+    },
+    "sola": {
+      "name": "SOLA",
+      "url": ""
+    },
+    "d-eaupe": {
+      "name": "D'EAUPE",
+      "url": ""
+    },
+    "ncm-label-detroit": {
+      "name": "NCM label Detroit",
+      "url": ""
+    },
+    "soulart-recordings": {
+      "name": "SoulArt Recordings",
+      "url": ""
+    },
+    "yellow-watermellow": {
+      "name": "Yellow Watermellow",
+      "url": ""
+    },
+    "mahool": {
+      "name": "MAHOOL",
+      "url": ""
+    },
+    "malvada": {
+      "name": "Malvada",
+      "url": ""
+    },
+    "cloakroom-records": {
+      "name": "Cloakroom Records",
+      "url": ""
+    },
+    "elegant-bastards": {
+      "name": "Elegant Bastards",
+      "url": ""
+    },
+    "unreleased": {
+      "name": "Unreleased",
+      "url": ""
+    },
+    "flamenca-records": {
+      "name": "Flamenca Records",
+      "url": ""
+    },
+    "houseklange": {
+      "name": "Houseklänge",
+      "url": ""
+    },
+    "tmrw-music": {
+      "name": "TMRW Music",
+      "url": ""
+    },
+    "sony-music-media": {
+      "name": "Sony Music Media",
+      "url": ""
+    },
+    "muve-recordings": {
+      "name": "muve recordings",
+      "url": ""
+    },
+    "clavette": {
+      "name": "Clavette",
+      "url": ""
+    },
+    "whoa": {
+      "name": "Whoa!",
+      "url": ""
+    },
+    "mstrv2": {
+      "name": "mstrv2",
+      "url": ""
+    },
+    "tnkfloor": {
+      "name": "TNKFLOOR",
+      "url": ""
+    },
+    "tv-recordings": {
+      "name": "TV Recordings",
+      "url": ""
+    },
+    "hothouse": {
+      "name": "hothouse.",
+      "url": ""
+    },
+    "clubview-records": {
+      "name": "ClubView Records",
+      "url": ""
+    },
+    "raw": {
+      "name": "RAW",
+      "url": ""
+    },
+    "sound-division": {
+      "name": "Sound Division",
+      "url": ""
+    },
+    "universal-music-canada": {
+      "name": "Universal Music Canada",
+      "url": ""
+    },
+    "houz-records": {
+      "name": "HOUZ Records",
+      "url": ""
+    },
+    "heartfeldt-records-one-seven-music": {
+      "name": "Heartfeldt Records / One Seven Music",
+      "url": ""
+    },
+    "affairs": {
+      "name": "Affairs",
+      "url": ""
+    },
+    "thrive-music": {
+      "name": "Thrive Music",
+      "url": ""
+    },
+    "lesixtynine-musique": {
+      "name": "LESIXTYNINE MUSIQUE",
+      "url": ""
+    },
+    "hell-beach-onelove": {
+      "name": "Hell Beach / OneLove",
+      "url": ""
+    }
+  },
+  "tracks": {
+    "<unknown> - Hitman (Original Mix)": "non-stop-film-trailer-sampler",
+    "4ualways - Empieza": "natural-rhythm",
+    "74 - Better late than never": "lapsus-music",
+    "a.trofimov - Phase Lure": "like-that-underground",
+    "A1 Giacomo Silvestri - Paradox": "like-that-underground",
+    "Aares - Vamos Bailar": "natural-rhythm",
+    "Aaron Smith feat. Marlon Robinson - Like This Before (Tony Arzadon Remix)": "gods-of-madness-recordings",
+    "Aaron Smith ft. Bridget Flowers - Good Day (Ezel Extended)": "gods-of-madness-recordings",
+    "Aaron Smith ft. IndiBlu - Gotta Have Faith (Tony Arzadon Extended)": "gods-of-madness-recordings",
+    "Aaron Smith ft. Luvli - Brighter Days (Rick and Gary's Greene Street Dub)": "gods-of-madness-recordings",
+    "Aaron Smith ft. Marlon Robinson - Woman [Skill Syrup Extended Mix]": "gods-of-madness-recordings",
+    "Abdon - Fifteen Years With Us (Extended Mix) [Lapsus Music]": "lapsus-music",
+    "Abdon, Sebastian Rivero - Never (Extended Mix) [Lapsus Music]": "lapsus-music",
+    "Adam Asenjo, Grant Richards - BBD (Extended)": "club-whatever",
+    "Agent Greg - Speck Of Drum (Extended Mix)": "toolroom-trax",
+    "Agustin Mesa - Agustin Mesa - Gran Turismo,": "moom-sound",
+    "Agustin Mesa - Going Back 2 The Roots": "moom-sound",
+    "Agustin Mesa - Old School": "moom-sound",
+    "Airsand & TuraniQa - Fire In My Soul (Extended Mix) [Exx Muzik]": "exx-muzik",
+    "Albert Marzinotto, Kelli-Leigh - More Beats More Love (Extended Mix)": "till-am-records",
+    "Ale Miguez - Ghost Floor [MixCult Records]": "like-that-underground",
+    "Ale Miguez - Low State[Soundteller Records]": "like-that-underground",
+    "Alejandre - BW'S": "like-that-underground",
+    "Alex Luckystrike - Times Up (Extended Mix)": "waldliebe-familien",
+    "Alex Luckystrike - Vamos (Extended Mix)": "adesso-music",
+    "ALEX LUCKYSTRIKE - Vamos (EXTENDED MIX)": "adesso-music",
+    "Alex Pizzuti, Simo & Franz - La Luna della Sirena": "tankfloor",
+    "Almared & Jateen Feat. Bukeka - After The Storm (Emanuele Esposito Remix)": "switch-records",
+    "ALRIUS - Change (Original Mix)": "groove-society",
+    "Amaral Borges - Bee Flight": "like-that-underground",
+    "Amethyst, Lenny Lenoks - Cinnamon Sky (Dandy Aka Peter Makto & Gregory S Remix)": "crossfade-sounds",
+    "Amuka, M Is For Motion, DJ Industrial Badger - Party Up In Here (Badger's Driving Beats Mix) Explicit": "rye-51-records",
+    "Amuka, M Is For Motion, DJ Industrial Badger - Party Up In Here (Badger's Driving Beats Mix) Explicit,": "rye-51-records",
+    "Andre Vila - Celeda & Danny Tenaglia - Music is The Answer (Andre Vila Remix)": "free-dl",
+    "Andrew Macari - Andrew Macari ft. Paka Project - Partie Times": "moom-sound",
+    "Andrew Macari ft. Paka Project - Partie Times (Josh Gregg Remix)": "moom-sound",
+    "Andrew Meller - Dance To The Rhythm (Original Mix)": "adesso-music",
+    "Andrew Meller - Groovin' (Original Mix)": "adesso-music",
+    "Andrew Meller - What We Need (Exrended Mix)": "adesso-music",
+    "Andri Rozvo - Spiegel (feat. B)": "natural-rhythm",
+    "ANNA KAM - MARBELLA (Benjamin Franklin Remix)": "miyu-records",
+    "ANOTR, Leven Kali, Erik Bandt - How You Feel (Original Mix)": "freerep01",
+    "Anthony Attalla, Siwell - Private Shots (Extended Mix)": "incorrect-music",
+    "Anton Powers x Selker ft Jem Cooke - You Don't Love Me (Extended Mix)": "come-together",
+    "Antonator - Module (Extended Mix)": "anto-recordings",
+    "Aretha Franklin - Chain Of Fools (Djolee & Scippo Edit)": "bulk-mstr",
+    "Armand Dj - Are You Ready": "disposable-records",
+    "Armand Van Helden, Mark Knight, D. Ramirez - You (Extended Mix)": "toolroom-records",
+    "ASSA x ALB[I]T & LENny (IT) - Imali Andinalo (Original Mix)": "cafe-de-anatolia",
+    "ATFC feat. Lisa Millet - Bad Habit (Tommy Mambretti Re-Edit)": "the-myth-of-nyx",
+    "Aüra, DJ Simi, Master Keys - So In Love ft. Antonio Carbone (Dub Mix)": "d-vision",
+    "AÜRA, Lexa Hill - Anikana-O (Dub Mix)": "d-vision",
+    "Aurora Solis - Mi Ritmo (Tali Freaks Remix)": "she-s-super-deep",
+    "Avelon - Loved U B4 (Original MIx)": "parallel-romance",
+    "Avelon - Soul In Place (Original Mix)": "parallel-romance",
+    "Avicii vs Nicky Romero - BONUS EDIT I Could Be The One (ALRIUS Extended Bootleg)": "groove-society",
+    "AYOHN - Until the Dawn (Extended Mix)": "ayohn-music",
+    "AYYBO - RIZZ (Millero Extended Remix)": "gdb-records",
+    "B.A.N.G! - Change The News (Extended Mix)": "feel-hype",
+    "B3 Ray Okpara feat. Nikki - Brainows": "like-that-underground",
+    "Baby - Prospa Murda Beatz (After Ours Remix)": "circoloco-records",
+    "Badger - Eple (Extended Mix)": "xploded-music",
+    "Bantu - Money Maker (Extended Mix)": "afrotherapy",
+    "belac - Cascade (I had to go) (Extended Mix)": "pias-electronique",
+    "Belfort - Braids ft. Veylura (Extended)": "big-top-amsterdam",
+    "Belyi, Kirr - Calinda (Original Mix)": "attraction-market",
+    "Benji, KŌA KŌA - Weather (Extended Mix)": "helix-records",
+    "Bessey - No Vaseline (Extended Mix)": "night-bass",
+    "BigPerro - Papa Simba (Extended Mix)": "natural-rhythm",
+    "Black Eyed Peas - Just Can't Get Enough (Boothed Extended Edit)": "insomniac-records",
+    "Black Moses - Broadways Vibes (Original Mix)": "rushin-records",
+    "Black Moses - Choose Life": "rushin-records",
+    "Blame - Hindsight (DJ Marky Remix)": "knowledge-magazine",
+    "Blaxx - Gimme Back (Extended Mix)": "honirika-music",
+    "Blossom - Stronger (Nitepunk Extended Remix)": "ukf",
+    "Body Ocean & Benni Ola - Listen To Your Teacher (Extended Mix)": "night-bass",
+    "Bomel - Sesame ft. Jade Mansion (Extended)": "big-top-amsterdam",
+    "Boothed - Seasons (Extended Mix)": "soave-dusk",
+    "Broklyn x Roby - Pegate (Original Mix)": "outside-romania",
+    "Bsharry - Mas (Extended Mix)": "bellosguardo",
+    "Cabassa, Tommy Veanud - Imagination (Original Mix)": "together-we-re-louder",
+    "CALI Sound - Baluginio": "cas-music",
+    "CALI Sound - Gloamveil": "cas-music",
+    "CALI Sound - Luares": "cas-music",
+    "Cameron Audio - Grooveans": "natural-rhythm",
+    "Cameron Gary - One Little Kiss": "rushin-records",
+    "camoufly - Deep Red Dub": "kawaii-bounce",
+    "Caputi - Mwa": "like-that-underground",
+    "Carlo Gambino - Dance For You": "secret-floor-inc",
+    "Carmen Fiorentino - Chemistry (Original Mix)": "killer-mushrooms",
+    "CARTER (AU), Skylin3 - Baby Boy (Extended Mix) [GOODSIDE]": "goodside",
+    "CASSIMM - Need Your Love (Ordonez Remix)": "crypto-ravers",
+    "Cat Dealers - BODY IN COMMAND (Extended Mix)": "cat-house-records",
+    "Cat Dealers - CONTROL YOUR BODY (Extended Mix)": "cat-house-records",
+    "Cat Dealers & Masked Wolf - Over & Over (Extended)": "tomorrowland-music",
+    "Cervinski - Se Se (Original Extended Mix)": "natural-rhythm",
+    "Cevin Fisher - The Way We Used To (STEIN (US) Remix)": "moonshine-music",
+    "Chain Selector - Wild ivy": "like-that-underground",
+    "Champagne Kenny - Keep Moving (Extended)": "dark-roast-records",
+    "Chanel Carmichael - Dreaming (Extended Mix)": "electronic-nature",
+    "Chapter & Verse - Hands Up (Extended Mix)": "myth-of-nyx",
+    "Chapter & Verse - Rock Your Body (Extended Mix)": "helix-records",
+    "Chemars - Get Into The Music (Iban Montoro & Jazzman Wax - Angelo Ferreri Remastered)": "waldliebe-familien",
+    "Chemars - Vanilla Jazz (Extended Club Mix)": "bellosguardo",
+    "Chesster - Ritmo (Original Mix)": "natural-rhythm",
+    "Chiara Meloni - Dance (Extended Mix)": "secret-floor-inc",
+    "Chronosonder - Start Movin (Jasper Miller Extended Remix)": "all-ways-dance",
+    "Ciava - Higher (Extended Mix)": "like-that-underground",
+    "Cigarette & Juice - Suena La Tromba (Extended Mix)": "bellosguardo",
+    "Claudio de Tulio - Work That  (Original Mix)": "like-that-underground",
+    "Cleo Grooves - I Don't Depend (Extended Edit)": "paraiso",
+    "CLMX - Baby i need you (XTD Version)": "circoloco-records",
+    "Clyde P - Bolly Hood (Original Mix)": "yayo-records",
+    "COEUR ACIDE - BITE ME": "toucan-sounds",
+    "CŒUR ACIDE - LET'S SWEAT": "toucan-sounds",
+    "Coflo Edits - Consentemential (Coflo's Dancer edit)": "secret-floor-inc",
+    "Corderoy - Heavyweight (Extended)": "48k-perfecto-records",
+    "Corey James, Paul Green - Dimension (Extended Mix)": "size-records",
+    "Cortazar - Real Son": "like-that-underground",
+    "Cover Girls - Wishing On A Star (Frank Delour Extended Mix)": "sounds-direct",
+    "Criss Deeper - Voyager Spark (Ewan Rill Remix)": "forward-music",
+    "Cristoph - Gimme The Love (Extended Mix)": "toolroom-records",
+    "Dale Hart - Only You (Extended Mix)": "uprise-music",
+    "Dancast - That Conga": "like-that-underground",
+    "Dane Carter - Sopro (Extended Mix)": "tikuna-trax",
+    "Daniel Anthony - All Nighter": "rushin-records",
+    "Danmds - Baila (Extended Mix)": "waldliebe-familien",
+    "Danmds - Cartel (Extended Mix)": "stealth-records",
+    "Danmds - Midnight (Extended)": "outside-romania",
+    "Danmds - Slick (Extended Mix)": "natural-rhythm",
+    "Danmds - Takata (Extended Mix)": "quanticman-records",
+    "Danmds - Zuubaka": "natural-rhythm",
+    "Danmds, Albin Kaczka - Manifest": "natural-rhythm",
+    "Danny Avila & Rome Fortune - Sweating (Original Mix)": "tomorrowland-music",
+    "Dario Nunez, Cem Egemen - Tokoto [Satsuma Music]": "satsuma-music",
+    "Dario Nunez, Cesar Sanchez - Let's Work (Extended Mix)": "adesso-music",
+    "DAZZ, CALVO - Enjoy The Ride (Extended Mix)": "dazz",
+    "DC LaRue, Yu Freakah, DJ Industrial Badger - Hot Jungle Drums Voodoo Rythm (Pounding Like Thunder Mix)": "helix-records",
+    "DECEMBR.12 - Dance For Me (Max Amorth Remix) [Abu Dhabi House Movement]": "dogmatta-records",
+    "DECEMBR.12 - Dance For Me [ADHouseMovement]": "dogmatta-records",
+    "DECEMBR.12 - Mi Campana (James Greene Remix)": "abu-dhabi-house-movement",
+    "Deep Colors - Trippin' (Extended Mix)": "adesso-music",
+    "Deep Fiktion - Turn Up The Volume (Extended)": "club-whatever",
+    "Deephope - Don't Give Up": "like-that-underground",
+    "Deephope - In My Veins": "like-that-underground",
+    "Delayz & Cicchini - Baila (Extended Mix)": "waldliebe-familien",
+    "Delmonte - dankie (Extended Mix)": "rf-digital-factory",
+    "Delon - Deep Water feat. Alyssa Jane (Extended Mix)": "way-of-house",
+    "Delon feat. Eribertho Cruz - Fuego Del Cielo (Extended Mix)": "way-of-house",
+    "Denats - Concerned About the Future (Original Mix)": "mk837",
+    "Denats - How It's Done (Original)": "mk837",
+    "Denats - Satisfy (Original Mix)": "jaded-recordings",
+    "Denats - Something About Music (Original Mix)": "mk837",
+    "Denats - This Is...  (Original Mix)": "braslive-records",
+    "Dennis Cartier - Mi Alma (Extended Mix)": "paraiso",
+    "Destiny's Child - Bug A Boo (DJ Soulstar Edit)": "immortrance-recordings",
+    "Deva Vicci - Distraction": "area-verde",
+    "Devault - Keep Your Body Pumpin (Extended Mix)": "insomniac-records",
+    "DHALI, dagi - Ibiza, Circoloco (Domenico Rondinelli & Dennis Reif Remix - Extended)": "like-that-underground",
+    "Dino DZ, The Disco GodFathers, HAWD HITTA - BOUNCE (Extended Mix)": "club-level-records",
+    "Diskull - Falling For You (Ambroz Extended Remix)": "groovy-bone",
+    "Diskull - Falling for You (Original Mix)": "groovy-bone",
+    "Dj Andrey feat Paula Ortega - Jacker's Smile (Original Mix)": "legent-music",
+    "Dj Babatr - La Luna (Tambor Urbano old mix )": "tankfloor",
+    "Dj Ease - Lakaw (Original Mix)": "mixmania-records",
+    "Dj Ease - The Bishop (Original Mix)": "mixmania-records",
+    "Dj Ease - Through My Veins (Original Mix)": "mixmania-records",
+    "Dj Ease, Ryder Dj - Already Gone (Original Mix)": "mixmania-records",
+    "DJ Jace feat. Kasia (CA) - Nice People": "like-that-underground",
+    "DJ Mattlok - Let That Track Ride (Original Peak Hour Mix)": "like-that-underground",
+    "DJ Mattlok - Let That Track Ride (Warehouse88 Classic House Bootleg Mix )": "like-that-underground",
+    "Dj Osiris - Como tu [Original Version]": "waldliebe-familien",
+    "DJ Osiris & Ana - El Tango (Extended Mix) [Natural Rhythm]": "natural-rhythm",
+    "DJ Renat,TuraniQa - Do You Want It (Afro Mix)": "exx-chill",
+    "Dj Ronald - My Frequenz": "grandmother-s-room",
+    "DJ SWISHERMAN - Horny'98 (The Swish Edit)": "parade-records",
+    "Dj Yirvin - Dance In The House": "storm-music-group",
+    "DJibouti - 1 Thing (DJibouti Dub)": "jinns-and-tonic",
+    "DJibouti - Crazy in Love (DJibouti Dub)": "ministry-of-sound",
+    "DJOKO, Hanns - On & On": "eight0eight-records",
+    "DNKA - Funky Whiteboy (Extended)": "club-whatever",
+    "doja cat - woman (sujaatse miami bass edit)": "gods-of-madness-recordings",
+    "Domenico Rondinelli & Giovanni Zarzana - Close (Extended Mix)": "like-that-underground",
+    "Dompe - Make It Real": "copyright-control",
+    "Dompe - Save Your Soul": "jackfruit-recordings",
+    "Dompe - Zero": "jackfruit-recordings",
+    "Dr. Ruth - \"Believe In Yourself": "like-that-underground",
+    "Drake - Massive (Felix Rey Afro Latino Remix)": "ovo-sound",
+    "Drake, Central Cee - Which One (Gold Lemonade Remix) [White Label]": "ovo-sound",
+    "DROPNE - ME (Original Mix)": "together-we-re-louder",
+    "Dua Lipa - Don't Start Now (Purple Disco Machine Remix) [Extended] (Original Mix)": "spectrum",
+    "Duskon - Shade": "like-that-underground",
+    "Dynamick - Cash On Me (Extended Mix) [Dark Roast Records]": "dark-roast-records",
+    "EchoStorms - I Know (Extended)": "galactica",
+    "EchoStorms, Selina Baron - An Anxiety (Extended Dub)": "galactica",
+    "Einfakinn, El Maar, Fynolla, Viktor (UV) - Atlantida Calling": "the-first-call",
+    "Ekko - Delante (Extended Mix)": "tonspiel",
+    "Ekodust - Mirror (Original Version)": "tsafree003",
+    "Ekodust - Varpour": "insectorama",
+    "El Alfa, Nfasis - Este (Andrea Fiusco Remix)": "helix-records",
+    "Elline, Backeer, Mad Afro - LoL": "qulaqas-records",
+    "Eloquin - Energetique (Extended Mix)": "all-ways-dance",
+    "Emanuele Esposito, David Hopperman - Ababtka": "switch-records",
+    "EMCY (COL) - Faia (Extended)": "elegie-remash",
+    "Esox, Daniel Skulnick, DJ Luane - One, Two, Three (Extended Mix)": "funk-you",
+    "Evgeny Otto - You Hypnotized (Extended Mix)": "audio-stage-records",
+    "Fabi Hernandez, Morenita, Mathieu Ruz - Prende La Vela (Extended Mix)": "virgin-records",
+    "Fabich - La Fiesta (Extended Mix)": "one-seven-music",
+    "Fabio Carminati - Human (Nicolas Barnes Remix)": "like-that-underground",
+    "Federico Scavo & GROSSOMODDO - Strump (Extended Mix)": "d-vision",
+    "Felipe Allenn - Cola (Extended Mix)": "one-seven-music",
+    "Felipe Allenn - Sun Is Shining (Extended Edit)": "together-we-re-louder",
+    "Felix Cartal - Stranger Things Theme (Felix Cartal's After Dark Remix)": "physical-presents",
+    "Ferreck Dawn & Jem Cooke - Everything You Need (Extended Mix)": "sink-or-swim",
+    "Fickry - Beware (Extended Mix)": "adesso-music",
+    "Finn Forte - It's a Sunny Day (Jon Billick Remix)": "angelfin-records",
+    "Finn Forte - NYE 1999 (Hold Me Like It's 1999) (Acapella)": "angelfin-records",
+    "Fleetwood Mac - Big Love (Nic Fanciulli Remix)": "warner-records",
+    "Flex (UK) - Say What (Extended Mix)": "funkshway",
+    "FLOYD WEST22 - V.I.P. [Erase Records]": "erase-records",
+    "Folkness - Junk Box (Extended Mix)": "electronic-nature",
+    "FR3SH TrX - Casablanca (Extended Mix)": "natural-rhythm",
+    "FRAME (FR) - Want Your Love (Extended)": "club-whatever",
+    "Francisco Samuel - Corazón (Original Mix)": "mk837",
+    "Frank Delour - Aya (Extended Mix) [Afro Tech Muzik]": "afro-tech-muzik",
+    "Frank Delour - The Moment": "adesso-music",
+    "Funky Green Dogs - Fired Up (CENKK Remix)": "purple-love-records",
+    "Funky M - I've Changed (Original Mix)": "mk837",
+    "Fuzzy Hair - My Trax (Extended Mix)": "club-whatever",
+    "G-lover - Ready Steady Go (Extended Mix)": "adesso-music",
+    "G-lover - Tomorrow (Extended Mix)": "like-that-underground",
+    "Galo - Take The Rhythm (Extended Mix)": "palm-tree-records",
+    "Galvatron - Rain": "powpow-music",
+    "Garruto & Angie Bee - All Right (Original Mix)": "legent-music",
+    "Gcina - District 6 Groove (Original Mix)": "natural-rhythm",
+    "George Privatti - El Chiquillo del Cable (Original Mix)": "la-pera-records",
+    "George Privatti - La Comebolsas (Original Mix)": "la-pera-records",
+    "Georgia Mos X Kanu - Pasaporte (Extended Mix)": "tankfloor",
+    "Gettoblaster - Cantina De Brazil": "balearic-vibes-records",
+    "Glen Horsborough, Nathalie Miranda, Peter Brown - Feel The Music": "waldliebe-familien",
+    "Glockenbach, 163Margs - No Stress (Extended)": "island-berlin",
+    "Gold Lemonade - Can't Feel My Face (ft. FlowFly) (Extended Mix) [Dark Roast Records]": "dark-roast-records",
+    "Gold Lemonade - Got The Boost (Original Mix) [Dark Roast Records]": "dark-roast-records",
+    "GOLDSCHLÄGER, ADIR DEKEL - Don't Depend (Extended)": "club-whatever",
+    "Goodie bags - Turn Up The Bassline (Extended Mix)": "i-eat-mangos",
+    "Groovecat - Live Your Life (Miguel Migs Piano Love Dub)": "natural-rhythm",
+    "H.E.R. ft. YG - Slide (Freshcobar Remix)": "city-stars-records",
+    "HABITAT - Milano (Extended)": "people-want-to-dance",
+    "Hardwell x Chuckie - The Partycrasher (Extended Mix)": "revealed-recordings",
+    "HASKELL - Rasa (Extended Mix)": "myth-of-nyx",
+    "HAVEN - I Run (DJ Prophet Edit)": "funfair-records",
+    "HAVEN. - I Run ( VYTO Afro House VIP Remix)": "funfair-records",
+    "HIISAK, Reeva - KILLA (Extended Mix)": "size-records",
+    "HILLS - Lift Me Up (Extended Mix)": "blu-music",
+    "His&Hertz, Ece Yilmaz, Toprak Baris - Madagascar (Extended Mix)": "his-hertz-records",
+    "HORATIO - SEA LION WOMAN [CLUB WHATEVER]": "ibizaholic-records",
+    "Horatio - The Summer of 1990": "shodan-records",
+    "Horatio & Danmds - Loud Enough (Extended),": "stealth-records",
+    "HORATIO & HAARAW - PARA UN LOCO,": "outside-romania",
+    "HORATIO & KEV SCOTT - GO ENGLAND GO": "house-of-horatio",
+    "HORATIO & MANUEL ALICANTE - LA COLEGIALA": "ibizaholic-records",
+    "Horatio, J Nitti - The Flute Song": "shodan-records",
+    "Horatio, J Nitti - Year of the Jack": "shodan-records",
+    "Horatio, J Nitti - Year of the Jack,": "shodan-records",
+    "Hrag Beko - Fluxion (Extended Mix)": "frcst",
+    "Hrag Beko - Let Me Tell You (Extended Mix)": "adesso-music",
+    "HUGEL Ultra Nate Imael Angel - Movin To The Sun (SJUR Remix)": "adesso-music",
+    "Ian Oliver x Ludacris - Stand Up Vs Bucovina (Los Padres Mashup)": "parade-records",
+    "Illyus Barrientos - Capitale (Extended Mix)": "in-rotation",
+    "Immersed - Tantra (Original Mix),": "house-for-artists-sony-music-de",
+    "Inkblot - Palindrum": "like-that-underground",
+    "Ivan Lake - Pull Back (Extended)": "club-whatever",
+    "J. Worra - Adored (Extended)": "milk-honey-records",
+    "Jaden Bojsen & David Guetta - Upside Down (Extended)": "people-want-to-dance",
+    "James Hype - Lose Control (Calabria Edit)": "natural-rhythm",
+    "James Hype - Paul Johnson - Get Get Down - James Hype Edit": "houseklange-records",
+    "James Hype, Turno & Kim Petras - Drums (Turno Remix)": "adesso-music",
+    "Jamie Jones & Camden Cox - State Of Mind (Extended Mix)": "helix-records",
+    "Jannik Vistisen - Sexy and I Know It": "game-of-tones",
+    "Jaques Le Noir - Club (Josh Nor Remix)": "bellosguardo",
+    "Jaques Le Noir - Level (Seumas Norv Remix)": "bellosguardo",
+    "Jaques Le Noir - Mambo (Extended Mix)": "bellosguardo",
+    "Jaques Le Noir - Morning Light (Extended Mix)": "bellosguardo",
+    "Jaques Le Noir - Who's Watching (Extended Mix)": "bellosguardo",
+    "Jasper Miller - Freak Like Me [Jasper Miller Remix]": "helix-records",
+    "JAY-Z, Kanye West - Ni**as in Paris (Kev Lavigne ID by Rivoli Remix)": "jay-z",
+    "Jewel Kid - The One (Extended Mix)": "myth-of-nyx",
+    "Joe Hunt - Renegade Masta (Extended Mix)": "island-berlin",
+    "Joel Corry - Stuck In A Loop (Extended Mix)": "sweat-it-out",
+    "John Newman - Love Me Again 'Again' (Wh0 Extended Remix)": "numana-music",
+    "John Newman - Love Me Again (Again) (Extended Mix)": "numana-music",
+    "Jordan Moxey - Pasilda [COPPADOS],": "coppados",
+    "Jordy Copz - Lana (Extended Mix)": "black-book-records",
+    "Joris Voorn x Roddy Lima x Talyr Renee - Machine (Extended)": "spectrum",
+    "Josh Baker, Poppy Baskcomb - My Place (Extended)": "three-six-zero-recordings",
+    "Josh Diaz - I Think I Like It (Josh Diaz Remix)": "the-myth-of-nyx",
+    "Josh Gregg - LUV": "moom-sound",
+    "Josh Gregg - Step Back": "moom-sound",
+    "Josh Wink & Marco Faraone x Shakira - Dai Dai I'm Ready (The Machine Reboot)": "spectrum",
+    "Joyce (ARG) - Girls In The Air (Extended Mix)": "adesso-music",
+    "Jubaa - Tabu (Extended Mix)": "adesso-music",
+    "Julius Strieder - Midnight on Repeat": "outside-romania",
+    "Justin Curoe - Feeling Low (Extended Mix)": "all-ways-dance",
+    "K-Klass feat Bobbi Depasois - Let Me Show You (Tim Cullen Extended Mix)": "armada-music",
+    "Kaleena Zanders & Shift K3Y - The Light (Extended Mix)": "helix-records",
+    "Kanu, Yasha, Simo & Franz - MOJITO (feat. Vika)": "tankfloor",
+    "Karar - Amen (Original Mix)": "mk837",
+    "Karar - The I AM (Original Mix)": "mk837",
+    "Karar - What the Lord Has Done for Me (Original Mix)": "mk837",
+    "KASH LOH - Grind That": "whore-house",
+    "Kaskade, Bobby Harvey, Sam Harper - Satisfy You (Sun Soaked Mix)": "arkade",
+    "Kenn Colt ft El Palma - LA NOCHE (Extended Mix)": "producciones-ale-kuma",
+    "Kenn Colt, Future Identity - NEVER ENOUGH (Extended Mix)": "pyro-records-feels-like-home-records",
+    "Keyklova - Mambo (Extended Mix)": "bellosguardo",
+    "KICK DR - DUBMERGENCE (STARPATH REMIX)": "moom-sound",
+    "Kings Of Tomorrow - Athem (Paul Lomax Vip Edit 2024)": "endless-city-records",
+    "Known Artist - Mar Del Plata (Club Mix)": "bellosguardo",
+    "Kriss Reeve & Groove Aspect - Boom (Extended Mix)": "what-ya-need",
+    "Kronan, L'Orchestre Massako - Dibembi 2026 (Extended Mix)": "big-top-amsterdam",
+    "Kryder - Eivissa (Extended Mix)": "size-records",
+    "La Fuente - Higher When I Rise (Extended)": "like-that-underground",
+    "La Fuente - Ring The Alarm (Extended)": "full-colour-records",
+    "Lan Damon - Pull Me Closer": "like-that-underground",
+    "LAPO UNDERGROUND - Collateral Effect (Extended)": "heldeep-records",
+    "Lapo Underground - I AM WORTH IT - IO VALGO": "heldeep-records",
+    "Lapo Underground - Larken by Lapo Underground (Original Mix)": "heldeep-records",
+    "Laserkraft 3D, Derya Akyol - Längst vergessen (Extended Mix)": "bootshaus-music",
+    "laurence. - Entre Nous (Extended Mix)": "all-ways-dance",
+    "Laurent Wolf - No Stress (Ludo Lacoste & John Lebel Edit)": "island-berlin",
+    "LAWZ - Back In The Day": "box-of-cats",
+    "LAWZ - Losing Touch (Extended Mix)": "upmotion-records",
+    "LENny (IT) & ALB[I]T - Moonshine (Original Mix)": "ingate-records",
+    "LENny(IT) & ALB[I]T - Call Me Baby": "tierra-sounds",
+    "Leon Michael - Apples Attic [RUSHIN RECORDS]": "rushin-records",
+    "LEZOLUT - Move Your Body (Extended)": "club-whatever",
+    "Line.y - Dawn Frequency": "ismos",
+    "Lion, Tommy Veanud - Blah Blah Blah (Extended Mix)": "hysteria-records",
+    "LIZOT x FABLO x Brave Culture - No Kiss (Extended)": "zeitgeist-for-intercord-records",
+    "LNRT - Flip That (Extended Mix)": "milk-honey-records",
+    "Local Singles - Time Gone (Extended Mix)": "helix-records",
+    "LOKIE + SINBA - Samba Disco (Deeper)": "blacksoul-music",
+    "LOKIE + SINBA - Samba Disco (Dub)": "blacksoul-music",
+    "Lostrocket v Paul Kenny - Soar (Extended Mix)": "adesso-music",
+    "Love Language, America Rose  - Dope Swings (Matt FX Deep Swing Mix)": "non-friction-records",
+    "Luca Secco, Craftkind, Dinamix - More Attention": "inside-groovebox",
+    "Lucas & Steve - Good Times (Extended Mix)": "spinnin-records",
+    "Ludwik M, G-Martinez - Stop The Beat (Extended)": "club-whatever",
+    "M is for Motion & Debby Holiday - Never Can Say Goodbye (Nick Bertossi Remix)": "lapsus-music",
+    "Made of Sand - This Girl/That Boy": "3music",
+    "Maldoon - 5AM": "like-that-underground",
+    "Marcio aka DJ Bat - 2026 (Original Mix)": "mk837",
+    "Marcio aka DJ Bat - My Tech (Original Mix)": "mk837",
+    "Marco Lys & Ben Miller - So Good (Extended)": "people-want-to-dance-club-sweat",
+    "Marco Rovere - Chaotic Society (Extended Mix)": "la-perle-records",
+    "Marco Rovere - Classical Drift (Extended Mix)": "welove-recordings",
+    "Marcus Cito - Coldblooded (Extended Mix) [Colorblind]": "colorblind",
+    "Mark Alow - Tigris": "sol-selectas",
+    "Mark Bale & Dessic - Funky Pillz (Extended Mix)": "funk-you",
+    "Mark Knight, Pietro, Rome Fortune - Shut It Down (Extended Mix)": "toolroom-trax",
+    "Marko Nastic - Dont Breake": "like-that-underground",
+    "Martin KUNG, A17N - In The House (Extended Mix)": "storm-music-group",
+    "Mat Frank - Floor On Fire (Extended Mix)": "so-kool",
+    "Matke, Minitronik - Hornet (Original Mix)": "mk837",
+    "Matt Sassari - Party All The Time (Extended Mix)": "broke-records",
+    "Matt Stone - I Don't Give a MF (Extended Mix)": "uncut-grooves",
+    "Matthias Leisegang - Robe (Original Mix)": "like-that-underground",
+    "MattLok - Drop The Sinulog Island Drums (MattLok's Original VIP Mix)": "like-that-underground",
+    "Max Niklas x Vize - End Of Beginning (Extended Mix)": "crash-your-sound",
+    "Mc On The Beat - Fiesta en la Disco": "astral-708-records",
+    "merchant & Marlon Roudette - Spotlight (Extended Mix)": "helix-records",
+    "Merlin - But If (Extended Mix)": "kontor-records",
+    "Merlin - Dan Di Da (Extended Mix)": "kontor-records",
+    "Merlin - Tuthimu (Extended Mix)": "kontor-records",
+    "Michael Fuego - Mi Sueño (Robdeep Rmx)": "like-that-underground",
+    "MichaelBM, Jesús Fernández, Vika - Sirena (Extended Mix)": "helix-records",
+    "Michele Tiberio, Soulmates (IT) - Feel so Good (Extended Mix)": "manic-people",
+    "Miguel Montez - Only Chords (Original Mix),": "mk837",
+    "Miguel Montez - Slow Motion (Original Mix)": "mk837",
+    "miirabelle, Stadiumx - Kongobongo (Extended)": "sub-religion-records",
+    "Mike Nasty - To Life (Soul Mix - Dub)": "nasty-tracks",
+    "Milkwish - Lost in Paradise (Extended Mix)": "magik-muzik",
+    "Moby, Anfisa Letyago - You & Me (KC Lights Extended Remix)": "defected",
+    "Mogi Wa Wa - Everyone Wants Feat. Leanne Golding (City Fiz Remix)": "mixmania-records",
+    "Mousekat - Aibo (Extended Mix)": "drunkwraps",
+    "Mr. Belt & Wezol - It's Not Right (But It's Okay) [Tom Budin Remix]": "trust-the-machine",
+    "Mr. Groove - Kairouan[Pure Trax Records]": "natural-rhythm",
+    "NAAiV - On The Road": "like-that-underground",
+    "Nari - S&M (Afro Mix)": "tomorrowland-music",
+    "Needs No Sleep x Tom Budin x KXNE - Started Off (Extended)": "this-ain-t-bristol",
+    "Next Door But One - We Are Stars (Extended Mix)": "feel-hype",
+    "Nic Fanciulli - This is Life (Look Edit)": "saved-records",
+    "Nic Vesperi, Taranco - Chanteo (Extended Mix)": "adesso-music",
+    "Nic Zega - Fact Me Up  (Original Mix)": "feel-hype",
+    "NICK NICCE - Cuss & Flow": "marba-records",
+    "Nicola Fasano, Trillogee - Fuego de Cumbia (Original Mix)": "one-seven-music",
+    "Nicolas Barnes - Bring Back My Self": "like-that-underground",
+    "Nicolas Barnes - Cloud Revolution": "like-that-underground",
+    "Nicolas Barnes - First Winter Night": "like-that-underground",
+    "Nicolas Barnes - Last Quest": "like-that-underground",
+    "Nicolas Barnes - Whispering Together": "like-that-underground",
+    "NIKMIND - Back the Rave (Original Mix)": "poison-777",
+    "NIKMIND - It Was Deep (Original Mix)": "poison-777",
+    "Nimbuster - Glimmers (Extended Mix)": "feel-hype",
+    "Nimbuster - The Escapist (Extended Mix)": "feel-hype",
+    "No End - Back It Up": "game-of-tones",
+    "Northern Alliance - Hope  (Extended Dub)": "black-vinyl-records",
+    "Not Yurs, Breauxx - Bakery": "natural-rhythm",
+    "Noumena - Come Apart": "like-that-underground",
+    "Novodisc - Don't You Say (Extended Mix)": "adesso-music",
+    "Oden & Fatso - Lauren (ACT ON Extended Edit)": "gods-of-madness-recordings",
+    "Olive Oil - The Music (Extended Mix)": "waldliebe-familien",
+    "Olive Oil & JMBX - For The Rhythm (Extended Mix)": "uprise-music",
+    "Oliver Heldens, Kryder, The Young Punx - AEIOU (Extended Mix)": "heldeep-records",
+    "Opius - Cubaris Emperor (Offish Remix)": "offish-productions",
+    "Oscar Sargent -  Needed You": "game-of-tones",
+    "Otto Knows - Part Of You (Extended Mix)": "tomorrowland-music",
+    "Paperwater - Close 2 U (Extended Mix)": "helix-records",
+    "Patrick Whale - Afterglow (Extended Mix) [Sonar Depth Records]": "sonar-depth-records",
+    "Paul Johnson - Get Get Down (JOHANNSON Latin Tech Bootleg Remix)": "houseklange-records",
+    "Paul McCartney & Michael Jackson - Say Say Say (DJ Soulstar 2026 Edit)": "mk837",
+    "Pavel Svetlove - Ok ! (Original Mix)": "soul-n-pepa",
+    "PEACE MAKER! - Faded Light (Extended Mix),": "uprise-music",
+    "Peppe Citarella , Jerry Ropero, Jesus Fernandez, Danzel - PUMP IT UP (Extended Mix)": "union-records",
+    "Peppe Citarella, Almared, NONAME B2B, Saxtracks - SAX AT NIGHT (Extended Mix)": "union-records",
+    "Pete Moss, Onur Ozman - Sad To Think (Original Mix)": "revival-records",
+    "Peter Raou - Keep Rushin' [RUSHIN RECORDS]": "rushin-records",
+    "Phase Modulation, Kaban - Deeper Reality (Kissoff Remix)": "karess-records",
+    "Plastik Funk & Toxic Joy - Close My Eyes (Extended Mix)": "electronic-rapture",
+    "PLMBWILD - Gotta Have More Cowbell (Extended Mix)": "stig-records",
+    "Prospa & Murda Beatz - Baby (Extended Mix)": "circoloco-records",
+    "Prospa, Cloonee - Free Your Mind (Extended Mix)": "musical-freedom",
+    "Prospa, Feat. Kosmo Kint - Love Songs (Extended Mix)": "circoloco-records",
+    "PROTECTTHEVIBE - Change Yourself (Extended Mix)": "protectthevibe-music",
+    "PROTECTTHEVIBE - Head In The Net (Extended Mix)": "protectthevibe-music",
+    "Qobra - Army (Extended Mix)": "myth-of-nyx",
+    "QZB - Dangerously High (ft. Marea)": "cuff",
+    "R cord - Cold Phase": "ignescent",
+    "Ralph Felix feat. Tania Foster - Out Of My Life (Extended Mix)": "gemstone-records",
+    "Red D - Red Basics 2 (Original)": "rf-digital-factory",
+    "Regard & RAYE - Secrets (Savilos Bootleg)": "quanticman-records",
+    "Revival House Project, Mousse T., Kathy Brown - I'm Gonna Make It (Groove P Extended Remix)": "revival-records",
+    "Revival House Project, Phebe Edwards ft GeO Gospel Choir - Think (Revival Re-Rub Edit)": "revival-records",
+    "REX STAX - Lies (Extended)": "truth-x-lies",
+    "REX STAX - What Is Love (Extended Mix)": "ants-on-mars",
+    "Rex Stax - Yaro": "chakra-records",
+    "REX STAX - Yaro": "chakra-records",
+    "Rez - Music Is Frequency": "waldliebe-familien",
+    "RHYME - STROBE (Extended Edit) [RHYME-RECORDS]": "rhyme-records",
+    "Roberto Tropea, Solarys - Let the Sunshine": "like-that-underground",
+    "Rodamaal feat. Nicinha - Musica Feliz (FLAVOR & Ottinger Remix)": "like-that-underground",
+    "Roger Sanchez, Moojo, Kashovski - Another Chance (Mademoiselle Sabah Edit)": "bmg",
+    "Rohm & Emperia - Look it (Dub)": "ritmin-records",
+    "ROLLINDICE - Personal[GAME_OF_TONES]": "game-of-tones",
+    "Rosalia - Dios Es Un Stalker (STBAN Dub Mix)": "columbia",
+    "Ryan Grey - Buzzin (Extended Mix)": "helix-records",
+    "Sabrina Claudio - Belong To You (Wingz Edit)": "sc-entertainment",
+    "SAM SUPPLIER & ROB GRITTON - TOUR OF THAILAND (Original Extended mix)": "karess-records",
+    "Sammy Dean, Gussy Campbell - Put Your Phone Down (Emma Clair Low Battery Remix)": "club-whatever",
+    "Sammy Dean, Gussy Campbell - Put Your Phone Down (Extended) [EXPLICIT]": "club-whatever",
+    "Sammy Porter - Human Resource - The Dominator (Sammy Porter Remix)": "like-that-underground",
+    "Samuele Sartini, DJ Shorty - Vazilando (Extended Mix)": "d-vision",
+    "Saymon Gomez - Loco (Original Mix)": "mk837",
+    "Saymon Gomez - Puah (Original Mix)": "mk837",
+    "Saymon Gomez - Tell Me Why (Original mix)": "mk837",
+    "Sebastian Wilberk - VIP (Extended Mix)": "bellosguardo",
+    "Secret Floor - DANCE! (Extended Mix)": "secret-floor-inc",
+    "Secret Floor - Front, Left (Extended Mix)": "secret-floor-inc",
+    "Secret Floor - In Tha Club (Extended)": "secret-floor-inc",
+    "Secret Floor - Shut Up (Extended Mix)": "secret-floor-inc",
+    "Selena Faider, Gaelle - King Of My Castle (Extended Mix)": "another-rhythm",
+    "SERGINIO, RANICK - GET THAT (ORIGINAL MIX)": "natural-rhythm",
+    "Seumas Norv - Danny Song (Extended Mix)": "loungespirit",
+    "Seumas Norv - Falling For You (Extended Mix)": "groovy-bone",
+    "Seumas Norv - Feel The Vibe (Extended Mix)": "drunkwraps",
+    "Seumas Norv - Lemons (Extended Mix)": "bellosguardo",
+    "Seumas Norv - Lips Over (Extended Mix)": "bellosguardo",
+    "Seumas Norv - Make On Jump (Gorillag Remix)": "bellosguardo",
+    "Seumas Norv - No Dancer (Extended Mix)": "drunkwraps",
+    "Seumas Norv - That You Want It (Extended Mix)": "drunkwraps",
+    "Seumas Norv - Twist (Extended Mix)": "bellosguardo",
+    "Seumas Norv - Wanna Be (Extended Mix)": "drunkwraps",
+    "Seumas Norv - Want You Back (Extended Mix)": "drunkwraps",
+    "Sezer Uysal - Hey Man (Extended Mix)": "theory-x",
+    "Shannon - Let The Music Play (DJ Tif Remix)": "sola",
+    "Shaun Surveillance - Keep Your Secret": "natural-rhythm",
+    "Shermanology - Insane (Extended Mix)": "d-eaupe",
+    "Shirley Bassey - Light My Fire (Mista Trick Remix)": "purple-love-records",
+    "SIDEPIECE ft. 95 South - Can I Ride": "ncm-label-detroit",
+    "Sigala x Leigh-Anne x Jonita Gandhi - Hello (S3VN Remix)": "ministry-of-sound",
+    "SINO - Like Oh 'Rock Ya Body' (Extended)": "people-want-to-dance",
+    "SIX40TWO - Alarma (Extended)": "numana-music",
+    "SIX40TWO x John Newman - What Would I Do (Deniz Koyu & SIX40TWO VIP Remix)": "numana-music",
+    "SIY - U Do": "soulart-recordings",
+    "Slow AF - For the Kamikaze": "like-that-underground",
+    "Slow AF - Ma Mia": "like-that-underground",
+    "Smeerch - This is the Rhythm (Scruscru Remix)": "yellow-watermellow",
+    "Sokkary - Falling Deep": "mahool",
+    "Solander - Pasion Eterna (Original Mix)": "malvada",
+    "Soledrifter - Kan't Wait (Original Mix)": "soul-n-pepa",
+    "Solid Soul - All Alone (Original Mix)": "cloakroom-records",
+    "Solid Soul - Eleven Play (Original Mix)": "cloakroom-records",
+    "Sonny Zamolo - Shine Your Light": "elegant-bastards",
+    "Soul Heads - All Day, All Week (Extended Mix)": "feel-hype",
+    "Space Native - Akasha (Extended Mix)": "mk837",
+    "Space Native - Say (What You Don't Say)": "mk837",
+    "Sparrow (CH) & Jay Fase ft. Kurtis Wells - Deja Vu (Extended Mix)": "helix-records",
+    "Star.One - Do For Love (All Of Me) Bootleg": "unreleased",
+    "Stardate - Brighter Days (Extended Mix) [QU3]": "gods-of-madness-recordings",
+    "Stardate - Mary J Blige- You Remind Me - Deja Vu (Stardate Garage House Remix)": "helix-records",
+    "STBAN - Amigo (MichaelBM Extended Mix)": "flamenca-records",
+    "STBAN - Esperanza (Extended Mix)": "flamenca-records",
+    "STBAN ft. India Martinez - Mundo de Locos (CASSIMM Extended Mix)": "flamenca-records",
+    "STBAN, Jose de Mara, Anlly Marin - La Negra (Extended Mix)": "flamenca-records",
+    "STBAN, Sandra Carrasco ft. Josemi Carmona - Gitanita (James Hurr Extended Mix)": "flamenca-records",
+    "Steve Angello, AN21 - Valodja (Liva K Exteded Remix)": "size-records",
+    "Steve Riddm - So Good": "people-want-to-dance-club-sweat",
+    "Steven Caretti - This Feeling (Extended Mix)": "houseklange",
+    "Stromae - Alors On Dance (Dave Ruthwell Tribal Edit)": "secret-floor-inc",
+    "SUBB & Felguk - Paradise (Extended Mix)": "the-myth-of-nyx",
+    "SUBB & Pithman - Dig it (Extended Mix)": "what-ya-need",
+    "Sunlover - Enjoy the Sun (vocal extended version)": "balearic-vibes-records",
+    "Supafly & Greg Stainer - Girls ft. Ca$h X (Husky Extended Remix)": "tmrw-music",
+    "Supafly x Interupt x Greg Stainer - Don't Mess With My Man (Extended Mix)": "tmrw-music",
+    "Superfunk Feat. Ron Carroll - Lucky Star (Tommy Mambretti Re-Edit)": "sony-music-media",
+    "Supermini, Frankie Romano, Antdot, Maz - Celebration (Antdot & Maz Extended Mix)": "another-rhythm",
+    "Sven van Holt - Love": "club-whatever",
+    "SYDNEY BLU - LIT UP (Extended Mix)": "blu-music",
+    "Tatana - One Beat, One Soul, One Love": "muve-recordings",
+    "TAVA - Pulverturm (Extended Mix)": "tankfloor",
+    "The Chemical Brothers - Galvanize (Rogerson Remix)": "clavette",
+    "The Cube Guys, Jubaba - Hermano (Extended Mix)": "whoa",
+    "The Martinez Brothers - Take You Home (Lowderz Edit)": "mstrv2",
+    "The Martinez Brothers & Tokischa - Kilo (Inno IT EDIT)": "ministry-of-sound",
+    "The Martinez Brothers, Gordo - Rizzla (Michael Grald Remix)": "gdb-records",
+    "The Martinez Brothers, Gordo - Rizzla (Michael Grald Remix),": "gdb-records",
+    "THE PRODIGY - NO GOOD (LAWZ EDIT EXTENDED)": "people-want-to-dance-club-sweat",
+    "the real unknown - Do For Love (Extended Mix)": "unreleased",
+    "The Tune Taylor - Gangster Haus (Original Mix)": "rushin-records",
+    "The Tune Taylor & Rosemary Quaye - House Addict": "rushin-records",
+    "Themba, Emanuele Esposito, Kanu - Pump Up The Jam (Extended Mix)": "tnkfloor",
+    "Thomas Newson & LOVRA - Bad Habit (Extended Mix)": "the-myth-of-nyx",
+    "Thomas Newson & Paskman - Carretero (Extended Mix)": "the-myth-of-nyx",
+    "Tim Sanders - Straight From The Underground (Extended Mix)": "helix-records",
+    "Tim Sanders & Marshall Jefferson - Watch Out Now (Extended Mix)": "helix-records",
+    "Tita Lau - Freaky": "helix-records",
+    "TO3I - Save Me": "mk837",
+    "Tom Enzy - Not Just Rhythm (Extended Mix)": "the-myth-of-nyx",
+    "Tom Enzy - Pull Me Away (Extended Dub Mix)": "spinnin-records",
+    "Tom Pool - Moody Moon": "like-that-underground",
+    "Tommy Veanud - Ready Or Not (Extended Mix)": "tv-recordings",
+    "Tony Amatore, Peppe Salerno, Luis Rodriguez - Who's That Girl (Extended Mix)": "electronic-nature",
+    "Tony Dark Eyes - In My Mind (Extended Mix)": "hothouse",
+    "Tony Dark Eyes - Want It (Extended Mix)": "hothouse",
+    "Tony Deledda - Freaky DJ  (Original Mix)": "helix-records",
+    "Toomy Disco - About My Love": "moom-sound",
+    "Toomy Disco - Soultisfaction": "moom-sound",
+    "Trader O & Blake Bair - No Drawers": "clubview-records",
+    "Transformer 2, Asli Tanriverdi - Just Can't Get Enough (Stardate 2026 Remix) [Bootleg]": "insomniac-records",
+    "Travis Scott - Goosebumps (Civil Servant Remix)": "raw",
+    "TRC2 - Sensing Objects": "offish-productions",
+    "TRC2 - Sensing Objects (88 Katanas Remix)": "offish-productions",
+    "TWOEF - SABOR (Extended Mix)": "sound-division",
+    "TyriqueOrDie - Ur Not Invited (Extended)": "universal-music-canada",
+    "Ugly Duckling - A LIttle Samba (Phil Indiblanc Rework)": "like-that-underground",
+    "Valmer x Jay Serano - Not Enough (Extended Mix)": "houz-records",
+    "Van Storck - Embody It (Original)": "mixmania-records",
+    "Victor Tellagio - Necesito (Extended)": "heartfeldt-records-one-seven-music",
+    "Vintage Culture, Nariman, rhys from the sticks - Think Too Much (Extended)": "affairs",
+    "Vinter - This Is Not The James Brown (Extended Mix)": "helix-records",
+    "Volum1k - Interference [Natural Rhythm]": "natural-rhythm",
+    "Volum1k & Max Murillo - What Was Your Name [Natural Rhythm]": "natural-rhythm",
+    "Wanderson XVR - Listen to the Music  (Extended Mix)": "feel-hype",
+    "Woodcamp - Eatin' Good (Extended Mix)": "thrive-music",
+    "Woodcamp - Put The Record On (Extended Mix)": "lesixtynine-musique",
+    "Y U QT, Jem Cooke - Call My Name (Extended Mix)": "hell-beach-onelove",
+    "YANIK, M.O.E. - Get Down (Extended Mix)": "houseklange-records",
+    "Yes Boone - All I Really Want (Extended)": "tmrw-music",
+    "Yes Boone - All I Really Want (Riva Starr Extended Remix)": "tmrw-music",
+    "YUNG DIGGERZ - GNUK WORK (Yung Diggerz Edit) - Dek 31 Masters At Work Denise Belfon": "like-that-underground",
+    "Yurie - Contento (Extended Mix)": "what-ya-need",
+    "ZALIK - Be With Me (Original Mix)": "mk837",
+    "ZHOG & Reverbate - Lo Que Pasa": "satsuma-music",
+    "Zhu - Faded (Markuss sunrise edit)": "broke-records",
+    "Ziggy Ostas x Josh Christian - Get Me Hot (Extended Mix)": "all-ways-dance",
+    "ZNHO - I RAN (Extended Mix)": "adesso-music",
+    "Zurra - Bada Boom (Extended)": "club-whatever"
+  }
+}

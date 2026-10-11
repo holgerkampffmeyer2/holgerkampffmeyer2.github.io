@@ -192,6 +192,76 @@ Nach dem Fetch ersetzt der neue Mix dort den vorherigen — kein manuelles Updat
 
 ---
 
+## Record-Labels pflegen
+
+Die Tracklist-Tabellen können optional eine **Label-Spalte** mit Link auf die Label-Website anzeigen.
+Die Daten werden **manuell** in `src/data/labels.json` gepflegt und zur Renderzeit über den Track-String
+nachgeschlagen — `tracklist` in `blog-posts.json` bleibt unverändert eine String-Liste.
+
+**Format:**
+
+```json
+{
+  "labels": {
+    "toolroom": { "name": "Toolroom", "url": "https://toolroomrecords.com" },
+    "defected": { "name": "Defected", "url": "https://defected.com" }
+  },
+  "tracks": {
+    "Basement Jaxx - Fly Life": "defected",
+    "Mark Knight - Man With The Red Face": "toolroom"
+  }
+}
+```
+
+- `labels` — Label-**ID** → `{ name, url }`. Die ID ist ein eindeutiger, frei wählbarer Schlüssel
+  (Slug wie `"toolroom"` oder fortlaufende Nummer `"1"`). `name` ist der Anzeigename, `url` die Website.
+- `tracks` — Track-String **exakt wie in der Tracklist** (`Artist - Title`) → Label-**ID**.
+- Tracks referenzieren Labels über die **ID**, nicht über den Namen: Umbenennungen betreffen dann nur
+  den `name` in `labels`, und zwei Labels mit gleichem Anzeigenamen bleiben unterscheidbar.
+- Ein Label ohne `url` wird als reiner Text (ohne Link) angezeigt; existiert die referenzierte ID nicht,
+  wird kein Label ausgegeben.
+
+**Verhalten:**
+
+- Der Abgleich ignoriert Groß-/Kleinschreibung, führende/abschließende Leerzeichen und ein
+  abschließendes Komma (`normalizeTrack` in `src/utils/track-labels.js`).
+- Die Label-Spalte erscheint nur, wenn für den jeweiligen Mix **mindestens ein** Track ein Label hat;
+  sonst bleibt die Tabelle zweispaltig (Artist | Title). Tracks ohne Label zeigen `—`.
+- Gerendert wird die Tabelle über die gemeinsame Komponente
+  `src/components/dj/TracklistTable.astro` (genutzt von `/dj/mixes/{slug}` und `/dj/mixes-weekly`).
+- Konsistenz prüfen: `validateLabelRegistry()` in `src/utils/track-labels.js` meldet fehlende Namen,
+  ungültige URLs sowie Tracks mit fehlender oder unbekannter Label-ID.
+
+Die Registry startet leer — Labels erscheinen erst, nachdem dort Einträge ergänzt wurden.
+
+### Labels recherchieren
+
+Statt alle Tracks manuell zu pflegen, gibt es ein zweistufiges Werkzeug. Es liest die
+Rekordbox-CUEs aus einem Verzeichnis, das **nicht** im Repo liegt, und ermittelt die Labels
+offline aus den Quelldatei-Tags (bevorzugt `publisher`/`label`-Tag, sonst `[Label]` in
+Titel/Dateiname, Album-Klammer oder Promo-`comment`) sowie online über die MusicBrainz-API
+als Fallback. (Die iTunes-Search-API liefert kein `label`-Feld; Beatport ist per
+Cloudflare/OAuth geblockt.)
+
+```bash
+# 1. Recherche (offline-first, CUE-Pfad per CLI oder Umgebungsvariable)
+LABEL_CUE_DIR="/mnt/c/Users/holge/Music/rekordbox/Recording/DJ Hulk" pnpm run label:research
+# optional: --offline (nur CUE-Tags), --limit N, --match-threshold 0.82
+
+# 2. Vorschläge sichten (label-research.json + label-research-report.md), dann übernehmen
+pnpm run label:apply --dry-run   # nur Zusammenfassung
+pnpm run label:apply             # schreibt src/data/labels.json
+```
+
+- Ergebnis der Recherche ist `label-research.json` (+ Report). `src/data/labels.json` wird dabei
+  **nicht** verändert; die Artefakte sind gitignored.
+- `label:apply` dedupliziert Label-Namen (Groß-/Kleinschreibung) und vergibt Slug-IDs. `url` bleibt
+  zunächst leer und kann anschließend in `labels.json` ergänzt werden (`--overwrite` überschreibt
+  bereits gesetzte Track-Zuordnungen).
+- Nach dem Übernehmen `pnpm run build` ausführen; die Label-Spalte erscheint pro Mix automatisch.
+
+---
+
 ## SEO-Optimierung
 
 Jede Mix-Seite erhält automatisch:
@@ -235,7 +305,7 @@ Jede Mix-Seite erhält automatisch:
 - Genre Tags
 - Use-Case Icons (Gym, Drive, Work, Party)
 - Mixcloud Player (Tracklist ausgeblendet)
-- Tracklist-Tabelle (Artist | Title)
+- Tracklist-Tabelle (Artist | Title | optional Label)
 - Prev/Next Navigation zwischen Mixes → `/dj/mixes/{prevPost.slug}` / `/dj/mixes/{nextPost.slug}`
 - Button "Back to Weekly DJ Mixes" → `/dj/mixes-weekly`
 - Button "View Archive" → `/dj/mixes-blog-archive`

@@ -17,7 +17,9 @@
     "astro": "astro",
     "generate-rss": "node scripts/generate-rss.mjs",
     "generate-urllist": "node scripts/generate-urllist.mjs",
-    "indexnow-submit": "node scripts/indexnow-submit.mjs"
+    "indexnow-submit": "node scripts/indexnow-submit.mjs",
+    "label:research": "node scripts/label-research.mjs",
+    "label:apply": "node scripts/label-apply.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

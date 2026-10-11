@@ -8,6 +8,12 @@ public/rss.xml
 
 # generated lastmod cache
 .lastmod-cache.json
+
+# label research artifacts (review-only)
+label-research.json
+label-research-report.md
+.label-tag-cache.json
+.label-lookup-cache.json
 # src/data/mixcloud-data.json - jetzt getrackt
 
 # dependencies
