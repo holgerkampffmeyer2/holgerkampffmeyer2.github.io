@@ -402,7 +402,7 @@
     },
     "spectrum": {
       "name": "Spectrum",
-      "url": ""
+      "url": "https://www.discogs.com/label/93706"
     },
     "galactica": {
       "name": "Galactica",
@@ -987,6 +987,14 @@
     "hell-beach-onelove": {
       "name": "Hell Beach / OneLove",
       "url": "https://www.beatport.com/label/hell-beach/100000"
+    },
+    "rimas": {
+      "name": "Rimas",
+      "url": "https://rimasmusic.com/"
+    },
+    "ellectrica-recordings": {
+      "name": "Ellectrica Recordings",
+      "url": ""
     }
   },
   "tracks": {
@@ -1575,6 +1583,20 @@
     "Zhu - Faded (Markuss sunrise edit)": "broke-records",
     "Ziggy Ostas x Josh Christian - Get Me Hot (Extended Mix)": "all-ways-dance",
     "ZNHO - I RAN (Extended Mix)": "adesso-music",
-    "Zurra - Bada Boom (Extended)": "club-whatever"
+    "Zurra - Bada Boom (Extended)": "club-whatever",
+    "Bad Bunny - NuevaYol (Mor Avrahami Remix)": "rimas",
+    "Danmds - Dinero (Extended Mix)": "ibizaholic-records",
+    "Danmds, Patricia Vivanco, Horatio - Casablanca": "natural-rhythm",
+    "Dj Osiris feat Ana - El Tango [Original Mix]": "natural-rhythm",
+    "HORATIO & DJ TAMISHA - EL GRANDE AMERICANO": "natural-rhythm",
+    "LENny (IT) - Toda La Noche (Sunset Edit)": "like-that-underground",
+    "Los de la Vega , Fosfora - La Joda": "natural-rhythm",
+    "Loz Seka - Cuccu (Extended Mix)": "flamenca-records",
+    "Maxvei - Mad Thing (Extended Mix)": "adesso-music",
+    "MichaelBM, Jayie & Vika - Barranquilla (Extended Mix)": "helix-records",
+    "Not Yurs - Brratata": "natural-rhythm",
+    "Pacho & Pepo - Maitu (Extended Mix)": "ellectrica-recordings",
+    "Peppe Citarella, Nfasis, La Insuperable - YO LO QUIERO (Extended Mix)": "union-records",
+    "Shermanology - Let's Go (Extended Mix)": "d-eaupe"
   }
 }
