@@ -167,13 +167,30 @@ async function fetchAllSources() {
     .sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
 }
 
+// Pure parser: strips optional preamble (header/prose up to a "TRACKLIST"
+// marker line) and the optional epilogue starting at the "TAGS" marker line,
+// then returns one cleaned entry per non-empty line.
+// Files without a "TRACKLIST" marker are parsed exactly as before, so legacy
+// track/guest/b2b files are unaffected.
+function parseTracklistText(rawText) {
+  if (!rawText) return [];
+  let text = rawText;
+  const start = text.match(/^\s*tracklist\s*:?\s*$/im);
+  if (start) {
+    text = text.slice(start.index + start[0].length);
+    const end = text.match(/^\s*tags\s*:?\s*$/im);
+    if (end) text = text.slice(0, end.index);
+  }
+  return text
+    .split('\n')
+    .filter(line => line.trim())
+    .map(line => line.trim().replace(/^\d+\.\s*/, '').replace(/\s*\d{2}:\d{2}:\d{2}\s*$/, '').normalize('NFC'));
+}
+
 function parseTracklist(filePath) {
   if (!filePath) return [];
   try {
-    return fs.readFileSync(filePath, 'utf-8')
-      .split('\n')
-      .filter(line => line.trim())
-      .map(line => line.trim().replace(/^\d+\.\s*/, '').replace(/\s*\d{2}:\d{2}:\d{2}\s*$/, '').normalize('NFC'));
+    return parseTracklistText(fs.readFileSync(filePath, 'utf-8'));
   } catch {
     return [];
   }
@@ -619,6 +636,7 @@ export {
   deriveUseCases, 
   computeConfidence, 
   parseTracklist, 
+  parseTracklistText, 
   convertPngsToWebp,
   copyWebpFiles,
   normalizeString,
