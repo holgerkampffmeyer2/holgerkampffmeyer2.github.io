@@ -32,8 +32,10 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 - `pnpm test` — Unit-Tests (Vitest)
 - `pnpm run label:research` — Label-Recherche (CUE-Tags + MusicBrainz) → label-research.json
 - `pnpm run label:apply` — Label-Vorschläge in src/data/labels.json mergen
-- `pnpm run label:urls` — Label-URLs recherchieren (MusicBrainz + Patterns) → label-url-proposals.json
-- `pnpm run label:urls:apply` — Label-URLs in labels.json mergen
+- `pnpm run label:urls` — Label-URLs recherchieren (MusicBrainz url-rels) → label-urls.json
+- `pnpm run label:urls:apply` — Label-URLs aus label-urls.json in labels.json mergen (nur `url`-Felder)
+- `node scripts/label-url-finder.mjs` — Optionales Pattern-Fallback (Domain-Patterns + HEAD-Check) → label-url-proposals.json
+- `node scripts/label-url-quality.mjs` — Quality-Check der Registry-URLs (HTML-Heuristik) → label-url-quality-report.json
 
 ## Git-Workflow
 - Conventional Commits: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `ci:`

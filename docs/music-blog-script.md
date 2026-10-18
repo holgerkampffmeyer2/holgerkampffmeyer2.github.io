@@ -265,23 +265,32 @@ pnpm run label:apply             # schreibt src/data/labels.json
 Für Labels ohne Website gibt es einen separaten Schritt:
 
 ```bash
-# 1. URLs finden (MusicBrainz official homepage + Domain-Patterns + HEAD-Check)
+# 1. URLs über MusicBrainz recherchieren (kanonisch)
 pnpm run label:urls
+# → label-urls.json + label-urls-report.md
+
+# 2. Optional: Pattern-Fallback für Labels ohne MusicBrainz-Treffer
+node scripts/label-url-finder.mjs
 # → label-url-proposals.json + label-url-proposals-report.md
 
-# 2. Optional: Quality-Check (HTML-Content prüfen, Domain-Parking filtern)
+# 3. Optional: Quality-Check (HTML-Content prüfen, Domain-Parking filtern)
 node scripts/label-url-quality.mjs
 # → label-url-quality-report.json/.md
 
-# 3. Vorschläge prüfen/korrigieren (label-url-proposals.json editieren), dann übernehmen
+# 4. Vorschläge prüfen/korrigieren (Artefakt editieren), dann übernehmen
 pnpm run label:urls:apply --dry-run
 pnpm run label:urls:apply
+# gleichwertig für das Finder-Artefakt:
+node scripts/label-apply.mjs --urls label-url-proposals.json [--overwrite] [--dry-run]
 ```
 
-- `label:urls` nutzt MusicBrainz "official homepage" Relation + heuristische Domain-Patterns
+- `pnpm run label:urls` fragt die MusicBrainz-Label-Entity ab (`inc=url-rels`, rate-limitiert, gecached)
+- `label-url-finder.mjs` ist das optionale Fallback: heuristische Domain-Patterns + HEAD-Check
+  (abfragt kein MusicBrainz) für Labels, die MusicBrainz nicht liefern konnte
 - `label-url-quality.mjs` prüft HTML-Content auf Musik-Keywords und filtert Domain-Parking/Verkauf
-- Review-Artefakte (`label-url-proposals.json`, Reports) sind gitignored
-- `label:urls:apply` merged **nur** die `url`-Felder, Track-Zuordnungen bleiben unberührt
+- Review-Artefakte (`label-urls.json`, `label-url-proposals.json`, Reports) sind gitignored
+- `label:urls:apply` (= `label-apply.mjs --urls`) merged **nur** die `url`-Felder,
+  Track-Zuordnungen bleiben unberührt; bestehende URLs nur mit `--overwrite`
 
 ---
 
