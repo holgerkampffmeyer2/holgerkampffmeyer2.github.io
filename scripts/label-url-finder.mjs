@@ -2,10 +2,12 @@
  * Semi-automatische Label-Website-Suche für Review.
  *
  * Quellen:
- * 1. MusicBrainz "official homepage" Relation (höchste Confidence)
- * 2. Heuristische Domain-Patterns + HTTP HEAD-Check
- * 3. Bestehende MusicBrainz-URLs (Discogs, Beatport, SoundCloud) als Fallback
+ * 1. Heuristische Domain-Patterns + HTTP HEAD-Check
+ * 2. Bestehende Registry-URLs als Kontext im Report
  *
+ * Hinweis: Die MusicBrainz-Recherche steckt in `scripts/label-urls.mjs`
+ * (kanonisch über `pnpm run label:urls`); dieses Skript ist das optionale
+ * Pattern-Fallback.
  * Ausgabe: label-url-proposals.json (reviewbar, manuell erweiterbar)
  * Apply:  node scripts/label-apply.mjs --urls label-url-proposals.json
  */
@@ -14,14 +16,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { labelMatchKey, labelCacheKey, createRateLimiter } from './lib/label-search.mjs';
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.join(__dirname, '..');
 
 const DEFAULTS = {
   data: path.join(ROOT_DIR, 'src/data/labels.json'),
-  mbCache: path.join(ROOT_DIR, '.label-url-cache.json'),
   out: path.join(ROOT_DIR, 'label-url-proposals.json'),
   report: path.join(ROOT_DIR, 'label-url-proposals-report.md'),
   concurrency: 6,
@@ -67,21 +66,12 @@ function parseArgs(argv) {
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     if (arg === '--data') { options.data = path.resolve(argv[++i]); continue; }
-    if (arg === '--mb-cache') { options.mbCache = path.resolve(argv[++i]); continue; }
     if (arg === '--out') { options.out = path.resolve(argv[++i]); continue; }
     if (arg === '--report') { options.report = path.resolve(argv[++i]); continue; }
     if (arg === '--concurrency') { options.concurrency = Number(argv[++i]); continue; }
     if (arg === '--timeout') { options.timeoutMs = Number(argv[++i]); continue; }
   }
   return options;
-}
-
-function loadCache(file) {
-  try {
-    return JSON.parse(fs.readFileSync(file, 'utf-8'));
-  } catch {
-    return {};
-  }
 }
 
 function slugifyBase(name) {
@@ -121,36 +111,7 @@ async function findOfficialViaPatterns(base, timeoutMs) {
   return null;
 }
 
-function extractMbOfficialHomepage(mbData) {
-  const relations = Array.isArray(mbData?.relations) ? mbData.relations : [];
-  for (const rel of relations) {
-    if ((rel.type ?? '').toLowerCase() === 'official homepage' && rel.url?.resource?.startsWith('http')) {
-      return { url: rel.url.resource, via: 'musicbrainz-official' };
-    }
-  }
-  return null;
-}
-
-function pickBestMbUrl(mbData) {
-  const relations = Array.isArray(mbData?.relations) ? mbData.relations : [];
-  for (const rel of relations) {
-    if (rel.url?.resource?.startsWith('http')) {
-      return { url: rel.url.resource, via: `musicbrainz-${rel.type ?? 'relation'}` };
-    }
-  }
-  return null;
-}
-
-async function processLabel(name, mbCache, options) {
-  const cacheKey = labelCacheKey(name);
-  const cached = mbCache[cacheKey];
-  let mbResult = null;
-
-  if (cached?.mbid) {
-    try {
-    } catch { /* ignore */ }
-  }
-
+async function processLabel(name, options) {
   const base = slugifyBase(name);
   const patternHit = await findOfficialViaPatterns(base, options.timeoutMs);
   if (patternHit) return { name, ...patternHit, confidence: 0.85, source: 'pattern' };
@@ -179,9 +140,6 @@ async function main() {
     return;
   }
 
-  const mbCache = loadCache(options.mbCache);
-  const rateLimit = createRateLimiter(1100);
-
   console.log(`Prüfe ${pending.length} Labels ohne URL...`);
   const semaphore = (async () => {
     const queue = [...pending];
@@ -192,7 +150,7 @@ async function main() {
       while (queue.length) {
         const name = queue.shift();
         const promise = (async () => {
-          const res = await processLabel(name, mbCache, options);
+          const res = await processLabel(name, options);
           results.push(res);
           if (res.url) console.log(`  ✓ ${name} → ${res.url} (${res.via}, conf=${res.confidence})`);
           else console.log(`  – ${name} (${res.via})`);
@@ -231,7 +189,7 @@ async function main() {
   const report = `# Label-URL-Vorschläge (Review)
 
 Erstellt: ${artifact.generatedAt}
-Quellen: MusicBrainz official homepage, Domain-Patterns (HEAD-Check), bestehende Registry-URLs
+Quellen: Domain-Patterns (HEAD-Check), bestehende Registry-URLs
 
 ## Statistik
 - Labels gesamt: ${artifact.total}

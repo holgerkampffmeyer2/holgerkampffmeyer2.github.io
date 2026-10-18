@@ -7,6 +7,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { analyzeContent } from './lib/label-quality.mjs';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.join(__dirname, '..');
 
@@ -17,27 +19,6 @@ const DEFAULTS = {
   concurrency: 8,
   timeoutMs: 10000,
 };
-
-const MUSIC_KEYWORDS = [
-  'record', 'label', 'music', 'records', 'recording', 'release', 'artist',
-  'vinyl', 'digital', 'streaming', 'beatport', 'bandcamp', 'soundcloud',
-  'spotify', 'apple music', 'distribution', 'publishing', 'royalties',
-  'demo', 'submit', 'contact', 'booking', 'management', 'events',
-  'shop', 'store', 'merch', 'news', 'blog', 'bio', 'about us',
-  'imprint', 'sublabel', 'catalog', 'discography', 'releases',
-];
-
-const NEGATIVE_KEYWORDS = [
-  'domain for sale', 'buy this domain', 'parked', 'godaddy', 'sedo',
-  'afternic', 'hugedomains', 'namecheap', 'premium domain',
-  'make an offer', 'inquire about', 'domain marketplace',
-  'this domain is for sale', 'expired domain', 'coming soon',
-  'under construction', 'default web site', 'nginx', 'apache2',
-  'iis windows server', 'test page', 'placeholder',
-  'real estate', 'immobilien', 'finanz', 'insurance', 'versicherung',
-  'lawyer', 'anwalt', 'dentist', 'zahnarzt', 'restaurant',
-  'hotel', 'travel', 'reise',
-];
 
 const USER_AGENT = 'holger-kampffmeyer.de label-url-quality/0.1 ( https://holger-kampffmeyer.de )';
 
@@ -53,69 +34,6 @@ function parseArgs(argv) {
     if (arg === '--limit') { options.limit = Number(argv[++i]); continue; }
   }
   return options;
-}
-
-function extractText(html) {
-  // Entfernt Scripts/Styles, normalisiert Whitespace
-  return html
-    .replace(/<script[^>]*>[\s\S]*?<\/script\s*>/gi, ' ')
-    .replace(/<style[^>]*>[\s\S]*?<\/style\s*>/gi, ' ')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/\s+/g, ' ')
-    .toLowerCase()
-    .trim();
-}
-
-function analyzeContent(url, html, finalUrl) {
-  const text = extractText(html);
-  const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
-  const title = titleMatch ? titleMatch[1].toLowerCase() : '';
-  const descMatch = html.match(/<meta[^>]*name=["']description["'][^>]*content=["']([^"']+)["']/i);
-  const description = descMatch ? descMatch[1].toLowerCase() : '';
-
-  const searchText = `${title} ${description} ${text.slice(0, 5000)}`;
-
-  let musicScore = 0;
-  let negativeScore = 0;
-  const foundMusic = [];
-  const foundNegative = [];
-
-  for (const kw of MUSIC_KEYWORDS) {
-    const regex = new RegExp(`\\b${kw}\\b`, 'i');
-    if (regex.test(searchText)) {
-      musicScore++;
-      foundMusic.push(kw);
-    }
-  }
-  for (const kw of NEGATIVE_KEYWORDS) {
-    if (searchText.includes(kw.toLowerCase())) {
-      negativeScore++;
-      foundNegative.push(kw);
-    }
-  }
-
-  // Heuristik: kurze Seiten mit wenig Text sind verdächtig
-  const textLength = text.length;
-  const hasSubstantialContent = textLength > 500;
-
-  let verdict = 'unknown';
-  if (negativeScore > 0) verdict = 'suspicious';
-  else if (musicScore >= 3 && hasSubstantialContent) verdict = 'likely-label';
-  else if (musicScore >= 1 && hasSubstantialContent) verdict = 'possible';
-  else if (!hasSubstantialContent) verdict = 'thin-content';
-  else verdict = 'unclear';
-
-  return {
-    url,
-    finalUrl,
-    verdict,
-    musicScore,
-    negativeScore,
-    foundMusic: [...new Set(foundMusic)].slice(0, 10),
-    foundNegative,
-    textLength,
-    title: title.slice(0, 120),
-  };
 }
 
 async function fetchWithTimeout(url, timeoutMs) {

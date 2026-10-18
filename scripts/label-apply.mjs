@@ -22,7 +22,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { validateLabelRegistry } from '../src/utils/track-labels.js';
-import { labelMatchKey } from './lib/label-search.mjs';
+import { slugify, findLabelId, uniqueId, applyUrlSuggestions, urlSuggestionsFromArtifact } from './lib/label-apply.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.join(__dirname, '..');
@@ -47,47 +47,10 @@ function parseArgs(argv) {
   return options;
 }
 
-function slugify(name) {
-  return name
-    .normalize('NFKD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N}]+/gu, '-')
-    .replace(/^-+|-+$/g, '') || 'label';
-}
-
-function findLabelId(labels, name) {
-  const target = name.trim().toLowerCase();
-  for (const [id, def] of Object.entries(labels)) {
-    if ((def?.name ?? '').trim().toLowerCase() === target) return id;
-  }
-  return null;
-}
-
-function uniqueId(labels, base) {
-  let id = base;
-  let suffix = 2;
-  while (labels[id]) id = `${base}-${suffix++}`;
-  return id;
-}
-
 function applyUrls(registry, urlFile, options) {
   const artifact = JSON.parse(fs.readFileSync(urlFile, 'utf-8'));
-  const suggestions = artifact.suggestions ?? artifact.proposals ?? [];
-  const byName = new Map(suggestions.map(suggestion => [labelMatchKey(suggestion.name), suggestion]));
-
-  let updated = 0;
-  let skipped = 0;
-  for (const [id, def] of Object.entries(registry.labels ?? {})) {
-    const label = byName.get(labelMatchKey(def?.name ?? ''));
-    if (!label?.url) continue;
-    if (def?.url && !options.overwrite) {
-      skipped++;
-      continue;
-    }
-    registry.labels[id].url = label.url;
-    updated++;
-  }
+  const suggestions = urlSuggestionsFromArtifact(artifact);
+  const { updated, skipped } = applyUrlSuggestions(registry, suggestions, options);
 
   console.log(`URL-Vorschläge: ${suggestions.length}`);
   console.log(`Aktualisierte URLs: ${updated}`);

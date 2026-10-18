@@ -60,6 +60,7 @@ async function main() {
 
   const registry = JSON.parse(fs.readFileSync(options.data, 'utf-8'));
   const labels = Object.entries(registry.labels ?? {});
+  const byName = new Map(labels.map(([id, def]) => [(def?.name ?? '').trim(), [id, def]]));
   const names = labels
     .filter(([, def]) => options.force || !(def?.url ?? '').trim())
     .map(([, def]) => (def?.name ?? '').trim())
@@ -85,8 +86,7 @@ async function main() {
   for (let i = 0; i < picked.length; i++) {
     const name = picked[i];
     const result = await lookupLabelUrl(name, { fetchImpl: globalThis.fetch, cache: cacheStore, rateLimit });
-    const labelDef = labels.find(([, def]) => (def?.name ?? '').trim() === name);
-    const id = labelDef?.[0] ?? '';
+    const id = byName.get(name)?.[0] ?? '';
     if (result) {
       suggestions.push(result);
       console.log(`  ✓ ${name} → ${result.url} (${result.via})`);
