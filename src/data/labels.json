@@ -4,6 +4,10 @@
       "name": "Non𝄞Stop Film Trailer Sampler",
       "url": ""
     },
+    "winslow": {
+      "name": "winslow.",
+      "url": "https://winslowxyz.bandcamp.com"
+    },
     "natural-rhythm": {
       "name": "Natural Rhythm",
       "url": "https://naturalrhythm.com"
@@ -638,7 +642,7 @@
     },
     "upmotion-records": {
       "name": "UPMotion Records",
-      "url": ""
+      "url": "https://labelsbase.net/upmotionrecords"
     },
     "ingate-records": {
       "name": "INGATE RECORDS",
@@ -978,7 +982,7 @@
     },
     "affairs": {
       "name": "Affairs",
-      "url": "https://affairs.com"
+      "url": ""
     },
     "thrive-music": {
       "name": "Thrive Music",
@@ -1626,6 +1630,7 @@
     "Not Yurs - Brratata": "natural-rhythm",
     "Pacho & Pepo - Maitu (Extended Mix)": "ellectrica-recordings",
     "Peppe Citarella, Nfasis, La Insuperable - YO LO QUIERO (Extended Mix)": "union-records",
-    "Shermanology - Let's Go (Extended Mix)": "d-eaupe"
+    "Shermanology - Let's Go (Extended Mix)": "d-eaupe",
+    "winslow. - Busta Rhymes - Gimme Some More (winslow.edit)": "winslow"
   }
 }
