@@ -104,6 +104,7 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 - `node scripts/fetch-mixcloud.mjs --force` — Erzwingt frischen Mixcloud-Fetch (24h Cache umgehen)
 - `node scripts/optimize-images.mjs` — Optimiert alle Bilder im Projekt
 - `node scripts/create-webp.mjs -w 1200 <datei>` — Konvertiert Einzelbild zu WebP
+- `node scripts/download-instagram.cjs <url>` — Lädt Bild von Instagram-Post-URL herunter (nutzt Playwright)
 
 ## IndexNow
 - `pnpm run indexnow-submit` — Sendet alle URLs aus `public/urllist.txt` an die IndexNow API (Bing). Wird nach `build:seo` ausgeführt.
