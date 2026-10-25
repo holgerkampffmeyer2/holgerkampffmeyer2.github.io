@@ -1027,6 +1027,10 @@
     "four-corners-music": {
       "name": "Four Corners Music",
       "url": ""
+    },
+    "house-for-artists": {
+      "name": "House For Artists / Sony Music",
+      "url": "https://www.beatport.com/label/house-for-artists/100000"
     }
   },
   "tracks": {
@@ -1036,7 +1040,7 @@
     "DJ Carl Meah - Massive House (Original Mix)": "unreleased",
     "BSTY & KLYN - Love From The Start (Extended Edit)": "club-whatever",
     "Kryder - OH MY! (Extended Mix)": "spinnin-records",
-    "HENDERSON x Tenchi - Sippin (Extended)": "unreleased",
+    "HENDERSON x Tenchi - Sippin (Extended)": "house-for-artists",
     "Enzo Fazz x GS5 - Nobody": "unreleased",
     "Djsakisp - Feel Your Love (Original Mix)": "unreleased",
     "Danny Jay The Doctor - Something Real Afrocentric Mix": "west-palm-music-corp",
