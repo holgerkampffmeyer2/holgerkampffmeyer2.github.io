@@ -1007,6 +1007,26 @@
     "west-palm-music-corp": {
       "name": "West Palm Music Corp",
       "url": "https://www.beatport.com/label/west-palm-music-corp/10369092"
+    },
+    "noppo": {
+      "name": "Noppo",
+      "url": ""
+    },
+    "white-rabbit": {
+      "name": "White Rabbit",
+      "url": ""
+    },
+    "halogenix": {
+      "name": "Halogenix",
+      "url": ""
+    },
+    "solsan": {
+      "name": "Solsan",
+      "url": ""
+    },
+    "four-corners-music": {
+      "name": "Four Corners Music",
+      "url": ""
     }
   },
   "tracks": {
@@ -1631,6 +1651,10 @@
     "Pacho & Pepo - Maitu (Extended Mix)": "ellectrica-recordings",
     "Peppe Citarella, Nfasis, La Insuperable - YO LO QUIERO (Extended Mix)": "union-records",
     "Shermanology - Let's Go (Extended Mix)": "d-eaupe",
-    "winslow. - Busta Rhymes - Gimme Some More (winslow.edit)": "winslow"
+    "winslow. - Busta Rhymes - Gimme Some More (winslow.edit)": "winslow",
+    "Noppo - Cashmere": "noppo",
+    "White Rabbit - Make a Wish": "white-rabbit",
+    "Halogenix - Chxrry22 - Wasteland [Halogenix Bootleg]": "unreleased",
+    "Solsan - 4CMFREE003 - Aztec Owl": "solsan"
   }
 }
