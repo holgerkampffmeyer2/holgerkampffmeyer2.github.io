@@ -14,7 +14,8 @@ try {
     latestMix = imported.default.mixes[0];
   }
 } catch (e) {
-  console.warn('Could not load mixcloud-data.json:', e);
+  const msg = e instanceof Error ? e.message : String(e);
+  console.error(`Failed to load mixcloud-data.json for latest mix: ${msg}`);
 }
 
 const links = [

@@ -3,6 +3,10 @@ name: Deploy Astro to GitHub Pages
 on:
   push:
     branches: ['main']
+    paths-ignore:
+      - '*.md'
+      - 'docs/**'
+      - 'README*'
   workflow_dispatch:
 
 permissions:
@@ -10,12 +14,16 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: deploy-main
+  cancel-in-progress: true
+
 jobs:
   # pnpm-Version ist in package.json als packageManager gepinnt. Corepack
   # installiert beim ersten Aufruf genau diese Version, deshalb genuegt hier
   # 'corepack enable' -- kein 'corepack prepare' mit zusaetzlicher Versionsangabe.
   #
-  # Kritischer Pfad: holt das Live-Ergebnis. Laeuft parallel zu 'check'.
+  # Build job: fetches Mixcloud data, builds site, generates SEO artifacts.
   build:
     runs-on: ubuntu-latest
     steps:
@@ -38,7 +46,6 @@ jobs:
       - name: Fetch Mixcloud data
         run: node scripts/fetch-mixcloud.mjs --force
 
-      # build:seo schreibt direkt nach dist/, ein zweiter Build ist nicht noetig
       - name: Build Astro site
         run: pnpm run build
 
@@ -52,7 +59,7 @@ jobs:
         with:
           path: ./dist
 
-  # Blockiert den Deploy, laeuft aber parallel zum Build.
+  # TypeScript check - runs in parallel with build
   check:
     runs-on: ubuntu-latest
     steps:
@@ -73,9 +80,29 @@ jobs:
       - name: TypeScript check
         run: pnpm run check
 
-  # Schnelle Checks, blockieren den Deploy nicht. Eigener Job, damit die
-  # Laufzeit von check nicht durch Tests und Lint verlaengert wird.
-  fast-checks:
+  # Linting - runs in parallel with build and check
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run ESLint
+        run: pnpm run lint
+
+  # Unit tests - runs in parallel with build, check, and lint
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -93,17 +120,14 @@ jobs:
         run: pnpm install
 
       - name: Unit tests
-        run: npx vitest run
-
-      - name: Run ESLint
-        run: pnpm run lint
+        run: pnpm test:run
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [build, check]
+    needs: [build, check, lint, test]
     steps:
       - uses: actions/deploy-pages@v5
         id: deployment

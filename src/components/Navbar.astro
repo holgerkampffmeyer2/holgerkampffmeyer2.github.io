@@ -105,7 +105,18 @@ const { currentPage = 'home' } = Astro.props;
   <div id="mobile-menu" class="hidden md:hidden bg-[var(--color-surface)] border-t border-[var(--color-border)]">
     <div class="px-4 py-4 space-y-3">
       {navItems.map(item => (
-        <a href={item.href} rel={item.rel} class="block nav-link py-2">{item.label}</a>
+        <>
+          <a href={item.href} rel={item.rel} class="block nav-link py-2">{item.label}</a>
+          {item.hasDropdown && item.items && (
+            <div class="ml-4 mt-1 space-y-1 border-l-2 border-[var(--color-primary)] pl-3">
+              {item.items.map(subItem => (
+                <a href={subItem.href} class="block text-sm text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] py-1">
+                  {subItem.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </>
       ))}
     </div>
   </div>

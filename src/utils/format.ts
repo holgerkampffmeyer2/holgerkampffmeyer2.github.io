@@ -7,5 +7,11 @@ export function formatDate(dateStr: string): string {
 export function formatDuration(seconds: number): string {
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+export function toIsoDuration(seconds: number): string {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
   return `PT${mins}M${secs}S`;
 }

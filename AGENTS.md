@@ -29,7 +29,8 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 - `pnpm run lint` — ESLint
 - `pnpm run lint:fix` — ESLint mit Auto-Fix
 - `pnpm run check` — TypeScript
-- `pnpm test` — Unit-Tests (Vitest)
+- `pnpm test` / `pnpm test:run` — Unit-Tests (Vitest)
+- `pnpm test:coverage` — Coverage-Report (v8, Schwellen: 70% lines/statements, 60% functions, 50% branches)
 - `pnpm run label:research` — Label-Recherche (CUE-Tags + MusicBrainz) → label-research.json
 - `pnpm run label:apply` — Label-Vorschläge in src/data/labels.json mergen
 - `pnpm run label:urls` — Label-URLs recherchieren (MusicBrainz url-rels) → label-urls.json
@@ -44,7 +45,7 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 - Keine Secrets committen
 
 ## Definition of Done
-- Nach Quellcode-Änderungen: `pnpm run lint && pnpm run check && pnpm run build && pnpm run build:seo`
+- Nach Quellcode-Änderungen: `pnpm run lint && pnpm run check && pnpm run build && pnpm run build:seo && pnpm test:run`
 - Nach reinen .md Änderungen: direkt push (kein lint/check/build)
 - Keine offenen TODOs im finalen Code hinterlassen
 - Vor Commit: `git status` prüfen, nur beabsichtigte Dateien stagen
@@ -113,5 +114,6 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 - **`dj/mixes/[number].astro`**: AudioObject + BreadcrumbList + BlogPosting Schema (Mix-Detailseite)
 - **`dj/mixes-weekly.astro`**: BlogPosting + MusicPlaylist + AudioObject Schema (Mixes-Übersicht)
 - **`dj/mixes-blog-archive.astro`**: Blog-Archiv, kein eigenes JSON-LD nötig
-- **`vermietung.astro`**: FAQPage Schema + Weiterleitung zu soundundlicht-stuttgart.de
+- **`vermietung.astro`**: **Kein FAQPage Schema** – Weiterleitung zu soundundlicht-stuttgart.de
 - **`djhulk-electronic-music.astro`**: Person + MusicGroup Schema
+- **`dj/videos.astro`**: VideoObject Schema (ohne duration, mit publisher)

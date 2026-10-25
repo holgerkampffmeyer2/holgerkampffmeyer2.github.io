@@ -41,14 +41,16 @@ function processFile(filePath) {
   let modified = false;
   let count = 0;
 
-  content = content.replace(/["']([^"']*\.jpe?g)["']/g, (match, imgPath) => {
+  // Match image references with various quote styles: src="...", src='...', src=...
+  content = content.replace(/(src|href)=["']?([^"'>\s]*\.(?:jpe?g|png))["']?/gi, (match, attr, imgPath) => {
     if (imgPath.includes('.webp')) return match;
 
     const webpPath = getWebpPath(imgPath);
     if (webpPath) {
       modified = true;
       count++;
-      return `"${webpPath}"`;
+      const quote = match.includes('="') ? '"' : match.includes("='") ? "'" : '"';
+      return `${attr}=${quote}${webpPath}${quote}`;
     }
     return match;
   });

@@ -47,9 +47,12 @@ try {
   const imported = await import("../data/mixcloud-data.json");
   if (imported && imported.default && Array.isArray(imported.default.mixes)) {
     mixcloudData = imported.default;
+  } else {
+    throw new Error('mixcloud-data.json has invalid structure: missing default.mixes array');
   }
 } catch (e) {
-  console.warn('Could not load mixcloud-data.json:', e);
+  const msg = e instanceof Error ? e.message : String(e);
+  console.error(`Failed to load mixcloud-data.json: ${msg}`);
   // mixcloudData remains { mixes: [] }
 }
 

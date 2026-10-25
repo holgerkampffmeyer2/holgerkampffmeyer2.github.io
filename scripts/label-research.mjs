@@ -2,7 +2,7 @@
  * Label-Recherche: erzeugt belegte Label-Vorschläge für alle Tracklisten.
  *
  * Offline-first: Label-Hinweise aus den Quelldatei-Tags der Rekordbox-CUEs
- * (`publisher`/Album-`[Label]`/Promo-comment), danach iTunes als Fallback.
+ * (`publisher`/Album-`[Label]`/Promo-comment), danach MusicBrainz als Fallback.
  * Ergebnis ist ein reviewbares Artefakt (`label-research.json`) + Report;
  * `src/data/labels.json` bleibt unverändert.
  *

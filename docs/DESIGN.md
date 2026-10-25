@@ -170,28 +170,38 @@ Zwei Varianten: `.hero-overlay` (default) und `.hero-overlay-secondary`
 ## Build-Skripte
 
 ```bash
-pnpm run dev        # Development Server
-pnpm run lint      # ESLint
-pnpm run check     # TypeScript
-pnpm run build     # Production Build (nur Astro, schnell)
-pnpm run build:seo # RSS + urllist.txt generieren
-pnpm run build:full # Fetch Mixcloud + Optimize Images + Build + SEO
-pnpm run preview   # Preview Build
+pnpm run dev           # Development Server
+pnpm run lint         # ESLint
+pnpm run check        # TypeScript
+pnpm run build        # Production Build (nur Astro, schnell)
+pnpm run build:seo    # RSS + urllist.txt generieren
+pnpm run build:full   # Fetch Mixcloud + Optimize Images + Build + SEO
+pnpm run preview      # Preview Build
+pnpm test             # Vitest (Watch Mode)
+pnpm test:run         # Vitest (CI Mode)
+pnpm test:coverage    # Coverage-Report (v8)
 ```
-
 ## Wartungsskripte
-- `node scripts/fetch-mixcloud.mjs` — Mixcloud-Daten abrufen (24h Cache, `--force` für frische Daten)
-- `node scripts/optimize-images.mjs` — Bilder optimieren
-- `node scripts/generate-rss.mjs` — RSS-Feed generieren
-- `node scripts/generate-urllist.mjs` — urllist.txt generieren
-- `node scripts/indexnow-submit.mjs` — URLs an IndexNow API senden
-- `node scripts/update-image-refs.mjs` — JPEG/PNG-Referenzen durch WebP ersetzen
+
+- `node scripts/update-image-refs.mjs` — Ersetzt JPEG/PNG-Bildreferenzen durch WebP-Versionen (falls verfügbar) in allen .astro, .html, .css und .mjs Dateien
+- `node scripts/fetch-mixcloud.mjs [--force]` — Erzwingt frischen Mixcloud-Fetch (24h Cache umgehen)
+- `node scripts/optimize-images.mjs` — Optimiert alle Bilder im Projekt (CLI: `-w`, `-q`, `--concurrency`, `--dir`)
+- `node scripts/create-webp.mjs -w 1200 <datei>` — Konvertiert Einzelbild zu WebP
+- `node scripts/download-instagram.cjs <url>` — Lädt Bild von Instagram-Post-URL herunter (nutzt Playwright)
+- `node scripts/lastmod.mjs` — Aktualisiert lastmod-Cache für Sitemap
+- `node scripts/generate-rss.mjs` — Generiert RSS-Feed
+- `node scripts/generate-urllist.mjs` — Generiert urllist.txt
+- `node scripts/indexnow-submit.mjs` — Sendet URLs an IndexNow API (Bing)
+- `pnpm run label:research` — Label-Recherche (CUE-Tags + MusicBrainz) → label-research.json
+- `pnpm run label:apply` — Label-Vorschläge in src/data/labels.json mergen
+- `pnpm run label:urls` — Label-URLs recherchieren (MusicBrainz url-rels) → label-urls.json
+- `pnpm run label:urls:apply` — Label-URLs in labels.json mergen
 
 ---
 
 ## SEO
 
-- **JSON-LD:** LocalBusiness, Person, WebPage, FAQPage (Index), VideoObject (Videos), BlogPosting (Mixes-Übersicht), MusicPlaylist, AudioObject + BreadcrumbList (Mix-Detailseiten)
+- **JSON-LD:** LocalBusiness, Person, WebPage, VideoObject (Videos, ohne duration, mit publisher), BlogPosting (Mixes-Übersicht), MusicPlaylist, AudioObject + BreadcrumbList (Mix-Detailseiten)
 - **Open Graph Tags:** inkl. spezielle Tags für Mix-Seiten (og:title, og:type=music.playlist, og:image 1200×630)
 - **Sitemap:** Automatisch generiert via @astrojs/sitemap mit Prioritäten (Mix-Seiten: 0.8, Startseite: 1.0)
 - **RSS Feed:** Generiert aus blog-posts.json (neueste 10 Mixes)

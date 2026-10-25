@@ -15,9 +15,9 @@ The system SHALL provide a `loadBlogPosts(): Promise<BlogPostData[]>` function i
 - **WHEN** `loadBlogPosts()` is called
 - **THEN** it returns an array of `BlogPostData` objects from `blog-posts.json`
 
-#### Scenario: Handle missing file gracefully
-- **WHEN** `blog-posts.json` cannot be loaded
-- **THEN** it returns an empty array `[]`
+#### Scenario: Handle missing/invalid file with descriptive error
+- **WHEN** `blog-posts.json` cannot be loaded or has invalid structure
+- **THEN** it throws an error with message containing the cause (e.g., "Failed to load blog-posts.json: ...")
 
 ### Requirement: createSearchablePosts helper function
 The system SHALL provide a `createSearchablePosts(posts: BlogPostData[]): SearchablePost[]` function that creates search-optimized post data.

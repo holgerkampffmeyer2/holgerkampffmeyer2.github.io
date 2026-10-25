@@ -3,7 +3,7 @@ import Icon from '../Icon.astro';
 import TracklistTable from './TracklistTable.astro';
 import { USECASE_CONFIG } from '../../data/usecase-config';
 import type { BlogPostData } from '../../types/blog';
-import { formatDate } from '../../utils/format';
+import { formatDate, formatDuration } from '../../utils/format';
 
 interface Props {
   post: BlogPostData;
@@ -12,12 +12,6 @@ interface Props {
 }
 
 const { post, isLatest = false, showNavigation = true } = Astro.props;
-
-function formatDuration(seconds: number) {
-  const mins = Math.floor(seconds / 60);
-  const secs = seconds % 60;
-  return `${mins}:${secs.toString().padStart(2, '0')}`;
-}
 ---
 
 <article class="mix-detail">

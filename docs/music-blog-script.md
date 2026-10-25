@@ -45,44 +45,34 @@ Das Mapping liegt in `src/data/genre-use-case-mapping.json`:
 - Ein Genre kann mehrere Use-Cases haben (z.B. Tech House → work + gym)
 - Ein Use-Case kann mehrere Genres haben
 
-### Workflow
+## Build-Skripte
 
-1. **API Call**: Holt die neuesten 100 Mixes von allen konfigurierten Mixcloud-Accounts (`MIXCLOUD_SOURCES` in `scripts/fetch-mixcloud.mjs`):
-   - `holger-kampffmeyer` — eigene Uploads
-   - `365fmradio` — Label-/Radio-Account; es werden nur Mixes mit "DJ Hulk" im Titel übernommen (`match`-Filter)
-2. **Mix-Details**: Für jeden Mix wird die API mit `?metadata=1` aufgerufen für vollständige Beschreibung
-3. **Tracklist**: Sucht in `tracklists/` nach Dateien mit Suffix `-tracklist.txt`
-4. **Hero-Image**: Sucht in `tracklists/` nach `.webp` Dateien (wird nach `public/tracklists/` kopiert)
-5. **Zuordnung**: Verwendet zweistufigen Matching-Algorithmus:
-   - **Stufe 1**: Exakte Zuordnung anhand Mix-Nummer (aus Titel/Key und Dateinamen)
-   - **Stufe 2**: Fuzzy-Matching-Fallback basierend auf längstem gemeinsamen Teilstring (für Mixes ohne klare Nummer)
-   - Nur Zuordnungen mit ausreichender Konfidenz (≥0.5) werden akzeptiert
-6. **Use-Cases**: Leitet aus Mixcloud-Tags ab (kann mehrere pro Mix sein)
-7. **Output**: Schreibt beide JSON-Dateien
+```bash
+# Development
+pnpm run dev           # Development Server
+pnpm run lint         # ESLint
+pnpm run check        # TypeScript
+pnpm test             # Vitest (Watch Mode)
+pnpm test:run         # Vitest (CI Mode)
+pnpm test:coverage    # Coverage-Report (v8)
 
-### Voraussetzungen
-
-**Tracklists** können im `tracklists/` Ordner abgelegt werden (keine manuelle Kopie nötig):
-- Dateiname enthält Mix-Nummer: `DJ Hulk - Mix175-TechHouse-tracklist.txt`
-- Format: Textdatei mit Tracklist (Artist - Track)
-
-**Hero-Images** können im `tracklists/` Ordner abgelegt werden:
-- Format: Kann PNG, JPG, JPEG sein (wird automatisch zu WebP konvertiert und nach `public/tracklists/` kopiert)
-- Dateiname enthält Mix-Nummer: `DJ Hulk - Mix175-TechHouse.png`
-
-**Konvertierte Hero-Images** liegen in `public/tracklists/`:
-- Format: WebP (automatisch aus PNG/JPG/JPEG konvertiert)
-- Dateiname enthält Mix-Nummer: `Mix175.webp`
+# Build
+pnpm run build        # Production Build (nur Astro, schnell)
+pnpm run build:seo    # RSS + urllist.txt generieren
+pnpm run build:full   # Fetch Mixcloud + Optimize Images + Build + SEO
+pnpm run preview      # Preview Build
+```
 
 ### Manuell ausführen
 
 ```bash
 node scripts/fetch-mixcloud.mjs --force
+pnpm run build && pnpm run build:seo
 ```
 
 ### Automatisch
 
-- `pnpm run build:full` - Vollständiger Build inkl. Mixcloud (cached, 24h — für neuen Mix `--force` nötig, siehe Schritt 4)
+- `pnpm run build:full` - Vollständiger Build inkl. Mixcloud (cached, 24h — für neuen Mix `--force` nötig)
 - `pnpm run build` - Nur Astro Build (schnell, keine Datenfetch)
 
 ### RSS-Feed
@@ -298,12 +288,12 @@ node scripts/label-apply.mjs --urls label-url-proposals.json [--overwrite] [--dr
 
 Jede Mix-Seite erhält automatisch:
 
-**Title:** `Mix#176 - Latin House / Tech House by DJ Hulk | DJ Hulk` (max 60 Zeichen)
+**Title:** `Mix#176 - Latin House / Tech House by DJ Hulk | DJ Hulk` (max 70 Zeichen, ellipsis)
 
 **Description:** Erste 160 Zeichen der Mix-Beschreibung (Fallback: Generische Beschreibung)
 
 **JSON-LD (Structured Data):**
-- `AudioObject` - Mix-Details (Titel, Beschreibung, Dauer, Datum, Genre, Producer)
+- `AudioObject` - Mix-Details (Titel, Beschreibung, Dauer, Datum, Genre, Producer) — **Dauer in ISO 8601 (PTnMnS)**
 - `BlogPosting` - Mix als Blog-Post (Headline, Description, DatePublished, Author)
 - `BreadcrumbList` - Navigation (Home → DJ Hulk → Weekly DJ Mixes → Mix-Titel)
 - `Person` - DJ Hulk als Produzent

@@ -211,17 +211,12 @@ async function convertPngsToWebp(dirPath) {
   let stderr = '';
   child.stdout.on('data', (data) => { stdout += data; });
   child.stderr.on('data', (data) => { stderr += data; });
-  child.on('close', (code) => {
-    if (code !== 0) {
-      console.error(`Conversion failed:`, stderr);
-      process.exit(1);
-    }
-  });
   await new Promise((resolve, reject) => {
     child.on('close', (code) => {
       if (code === 0) {
         resolve();
       } else {
+        console.error(`Conversion failed:`, stderr);
         reject(new Error(`Process exited with code ${code}`));
       }
     });
@@ -241,6 +236,14 @@ function copyWebpFiles(srcDir, destDir) {
   if (!fs.existsSync(destDir)) {
     fs.mkdirSync(destDir, { recursive: true });
   }
+  
+  // Clean destination: remove all existing .webp files
+  const existingFiles = fs.readdirSync(destDir);
+  const existingWebpFiles = existingFiles.filter(f => path.extname(f) === '.webp');
+  for (const file of existingWebpFiles) {
+    fs.unlinkSync(path.join(destDir, file));
+  }
+  
   const files = fs.readdirSync(srcDir);
   const webpFiles = files.filter(f => path.extname(f) === '.webp');
   console.log(`Copying ${webpFiles.length} WebP files from ${srcDir} to ${destDir}...`);

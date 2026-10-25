@@ -35,7 +35,7 @@ function parseArgs() {
       options.concurrency = parseInt(args[++i], 10) || CONCURRENCY;
     } else if (arg === '-d' || arg === '--dir') {
       options.dirs = [args[++i]];
-    } else if (arg === '-h' || arg === '--help') {
+    } else if (arg === '--help') {
       console.log(`
 Usage: node optimize-images.mjs [options]
 
@@ -46,7 +46,7 @@ Options:
   -q, --quality <num>     WebP quality 1-100 (default: 80)
   --concurrency <num>     Parallel tasks (default: CPU cores)
   -d, --dir <path>        Single directory to process (default: public/img + public/tracklists)
-  -h, --help              Show this help
+  --help                  Show this help
       `);
       process.exit(0);
     }

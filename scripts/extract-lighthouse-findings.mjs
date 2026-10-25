@@ -1,7 +1,13 @@
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 const lhDir = '.lighthouseci';
+
+if (!existsSync(lhDir)) {
+  console.log('Lighthouse CI directory not found. Skipping extraction.');
+  process.exit(0);
+}
+
 const files = readdirSync(lhDir).filter(f => f.startsWith('lhr-') && f.endsWith('.json'));
 
 if (files.length === 0) {

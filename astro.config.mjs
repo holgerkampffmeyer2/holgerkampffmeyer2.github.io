@@ -29,9 +29,9 @@ export default defineConfig({
       const lastmod = trim.startsWith('dj/mixes/')
         ? getMixDate(trim.slice('dj/mixes/'.length))
         : lastModifiedFor(resolveSourceFiles(path));
-      const out = { ...item, lastmod: lastmod || new Date().toISOString(), priority: 0.5, changefreq: ChangeFreqEnum.MONTHLY };
+      const out = { ...item, lastmod: lastmod || new Date(0).toISOString(), priority: 0.5, changefreq: ChangeFreqEnum.MONTHLY };
       if (path === '/') { out.priority = 1.0; out.changefreq = ChangeFreqEnum.WEEKLY; }
-      else if (path.startsWith('/dj/mixes') && path !== '/dj/mixes-all' && path !== '/dj/mixes-blog-archive') { out.priority = 0.8; out.changefreq = ChangeFreqEnum.WEEKLY; }
+      else if (path.startsWith('/dj/mixes') && path !== '/dj/mixes-blog-archive') { out.priority = 0.8; out.changefreq = ChangeFreqEnum.WEEKLY; }
       else if (path === '/djhulk-electronic-music') { out.priority = 0.8; out.changefreq = ChangeFreqEnum.WEEKLY; }
       else if (path === '/work' || path === '/dj/videos' || path === '/dj/em3f') { out.priority = 0.6; }
       else if (path === '/links') { out.priority = 0.5; }

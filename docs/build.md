@@ -18,6 +18,10 @@ Commands in [AGENTS.md](../AGENTS.md). Details siehe unten.
 2. `node scripts/generate-rss.mjs` → RSS-Feed aktualisieren
 3. `node scripts/generate-urllist.mjs` → urllist.txt generieren
 
+### Test
+- `pnpm test` / `pnpm test:run` — Unit-Tests (Vitest)
+- `pnpm test:coverage` — Coverage-Report (v8, Schwellen: 70% lines/statements, 60% functions, 50% branches)
+
 ## Paketmanager
 - Version ist in `package.json` als `packageManager` gepinnt (`pnpm@12.4.2`) und gilt für lokal und CI gleichermaßen.
 - Corepack installiert die gepinnte Version beim ersten Aufruf. Ein Workflow braucht dafür nur `corepack enable` — kein `corepack prepare` mit eigener Versionsangabe.
@@ -28,6 +32,19 @@ Commands in [AGENTS.md](../AGENTS.md). Details siehe unten.
 - **Wichtig:** Für neue Mixes auf Mixcloud muss `--force` verwendet werden: `node scripts/fetch-mixcloud.mjs --force`
 - `pnpm run build` ist schnell (~15-20s)
 - Für frische Daten + SEO: `pnpm run build:full`
+
+## CI (GitHub Actions)
+
+### deploy.yml (main branch)
+- **4 parallele Jobs (alle blockierend):** `build` + `check` + `lint` + `test` → `deploy`
+- `paths-ignore`: `*.md`, `docs/**`, `README*` → docs-only pushes lösen keinen Deploy aus
+- `concurrency.cancel-in-progress: true` für main branch
+
+### weekly-mixcloud.yml (wöchentlich, Sonntag 10:00)
+- Parallele Jobs: `build` + `check` + `lint` + `test` → `deploy`
+- Kein redundanter zweiter Build
+- Smoke-Test + Unit-Tests integriert
+- `concurrency.cancel-in-progress: true`
 
 ## Output
 - `dist/` - statische HTML-Dateien

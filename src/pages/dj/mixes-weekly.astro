@@ -8,7 +8,7 @@ import TracklistTable from "../../components/dj/TracklistTable.astro";
 import { getDjPersonSchema } from "../../utils/dj-schema.js";
 import { USECASE_CONFIG } from "../../data/usecase-config";
 import { loadBlogPosts, createSearchablePosts } from "../../utils/blog-data";
-import { formatDate } from "../../utils/format";
+import { formatDate, toIsoDuration } from "../../utils/format";
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
@@ -67,7 +67,7 @@ const blogPostingSchema = postsWithTracklists.slice(0, 10).map(post => ({
       "name": latestPost.title,
       "description": latestPost.description?.substring(0, 200) || "",
       "contentUrl": latestPost.url,
-      "duration": latestPost.audio_length ? `PT${Math.floor(latestPost.audio_length / 60)}M${latestPost.audio_length % 60}S` : undefined,
+      "duration": latestPost.audio_length ? toIsoDuration(latestPost.audio_length) : undefined,
       "genre": latestPost.tags,
       "datePublished": latestPost.created_time,
       "producer": {

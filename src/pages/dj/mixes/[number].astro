@@ -8,6 +8,7 @@ import { getMixDisplay } from "../../../utils/mix-display.js";
 import { getDjPersonSchema } from "../../../utils/dj-schema.js";
 import type { BlogPostData } from "../../../types/blog";
 import { loadBlogPosts } from "../../../utils/blog-data";
+import { toIsoDuration } from "../../../utils/format";
 
 export async function getStaticPaths() {
   const allPosts = await loadBlogPosts();
@@ -38,9 +39,9 @@ const { post, prevPost, nextPost, isLatest } = Astro.props;
 const curDisplay = getMixDisplay(post.key, post.title);
 const prefix = curDisplay.mixNum ? `Mix#${curDisplay.mixNum} - ` : '';
 let rawTitle = `${prefix}${post.title} - DJ Hulk Weekly Mix - House, Tech House, Deep House - Electronic Music`;
-const pageTitle = rawTitle.length > 60 ? rawTitle.substring(0, 60) : rawTitle;
+const pageTitle = rawTitle.length > 70 ? rawTitle.substring(0, 67).trimEnd() + '…' : rawTitle;
 const baseDesc = `${prefix}${post.title} - Electronic Music Mix with Tracklist. Enjoy House, Tech House, Deep House sets for gym, driving, work and pre-party. Free download and streaming on Mixcloud.`;
-const pageDescription = post.description ? (post.description.length > 160 ? post.description.substring(0, 160) : post.description) : baseDesc;
+const pageDescription = post.description ? (post.description.length > 160 ? post.description.substring(0, 157).trimEnd() + '…' : post.description) : baseDesc;
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
@@ -48,12 +49,6 @@ const breadcrumbSegments = [
   { label: "Weekly DJ Mixes", href: "/dj/mixes-weekly" },
   { label: curDisplay.label }
 ];
-
-function formatDuration(seconds: number) {
-  const mins = Math.floor(seconds / 60);
-  const secs = seconds % 60;
-  return `PT${mins}M${secs}S`;
-}
 
 const jsonLd = [
   {
@@ -84,7 +79,7 @@ const jsonLd = [
     "name": `${prefix}${post.title}`,
     "description": post.description?.substring(0, 500) || "",
     "contentUrl": post.url,
-    "duration": post.audio_length ? formatDuration(post.audio_length) : undefined,
+    "duration": post.audio_length ? toIsoDuration(post.audio_length) : undefined,
     "datePublished": post.created_time,
     "genre": post.tags,
     "producer": {

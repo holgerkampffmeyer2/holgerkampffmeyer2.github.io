@@ -1,18 +1,17 @@
 import type { BlogPostData, BlogData, SearchablePost } from '../types/blog';
 
 export async function loadBlogPosts(): Promise<BlogPostData[]> {
-  let blogData: BlogData = { posts: [] };
-
   try {
     const imported = await import('../data/blog-posts.json');
     if (imported && imported.default && Array.isArray(imported.default.posts)) {
-      blogData = imported.default as unknown as BlogData;
+      const blogData = imported.default as unknown as BlogData;
+      return blogData.posts || [];
     }
+    throw new Error('blog-posts.json has invalid structure: missing default.posts array');
   } catch (e) {
-    console.warn('Could not load blog-posts.json:', e);
+    const msg = e instanceof Error ? e.message : String(e);
+    throw new Error(`Failed to load blog-posts.json: ${msg}`, { cause: e });
   }
-
-  return blogData.posts || [];
 }
 
 export function createSearchablePosts(posts: BlogPostData[]): SearchablePost[] {

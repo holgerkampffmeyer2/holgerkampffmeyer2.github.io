@@ -60,18 +60,6 @@ body {
   background-clip: text;
 }
 
-.gradient-bg {
-  background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
-}
-
-.glow-primary {
-  box-shadow: 0 0 30px color-mix(in srgb, var(--color-primary) 40%, transparent);
-}
-
-.glow-secondary {
-  box-shadow: 0 0 30px color-mix(in srgb, var(--color-secondary) 40%, transparent);
-}
-
 .check-icon {
   @apply w-4 h-4 text-[var(--color-primary)] flex-shrink-0;
 }
@@ -350,54 +338,6 @@ body {
   transform: translateY(-5px) scale(1.1);
 }
 
-.equipment-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 1rem;
-  padding: 2rem;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.equipment-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-}
-
-.equipment-card:hover {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 40px color-mix(in srgb, var(--color-primary) 20%, transparent);
-  transform: translateY(-8px);
-}
-
-.equipment-card:hover::before {
-  transform: scaleX(1);
-}
-
-/* Mobile Menu */
-.mobile-menu {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .mobile-menu {
-    display: block;
-  }
-
-  .desktop-menu {
-    display: none;
-  }
-}
-
 /* Scroll Animations */
 @keyframes fadeInUp {
   from {
@@ -430,23 +370,6 @@ body {
 .stagger-3 { animation-delay: 0.3s; }
 .stagger-4 { animation-delay: 0.4s; }
 
-/* Section backgrounds */
-.section-dark {
-  background: var(--color-bg);
-}
-
-.section-surface {
-  background: var(--color-surface);
-}
-
-/* Decorative elements */
-.decorative-line {
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-  border-radius: 2px;
-}
-
 /* Image styling */
 .rounded-img {
   border-radius: 1rem;
@@ -477,22 +400,6 @@ body {
   background: var(--color-primary-hover);
 }
 
-/* Section highlights */
-.section-highlight {
-  position: relative;
-}
-
-.section-highlight::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 20% 50%, color-mix(in srgb, var(--color-primary) 5%, transparent) 0%, transparent 50%);
-  pointer-events: none;
-}
-
 /* Hide scrollbar */
 .scrollbar-hide {
   -ms-overflow-style: none;
@@ -501,31 +408,6 @@ body {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
-}
-
-/* Event card glow (replaces hardcoded hover:shadow) */
-.event-card-glow {
-  transition: all 0.3s ease;
-}
-
-.event-card-glow:hover {
-  box-shadow: 0 0 30px color-mix(in srgb, var(--color-primary) 30%, transparent);
-  border-color: var(--color-primary);
-  transform: scale(1.01);
-}
-
-/* Filter button hover */
-.filter-btn-hover {
-  transition: all 0.3s ease;
-}
-
-.filter-btn-hover:hover {
-  border-color: var(--color-primary);
-}
-
-/* Usecase icon color */
-.usecase-icon {
-  color: var(--color-primary);
 }
 
 /* Fill container iframe */
@@ -555,52 +437,6 @@ body {
   height: 100%;
 }
 
-.iframe-mixcloud-card {
-  width: 100%;
-  aspect-ratio: 16/9;
-  border: none;
-  border-radius: 8px;
-}
-
-.iframe-mixcloud-compact {
-  width: 100%;
-  height: 150px;
-  border: none;
-  border-radius: 8px;
-}
-
-/* Card border hover */
-.card-border-hover {
-  transition: all 0.3s ease;
-}
-
-.card-border-hover:hover {
-  border-color: var(--color-primary);
-}
-
-/* Image hover ring */
-.img-hover-ring {
-  transition: all 0.3s ease;
-}
-
-.img-hover-ring:hover {
-  ring: 2px solid var(--color-primary);
-  transform: scale(1.02);
-}
-
-/* Usecase badge */
-.usecase-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.125rem 0.5rem;
-  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
-  border-radius: 0.25rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--color-primary);
-}
-
 /* Latest badge */
 .latest-badge {
   background: var(--color-primary);
@@ -609,11 +445,6 @@ body {
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   font-weight: 500;
-}
-
-/* Latest ring */
-.latest-ring {
-  ring: 2px solid var(--color-primary);
 }
 
 /* Mix Search Overlay */
