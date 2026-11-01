@@ -100,6 +100,18 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 (`MixcloudWidget variant="featured"` in `src/pages/links.astro`, liest `mixes[0]`). Nach dem Mixcloud-Fetch
 (`fetch-mixcloud.mjs` / `build:full`) ersetzt der neue Mix dort den vorherigen — kein manuelles Update nötig.
 
+### Labels recherchieren und pflegen
+1. `pnpm run label:research` — CUE-Tags offline-first, MusicBrainz als Fallback; Ergebnisse sichten.
+2. `pnpm run label:apply --dry-run`, dann `pnpm run label:apply` — Track-Zuordnungen übernehmen.
+3. URLs mit `pnpm run label:urls` recherchieren, optional `label-url-finder.mjs`; danach
+   `label-url-quality.mjs` prüfen und `pnpm run label:urls:apply --dry-run` / ohne `--dry-run` mergen.
+4. URL-Priorität: offizielle Label-Website → offizieller Bandcamp → Beatport-Labelseite.
+   Keine geparkten Domains, For-Sale-/Maintenance-Seiten oder falschen Namensvetter verwenden.
+5. Beatport blockt Skripte per Cloudflare (HTTP 403); Labelseiten über Suchtreffer/Seitentitel
+   verifizieren. Bandcamp-Warnungen von `label-url-quality` sind oft False Positives.
+6. Edit-/Bootleg-Tracks ohne Label als `unreleased` führen; bestehende URLs nur mit `--overwrite` ändern.
+7. Details: [Music-Blog-Script](docs/music-blog-script.md#labels-recherchieren).
+
 ## Wartungsskripte
 - `node scripts/update-image-refs.mjs` — Ersetzt JPEG/PNG-Bildreferenzen durch WebP-Versionen (falls verfügbar) in allen .astro, .html, .css und .mjs Dateien
 - `node scripts/fetch-mixcloud.mjs --force` — Erzwingt frischen Mixcloud-Fetch (24h Cache umgehen)

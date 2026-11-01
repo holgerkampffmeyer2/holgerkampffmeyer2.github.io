@@ -281,6 +281,11 @@ node scripts/label-apply.mjs --urls label-url-proposals.json [--overwrite] [--dr
 - Review-Artefakte (`label-urls.json`, `label-url-proposals.json`, Reports) sind gitignored
 - `label:urls:apply` (= `label-apply.mjs --urls`) merged **nur** die `url`-Felder,
   Track-Zuordnungen bleiben unberührt; bestehende URLs nur mit `--overwrite`
+- URL-Priorität: offizielle Label-Website → offizieller Bandcamp → Beatport-Labelseite.
+  Keine geparkten Domains, For-Sale-/Maintenance-Seiten oder falschen Namensvetter verwenden.
+- Beatport blockt Skripte per Cloudflare (HTTP 403). Labelseiten über Suchtreffer/Seitentitel
+  verifizieren; ein 403 im Quality-Report bedeutet nicht automatisch einen toten Link.
+- Edit-/Bootleg-Tracks ohne Label als `unreleased` führen.
 
 ---
 

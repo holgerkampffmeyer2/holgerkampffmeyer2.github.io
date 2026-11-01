@@ -16,10 +16,13 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 
 - `pnpm run test` / `pnpm test:run` — Unit tests (Vitest)
 - `pnpm test:coverage` — Coverage report (v8)
-- `pnpm run label:research` — Label research (CUE + MusicBrainz)
+- `pnpm run label:research` — Label research (CUE tags offline-first, MusicBrainz fallback)
 - `pnpm run label:apply` — Merge label suggestions
 - `pnpm run label:urls` — Label URL research (MusicBrainz url-rels)
 - `pnpm run label:urls:apply` — Merge label URLs
+
+Label workflow and URL verification rules (official site → Bandcamp → Beatport, no parked domains)
+are documented in the [Music Blog Script](docs/music-blog-script.md#labels-recherchieren).
 - `node scripts/optimize-images.mjs` — Image optimization (WebP)
 - `node scripts/create-webp.mjs -w 1200 <file>` — Single image to WebP
 - `node scripts/download-instagram.cjs <url>` — Download Instagram image
