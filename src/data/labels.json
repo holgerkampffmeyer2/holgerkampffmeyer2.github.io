@@ -10,7 +10,7 @@
     },
     "natural-rhythm": {
       "name": "Natural Rhythm",
-      "url": "https://naturalrhythm.com"
+      "url": "https://naturalrhythm.bandcamp.com/"
     },
     "lapsus-music": {
       "name": "Lapsus Music",
@@ -654,7 +654,7 @@
     },
     "ismos": {
       "name": "ISMOS",
-      "url": "https://ismos.de"
+      "url": "https://www.beatport.com/label/ismos/125209"
     },
     "hysteria-records": {
       "name": "Hysteria Records",
@@ -1031,6 +1031,26 @@
     "house-for-artists": {
       "name": "House For Artists / Sony Music",
       "url": "https://www.beatport.com/label/house-for-artists/100000"
+    },
+    "maison-arts": {
+      "name": "Maison Arts",
+      "url": "https://www.maisonarts.co"
+    },
+    "treble-recordings": {
+      "name": "Treble Recordings",
+      "url": "https://www.beatport.com/label/treble-recordings/124389"
+    },
+    "ellum-audio": {
+      "name": "Ellum Audio",
+      "url": "https://ellum.bandcamp.com/"
+    },
+    "mood-child": {
+      "name": "Mood Child",
+      "url": "https://moodchild.art"
+    },
+    "come-together-records": {
+      "name": "Come Together Records",
+      "url": "https://www.beatport.com/label/come-together-records/381730"
     }
   },
   "tracks": {
@@ -1659,6 +1679,23 @@
     "Noppo - Cashmere": "noppo",
     "White Rabbit - Make a Wish": "white-rabbit",
     "Halogenix - Chxrry22 - Wasteland [Halogenix Bootleg]": "unreleased",
-    "Solsan - 4CMFREE003 - Aztec Owl": "solsan"
+    "Solsan - 4CMFREE003 - Aztec Owl": "solsan",
+    "Dvit Bousa, Deejay P4T - The Best Night of My Life (Original Mix)": "natural-rhythm",
+    "Gatis Vilinskis - Ice Cream (Extended Mix)": "natural-rhythm",
+    "SLOW AF - No Other": "like-that-underground",
+    "IDAN & DAVIDI - Heads Will Roll (2026 Edit)": "unreleased",
+    "Ruky Deejay, Peejay Vincent - Isaura (Extended Mix)": "natural-rhythm",
+    "notdanilo - Victony - SLICK (notdanilo Edit)": "unreleased",
+    "Azhariel - Awgazi (Azhariel Edit)": "unreleased",
+    "Local Singles - Bump Bump Bump (Extended Mix)": "maison-arts",
+    "Govan Jones - Dubai Chocolate": "ismos",
+    "Maximo Quinones - Call Me Back (Extended Mix)": "treble-recordings",
+    "Mood Edits - Salud (Stephano Franca Edit)": "mood-child",
+    "Los de la Vega - Poesias": "natural-rhythm",
+    "BETH - In My Veins (VIP Extended)": "come-together-records",
+    "FLAVOR - Girlz Girlz Girlz": "like-that-underground",
+    "Maceo Plex - Lonely Drive": "ellum-audio",
+    "UNUSUAL & Dennis Reif - Freak (Extended Mix)": "kontor-records",
+    "N2N & Luxo - Ball Up Top ft. Nevve (Extended Mix)": "myth-of-nyx"
   }
 }
