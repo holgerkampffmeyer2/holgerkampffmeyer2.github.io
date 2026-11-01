@@ -33,6 +33,7 @@ export default defineConfig({
       if (path === '/') { out.priority = 1.0; out.changefreq = ChangeFreqEnum.WEEKLY; }
       else if (path.startsWith('/dj/mixes') && path !== '/dj/mixes-blog-archive') { out.priority = 0.8; out.changefreq = ChangeFreqEnum.WEEKLY; }
       else if (path === '/djhulk-electronic-music') { out.priority = 0.8; out.changefreq = ChangeFreqEnum.WEEKLY; }
+      else if (path === '/booking' || path === '/en/booking') { out.priority = 0.9; out.changefreq = ChangeFreqEnum.WEEKLY; }
       else if (path === '/work' || path === '/dj/videos' || path === '/dj/em3f') { out.priority = 0.6; }
       else if (path === '/links') { out.priority = 0.5; }
       else if (path === '/impressum' || path.startsWith('/vermietung')) { out.priority = 0.3; out.changefreq = ChangeFreqEnum.YEARLY; }
@@ -47,6 +48,12 @@ export default defineConfig({
     'dj/mixes.html': '/dj/mixes-weekly',
     '/mixes': '/dj/mixes-weekly',
     '/mixes.html': '/dj/mixes-weekly',
+
+    '/dj/epk': '/booking',
+    '/epk': '/booking',
+    '/presskit': '/booking',
+    '/booking.html': '/booking',
+    '/en/epk': '/en/booking',
 
     '/vermietung.html': 'https://soundundlicht-stuttgart.de/vermietung/',
     '/vermietung/djpaket-fildern/': 'https://soundundlicht-stuttgart.de/vermietung/djpaket-fildern/',

@@ -1,0 +1,73 @@
+---
+import { Picture } from 'astro:assets';
+import Icon from './Icon.astro';
+import type { PressPhoto } from '../data/booking';
+
+import neon from '../assets/img/booking/dj-hulk-neon.webp';
+import studio from '../assets/img/booking/dj-hulk-studio.webp';
+import club from '../assets/img/booking/dj-hulk-club.webp';
+import light from '../assets/img/booking/dj-hulk-light.webp';
+import liveBw from '../assets/img/booking/dj-hulk-live-bw.webp';
+import liveCrowd from '../assets/img/booking/dj-hulk-live-crowd.webp';
+import presskit from '../assets/img/booking/dj-hulk-presskit.webp';
+
+interface Props {
+  photos: PressPhoto[];
+  downloadLabel: string;
+}
+
+const { photos, downloadLabel } = Astro.props;
+
+const images = {
+  neon,
+  studio,
+  club,
+  light,
+  liveBw,
+  liveCrowd,
+  presskit,
+};
+---
+
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {photos.map((photo) => (
+    <figure class="group relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)]">
+      <div class="aspect-[4/5] overflow-hidden">
+        <Picture
+          src={images[photo.key]}
+          formats={['avif', 'webp']}
+          widths={[320, 480, 640, 800]}
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          alt={photo.alt}
+          loading="lazy"
+          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
+      <figcaption class="flex items-center justify-between gap-3 p-4">
+        <div class="min-w-0">
+          <p class="truncate text-sm text-[var(--color-text-muted)]">{photo.alt}</p>
+          {photo.credit && (
+            <p class="mt-1 text-xs text-[var(--color-text-muted)]">
+              {photo.creditUrl ? (
+                <a href={photo.creditUrl} target="_blank" rel="noopener" class="underline hover:text-[var(--color-secondary)]">
+                  {photo.credit}
+                </a>
+              ) : (
+                photo.credit
+              )}
+            </p>
+          )}
+        </div>
+        <a
+          href={photo.download}
+          download
+          class="inline-flex shrink-0 items-center gap-2 rounded-lg border border-[var(--color-border)] px-3 py-2 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+          aria-label={`${downloadLabel}: ${photo.alt}`}
+        >
+          <Icon name="download" class="h-4 w-4" />
+          <span class="hidden sm:inline">{downloadLabel}</span>
+        </a>
+      </figcaption>
+    </figure>
+  ))}
+</div>

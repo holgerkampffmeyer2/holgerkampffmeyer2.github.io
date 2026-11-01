@@ -4,7 +4,105 @@
       "id": "vermietung-hinweis",
       "question": "Du hast Fragen zur Vermietung?",
       "answer": "Meine Vermietungsseite ist umgezogen. Alle Infos zu Preisen, Paketen, verfügbarer Technik und Ablauf findest du auf <a href=\"https://soundundlicht-stuttgart.de/vermietung/\" target=\"_blank\" rel=\"noopener\">soundundlicht-stuttgart.de/vermietung/</a>.",
-      "pages": ["index"]
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "id": "booking-de-vorlauf",
+      "question": "Wie weit im Voraus sollte ich buchen?",
+      "answer": "Für Wochenendtermine empfehle ich 4–8 Wochen Vorlauf. Kurzfristige Anfragen sind je nach Verfügbarkeit ebenfalls möglich.",
+      "pages": [
+        "booking-de"
+      ]
+    },
+    {
+      "id": "booking-de-technik",
+      "question": "Spielst du auch ohne eigenes CDJ-Setup?",
+      "answer": "Ja. Bevorzugt spiele ich auf einem klassischen CDJ-Setup. Alternativ bringe ich meinen Laptop mit DDJ-1000 Controller mit.",
+      "pages": [
+        "booking-de"
+      ]
+    },
+    {
+      "id": "booking-de-kosten",
+      "question": "Was kostet ein DJ-Booking?",
+      "answer": "Die Gage hängt von Dauer, Ort, Format und Technik ab. Schick mir die Eckdaten, dann erhältst du ein individuelles Angebot.",
+      "pages": [
+        "booking-de"
+      ]
+    },
+    {
+      "id": "booking-de-reise",
+      "question": "Fährst du auch außerhalb von Stuttgart?",
+      "answer": "Ja, ich bin deutschlandweit auf Anfrage unterwegs. Reisekosten werden transparent im Angebot ausgewiesen.",
+      "pages": [
+        "booking-de"
+      ]
+    },
+    {
+      "id": "booking-de-musik",
+      "question": "Welche Musikrichtung spielst du?",
+      "answer": "House, Tech House, Deep House, Afro/Latin House, Techno und Drum n Bass. Das Set wird auf Anlass, Publikum und Zeitfenster abgestimmt.",
+      "pages": [
+        "booking-de"
+      ]
+    },
+    {
+      "id": "booking-de-ablauf",
+      "question": "Wie läuft die Buchung ab?",
+      "answer": "Du sendest Datum, Ort, Uhrzeit, Format, Gästezahl und Technik. Ich prüfe die Verfügbarkeit, erstelle ein Angebot und stimme Rider sowie Ablauf ab.",
+      "pages": [
+        "booking-de"
+      ]
+    },
+    {
+      "id": "booking-en-lead-time",
+      "question": "How far in advance should I book?",
+      "answer": "For weekend dates I recommend 4–8 weeks lead time. Short-notice requests are possible depending on availability.",
+      "pages": [
+        "booking-en"
+      ]
+    },
+    {
+      "id": "booking-en-equipment",
+      "question": "Can you play without a CDJ setup?",
+      "answer": "Yes. I prefer a classic CDJ setup. Alternatively, I bring my own laptop with a DDJ-1000 controller.",
+      "pages": [
+        "booking-en"
+      ]
+    },
+    {
+      "id": "booking-en-cost",
+      "question": "What does a DJ booking cost?",
+      "answer": "The fee depends on duration, location, format and equipment. Send me the key details and you will receive an individual quote.",
+      "pages": [
+        "booking-en"
+      ]
+    },
+    {
+      "id": "booking-en-travel",
+      "question": "Do you travel outside Stuttgart?",
+      "answer": "Yes, I travel throughout Germany on request. Travel costs are shown transparently in the quote.",
+      "pages": [
+        "booking-en"
+      ]
+    },
+    {
+      "id": "booking-en-music",
+      "question": "What music do you play?",
+      "answer": "House, Tech House, Deep House, Afro/Latin House, Techno and Drum n Bass. The set is tailored to the occasion, audience and time slot.",
+      "pages": [
+        "booking-en"
+      ]
+    },
+    {
+      "id": "booking-en-process",
+      "question": "How does the booking process work?",
+      "answer": "You send the date, venue, time, format, expected guests and equipment. I check availability, prepare a quote and coordinate rider and schedule.",
+      "pages": [
+        "booking-en"
+      ]
     }
   ]
 }

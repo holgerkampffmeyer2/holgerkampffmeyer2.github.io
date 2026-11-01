@@ -1,0 +1,164 @@
+---
+import Icon from './Icon.astro';
+import socialStats from '../data/social-stats.json';
+
+interface Props {
+  lang?: 'de' | 'en';
+  title: string;
+  description: string;
+  followersLabel: string;
+  updatedLabel: string;
+  note?: string;
+}
+
+const { lang = 'de', title, description, followersLabel, updatedLabel, note } = Astro.props;
+
+const platforms = [
+  {
+    key: 'instagram' as const,
+    label: 'Instagram',
+    icon: 'instagram' as const,
+    accent: 'text-pink-400',
+    ring: 'hover:border-pink-400/60',
+  },
+  {
+    key: 'facebook' as const,
+    label: 'Facebook',
+    icon: 'facebook' as const,
+    accent: 'text-blue-400',
+    ring: 'hover:border-blue-400/60',
+  },
+  {
+    key: 'mixcloud' as const,
+    label: 'Mixcloud',
+    icon: 'mixcloud' as const,
+    accent: 'text-orange-400',
+    ring: 'hover:border-orange-400/60',
+  },
+];
+
+const formatter = new Intl.NumberFormat(lang === 'de' ? 'de-DE' : 'en-US');
+const updatedAt = new Date(`${socialStats.updatedAt}T00:00:00Z`);
+const updatedLabelText = updatedAt.toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-US', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<section id="social-stats" class="py-16 sm:py-20 bg-[var(--color-surface)]/40" aria-labelledby="social-stats-title">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="max-w-3xl mb-10">
+      <h2 id="social-stats-title" class="font-play text-3xl sm:text-4xl font-bold mb-3">{title}</h2>
+      <p class="text-[var(--color-text-muted)] text-lg">{description}</p>
+    </div>
+
+    <div class="grid gap-4 sm:gap-6 sm:grid-cols-3">
+      {platforms.map((platform) => {
+        const stats = socialStats.platforms[platform.key];
+        return (
+          <a
+            href={stats.url}
+            target="_blank"
+            rel="noopener"
+            class:list={[
+              'group relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20',
+              platform.ring,
+            ]}
+            data-social-platform={platform.key}
+          >
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]">
+                <Icon name={platform.icon} class={`h-6 w-6 ${platform.accent}`} />
+              </div>
+              <Icon
+                name="chevron-right"
+                class="h-5 w-5 text-[var(--color-text-muted)] transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </div>
+
+            <div class="mt-8">
+              <div class="flex items-baseline gap-2">
+                <span
+                  class="font-play text-4xl sm:text-5xl font-bold tabular-nums tracking-tight"
+                  data-count-to={stats.count}
+                  data-count-locale={lang === 'de' ? 'de-DE' : 'en-US'}
+                >
+                  {formatter.format(stats.count)}
+                </span>
+                <span class="text-sm text-[var(--color-text-muted)]">{followersLabel}</span>
+              </div>
+              <div class="mt-2 flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
+                <span class="font-medium text-[var(--color-text)]">{platform.label}</span>
+                <span aria-hidden="true">·</span>
+                <span>{stats.handle}</span>
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+
+    <p class="mt-6 text-sm text-[var(--color-text-muted)]">
+      {updatedLabel}: {updatedLabelText}{note ? ` · ${note}` : ''}
+    </p>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    if (window.__socialStatsInitialized) return;
+    window.__socialStatsInitialized = true;
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var counters = document.querySelectorAll('[data-count-to]');
+    if (!counters.length) return;
+
+    function animate(el) {
+      var target = Number(el.getAttribute('data-count-to'));
+      var locale = el.getAttribute('data-count-locale') || 'de-DE';
+      if (!Number.isFinite(target)) return;
+
+      var formatter = new Intl.NumberFormat(locale);
+      if (reduceMotion) {
+        el.textContent = formatter.format(target);
+        return;
+      }
+
+      var duration = 1600;
+      var start = null;
+      el.textContent = formatter.format(0);
+
+      function tick(now) {
+        if (start === null) start = now;
+        var progress = Math.min((now - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = formatter.format(Math.round(target * eased));
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      counters.forEach(animate);
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          observer.unobserve(entry.target);
+          animate(entry.target);
+        });
+      },
+      { threshold: 0.35 }
+    );
+
+    counters.forEach(function (counter) {
+      observer.observe(counter);
+    });
+  })();
+</script>

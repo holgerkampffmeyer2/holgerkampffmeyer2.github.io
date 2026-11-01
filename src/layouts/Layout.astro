@@ -7,6 +7,16 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  /** document language (default: de) */
+  lang?: 'de' | 'en';
+  /** page-specific keywords (falls back to site defaults) */
+  keywords?: string;
+  /** Open Graph locale (default: de_DE) */
+  ogLocale?: string;
+  /** hreflang alternates for multilingual pages */
+  alternates?: { hreflang: string; href: string }[];
+  /** skip link label (default: Zum Inhalt springen) */
+  skipLinkLabel?: string;
   /** prevent indexing (e.g. legal pages) */
   noIndex?: boolean;
   /** additional JSON-LD objects to embed in head */
@@ -35,6 +45,11 @@ const {
   title, 
   description = "DJ Hulk aus Stuttgart. Electronic Music DJ für Events, Feiern und Hochzeiten. Wöchentliche DJ Mixes auf Mixcloud.",
   image = "/img/djhulk_logo.webp",
+  lang = 'de',
+  keywords,
+  ogLocale = 'de_DE',
+  alternates,
+  skipLinkLabel = 'Zum Inhalt springen',
   noIndex = false,
   jsonLd,
   preloadImage,
@@ -61,15 +76,18 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="author" content="Holger Kampffmeyer" />
-    <meta name="keywords" content="Holger Kampffmeyer, DJ Hulk, Stuttgart, Mixcloud, DJ, House, Tech House, Drum n Bass" />
+    <meta name="keywords" content={keywords || "Holger Kampffmeyer, DJ Hulk, Stuttgart, Mixcloud, DJ, House, Tech House, Drum n Bass"} />
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
     <link rel="canonical" href={canonicalURL} />
+    {alternates?.map((alt) => (
+      <link rel="alternate" hreflang={alt.hreflang} href={new URL(alt.href, Astro.site).href} />
+    ))}
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#0a0a0f" />
     <meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow"} />
@@ -176,7 +194,7 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
     <meta property="og:image:width" content={ogImageWidth.toString()} />
     <meta property="og:image:height" content={ogImageHeight.toString()} />
     <meta property="og:image:alt" content={ogTitle || "DJ Hulk - Holger Kampffmeyer"} />
-    <meta property="og:locale" content="de_DE" />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:site_name" content="DJ Hulk - Holger Kampffmeyer" />
     {ogType === "music.playlist" && <meta property="music:musician" content="https://www.mixcloud.com/holger-kampffmeyer/" />}
     
@@ -196,7 +214,7 @@ const canonicalURL = new URL(canonicalPath, Astro.site);
   </head>
   <body class="min-h-screen">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-[var(--color-primary)] focus:text-white focus:rounded-lg">
-      Zum Inhalt springen
+      {skipLinkLabel}
     </a>
     <main id="main-content" tabindex="-1" class="outline-none">
       <slot />

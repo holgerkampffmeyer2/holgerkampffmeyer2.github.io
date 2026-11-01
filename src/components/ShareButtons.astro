@@ -1,0 +1,151 @@
+---
+import Icon from './Icon.astro';
+import { buildShareLinks } from '../utils/share';
+
+interface Props {
+  url: string;
+  title: string;
+  text: string;
+  hashtags?: string;
+  nativeLabel: string;
+  whatsappLabel: string;
+  facebookLabel: string;
+  xLabel: string;
+  linkedinLabel: string;
+  emailLabel: string;
+  copyLabel: string;
+  copiedLabel: string;
+}
+
+const {
+  url,
+  title,
+  text,
+  hashtags,
+  nativeLabel,
+  whatsappLabel,
+  facebookLabel,
+  xLabel,
+  linkedinLabel,
+  emailLabel,
+  copyLabel,
+  copiedLabel,
+} = Astro.props;
+
+const links = buildShareLinks({ url, title, text, hashtags });
+---
+
+<div class="flex flex-wrap gap-3" data-share-root data-share-url={url} data-share-title={title} data-share-text={text}>
+  <button
+    type="button"
+    class="hidden inline-flex items-center gap-2 rounded-lg bg-[var(--color-primary)] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-primary-hover)]"
+    data-native-share
+  >
+    <Icon name="share" class="h-4 w-4" />
+    {nativeLabel}
+  </button>
+
+  <a
+    href={links.whatsapp}
+    target="_blank"
+    rel="noopener"
+    class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+  >
+    <Icon name="whatsapp" class="h-5 w-5" />
+    {whatsappLabel}
+  </a>
+
+  <a
+    href={links.facebook}
+    target="_blank"
+    rel="noopener"
+    class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+  >
+    <Icon name="facebook" class="h-5 w-5" />
+    {facebookLabel}
+  </a>
+
+  <a
+    href={links.x}
+    target="_blank"
+    rel="noopener"
+    class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+  >
+    <Icon name="x" class="h-5 w-5" />
+    {xLabel}
+  </a>
+
+  <a
+    href={links.linkedin}
+    target="_blank"
+    rel="noopener"
+    class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+  >
+    <Icon name="linkedin" class="h-5 w-5" />
+    {linkedinLabel}
+  </a>
+
+  <a
+    href={links.email}
+    class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+  >
+    <Icon name="email" class="h-5 w-5" />
+    {emailLabel}
+  </a>
+
+  <button
+    type="button"
+    class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+    data-copy-url={url}
+    data-copy-label={copyLabel}
+    data-copied-label={copiedLabel}
+  >
+    <Icon name="copy" class="h-4 w-4" />
+    <span data-copy-text>{copyLabel}</span>
+  </button>
+</div>
+
+<script is:inline>
+  (function () {
+    var roots = document.querySelectorAll('[data-share-root]');
+    roots.forEach(function (root) {
+      if (root.dataset.shareInitialized) return;
+      root.dataset.shareInitialized = 'true';
+
+      var nativeButton = root.querySelector('[data-native-share]');
+      var copyButton = root.querySelector('[data-copy-url]');
+
+      if (nativeButton && navigator.share) {
+        nativeButton.classList.remove('hidden');
+        nativeButton.addEventListener('click', function () {
+          navigator
+            .share({
+              title: root.dataset.shareTitle,
+              text: root.dataset.shareText,
+              url: root.dataset.shareUrl,
+            })
+            .catch(function () {});
+        });
+      }
+
+      if (copyButton) {
+        copyButton.addEventListener('click', function () {
+          var url = copyButton.getAttribute('data-copy-url');
+          var label = copyButton.querySelector('[data-copy-text]');
+          if (!url) return;
+
+          navigator.clipboard
+            .writeText(url)
+            .then(function () {
+              if (!label) return;
+              label.textContent = copyButton.getAttribute('data-copied-label') || 'Copied';
+              window.setTimeout(function () {
+                label.textContent = copyButton.getAttribute('data-copy-label') || 'Copy';
+              }, 2000);
+            })
+            .catch(function () {});
+        });
+      }
+    });
+  })();
+</script>

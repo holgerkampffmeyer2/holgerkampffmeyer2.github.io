@@ -1,0 +1,313 @@
+---
+import { Picture } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../Navbar.astro';
+import Footer from '../Footer.astro';
+import SectionNav from '../SectionNav.astro';
+import Icon from '../Icon.astro';
+import BookingBody from './BookingBody.astro';
+import { bookingContent, type BookingLocale } from '../../data/booking';
+import { getFaqSchema } from '../../data/faqs';
+import heroImg from '../../assets/img/booking/dj-hulk-neon.webp';
+
+interface Props {
+  lang: BookingLocale;
+}
+
+const { lang } = Astro.props;
+const content = bookingContent[lang];
+const canonical = `https://holger-kampffmeyer.de${content.seo.path}`;
+
+const sections = [
+  { id: 'facts', label: content.labels.factSheet },
+  { id: 'bio', label: 'Bio' },
+  { id: 'genres', label: content.labels.genre },
+  { id: 'references', label: content.labels.references },
+  { id: 'formats', label: content.labels.formats },
+  { id: 'rider', label: content.labels.rider },
+  { id: 'press', label: content.labels.press },
+  { id: 'process', label: content.labels.process },
+  { id: 'faq', label: content.labels.faq },
+  { id: 'contact', label: content.labels.contact },
+];
+
+const breadcrumbName = lang === 'de' ? 'Booking' : 'Booking';
+const homeName = lang === 'de' ? 'Startseite' : 'Home';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: homeName, item: 'https://holger-kampffmeyer.de/' },
+      { '@type': 'ListItem', position: 2, name: breadcrumbName, item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: content.hero.title,
+    serviceType: 'DJ Booking',
+    description: content.seo.description,
+    url: canonical,
+    provider: {
+      '@type': 'Person',
+      name: 'Holger Kampffmeyer',
+      alternateName: 'DJ Hulk',
+      url: 'https://holger-kampffmeyer.de/djhulk-electronic-music',
+    },
+    areaServed: {
+      '@type': 'City',
+      name: 'Stuttgart',
+    },
+    image: `https://holger-kampffmeyer.de${content.seo.ogImage}`,
+  },
+  getFaqSchema(`booking-${lang}`),
+];
+---
+
+<Layout
+  lang={lang}
+  title={content.seo.title}
+  description={content.seo.description}
+  keywords={content.seo.keywords}
+  image={content.seo.ogImage}
+  ogLocale={content.seo.ogLocale}
+  alternates={[
+    { hreflang: 'de', href: '/booking' },
+    { hreflang: 'en', href: '/en/booking' },
+    { hreflang: 'x-default', href: '/booking' },
+  ]}
+  jsonLd={jsonLd}
+  skipLinkLabel={lang === 'de' ? 'Zum Inhalt springen' : 'Skip to content'}
+>
+  <Navbar currentPage={content.seo.path} />
+
+  <div id="top">
+    <section class="relative flex min-h-[85vh] items-center overflow-hidden pt-20">
+      <div class="absolute inset-0">
+        <Picture
+          src={heroImg}
+          formats={['avif', 'webp']}
+          widths={[640, 960, 1280, 1600]}
+          sizes="100vw"
+          alt={content.hero.imageAlt}
+          loading="eager"
+          class="h-full w-full object-cover object-top print:hidden"
+        />
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-bg)] via-[var(--color-bg)]/85 to-[var(--color-bg)]/20 print:hidden"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-transparent to-transparent print:hidden"></div>
+
+      <div class="relative mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 print:hidden">
+        <div class="max-w-3xl">
+          <div class="mb-6 flex flex-wrap items-center gap-3">
+            <p class="inline-flex items-center gap-2 rounded-full border border-[var(--color-primary)]/40 bg-[var(--color-primary)]/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--color-primary)]">
+              <Icon name="volume-up" class="h-4 w-4" />
+              {content.hero.eyebrow}
+            </p>
+            <a
+              href={content.hero.languageHref}
+              hreflang={content.seo.alternateHrefLang}
+              lang={content.seo.alternateHrefLang}
+              class="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-border)] px-3 py-1.5 text-xs font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+            >
+              <Icon name="link" class="h-3.5 w-3.5" />
+              {content.hero.languageLabel}
+            </a>
+          </div>
+
+          <h1 class="font-play text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+            {content.hero.title}
+          </h1>
+          <p class="mt-4 text-lg font-medium text-[var(--color-text)] sm:text-xl">{content.hero.subtitle}</p>
+          <p class="mt-4 max-w-2xl text-base leading-relaxed text-[var(--color-text-muted)] sm:text-lg">
+            {content.hero.description}
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="#contact"
+              class="inline-flex items-center gap-2 rounded-lg bg-[var(--color-primary)] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-primary-hover)]"
+            >
+              <Icon name="email" class="h-5 w-5" />
+              {content.hero.primaryCta}
+            </a>
+            <a
+              href={content.press.pdfHref}
+              download
+              class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)]/60 px-6 py-3.5 text-sm font-medium text-[var(--color-text-muted)] backdrop-blur transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+            >
+              <Icon name="download" class="h-4 w-4" />
+              {content.hero.secondaryCta}
+            </a>
+            <a
+              href="#share"
+              class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)]/60 px-6 py-3.5 text-sm font-medium text-[var(--color-text-muted)] backdrop-blur transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+            >
+              <Icon name="share" class="h-4 w-4" />
+              {content.hero.shareCta}
+            </a>
+          </div>
+
+          <ul class="mt-10 flex flex-wrap gap-x-5 gap-y-2">
+            {content.trust.map((name) => (
+              <li class="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-muted)]">
+                <Icon name="check" class="h-4 w-4 text-[var(--color-primary)]" />
+                {name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Print-only compact hero -->
+    <header class="hidden print:block print:mb-8 print:border-b print:border-gray-300 print:pb-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <Picture
+              src={heroImg}
+              formats={['avif', 'webp']}
+              widths={[200]}
+              sizes="200px"
+              alt=""
+              class="h-16 w-16 rounded-full object-cover"
+            />
+            <div>
+              <h1 class="font-play text-2xl font-bold text-gray-900">{content.hero.title}</h1>
+              <p class="text-base font-medium text-gray-600">{content.hero.subtitle}</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="text-sm text-gray-500">{content.labels.press}</p>
+            <p class="text-xs text-gray-400">{new Date().toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <SectionNav sections={sections} class="print:hidden" />
+
+    <BookingBody lang={lang} url={canonical} />
+  </div>
+
+  <Footer />
+</Layout>
+
+<style is:global>
+  @media print {
+    html {
+      --color-bg: #ffffff;
+      --color-surface: #f5f5f5;
+      --color-surface-hover: #eeeeee;
+      --color-text: #111111;
+      --color-text-muted: #444444;
+      --color-border: #dddddd;
+      --color-primary: #6d28d9;
+      --color-primary-hover: #5b21b6;
+      --color-secondary: #7c3aed;
+      font-size: 11pt;
+      line-height: 1.5;
+    }
+
+    @page {
+      margin: 18mm 16mm;
+      @top-center {
+        content: "DJ Hulk — Electronic Press Kit";
+        font-size: 8pt;
+        color: #999;
+      }
+      @bottom-center {
+        content: counter(page) " / " counter(pages);
+        font-size: 8pt;
+        color: #999;
+      }
+    }
+
+    nav, footer, [data-section-nav], [data-share-root], [data-print-epk], [data-native-share], [data-copy-bio], [data-copy-url], [class*="print:hidden"] { display: none !important; }
+
+    body { background: #ffffff !important; color: #111111 !important; }
+
+    section { break-inside: avoid; padding: 0.75rem 0 !important; background: #ffffff !important; }
+    section > div { padding-left: 0 !important; padding-right: 0 !important; }
+    [class*="max-w-7xl"], [class*="max-w-4xl"], [class*="max-w-3xl"] { padding-left: 0 !important; padding-right: 0 !important; }
+
+    @page { margin: 18mm 16mm; @top-center { content: "DJ Hulk — Electronic Press Kit"; font-size: 8pt; color: #999; } @bottom-center { content: counter(page) " / " counter(pages); font-size: 8pt; color: #999; } }
+
+    h1 { font-size: 1.75rem !important; line-height: 1.2 !important; margin-bottom: 0.75rem !important; }
+    h2 { font-size: 1.5rem !important; line-height: 1.3 !important; margin-top: 2rem !important; margin-bottom: 1rem !important; }
+    h3 { font-size: 1.125rem !important; line-height: 1.3 !important; margin-top: 1.5rem !important; margin-bottom: 0.5rem !important; }
+    p, li { font-size: 0.9375rem !important; line-height: 1.6 !important; margin-bottom: 0.5rem !important; }
+
+    a { color: #111111 !important; text-decoration: none !important; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #666; font-weight: normal; }
+    a[href^="#"]::after { content: ""; }
+
+    [class*="grid"] { display: block !important; }
+    [class*="grid"] > * { break-inside: avoid; margin-bottom: 1rem; }
+
+    img { max-height: none !important; object-fit: cover; }
+    figure { break-inside: avoid; margin: 0 0 1rem 0; }
+    figcaption { font-size: 0.75rem !important; color: #666 !important; margin-top: 0.25rem !important; }
+
+    dl > div { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+    dt { font-weight: 500; color: #333; }
+    dd { font-weight: 400; color: #555; text-align: right; }
+
+    [class*="lg:grid-cols-3"] > div { width: 100% !important; margin-bottom: 1.5rem; }
+    [class*="lg:grid-cols-3"] h3 { font-size: 1rem !important; border-bottom: 1px solid #ddd; padding-bottom: 0.25rem; margin-bottom: 0.5rem; }
+    [class*="lg:grid-cols-3"] ul { padding-left: 1.25rem; }
+    [class*="lg:grid-cols-3"] li { font-size: 0.875rem !important; line-height: 1.6 !important; margin-bottom: 0.35rem !important; }
+
+    ol > li { break-inside: avoid; padding: 1rem; border: 1px solid #ddd; border-radius: 0.5rem; margin-bottom: 0.75rem; background: #fafafa; }
+    ol > li > span:first-child { font-size: 2rem !important; font-weight: 700; color: #6d28d9; display: block; margin-bottom: 0.5rem; }
+
+    figure > div { aspect-ratio: 4/5 !important; }
+    figure > div > img { max-height: 200px !important; }
+
+    section[id="facts"] dl { display: flex !important; flex-wrap: wrap !important; gap: 0.35rem 1.5rem !important; }
+    section[id="facts"] dl > div { flex: 1 1 calc(50% - 0.75rem) !important; min-width: 130px !important; padding: 0.25rem 0 !important; border-bottom: 1px solid #eee !important; margin: 0 !important; }
+    section[id="facts"] dt { font-weight: 600 !important; color: #333 !important; font-size: 0.8125rem !important; }
+    section[id="facts"] dd { font-weight: 400 !important; color: #555 !important; text-align: right !important; margin: 0 !important; font-size: 0.8125rem !important; }
+
+    section[id="social-stats"] { page-break-inside: avoid; padding: 0.5rem 0 !important; }
+    section[id="social-stats"] [class*="grid"] { display: flex !important; flex-wrap: wrap !important; gap: 0.5rem !important; justify-content: space-between; }
+    section[id="social-stats"] [class*="grid"] > a { width: calc(33.333% - 0.33rem) !important; margin-bottom: 0 !important; padding: 0.5rem !important; border: 1px solid #ddd !important; border-radius: 0.375rem !important; background: #fafafa !important; text-decoration: none !important; display: flex !important; flex-direction: column; }
+    section[id="social-stats"] [class*="grid"] > a::after { content: none !important; }
+    section[id="social-stats"] [class*="flex"][class*="h-12"][class*="w-12"] { width: 40px !important; height: 40px !important; border-radius: 0.375rem !important; border: 1px solid #ddd !important; background: #fff !important; margin-bottom: 0.35rem !important; }
+    section[id="social-stats"] .font-play.text-4xl, section[id="social-stats"] .font-play.text-5xl { font-size: 1.75rem !important; line-height: 1.15 !important; color: #111 !important; }
+    section[id="social-stats"] .text-sm.text-gray-500 { color: #555 !important; font-size: 0.75rem !important; }
+    section[id="social-stats"] .mt-2.flex.items-center.gap-2 { font-size: 0.75rem !important; margin-top: 0.25rem !important; }
+    section[id="social-stats"] .mt-6.text-sm { font-size: 0.6875rem !important; color: #888 !important; margin-top: 0.5rem !important; text-align: center; width: 100%; }
+    section[id="social-stats"] h2 { font-size: 1.125rem !important; margin-top: 0.75rem !important; margin-bottom: 0.5rem !important; }
+    section[id="social-stats"] p.text-lg { font-size: 0.875rem !important; margin-bottom: 0.5rem !important; }
+    section[id="social-stats"] > div:first-child { margin-bottom: 0.5rem !important; }
+
+    section[id="press"] figure { break-inside: avoid; margin: 0 0 0.5rem 0; padding: 0.25rem !important; }
+    section[id="press"] figure > div { aspect-ratio: 4/5 !important; max-height: 160px !important; }
+    section[id="press"] figcaption { font-size: 0.6875rem !important; color: #666 !important; margin-top: 0.15rem !important; padding: 0.25rem !important; }
+    section[id="press"] figcaption a { font-size: 0.6875rem !important; }
+
+    section[id="share"], section[id="faq"], section[id="references"] { display: none !important; }
+
+    section[id="press"] [class*="grid"][class*="gap-3"] > a { display: none !important; }
+
+    section[id="formats"] { page-break-inside: avoid !important; padding: 0.5rem 0 !important; }
+    section[id="formats"] [class*="grid"] { display: flex !important; flex-wrap: wrap !important; gap: 0.5rem !important; }
+    section[id="formats"] [class*="grid"] > div { width: calc(50% - 0.25rem) !important; min-width: 200px !important; padding: 0.5rem !important; border: 1px solid #ddd !important; border-radius: 0.375rem !important; background: #fafafa !important; break-inside: avoid !important; margin-bottom: 0.5rem !important; }
+    section[id="formats"] [class*="grid"] > div > div { display: none !important; }
+    section[id="formats"] h3 { font-size: 0.9375rem !important; margin: 0.25rem 0 !important; line-height: 1.3 !important; }
+    section[id="formats"] p { font-size: 0.8125rem !important; margin: 0 !important; line-height: 1.4 !important; color: #555 !important; }
+
+    section[id="contact"] [class*="grid"][class*="gap-10"] { display: block !important; }
+    section[id="contact"] a[href^="mailto:"], section[id="contact"] a[href^="tel:"], section[id="contact"] a[href^="https://wa.me"] { display: inline-block !important; margin: 0.25rem 0.5rem 0.25rem 0 !important; padding: 0.5rem 1rem !important; font-size: 0.875rem !important; border: 1px solid #ddd !important; background: #fafafa !important; border-radius: 0.375rem !important; text-decoration: none !important; color: #333 !important; }
+    section[id="contact"] a[href^="mailto:"]::after, section[id="contact"] a[href^="tel:"]::after, section[id="contact"] a[href^="https://wa.me"]::after { content: none !important; }
+    section[id="contact"] aside { margin-top: 1rem !important; padding: 0.75rem !important; border: 1px solid #ddd !important; border-radius: 0.375rem !important; background: #fafafa !important; }
+    section[id="contact"] aside h3 { font-size: 0.9375rem !important; margin-bottom: 0.35rem !important; border-bottom: 1px solid #ddd !important; padding-bottom: 0.2rem !important; }
+    section[id="contact"] aside p { font-size: 0.8125rem !important; margin: 0.2rem 0 !important; }
+
+    [data-share-root] { display: none !important; }
+    [data-copy-url] { display: none !important; }
+  }</style>

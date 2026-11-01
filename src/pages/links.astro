@@ -20,6 +20,18 @@ try {
 
 const links = [
   {
+    name: "Booking & EPK",
+    url: "/booking",
+    icon: "calendar",
+    description: "DJ-Booking, technischer Rider, Referenzen & Pressefotos"
+  },
+  {
+    name: "EPK als PDF",
+    url: "/files/dj-hulk-epk-de.pdf",
+    icon: "download",
+    description: "Press Kit & technischer Rider zum Download"
+  },
+  {
     name: "Sound & Licht Stuttgart",
     url: "https://soundundlicht-stuttgart.de/",
     icon: "volume-up",
@@ -166,8 +178,9 @@ const links = [
         {links.map((link) => (
           <a
             href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
+            target={link.url.startsWith('/') ? undefined : '_blank'}
+            rel={link.url.startsWith('/') ? undefined : 'noopener noreferrer'}
+            download={link.url.endsWith('.pdf') ? '' : undefined}
             class="flex items-center gap-4 w-full bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl px-5 py-4 hover:border-[var(--color-primary)] hover:bg-[var(--color-surface-hover)] transition-all duration-200 hover:-translate-y-0.5 group"
           >
             <div

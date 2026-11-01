@@ -33,6 +33,7 @@ const { currentPage = 'home' } = Astro.props;
     },
     { href: '/vermietung', label: 'Vermietung' },
     { href: '/work', label: 'Work' },
+    { href: '/booking', label: 'Booking' },
     { href: '/links', label: 'Links' },
     { href: '/impressum', label: 'Impressum', rel: 'nofollow' },
   ];
@@ -56,6 +57,7 @@ const { currentPage = 'home' } = Astro.props;
             const isActive = normalize(currentPage) === normalize(item.href) ||
                              normalize(currentPage).startsWith('/dj') && normalize(item.href) === '/djhulk-electronic-music' ||
                              normalize(currentPage).startsWith('/vermietung') && normalize(item.href) === '/vermietung' ||
+                             (normalize(currentPage).startsWith('/booking') || normalize(currentPage).startsWith('/en/booking')) && normalize(item.href) === '/booking' ||
                              normalize(currentPage) === '' && normalize(item.href) === '';
           
           return item.hasDropdown ? (

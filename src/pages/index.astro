@@ -47,7 +47,10 @@ const faqs = getFaqsForPage('index');
          category: "Electro, House, Tech House, Techno, DnB",
          description: "Stuttgarter DJ für elektronische Musik - House, Tech House, Techno, Drum n Bass",
          backgroundImage: sliderImg1,
-          buttons: [{ text: "Mehr über DJ Hulk", href: "/djhulk-electronic-music" }]
+          buttons: [
+            { text: "Mehr über DJ Hulk", href: "/djhulk-electronic-music" },
+            { text: "Booking & EPK", href: "/booking" }
+          ]
         },
         {
           title: "Mixes mit Tracklists",
@@ -246,6 +249,73 @@ const faqs = getFaqsForPage('index');
     </div>
   </section>
 
+  <!-- Booking Section -->
+  <section id="booking" class="section-padding">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-center">
+        <div class="animate-on-scroll">
+          <span class="text-[var(--color-secondary)] text-lg tracking-widest uppercase">Booking</span>
+          <h2 class="font-play text-4xl md:text-5xl font-bold mt-4 mb-6">
+            DJ Hulk buchen
+          </h2>
+          <p class="text-[var(--color-text-muted)] text-lg mb-6">
+            Clubnacht, Festival, Firmenfeier oder private Party: Alle Infos zu Sound,
+            Referenzen, technischem Rider und Pressefotos findest du im Booking & EPK.
+          </p>
+          <ul class="grid gap-3 sm:grid-cols-2 mb-8">
+            <li class="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
+              <Icon name="check" class="h-4 w-4 text-[var(--color-primary)]" />
+              House, Tech House, Techno & DnB
+            </li>
+            <li class="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
+              <Icon name="check" class="h-4 w-4 text-[var(--color-primary)]" />
+              CDJ-Setup oder eigener DDJ-1000
+            </li>
+            <li class="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
+              <Icon name="check" class="h-4 w-4 text-[var(--color-primary)]" />
+              EPK als PDF & Pressefotos
+            </li>
+            <li class="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
+              <Icon name="check" class="h-4 w-4 text-[var(--color-primary)]" />
+              Stuttgart & deutschlandweit
+            </li>
+          </ul>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="/booking" class="btn-primary flex items-center justify-center gap-2">
+              <Icon name="calendar" class="h-5 w-5" />
+              Booking & EPK ansehen
+            </a>
+            <a href="/files/dj-hulk-epk-de.pdf" download class="btn-secondary flex items-center justify-center gap-2">
+              <Icon name="download" class="h-4 w-4" />
+              EPK als PDF
+            </a>
+          </div>
+        </div>
+        <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8 animate-on-scroll">
+          <h3 class="font-play text-2xl font-bold mb-4">Auf einen Blick</h3>
+          <dl class="space-y-4">
+            <div class="flex justify-between gap-4 border-b border-[var(--color-border)] pb-3">
+              <dt class="text-sm text-[var(--color-text-muted)]">Genres</dt>
+              <dd class="text-sm font-medium text-right">House, Tech House, Techno, DnB</dd>
+            </div>
+            <div class="flex justify-between gap-4 border-b border-[var(--color-border)] pb-3">
+              <dt class="text-sm text-[var(--color-text-muted)]">Formate</dt>
+              <dd class="text-sm font-medium text-right">Club, Festival, Firmenfeier, Private</dd>
+            </div>
+            <div class="flex justify-between gap-4 border-b border-[var(--color-border)] pb-3">
+              <dt class="text-sm text-[var(--color-text-muted)]">Standort</dt>
+              <dd class="text-sm font-medium text-right">Stuttgart / Leinfelden-Echterdingen</dd>
+            </div>
+            <div class="flex justify-between gap-4">
+              <dt class="text-sm text-[var(--color-text-muted)]">Preise</dt>
+              <dd class="text-sm font-medium text-right">Auf Anfrage</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Kontakt Section -->
   <section id="kontakt" class="section-padding bg-[var(--color-surface)]">
     <div class="max-w-4xl mx-auto text-center animate-on-scroll">
@@ -270,7 +340,7 @@ const faqs = getFaqsForPage('index');
           holger.kampffmeyer+dj@gmail.com
         </a>
         <a
-          href="/djhulk-electronic-music"
+          href="/booking"
           class="btn-secondary flex items-center justify-center gap-2"
         >
           Als DJ buchen

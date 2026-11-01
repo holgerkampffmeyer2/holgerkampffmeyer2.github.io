@@ -23,7 +23,7 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 ## Build- & Test-Kommandos
 - `pnpm run build` — Production Build (Details: [docs/build.md](docs/build.md))
 - `pnpm run build:seo` — RSS + urllist.txt generieren
-- `pnpm run build:full` — Fetch Mixcloud + Optimize Images + Build + SEO (für Mix-Posts, **ACHTUNG:** 24h Cache, für neue Mixes `--force` nötig)
+- `pnpm run build:full` — Fetch Mixcloud + Fetch Social Stats + Optimize Images + Build + SEO (für Mix-Posts, **ACHTUNG:** 24h Cache, für neue Mixes `--force` nötig)
 - `pnpm run dev` — Dev server
 - `pnpm run preview` — Preview build
 - `pnpm run lint` — ESLint
@@ -35,6 +35,9 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 - `pnpm run label:apply` — Label-Vorschläge in src/data/labels.json mergen
 - `pnpm run label:urls` — Label-URLs recherchieren (MusicBrainz url-rels) → label-urls.json
 - `pnpm run label:urls:apply` — Label-URLs aus label-urls.json in labels.json mergen (nur `url`-Felder)
+- `pnpm run stats:fetch` — Social Stats (Instagram, Facebook, Mixcloud) zur Buildzeit abrufen → src/data/social-stats.json
+- `pnpm run epk:og` — OG-Images für Booking-Seite generieren (1200×630)
+- `pnpm run epk:pdf` — EPK-PDFs für DE/EN via Playwright generieren (dist muss gebaut sein)
 - `node scripts/label-url-finder.mjs` — Optionales Pattern-Fallback (Domain-Patterns + HEAD-Check) → label-url-proposals.json
 - `node scripts/label-url-quality.mjs` — Quality-Check der Registry-URLs (HTML-Heuristik) → label-url-quality-report.json
 
@@ -115,9 +118,12 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 ## Wartungsskripte
 - `node scripts/update-image-refs.mjs` — Ersetzt JPEG/PNG-Bildreferenzen durch WebP-Versionen (falls verfügbar) in allen .astro, .html, .css und .mjs Dateien
 - `node scripts/fetch-mixcloud.mjs --force` — Erzwingt frischen Mixcloud-Fetch (24h Cache umgehen)
+- `node scripts/fetch-social-stats.mjs` — Holt Follower-Zahlen von Instagram, Facebook, Mixcloud (Buildzeit, Cache-fallback)
 - `node scripts/optimize-images.mjs` — Optimiert alle Bilder im Projekt
 - `node scripts/create-webp.mjs -w 1200 <datei>` — Konvertiert Einzelbild zu WebP
 - `node scripts/download-instagram.cjs <url>` — Lädt Bild von Instagram-Post-URL herunter (nutzt Playwright)
+- `node scripts/generate-booking-og.mjs` — Generiert OG-Images für Booking-Seite (1200×630)
+- `node scripts/generate-epk-pdf.mjs` — Generiert EPK-PDFs für DE/EN via Playwright (braucht `dist/`)
 
 ## IndexNow
 - `pnpm run indexnow-submit` — Sendet alle URLs aus `public/urllist.txt` an die IndexNow API (Bing). Wird nach `build:seo` ausgeführt.
@@ -129,3 +135,13 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 - **`vermietung.astro`**: **Kein FAQPage Schema** – Weiterleitung zu soundundlicht-stuttgart.de
 - **`djhulk-electronic-music.astro`**: Person + MusicGroup Schema
 - **`dj/videos.astro`**: VideoObject Schema (ohne duration, mit publisher)
+- **`booking.astro` / `en/booking.astro`**: Service + BreadcrumbList + FAQPage + LocalBusiness Schema. Hero mit LCP-Bild, SectionNav, SocialStats (Count-Up), PressPhotoGrid (Download), ShareButtons (Native + Copy), Print-to-PDF Button.
+
+## Workflows
+
+### Booking / EPK-Seite pflegen
+1. Inhalte in `src/data/booking.ts` anpassen (DE/EN).
+2. Falls neue Pressefotos: `node scripts/import-booking-images.mjs` ausführen, dann `pnpm run epk:og` für OG-Images.
+3. `pnpm run stats:fetch` für aktuelle Follower-Zahlen (optional, Cache 24h).
+4. `pnpm run build && pnpm run epk:pdf` — EPK-PDFs neu generieren (committen).
+5. `pnpm run build:seo` für Sitemap/RSS/urllist.

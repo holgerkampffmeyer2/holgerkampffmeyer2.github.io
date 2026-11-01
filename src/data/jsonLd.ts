@@ -98,12 +98,18 @@ export const siteNavigationJsonLd = {
     {
       "@type": "SiteNavigationElement",
       "position": 7,
+      "name": "Booking & EPK",
+      "url": "https://holger-kampffmeyer.de/booking/"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "position": 8,
       "name": "Links",
       "url": "https://holger-kampffmeyer.de/links/"
     },
     {
       "@type": "SiteNavigationElement",
-      "position": 8,
+      "position": 9,
       "name": "Impressum",
       "url": "https://holger-kampffmeyer.de/impressum/"
     }
