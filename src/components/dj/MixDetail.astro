@@ -1,6 +1,8 @@
 ---
 import Icon from '../Icon.astro';
 import TracklistTable from './TracklistTable.astro';
+import BookingCTA from './BookingCTA.astro';
+import ShareButtons from '../ShareButtons.astro';
 import { USECASE_CONFIG } from '../../data/usecase-config';
 import type { BlogPostData } from '../../types/blog';
 import { formatDate, formatDuration } from '../../utils/format';
@@ -98,6 +100,9 @@ const { post, isLatest = false, showNavigation = true } = Astro.props;
       ></iframe>
     </div>
 
+    {/* Booking CTA - Sidebar variant after player */}
+    <BookingCTA variant="sidebar" class="mb-8" />
+
     {/* Tracklist */}
     {post.tracklist && post.tracklist.length > 0 && (
       <div class="bg-[var(--color-surface)] rounded-xl overflow-hidden border border-[var(--color-border)] mb-8">
@@ -105,7 +110,7 @@ const { post, isLatest = false, showNavigation = true } = Astro.props;
           <h2 class="font-play text-lg font-bold">Tracklist ({post.tracklist.length} Tracks)</h2>
         </div>
         <div class="p-4 max-h-[500px] overflow-y-auto">
-          <TracklistTable tracks={post.tracklist} />
+          <TracklistTable tracks={post.tracklist} displayMode="responsive" />
         </div>
       </div>
     )}
@@ -119,5 +124,25 @@ const { post, isLatest = false, showNavigation = true } = Astro.props;
         </a>
       </div>
     )}
+
+    {/* Share this mix */}
+    <ShareButtons
+      url={`https://holger-kampffmeyer.de/dj/mixes/${post.slug}`}
+      title={post.title}
+      text={post.description?.substring(0, 200) || `DJ Hulk Mix: ${post.title}`}
+      hashtags="DJHulk,TechHouse,House,ElectronicMusic"
+      nativeLabel="Teilen"
+      whatsappLabel="WhatsApp"
+      facebookLabel="Facebook"
+      xLabel="X"
+      linkedinLabel="LinkedIn"
+      emailLabel="E-Mail"
+      pinterestLabel="Pinterest"
+      redditLabel="Reddit"
+      telegramLabel="Telegram"
+      tiktokLabel="TikTok"
+      copyLabel="Link kopieren"
+      copiedLabel="Link kopiert"
+    />
   </div>
 </article>

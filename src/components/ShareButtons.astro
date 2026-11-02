@@ -13,6 +13,10 @@ interface Props {
   xLabel: string;
   linkedinLabel: string;
   emailLabel: string;
+  pinterestLabel: string;
+  redditLabel: string;
+  telegramLabel: string;
+  tiktokLabel: string;
   copyLabel: string;
   copiedLabel: string;
 }
@@ -28,6 +32,10 @@ const {
   xLabel,
   linkedinLabel,
   emailLabel,
+  pinterestLabel,
+  redditLabel,
+  telegramLabel,
+  tiktokLabel,
   copyLabel,
   copiedLabel,
 } = Astro.props;
@@ -83,6 +91,46 @@ const links = buildShareLinks({ url, title, text, hashtags });
   >
     <Icon name="linkedin" class="h-5 w-5" />
     {linkedinLabel}
+  </a>
+
+  <a
+    href={links.pinterest}
+    target="_blank"
+    rel="noopener"
+    class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+  >
+    <Icon name="pinterest" class="h-5 w-5" />
+    {pinterestLabel}
+  </a>
+
+  <a
+    href={links.tiktok}
+    target="_blank"
+    rel="noopener"
+    class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+  >
+    <Icon name="tiktok" class="h-5 w-5" />
+    {tiktokLabel}
+  </a>
+
+  <a
+    href={links.reddit}
+    target="_blank"
+    rel="noopener"
+    class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+  >
+    <Icon name="reddit" class="h-5 w-5" />
+    {redditLabel}
+  </a>
+
+  <a
+    href={links.telegram}
+    target="_blank"
+    rel="noopener"
+    class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+  >
+    <Icon name="telegram" class="h-5 w-5" />
+    {telegramLabel}
   </a>
 
   <a

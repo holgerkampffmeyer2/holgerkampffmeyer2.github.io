@@ -1,0 +1,51 @@
+---
+import Icon from '../Icon.astro';
+
+interface Props {
+  variant?: 'sidebar' | 'footer' | 'inline';
+  class?: string;
+}
+
+const { variant = 'sidebar', class: className = '' } = Astro.props;
+
+const baseStyles = 'bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/10 rounded-xl';
+const variantStyles = {
+  sidebar: 'p-4 md:p-6',
+  footer: 'p-4 md:p-6 mt-8',
+  inline: 'p-3 md:p-4 my-6',
+};
+
+const titleStyles = 'font-play font-bold text-[var(--color-primary)]';
+const titleSizes = {
+  sidebar: 'text-lg',
+  footer: 'text-base',
+  inline: 'text-sm',
+};
+
+const textStyles = 'text-[var(--color-text-muted)]';
+const textSizes = {
+  sidebar: 'text-sm',
+  footer: 'text-sm',
+  inline: 'text-xs',
+};
+
+const buttonStyles = 'inline-flex items-center gap-2 bg-[var(--color-primary)] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[var(--color-primary-hover)] transition-colors';
+const buttonSizes = {
+  sidebar: 'px-4 py-2 text-sm',
+  footer: 'px-4 py-2 text-sm',
+  inline: 'px-3 py-1.5 text-xs',
+};
+---
+
+<aside class={`${baseStyles} ${variantStyles[variant]} ${className}`} aria-label="Booking CTA">
+  <h3 class={`${titleStyles} ${titleSizes[variant]} mb-2`}>
+    Gefällt dir der Sound?
+  </h3>
+  <p class={`${textStyles} ${textSizes[variant]} mb-3`}>
+    DJ Hulk für dein Event, Club oder Festival buchen.
+  </p>
+  <a href="/booking" class={`${buttonStyles} ${buttonSizes[variant]}`}>
+    <Icon name="calendar" class="w-4 h-4" />
+    Booking & EPK ansehen
+  </a>
+</aside>

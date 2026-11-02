@@ -11,6 +11,10 @@ export interface ShareLinks {
   x: string;
   linkedin: string;
   email: string;
+  pinterest: string;
+  reddit: string;
+  telegram: string;
+  tiktok: string;
 }
 
 export interface MailtoInput {
@@ -19,19 +23,30 @@ export interface MailtoInput {
   body: string;
 }
 
-export function buildShareLinks({ url, title, text, hashtags = '' }: ShareInput): ShareLinks {
+export function buildShareLinks({ url, title, text, hashtags }: ShareInput): ShareLinks {
   const encodedUrl = encodeURIComponent(url);
   const shareText = `${text} ${url}`.trim();
   const encodedText = encodeURIComponent(shareText);
   const encodedTitle = encodeURIComponent(title);
-  const hashtagParam = hashtags ? `&hashtags=${encodeURIComponent(hashtags)}` : '';
+  const encodedHashtags = hashtags ? encodeURIComponent(hashtags) : '';
+
+  const pinterestUrl = `https://pinterest.com/pin/create/button/?url=${encodedUrl}&description=${encodedText}`;
+  const redditUrl = `https://reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`;
+  const telegramUrl = `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}`;
+  const tiktokUrl = `https://www.tiktok.com/share/item/?url=${encodedUrl}&desc=${encodedText}`;
+
+  const xUrl = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}${encodedHashtags ? `&hashtags=${encodedHashtags}` : ''}`;
 
   return {
     whatsapp: `https://wa.me/?text=${encodedText}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-    x: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}${hashtagParam}`,
+    x: xUrl,
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
     email: `mailto:?subject=${encodedTitle}&body=${encodedText}`,
+    pinterest: pinterestUrl,
+    reddit: redditUrl,
+    telegram: telegramUrl,
+    tiktok: tiktokUrl,
   };
 }
 

@@ -25,7 +25,7 @@ const { sections, class: className = '' } = Astro.props;
 <script>
   (function () {
     var links = document.querySelectorAll("[data-section-link]");
-    var sections = document.querySelectorAll("section[id]");
+    var sections: HTMLElement[] = Array.from(document.querySelectorAll("section[id]"));
     if (!links.length || !sections.length) return;
 
     function updateActive(id: string) {
@@ -34,6 +34,7 @@ const { sections, class: className = '' } = Astro.props;
       });
     }
 
+    // Primary: IntersectionObserver with generous rootMargin
     var observer = new IntersectionObserver(
       function (entries) {
         var visible: { id: string; ratio: number }[] = [];
@@ -46,12 +47,66 @@ const { sections, class: className = '' } = Astro.props;
         visible.sort(function (a, b) { return b.ratio - a.ratio; });
         updateActive(visible[0].id);
       },
-      { threshold: [0, 0.25, 0.5, 0.75, 1], rootMargin: "-80px 0px -40% 0px" }
+      { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1], rootMargin: "-80px 0px -50% 0px" }
     );
 
     sections.forEach(function (section) {
       observer.observe(section);
     });
+
+    // Re-observe sections when their size changes (e.g., lazy images load)
+    var resizeObserver = new ResizeObserver(function (entries) {
+      entries.forEach(function (entry) {
+        observer.unobserve(entry.target);
+        observer.observe(entry.target);
+      });
+    });
+    sections.forEach(function (section) {
+      resizeObserver.observe(section);
+    });
+
+    // Fallback: scroll-based detection using getBoundingClientRect
+    // Handles edge cases where IntersectionObserver misses dynamic content
+    var scrollTimeout: number;
+    function checkScrollPosition() {
+      var bestSection: HTMLElement | null = null;
+      var bestScore = -1;
+      var navHeight = 80; // sticky nav offset
+
+      for (var i = 0; i < sections.length; i++) {
+        var section = sections[i];
+        var rect = section.getBoundingClientRect();
+        var sectionTop = rect.top;
+        var sectionBottom = rect.bottom;
+        var viewportHeight = window.innerHeight;
+
+        // Section is visible if it overlaps with the "active zone" (below nav, above 50% of viewport)
+        var activeZoneTop = navHeight;
+        var activeZoneBottom = viewportHeight * 0.5;
+
+        // Calculate overlap with active zone
+        var overlapTop = Math.max(sectionTop, activeZoneTop);
+        var overlapBottom = Math.min(sectionBottom, activeZoneBottom);
+        var overlap = Math.max(0, overlapBottom - overlapTop);
+
+        if (overlap > bestScore) {
+          bestScore = overlap;
+          bestSection = section;
+        }
+      }
+
+      if (bestSection) {
+        updateActive(bestSection.id);
+      }
+    }
+
+    window.addEventListener("scroll", function () {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = window.setTimeout(checkScrollPosition, 50);
+    }, { passive: true });
+
+    // Initial check
+    checkScrollPosition();
 
     links.forEach(function (link) {
       link.addEventListener("click", function (e) {

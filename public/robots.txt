@@ -20,6 +20,28 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
+# Additional AI Crawlers
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
 # LLMs.txt for AI crawlers
 LLMs.txt: /llms.txt
 

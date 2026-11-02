@@ -9,22 +9,24 @@ import { getDjPersonSchema } from "../../../utils/dj-schema.js";
 import type { BlogPostData } from "../../../types/blog";
 import { loadBlogPosts } from "../../../utils/blog-data";
 import { toIsoDuration } from "../../../utils/format";
+import labelsData from "../../../data/labels.json";
+import { buildTrackLabels } from "../../../utils/track-labels.js";
 
 export async function getStaticPaths() {
   const allPosts = await loadBlogPosts();
   const postsWithTracklists = allPosts.filter((post: BlogPostData) => post.hasTracklist);
 
    return postsWithTracklists.map((post: BlogPostData, index: number) => {
-     const currentIndex = index;
-     const prevPost = currentIndex < postsWithTracklists.length - 1 ? postsWithTracklists[currentIndex + 1] : null;
-     const nextPost = currentIndex > 0 ? postsWithTracklists[currentIndex - 1] : null;
-     const isLatest = index === 0;
+      const currentIndex = index;
+      const prevPost = currentIndex < postsWithTracklists.length - 1 ? postsWithTracklists[currentIndex + 1] : null;
+      const nextPost = currentIndex > 0 ? postsWithTracklists[currentIndex - 1] : null;
+      const isLatest = index === 0;
 
-     return {
-        params: { number: post.slug },
-       props: { post, prevPost, nextPost, isLatest }
-     };
-   });
+      return {
+         params: { number: post.slug },
+        props: { post, prevPost, nextPost, isLatest }
+      };
+    });
 }
 
 interface Props {
@@ -36,25 +38,86 @@ interface Props {
 
 const { post, prevPost, nextPost, isLatest } = Astro.props;
 
-const curDisplay = getMixDisplay(post.key, post.title);
-const prefix = curDisplay.mixNum ? `Mix#${curDisplay.mixNum} - ` : '';
-let rawTitle = `${prefix}${post.title} - DJ Hulk Weekly Mix - House, Tech House, Deep House - Electronic Music`;
+// Build track labels for this mix
+const trackLabels = buildTrackLabels(labelsData);
+
+// Get unique labels for this mix, sorted by frequency
+const labelCounts = new Map<string, { name: string; url: string | null; count: number }>();
+if (post.tracklist) {
+  for (const track of post.tracklist) {
+    const label = trackLabels.get(track);
+    if (label) {
+      const key = label.name;
+      const existing = labelCounts.get(key) || { name: label.name, url: label.url, count: 0 };
+      existing.count++;
+      labelCounts.set(key, existing);
+    }
+  }
+}
+
+// Top labels sorted by count
+const topLabels = Array.from(labelCounts.values())
+  .sort((a, b) => b.count - a.count)
+  .slice(0, 5);
+
+const topLabelNames = topLabels.map(l => l.name);
+const topLabelNamesStr = topLabelNames.join(', ');
+
+// Build enhanced title with top labels
+const curDisplayLabel = getMixDisplay(post.key, post.title);
+const mixPrefix = curDisplayLabel.mixNum ? `Mix#${curDisplayLabel.mixNum} - ` : '';
+const baseTitle = `${mixPrefix}${post.title}`;
+const enhancedTitle = topLabelNames.length > 0
+  ? `${baseTitle} | ${topLabelNames.slice(0, 3).join(', ')}`
+  : baseTitle;
+const rawTitle = `${enhancedTitle} - DJ Hulk Weekly Mix - House, Tech House, Deep House - Electronic Music`;
 const pageTitle = rawTitle.length > 70 ? rawTitle.substring(0, 67).trimEnd() + '…' : rawTitle;
-const baseDesc = `${prefix}${post.title} - Electronic Music Mix with Tracklist. Enjoy House, Tech House, Deep House sets for gym, driving, work and pre-party. Free download and streaming on Mixcloud.`;
-const pageDescription = post.description ? (post.description.length > 160 ? post.description.substring(0, 157).trimEnd() + '…' : post.description) : baseDesc;
+
+// Enhanced description with top labels and use cases
+const useCasesStr = post.useCases?.length ? post.useCases.join(', ') : '';
+const baseDesc = `${mixPrefix}${post.title} - Electronic Music Mix with Tracklist. ${topLabelNamesStr ? `Featuring tracks from ${topLabelNamesStr}. ` : ''}${useCasesStr ? `Perfect for ${useCasesStr}. ` : ''}Enjoy House, Tech House, Deep House sets. Free streaming on Mixcloud.`;
+const pageDescription = post.description
+  ? (post.description.length > 160 ? post.description.substring(0, 157).trimEnd() + '…' : post.description)
+  : (baseDesc.length > 160 ? baseDesc.substring(0, 157).trimEnd() + '…' : baseDesc);
+
+// Build structured track data for enhanced MusicRecording schema
+const structuredTracks = post.tracklist?.map((track, index) => {
+  const trackLabel = trackLabels.get(track);
+  const parts = track.split(' - ');
+  const artist = parts[0]?.replace(/,$/, '') || '';
+  const title = parts.slice(1).join(' - ').replace(/,$/, '') || track;
+  return {
+    position: index + 1,
+    artist,
+    title,
+    label: trackLabel ? { name: trackLabel.name, url: trackLabel.url } : null
+  };
+}) || [];
+
+// Keywords for SEO
+const keywords = [
+  'DJ Mix', 'House', 'Tech House', 'Deep House', 'Electronic Music',
+  'Tracklist', 'Mixcloud', 'DJ Hulk', 'Stuttgart',
+  ...(post.tags || []),
+  ...(post.useCases || []),
+  ...topLabelNames,
+].join(', ');
+
+// Custom OG image path
+const customOgImage = `/og/mix-${post.slug}.jpg`;
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
   { label: "DJ Hulk", href: "/djhulk-electronic-music/" },
   { label: "Weekly DJ Mixes", href: "/dj/mixes-weekly" },
-  { label: curDisplay.label }
+  { label: curDisplayLabel.label }
 ];
 
 const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": `${prefix}${post.title}`,
+    "headline": `${mixPrefix}${post.title}`,
     "description": post.description?.substring(0, 500) || "",
     "image": post.picture,
     "datePublished": post.created_time,
@@ -76,9 +139,10 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "AudioObject",
-    "name": `${prefix}${post.title}`,
+    "name": `${mixPrefix}${post.title}`,
     "description": post.description?.substring(0, 500) || "",
     "contentUrl": post.url,
+    "embedUrl": post.src,
     "duration": post.audio_length ? toIsoDuration(post.audio_length) : undefined,
     "datePublished": post.created_time,
     "genre": post.tags,
@@ -87,16 +151,80 @@ const jsonLd = [
       "name": "DJ Hulk",
       "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
     },
-    "image": post.picture
-  }
-];
+    "image": post.picture,
+    "encodingFormat": "audio/mpeg",
+    "associatedMedia": {
+      "@type": "MusicAlbum",
+      "name": `${mixPrefix}${post.title}`,
+      "byArtist": {
+        "@type": "Person",
+        "name": "DJ Hulk"
+      },
+      "datePublished": post.created_time,
+      "genre": post.tags,
+      "track": structuredTracks.map(t => ({
+        "@type": "MusicRecording",
+        "name": t.title,
+        "byArtist": {
+          "@type": "Person",
+          "name": t.artist
+        },
+        "inAlbum": {
+          "@type": "MusicAlbum",
+          "name": `${mixPrefix}${post.title}`
+        },
+        "position": t.position,
+        ...(t.label && {
+          "recordedBy": {
+            "@type": "Organization",
+            "name": t.label.name,
+            "url": t.label.url || undefined
+          }
+        })
+      }))
+    }
+  },
+  // ItemList for tracklist with labels (enhanced)
+  post.tracklist && post.tracklist.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `Tracklist for ${mixPrefix}${post.title}`,
+    "numberOfItems": post.tracklist.length,
+    "itemListElement": structuredTracks.map(t => ({
+      "@type": "ListItem",
+      "position": t.position,
+      "item": {
+        "@type": "MusicRecording",
+        "name": t.title,
+        "byArtist": {
+          "@type": "Person",
+          "name": t.artist
+        },
+        "inAlbum": {
+          "@type": "MusicAlbum",
+          "name": `${mixPrefix}${post.title}`
+        },
+        ...(t.label && {
+          "recordedBy": {
+            "@type": "Organization",
+            "name": t.label.name,
+            "url": t.label.url || undefined
+          }
+        }),
+        "genre": post.tags,
+        "datePublished": post.created_time
+      }
+    }))
+  } : null
+].filter(Boolean);
+
 ---
 
 <Layout
   title={pageTitle}
   description={pageDescription}
-  image={post.ogImage || post.picture}
-  ogTitle={`DJ Hulk - ${curDisplay.label}`}
+  image={customOgImage}
+  ogTitle={enhancedTitle}
   ogType="music.playlist"
   ogImageWidth={1200}
   ogImageHeight={630}
@@ -111,6 +239,7 @@ const jsonLd = [
       "item": segment.href ? `https://holger-kampffmeyer.de${segment.href}` : undefined
     }))
   }]}
+  keywords={keywords}
 >
   <Navbar currentPage="/dj/mixes/" />
 

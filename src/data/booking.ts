@@ -131,7 +131,7 @@ export interface BookingContent {
     responseTime: string;
     location: string;
   };
-  share: {
+share: {
     title: string;
     description: string;
     text: string;
@@ -142,6 +142,10 @@ export interface BookingContent {
     xLabel: string;
     linkedinLabel: string;
     emailLabel: string;
+    pinterestLabel: string;
+    redditLabel: string;
+    telegramLabel: string;
+    tiktokLabel: string;
     copyLabel: string;
     copiedLabel: string;
   };
@@ -413,6 +417,10 @@ export const bookingContent: Record<BookingLocale, BookingContent> = {
       xLabel: 'X',
       linkedinLabel: 'LinkedIn',
       emailLabel: 'E-Mail',
+      pinterestLabel: 'Pinterest',
+      redditLabel: 'Reddit',
+      telegramLabel: 'Telegram',
+      tiktokLabel: 'TikTok',
       copyLabel: 'Link kopieren',
       copiedLabel: 'Link kopiert',
     },
@@ -642,6 +650,10 @@ export const bookingContent: Record<BookingLocale, BookingContent> = {
       xLabel: 'X',
       linkedinLabel: 'LinkedIn',
       emailLabel: 'Email',
+      pinterestLabel: 'Pinterest',
+      redditLabel: 'Reddit',
+      telegramLabel: 'Telegram',
+      tiktokLabel: 'TikTok',
       copyLabel: 'Copy link',
       copiedLabel: 'Link copied',
     },
