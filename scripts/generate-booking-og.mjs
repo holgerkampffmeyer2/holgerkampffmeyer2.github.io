@@ -8,6 +8,15 @@ const ROOT_DIR = path.join(__dirname, '..');
 const SOURCE = path.join(ROOT_DIR, 'src/assets/img/booking/dj-hulk-neon.webp');
 const OUT_DIR = path.join(ROOT_DIR, 'public/og');
 
+function escapeXmlText(value) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
 const variants = [
   {
     file: 'booking-dj-hulk-de.jpg',
@@ -53,7 +62,7 @@ for (const variant of variants) {
       .split('\n')
       .map(
         (line, index) =>
-          `<text x="66" y="${255 + index * 87}" fill="#ffffff" font-family="DejaVu Sans, sans-serif" font-size="78" font-weight="700" letter-spacing="-1">${line.replace('&', '&amp;')}</text>`,
+          `<text x="66" y="${255 + index * 87}" fill="#ffffff" font-family="DejaVu Sans, sans-serif" font-size="78" font-weight="700" letter-spacing="-1">${escapeXmlText(line)}</text>`,
       )
       .join('\n    ')}
     <text x="70" y="408" fill="#22d3ee" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" letter-spacing="5">${variant.subtitle}</text>
