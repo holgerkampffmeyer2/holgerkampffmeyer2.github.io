@@ -14,7 +14,6 @@ export interface ShareLinks {
   pinterest: string;
   reddit: string;
   telegram: string;
-  tiktok: string;
 }
 
 export interface MailtoInput {
@@ -33,7 +32,6 @@ export function buildShareLinks({ url, title, text, hashtags }: ShareInput): Sha
   const pinterestUrl = `https://pinterest.com/pin/create/button/?url=${encodedUrl}&description=${encodedText}`;
   const redditUrl = `https://reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`;
   const telegramUrl = `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}`;
-  const tiktokUrl = `https://www.tiktok.com/share/item/?url=${encodedUrl}&desc=${encodedText}`;
 
   const xUrl = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}${encodedHashtags ? `&hashtags=${encodedHashtags}` : ''}`;
 
@@ -46,7 +44,6 @@ export function buildShareLinks({ url, title, text, hashtags }: ShareInput): Sha
     pinterest: pinterestUrl,
     reddit: redditUrl,
     telegram: telegramUrl,
-    tiktok: tiktokUrl,
   };
 }
 

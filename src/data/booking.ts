@@ -145,7 +145,6 @@ share: {
     pinterestLabel: string;
     redditLabel: string;
     telegramLabel: string;
-    tiktokLabel: string;
     copyLabel: string;
     copiedLabel: string;
   };
@@ -420,7 +419,6 @@ export const bookingContent: Record<BookingLocale, BookingContent> = {
       pinterestLabel: 'Pinterest',
       redditLabel: 'Reddit',
       telegramLabel: 'Telegram',
-      tiktokLabel: 'TikTok',
       copyLabel: 'Link kopieren',
       copiedLabel: 'Link kopiert',
     },
@@ -653,7 +651,6 @@ export const bookingContent: Record<BookingLocale, BookingContent> = {
       pinterestLabel: 'Pinterest',
       redditLabel: 'Reddit',
       telegramLabel: 'Telegram',
-      tiktokLabel: 'TikTok',
       copyLabel: 'Copy link',
       copiedLabel: 'Link copied',
     },
