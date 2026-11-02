@@ -32,7 +32,6 @@ async function generateMixOG() {
       url: `holger-kampffmeyer.de/dj/mixes/${post.slug}`,
     };
 
-    console.log("DEBUG escapeXml test:", escapeXml("test & test"));
     const overlay = buildOverlay(variant);
     if (post.slug.includes("mix192") || post.slug.includes("mix177") || post.slug.includes("mix164") || post.slug.includes("mix129")) {
         fs.writeFileSync(`/tmp/debug_overlay_${post.slug}.svg`, overlay);
@@ -138,8 +137,8 @@ function buildOverlay(variant) {
     <rect width="1200" height="630" fill="url(#bottom)"/>
     <rect x="0" y="0" width="10" height="630" fill="url(#accent)"/>
     <text x="70" y="105" fill="#f97316" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" letter-spacing="6">${escapeXml(variant.eyebrow)}</text>
-    <text x="66" y="200" fill="#ffffff" font-family="DejaVu Sans, sans-serif" font-size="56" font-weight="700" letter-spacing="-1" style="max-width: 1050px;">${(console.log("DEBUG title escape:", variant.title), escapeXml(variant.title), console.log("DEBUG after escapeXml"))}</text>
-    <text x="70" y="280" fill="#22d3ee" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="600" letter-spacing="3">${(console.log("DEBUG subtitle:", variant.subtitle), escapeXml(variant.subtitle))}</text>
+    <text x="66" y="200" fill="#ffffff" font-family="DejaVu Sans, sans-serif" font-size="56" font-weight="700" letter-spacing="-1" style="max-width: 1050px;">${escapeXml(variant.title)}</text>
+    <text x="70" y="280" fill="#22d3ee" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="600" letter-spacing="3">${escapeXml(variant.subtitle)}</text>
     ${variant.labels.length > 0 ? `
     <text x="70" y="340" fill="#a1a1aa" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="500">LABELS IN THIS MIX</text>
     ${labelsHtml}
@@ -153,7 +152,7 @@ function buildOverlay(variant) {
 
 function escapeXml(str) {
   return str
-    .replace(/&/g, "\&")
+    .replace(/&/g, "&")
     .replace(/</g, "<")
     .replace(/>/g, ">")
     .replace(/"/g, '"')

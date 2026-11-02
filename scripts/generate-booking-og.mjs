@@ -8,6 +8,15 @@ const ROOT_DIR = path.join(__dirname, '..');
 const SOURCE = path.join(ROOT_DIR, 'src/assets/img/booking/dj-hulk-neon.webp');
 const OUT_DIR = path.join(ROOT_DIR, 'public/og');
 
+function escapeXml(str) {
+  return str
+    .replace(/&/g, "&")
+    .replace(/</g, "<")
+    .replace(/>/g, ">")
+    .replace(/"/g, '"')
+    .replace(/'/g, "&apos;");
+}
+
 const variants = [
   {
     file: 'booking-dj-hulk-de.jpg',
@@ -48,19 +57,19 @@ for (const variant of variants) {
     <rect width="1200" height="630" fill="url(#dark)"/>
     <rect width="1200" height="630" fill="url(#bottom)"/>
     <rect x="0" y="0" width="10" height="630" fill="url(#accent)"/>
-    <text x="70" y="105" fill="#f97316" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" letter-spacing="6">${variant.eyebrow}</text>
+    <text x="70" y="105" fill="#f97316" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" letter-spacing="6">${escapeXml(variant.eyebrow)}</text>
     ${variant.title
       .split('\n')
       .map(
         (line, index) =>
-          `<text x="66" y="${255 + index * 87}" fill="#ffffff" font-family="DejaVu Sans, sans-serif" font-size="78" font-weight="700" letter-spacing="-1">${line.replace(/&/g, '&')}</text>`,
+          `<text x="66" y="${255 + index * 87}" fill="#ffffff" font-family="DejaVu Sans, sans-serif" font-size="78" font-weight="700" letter-spacing="-1">${escapeXml(line)}</text>`,
       )
       .join('\n    ')}
-    <text x="70" y="408" fill="#22d3ee" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" letter-spacing="5">${variant.subtitle}</text>
+    <text x="70" y="408" fill="#22d3ee" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" letter-spacing="5">${escapeXml(variant.subtitle)}</text>
     <line x1="70" y1="455" x2="560" y2="455" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"/>
     <text x="70" y="510" fill="#ffffff" font-family="DejaVu Sans, sans-serif" font-size="28" font-weight="700">DJ HULK</text>
     <text x="70" y="548" fill="#a1a1aa" font-family="DejaVu Sans, sans-serif" font-size="22">Holger Kampffmeyer · House / Tech House / Techno / DnB</text>
-    <text x="70" y="592" fill="#f97316" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700">${variant.url}</text>
+    <text x="70" y="592" fill="#f97316" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="700">${escapeXml(variant.url)}</text>
   </svg>`;
 
   const out = path.join(OUT_DIR, variant.file);
