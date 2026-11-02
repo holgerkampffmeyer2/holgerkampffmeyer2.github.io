@@ -7,7 +7,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.join(__dirname, '..');
 const BLOG_DATA = path.join(ROOT_DIR, 'src/data/blog-posts.json');
 const OUT_DIR = path.join(ROOT_DIR, 'public/og');
-const FONT_DIR = path.join(ROOT_DIR, 'src/assets/fonts');
 
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
@@ -151,12 +150,7 @@ function buildOverlay(variant) {
 }
 
 function escapeXml(str) {
-  return str
-    .replace(/&/g, "&")
-    .replace(/</g, "<")
-    .replace(/>/g, ">")
-    .replace(/"/g, '"')
-    .replace(/'/g, "&apos;");
+  return str.replace(/[&<>"']/g, (c) => ({ '&': '&', '<': '<', '>': '>', '"': '"', "'": '&apos;' })[c]);
 }
 
 // Build track labels resolver
