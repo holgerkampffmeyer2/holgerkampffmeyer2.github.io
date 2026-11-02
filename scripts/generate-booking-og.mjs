@@ -53,7 +53,7 @@ for (const variant of variants) {
       .split('\n')
       .map(
         (line, index) =>
-          `<text x="66" y="${255 + index * 87}" fill="#ffffff" font-family="DejaVu Sans, sans-serif" font-size="78" font-weight="700" letter-spacing="-1">${line.replace('&', '&amp;')}</text>`,
+          `<text x="66" y="${255 + index * 87}" fill="#ffffff" font-family="DejaVu Sans, sans-serif" font-size="78" font-weight="700" letter-spacing="-1">${line.replace(/&/g, '&')}</text>`,
       )
       .join('\n    ')}
     <text x="70" y="408" fill="#22d3ee" font-family="DejaVu Sans, sans-serif" font-size="24" font-weight="700" letter-spacing="5">${variant.subtitle}</text>

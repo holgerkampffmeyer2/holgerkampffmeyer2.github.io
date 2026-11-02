@@ -21,8 +21,8 @@ export const NEGATIVE_KEYWORDS = [
 
 export function extractText(html) {
   return html
-    .replace(/<script[^>]*>[\s\S]*?<\/script\s*>/gi, ' ')
-    .replace(/<style[^>]*>[\s\S]*?<\/style\s*>/gi, ' ')
+    .replace(/<script[^>]*>[\s\S]*?<\/script[^>]*>/gi, ' ')
+    .replace(/<style[^>]*>[\s\S]*?<\/style[^>]*>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
     .replace(/\s+/g, ' ')
     .toLowerCase()
