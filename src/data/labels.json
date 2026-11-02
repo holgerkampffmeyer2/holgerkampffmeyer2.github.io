@@ -50,7 +50,7 @@
     },
     "adesso-music": {
       "name": "Adesso Music",
-      "url": "https://adessomusic.com"
+      "url": "https://adessomusic.bandcamp.com/"
     },
     "tankfloor": {
       "name": "Tankfloor",
@@ -106,15 +106,11 @@
     },
     "toolroom-records": {
       "name": "Toolroom Records",
-      "url": "https://toolroomrecords.com"
+      "url": "https://toolroomrecords.com/"
     },
     "cafe-de-anatolia": {
       "name": "Cafe De Anatolia",
       "url": "https://cafe-de-anatolia.com/"
-    },
-    "the-myth-of-nyx": {
-      "name": "The Myth of NYX",
-      "url": "https://www.discogs.com/label/123456-The-Myth-Of-NYX"
     },
     "d-vision": {
       "name": "d:vision",
@@ -210,7 +206,7 @@
     },
     "together-we-re-louder": {
       "name": "TOGETHER WE'RE LOUDER",
-      "url": "https://togethersarelouder.com"
+      "url": "https://www.beatport.com/de/label/together-were-louder"
     },
     "cas-music": {
       "name": "CAS Music",
@@ -256,17 +252,13 @@
       "name": "Electronic Nature",
       "url": "https://www.discogs.com/label/1868815"
     },
-    "myth-of-nyx": {
-      "name": "Myth of NYX",
-      "url": "https://themythofnyx.com/"
-    },
     "all-ways-dance": {
       "name": "All Ways Dance",
       "url": "https://allwaysdance.com"
     },
     "paraiso": {
       "name": "Paraíso",
-      "url": "https://paraiso.com"
+      "url": "https://www.beatport.com/label/paraiso/100932"
     },
     "yayo-records": {
       "name": "YAYO Records",
@@ -343,10 +335,6 @@
     "braslive-records": {
       "name": "Braslive Records",
       "url": "https://brasliverecords.com"
-    },
-    "immortrance-recordings": {
-      "name": "Immortrance Recordings",
-      "url": "https://immortrance.com"
     },
     "area-verde": {
       "name": "Area Verde",
@@ -454,7 +442,7 @@
     },
     "one-seven-music": {
       "name": "One Seven Music",
-      "url": "https://onesevenmusic.com"
+      "url": "https://www.beatport.com/label/one-seven-music/91798"
     },
     "physical-presents": {
       "name": "Physical Presents",
@@ -647,10 +635,6 @@
     "ingate-records": {
       "name": "INGATE RECORDS",
       "url": "https://www.beatport.com/label/ingate/123372"
-    },
-    "tierra-sounds": {
-      "name": "TIERRA SOUNDS",
-      "url": "https://tierrasounds.com"
     },
     "ismos": {
       "name": "ISMOS",
@@ -1051,6 +1035,38 @@
     "come-together-records": {
       "name": "Come Together Records",
       "url": "https://www.beatport.com/label/come-together-records/381730"
+    },
+    "xumba-recordings": {
+      "name": "Xumba Recordings",
+      "url": "https://www.beatport.com/label/xumba-recordings/32351"
+    },
+    "happy-techno-music": {
+      "name": "Happy Techno Music",
+      "url": "https://happytechno.com/"
+    },
+    "nothing-else-matters": {
+      "name": "Nothing Else Matters",
+      "url": "https://www.beatport.com/label/nothing-else-matters/78485"
+    },
+    "terms-conditions-records": {
+      "name": "Terms & Conditions Records",
+      "url": "https://www.beatport.com/label/terms-conditions-records/150425"
+    },
+    "sono-music": {
+      "name": "SONO Music",
+      "url": "https://www.beatport.com/label/sono-music/60553"
+    },
+    "too-many-rules": {
+      "name": "Too Many Rules",
+      "url": "https://www.beatport.com/label/too-many-rules/70687"
+    },
+    "route75-records": {
+      "name": "Route75 Records",
+      "url": "https://www.beatport.com/label/route75-records/58973"
+    },
+    "myth-of-nyx": {
+      "name": "Myth of NYX",
+      "url": "https://themythofnyx.com/"
     }
   },
   "tracks": {
@@ -1124,7 +1140,7 @@
     "Armand Dj - Are You Ready": "disposable-records",
     "Armand Van Helden, Mark Knight, D. Ramirez - You (Extended Mix)": "toolroom-records",
     "ASSA x ALB[I]T & LENny (IT) - Imali Andinalo (Original Mix)": "cafe-de-anatolia",
-    "ATFC feat. Lisa Millet - Bad Habit (Tommy Mambretti Re-Edit)": "the-myth-of-nyx",
+    "ATFC feat. Lisa Millet - Bad Habit (Tommy Mambretti Re-Edit)": "myth-of-nyx",
     "Aüra, DJ Simi, Master Keys - So In Love ft. Antonio Carbone (Dub Mix)": "d-vision",
     "AÜRA, Lexa Hill - Anikana-O (Dub Mix)": "d-vision",
     "Aurora Solis - Mi Ritmo (Tali Freaks Remix)": "she-s-super-deep",
@@ -1180,7 +1196,6 @@
     "Chemars - Get Into The Music (Iban Montoro & Jazzman Wax - Angelo Ferreri Remastered)": "waldliebe-familien",
     "Chemars - Vanilla Jazz (Extended Club Mix)": "bellosguardo",
     "Chesster - Ritmo (Original Mix)": "natural-rhythm",
-    "Chiara Meloni - Dance (Extended Mix)": "secret-floor-inc",
     "Chronosonder - Start Movin (Jasper Miller Extended Remix)": "all-ways-dance",
     "Ciava - Higher (Extended Mix)": "like-that-underground",
     "Cigarette & Juice - Suena La Tromba (Extended Mix)": "bellosguardo",
@@ -1230,7 +1245,6 @@
     "Denats - Something About Music (Original Mix)": "mk837",
     "Denats - This Is...  (Original Mix)": "braslive-records",
     "Dennis Cartier - Mi Alma (Extended Mix)": "paraiso",
-    "Destiny's Child - Bug A Boo (DJ Soulstar Edit)": "immortrance-recordings",
     "Deva Vicci - Distraction": "area-verde",
     "Devault - Keep Your Body Pumpin (Extended Mix)": "insomniac-records",
     "DHALI, dagi - Ibiza, Circoloco (Domenico Rondinelli & Dennis Reif Remix - Extended)": "like-that-underground",
@@ -1282,11 +1296,11 @@
     "Esox, Daniel Skulnick, DJ Luane - One, Two, Three (Extended Mix)": "funk-you",
     "Evgeny Otto - You Hypnotized (Extended Mix)": "audio-stage-records",
     "Fabi Hernandez, Morenita, Mathieu Ruz - Prende La Vela (Extended Mix)": "virgin-records",
-    "Fabich - La Fiesta (Extended Mix)": "one-seven-music",
+    "Fabich - La Fiesta (Extended Mix)": "toolroom-records",
     "Fabio Carminati - Human (Nicolas Barnes Remix)": "like-that-underground",
     "Federico Scavo & GROSSOMODDO - Strump (Extended Mix)": "d-vision",
     "Felipe Allenn - Cola (Extended Mix)": "one-seven-music",
-    "Felipe Allenn - Sun Is Shining (Extended Edit)": "together-we-re-louder",
+    "Felipe Allenn - Sun Is Shining (Extended Edit)": "paraiso",
     "Felix Cartal - Stranger Things Theme (Felix Cartal's After Dark Remix)": "physical-presents",
     "Ferreck Dawn & Jem Cooke - Everything You Need (Extended Mix)": "sink-or-swim",
     "Fickry - Beware (Extended Mix)": "adesso-music",
@@ -1313,7 +1327,7 @@
     "George Privatti - El Chiquillo del Cable (Original Mix)": "la-pera-records",
     "George Privatti - La Comebolsas (Original Mix)": "la-pera-records",
     "Georgia Mos X Kanu - Pasaporte (Extended Mix)": "tankfloor",
-    "Gettoblaster - Cantina De Brazil": "balearic-vibes-records",
+    "Gettoblaster - Cantina De Brazil": "too-many-rules",
     "Glen Horsborough, Nathalie Miranda, Peter Brown - Feel The Music": "waldliebe-familien",
     "Glockenbach, 163Margs - No Stress (Extended)": "island-berlin",
     "Gold Lemonade - Can't Feel My Face (ft. FlowFly) (Extended Mix) [Dark Roast Records]": "dark-roast-records",
@@ -1370,7 +1384,7 @@
     "Jordy Copz - Lana (Extended Mix)": "black-book-records",
     "Joris Voorn x Roddy Lima x Talyr Renee - Machine (Extended)": "spectrum",
     "Josh Baker, Poppy Baskcomb - My Place (Extended)": "three-six-zero-recordings",
-    "Josh Diaz - I Think I Like It (Josh Diaz Remix)": "the-myth-of-nyx",
+    "Josh Diaz - I Think I Like It (Josh Diaz Remix)": "myth-of-nyx",
     "Josh Gregg - LUV": "moom-sound",
     "Josh Gregg - Step Back": "moom-sound",
     "Josh Wink & Marco Faraone x Shakira - Dai Dai I'm Ready (The Machine Reboot)": "spectrum",
@@ -1407,7 +1421,6 @@
     "LAWZ - Back In The Day": "box-of-cats",
     "LAWZ - Losing Touch (Extended Mix)": "upmotion-records",
     "LENny (IT) & ALB[I]T - Moonshine (Original Mix)": "ingate-records",
-    "LENny(IT) & ALB[I]T - Call Me Baby": "tierra-sounds",
     "Leon Michael - Apples Attic [RUSHIN RECORDS]": "rushin-records",
     "LEZOLUT - Move Your Body (Extended)": "club-whatever",
     "Line.y - Dawn Frequency": "ismos",
@@ -1469,7 +1482,7 @@
     "Nic Vesperi, Taranco - Chanteo (Extended Mix)": "adesso-music",
     "Nic Zega - Fact Me Up  (Original Mix)": "feel-hype",
     "NICK NICCE - Cuss & Flow": "marba-records",
-    "Nicola Fasano, Trillogee - Fuego de Cumbia (Original Mix)": "one-seven-music",
+    "Nicola Fasano, Trillogee - Fuego de Cumbia (Original Mix)": "route75-records",
     "Nicolas Barnes - Bring Back My Self": "like-that-underground",
     "Nicolas Barnes - Cloud Revolution": "like-that-underground",
     "Nicolas Barnes - First Winter Night": "like-that-underground",
@@ -1593,7 +1606,7 @@
     "Steve Riddm - So Good": "people-want-to-dance-club-sweat",
     "Steven Caretti - This Feeling (Extended Mix)": "houseklange",
     "Stromae - Alors On Dance (Dave Ruthwell Tribal Edit)": "secret-floor-inc",
-    "SUBB & Felguk - Paradise (Extended Mix)": "the-myth-of-nyx",
+    "SUBB & Felguk - Paradise (Extended Mix)": "myth-of-nyx",
     "SUBB & Pithman - Dig it (Extended Mix)": "what-ya-need",
     "Sunlover - Enjoy the Sun (vocal extended version)": "balearic-vibes-records",
     "Supafly & Greg Stainer - Girls ft. Ca$h X (Husky Extended Remix)": "tmrw-music",
@@ -1615,13 +1628,13 @@
     "The Tune Taylor - Gangster Haus (Original Mix)": "rushin-records",
     "The Tune Taylor & Rosemary Quaye - House Addict": "rushin-records",
     "Themba, Emanuele Esposito, Kanu - Pump Up The Jam (Extended Mix)": "tnkfloor",
-    "Thomas Newson & LOVRA - Bad Habit (Extended Mix)": "the-myth-of-nyx",
-    "Thomas Newson & Paskman - Carretero (Extended Mix)": "the-myth-of-nyx",
+    "Thomas Newson & LOVRA - Bad Habit (Extended Mix)": "myth-of-nyx",
+    "Thomas Newson & Paskman - Carretero (Extended Mix)": "myth-of-nyx",
     "Tim Sanders - Straight From The Underground (Extended Mix)": "helix-records",
     "Tim Sanders & Marshall Jefferson - Watch Out Now (Extended Mix)": "helix-records",
     "Tita Lau - Freaky": "helix-records",
     "TO3I - Save Me": "mk837",
-    "Tom Enzy - Not Just Rhythm (Extended Mix)": "the-myth-of-nyx",
+    "Tom Enzy - Not Just Rhythm (Extended Mix)": "myth-of-nyx",
     "Tom Enzy - Pull Me Away (Extended Dub Mix)": "spinnin-records",
     "Tom Pool - Moody Moon": "like-that-underground",
     "Tommy Veanud - Ready Or Not (Extended Mix)": "tv-recordings",
@@ -1696,6 +1709,14 @@
     "FLAVOR - Girlz Girlz Girlz": "like-that-underground",
     "Maceo Plex - Lonely Drive": "ellum-audio",
     "UNUSUAL & Dennis Reif - Freak (Extended Mix)": "kontor-records",
-    "N2N & Luxo - Ball Up Top ft. Nevve (Extended Mix)": "myth-of-nyx"
+    "N2N & Luxo - Ball Up Top ft. Nevve (Extended Mix)": "myth-of-nyx",
+    "Bongotrack - Rio Magdalena (Techplayers Remix)": "xumba-recordings",
+    "ISAA & Sansa SP - Fuerza Latina": "happy-techno-music",
+    "Yosmer Davis, Yautja - La Rumba": "happy-techno-music",
+    "Celeda, Denney, Dean Mickoski - Take Flight (feat. Celeda) (Extended Mix)": "nothing-else-matters",
+    "Angelo Morello - Caliente (Extended Mix)": "terms-conditions-records",
+    "Albert Neve & Abel Ramos - Guarachando (Extended Mix)": "sono-music",
+    "Chiara Meloni - Dance (Extended Mix)": "paraiso",
+    "LENny(IT) & ALB[I]T - Moonshine (Original Mix)": "ingate-records"
   }
 }
