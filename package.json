@@ -26,7 +26,8 @@
     "label:urls:apply": "node scripts/label-apply.mjs --urls label-urls.json",
     "stats:fetch": "node scripts/fetch-social-stats.mjs",
     "epk:og": "node scripts/generate-booking-og.mjs",
-    "epk:pdf": "node scripts/generate-epk-pdf.mjs"
+    "epk:pdf": "node scripts/generate-epk-pdf.mjs",
+    "epk:zip": "node scripts/generate-press-kit-zip.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
@@ -40,6 +41,7 @@
     "@typescript-eslint/eslint-plugin": "^8.71.0",
     "@typescript-eslint/parser": "^8.71.0",
     "@vitest/coverage-v8": "^4.1.11",
+    "archiver": "^8.0.0",
     "astro-eslint-parser": "^1.4.0",
     "eslint": "^10.12.0",
     "globals": "^17.13.0",
