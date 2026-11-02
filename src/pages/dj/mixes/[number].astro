@@ -93,6 +93,21 @@ const structuredTracks = post.tracklist?.map((track, index) => {
     label: trackLabel ? { name: trackLabel.name, url: trackLabel.url } : null
   };
 }) || [];
+// Build unique label entities with @id for JSON-LD referencing
+const labelEntities = [];
+const seenLabelIds = new Set();
+for (const t of structuredTracks) {
+  if (t.label && !seenLabelIds.has(t.label.name)) {
+    seenLabelIds.add(t.label.name);
+    labelEntities.push({
+      "@type": "Organization",
+      "@id": "https://holger-kampffmeyer.de/dj/labels/" + t.label.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      "name": t.label.name,
+      "url": t.label.url || undefined,
+      "description": "Record label: " + t.label.name
+    });
+  }
+}
 
 // Keywords for SEO
 const keywords = [
@@ -176,9 +191,7 @@ const jsonLd = [
         "position": t.position,
         ...(t.label && {
           "recordedBy": {
-            "@type": "Organization",
-            "name": t.label.name,
-            "url": t.label.url || undefined
+            "@id": "https://holger-kampffmeyer.de/dj/labels/" + t.label.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")
           }
         })
       }))
@@ -206,14 +219,24 @@ const jsonLd = [
         },
         ...(t.label && {
           "recordedBy": {
-            "@type": "Organization",
-            "name": t.label.name,
-            "url": t.label.url || undefined
+            "@id": "https://holger-kampffmeyer.de/dj/labels/" + t.label.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")
           }
         }),
         "genre": post.tags,
         "datePublished": post.created_time
       }
+    }))
+  } : null,
+  // Label entities as separate ItemList for reference
+  labelEntities.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Record labels in " + mixPrefix + post.title,
+    "numberOfItems": labelEntities.length,
+    "itemListElement": labelEntities.map((label, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": label
     }))
   } : null
 ].filter(Boolean);

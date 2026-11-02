@@ -8,6 +8,8 @@ import TracklistTable from "../../components/dj/TracklistTable.astro";
 import { getDjPersonSchema } from "../../utils/dj-schema.js";
 import { USECASE_CONFIG } from "../../data/usecase-config";
 import { loadBlogPosts, createSearchablePosts } from "../../utils/blog-data";
+import labels from "../../data/labels.json";
+import { buildTrackLabels } from "../../utils/track-labels.js";
 import { formatDate, toIsoDuration } from "../../utils/format";
 
 const breadcrumbSegments = [
@@ -34,6 +36,35 @@ const blogPostingSchema = postsWithTracklists.slice(0, 10).map(post => ({
     "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
   }
 }));
+const trackLabels = buildTrackLabels(labels);
+const latestStructuredTracks = latestPost?.tracklist?.map((track, index) => {
+  const trackLabel = trackLabels.get(track);
+  const parts = track.split(' - ');
+  const artist = parts[0]?.replace(/,$/, '') || '';
+  const title = parts.slice(1).join(' - ').replace(/,$/, '') || track;
+  return {
+    position: index + 1,
+    artist,
+    title,
+    label: trackLabel ? { name: trackLabel.name, url: trackLabel.url } : null
+  };
+}) || [];
+
+// Build unique label entities for latest post
+const latestLabelEntities = [];
+const seenLabelIds = new Set();
+for (const t of latestStructuredTracks) {
+  if (t.label && !seenLabelIds.has(t.label.name)) {
+    seenLabelIds.add(t.label.name);
+    latestLabelEntities.push({
+      "@type": "Organization",
+      "@id": "https://holger-kampffmeyer.de/dj/labels/" + t.label.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      "name": t.label.name,
+      "url": t.label.url || undefined,
+      "description": "Record label: " + t.label.name
+    });
+  }
+}
 ---
 
 <Layout
@@ -73,9 +104,49 @@ const blogPostingSchema = postsWithTracklists.slice(0, 10).map(post => ({
       "producer": {
         "@type": "Person",
         "name": "DJ Hulk"
+      },
+      "associatedMedia": {
+        "@type": "MusicAlbum",
+        "name": latestPost.title,
+        "byArtist": {
+          "@type": "Person",
+          "name": "DJ Hulk"
+        },
+        "datePublished": latestPost.created_time,
+        "genre": latestPost.tags,
+        "track": latestStructuredTracks.map(t => ({
+          "@type": "MusicRecording",
+          "name": t.title,
+          "byArtist": {
+            "@type": "Person",
+            "name": t.artist
+          },
+          "inAlbum": {
+            "@type": "MusicAlbum",
+            "name": latestPost.title
+          },
+          "position": t.position,
+          ...(t.label && {
+            "recordedBy": {
+              "@id": "https://holger-kampffmeyer.de/dj/labels/" + t.label.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")
+            }
+          })
+        }))
       }
     } : null,
-    getDjPersonSchema()
+    getDjPersonSchema(),
+    // Label entities for latest mix
+    latestPost && latestLabelEntities.length > 0 ? {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Record labels in " + latestPost.title,
+      "numberOfItems": latestLabelEntities.length,
+      "itemListElement": latestLabelEntities.map((label, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": label
+      }))
+    } : null
   ].filter(Boolean)}
 >
   <Navbar currentPage="/dj/mixes-weekly/" />
