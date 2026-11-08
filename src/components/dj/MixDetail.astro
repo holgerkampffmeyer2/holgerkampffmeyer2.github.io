@@ -17,7 +17,7 @@ interface Props {
 const { post, isLatest = false, showNavigation = true } = Astro.props;
 ---
 
-<article class="mix-detail">
+<article class="mix-detail" headingoffset="1">
   <div class="max-w-4xl mx-auto">
     {/* Tags */}
     {post.tags && post.tags.length > 0 && (
