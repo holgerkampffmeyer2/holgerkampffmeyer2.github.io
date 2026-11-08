@@ -74,8 +74,14 @@ jobs:
           node-version: '24'
           cache: 'pnpm'
 
+      - name: Debug Node and pnpm versions
+        run: |
+          node --version
+          pnpm --version
+          pnpm list @astrojs/check
+
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: TypeScript check
         run: pnpm run check
