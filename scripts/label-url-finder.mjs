@@ -101,9 +101,10 @@ async function findOfficialViaPatterns(base, timeoutMs) {
   const batchSize = 8;
   for (let i = 0; i < candidates.length; i += batchSize) {
     const batch = candidates.slice(i, i + batchSize);
-    const results = await Promise.all(batch.map(domain => {
+    const results = await Promise.all(batch.map(async (domain) => {
       const url = `https://${domain}`;
-      return headOk(url, timeoutMs).then(ok => ok ? { url, via: 'pattern', domain } : null);
+      const ok = await headOk(url, timeoutMs);
+      return ok ? { url, via: 'pattern', domain } : null;
     }));
     const hit = results.find(r => r);
     if (hit) return hit;
