@@ -78,8 +78,8 @@ const showMobile = isResponsive || isInline;
 
 {showMobile && (
   <div class="lg:hidden">
-    <div class="space-y-2 pt-2 border-t border-[var(--color-border)]" aria-label="Tracklist (mobile view)">
+    <nav class="space-y-2 pt-2 border-t border-[var(--color-border)]" aria-label="Tracklist (mobile view)">
       <div set:html={renderMobileTracklist(tracks, showLabel)} />
-    </div>
+    </nav>
   </div>
 )}
