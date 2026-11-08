@@ -1,6 +1,7 @@
 ---
 import labels from '../../data/labels.json';
 import { buildTrackLabels } from '../../utils/track-labels.js';
+import { renderMobileTracklist } from '../../utils/tracklist-renderer.ts';
 
 interface Props {
   tracks: string[];
@@ -18,11 +19,14 @@ function splitTrack(track: string) {
   return { artist, title };
 }
 
-const isInline = displayMode === 'inline';
+const isTable = displayMode === 'table';
 const isResponsive = displayMode === 'responsive';
+const isInline = displayMode === 'inline';
+const showTable = isTable || isResponsive;
+const showMobile = isResponsive || isInline;
 ---
 
-{isResponsive && (
+{showTable && (
   <div class="hidden lg:block">
     <table class="w-full">
       <thead class="sticky top-0 bg-[var(--color-surface)]">
@@ -72,87 +76,10 @@ const isResponsive = displayMode === 'responsive';
   </div>
 )}
 
-<div class="lg:hidden">
-  {isResponsive ? (
-    <div class="space-y-2 pt-2 border-t border-[var(--color-border)]" aria-label="Tracklist (mobile inline view)">
-      {tracks.map((track: string) => {
-        const { artist, title } = splitTrack(track);
-        const label = trackLabels.get(track);
-        return (
-          <div class="flex flex-col gap-1 py-2 border-b border-[var(--color-border)] last:border-0">
-            <div class="flex items-baseline gap-2 flex-wrap">
-              <span class="font-semibold text-sm text-[var(--color-text)]">{artist}</span>
-              <span class="text-[var(--color-text-muted)] text-sm">–</span>
-              <span class="text-sm text-[var(--color-text)]">{title}</span>
-              {showLabel && label && (
-                <span class="ml-1">
-                  <span class="text-[var(--color-text-muted)] text-sm">(</span>
-                  {label.url ? (
-                    <a
-                      href={label.url}
-                      target="_blank"
-                      rel="noopener noreferrer nofollow"
-                      class="text-[var(--color-secondary)] hover:underline text-sm"
-                    >
-                      {label.name}
-                    </a>
-                  ) : (
-                    <span class="text-[var(--color-text-muted)] text-sm">{label.name}</span>
-                  )}
-                  <span class="text-[var(--color-text-muted)] text-sm">)</span>
-                </span>
-              )}
-            </div>
-          </div>
-        );
-      })}
+{showMobile && (
+  <div class="lg:hidden">
+    <div class="space-y-2 pt-2 border-t border-[var(--color-border)]" aria-label="Tracklist (mobile view)">
+      <div set:html={renderMobileTracklist(tracks, showLabel)} />
     </div>
-  ) : isInline ? (
-    <div class="space-y-2 pt-2 border-t border-[var(--color-border)]" aria-label="Tracklist (inline view)">
-      {tracks.map((track: string) => {
-        const { artist, title } = splitTrack(track);
-        const label = trackLabels.get(track);
-        return (
-          <div class="flex flex-col gap-1 py-2 border-b border-[var(--color-border)] last:border-0">
-            <div class="flex items-baseline gap-2 flex-wrap">
-              <span class="font-semibold text-sm text-[var(--color-text)]">{artist}</span>
-              <span class="text-[var(--color-text-muted)] text-sm">–</span>
-              <span class="text-sm text-[var(--color-text)]">{title}</span>
-              {showLabel && label && (
-                <span class="ml-1">
-                  <span class="text-[var(--color-text-muted)] text-sm">(</span>
-                  {label.url ? (
-                    <a
-                      href={label.url}
-                      target="_blank"
-                      rel="noopener noreferrer nofollow"
-                      class="text-[var(--color-secondary)] hover:underline text-sm"
-                    >
-                      {label.name}
-                    </a>
-                  ) : (
-                    <span class="text-[var(--color-text-muted)] text-sm">{label.name}</span>
-                  )}
-                  <span class="text-[var(--color-text-muted)] text-sm">)</span>
-                </span>
-              )}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  ) : null}
-</div>
-
-<style>
-  @media (max-width: 1023px) {
-    .tracklist-table-desktop {
-      display: none;
-    }
-  }
-  @media (min-width: 1024px) {
-    .tracklist-mobile-inline {
-      display: none;
-    }
-  }
-</style>
+  </div>
+)}

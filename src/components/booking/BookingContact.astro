@@ -1,0 +1,60 @@
+---
+import Icon from '../Icon.astro';
+import type { BookingContent } from '../../data/booking';
+
+interface Props {
+  contact: BookingContent['contact'];
+  facts: BookingContent['facts'];
+  labels: BookingContent['labels'];
+  mailto: string;
+}
+
+const { contact, facts, labels, mailto } = Astro.props;
+---
+
+<section id="contact" class="py-16 sm:py-20 bg-[var(--color-surface)]/40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+    <div>
+      <h2 class="font-play text-3xl sm:text-4xl font-bold mb-3">{contact.title}</h2>
+      <p class="max-w-2xl text-[var(--color-text-muted)] text-lg mb-8">{contact.description}</p>
+      <div class="flex flex-wrap gap-3">
+        <a
+          href={mailto}
+          class="inline-flex items-center gap-2 rounded-lg bg-[var(--color-primary)] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-primary-hover)]"
+        >
+          <Icon name="email" class="h-5 w-5" />
+          {contact.email}
+        </a>
+        <a
+          href={contact.whatsappHref}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-5 py-3 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+        >
+          <Icon name="whatsapp" class="h-5 w-5" />
+          WhatsApp
+        </a>
+        <a
+          href={contact.phoneHref}
+          class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-5 py-3 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+        >
+          <Icon name="phone" class="h-4 w-4" />
+          {contact.phone}
+        </a>
+      </div>
+      <p class="mt-6 flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
+        <Icon name="calendar" class="h-4 w-4" />
+        {contact.responseTime}
+      </p>
+    </div>
+
+    <aside class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-6">
+      <h3 class="font-play text-xl font-bold mb-2">{labels.contact}</h3>
+      <p class="text-sm text-[var(--color-text-muted)]">{contact.location}</p>
+      <div class="mt-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+        <p class="text-xs uppercase tracking-wider text-[var(--color-text-muted)]">{labels.priceOnRequest}</p>
+        <p class="mt-1 text-sm text-[var(--color-text-muted)]">{facts.find((fact) => fact.label === 'Preise' || fact.label === 'Rates')?.value ?? labels.priceOnRequest}</p>
+      </div>
+    </aside>
+  </div>
+</section>

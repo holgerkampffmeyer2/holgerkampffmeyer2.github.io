@@ -1,0 +1,39 @@
+---
+import Icon from '../Icon.astro';
+import type { BookingContent } from '../../data/booking';
+
+interface Props {
+  formats: BookingContent['formats'];
+}
+
+const { formats } = Astro.props;
+---
+
+<section id="formats" class="py-16 sm:py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <h2 class="font-play text-3xl sm:text-4xl font-bold mb-3">{formats.title}</h2>
+    <p class="max-w-3xl text-[var(--color-text-muted)] text-lg mb-10">{formats.description}</p>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {formats.items.map((item) => (
+        <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+          <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--color-primary)]/15 text-[var(--color-primary)]">
+            <Icon name="party" class="h-5 w-5" />
+          </div>
+          <h3 class="font-play text-lg font-bold">{item.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)]">{item.description}</p>
+          {item.link && (
+            <a
+              href={item.link}
+              target="_blank"
+              rel="noopener"
+              class="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-primary)] hover:text-[var(--color-primary-hover)]"
+            >
+              {item.linkLabel}
+              <Icon name="arrow-up" class="h-3.5 w-3.5" />
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

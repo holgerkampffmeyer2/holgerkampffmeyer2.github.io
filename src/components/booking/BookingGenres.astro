@@ -1,0 +1,30 @@
+---
+import type { BookingContent } from '../../data/booking';
+
+interface Props {
+  genres: BookingContent['genres'];
+}
+
+const { genres } = Astro.props;
+---
+
+<section id="genres" class="py-16 sm:py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <h2 class="font-play text-3xl sm:text-4xl font-bold mb-3">{genres.title}</h2>
+    <p class="max-w-3xl text-[var(--color-text-muted)] text-lg mb-10">{genres.description}</p>
+    <div class="grid gap-4 md:grid-cols-3">
+      {genres.groups.map((group) => (
+        <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+          <h3 class="font-play text-xl font-bold mb-4">{group.title}</h3>
+          <ul class="flex flex-wrap gap-2">
+            {group.items.map((item) => (
+              <li class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-1.5 text-sm text-[var(--color-text-muted)]">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

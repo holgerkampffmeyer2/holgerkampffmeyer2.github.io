@@ -10,7 +10,15 @@ import { USECASE_CONFIG } from "../../data/usecase-config";
 import { loadBlogPosts, createSearchablePosts } from "../../utils/blog-data";
 import labels from "../../data/labels.json";
 import { buildTrackLabels } from "../../utils/track-labels.js";
-import { formatDate, toIsoDuration } from "../../utils/format";
+import { formatDate } from "../../utils/format";
+import {
+  buildBlogPostingSchema,
+  buildAudioObjectSchema,
+  buildMusicPlaylistSchema,
+  buildBreadcrumbSchema,
+  buildLabelEntities,
+  buildTracklistItemList,
+} from "../../utils/schema-builders.js";
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
@@ -23,19 +31,6 @@ const latestPost = allPosts.length > 0 ? allPosts[0] : null;
 const postsWithTracklists = allPosts.filter(post => post.hasTracklist);
 const searchablePosts = createSearchablePosts(allPosts);
 
-const blogPostingSchema = postsWithTracklists.slice(0, 10).map(post => ({
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.slug}`,
-  "headline": post.title,
-  "image": post.picture,
-  "datePublished": post.created_time,
-  "author": {
-    "@type": "Person",
-    "name": "DJ Hulk",
-    "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
-  }
-}));
 const trackLabels = buildTrackLabels(labels);
 const latestStructuredTracks = latestPost?.tracklist?.map((track, index) => {
   const trackLabel = trackLabels.get(track);
@@ -50,21 +45,31 @@ const latestStructuredTracks = latestPost?.tracklist?.map((track, index) => {
   };
 }) || [];
 
-// Build unique label entities for latest post
-const latestLabelEntities = [];
-const seenLabelIds = new Set();
-for (const t of latestStructuredTracks) {
-  if (t.label && !seenLabelIds.has(t.label.name)) {
-    seenLabelIds.add(t.label.name);
-    latestLabelEntities.push({
-      "@type": "Organization",
-      "@id": "https://holger-kampffmeyer.de/dj/labels/" + t.label.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-      "name": t.label.name,
-      "url": t.label.url || undefined,
-      "description": "Record label: " + t.label.name
-    });
-  }
-}
+// Build BlogPosting schemas for recent posts
+const blogPostingSchema = postsWithTracklists.slice(0, 10).map(post =>
+  buildBlogPostingSchema(post)
+);
+
+// Build AudioObject schema for latest post
+const audioObjectSchema = latestPost && latestStructuredTracks.length > 0
+  ? buildAudioObjectSchema(latestPost, latestStructuredTracks)
+  : null;
+
+// Build MusicPlaylist schema
+const musicPlaylistSchema = buildMusicPlaylistSchema(postsWithTracklists);
+
+// Build Breadcrumb schema
+const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbSegments);
+
+// Build Label entities for latest post
+const labelEntitiesSchema = latestPost && latestStructuredTracks.length > 0
+  ? buildLabelEntities(latestStructuredTracks)
+  : null;
+
+// Build Tracklist ItemList for latest post
+const tracklistItemListSchema = latestPost && latestStructuredTracks.length > 0
+  ? buildTracklistItemList(latestPost, latestStructuredTracks)
+  : null;
 ---
 
 <Layout
@@ -72,81 +77,13 @@ for (const t of latestStructuredTracks) {
    description="Every Sunday new DJ mix on Mixcloud by DJ Hulk. House, Tech House, Deep House with tracklists. Perfect for gym, driving, work, or pre-party."
    image="/img/_81A4010.webp"
   jsonLd={[
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
-        {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music/"},
-        {"@type": "ListItem", "position": 3, "name": "Weekly DJ Mixes", "item": "https://holger-kampffmeyer.de/dj/mixes-weekly/"}
-      ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "MusicPlaylist",
-      "name": "DJ Hulk Weekly Mixes",
-      "description": "Weekly electronic music DJ mixes by DJ Hulk with full tracklists. Specialized for gym, driving, work focus, and pre-party.",
-      "url": "https://holger-kampffmeyer.de/dj/mixes-weekly/",
-      "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
-      "genre": ["House", "Tech House", "Deep House", "Latin House"],
-      "numTracks": allPosts.length || 0
-    },
+    breadcrumbSchema,
+    musicPlaylistSchema,
     ...blogPostingSchema,
-    latestPost ? {
-      "@context": "https://schema.org",
-      "@type": "AudioObject",
-      "name": latestPost.title,
-      "description": latestPost.description?.substring(0, 200) || "",
-      "contentUrl": latestPost.url,
-      "duration": latestPost.audio_length ? toIsoDuration(latestPost.audio_length) : undefined,
-      "genre": latestPost.tags,
-      "datePublished": latestPost.created_time,
-      "producer": {
-        "@type": "Person",
-        "name": "DJ Hulk"
-      },
-      "associatedMedia": {
-        "@type": "MusicAlbum",
-        "name": latestPost.title,
-        "byArtist": {
-          "@type": "Person",
-          "name": "DJ Hulk"
-        },
-        "datePublished": latestPost.created_time,
-        "genre": latestPost.tags,
-        "track": latestStructuredTracks.map(t => ({
-          "@type": "MusicRecording",
-          "name": t.title,
-          "byArtist": {
-            "@type": "Person",
-            "name": t.artist
-          },
-          "inAlbum": {
-            "@type": "MusicAlbum",
-            "name": latestPost.title
-          },
-          "position": t.position,
-          ...(t.label && {
-            "recordedBy": {
-              "@id": "https://holger-kampffmeyer.de/dj/labels/" + t.label.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")
-            }
-          })
-        }))
-      }
-    } : null,
+    audioObjectSchema,
     getDjPersonSchema(),
-    // Label entities for latest mix
-    latestPost && latestLabelEntities.length > 0 ? {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      "name": "Record labels in " + latestPost.title,
-      "numberOfItems": latestLabelEntities.length,
-      "itemListElement": latestLabelEntities.map((label, index) => ({
-        "@type": "ListItem",
-        "position": index + 1,
-        "item": label
-      }))
-    } : null
+    labelEntitiesSchema,
+    tracklistItemListSchema,
   ].filter(Boolean)}
 >
   <Navbar currentPage="/dj/mixes-weekly/" />

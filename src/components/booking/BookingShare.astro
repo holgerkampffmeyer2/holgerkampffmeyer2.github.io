@@ -1,0 +1,46 @@
+---
+import ShareButtons from '../ShareButtons.astro';
+import Icon from '../Icon.astro';
+import type { BookingContent } from '../../data/booking';
+
+interface Props {
+  share: BookingContent['share'];
+  url: string;
+  heroTitle: string;
+  labels: BookingContent['labels'];
+}
+
+const { share, url, heroTitle, labels } = Astro.props;
+---
+
+<section id="share" class="py-16 sm:py-20">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <h2 class="font-play text-3xl sm:text-4xl font-bold mb-3">{share.title}</h2>
+    <p class="text-[var(--color-text-muted)] text-lg mb-8">{share.description}</p>
+    <ShareButtons
+      url={url}
+      title={heroTitle}
+      text={share.text}
+      hashtags={share.hashtags}
+      config={{
+        nativeLabel: share.nativeLabel,
+        whatsappLabel: share.whatsappLabel,
+        facebookLabel: share.facebookLabel,
+        xLabel: share.xLabel,
+        linkedinLabel: share.linkedinLabel,
+        emailLabel: share.emailLabel,
+        pinterestLabel: share.pinterestLabel,
+        redditLabel: share.redditLabel,
+        telegramLabel: share.telegramLabel,
+        copyLabel: share.copyLabel,
+        copiedLabel: share.copiedLabel,
+      }}
+    />
+    <div class="mt-10 border-t border-[var(--color-border)] pt-6">
+      <a href="#top" class="inline-flex items-center gap-2 text-sm text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-secondary)]">
+        <Icon name="arrow-up" class="h-4 w-4" />
+        {labels.backToTop}
+      </a>
+    </div>
+  </div>
+</section>

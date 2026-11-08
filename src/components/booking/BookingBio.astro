@@ -1,0 +1,36 @@
+---
+import Icon from '../Icon.astro';
+import type { BookingContent } from '../../data/booking';
+
+interface Props {
+  bio: BookingContent['bio'];
+  labels: BookingContent['labels'];
+}
+
+const { bio, labels } = Astro.props;
+---
+
+<section id="bio" class="py-16 sm:py-20 bg-[var(--color-surface)]/40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+    <div>
+      <h2 class="font-play text-3xl sm:text-4xl font-bold mb-6">{bio.title}</h2>
+      <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
+        {bio.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+    <aside id="press-bio" class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-6 h-fit">
+      <h3 class="font-play text-xl font-bold mb-3">{labels.press}</h3>
+      <p class="text-sm leading-relaxed text-[var(--color-text-muted)]">{bio.pressBio}</p>
+      <button
+        type="button"
+        class="mt-5 inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
+        data-copy-bio={bio.pressBio}
+        data-copy-label={labels.copyBio}
+        data-copied-label={labels.bioCopied}
+      >
+        <Icon name="copy" class="h-4 w-4" />
+        <span data-copy-bio-label>{labels.copyBio}</span>
+      </button>
+    </aside>
+  </div>
+</section>

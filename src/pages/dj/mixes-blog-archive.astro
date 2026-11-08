@@ -10,6 +10,7 @@ import Hero from "../../components/Hero.astro";
 import heroImg from "../../assets/img/em3f/DSC_2451.jpg";
 import { loadBlogPosts, createSearchablePosts } from "../../utils/blog-data";
 import { formatDate } from "../../utils/format";
+import { buildBlogPostingSchema, buildBreadcrumbSchema } from "../../utils/schema-builders.js";
 
 const allPosts = await loadBlogPosts();
 const archivePosts = allPosts.filter(post => post.hasTracklist).slice(1);
@@ -31,15 +32,12 @@ const breadcrumbSegments = [
   { label: breadcrumbLabel }
 ];
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://holger-kampffmeyer.de/"},
-    {"@type": "ListItem", "position": 2, "name": "DJ Hulk", "item": "https://holger-kampffmeyer.de/djhulk-electronic-music/"},
-    {"@type": "ListItem", "position": 3, "name": "Mix Archive", "item": "https://holger-kampffmeyer.de/dj/mixes-blog-archive/"}
-  ]
-};
+const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbSegments);
+
+// Build BlogPosting schemas for archive posts
+const blogPostingSchemas = archivePosts.slice(0, 10).map(post =>
+  buildBlogPostingSchema(post)
+);
 
 const blogSchema = {
   "@context": "https://schema.org",
@@ -53,12 +51,7 @@ const blogSchema = {
     "name": "DJ Hulk",
     "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
   },
-   "blogPosts": archivePosts.slice(0, 10).map(post => ({
-     "@type": "BlogPosting",
-     "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.slug}`,
-      "headline": post.title,
-     "datePublished": post.created_time
-   }))
+  "blogPosts": blogPostingSchemas
 };
 
 const collectionPageSchema = {
@@ -75,7 +68,7 @@ const collectionPageSchema = {
     "byArtist": {
       "@type": "Person",
       "name": "DJ Hulk",
-"url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
+      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
     },
     "genre": ["House", "Tech House", "Deep House", "Latin House"],
     "numTracks": archivePosts.length

@@ -6,6 +6,7 @@ import ShareButtons from '../ShareButtons.astro';
 import { USECASE_CONFIG } from '../../data/usecase-config';
 import type { BlogPostData } from '../../types/blog';
 import { formatDate, formatDuration } from '../../utils/format';
+import { getShareConfig } from '../../utils/share-config';
 
 interface Props {
   post: BlogPostData;
@@ -131,17 +132,7 @@ const { post, isLatest = false, showNavigation = true } = Astro.props;
       title={post.title}
       text={post.description?.substring(0, 200) || `DJ Hulk Mix: ${post.title}`}
       hashtags="DJHulk,TechHouse,House,ElectronicMusic"
-      nativeLabel="Teilen"
-      whatsappLabel="WhatsApp"
-      facebookLabel="Facebook"
-      xLabel="X"
-      linkedinLabel="LinkedIn"
-      emailLabel="E-Mail"
-      pinterestLabel="Pinterest"
-      redditLabel="Reddit"
-      telegramLabel="Telegram"
-      copyLabel="Link kopieren"
-      copiedLabel="Link kopiert"
+      config={getShareConfig('mixDetail', 'de')}
     />
   </div>
 </article>

@@ -1,0 +1,26 @@
+---
+import type { BookingContent } from '../../data/booking';
+
+interface Props {
+  facts: BookingContent['facts'];
+  label: string;
+  bioLead: string;
+}
+
+const { facts, label, bioLead } = Astro.props;
+---
+
+<section id="facts" class="py-16 sm:py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <h2 class="font-play text-3xl sm:text-4xl font-bold mb-3">{label}</h2>
+    <p class="max-w-3xl text-[var(--color-text-muted)] text-lg mb-10">{bioLead}</p>
+    <dl class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {facts.map((fact) => (
+        <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
+          <dt class="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">{fact.label}</dt>
+          <dd class="mt-2 text-sm font-medium leading-relaxed">{fact.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

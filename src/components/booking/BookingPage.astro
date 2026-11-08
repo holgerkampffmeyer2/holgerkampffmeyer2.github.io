@@ -5,9 +5,20 @@ import Navbar from '../Navbar.astro';
 import Footer from '../Footer.astro';
 import SectionNav from '../SectionNav.astro';
 import Icon from '../Icon.astro';
-import BookingBody from './BookingBody.astro';
 import MixcloudWidget from '../MixcloudWidget.astro';
-import { bookingContent, type BookingLocale } from '../../data/booking';
+import SocialStats from '../SocialStats.astro';
+import BookingFacts from './BookingFacts.astro';
+import BookingBio from './BookingBio.astro';
+import BookingGenres from './BookingGenres.astro';
+import BookingReferences from './BookingReferences.astro';
+import BookingFormats from './BookingFormats.astro';
+import BookingRider from './BookingRider.astro';
+import BookingPress from './BookingPress.astro';
+import BookingProcess from './BookingProcess.astro';
+import BookingFAQ from './BookingFAQ.astro';
+import BookingContact from './BookingContact.astro';
+import BookingShare from './BookingShare.astro';
+import { bookingContent, bookingMailto, type BookingLocale } from '../../data/booking';
 import { getFaqSchema } from '../../data/faqs';
 import heroImg from '../../assets/img/booking/dj-hulk-neon.webp';
 
@@ -18,6 +29,7 @@ interface Props {
 const { lang } = Astro.props;
 const content = bookingContent[lang];
 const canonical = `https://holger-kampffmeyer.de${content.seo.path}`;
+const mailto = bookingMailto(lang);
 
 const sections = [
   { id: 'facts', label: content.labels.factSheet },
@@ -30,6 +42,7 @@ const sections = [
   { id: 'process', label: content.labels.process },
   { id: 'faq', label: content.labels.faq },
   { id: 'contact', label: content.labels.contact },
+  { id: 'share', label: content.labels.share },
 ];
 
 const breadcrumbName = lang === 'de' ? 'Booking' : 'Booking';
@@ -203,7 +216,25 @@ const jsonLd = [
 
     <SectionNav sections={sections} class="print:hidden" />
 
-    <BookingBody lang={lang} url={canonical} />
+    <BookingFacts facts={content.facts} label={content.labels.factSheet} bioLead={content.bio.lead} />
+    <BookingBio bio={content.bio} labels={content.labels} />
+    <BookingGenres genres={content.genres} />
+    <BookingReferences references={content.references} trust={content.trust} />
+    <BookingFormats formats={content.formats} />
+    <BookingRider rider={content.rider} />
+    <BookingPress press={content.press} labels={content.labels} />
+    <BookingProcess process={content.process} />
+    <SocialStats
+      lang={lang}
+      title={content.stats.title}
+      description={content.stats.description}
+      followersLabel={content.stats.followersLabel}
+      updatedLabel={content.stats.updatedLabel}
+      note={content.stats.note}
+    />
+    <BookingFAQ faq={content.faq} lang={lang} />
+    <BookingContact contact={content.contact} facts={content.facts} labels={content.labels} mailto={mailto} />
+    <BookingShare share={content.share} url={canonical} heroTitle={content.hero.title} labels={content.labels} />
   </div>
 
   <Footer />
@@ -323,4 +354,37 @@ const jsonLd = [
 
     [data-share-root] { display: none !important; }
     [data-copy-url] { display: none !important; }
-  }</style>
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-print-epk]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        window.print();
+      });
+    });
+
+    document.querySelectorAll('[data-copy-bio]').forEach(function (button) {
+      if (button.dataset.copyInitialized) return;
+      button.dataset.copyInitialized = 'true';
+
+      button.addEventListener('click', function () {
+        var text = button.getAttribute('data-copy-bio');
+        var label = button.querySelector('[data-copy-bio-label]');
+        if (!text) return;
+
+        navigator.clipboard
+          .writeText(text)
+          .then(function () {
+            if (!label) return;
+            label.textContent = button.getAttribute('data-copied-label') || 'Copied';
+            window.setTimeout(function () {
+              label.textContent = button.getAttribute('data-copy-label') || 'Copy';
+            }, 2000);
+          })
+          .catch(function () {});
+      });
+    });
+  })();
+</script>

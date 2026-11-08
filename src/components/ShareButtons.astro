@@ -1,23 +1,25 @@
 ---
 import Icon from './Icon.astro';
 import { buildShareLinks } from '../utils/share';
+import type { ShareConfigPreset } from '../utils/share-config';
 
 interface Props {
   url: string;
   title: string;
   text: string;
   hashtags?: string;
-  nativeLabel: string;
-  whatsappLabel: string;
-  facebookLabel: string;
-  xLabel: string;
-  linkedinLabel: string;
-  emailLabel: string;
-  pinterestLabel: string;
-  redditLabel: string;
-  telegramLabel: string;
-  copyLabel: string;
-  copiedLabel: string;
+  nativeLabel?: string;
+  whatsappLabel?: string;
+  facebookLabel?: string;
+  xLabel?: string;
+  linkedinLabel?: string;
+  emailLabel?: string;
+  pinterestLabel?: string;
+  redditLabel?: string;
+  telegramLabel?: string;
+  copyLabel?: string;
+  copiedLabel?: string;
+  config?: ShareConfigPreset;
 }
 
 const {
@@ -36,7 +38,36 @@ const {
   telegramLabel,
   copyLabel,
   copiedLabel,
+  config,
 } = Astro.props;
+
+const labels = config
+  ? {
+      nativeLabel: config.nativeLabel,
+      whatsappLabel: config.whatsappLabel,
+      facebookLabel: config.facebookLabel,
+      xLabel: config.xLabel,
+      linkedinLabel: config.linkedinLabel,
+      emailLabel: config.emailLabel,
+      pinterestLabel: config.pinterestLabel,
+      redditLabel: config.redditLabel,
+      telegramLabel: config.telegramLabel,
+      copyLabel: config.copyLabel,
+      copiedLabel: config.copiedLabel,
+    }
+  : {
+      nativeLabel: nativeLabel!,
+      whatsappLabel: whatsappLabel!,
+      facebookLabel: facebookLabel!,
+      xLabel: xLabel!,
+      linkedinLabel: linkedinLabel!,
+      emailLabel: emailLabel!,
+      pinterestLabel: pinterestLabel!,
+      redditLabel: redditLabel!,
+      telegramLabel: telegramLabel!,
+      copyLabel: copyLabel!,
+      copiedLabel: copiedLabel!,
+    };
 
 const links = buildShareLinks({ url, title, text, hashtags });
 ---
@@ -48,7 +79,7 @@ const links = buildShareLinks({ url, title, text, hashtags });
     data-native-share
   >
     <Icon name="share" class="h-4 w-4" />
-    {nativeLabel}
+    {labels.nativeLabel}
   </button>
 
   <a
@@ -58,7 +89,7 @@ const links = buildShareLinks({ url, title, text, hashtags });
     class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
   >
     <Icon name="whatsapp" class="h-5 w-5" />
-    {whatsappLabel}
+    {labels.whatsappLabel}
   </a>
 
   <a
@@ -68,7 +99,7 @@ const links = buildShareLinks({ url, title, text, hashtags });
     class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
   >
     <Icon name="facebook" class="h-5 w-5" />
-    {facebookLabel}
+    {labels.facebookLabel}
   </a>
 
   <a
@@ -78,7 +109,7 @@ const links = buildShareLinks({ url, title, text, hashtags });
     class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
   >
     <Icon name="x" class="h-5 w-5" />
-    {xLabel}
+    {labels.xLabel}
   </a>
 
   <a
@@ -88,7 +119,7 @@ const links = buildShareLinks({ url, title, text, hashtags });
     class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
   >
     <Icon name="linkedin" class="h-5 w-5" />
-    {linkedinLabel}
+    {labels.linkedinLabel}
   </a>
 
   <a
@@ -98,7 +129,7 @@ const links = buildShareLinks({ url, title, text, hashtags });
     class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
   >
     <Icon name="pinterest" class="h-5 w-5" />
-    {pinterestLabel}
+    {labels.pinterestLabel}
   </a>
 
   <a
@@ -108,7 +139,7 @@ const links = buildShareLinks({ url, title, text, hashtags });
     class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
   >
     <Icon name="reddit" class="h-5 w-5" />
-    {redditLabel}
+    {labels.redditLabel}
   </a>
 
   <a
@@ -118,7 +149,7 @@ const links = buildShareLinks({ url, title, text, hashtags });
     class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
   >
     <Icon name="telegram" class="h-5 w-5" />
-    {telegramLabel}
+    {labels.telegramLabel}
   </a>
 
   <a
@@ -126,18 +157,18 @@ const links = buildShareLinks({ url, title, text, hashtags });
     class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
   >
     <Icon name="email" class="h-5 w-5" />
-    {emailLabel}
+    {labels.emailLabel}
   </a>
 
   <button
     type="button"
     class="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-secondary)]"
     data-copy-url={url}
-    data-copy-label={copyLabel}
-    data-copied-label={copiedLabel}
+    data-copy-label={labels.copyLabel}
+    data-copied-label={labels.copiedLabel}
   >
     <Icon name="copy" class="h-4 w-4" />
-    <span data-copy-text>{copyLabel}</span>
+    <span data-copy-text>{labels.copyLabel}</span>
   </button>
 </div>
 

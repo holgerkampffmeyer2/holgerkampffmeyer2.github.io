@@ -8,9 +8,15 @@ import { getMixDisplay } from "../../../utils/mix-display.js";
 import { getDjPersonSchema } from "../../../utils/dj-schema.js";
 import type { BlogPostData } from "../../../types/blog";
 import { loadBlogPosts } from "../../../utils/blog-data";
-import { toIsoDuration } from "../../../utils/format";
 import labelsData from "../../../data/labels.json";
 import { buildTrackLabels } from "../../../utils/track-labels.js";
+import {
+  buildBlogPostingSchema,
+  buildAudioObjectSchema,
+  buildBreadcrumbSchema,
+  buildLabelEntities,
+  buildTracklistItemList,
+} from "../../../utils/schema-builders.js";
 
 export async function getStaticPaths() {
   const allPosts = await loadBlogPosts();
@@ -93,21 +99,20 @@ const structuredTracks = post.tracklist?.map((track, index) => {
     label: trackLabel ? { name: trackLabel.name, url: trackLabel.url } : null
   };
 }) || [];
-// Build unique label entities with @id for JSON-LD referencing
-const labelEntities = [];
-const seenLabelIds = new Set();
-for (const t of structuredTracks) {
-  if (t.label && !seenLabelIds.has(t.label.name)) {
-    seenLabelIds.add(t.label.name);
-    labelEntities.push({
-      "@type": "Organization",
-      "@id": "https://holger-kampffmeyer.de/dj/labels/" + t.label.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-      "name": t.label.name,
-      "url": t.label.url || undefined,
-      "description": "Record label: " + t.label.name
-    });
-  }
-}
+
+const breadcrumbSegments = [
+  { label: "Home", href: "/" },
+  { label: "DJ Hulk", href: "/djhulk-electronic-music/" },
+  { label: "Weekly DJ Mixes", href: "/dj/mixes-weekly" },
+  { label: curDisplayLabel.label }
+];
+
+// Build JSON-LD using schema builders
+const blogPostingSchema = buildBlogPostingSchema(post);
+const audioObjectSchema = buildAudioObjectSchema(post, structuredTracks);
+const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbSegments);
+const labelEntitiesSchema = buildLabelEntities(structuredTracks);
+const tracklistItemListSchema = buildTracklistItemList(post, structuredTracks);
 
 // Keywords for SEO
 const keywords = [
@@ -121,124 +126,13 @@ const keywords = [
 // Custom OG image path
 const customOgImage = `/og/mix-${post.slug}.jpg`;
 
-const breadcrumbSegments = [
-  { label: "Home", href: "/" },
-  { label: "DJ Hulk", href: "/djhulk-electronic-music/" },
-  { label: "Weekly DJ Mixes", href: "/dj/mixes-weekly" },
-  { label: curDisplayLabel.label }
-];
-
 const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": `${mixPrefix}${post.title}`,
-    "description": post.description?.substring(0, 500) || "",
-    "image": post.picture,
-    "datePublished": post.created_time,
-    "author": {
-      "@type": "Person",
-      "name": "DJ Hulk",
-      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
-    },
-    "publisher": {
-      "@type": "Person",
-      "name": "DJ Hulk",
-      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://holger-kampffmeyer.de/dj/mixes/${post.slug}`
-    }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "AudioObject",
-    "name": `${mixPrefix}${post.title}`,
-    "description": post.description?.substring(0, 500) || "",
-    "contentUrl": post.url,
-    "embedUrl": post.src,
-    "duration": post.audio_length ? toIsoDuration(post.audio_length) : undefined,
-    "datePublished": post.created_time,
-    "genre": post.tags,
-    "producer": {
-      "@type": "Person",
-      "name": "DJ Hulk",
-      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
-    },
-    "image": post.picture,
-    "encodingFormat": "audio/mpeg",
-    "associatedMedia": {
-      "@type": "MusicAlbum",
-      "name": `${mixPrefix}${post.title}`,
-      "byArtist": {
-        "@type": "Person",
-        "name": "DJ Hulk"
-      },
-      "datePublished": post.created_time,
-      "genre": post.tags,
-      "track": structuredTracks.map(t => ({
-        "@type": "MusicRecording",
-        "name": t.title,
-        "byArtist": {
-          "@type": "Person",
-          "name": t.artist
-        },
-        "inAlbum": {
-          "@type": "MusicAlbum",
-          "name": `${mixPrefix}${post.title}`
-        },
-        "position": t.position,
-        ...(t.label && {
-          "recordedBy": {
-            "@id": "https://holger-kampffmeyer.de/dj/labels/" + t.label.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")
-          }
-        })
-      }))
-    }
-  },
-  // ItemList for tracklist with labels (enhanced)
-  post.tracklist && post.tracklist.length > 0 ? {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": `Tracklist for ${mixPrefix}${post.title}`,
-    "numberOfItems": post.tracklist.length,
-    "itemListElement": structuredTracks.map(t => ({
-      "@type": "ListItem",
-      "position": t.position,
-      "item": {
-        "@type": "MusicRecording",
-        "name": t.title,
-        "byArtist": {
-          "@type": "Person",
-          "name": t.artist
-        },
-        "inAlbum": {
-          "@type": "MusicAlbum",
-          "name": `${mixPrefix}${post.title}`
-        },
-        ...(t.label && {
-          "recordedBy": {
-            "@id": "https://holger-kampffmeyer.de/dj/labels/" + t.label.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")
-          }
-        }),
-        "genre": post.tags,
-        "datePublished": post.created_time
-      }
-    }))
-  } : null,
-  // Label entities as separate ItemList for reference
-  labelEntities.length > 0 ? {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Record labels in " + mixPrefix + post.title,
-    "numberOfItems": labelEntities.length,
-    "itemListElement": labelEntities.map((label, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "item": label
-    }))
-  } : null
+  getDjPersonSchema(),
+  blogPostingSchema,
+  audioObjectSchema,
+  breadcrumbSchema,
+  labelEntitiesSchema,
+  tracklistItemListSchema,
 ].filter(Boolean);
 
 ---
@@ -252,16 +146,7 @@ const jsonLd = [
   ogImageWidth={1200}
   ogImageHeight={630}
   twitterPlayerUrl={post.src}
-  jsonLd={[getDjPersonSchema(), ...jsonLd, {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": breadcrumbSegments.map((segment, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "name": segment.label,
-      "item": segment.href ? `https://holger-kampffmeyer.de${segment.href}` : undefined
-    }))
-  }]}
+  jsonLd={jsonLd}
   keywords={keywords}
 >
   <Navbar currentPage="/dj/mixes/" />

@@ -1,0 +1,38 @@
+---
+import Icon from '../Icon.astro';
+import type { BookingContent } from '../../data/booking';
+
+interface Props {
+  rider: BookingContent['rider'];
+}
+
+const { rider } = Astro.props;
+---
+
+<section id="rider" class="py-16 sm:py-20 bg-[var(--color-surface)]/40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <h2 class="font-play text-3xl sm:text-4xl font-bold mb-3">{rider.title}</h2>
+    <p class="max-w-3xl text-[var(--color-text-muted)] text-lg mb-10">{rider.description}</p>
+    <div class="grid gap-4 lg:grid-cols-3">
+      {rider.groups.map((group, index) => (
+        <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-6">
+          <div class="mb-4 flex items-center gap-3">
+            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-primary)]/15 text-sm font-bold text-[var(--color-primary)]">
+              {index + 1}
+            </span>
+            <h3 class="font-play text-lg font-bold">{group.title}</h3>
+          </div>
+          <ul class="space-y-2.5">
+            {group.items.map((item) => (
+              <li class="flex gap-3 text-sm text-[var(--color-text-muted)]">
+                <Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary)]" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <p class="mt-6 text-sm text-[var(--color-text-muted)]">{rider.note}</p>
+  </div>
+</section>
