@@ -228,15 +228,16 @@ Die Registry startet leer — Labels erscheinen erst, nachdem dort Einträge erg
 
 Statt alle Tracks manuell zu pflegen, gibt es ein zweistufiges Werkzeug. Es liest die
 Rekordbox-CUEs aus einem Verzeichnis, das **nicht** im Repo liegt, und ermittelt die Labels
-offline aus den Quelldatei-Tags (bevorzugt `publisher`/`label`-Tag, sonst `[Label]` in
-Titel/Dateiname, Album-Klammer oder Promo-`comment`) sowie online über die MusicBrainz-API
-als Fallback. (Die iTunes-Search-API liefert kein `label`-Feld; Beatport ist per
-Cloudflare/OAuth geblockt.)
+offline aus den Quelldatei-Tags (bevorzugt `label`/`organization`/`publisher`-Tag, sonst
+`[Label]` in Titel/Dateiname, Album-Klammer oder Promo-`comment`) sowie online über die
+MusicBrainz-API als Fallback. (Die iTunes-Search-API liefert kein `label`-Feld; Beatport ist
+per Cloudflare/OAuth geblockt.)
 
 ```bash
 # 1. Recherche (offline-first, CUE-Pfad per CLI oder Umgebungsvariable)
 LABEL_CUE_DIR="/mnt/c/Users/holge/Music/rekordbox/Recording/DJ Hulk" pnpm run label:research
-# optional: --offline (nur CUE-Tags), --limit N, --match-threshold 0.82
+# optional: --offline (nur CUE-Tags), --limit N,
+#           --match-threshold 0.82, --lookup-threshold 0.8
 
 # 2. Vorschläge sichten (label-research.json + label-research-report.md), dann übernehmen
 pnpm run label:apply --dry-run   # nur Zusammenfassung
@@ -247,8 +248,44 @@ pnpm run label:apply             # schreibt src/data/labels.json
   **nicht** verändert; die Artefakte sind gitignored.
 - `label:apply` dedupliziert Label-Namen (Groß-/Kleinschreibung) und vergibt Slug-IDs. `url` bleibt
   zunächst leer und kann anschließend in `labels.json` ergänzt werden (`--overwrite` überschreibt
-  bereits gesetzte Track-Zuordnungen).
+  bereits gesetzte Track-Zuordnungen; `--in`/`--registry` überschreiben die Pfade).
 - Nach dem Übernehmen `pnpm run build` ausführen; die Label-Spalte erscheint pro Mix automatisch.
+
+**CLI-Flags & Caches**
+
+| Flag | Bedeutung |
+|---|---|
+| `--cue-dir <pfad>` | CUE-Verzeichnis (alternativ `LABEL_CUE_DIR` / `DJ_CUE_DIR`) |
+| `--offline` | nur CUE-Tags, keine MusicBrainz-Abfrage |
+| `--limit N` | maximal N eindeutige Tracks verarbeiten |
+| `--match-threshold 0.82` | Mindest-Score für Offline-Zuordnung |
+| `--lookup-threshold 0.8` | Mindest-Score für Online-Zuordnung |
+| `--data` / `--out` / `--report` | alternative Pfade für Eingabe und Artefakte |
+
+Caches: `.label-tag-cache.json` (ffprobe-Tags der Quelldateien) und `.label-lookup-cache.json`
+(MusicBrainz-Antworten). Beide sind gitignored.
+
+**Wie der Abgleich funktioniert**
+
+- Jeder Track-String aus `blog-posts.json` wird gegen alle CUE-Einträge (`PERFORMER - TITLE`) verglichen.
+- `trackVariants` bildet Varianten (voll, ohne Klammer-Qualifier, Titelanteil nach dem ersten ` - `),
+  damit `(Extended Mix)` vs. `(Original)` und vertauschte `Titel - Artist`-Reihenfolgen zusammenfinden.
+- `similarity` kombiniert Bigram- und Token-Dice; enthält der kürzere String den längeren, gilt 0.9.
+- Der höchste Score ≥ `--match-threshold` gewinnt; der veröffentlichte Track-String bleibt Schlüssel.
+- Online: MusicBrainz-Recording-Suche (max. 5 Treffer); der beste Treffer wird über
+  `Titel*0.9 ± Artist-Bonus` bewertet (`-0.25` ohne Artist-Überlappung), danach wird das erste Label
+  aus `release?inc=labels` gelesen. Übernommen ab `--lookup-threshold`, rate-limitiert
+  (~1 Request/Sekunde) und mit aussagekräftigem User-Agent.
+- Nicht-Musik-Einträge (Jingles/Sweeper) werden vorher aussortiert.
+
+**Label-Bereinigung (`cleanLabel`/`cleanBracketLabel`)**
+
+- Verwirft Promo-/Hosting-Dienste (Inflyte, LabelEngine, PromoCloud …), generische Platzhalter
+  (`white label`, `unknown`, `self-released` …), URLs sowie zu kurze/lange Werte.
+- Klammer-Labels werden zusätzlich verworfen, wenn sie Mix-Qualifier (`extended`, `remix` …),
+  Genre-Begriffe (`house`, `techno` …), Ländercodes oder reine Zahlen sind.
+- `source` in den Vorschlägen: `publisher`/`tag` (Datei-Tag), `title`/`album` (Klammer),
+  `comment` (Promo), `musicbrainz` (online).
 
 ### Label-URLs recherchieren & pflegen
 
@@ -274,15 +311,18 @@ pnpm run label:urls:apply
 node scripts/label-apply.mjs --urls label-url-proposals.json [--overwrite] [--dry-run]
 ```
 
-- `pnpm run label:urls` fragt die MusicBrainz-Label-Entity ab (`inc=url-rels`, rate-limitiert, gecached)
+- `pnpm run label:urls` fragt die MusicBrainz-Label-Entity ab (`inc=url-rels`, rate-limitiert, gecached);
+  `--force` recherchiert auch Labels, die bereits eine URL haben
 - `label-url-finder.mjs` ist das optionale Fallback: heuristische Domain-Patterns + HEAD-Check
   (abfragt kein MusicBrainz) für Labels, die MusicBrainz nicht liefern konnte
-- `label-url-quality.mjs` prüft HTML-Content auf Musik-Keywords und filtert Domain-Parking/Verkauf
+- `label-url-quality.mjs` prüft die **bereits in `labels.json` gesetzten** URLs auf Musik-Keywords
+  und filtert Domain-Parking/Verkauf (also nach dem Apply laufen lassen)
 - Review-Artefakte (`label-urls.json`, `label-url-proposals.json`, Reports) sind gitignored
 - `label:urls:apply` (= `label-apply.mjs --urls`) merged **nur** die `url`-Felder,
   Track-Zuordnungen bleiben unberührt; bestehende URLs nur mit `--overwrite`
-- URL-Priorität: offizielle Label-Website → offizieller Bandcamp → Beatport-Labelseite.
-  Keine geparkten Domains, For-Sale-/Maintenance-Seiten oder falschen Namensvetter verwenden.
+- MusicBrainz-URL-Priorität (erster Treffer gewinnt): offizielle Homepage → Bandcamp → Beatport →
+  SoundCloud → Discogs als Fallback. Keine geparkten Domains, For-Sale-/Maintenance-Seiten oder
+  falschen Namensvetter verwenden.
 - Beatport blockt Skripte per Cloudflare (HTTP 403). Labelseiten über Suchtreffer/Seitentitel
   verifizieren; ein 403 im Quality-Report bedeutet nicht automatisch einen toten Link.
 - Edit-/Bootleg-Tracks ohne Label als `unreleased` führen.

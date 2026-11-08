@@ -38,6 +38,7 @@ Sekundäres Ziel: organischer SEO-Traffic über DJ-Mix-Seiten und Tracklists.
 - `pnpm run stats:fetch` — Social Stats (Instagram, Facebook, Mixcloud) zur Buildzeit abrufen → src/data/social-stats.json
 - `pnpm run epk:og` — OG-Images für Booking-Seite generieren (1200×630)
 - `pnpm run epk:pdf` — EPK-PDFs für DE/EN via Playwright generieren (dist muss gebaut sein)
+- `pnpm run epk:zip` — Press-Kit-ZIP aus generierten Assets bauen
 - `node scripts/label-url-finder.mjs` — Optionales Pattern-Fallback (Domain-Patterns + HEAD-Check) → label-url-proposals.json
 - `node scripts/label-url-quality.mjs` — Quality-Check der Registry-URLs (HTML-Heuristik) → label-url-quality-report.json
 
@@ -106,14 +107,23 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 ### Labels recherchieren und pflegen
 1. `pnpm run label:research` — CUE-Tags offline-first, MusicBrainz als Fallback; Ergebnisse sichten.
 2. `pnpm run label:apply --dry-run`, dann `pnpm run label:apply` — Track-Zuordnungen übernehmen.
-3. URLs mit `pnpm run label:urls` recherchieren, optional `label-url-finder.mjs`; danach
-   `label-url-quality.mjs` prüfen und `pnpm run label:urls:apply --dry-run` / ohne `--dry-run` mergen.
+3. URLs mit `pnpm run label:urls` recherchieren, optional `label-url-finder.mjs`;
+   `pnpm run label:urls:apply --dry-run` / ohne `--dry-run` mergen. Danach
+   `label-url-quality.mjs` auf die Registry anwenden (prüft bereits gesetzte URLs).
 4. URL-Priorität: offizielle Label-Website → offizieller Bandcamp → Beatport-Labelseite.
    Keine geparkten Domains, For-Sale-/Maintenance-Seiten oder falschen Namensvetter verwenden.
 5. Beatport blockt Skripte per Cloudflare (HTTP 403); Labelseiten über Suchtreffer/Seitentitel
    verifizieren. Bandcamp-Warnungen von `label-url-quality` sind oft False Positives.
 6. Edit-/Bootleg-Tracks ohne Label als `unreleased` führen; bestehende URLs nur mit `--overwrite` ändern.
 7. Details: [Music-Blog-Script](docs/music-blog-script.md#labels-recherchieren).
+
+### Booking / EPK-Seite pflegen
+1. Inhalte in `src/data/booking.ts` anpassen (DE/EN).
+2. Falls neue Pressefotos: `node scripts/import-booking-images.mjs` ausführen, dann `pnpm run epk:og` für OG-Images.
+3. `pnpm run stats:fetch` für aktuelle Follower-Zahlen (optional, Cache 24h).
+4. `pnpm run build && pnpm run epk:pdf` — EPK-PDFs neu generieren (committen).
+5. `pnpm run epk:zip` — Press-Kit-ZIP neu bauen (committen).
+6. `pnpm run build:seo` für Sitemap/RSS/urllist.
 
 ## Wartungsskripte
 - `node scripts/update-image-refs.mjs` — Ersetzt JPEG/PNG-Bildreferenzen durch WebP-Versionen (falls verfügbar) in allen .astro, .html, .css und .mjs Dateien
@@ -122,8 +132,11 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 - `node scripts/optimize-images.mjs` — Optimiert alle Bilder im Projekt
 - `node scripts/create-webp.mjs -w 1200 <datei>` — Konvertiert Einzelbild zu WebP
 - `node scripts/download-instagram.cjs <url>` — Lädt Bild von Instagram-Post-URL herunter (nutzt Playwright)
+- `node scripts/import-booking-images.mjs` — Konvertiert Booking-Pressefotos zu WebP (Display) und JPG (Press)
 - `node scripts/generate-booking-og.mjs` — Generiert OG-Images für Booking-Seite (1200×630)
 - `node scripts/generate-epk-pdf.mjs` — Generiert EPK-PDFs für DE/EN via Playwright (braucht `dist/`)
+- `node scripts/generate-press-kit-zip.mjs` — Baut das Press-Kit-ZIP aus den generierten Assets
+- `node scripts/smoke-dist.mjs` — Smoke-Test des gebauten `dist/`-Artefakts (CI)
 
 ## IndexNow
 - `pnpm run indexnow-submit` — Sendet alle URLs aus `public/urllist.txt` an die IndexNow API (Bing). Wird nach `build:seo` ausgeführt.
@@ -136,12 +149,3 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 - **`djhulk-electronic-music.astro`**: Person + MusicGroup Schema
 - **`dj/videos.astro`**: VideoObject Schema (ohne duration, mit publisher)
 - **`booking.astro` / `en/booking.astro`**: Service + BreadcrumbList + FAQPage + LocalBusiness Schema. Hero mit LCP-Bild, SectionNav, SocialStats (Count-Up), PressPhotoGrid (Download), ShareButtons (Native + Copy), Print-to-PDF Button.
-
-## Workflows
-
-### Booking / EPK-Seite pflegen
-1. Inhalte in `src/data/booking.ts` anpassen (DE/EN).
-2. Falls neue Pressefotos: `node scripts/import-booking-images.mjs` ausführen, dann `pnpm run epk:og` für OG-Images.
-3. `pnpm run stats:fetch` für aktuelle Follower-Zahlen (optional, Cache 24h).
-4. `pnpm run build && pnpm run epk:pdf` — EPK-PDFs neu generieren (committen).
-5. `pnpm run build:seo` für Sitemap/RSS/urllist.

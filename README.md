@@ -14,22 +14,30 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 
 ## Scripts
 
+- `pnpm run build` / `pnpm run build:seo` / `pnpm run build:full` — Astro-Build, SEO-Dateien bzw. Komplett-Build (Mixcloud, Stats, Bilder)
 - `pnpm run test` / `pnpm test:run` — Unit tests (Vitest)
 - `pnpm test:coverage` — Coverage report (v8)
+- `pnpm run stats:fetch` — Follower-Zahlen (Instagram, Facebook, Mixcloud) → `src/data/social-stats.json`
+- `pnpm run epk:og` / `epk:pdf` / `epk:zip` — Booking-OG-Images, EPK-PDFs (DE/EN), Press-Kit-ZIP
+- `pnpm run indexnow-submit` — URLs aus `public/urllist.txt` an IndexNow (Bing) senden
 - `pnpm run label:research` — Label research (CUE tags offline-first, MusicBrainz fallback)
 - `pnpm run label:apply` — Merge label suggestions
 - `pnpm run label:urls` — Label URL research (MusicBrainz url-rels)
 - `pnpm run label:urls:apply` — Merge label URLs
-
-Label workflow and URL verification rules (official site → Bandcamp → Beatport, no parked domains)
-are documented in the [Music Blog Script](docs/music-blog-script.md#labels-recherchieren).
+- `node scripts/label-url-finder.mjs` — Optionales Pattern-Fallback für Label-URLs
+- `node scripts/label-url-quality.mjs` — Quality-Check der Registry-URLs
 - `node scripts/optimize-images.mjs` — Image optimization (WebP)
 - `node scripts/create-webp.mjs -w 1200 <file>` — Single image to WebP
 - `node scripts/download-instagram.cjs <url>` — Download Instagram image
+- `node scripts/update-image-refs.mjs` — Rewrite image refs to WebP
 - `node scripts/fetch-mixcloud.mjs [--force]` — Fetch Mixcloud data (24h cache)
+- `node scripts/smoke-dist.mjs` — Smoke test the built `dist/` artifact
 - `node scripts/lastmod.mjs` — Update lastmod cache
 - `node scripts/generate-rss.mjs` — Generate RSS feed
 - `node scripts/generate-urllist.mjs` — Generate urllist.txt
+
+Label workflow and URL verification rules (official site → Bandcamp → Beatport, no parked domains)
+are documented in the [Music Blog Script](docs/music-blog-script.md#labels-recherchieren).
 
 ## CI
 
@@ -40,3 +48,4 @@ are documented in the [Music Blog Script](docs/music-blog-script.md#labels-reche
 Weitere Informationen für Agenten in [AGENTS.md](AGENTS.md).
 Workflow für neue Mix-Posts: [Music Blog Script](docs/music-blog-script.md).
 Projektstruktur und Architektur in [docs/DESIGN.md](docs/DESIGN.md).
+Feature-Specs und Change-Historie: [openspec/](openspec/) (OpenSpec).
