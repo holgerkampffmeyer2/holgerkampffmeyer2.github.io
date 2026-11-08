@@ -49,5 +49,12 @@
     "sharp": "^0.35.5",
     "typescript": "^5.9.3",
     "vitest": "^4.1.11"
+  },
+  "overrides": {
+    "zod": "^4.6.6",
+    "undici": "^8.12.2",
+    "@vitest/mocker": "^4.1.12",
+    "fast-uri": "^4.2.2",
+    "minimatch": "^10.2.7"
   }
 }
