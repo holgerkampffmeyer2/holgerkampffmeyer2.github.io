@@ -1067,6 +1067,30 @@
     "myth-of-nyx": {
       "name": "Myth of NYX",
       "url": "https://themythofnyx.com/"
+    },
+    "airæs-jay-phoenix-odinn": {
+      "name": "AIRÆS, Jay Phoenix, Odinn",
+      "url": ""
+    },
+    "around-midnight": {
+      "name": "Around Midnight",
+      "url": "https://aroundmidnightrecords.bandcamp.com/"
+    },
+    "immortrance-recordings": {
+      "name": "Immortrance Recordings",
+      "url": ""
+    },
+    "tierra-sounds": {
+      "name": "TIERRA SOUNDS",
+      "url": ""
+    },
+    "island": {
+      "name": "Island",
+      "url": "https://www.islandrecords.com/"
+    },
+    "beatality": {
+      "name": "Beatality",
+      "url": "https://www.beatport.com/label/beatality-records/20799"
     }
   },
   "tracks": {
@@ -1717,6 +1741,28 @@
     "Angelo Morello - Caliente (Extended Mix)": "terms-conditions-records",
     "Albert Neve & Abel Ramos - Guarachando (Extended Mix)": "sono-music",
     "Chiara Meloni - Dance (Extended Mix)": "paraiso",
-    "LENny(IT) & ALB[I]T - Moonshine (Original Mix)": "ingate-records"
+    "LENny(IT) & ALB[I]T - Moonshine (Original Mix)": "ingate-records",
+    "Chris Lake, Aluna X Elettra Lamborghini - Beggin' X Voilà (AIRÆS Mashup)": "airæs-jay-phoenix-odinn",
+    "Cobuz & Bustta - My Muse (Extended Mix)": "size-records",
+    "Creange - The Sparks (Raphael Palacci Extended Remix)": "around-midnight",
+    "Denats - Push It For Me (Original Mix)": "mk837",
+    "Destiny's Child - Bug A Boo (DJ Soulstar Edit)": "immortrance-recordings",
+    "DGreyFox - Feelings": "toolroom-records",
+    "Dvit Bousa, Deejay P4T - For the Sound (original Mix)": "natural-rhythm",
+    "Dvit Bousa, Deejay P4T - Just Imagine": "natural-rhythm",
+    "Edan Everywhere - Uncommon (Original Mix)": "natural-rhythm",
+    "Enzo Fazz - House Party MiKel CuGGa ReMix": "unreleased",
+    "Eseym - Inside": "like-that-underground",
+    "JSDS - It's All You": "like-that-underground",
+    "JT Donaldson, Liv.e - Stay Inside feat. Liv.e (Sandy Rivera Extended Remix)": "like-that-underground",
+    "Junior Jack, Mark Knight, James Hurr - Feelings (Extended Mix)": "toolroom-records",
+    "La Class - Blow (Original Mix)": "natural-rhythm",
+    "LENny(IT) & ALB[I]T - Call Me Baby": "tierra-sounds",
+    "LOOVEbites - Morenita (Loovebites Afro House Remix)": "producciones-ale-kuma",
+    "Next Door But One - What's Your Name (Extended Mix)": "feel-hype",
+    "Nina Simone - Work Song (Antdot Extended Remix)": "whoa",
+    "Storm Queen - Look Right Through (Tommy Mambretti Private Mix)": "island",
+    "Tali Freaks - Don't Use It  (Original Mix)": "she-s-super-deep",
+    "Yakka - Another Dawn (Extended Mix) [Beatality]": "beatality"
   }
 }
