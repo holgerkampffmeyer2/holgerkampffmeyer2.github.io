@@ -3,8 +3,8 @@
  *
  * Sucht ein Label über den Label-Index (`/ws/2/label?query=label:"..."`) und
  * liest die verknüpften URLs über `/ws/2/label/<id>?inc=url-rels&fmt=json`
- * (offizielle Homepage, Diskogs, Bandcamp, SoundCloud …). Es werden nur
- * reale, von MusicBrainz gelieferte URLs übernommen – es wird nichts geraten.
+ * (offizielle Homepage, Bandcamp, Beatport, SoundCloud, Discogs …). Es werden
+ * nur reale, von MusicBrainz gelieferte URLs übernommen – es wird nichts geraten.
  */
 
 import { MUSICBRAINZ_API, createRateLimiter } from './label-lookup.mjs';
@@ -25,10 +25,10 @@ export function labelCacheKey(name) {
 
 /**
  * Bevorzugte URL-Beziehungstypen für Labels (höchste Priorität zuerst).
- * Höchste Priorität hat die offizielle Homepage, danach Diskogs (stabil bei
- * Rebrandings), dann Bandcamp/SoundCloud/Beatport.
+ * Entspricht der dokumentierten Policy: offizielle Homepage → Bandcamp →
+ * Beatport → SoundCloud; Discogs dient nur als letzter Fallback.
  */
-const URL_PRIORITY = ['official homepage', 'discogs', 'bandcamp', 'soundcloud', 'beatport', 'online data'];
+const URL_PRIORITY = ['official homepage', 'bandcamp', 'beatport', 'soundcloud', 'discogs', 'online data'];
 
 /**
  * Normalisierter Vergleichsschlüssel für Label-Namen.

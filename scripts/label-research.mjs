@@ -231,7 +231,7 @@ async function main() {
     '',
     `- Tracklisten-Einträge: ${tracks.length}`,
     `- Offline (CUE-Tags): ${output.stats.offline}`,
-    `- Online (iTunes): ${output.stats.online}`,
+    `- Online (MusicBrainz): ${output.stats.online}`,
     `- Offen: ${output.stats.unresolved}`,
     '',
   ];

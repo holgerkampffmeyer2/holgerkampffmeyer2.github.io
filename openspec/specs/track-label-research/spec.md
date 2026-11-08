@@ -27,9 +27,9 @@ Pfad hart kodieren.
 Das Werkzeug SHALL alle CUE-Dateien im konfigurierten Verzeichnis parsen, je Track
 `PERFORMER`/`TITLE` und den referenzierten Quelldatei-Pfad ermitteln und für die
 Quelldatei vorhandene Label-Hinweise auslesen. Als Quellen gelten in dieser Reihenfolge:
-das `publisher`-Tag, ein `[Label]`-Muster im Titel/Dateinamen, ein `[Label]`-Muster im
-Album-Titel und Promo-`comment`-Muster der Form „on behalf of &lt;Label&gt;". Nicht-Musik-Einträge
-(z. B. Jingles) MUST ignoriert werden.
+das `label`/`organization`/`publisher`-Tag, ein `[Label]`-Muster im Titel/Dateinamen, ein
+`[Label]`-Muster im Album-Titel und Promo-`comment`-Muster der Form „on behalf of &lt;Label&gt;".
+Nicht-Musik-Einträge (z. B. Jingles) MUST ignoriert werden.
 
 #### Scenario: Label aus publisher-Tag
 - **WHEN** die Quelldatei ein `publisher`-Tag enthält

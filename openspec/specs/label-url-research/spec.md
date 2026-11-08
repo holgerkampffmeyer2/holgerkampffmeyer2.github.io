@@ -24,8 +24,9 @@ maschinenspezifischen Pfade hart kodieren.
 
 Das Recherche-Werkzeug SHALL Labels ohne Website über die MusicBrainz-Label-Entity
 suchen und die offizielle Homepage über URL-Relationen (`inc=url-rels`) ermitteln,
-den erstplatzierten Vorschlag übernehmen und unbekannte Labels ohne Raten mit „kein
-Vorschlag" quittieren. Die Abfrage MUST rate-limitiert (max. ~1 Request/Sekunde)
+dabei die Priorität offizielle Homepage → Bandcamp → Beatport → SoundCloud → Discogs
+anwenden, den erstplatzierten Vorschlag übernehmen und unbekannte Labels ohne Raten mit
+„kein Vorschlag" quittieren. Die Abfrage MUST rate-limitiert (max. ~1 Request/Sekunde)
 erfolgen, eine aussagekräftige User-Agent-Kennung senden und Ergebnisse cachen.
 
 #### Scenario: MusicBrainz liefert eine Homepage
@@ -58,8 +59,9 @@ Quellen MUST exakt den tatsächlich abgefragten Quellen entsprechen.
 ### Requirement: Reviewbares URL-Artefakt
 
 Das Recherche-Werkzeug SHALL die Ergebnisse als JSON-Artefakt mit je Vorschlag
-`{ name, url, via, confidence, source }` sowie einen Statistik-Report schreiben und
-MUST `src/data/labels.json` dabei nicht verändern.
+`{ name, url, source, via, mbid }` sowie einen Statistik-Report schreiben und
+MUST `src/data/labels.json` dabei nicht verändern. Das optionale Pattern-Fallback
+verwendet `{ name, url, via, confidence, source }`.
 
 #### Scenario: Lauf erzeugt Vorschläge ohne Registry-Änderung
 - **WHEN** das Recherche-Werkzeug erfolgreich läuft

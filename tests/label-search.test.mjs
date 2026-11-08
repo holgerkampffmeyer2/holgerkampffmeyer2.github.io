@@ -165,8 +165,8 @@ describe('extractLabelUrl', () => {
     };
     const result = extractLabelUrl(data);
     expect(result).toEqual({
-      url: 'https://discogs.com/label',
-      via: 'discogs'
+      url: 'https://bandcamp.com/label',
+      via: 'bandcamp'
     });
   });
 
