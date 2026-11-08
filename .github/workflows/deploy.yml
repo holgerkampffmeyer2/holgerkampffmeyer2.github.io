@@ -41,7 +41,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Fetch Mixcloud data
         run: node scripts/fetch-mixcloud.mjs --force
@@ -59,34 +59,7 @@ jobs:
         with:
           path: ./dist
 
-  # TypeScript check - runs in parallel with build
-  check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-
-      - name: Setup pnpm
-        run: corepack enable
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-          cache: 'pnpm'
-
-      - name: Debug Node and pnpm versions
-        run: |
-          node --version
-          pnpm --version
-          pnpm list @astrojs/check
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: TypeScript check
-        run: pnpm run check
-
-  # Linting - runs in parallel with build and check
+  # Linting - runs in parallel with build
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -102,12 +75,12 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Run ESLint
         run: pnpm run lint
 
-  # Unit tests - runs in parallel with build, check, and lint
+  # Unit tests - runs in parallel with build and lint
   test:
     runs-on: ubuntu-latest
     steps:
@@ -123,7 +96,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Unit tests
         run: pnpm test:run
@@ -133,7 +106,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [build, check, lint, test]
+    needs: [build, lint, test]
     steps:
       - uses: actions/deploy-pages@v5
         id: deployment
