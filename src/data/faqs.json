@@ -3,7 +3,7 @@
     {
       "id": "vermietung-hinweis",
       "question": "Du hast Fragen zur Vermietung?",
-      "answer": "Meine Vermietungsseite ist umgezogen. Alle Infos zu Preisen, Paketen, verfügbarer Technik und Ablauf findest du auf <a href=\"https://soundundlicht-stuttgart.de/vermietung/\" target=\"_blank\" rel=\"noopener\">soundundlicht-stuttgart.de/vermietung/</a>.",
+      "answer": "Meine Vermietungsseite ist umgezogen. Alle Infos zu Preisen, Paketen, verfügbarer Technik und Ablauf findest du auf <a href=\"https://soundundlicht-stuttgart.de/vermietung\" target=\"_blank\" rel=\"noopener\">soundundlicht-stuttgart.de/vermietung/</a>.",
       "pages": [
         "index"
       ]
