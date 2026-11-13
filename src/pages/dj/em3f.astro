@@ -5,6 +5,7 @@ import Hero from '../../components/Hero.astro';
 import heroImg from '../../assets/img/tomatefestival.jpg';
 import Footer from '../../components/Footer.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import Lightbox from '../../components/Lightbox.astro';
 import { getDjPersonSchema } from '../../utils/dj-schema.js';
 
 const breadcrumbSegments = [
@@ -24,22 +25,22 @@ const breadcrumbSchema = {
 };
 
 const photos = [
-  "/img/em3f/DSC_2142.webp",
-  "/img/em3f/DSC_2157.webp",
-  "/img/em3f/DSC_2289.webp",
-  "/img/em3f/DSC_2305.webp",
-  "/img/em3f/DSC_2308.webp",
-  "/img/em3f/DSC_2311.webp",
-  "/img/em3f/DSC_2315.webp",
-  "/img/em3f/DSC_2316.webp",
-  "/img/em3f/DSC_2320.webp",
-  "/img/em3f/DSC_2386.webp",
-  "/img/em3f/DSC_2451.webp",
-  "/img/em3f/DSC_2583.webp",
-  "/img/em3f/UP8A7720.webp",
-  "/img/em3f/UP8A7733.webp",
-  "/img/em3f/UP8A7778.webp",
-  "/img/em3f/UP8A8078.webp"
+  { src: "/img/em3f/DSC_2142.webp", alt: "DJ Hulk EM3F Festival Foto 1" },
+  { src: "/img/em3f/DSC_2157.webp", alt: "DJ Hulk EM3F Festival Foto 2" },
+  { src: "/img/em3f/DSC_2289.webp", alt: "DJ Hulk EM3F Festival Foto 3" },
+  { src: "/img/em3f/DSC_2305.webp", alt: "DJ Hulk EM3F Festival Foto 4" },
+  { src: "/img/em3f/DSC_2308.webp", alt: "DJ Hulk EM3F Festival Foto 5" },
+  { src: "/img/em3f/DSC_2311.webp", alt: "DJ Hulk EM3F Festival Foto 6" },
+  { src: "/img/em3f/DSC_2315.webp", alt: "DJ Hulk EM3F Festival Foto 7" },
+  { src: "/img/em3f/DSC_2316.webp", alt: "DJ Hulk EM3F Festival Foto 8" },
+  { src: "/img/em3f/DSC_2320.webp", alt: "DJ Hulk EM3F Festival Foto 9" },
+  { src: "/img/em3f/DSC_2386.webp", alt: "DJ Hulk EM3F Festival Foto 10" },
+  { src: "/img/em3f/DSC_2451.webp", alt: "DJ Hulk EM3F Festival Foto 11" },
+  { src: "/img/em3f/DSC_2583.webp", alt: "DJ Hulk EM3F Festival Foto 12" },
+  { src: "/img/em3f/UP8A7720.webp", alt: "DJ Hulk EM3F Festival Foto 13" },
+  { src: "/img/em3f/UP8A7733.webp", alt: "DJ Hulk EM3F Festival Foto 14" },
+  { src: "/img/em3f/UP8A7778.webp", alt: "DJ Hulk EM3F Festival Foto 15" },
+  { src: "/img/em3f/UP8A8078.webp", alt: "DJ Hulk EM3F Festival Foto 16" }
 ];
 ---
 
@@ -88,15 +89,16 @@ const photos = [
         <h2 class="font-play text-4xl font-bold mt-4">Event Fotos</h2>
       </div>
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-grid">
         {photos.map((photo, index) => (
           <div class="aspect-square overflow-hidden rounded-xl animate-on-scroll" style={`animation-delay: ${index * 0.05}s`}>
             <img 
-              src={photo} 
-              alt={`DJ Hulk Event ${index + 1}`} 
+              src={photo.src} 
+              alt={photo.alt} 
               loading="lazy"
               decoding="async"
               class="w-full h-full object-cover hover:scale-110 transition-transform duration-500 cursor-pointer"
+              data-gallery-index={index}
             />
           </div>
         ))}
@@ -123,4 +125,25 @@ const photos = [
   </section>
 
   <Footer />
+
+  <Lightbox images={photos} />
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('gallery-grid');
+      const lightbox = document.getElementById('lightbox');
+      
+      if (grid && lightbox) {
+        const lightboxInstance = lightbox.__lightbox;
+        
+        grid.addEventListener('click', (e) => {
+          const img = e.target.closest('img[data-gallery-index]');
+          if (img) {
+            const index = parseInt(img.dataset.galleryIndex!);
+            lightboxInstance.open(index);
+          }
+        });
+      }
+    });
+  </script>
 </Layout>
