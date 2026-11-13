@@ -7,10 +7,15 @@ interface Props {
 const { images, initialIndex = 0 } = Astro.props;
 ---
 
-<dialog id="lightbox" class="lightbox fixed inset-0 z-[100] hidden">
+<dialog
+  id="lightbox"
+  class="lightbox fixed inset-0 z-[100] hidden"
+  data-images={JSON.stringify(images)}
+  data-initial-index={initialIndex}
+>
   <div class="lightbox-backdrop absolute inset-0 bg-black/95 backdrop-blur-sm" aria-hidden="true"></div>
-  
-  <button 
+
+  <button
     class="lightbox-close fixed top-6 right-6 z-10 p-2 text-white/80 hover:text-white transition-colors rounded-full bg-white/10 backdrop-blur-sm"
     aria-label="Lightbox schließen"
     data-lightbox-close
@@ -20,7 +25,7 @@ const { images, initialIndex = 0 } = Astro.props;
     </svg>
   </button>
 
-  <button 
+  <button
     class="lightbox-nav lightbox-prev fixed left-6 top-1/2 -translate-y-1/2 z-10 p-3 text-white/80 hover:text-white transition-colors rounded-full bg-white/10 backdrop-blur-sm hidden sm:flex"
     aria-label="Vorheriges Bild"
     data-lightbox-prev
@@ -30,7 +35,7 @@ const { images, initialIndex = 0 } = Astro.props;
     </svg>
   </button>
 
-  <button 
+  <button
     class="lightbox-nav lightbox-next fixed right-6 top-1/2 -translate-y-1/2 z-10 p-3 text-white/80 hover:text-white transition-colors rounded-full bg-white/10 backdrop-blur-sm hidden sm:flex"
     aria-label="Nächstes Bild"
     data-lightbox-next
@@ -42,10 +47,10 @@ const { images, initialIndex = 0 } = Astro.props;
 
   <div class="lightbox-content absolute inset-0 flex items-center justify-center p-4">
     <figure class="max-w-full max-h-full">
-      <img 
-        id="lightbox-img" 
-        src={images[initialIndex].src} 
-        alt={images[initialIndex].alt}
+      <img
+        id="lightbox-img"
+        src={images[initialIndex]?.src}
+        alt={images[initialIndex]?.alt ?? ''}
         class="max-w-full max-h-[90vh] object-contain"
       />
       <figcaption id="lightbox-caption" class="sr-only"></figcaption>
@@ -72,124 +77,118 @@ const { images, initialIndex = 0 } = Astro.props;
 </dialog>
 
 <script>
-  class Lightbox {
-    constructor() {
-      this.dialog = document.getElementById('lightbox');
-      this.img = document.getElementById('lightbox-img');
-      this.caption = document.getElementById('lightbox-caption');
-      this.currentEl = document.getElementById('lightbox-current');
-      this.thumbs = this.dialog.querySelectorAll('[data-lightbox-thumb]');
-      this.images = {images};
-      this.index = {initialIndex};
-      this.isOpen = false;
-      this.preloadCache = new Map();
-      
-      this.bindEvents();
-      this.preloadAdjacent();
-    }
+  document.addEventListener('DOMContentLoaded', () => {
+    const dialog = document.getElementById('lightbox') as HTMLDialogElement | null;
+    if (!dialog) return;
 
-    bindEvents() {
-      this.dialog.querySelector('[data-lightbox-close]').addEventListener('click', () => this.close());
-      this.dialog.querySelector('[data-lightbox-prev]').addEventListener('click', () => this.prev());
-      this.dialog.querySelector('[data-lightbox-next]').addEventListener('click', () => this.next());
-      this.dialog.querySelector('.lightbox-backdrop').addEventListener('click', () => this.close());
-      
-      this.thumbs.forEach(thumb => {
-        thumb.addEventListener('click', () => this.goTo(parseInt(thumb.dataset.lightboxThumb!)));
-      });
+    const img = document.getElementById('lightbox-img') as HTMLImageElement;
+    const caption = document.getElementById('lightbox-caption');
+    const currentEl = document.getElementById('lightbox-current');
+    const thumbs = dialog.querySelectorAll<HTMLButtonElement>('[data-lightbox-thumb]');
+    const images: { src: string; alt: string }[] = JSON.parse(dialog.dataset.images || '[]');
 
-      document.addEventListener('keydown', (e) => {
-        if (!this.isOpen) return;
-        if (e.key === 'Escape') this.close();
-        if (e.key === 'ArrowLeft') this.prev();
-        if (e.key === 'ArrowRight') this.next();
-      });
+    let index = parseInt(dialog.dataset.initialIndex || '0', 10);
+    let isOpen = false;
+    const preloadCache = new Set<number>();
 
-      this.dialog.addEventListener('click', (e) => {
-        if (e.target === this.dialog) this.close();
-      });
-    }
+    const updateImage = () => {
+      const image = images[index];
+      if (!image) return;
+      img.src = image.src;
+      img.alt = image.alt;
+      if (caption) caption.textContent = image.alt;
+      if (currentEl) currentEl.textContent = String(index + 1);
+    };
 
-    open(index = this.index) {
-      this.index = index;
-      this.updateImage();
-      this.dialog.showModal();
-      this.isOpen = true;
-      document.body.style.overflow = 'hidden';
-      this.updateThumbs();
-      this.preloadAdjacent();
-    }
-
-    close() {
-      this.dialog.close();
-      this.isOpen = false;
-      document.body.style.overflow = '';
-    }
-
-    prev() {
-      this.index = (this.index - 1 + this.images.length) % this.images.length;
-      this.updateImage();
-      this.updateThumbs();
-      this.preloadAdjacent();
-    }
-
-    next() {
-      this.index = (this.index + 1) % this.images.length;
-      this.updateImage();
-      this.updateThumbs();
-      this.preloadAdjacent();
-    }
-
-    goTo(index) {
-      this.index = index;
-      this.updateImage();
-      this.updateThumbs();
-      this.preloadAdjacent();
-    }
-
-    updateImage() {
-      const img = this.images[this.index];
-      this.img.src = img.src;
-      this.img.alt = img.alt;
-      this.caption.textContent = img.alt;
-      this.currentEl.textContent = this.index + 1;
-    }
-
-    updateThumbs() {
-      this.thumbs.forEach((thumb, i) => {
-        const active = i === this.index;
+    const updateThumbs = () => {
+      thumbs.forEach((thumb, i) => {
+        const active = i === index;
         thumb.classList.toggle('border-[var(--color-secondary)]', active);
         thumb.classList.toggle('scale-110', active);
         thumb.classList.toggle('border-transparent', !active);
         thumb.classList.toggle('opacity-60', !active);
-        thumb.setAttribute('aria-selected', active.toString());
+        thumb.setAttribute('aria-selected', String(active));
       });
-      
-      const activeThumb = this.thumbs[this.index];
-      if (activeThumb) {
-        activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      }
-    }
+      thumbs[index]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    };
 
-    preloadAdjacent() {
-      const prevIdx = (this.index - 1 + this.images.length) % this.images.length;
-      const nextIdx = (this.index + 1) % this.images.length;
-      [prevIdx, nextIdx].forEach(idx => {
-        if (!this.preloadCache.has(idx)) {
-          const link = document.createElement('link');
-          link.rel = 'preload';
-          link.as = 'image';
-          link.href = this.images[idx].src;
-          document.head.appendChild(link);
-          this.preloadCache.set(idx, true);
-        }
+    const preloadAdjacent = () => {
+      if (images.length < 2) return;
+      const prevIdx = (index - 1 + images.length) % images.length;
+      const nextIdx = (index + 1) % images.length;
+      [prevIdx, nextIdx].forEach((idx) => {
+        if (preloadCache.has(idx)) return;
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = images[idx].src;
+        document.head.appendChild(link);
+        preloadCache.add(idx);
       });
-    }
-  }
+    };
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const instance = new Lightbox();
-    document.getElementById('lightbox').__lightbox = instance;
+    const open = (startIndex: number) => {
+      index = startIndex;
+      updateImage();
+      updateThumbs();
+      preloadAdjacent();
+      dialog.showModal();
+      isOpen = true;
+      document.body.style.overflow = 'hidden';
+    };
+
+    const close = () => {
+      dialog.close();
+      isOpen = false;
+      document.body.style.overflow = '';
+    };
+
+    const prev = () => {
+      index = (index - 1 + images.length) % images.length;
+      updateImage();
+      updateThumbs();
+      preloadAdjacent();
+    };
+
+    const next = () => {
+      index = (index + 1) % images.length;
+      updateImage();
+      updateThumbs();
+      preloadAdjacent();
+    };
+
+    dialog.querySelector('[data-lightbox-close]')?.addEventListener('click', close);
+    dialog.querySelector('[data-lightbox-prev]')?.addEventListener('click', prev);
+    dialog.querySelector('[data-lightbox-next]')?.addEventListener('click', next);
+    dialog.querySelector('.lightbox-backdrop')?.addEventListener('click', close);
+
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        index = parseInt(thumb.dataset.lightboxThumb || '0', 10);
+        updateImage();
+        updateThumbs();
+        preloadAdjacent();
+      });
+    });
+
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!isOpen) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    });
+
+    document.addEventListener('click', (e) => {
+      const trigger = (e.target as HTMLElement).closest<HTMLElement>('[data-gallery-index]');
+      if (!trigger) return;
+      const startIndex = parseInt(trigger.dataset.galleryIndex || '0', 10);
+      if (Number.isNaN(startIndex)) return;
+      open(startIndex);
+    });
   });
 </script>
 
@@ -209,11 +208,11 @@ const { images, initialIndex = 0 } = Astro.props;
   }
 
   @keyframes zoomIn {
-    from { 
+    from {
       opacity: 0;
       transform: scale(0.95);
     }
-    to { 
+    to {
       opacity: 1;
       transform: scale(1);
     }

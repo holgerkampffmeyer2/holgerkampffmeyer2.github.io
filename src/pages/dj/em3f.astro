@@ -127,23 +127,4 @@ const photos = [
   <Footer />
 
   <Lightbox images={photos} />
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const grid = document.getElementById('gallery-grid');
-      const lightbox = document.getElementById('lightbox');
-      
-      if (grid && lightbox) {
-        const lightboxInstance = lightbox.__lightbox;
-        
-        grid.addEventListener('click', (e) => {
-          const img = e.target.closest('img[data-gallery-index]');
-          if (img) {
-            const index = parseInt(img.dataset.galleryIndex!);
-            lightboxInstance.open(index);
-          }
-        });
-      }
-    });
-  </script>
 </Layout>
