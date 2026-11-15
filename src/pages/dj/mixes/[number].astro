@@ -10,6 +10,7 @@ import type { BlogPostData } from "../../../types/blog";
 import { loadBlogPosts } from "../../../utils/blog-data";
 import labelsData from "../../../data/labels.json";
 import { buildTrackLabels } from "../../../utils/track-labels.js";
+import { brandedOgImagePath } from "../../../utils/og-image.js";
 import {
   buildBlogPostingSchema,
   buildAudioObjectSchema,
@@ -124,7 +125,7 @@ const keywords = [
 ].join(', ');
 
 // Custom OG image path
-const customOgImage = `/og/mix-${post.slug}.jpg`;
+const customOgImage = brandedOgImagePath(post.slug);
 
 const jsonLd = [
   getDjPersonSchema(),

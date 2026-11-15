@@ -9,7 +9,15 @@ const SOURCE = path.join(ROOT_DIR, 'src/assets/img/booking/dj-hulk-neon.webp');
 const OUT_DIR = path.join(ROOT_DIR, 'public/og');
 
 function escapeXml(str) {
-  return str.replace(/[&<>"']/g, (c) => ({ '&': '&', '<': '<', '>': '>', '"': '"', "'": '&apos;' })[c]);
+  const amp = String.fromCharCode(38);
+  const entities = {
+    '&': amp + 'amp;',
+    '<': amp + 'lt;',
+    '>': amp + 'gt;',
+    '"': amp + 'quot;',
+    "'": amp + 'apos;',
+  };
+  return String(str).replace(/[&<>"']/g, (c) => entities[c]);
 }
 
 const variants = [

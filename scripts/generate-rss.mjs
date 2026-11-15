@@ -22,12 +22,15 @@ const PAGES = [
 ];
 
 function escapeXml(str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
+  const amp = String.fromCharCode(38);
+  const entities = {
+    '&': amp + 'amp;',
+    '<': amp + 'lt;',
+    '>': amp + 'gt;',
+    '"': amp + 'quot;',
+    "'": amp + 'apos;',
+  };
+  return String(str).replace(/[&<>"']/g, (c) => entities[c]);
 }
 
 function formatRssDate(dateStr) {
