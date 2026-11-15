@@ -518,7 +518,7 @@
     },
     "blu-music": {
       "name": "BLU MUSIC",
-      "url": ""
+      "url": "https://www.discogs.com/label/486346"
     },
     "his-hertz-records": {
       "name": "His&Hertz Records",
@@ -854,7 +854,7 @@
     },
     "theory-x": {
       "name": "Theory X",
-      "url": ""
+      "url": "https://www.discogs.com/label/1074062"
     },
     "sola": {
       "name": "SOLA",
@@ -966,7 +966,7 @@
     },
     "affairs": {
       "name": "Affairs",
-      "url": ""
+      "url": "https://www.qobuz.com/gb-en/label/affairs-2/download-streaming-albums/8661284"
     },
     "thrive-music": {
       "name": "Thrive Music",
@@ -998,7 +998,7 @@
     },
     "white-rabbit": {
       "name": "White Rabbit",
-      "url": ""
+      "url": "https://www.discogs.com/label/262597"
     },
     "halogenix": {
       "name": "Halogenix",
@@ -1010,7 +1010,7 @@
     },
     "four-corners-music": {
       "name": "Four Corners Music",
-      "url": ""
+      "url": "https://www.discogs.com/label/1659469"
     },
     "house-for-artists": {
       "name": "House For Artists / Sony Music",
@@ -1091,6 +1091,26 @@
     "beatality": {
       "name": "Beatality",
       "url": "https://www.beatport.com/label/beatality-records/20799"
+    },
+    "massive-house-records": {
+      "name": "Massive House Records",
+      "url": ""
+    },
+    "eightbarmusic": {
+      "name": "Eight Bar Music",
+      "url": "https://eightbarmusic.bandcamp.com/"
+    },
+    "spinnin-deep": {
+      "name": "Spinnin' Deep",
+      "url": "https://soundcloud.com/spinnin-deep"
+    },
+    "notype-records": {
+      "name": "NoType Records",
+      "url": ""
+    },
+    "album-only": {
+      "name": "Album Only",
+      "url": "https://albumonly.bandcamp.com/"
     }
   },
   "tracks": {
@@ -1763,6 +1783,23 @@
     "Nina Simone - Work Song (Antdot Extended Remix)": "whoa",
     "Storm Queen - Look Right Through (Tommy Mambretti Private Mix)": "island",
     "Tali Freaks - Don't Use It  (Original Mix)": "she-s-super-deep",
-    "Yakka - Another Dawn (Extended Mix) [Beatality]": "beatality"
+    "Yakka - Another Dawn (Extended Mix) [Beatality]": "beatality",
+    "Claudio Huston, Memo Framed - Dalida for breakfast": "album-only",
+    "De Biasi & Durante - Street Groove (Extend Mix)": "soul-n-pepa",
+    "Denats - What They Say (Original Mix)": "mk837",
+    "Denats - You Won't Tell Me (Original Mix)": "mk837",
+    "Disco Ball'z - Hood Roulette (Original Mix)": "legent-music",
+    "DJ Carl Meah - Breakdown (Original Mix)": "massive-house-records",
+    "Dvit Bousa, Deejay P4T - House of Grooving": "natural-rhythm",
+    "Eight Bar - Love Somebody": "eightbarmusic",
+    "Eight Bar - Supa Fly": "eightbarmusic",
+    "Ferreck Dawn - Love You Better ft. Caroline Byrne (Extended Mix)": "spinnin-deep",
+    "OFFAIAH -  'Work It Out' (Club Mix)": "defected",
+    "R3V3S, Electro Blues - Soul Shadows (Original Mix)": "legent-music",
+    "Sam Allan, Yalla Habebe, Mady Minton - Out of Touch (Extended Mix)": "notype-records",
+    "Sister Sledge - Thinking Of You (Djsakisp Bootleg)": "unreleased",
+    "Wanderson XVR - Are You Felling (Extended Mix)": "feel-hype",
+    "Yakka - Dancin' (Extended Mix) [Beatality]": "beatality",
+    "Yakka - Superfly (Extended Mix) [Beatality]": "beatality"
   }
 }
