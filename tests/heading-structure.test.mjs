@@ -34,8 +34,8 @@ describe('Heading-Struktur', () => {
     expect(offenders.map((file) => path.relative(ROOT_DIR, file))).toEqual([]);
   });
 
-  it('Mix-Detailseite hat genau ein h1', () => {
-    const source = fs.readFileSync(path.join(SRC_DIR, 'components/dj/MixDetail.astro'), 'utf8');
+  it('Mix-Detail-Seite hat genau ein h1', () => {
+    const source = fs.readFileSync(path.join(SRC_DIR, 'pages/dj/mixes/[number].astro'), 'utf8');
     const matches = source.match(/<h1\b/g) || [];
 
     expect(matches).toHaveLength(1);
@@ -48,8 +48,8 @@ describe('Heading-Struktur', () => {
     expect(matches).toHaveLength(1);
   });
 
-  it('Mix-Detailseite startet mit h1 und nutzt h2 fuer Abschnitte', () => {
-    const source = fs.readFileSync(path.join(SRC_DIR, 'components/dj/MixDetail.astro'), 'utf8');
+  it('Mix-Detail-Seite startet mit h1 und nutzt h2 für Abschnitte', () => {
+    const source = fs.readFileSync(path.join(SRC_DIR, 'pages/dj/mixes/[number].astro'), 'utf8');
     const headingOrder = [...source.matchAll(/<(h[1-6])\b/g)].map((match) => match[1]);
 
     expect(headingOrder[0]).toBe('h1');

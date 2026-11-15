@@ -91,9 +91,9 @@ const tracklistItemListSchema = latestPost && latestStructuredTracks.length > 0
   <Breadcrumb segments={breadcrumbSegments} />
 
   {latestPost && (
-    <section class="pt-8 pb-0">
+    <section class="pt-8 pb-0" aria-labelledby="weekly-mixes-heading">
       <div class="max-w-6xl mx-auto px-4">
-        <h1 class="font-play text-4xl md:text-5xl lg:text-6xl font-bold mb-4 gradient-text">
+        <h1 id="weekly-mixes-heading" class="font-play text-4xl md:text-5xl lg:text-6xl font-bold mb-4 gradient-text">
           Weekly DJ Mixes on Mixcloud
         </h1>
         <p class="text-[var(--color-text-muted)] text-lg mb-6 max-w-2xl">
@@ -116,9 +116,9 @@ const tracklistItemListSchema = latestPost && latestStructuredTracks.length > 0
     </section>
   )}
 
-  <section class="pt-8 pb-16 hero-gradient">
+  <section class="pt-8 pb-16 hero-gradient" aria-labelledby="latest-mix-heading">
     <div class="max-w-6xl mx-auto px-4">
-      <h2 class="sr-only">Latest Mix Details</h2>
+      <h2 id="latest-mix-heading" class="font-play text-2xl font-bold mb-6 text-[var(--color-text)]">Latest Mix</h2>
       {latestPost && (
         <>
           <div class="mb-12">

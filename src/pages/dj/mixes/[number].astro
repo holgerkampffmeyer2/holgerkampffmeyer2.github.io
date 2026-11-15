@@ -166,8 +166,9 @@ const jsonLd = [
 
   <Breadcrumb segments={breadcrumbSegments} />
 
-  <section class="pt-8 pb-16 hero-gradient">
+  <section class="pt-8 pb-16 hero-gradient" aria-labelledby="mix-detail-heading">
     <div class="max-w-6xl mx-auto px-4">
+      <h1 id="mix-detail-heading" class="sr-only">{post.title}</h1>
       <MixDetail post={post} isLatest={isLatest} introSentences={introSentences} relatedMixes={relatedMixes} topLabels={topLabels} />
 
       {/* Navigation between mixes */}
