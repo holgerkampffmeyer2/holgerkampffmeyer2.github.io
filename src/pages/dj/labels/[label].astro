@@ -1,0 +1,227 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Navbar from "../../../components/Navbar.astro";
+import Footer from "../../../components/Footer.astro";
+import Breadcrumb from "../../../components/Breadcrumb.astro";
+import Icon from "../../../components/Icon.astro";
+import type { BlogPostData } from "../../../types/blog";
+import { loadBlogPosts } from "../../../utils/blog-data";
+import labelsData from "../../../data/labels.json";
+import { labelSlug } from "../../../utils/label-slug.js";
+import { buildMixBreadcrumbLabel } from "../../../utils/mix-seo.js";
+import { formatDate } from "../../../utils/format";
+
+interface LabelTrack {
+  artist: string;
+  title: string;
+}
+
+interface LabelMix {
+  slug: string;
+  title: string;
+  created_time: string;
+  displayLabel: string;
+  tracks: LabelTrack[];
+}
+
+interface LabelEntry {
+  id: string;
+  name: string;
+  url: string;
+  slug: string;
+  mixes: LabelMix[];
+  trackCount: number;
+}
+
+export async function getStaticPaths() {
+  const posts = (await loadBlogPosts()).filter((post: BlogPostData) => post.hasTracklist);
+  const trackToLabel = labelsData.tracks as Record<string, string>;
+  const labelDefs = labelsData.labels as Record<string, { name: string; url?: string }>;
+
+  const entries = new Map<string, LabelEntry>();
+
+  for (const post of posts) {
+    for (const track of post.tracklist || []) {
+      const id = trackToLabel[track];
+      if (!id || !labelDefs[id]) continue;
+
+      const name = labelDefs[id].name;
+      const slug = labelSlug(name);
+
+      if (!entries.has(id)) {
+        entries.set(id, {
+          id,
+          name,
+          url: labelDefs[id].url || '',
+          slug,
+          mixes: [],
+          trackCount: 0,
+        });
+      }
+
+      const entry = entries.get(id)!;
+      const parts = track.split(' - ');
+      const artist = parts[0]?.replace(/,$/, '') || '';
+      const title = parts.slice(1).join(' - ').replace(/,$/, '') || track;
+
+      const existing = entry.mixes.find((mix) => mix.slug === post.slug);
+      if (existing) {
+        existing.tracks.push({ artist, title });
+      } else {
+        entry.mixes.push({
+          slug: post.slug,
+          title: post.title,
+          created_time: post.created_time,
+          displayLabel: buildMixBreadcrumbLabel(post),
+          tracks: [{ artist, title }],
+        });
+      }
+      entry.trackCount += 1;
+    }
+  }
+
+  return Array.from(entries.values()).map((entry) => ({
+    params: { label: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: LabelEntry;
+}
+
+const { entry } = Astro.props;
+const mixCount = entry.mixes.length;
+const mixLabel = mixCount === 1 ? 'Mix' : 'Mixes';
+const trackLabel = entry.trackCount === 1 ? 'Track' : 'Tracks';
+const pageTitle =
+  `${entry.name} – ${mixCount} ${mixLabel} von DJ Hulk | Record Label`.length <= 68
+    ? `${entry.name} – ${mixCount} ${mixLabel} von DJ Hulk | Record Label`
+    : `${entry.name} – ${mixCount} ${mixLabel} | Record Label`;
+const trackExamples = entry.mixes
+  .flatMap((mix) => mix.tracks.map((track) => `${track.artist} - ${track.title}`.trim()))
+  .filter((value, index, all) => value.length > 3 && all.indexOf(value) === index)
+  .slice(0, 2);
+const descriptionBase = `${entry.name} in ${mixCount} DJ-Hulk-${mixLabel} mit ${entry.trackCount} ${trackLabel}`;
+const descriptionSuffix = '. Alle Mixes mit Tracklist und Release-Datum findest du hier.';
+const descriptionCandidates = [
+  trackExamples.length > 1
+    ? `${descriptionBase} – u.a. „${trackExamples.join('“ und „')}“${descriptionSuffix}`
+    : '',
+  trackExamples.length > 0
+    ? `${descriptionBase} – u.a. „${trackExamples[0]}“${descriptionSuffix}`
+    : '',
+  `${descriptionBase}${descriptionSuffix}`,
+].filter((candidate) => candidate.length > 0);
+const pageDescription = descriptionCandidates.find((candidate) => candidate.length <= 160) ?? descriptionCandidates[descriptionCandidates.length - 1];
+
+const breadcrumbSegments = [
+  { label: "Home", href: "/" },
+  { label: "DJ Hulk", href: "/djhulk-electronic-music/" },
+  { label: "Weekly DJ Mixes", href: "/dj/mixes-weekly" },
+  { label: `Label: ${entry.name}` },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `https://holger-kampffmeyer.de/dj/labels/${entry.slug}#webpage`,
+    mainEntityOfPage: `https://holger-kampffmeyer.de/dj/labels/${entry.slug}`,
+    name: `${entry.name} – Mixes von DJ Hulk`,
+    description: pageDescription,
+    inLanguage: 'de-DE',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `https://holger-kampffmeyer.de/dj/labels/${entry.slug}`,
+    name: entry.name,
+    url: entry.url || undefined,
+    description: `Record label: ${entry.name}`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `https://holger-kampffmeyer.de/dj/labels/${entry.slug}#list`,
+    numberOfItems: mixCount,
+    itemListElement: entry.mixes.map((mix, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: mix.displayLabel,
+      url: `https://holger-kampffmeyer.de/dj/mixes/${mix.slug}`,
+    })),
+  },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd}>
+  <Navbar currentPage="/dj/mixes/" />
+
+  <Breadcrumb segments={breadcrumbSegments} />
+
+  <section class="pt-8 pb-16 hero-gradient" headingoffset="1">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="font-play text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-4">
+        {entry.name}
+      </h1>
+
+      <p class="text-[var(--color-text-muted)] text-lg mb-6 max-w-2xl">
+        {entry.name} liefert {entry.trackCount} {trackLabel} in {mixCount} {mixLabel} von DJ Hulk. Jeder Mix
+        unten verlinkt auf die Detailseite mit vollständiger Tracklist, sodass sich der Sound der
+        Label-Reihe direkt vergleichen lässt.
+      </p>
+
+      {entry.url && (
+        <a
+          href={entry.url}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-secondary)] transition-colors text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] mb-8"
+        >
+          <Icon name="link" class="w-4 h-4" />
+          <span>Offizielle Website von {entry.name}</span>
+        </a>
+      )}
+
+      <h2 class="font-play text-lg font-bold mb-4">Mixes mit {entry.name}</h2>
+
+      <div class="space-y-4">
+        {entry.mixes.map((mix) => (
+          <article class="p-4 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)]">
+            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
+              <a
+                href={`/dj/mixes/${mix.slug}`}
+                class="font-medium text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors"
+              >
+                {mix.displayLabel}
+              </a>
+              <time
+                datetime={mix.created_time}
+                class="text-xs text-[var(--color-text-muted)]"
+              >
+                {formatDate(mix.created_time)}
+              </time>
+            </div>
+            <ul class="text-sm text-[var(--color-text-muted)] space-y-1">
+              {mix.tracks.map((track) => (
+                <li>
+                  <span class="text-[var(--color-text)]">{track.artist}</span>
+                  {' – '}
+                  {track.title}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-4 mt-10">
+        <a href="/dj/mixes-weekly" class="btn-secondary">← Alle DJ Mixes</a>
+        <a href="/dj/mixes-blog-archive" class="btn-secondary">Mix-Archiv</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

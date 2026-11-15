@@ -1,4 +1,5 @@
 import type { BlogPostData } from '../types/blog';
+import { labelSlug } from './label-slug.js';
 
 export interface BreadcrumbSegment {
   label: string;
@@ -9,13 +10,7 @@ export interface SchemaBuilderOptions {
   baseUrl?: string;
   authorName?: string;
   authorUrl?: string;
-}
-
-function slugify(str: string): string {
-  return str
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+  description?: string;
 }
 
 function resolveUrl(path: string, baseUrl: string): string {
@@ -26,7 +21,7 @@ export function buildBlogPostingSchema(
   post: BlogPostData,
   options: SchemaBuilderOptions = {}
 ): object {
-  const { baseUrl = 'https://holger-kampffmeyer.de', authorName = 'DJ Hulk', authorUrl = 'https://holger-kampffmeyer.de/djhulk-electronic-music/' } = options;
+  const { baseUrl = 'https://holger-kampffmeyer.de', authorName = 'DJ Hulk', authorUrl = 'https://holger-kampffmeyer.de/djhulk-electronic-music/', description } = options;
   const postUrl = resolveUrl(`/dj/mixes/${post.slug}`, baseUrl);
 
   return {
@@ -34,7 +29,7 @@ export function buildBlogPostingSchema(
     '@type': 'BlogPosting',
     '@id': postUrl,
     headline: post.title,
-    description: post.description?.substring(0, 500) || '',
+    description: description || post.description?.substring(0, 500) || '',
     image: post.picture,
     datePublished: post.created_time,
     author: {
@@ -82,7 +77,7 @@ export function buildAudioObjectSchema(
     position: t.position,
     ...(t.label && {
       recordedBy: {
-        '@id': resolveUrl(`/dj/labels/${slugify(t.label.name)}`, baseUrl),
+        '@id': resolveUrl(`/dj/labels/${labelSlug(t.label.name)}`, baseUrl),
       },
     }),
     genre: post.tags,
@@ -95,7 +90,7 @@ export function buildAudioObjectSchema(
       if (t.label && !acc.has(t.label.name)) {
         acc.set(t.label.name, {
           '@type': 'Organization',
-          '@id': resolveUrl(`/dj/labels/${slugify(t.label.name)}`, baseUrl),
+          '@id': resolveUrl(`/dj/labels/${labelSlug(t.label.name)}`, baseUrl),
           name: t.label.name,
           url: t.label.url || undefined,
           description: `Record label: ${t.label.name}`,
@@ -188,7 +183,7 @@ export function buildLabelEntities(
       if (t.label && !acc.has(t.label.name)) {
         acc.set(t.label.name, {
           '@type': 'Organization',
-          '@id': resolveUrl(`/dj/labels/${slugify(t.label.name)}`, baseUrl),
+          '@id': resolveUrl(`/dj/labels/${labelSlug(t.label.name)}`, baseUrl),
           name: t.label.name,
           url: t.label.url || undefined,
           description: `Record label: ${t.label.name}`,
@@ -242,7 +237,7 @@ export function buildTracklistItemList(
         },
         ...(t.label && {
           recordedBy: {
-            '@id': resolveUrl(`/dj/labels/${slugify(t.label.name)}`, baseUrl),
+            '@id': resolveUrl(`/dj/labels/${labelSlug(t.label.name)}`, baseUrl),
           },
         }),
         genre: post.tags,

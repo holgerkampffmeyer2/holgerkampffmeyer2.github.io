@@ -7,14 +7,26 @@ import { USECASE_CONFIG } from '../../data/usecase-config';
 import type { BlogPostData } from '../../types/blog';
 import { formatDate, formatDuration } from '../../utils/format';
 import { getShareConfig } from '../../utils/share-config';
+import type { MixLabelInfo, RelatedMix } from '../../utils/mix-seo.js';
+import { labelSlug } from '../../utils/label-slug.js';
 
 interface Props {
   post: BlogPostData;
   isLatest?: boolean;
   showNavigation?: boolean;
+  introSentences?: string[];
+  relatedMixes?: RelatedMix[];
+  topLabels?: MixLabelInfo[];
 }
 
-const { post, isLatest = false, showNavigation = true } = Astro.props;
+const {
+  post,
+  isLatest = false,
+  showNavigation = true,
+  introSentences = [],
+  relatedMixes = [],
+  topLabels = [],
+} = Astro.props;
 ---
 
 <article class="mix-detail" headingoffset="1">
@@ -67,9 +79,42 @@ const { post, isLatest = false, showNavigation = true } = Astro.props;
       )}
     </div>
 
+    {/* Intro */}
+    {introSentences.length > 0 && (
+      <div class="mb-8 max-w-2xl">
+        <p class="text-[var(--color-text)] text-lg leading-relaxed">{introSentences[0]}</p>
+        {introSentences.length > 1 && (
+          <p class="text-[var(--color-text-muted)] leading-relaxed mt-3">{introSentences.slice(1).join(' ')}</p>
+        )}
+      </div>
+    )}
+
     {/* Description */}
     {post.description && (
-      <p class="text-[var(--color-text-muted)] text-lg mb-6 max-w-2xl whitespace-pre-wrap">{post.description}</p>
+      <div class="mb-8 max-w-2xl">
+        <h2 class="font-play text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-2">Beschreibung von Mixcloud</h2>
+        <p class="text-[var(--color-text-muted)] whitespace-pre-wrap">{post.description}</p>
+      </div>
+    )}
+
+    {/* Labels in this mix */}
+    {topLabels.length > 0 && (
+      <div class="mb-8">
+        <h2 class="font-play text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Labels in diesem Mix</h2>
+        <ul class="flex flex-wrap gap-2">
+          {topLabels.map((label) => (
+            <li>
+              <a
+                href={`/dj/labels/${labelSlug(label.name)}`}
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+              >
+                {label.name}
+                <span class="text-[var(--color-text-muted)] text-xs">({label.count})</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     )}
 
     {/* Use Cases */}
@@ -112,6 +157,24 @@ const { post, isLatest = false, showNavigation = true } = Astro.props;
         </div>
         <div class="p-4 max-h-[500px] overflow-y-auto">
           <TracklistTable tracks={post.tracklist} displayMode="responsive" />
+        </div>
+      </div>
+    )}
+
+    {/* Related mixes */}
+    {relatedMixes.length > 0 && (
+      <div class="mb-8">
+        <h2 class="font-play text-lg font-bold mb-4">Ähnliche Mixes</h2>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {relatedMixes.map((mix) => (
+            <a
+              href={mix.href}
+              class="flex flex-col gap-1 p-4 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors"
+            >
+              <span class="font-medium text-[var(--color-text)] text-sm">{mix.title}</span>
+              <span class="text-xs text-[var(--color-text-muted)]">{mix.reason}</span>
+            </a>
+          ))}
         </div>
       </div>
     )}

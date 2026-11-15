@@ -4,13 +4,21 @@ import Navbar from "../../../components/Navbar.astro";
 import Footer from "../../../components/Footer.astro";
 import Breadcrumb from "../../../components/Breadcrumb.astro";
 import MixDetail from "../../../components/dj/MixDetail.astro";
-import { getMixDisplay } from "../../../utils/mix-display.js";
 import { getDjPersonSchema } from "../../../utils/dj-schema.js";
 import type { BlogPostData } from "../../../types/blog";
 import { loadBlogPosts } from "../../../utils/blog-data";
 import labelsData from "../../../data/labels.json";
 import { buildTrackLabels } from "../../../utils/track-labels.js";
 import { brandedOgImagePath } from "../../../utils/og-image.js";
+import {
+  buildMixTitle,
+  buildMixDescription,
+  buildMixIntro,
+  buildMixBreadcrumbLabel,
+  buildRelatedMixes,
+  type MixCandidate,
+  type MixLabelInfo,
+} from "../../../utils/mix-seo.js";
 import {
   buildBlogPostingSchema,
   buildAudioObjectSchema,
@@ -63,29 +71,33 @@ if (post.tracklist) {
 }
 
 // Top labels sorted by count
-const topLabels = Array.from(labelCounts.values())
+const topLabels: MixLabelInfo[] = Array.from(labelCounts.values())
   .sort((a, b) => b.count - a.count)
   .slice(0, 5);
 
 const topLabelNames = topLabels.map(l => l.name);
-const topLabelNamesStr = topLabelNames.join(', ');
 
 // Build enhanced title with top labels
-const curDisplayLabel = getMixDisplay(post.key, post.title);
-const mixPrefix = curDisplayLabel.mixNum ? `Mix#${curDisplayLabel.mixNum} - ` : '';
-const baseTitle = `${mixPrefix}${post.title}`;
-const enhancedTitle = topLabelNames.length > 0
-  ? `${baseTitle} | ${topLabelNames.slice(0, 3).join(', ')}`
-  : baseTitle;
-const rawTitle = `${enhancedTitle} - DJ Hulk Weekly Mix - House, Tech House, Deep House - Electronic Music`;
-const pageTitle = rawTitle.length > 70 ? rawTitle.substring(0, 67).trimEnd() + '…' : rawTitle;
+const enhancedTitle = buildMixTitle(post, topLabels);
+const pageTitle = enhancedTitle;
 
-// Enhanced description with top labels and use cases
-const useCasesStr = post.useCases?.length ? post.useCases.join(', ') : '';
-const baseDesc = `${mixPrefix}${post.title} - Electronic Music Mix with Tracklist. ${topLabelNamesStr ? `Featuring tracks from ${topLabelNamesStr}. ` : ''}${useCasesStr ? `Perfect for ${useCasesStr}. ` : ''}Enjoy House, Tech House, Deep House sets. Free streaming on Mixcloud.`;
-const pageDescription = post.description
-  ? (post.description.length > 160 ? post.description.substring(0, 157).trimEnd() + '…' : post.description)
-  : (baseDesc.length > 160 ? baseDesc.substring(0, 157).trimEnd() + '…' : baseDesc);
+const pageDescription = buildMixDescription(post, topLabels);
+const introSentences = buildMixIntro(post, topLabels);
+
+const allMixPosts = (await loadBlogPosts()).filter((entry: BlogPostData) => entry.hasTracklist);
+const candidates: MixCandidate[] = allMixPosts.map((entry: BlogPostData) => {
+  const counts = new Map<string, { name: string; url: string | null; count: number }>();
+  for (const track of entry.tracklist || []) {
+    const label = trackLabels.get(track);
+    if (!label) continue;
+    const current = counts.get(label.name) || { name: label.name, url: label.url, count: 0 };
+    current.count += 1;
+    counts.set(label.name, current);
+  }
+  const labels: MixLabelInfo[] = Array.from(counts.values()).sort((a, b) => b.count - a.count);
+  return { post: entry, labels };
+});
+const relatedMixes = buildRelatedMixes(post, candidates, 3);
 
 // Build structured track data for enhanced MusicRecording schema
 const structuredTracks = post.tracklist?.map((track, index) => {
@@ -105,11 +117,11 @@ const breadcrumbSegments = [
   { label: "Home", href: "/" },
   { label: "DJ Hulk", href: "/djhulk-electronic-music/" },
   { label: "Weekly DJ Mixes", href: "/dj/mixes-weekly" },
-  { label: curDisplayLabel.label }
+  { label: buildMixBreadcrumbLabel(post) }
 ];
 
 // Build JSON-LD using schema builders
-const blogPostingSchema = buildBlogPostingSchema(post);
+const blogPostingSchema = buildBlogPostingSchema(post, { description: pageDescription });
 const audioObjectSchema = buildAudioObjectSchema(post, structuredTracks);
 const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbSegments);
 const labelEntitiesSchema = buildLabelEntities(structuredTracks);
@@ -157,7 +169,7 @@ const jsonLd = [
   <section class="pt-8 pb-16 hero-gradient" headingoffset="1">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="sr-only">Mix Details and Tracklist</h2>
-      <MixDetail post={post} isLatest={isLatest} />
+      <MixDetail post={post} isLatest={isLatest} introSentences={introSentences} relatedMixes={relatedMixes} topLabels={topLabels} />
 
       {/* Navigation between mixes */}
       <div class="max-w-4xl mx-auto mt-12">
@@ -169,7 +181,7 @@ const jsonLd = [
     </svg>
     <div class="text-left">
       <span class="text-xs text-[var(--color-text-muted)] block">Previous</span>
-      <span class="font-medium text-[var(--color-text)]">{getMixDisplay(nextPost.key, nextPost.title).label}</span>
+      <span class="font-medium text-[var(--color-text)]">{buildMixBreadcrumbLabel(nextPost)}</span>
     </div>
   </a>
 ) : <div></div>}
@@ -178,7 +190,7 @@ const jsonLd = [
   <a href={`/dj/mixes/${prevPost.slug}`} class="flex items-center gap-3 px-5 py-3 bg-[var(--color-surface)] rounded-lg border border-[var(--color-border)] hover:border-[var(--color-primary)] transition-colors group">
     <div class="text-right">
       <span class="text-xs text-[var(--color-text-muted)] block">Next</span>
-      <span class="font-medium text-[var(--color-text)]">{getMixDisplay(prevPost.key, prevPost.title).label}</span>
+      <span class="font-medium text-[var(--color-text)]">{buildMixBreadcrumbLabel(prevPost)}</span>
     </div>
     <svg class="w-5 h-5 text-[var(--color-secondary)] group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
