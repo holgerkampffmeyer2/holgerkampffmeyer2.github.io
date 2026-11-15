@@ -48,7 +48,7 @@ Commands in [AGENTS.md](../AGENTS.md). Details siehe unten.
 
 ## Output
 - `dist/` - statische HTML-Dateien
-- `dist/sitemap.xml` - generiert von @astrojs/sitemap während Build
+- `dist/sitemap-index.xml` + `dist/sitemap-0.xml` - generiert von @astrojs/sitemap während Build
 - `dist/rss.xml` - RSS-Feed
 - `dist/urllist.txt` - URL-Liste für IndexNow (via `pnpm run indexnow-submit`)
 - `public/urllist.txt` - Kopie für nächsten Build
