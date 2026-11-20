@@ -6,7 +6,7 @@ import ShareButtons from '../ShareButtons.astro';
 import { USECASE_CONFIG } from '../../data/usecase-config';
 import type { BlogPostData } from '../../types/blog';
 import { formatDate, formatDuration } from '../../utils/format';
-import { getShareConfig } from '../../utils/share-config';
+import { shareConfig } from '../../utils/share-config';
 import type { MixLabelInfo, RelatedMix } from '../../utils/mix-seo.js';
 import { labelSlug } from '../../utils/label-slug.js';
 
@@ -195,7 +195,7 @@ const {
       title={post.title}
       text={post.description?.substring(0, 200) || `DJ Hulk Mix: ${post.title}`}
       hashtags="DJHulk,TechHouse,House,ElectronicMusic"
-      config={getShareConfig('mixDetail', 'de')}
+      config={shareConfig.mixDetail.de}
     />
   </div>
 </article>

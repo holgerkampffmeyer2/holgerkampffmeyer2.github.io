@@ -10,6 +10,7 @@ import { USECASE_CONFIG } from "../../data/usecase-config";
 import { loadBlogPosts, createSearchablePosts } from "../../utils/blog-data";
 import labels from "../../data/labels.json";
 import { buildTrackLabels } from "../../utils/track-labels.js";
+import { buildStructuredTracks, type TrackLabelResolver } from "../../utils/mix-track-data.js";
 import { formatDate } from "../../utils/format";
 import {
   buildBlogPostingSchema,
@@ -31,19 +32,8 @@ const latestPost = allPosts.length > 0 ? allPosts[0] : null;
 const postsWithTracklists = allPosts.filter(post => post.hasTracklist);
 const searchablePosts = createSearchablePosts(allPosts);
 
-const trackLabels = buildTrackLabels(labels);
-const latestStructuredTracks = latestPost?.tracklist?.map((track, index) => {
-  const trackLabel = trackLabels.get(track);
-  const parts = track.split(' - ');
-  const artist = parts[0]?.replace(/,$/, '') || '';
-  const title = parts.slice(1).join(' - ').replace(/,$/, '') || track;
-  return {
-    position: index + 1,
-    artist,
-    title,
-    label: trackLabel ? { name: trackLabel.name, url: trackLabel.url } : null
-  };
-}) || [];
+const trackLabels = buildTrackLabels(labels) as TrackLabelResolver;
+const latestStructuredTracks = buildStructuredTracks(latestPost?.tracklist || [], trackLabels);
 
 // Build BlogPosting schemas for recent posts
 const blogPostingSchema = postsWithTracklists.slice(0, 10).map(post =>

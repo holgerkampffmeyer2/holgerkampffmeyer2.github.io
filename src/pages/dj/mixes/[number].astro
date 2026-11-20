@@ -9,6 +9,12 @@ import type { BlogPostData } from "../../../types/blog";
 import { loadBlogPosts } from "../../../utils/blog-data";
 import labelsData from "../../../data/labels.json";
 import { buildTrackLabels } from "../../../utils/track-labels.js";
+import {
+  buildStructuredTracks,
+  countTopLabels,
+  getCandidates,
+  type TrackLabelResolver,
+} from "../../../utils/mix-track-data.js";
 import { brandedOgImagePath } from "../../../utils/og-image.js";
 import {
   buildMixTitle,
@@ -54,26 +60,9 @@ interface Props {
 const { post, prevPost, nextPost, isLatest } = Astro.props;
 
 // Build track labels for this mix
-const trackLabels = buildTrackLabels(labelsData);
+const trackLabels = buildTrackLabels(labelsData) as TrackLabelResolver;
 
-// Get unique labels for this mix, sorted by frequency
-const labelCounts = new Map<string, { name: string; url: string | null; count: number }>();
-if (post.tracklist) {
-  for (const track of post.tracklist) {
-    const label = trackLabels.get(track);
-    if (label) {
-      const key = label.name;
-      const existing = labelCounts.get(key) || { name: label.name, url: label.url, count: 0 };
-      existing.count++;
-      labelCounts.set(key, existing);
-    }
-  }
-}
-
-// Top labels sorted by count
-const topLabels: MixLabelInfo[] = Array.from(labelCounts.values())
-  .sort((a, b) => b.count - a.count)
-  .slice(0, 5);
+const topLabels: MixLabelInfo[] = countTopLabels(post.tracklist || [], trackLabels, 5);
 
 const topLabelNames = topLabels.map(l => l.name);
 
@@ -85,33 +74,11 @@ const pageDescription = buildMixDescription(post, topLabels);
 const introSentences = buildMixIntro(post, topLabels);
 
 const allMixPosts = (await loadBlogPosts()).filter((entry: BlogPostData) => entry.hasTracklist);
-const candidates: MixCandidate[] = allMixPosts.map((entry: BlogPostData) => {
-  const counts = new Map<string, { name: string; url: string | null; count: number }>();
-  for (const track of entry.tracklist || []) {
-    const label = trackLabels.get(track);
-    if (!label) continue;
-    const current = counts.get(label.name) || { name: label.name, url: label.url, count: 0 };
-    current.count += 1;
-    counts.set(label.name, current);
-  }
-  const labels: MixLabelInfo[] = Array.from(counts.values()).sort((a, b) => b.count - a.count);
-  return { post: entry, labels };
-});
+const candidates: MixCandidate[] = getCandidates(allMixPosts, trackLabels);
 const relatedMixes = buildRelatedMixes(post, candidates, 3);
 
 // Build structured track data for enhanced MusicRecording schema
-const structuredTracks = post.tracklist?.map((track, index) => {
-  const trackLabel = trackLabels.get(track);
-  const parts = track.split(' - ');
-  const artist = parts[0]?.replace(/,$/, '') || '';
-  const title = parts.slice(1).join(' - ').replace(/,$/, '') || track;
-  return {
-    position: index + 1,
-    artist,
-    title,
-    label: trackLabel ? { name: trackLabel.name, url: trackLabel.url } : null
-  };
-}) || [];
+const structuredTracks = buildStructuredTracks(post.tracklist || [], trackLabels);
 
 const breadcrumbSegments = [
   { label: "Home", href: "/" },

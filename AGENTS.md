@@ -118,7 +118,7 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 7. Details: [Music-Blog-Script](docs/music-blog-script.md#labels-recherchieren).
 
 ### Booking / EPK-Seite pflegen
-1. Inhalte in `src/data/booking.ts` anpassen (DE/EN).
+1. Inhalte in `src/data/booking.de.ts` / `src/data/booking.en.ts` anpassen (Typen in `booking.types.ts`, Barrel `booking.ts`).
 2. Falls neue Pressefotos: `node scripts/import-booking-images.mjs` ausführen, dann `pnpm run epk:og` für OG-Images.
 3. `pnpm run stats:fetch` für aktuelle Follower-Zahlen (optional, Cache 24h).
 4. `pnpm run build && pnpm run epk:pdf` — EPK-PDFs neu generieren (committen).
@@ -144,7 +144,7 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 ## Bereichsspezifische Hinweise
 - **`dj/mixes/[number].astro`**: AudioObject + BreadcrumbList + BlogPosting Schema (Mix-Detailseite)
 - **`dj/mixes-weekly.astro`**: BlogPosting + MusicPlaylist + AudioObject Schema (Mixes-Übersicht)
-- **`dj/mixes-blog-archive.astro`**: Blog-Archiv, kein eigenes JSON-LD nötig
+- **`dj/mixes-blog-archive.astro`**: Blog-Archiv mit CollectionPage + Blog + MusicAlbum + BreadcrumbList (über `src/utils/schema-builders.ts`)
 - **`vermietung.astro`**: **Kein FAQPage Schema** – Weiterleitung zu soundundlicht-stuttgart.de
 - **`djhulk-electronic-music.astro`**: Person + MusicGroup Schema
 - **`dj/videos.astro`**: VideoObject Schema (ohne duration, mit publisher)

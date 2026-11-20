@@ -11,7 +11,7 @@ Commands in [AGENTS.md](../AGENTS.md). Details siehe unten.
 4. `astro build` → statische Seite in `dist/` (inkl. Sitemap via @astrojs/sitemap)
 5. `node scripts/generate-rss.mjs` → RSS-Feed → `public/rss.xml` + `dist/rss.xml`
 6. `node scripts/generate-urllist.mjs` → `public/urllist.txt` + `dist/urllist.txt`
-7. **Automatisch:** OG-Bilder (1200×630 WebP) werden aus Mixcloud-Covers generiert → `public/og/{slug}.webp`
+7. **Automatisch:** OG-Bilder (1200×630 JPEG) werden aus Mixcloud-Covers generiert → `public/og/mix-{slug}.jpg` (`src/utils/og-image.js`)
 
 ### build:seo (nach Code-Änderungen)
 1. `node scripts/lastmod.mjs` → `.lastmod-cache.json` aktualisieren

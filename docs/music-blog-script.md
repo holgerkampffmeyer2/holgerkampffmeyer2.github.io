@@ -163,7 +163,7 @@ pnpm run build:full  # ACHTUNG: Nutzt Cache! Für neue Mixes: --force nötig
 2. Tracklist aus `tracklists/` wird zugeordnet (Regex auf `Mix<nummer>`)
 3. Hero-Image aus `tracklists/` wird gefunden, konvertiert und nach `public/tracklists/` kopiert
 4. `blog-posts.json` + `mixcloud-data.json` werden aktualisiert
-5. OG-Vorschaubilder (1200×630 WebP) werden aus Mixcloud-Covers generiert → `public/og/{slug}.webp`
+5. OG-Vorschaubilder (1200×630 JPEG) werden aus Mixcloud-Covers generiert → `public/og/mix-{slug}.jpg` (`src/utils/og-image.js`)
 6. Astro baut die neue Seite `/dj/mixes/<slug>.html`
 7. RSS-Feed + `urllist.txt` werden generiert
 
@@ -179,6 +179,11 @@ Nach dem Fetch ersetzt der neue Mix dort den vorherigen — kein manuelles Updat
 - Verifiziere JSON-LD in den Page Source
 
 ### Schritt 6: Commit + Push
+
+Vor dem Commit die Definition of Done aus `AGENTS.md` ausführen:
+`pnpm run lint && pnpm run check && pnpm run build && pnpm run build:seo && pnpm test:run`.
+Danach nur die geänderten Daten-/Asset-Dateien stagen, mit konventioneller Nachricht committen
+(z. B. `feat: add new mix`) und pushen.
 
 ---
 
@@ -222,7 +227,7 @@ nachgeschlagen — `tracklist` in `blog-posts.json` bleibt unverändert eine Str
 - Konsistenz prüfen: `validateLabelRegistry()` in `src/utils/track-labels.js` meldet fehlende Namen,
   ungültige URLs sowie Tracks mit fehlender oder unbekannter Label-ID.
 
-Die Registry startet leer — Labels erscheinen erst, nachdem dort Einträge ergänzt wurden.
+Die Registry ist bereits mit Labels und Track-Zuordnungen gefüllt — neue Tracks bei Bedarf ergänzen.
 
 ### Labels recherchieren
 
@@ -346,7 +351,7 @@ Jede Mix-Seite erhält automatisch:
 **Open Graph:**
 - `og:title` - DJ Hulk - Mix-Titel
 - `og:type` - music.playlist
-- `og:image` - 1200×630 WebP Bild aus `public/og/{slug}.webp`
+- `og:image` - 1200×630 JPEG Bild aus `public/og/mix-{slug}.jpg`
 - `twitter:player` - Mixcloud Player URL
 
 **Canonical URL:** `https://holger-kampffmeyer.de/dj/mixes/{slug}`
@@ -381,7 +386,7 @@ Jede Mix-Seite erhält automatisch:
 ### /dj/mixes-blog-archive (Archiv)
 - Kompakte Listenansicht
 - Filter-Buttons (All, Gym, Drive, Work, Party) → `/dj/mixes-blog-archive?useCase=...`
-- Pagination (6 Mixes pro Seite)
+- Pagination (12 Mixes pro Seite, `ITEMS_PER_PAGE` in `src/pages/dj/mixes-blog-archive.astro`)
 - Titel, Datum, Tags pro Eintrag → verlinkt auf `/dj/mixes/{slug}`
 - Button "Back to Weekly DJ Mixes" → `/dj/mixes-weekly`
 

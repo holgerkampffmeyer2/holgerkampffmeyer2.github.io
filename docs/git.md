@@ -5,7 +5,7 @@ Präfixe: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `ci:`
 
 ## Standard-Commit (Quellcode)
 ```bash
-pnpm run lint && pnpm run check && pnpm run build && pnpm run build:seo
+pnpm run lint && pnpm run check && pnpm run build && pnpm run build:seo && pnpm test:run
 git add .
 git commit -m "feat: describe changes"
 git push origin main

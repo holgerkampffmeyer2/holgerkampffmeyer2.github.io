@@ -7,6 +7,8 @@ import {
   buildBreadcrumbSchema,
   buildLabelEntities,
   buildTracklistItemList,
+  buildBlogSchema,
+  buildCollectionPageSchema,
 } from '../schema-builders';
 
 const mockPost: BlogPostData = {
@@ -184,5 +186,36 @@ describe('buildTracklistItemList', () => {
     expect((schema.itemListElement as SchemaObject[])[0].position).toBe(1);
     expect(((schema.itemListElement as SchemaObject[])[0].item as SchemaObject).name).toBe('Track One');
     expect((((schema.itemListElement as SchemaObject[])[0].item as SchemaObject).byArtist as SchemaObject).name).toBe('Artist One');
+  });
+});
+
+describe('buildBlogSchema', () => {
+  it('returns Blog schema with at most 10 BlogPosting entries', () => {
+    const posts = Array.from({ length: 12 }, (_, index) => ({
+      ...mockPost,
+      slug: `mix-${index}`,
+    }));
+    const schema = buildBlogSchema(posts) as SchemaObject;
+
+    expect(schema['@type']).toBe('Blog');
+    expect(schema.url).toBe('https://holger-kampffmeyer.de/dj/mixes-blog-archive/');
+    expect((schema.blogPosts as unknown[])).toHaveLength(10);
+  });
+});
+
+describe('buildCollectionPageSchema', () => {
+  it('returns CollectionPage with Blog and MusicAlbum using the full post count', () => {
+    const posts = Array.from({ length: 12 }, (_, index) => ({
+      ...mockPost,
+      slug: `mix-${index}`,
+    }));
+    const schema = buildCollectionPageSchema(posts) as SchemaObject;
+    const mainEntity = schema.mainEntity as SchemaObject[];
+
+    expect(schema['@type']).toBe('CollectionPage');
+    expect(mainEntity[0]['@type']).toBe('Blog');
+    expect((mainEntity[0].blogPosts as unknown[])).toHaveLength(10);
+    expect(mainEntity[1]['@type']).toBe('MusicAlbum');
+    expect(mainEntity[1].numTracks).toBe(12);
   });
 });

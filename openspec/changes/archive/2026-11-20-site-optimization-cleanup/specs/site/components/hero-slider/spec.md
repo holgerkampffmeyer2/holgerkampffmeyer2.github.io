@@ -1,6 +1,6 @@
 # Spec Delta
 
-## MODIFIED Requirements
+## ADDED Requirements
 
 ### Requirement: HeroSlider script loaded from shared asset
 The system SHALL load the slider interaction script from `/assets/hero-slider.js` via `<script src="/assets/hero-slider.js" defer is:inline>` instead of embedding 50+ lines of inline JavaScript in the component.

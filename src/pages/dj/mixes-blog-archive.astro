@@ -10,7 +10,7 @@ import Hero from "../../components/Hero.astro";
 import heroImg from "../../assets/img/em3f/DSC_2451.jpg";
 import { loadBlogPosts, createSearchablePosts } from "../../utils/blog-data";
 import { formatDate } from "../../utils/format";
-import { buildBlogPostingSchema, buildBreadcrumbSchema } from "../../utils/schema-builders.js";
+import { buildBreadcrumbSchema, buildCollectionPageSchema } from "../../utils/schema-builders.js";
 
 const allPosts = await loadBlogPosts();
 const archivePosts = allPosts.filter(post => post.hasTracklist).slice(1);
@@ -34,46 +34,7 @@ const breadcrumbSegments = [
 
 const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbSegments);
 
-// Build BlogPosting schemas for archive posts
-const blogPostingSchemas = archivePosts.slice(0, 10).map(post =>
-  buildBlogPostingSchema(post)
-);
-
-const blogSchema = {
-  "@context": "https://schema.org",
-  "@type": "Blog",
-  "name": "DJ Hulk Weekly Mixes Blog",
-  "description": "Weekly electronic music DJ mixes by DJ Hulk with full tracklists. House, Tech House, Deep House, Latin House.",
-  "url": "https://holger-kampffmeyer.de/dj/mixes-blog-archive/",
-  "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
-  "author": {
-    "@type": "Person",
-    "name": "DJ Hulk",
-    "url": "https://holger-kampffmeyer.de/djhulk-electronic-music"
-  },
-  "blogPosts": blogPostingSchemas
-};
-
-const collectionPageSchema = {
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "DJ Hulk Mix Archive",
-  "description": "Complete archive of DJ Hulk's electronic music mixes with tracklists - House, Tech House, Deep House, Latin House.",
-  "url": "https://holger-kampffmeyer.de/dj/mixes-blog-archive/",
-  "image": "https://holger-kampffmeyer.de/img/_81A4010.webp",
-  "mainEntity": [blogSchema, {
-    "@type": "MusicAlbum",
-    "name": "DJ Hulk Mix Archive",
-    "description": "All DJ mixes with tracklists by DJ Hulk",
-    "byArtist": {
-      "@type": "Person",
-      "name": "DJ Hulk",
-      "url": "https://holger-kampffmeyer.de/djhulk-electronic-music/"
-    },
-    "genre": ["House", "Tech House", "Deep House", "Latin House"],
-    "numTracks": archivePosts.length
-  }]
-};
+const collectionPageSchema = buildCollectionPageSchema(archivePosts);
 
 const jsonLd: object[] = [collectionPageSchema, breadcrumbSchema, getDjPersonSchema()];
 if (useCaseFilter) {

@@ -10,6 +10,7 @@ Persönliche Website von Holger Kampffmeyer - DJ, Lichttechniker und Event-Techn
 - **dj/videos:** VideoObject-Schema (duration removed, publisher kept)
 - **dj/mixes-weekly:** BlogPosting + MusicPlaylist + AudioObject Schema
 - **dj/mixes/[slug]:** AudioObject + BreadcrumbList + BlogPosting Schema
+- **dj/mixes-blog-archive:** CollectionPage + Blog + MusicAlbum Schema
 - **djhulk-electronic-music:** Person + MusicGroup Schema
 
 ## Scripts

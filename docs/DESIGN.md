@@ -17,7 +17,9 @@
 ```
 src/
 ├── components/           # UI-Komponenten
-├── data/                 # Daten (faqs.json, mixcloud-data.json, blog-posts.json)
+│   ├── booking/          # BookingPage + 11 Section-Komponenten
+│   └── dj/               # MixDetail, TracklistTable, MixcloudWidget, BookingCTA
+├── data/                 # Daten (faqs.json, mixcloud-data.json, blog-posts.json, labels.json, booking.*)
 ├── layouts/             # Layouts (Layout.astro)
 ├── pages/               # Routen
 │   ├── index.astro      # Startseite
@@ -28,6 +30,7 @@ src/
 │   │   ├── mixes/
 │   │   │   └── [number].astro  # Dynamische Mix-Detailseiten
 │   │   ├── mixes-blog-archive.astro
+│   │   ├── labels/[label].astro
 │   │   └── em3f.astro
 │   ├── vermietung.astro  # Landingpage mit Verweis → extern
 │   ├── work.astro
@@ -42,7 +45,7 @@ src/
 │       ├── electric-night.css  # Purple/Pink/Neon
 │       └── golden-hour.css     # Amber/Gold/terrakotta
 ├── types/               # TypeScript Typdefinitionen
-└── utils/               # Hilfsfunktionen
+└── utils/               # Hilfsfunktionen (schema-builders, mix-track-data, tracklist-renderer, share-config)
 ```
 
 ---
@@ -201,7 +204,7 @@ pnpm test:coverage    # Coverage-Report (v8)
 
 ## SEO
 
-- **JSON-LD:** LocalBusiness, Person, WebPage, VideoObject (Videos, ohne duration, mit publisher), BlogPosting (Mixes-Übersicht), MusicPlaylist, AudioObject + BreadcrumbList (Mix-Detailseiten)
+- **JSON-LD:** LocalBusiness, Person, WebPage, VideoObject (Videos, ohne duration, mit publisher), BlogPosting + MusicPlaylist + AudioObject + BreadcrumbList (Mix-Seiten), CollectionPage + Blog + MusicAlbum (Mix-Archiv); Builder in `src/utils/schema-builders.ts`
 - **Open Graph Tags:** inkl. spezielle Tags für Mix-Seiten (og:title, og:type=music.playlist, og:image 1200×630)
 - **Sitemap:** Automatisch generiert via @astrojs/sitemap mit Prioritäten (Mix-Seiten: 0.8, Startseite: 1.0)
 - **RSS Feed:** Generiert aus blog-posts.json (neueste 10 Mixes)

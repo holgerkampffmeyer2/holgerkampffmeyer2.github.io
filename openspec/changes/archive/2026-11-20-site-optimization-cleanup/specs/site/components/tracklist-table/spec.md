@@ -1,6 +1,6 @@
 # Spec Delta
 
-## MODIFIED Requirements
+## ADDED Requirements
 
 ### Requirement: TracklistTable renders responsive table on desktop, inline list on mobile
 The system SHALL render a semantic HTML table on desktop (>=1024px) with columns for Artist, Title, and optionally Label (when any track has a label). On mobile (<1024px), it SHALL render an inline flex-based list with the same data. The `responsive` and `inline` displayMode values SHALL produce identical mobile output (single code path).

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { shareConfig, getShareConfig, type ShareConfigPreset } from '../share-config';
+import { shareConfig, type ShareConfigPreset } from '../share-config';
 
 describe('shareConfig', () => {
   it('has all required preset types', () => {
@@ -48,38 +48,9 @@ describe('shareConfig', () => {
     expect(de.emailLabel).not.toBe(en.emailLabel);
     expect(de.copyLabel).not.toBe(en.copyLabel);
   });
-});
 
-describe('getShareConfig', () => {
-  it('returns correct preset for booking/de', () => {
-    const config = getShareConfig('booking', 'de');
-    expect(config.nativeLabel).toBe('Teilen');
-    expect(config.copyLabel).toBe('Link kopieren');
-  });
-
-  it('returns correct preset for booking/en', () => {
-    const config = getShareConfig('booking', 'en');
-    expect(config.nativeLabel).toBe('Share');
-    expect(config.copyLabel).toBe('Copy link');
-  });
-
-  it('returns correct preset for mixDetail/de', () => {
-    const config = getShareConfig('mixDetail', 'de');
-    expect(config.nativeLabel).toBe('Teilen');
-  });
-
-  it('returns correct preset for mixDetail/en', () => {
-    const config = getShareConfig('mixDetail', 'en');
-    expect(config.nativeLabel).toBe('Share');
-  });
-
-  it('returns correct preset for generic/de', () => {
-    const config = getShareConfig('generic', 'de');
-    expect(config.nativeLabel).toBe('Teilen');
-  });
-
-  it('returns correct preset for generic/en', () => {
-    const config = getShareConfig('generic', 'en');
-    expect(config.nativeLabel).toBe('Share');
+  it('uses the same labels across booking, mix detail and generic presets', () => {
+    expect(shareConfig.mixDetail).toEqual(shareConfig.booking);
+    expect(shareConfig.generic).toEqual(shareConfig.booking);
   });
 });

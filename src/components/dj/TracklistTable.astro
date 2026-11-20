@@ -2,6 +2,7 @@
 import labels from '../../data/labels.json';
 import { buildTrackLabels } from '../../utils/track-labels.js';
 import { renderMobileTracklist } from '../../utils/tracklist-renderer.ts';
+import { splitTrack } from '../../utils/mix-track-data.ts';
 
 interface Props {
   tracks: string[];
@@ -11,13 +12,6 @@ interface Props {
 const { tracks = [], displayMode = 'table' } = Astro.props;
 const trackLabels = buildTrackLabels(labels);
 const showLabel = trackLabels.hasAny(tracks);
-
-function splitTrack(track: string) {
-  const parts = track.split(' - ');
-  const artist = parts[0]?.replace(/,$/, '') || '';
-  const title = parts.slice(1).join(' - ').replace(/,$/, '') || track;
-  return { artist, title };
-}
 
 const isTable = displayMode === 'table';
 const isResponsive = displayMode === 'responsive';
@@ -79,7 +73,7 @@ const showMobile = isResponsive || isInline;
 {showMobile && (
   <div class="lg:hidden">
     <nav class="space-y-2 pt-2 border-t border-[var(--color-border)]" aria-label="Tracklist (mobile view)">
-      <div set:html={renderMobileTracklist(tracks, showLabel)} />
+      <div set:html={renderMobileTracklist(tracks, showLabel, trackLabels)} />
     </nav>
   </div>
 )}

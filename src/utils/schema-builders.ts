@@ -1,5 +1,6 @@
 import type { BlogPostData } from '../types/blog';
 import { labelSlug } from './label-slug.js';
+import type { StructuredTrack } from './mix-track-data';
 
 export interface BreadcrumbSegment {
   label: string;
@@ -49,12 +50,7 @@ export function buildBlogPostingSchema(
   };
 }
 
-export interface TrackWithLabel {
-  position: number;
-  artist: string;
-  title: string;
-  label?: { name: string; url: string | null } | null;
-}
+export type TrackWithLabel = StructuredTrack;
 
 export function buildAudioObjectSchema(
   post: BlogPostData,
@@ -244,5 +240,66 @@ export function buildTracklistItemList(
         datePublished: post.created_time,
       },
     })),
+  };
+}
+
+export function buildBlogSchema(
+  posts: BlogPostData[],
+  options: SchemaBuilderOptions = {}
+): object {
+  const {
+    baseUrl = 'https://holger-kampffmeyer.de',
+    authorName = 'DJ Hulk',
+    authorUrl = 'https://holger-kampffmeyer.de/djhulk-electronic-music/',
+  } = options;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'DJ Hulk Weekly Mixes Blog',
+    description: 'Weekly electronic music DJ mixes by DJ Hulk with full tracklists. House, Tech House, Deep House, Latin House.',
+    url: resolveUrl('/dj/mixes-blog-archive/', baseUrl),
+    image: resolveUrl('/img/_81A4010.webp', baseUrl),
+    author: {
+      '@type': 'Person',
+      name: authorName,
+      url: authorUrl,
+    },
+    blogPosts: posts.slice(0, 10).map((post) => buildBlogPostingSchema(post, options)),
+  };
+}
+
+export function buildCollectionPageSchema(
+  posts: BlogPostData[],
+  options: SchemaBuilderOptions = {}
+): object {
+  const {
+    baseUrl = 'https://holger-kampffmeyer.de',
+    authorName = 'DJ Hulk',
+    authorUrl = 'https://holger-kampffmeyer.de/djhulk-electronic-music/',
+  } = options;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'DJ Hulk Mix Archive',
+    description: 'Complete archive of DJ Hulk\'s electronic music mixes with tracklists - House, Tech House, Deep House, Latin House.',
+    url: resolveUrl('/dj/mixes-blog-archive/', baseUrl),
+    image: resolveUrl('/img/_81A4010.webp', baseUrl),
+    mainEntity: [
+      buildBlogSchema(posts, options),
+      {
+        '@type': 'MusicAlbum',
+        name: 'DJ Hulk Mix Archive',
+        description: 'All DJ mixes with tracklists by DJ Hulk',
+        byArtist: {
+          '@type': 'Person',
+          name: authorName,
+          url: authorUrl,
+        },
+        genre: ['House', 'Tech House', 'Deep House', 'Latin House'],
+        numTracks: posts.length,
+      },
+    ],
   };
 }
