@@ -61,13 +61,12 @@ const { images, initialIndex = 0 } = Astro.props;
     <span id="lightbox-current">1</span> / <span id="lightbox-total">{images.length}</span>
   </div>
 
-  <div class="lightbox-thumbs fixed bottom-6 left-1/2 -translate-x-1/2 flex gap-2 p-2 max-w-[90vw] overflow-x-auto hidden lg:flex" role="tablist" aria-label="Miniaturansichten">
+  <div class="lightbox-thumbs fixed bottom-6 left-1/2 -translate-x-1/2 flex gap-2 p-2 max-w-[90vw] overflow-x-auto hidden lg:flex" role="group" aria-label="Miniaturansichten">
     {images.map((img, i) => (
       <button
         class="lightbox-thumb flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 {i === initialIndex ? 'border-[var(--color-secondary)] scale-110' : 'border-transparent opacity-60 hover:opacity-100'}"
-        role="tab"
-        aria-selected={i === initialIndex}
-        aria-label={`Zu Bild ${i + 1}`}
+        aria-pressed={i === initialIndex}
+        aria-label={`Bild ${i + 1} anzeigen`}
         data-lightbox-thumb={i}
       >
         <img src={img.src} alt="" class="w-full h-full object-cover" loading="lazy" />
@@ -107,7 +106,7 @@ const { images, initialIndex = 0 } = Astro.props;
         thumb.classList.toggle('scale-110', active);
         thumb.classList.toggle('border-transparent', !active);
         thumb.classList.toggle('opacity-60', !active);
-        thumb.setAttribute('aria-selected', String(active));
+        thumb.setAttribute('aria-pressed', String(active));
       });
       thumbs[index]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     };
