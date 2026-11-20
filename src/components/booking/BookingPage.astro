@@ -238,6 +238,38 @@ const jsonLd = [
   </div>
 
   <Footer />
+
+  <script is:inline>
+    (function () {
+      document.querySelectorAll('[data-print-epk]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          window.print();
+        });
+      });
+
+      document.querySelectorAll('[data-copy-bio]').forEach(function (button) {
+        if (button.dataset.copyInitialized) return;
+        button.dataset.copyInitialized = 'true';
+
+        button.addEventListener('click', function () {
+          var text = button.getAttribute('data-copy-bio');
+          var label = button.querySelector('[data-copy-bio-label]');
+          if (!text) return;
+
+          navigator.clipboard
+            .writeText(text)
+            .then(function () {
+              if (!label) return;
+              label.textContent = button.getAttribute('data-copied-label') || 'Copied';
+              window.setTimeout(function () {
+                label.textContent = button.getAttribute('data-copy-label') || 'Copy';
+              }, 2000);
+            })
+            .catch(function () {});
+        });
+      });
+    })();
+  </script>
 </Layout>
 
 <style is:global>
@@ -356,35 +388,3 @@ const jsonLd = [
     [data-copy-url] { display: none !important; }
   }
 </style>
-
-<script is:inline>
-  (function () {
-    document.querySelectorAll('[data-print-epk]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        window.print();
-      });
-    });
-
-    document.querySelectorAll('[data-copy-bio]').forEach(function (button) {
-      if (button.dataset.copyInitialized) return;
-      button.dataset.copyInitialized = 'true';
-
-      button.addEventListener('click', function () {
-        var text = button.getAttribute('data-copy-bio');
-        var label = button.querySelector('[data-copy-bio-label]');
-        if (!text) return;
-
-        navigator.clipboard
-          .writeText(text)
-          .then(function () {
-            if (!label) return;
-            label.textContent = button.getAttribute('data-copied-label') || 'Copied';
-            window.setTimeout(function () {
-              label.textContent = button.getAttribute('data-copy-label') || 'Copy';
-            }, 2000);
-          })
-          .catch(function () {});
-      });
-    });
-  })();
-</script>
