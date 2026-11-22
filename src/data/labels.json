@@ -1111,6 +1111,10 @@
     "album-only": {
       "name": "Album Only",
       "url": "https://albumonly.bandcamp.com/"
+    },
+    "flying-lap": {
+      "name": "Flying Lap",
+      "url": ""
     }
   },
   "tracks": {
@@ -1800,6 +1804,22 @@
     "Sister Sledge - Thinking Of You (Djsakisp Bootleg)": "unreleased",
     "Wanderson XVR - Are You Felling (Extended Mix)": "feel-hype",
     "Yakka - Dancin' (Extended Mix) [Beatality]": "beatality",
-    "Yakka - Superfly (Extended Mix) [Beatality]": "beatality"
+    "Yakka - Superfly (Extended Mix) [Beatality]": "beatality",
+    "Aaron Smith ft. Marlon Robinson - Back it Up (Tony Arzadon Extended)": "gods-of-madness-recordings",
+    "CABLE (UK) - All In Check (Extended)": "club-whatever",
+    "Davide Messina - Awola Bose": "club-whatever",
+    "Deeper Purpose & Ribguga - No Rush (Extended Mix)": "myth-of-nyx",
+    "DJ Andrey feat. Paula Ortega - Jack's Back (Original Mix)": "legent-music",
+    "Djalo - Inner Wounds": "like-that-underground",
+    "Dvit Bousa, Deejay P4T - Solar (Original Mix)": "natural-rhythm",
+    "Electrick City - Do It Right (Extended Mixl)": "feel-hype",
+    "ELSAN - Step Inside (Extended Mix)": "all-ways-dance",
+    "Ivory Coats - Solar Flares (Original Mix)": "mixmania-records",
+    "Jaco Reigosa - Jaco Reigosa - Flight Mode": "moom-sound",
+    "Kirk Mannero - Open Up (Original Mix)": "mixmania-records",
+    "Nina Simone - Take Care Of Business (Solomun Extended Remix)": "whoa",
+    "Rafasan - Back 2 House (Extended Mix)": "flying-lap",
+    "Drewbear - Shake Down": "unreleased",
+    "Jaxon Tonic - Jaxon Tonic - Outerspace (Extended mix)": "unreleased"
   }
 }
