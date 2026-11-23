@@ -76,44 +76,67 @@ const personSchema = {
       </div>
       
       <div class="max-w-4xl mx-auto">
-        {openSourceProjects.projects.map((project, index) => (
-          <div class={`bg-[var(--color-surface)] rounded-xl p-6 animate-on-scroll hover:border-[var(--color-secondary)] border border-transparent transition-all ${index > 0 ? 'mt-6' : ''}`}>
-            <div 
-              class="project-toggle w-full flex items-start gap-4 text-left cursor-pointer"
-              data-project={project.name}
+        {openSourceProjects.projects.map((project, index) => {
+          const isInitiallyOpen = index === 0;
+          const detailsId = `project-details-${index}`;
+
+          return (
+            <div
+              class={`project-card bg-[var(--color-surface)] rounded-xl p-6 animate-on-scroll hover:border-[var(--color-secondary)] border border-transparent transition-all ${index > 0 ? 'mt-6' : ''}`}
+              data-project-card
+              data-expanded={isInitiallyOpen ? 'true' : 'false'}
             >
-              <div class="w-20 h-20 bg-[var(--color-bg)] rounded-lg flex items-center justify-center shrink-0">
-                <img src={project.image} alt={project.imageAlt} width="80" height="80" loading="lazy" decoding="async" class="w-20 h-20 rounded-lg object-cover">
-              </div>
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <a href={project.url} target="_blank" rel="noopener noreferrer nofollow" class="font-bold text-lg hover:text-[var(--color-secondary)] transition-colors">
-                    {project.name}
-                  </a>
-                  <Icon name="chevron-down" class="toggle-icon w-5 h-5 text-[var(--color-secondary)] transition-transform" />
+              <div
+                class="project-toggle w-full flex items-start gap-4 text-left cursor-pointer"
+                data-project-toggle
+                data-project={project.name}
+              >
+                <div class="w-20 h-20 bg-[var(--color-bg)] rounded-lg flex items-center justify-center shrink-0">
+                  <img src={project.image} alt={project.imageAlt} width="80" height="80" loading="lazy" decoding="async" class="w-20 h-20 rounded-lg object-cover">
                 </div>
-                <p class="text-[var(--color-text-muted)] text-sm mt-2">
-                  {project.description}
-                </p>
-                <a href={project.url} target="_blank" rel="noopener noreferrer nofollow" class="inline-flex items-center gap-2 text-[var(--color-secondary)] text-sm mt-3 hover:underline">
-                  <Icon name="github" class="w-4 h-4" />
-                  View on GitHub
-                </a>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <a href={project.url} target="_blank" rel="noopener noreferrer nofollow" class="font-bold text-lg hover:text-[var(--color-secondary)] transition-colors">
+                      {project.name}
+                    </a>
+                    <button
+                      type="button"
+                      data-project-toggle-button
+                      class="project-toggle-button shrink-0 rounded-full p-1 hover:bg-[var(--color-bg)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-secondary)]"
+                      aria-expanded={isInitiallyOpen ? 'true' : 'false'}
+                      aria-controls={detailsId}
+                      aria-label={`${project.name} Details ${isInitiallyOpen ? 'ausblenden' : 'einblenden'}`}
+                    >
+                      <Icon name="chevron-down" class="toggle-icon w-5 h-5 text-[var(--color-secondary)] transition-transform" />
+                    </button>
+                  </div>
+                  <p class="text-[var(--color-text-muted)] text-sm mt-2">
+                    {project.description}
+                  </p>
+                  <a href={project.url} target="_blank" rel="noopener noreferrer nofollow" class="inline-flex items-center gap-2 text-[var(--color-secondary)] text-sm mt-3 hover:underline">
+                    <Icon name="github" class="w-4 h-4" />
+                    View on GitHub
+                  </a>
+                </div>
+              </div>
+              <div class="project-details" id={detailsId} data-project-details aria-hidden={isInitiallyOpen ? 'false' : 'true'}>
+                <div class="project-details-clip">
+                  <div class="mt-4 pl-24">
+                    <h3 class="font-bold text-sm text-[var(--color-secondary)] uppercase tracking-wider mb-3">Features</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                      {project.features.map((feature) => (
+                        <li class="flex items-center gap-2 text-[var(--color-text-muted)] text-sm">
+                          <span class="w-1.5 h-1.5 bg-[var(--color-secondary)] rounded-full shrink-0"></span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="project-details hidden mt-4 pl-24">
-              <h3 class="font-bold text-sm text-[var(--color-secondary)] uppercase tracking-wider mb-3">Features</h3>
-              <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                {project.features.map((feature) => (
-                  <li class="flex items-center gap-2 text-[var(--color-text-muted)] text-sm">
-                    <span class="w-1.5 h-1.5 bg-[var(--color-secondary)] rounded-full shrink-0"></span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   </section>
@@ -256,16 +279,143 @@ const personSchema = {
     </div>
   </section>
 
+  <style>
+    .project-card[data-expanded='true'] {
+      border-color: var(--color-secondary);
+      box-shadow: 0 16px 36px rgb(0 0 0 / 0.22);
+    }
+
+    .project-toggle-button {
+      transition: background-color 0.3s ease;
+    }
+
+    .toggle-icon {
+      transition: transform 0.35s ease;
+    }
+
+    .project-card[data-expanded='true'] .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .project-details {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition: grid-template-rows 0.35s ease, opacity 0.25s ease;
+    }
+
+    .project-card[data-expanded='true'] .project-details {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+
+    .project-details-clip {
+      min-height: 0;
+      overflow: hidden;
+      transform: translateY(-6px);
+      transition: transform 0.35s ease;
+    }
+
+    .project-card[data-expanded='true'] .project-details-clip {
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .project-details,
+      .project-details-clip,
+      .toggle-icon {
+        transition: none;
+      }
+    }
+  </style>
+
   <script>
-    document.querySelectorAll('.project-toggle').forEach(button => {
-      button.addEventListener('click', () => {
-        const details = button.nextElementSibling;
-        const icon = button.querySelector('.toggle-icon');
-        
-        details?.classList.toggle('hidden');
-        icon?.classList.toggle('rotate-180');
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-project-card]'));
+
+    function setExpanded(card: HTMLElement, expanded: boolean) {
+      card.setAttribute('data-expanded', String(expanded));
+
+      const toggle = card.querySelector('[data-project-toggle-button]');
+      const details = card.querySelector('[data-project-details]');
+      const name = card.querySelector('[data-project-toggle]')?.getAttribute('data-project') ?? '';
+
+      toggle?.setAttribute('aria-expanded', String(expanded));
+      toggle?.setAttribute('aria-label', `${name} Details ${expanded ? 'ausblenden' : 'einblenden'}`);
+      details?.setAttribute('aria-hidden', String(!expanded));
+    }
+
+    cards.forEach((card) => {
+      const header = card.querySelector('[data-project-toggle]');
+      const button = card.querySelector('[data-project-toggle-button]');
+      const toggleCard = () => setExpanded(card, card.getAttribute('data-expanded') !== 'true');
+
+      header?.addEventListener('click', (event) => {
+        if (event.target instanceof Element && event.target.closest('a')) return;
+        toggleCard();
+      });
+
+      button?.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleCard();
       });
     });
+
+    let focusedCard = cards[0] ?? null;
+    let scrollScheduled = false;
+
+    function applyFocus(card: HTMLElement) {
+      focusedCard = card;
+      cards.forEach((item) => {
+        const shouldBeOpen = item === card;
+        if (item.getAttribute('data-expanded') !== String(shouldBeOpen)) {
+          setExpanded(item, shouldBeOpen);
+        }
+      });
+    }
+
+    function updateFocus() {
+      scrollScheduled = false;
+      if (!cards.length) return;
+
+      const focusLine = window.innerHeight * 0.42;
+      const candidates = cards.flatMap((card) => {
+        const header = card.querySelector('[data-project-toggle]');
+        if (!header) return [];
+
+        const rect = header.getBoundingClientRect();
+        return [{
+          card,
+          top: rect.top,
+          bottom: rect.bottom,
+          distance: Math.abs(rect.top + rect.height / 2 - focusLine),
+        }];
+      });
+
+      if (!candidates.length) return;
+
+      const containing = candidates.find(({ top, bottom }) => top <= focusLine && bottom >= focusLine);
+      const nearest = candidates.reduce((closest, candidate) => (
+        candidate.distance < closest.distance ? candidate : closest
+      ));
+
+      if (!containing && focusedCard) {
+        const current = candidates.find(({ card }) => card === focusedCard);
+        if (current && current.distance < nearest.distance + 32) return;
+      }
+
+      applyFocus((containing ?? nearest).card);
+    }
+
+    function scheduleFocusUpdate() {
+      if (scrollScheduled) return;
+      scrollScheduled = true;
+      window.requestAnimationFrame(updateFocus);
+    }
+
+    window.addEventListener('scroll', scheduleFocusUpdate, { passive: true });
+    window.addEventListener('resize', scheduleFocusUpdate, { passive: true });
+
+    if (focusedCard) applyFocus(focusedCard);
   </script>
 
   <Footer />
