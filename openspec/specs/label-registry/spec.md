@@ -71,3 +71,18 @@ als reiner Text; Tracks ohne Label MUST als Platzhalter dargestellt werden.
 #### Scenario: Teilweise befüllter Mix
 - **WHEN** mindestens ein Track ein Label hat, andere aber nicht
 - **THEN** erscheint die Label-Spalte, befüllte Zellen zeigen Label (ggf. als Link), leere Zellen den Platzhalter
+
+### Requirement: Indexierbarkeit von Label-Einzelseiten
+
+Das System SHALL Label-Einzelseiten unter `/dj/labels/<slug>` nur für Labels mit mindestens
+`MIN_LABEL_TRACKS` (3) Tracks indexieren. Labels mit weniger Tracks MUST `noindex, nofollow`
+erhalten, aus Sitemap und `urllist.txt` ausgeschlossen werden und dürfen weder als interne
+Chips noch als JSON-LD-`@id` verlinkt werden.
+
+#### Scenario: Dünnes Label
+- **WHEN** ein Label in weniger als drei Tracks vorkommt
+- **THEN** ist seine Seite `noindex`, fehlt in Sitemap/urllist.txt und wird nicht intern verlinkt
+
+#### Scenario: Etabliertes Label
+- **WHEN** ein Label in mindestens drei Tracks vorkommt
+- **THEN** bleibt die Seite indexierbar und wird in Chips und JSON-LD verlinkt

@@ -1,6 +1,7 @@
 import type { BlogPostData } from '../types/blog';
 import { labelSlug } from './label-slug.js';
 import type { StructuredTrack } from './mix-track-data';
+import type { LabelIndexablePredicate } from '../../types/label-indexability.js';
 
 export interface BreadcrumbSegment {
   label: string;
@@ -12,6 +13,7 @@ export interface SchemaBuilderOptions {
   authorName?: string;
   authorUrl?: string;
   description?: string;
+  isLabelIndexable?: LabelIndexablePredicate;
 }
 
 function resolveUrl(path: string, baseUrl: string): string {
@@ -57,7 +59,7 @@ export function buildAudioObjectSchema(
   structuredTracks: TrackWithLabel[],
   options: SchemaBuilderOptions = {}
 ): object {
-  const { baseUrl = 'https://holger-kampffmeyer.de', authorName = 'DJ Hulk', authorUrl = 'https://holger-kampffmeyer.de/djhulk-electronic-music/' } = options;
+  const { baseUrl = 'https://holger-kampffmeyer.de', authorName = 'DJ Hulk', authorUrl = 'https://holger-kampffmeyer.de/djhulk-electronic-music/', isLabelIndexable = () => true } = options;
 
   const trackItems = structuredTracks.map((t) => ({
     '@type': 'MusicRecording',
@@ -71,7 +73,7 @@ export function buildAudioObjectSchema(
       name: post.title,
     },
     position: t.position,
-    ...(t.label && {
+    ...(t.label && isLabelIndexable(t.label.name) && {
       recordedBy: {
         '@id': resolveUrl(`/dj/labels/${labelSlug(t.label.name)}`, baseUrl),
       },
@@ -81,7 +83,7 @@ export function buildAudioObjectSchema(
   }));
 
   const labelEntities = structuredTracks
-    .filter((t) => t.label)
+    .filter((t) => t.label && isLabelIndexable(t.label.name))
     .reduce((acc, t) => {
       if (t.label && !acc.has(t.label.name)) {
         acc.set(t.label.name, {
@@ -171,10 +173,10 @@ export function buildLabelEntities(
   structuredTracks: TrackWithLabel[],
   options: SchemaBuilderOptions = {}
 ): object | null {
-  const { baseUrl = 'https://holger-kampffmeyer.de' } = options;
+  const { baseUrl = 'https://holger-kampffmeyer.de', isLabelIndexable = () => true } = options;
 
   const labelEntities = structuredTracks
-    .filter((t) => t.label)
+    .filter((t) => t.label && isLabelIndexable(t.label.name))
     .reduce((acc, t) => {
       if (t.label && !acc.has(t.label.name)) {
         acc.set(t.label.name, {
@@ -210,7 +212,7 @@ export function buildTracklistItemList(
   structuredTracks: TrackWithLabel[],
   options: SchemaBuilderOptions = {}
 ): object {
-  const { baseUrl = 'https://holger-kampffmeyer.de' } = options;
+  const { baseUrl = 'https://holger-kampffmeyer.de', isLabelIndexable = () => true } = options;
 
   return {
     '@context': 'https://schema.org',
@@ -231,7 +233,7 @@ export function buildTracklistItemList(
           '@type': 'MusicAlbum',
           name: post.title,
         },
-        ...(t.label && {
+        ...(t.label && isLabelIndexable(t.label.name) && {
           recordedBy: {
             '@id': resolveUrl(`/dj/labels/${labelSlug(t.label.name)}`, baseUrl),
           },

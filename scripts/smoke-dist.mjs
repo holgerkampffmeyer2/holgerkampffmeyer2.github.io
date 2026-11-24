@@ -28,6 +28,10 @@ const REDIRECT_STUBS = {
   'vermietung/index.html': 'https://soundundlicht-stuttgart.de/vermietung',
 };
 
+const NOINDEX_LABEL_PAGES = ['dj/labels/nothing-hurt/index.html'];
+const INDEXED_LABEL_PAGES = ['dj/labels/ministry-of-sound/index.html'];
+const THIN_LABEL_LINK_SOURCES = ['dj/mixes-weekly/index.html'];
+
 function checkFile(relative) {
   const full = path.join(DIST_DIR, relative);
   if (!fs.existsSync(full)) {
@@ -61,6 +65,23 @@ function checkRedirectStub(relative, target) {
   return { ok: true };
 }
 
+function checkNoIndex(relative, expected) {
+  const full = path.join(DIST_DIR, relative);
+  if (!fs.existsSync(full)) return { ok: false, reason: 'fehlt' };
+  const html = fs.readFileSync(full, 'utf-8');
+  const isNoIndex = html.includes('name="robots" content="noindex, nofollow"');
+  if (isNoIndex !== expected) return { ok: false, reason: expected ? 'fehlt noindex' : 'unerwartet noindex' };
+  return { ok: true };
+}
+
+function checkNoThinLabelLink(relative) {
+  const full = path.join(DIST_DIR, relative);
+  if (!fs.existsSync(full)) return { ok: false, reason: 'fehlt' };
+  const html = fs.readFileSync(full, 'utf-8');
+  if (html.includes('/dj/labels/nothing-hurt')) return { ok: false, reason: 'verlinkt dünnes Label' };
+  return { ok: true };
+}
+
 const failures = [];
 
 console.log('Smoke-Test dist/\n');
@@ -72,6 +93,30 @@ for (const relative of FILES) {
   } else {
     console.log(`  ✗ ${relative} — ${result.reason}`);
     failures.push(relative);
+  }
+}
+
+for (const relative of NOINDEX_LABEL_PAGES) {
+  const result = checkNoIndex(relative, true);
+  if (!result.ok) {
+    console.log(`  ✗ ${relative} — ${result.reason}`);
+    failures.push(`${relative} (${result.reason})`);
+  }
+}
+
+for (const relative of INDEXED_LABEL_PAGES) {
+  const result = checkNoIndex(relative, false);
+  if (!result.ok) {
+    console.log(`  ✗ ${relative} — ${result.reason}`);
+    failures.push(`${relative} (${result.reason})`);
+  }
+}
+
+for (const relative of THIN_LABEL_LINK_SOURCES) {
+  const result = checkNoThinLabelLink(relative);
+  if (!result.ok) {
+    console.log(`  ✗ ${relative} — ${result.reason}`);
+    failures.push(`${relative} (${result.reason})`);
   }
 }
 

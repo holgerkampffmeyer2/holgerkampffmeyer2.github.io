@@ -8,6 +8,7 @@ import type { BlogPostData } from "../../../types/blog";
 import { loadBlogPosts } from "../../../utils/blog-data";
 import labelsData from "../../../data/labels.json";
 import { labelSlug } from "../../../utils/label-slug.js";
+import { isIndexableLabel } from "../../../utils/label-indexability.mjs";
 import { buildMixBreadcrumbLabel } from "../../../utils/mix-seo.js";
 import { formatDate } from "../../../utils/format";
 
@@ -155,7 +156,7 @@ const jsonLd = [
 ];
 ---
 
-<Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd}>
+<Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd} noIndex={!isIndexableLabel(entry.name)}>
   <Navbar currentPage="/dj/mixes/" />
 
   <Breadcrumb segments={breadcrumbSegments} />

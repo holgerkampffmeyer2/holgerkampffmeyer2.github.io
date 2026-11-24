@@ -12,6 +12,7 @@ import labels from "../../data/labels.json";
 import { buildTrackLabels } from "../../utils/track-labels.js";
 import { buildStructuredTracks, type TrackLabelResolver } from "../../utils/mix-track-data.js";
 import { formatDate } from "../../utils/format";
+import { isIndexableLabel } from "../../utils/label-indexability.mjs";
 import {
   buildBlogPostingSchema,
   buildAudioObjectSchema,
@@ -42,7 +43,7 @@ const blogPostingSchema = postsWithTracklists.slice(0, 10).map(post =>
 
 // Build AudioObject schema for latest post
 const audioObjectSchema = latestPost && latestStructuredTracks.length > 0
-  ? buildAudioObjectSchema(latestPost, latestStructuredTracks)
+  ? buildAudioObjectSchema(latestPost, latestStructuredTracks, { isLabelIndexable: isIndexableLabel })
   : null;
 
 // Build MusicPlaylist schema
@@ -53,12 +54,12 @@ const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbSegments);
 
 // Build Label entities for latest post
 const labelEntitiesSchema = latestPost && latestStructuredTracks.length > 0
-  ? buildLabelEntities(latestStructuredTracks)
+  ? buildLabelEntities(latestStructuredTracks, { isLabelIndexable: isIndexableLabel })
   : null;
 
 // Build Tracklist ItemList for latest post
 const tracklistItemListSchema = latestPost && latestStructuredTracks.length > 0
-  ? buildTracklistItemList(latestPost, latestStructuredTracks)
+  ? buildTracklistItemList(latestPost, latestStructuredTracks, { isLabelIndexable: isIndexableLabel })
   : null;
 ---
 

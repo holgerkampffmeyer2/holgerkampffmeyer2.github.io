@@ -102,6 +102,17 @@ describe('buildAudioObjectSchema', () => {
     const schema = buildAudioObjectSchema(mockPost, tracksWithoutLabels) as SchemaObject;
     expect(schema['@graph']).toBeUndefined();
   });
+
+  it('omits non-indexable label references when a predicate is provided', () => {
+    const schema = buildAudioObjectSchema(mockPost, mockStructuredTracks, {
+      isLabelIndexable: (name) => name === 'Toolroom',
+    }) as SchemaObject;
+    const tracks = (schema.associatedMedia as SchemaObject).track as SchemaObject[];
+
+    expect((tracks[0].recordedBy as SchemaObject)['@id']).toContain('/dj/labels/toolroom');
+    expect(tracks[1].recordedBy).toBeUndefined();
+    expect(schema['@graph']).toHaveLength(1);
+  });
 });
 
 describe('buildMusicPlaylistSchema', () => {

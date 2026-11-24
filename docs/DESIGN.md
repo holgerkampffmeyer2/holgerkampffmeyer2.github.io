@@ -65,6 +65,9 @@ src/
 | /links | Links |
 | /impressum | Impressum |
 
+Label-Einzelseiten (`/dj/labels/<slug>`) sind erst ab 3 Tracks indexierbar; dünnere Labels
+werden als `noindex` ausgeliefert und aus Sitemap und `urllist.txt` ausgeschlossen.
+
 ---
 
 ## CSS-Theme-System

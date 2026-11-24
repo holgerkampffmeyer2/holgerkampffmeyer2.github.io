@@ -9,6 +9,7 @@ import { formatDate, formatDuration } from '../../utils/format';
 import { shareConfig } from '../../utils/share-config';
 import type { MixLabelInfo, RelatedMix } from '../../utils/mix-seo.js';
 import { labelSlug } from '../../utils/label-slug.js';
+import { isIndexableLabel } from '../../utils/label-indexability.mjs';
 
 interface Props {
   post: BlogPostData;
@@ -27,6 +28,8 @@ const {
   relatedMixes = [],
   topLabels = [],
 } = Astro.props;
+
+const indexableTopLabels = topLabels.filter((label) => isIndexableLabel(label.name));
 ---
 
 <article class="mix-detail">
@@ -98,11 +101,11 @@ const {
     )}
 
     {/* Labels in this mix */}
-    {topLabels.length > 0 && (
+    {indexableTopLabels.length > 0 && (
       <div class="mb-8">
         <h2 class="font-play text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)] mb-3">Labels in diesem Mix</h2>
         <ul class="flex flex-wrap gap-2">
-          {topLabels.map((label) => (
+          {indexableTopLabels.map((label) => (
             <li>
               <a
                 href={`/dj/labels/${labelSlug(label.name)}`}

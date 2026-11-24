@@ -3,6 +3,9 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
 import { getMixDate, lastModifiedFor, resolveSourceFiles } from './scripts/lastmod.mjs';
+import { getThinLabelSlugs } from './src/utils/label-indexability.mjs';
+
+const thinLabelPaths = new Set(getThinLabelSlugs().map((slug) => `/dj/labels/${slug}`));
 
 export default defineConfig({
   image: {
@@ -22,6 +25,10 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'never',
   integrations: [sitemap({
+    filter(page) {
+      const path = new URL(page).pathname.replace(/\/$/, '');
+      return !thinLabelPaths.has(path);
+    },
     serialize(item) {
       const url = new URL(item.url);
       const path = decodeURIComponent(url.pathname);

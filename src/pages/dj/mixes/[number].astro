@@ -32,6 +32,7 @@ import {
   buildLabelEntities,
   buildTracklistItemList,
 } from "../../../utils/schema-builders.js";
+import { isIndexableLabel } from "../../../utils/label-indexability.mjs";
 
 export async function getStaticPaths() {
   const allPosts = await loadBlogPosts();
@@ -89,10 +90,10 @@ const breadcrumbSegments = [
 
 // Build JSON-LD using schema builders
 const blogPostingSchema = buildBlogPostingSchema(post, { description: pageDescription });
-const audioObjectSchema = buildAudioObjectSchema(post, structuredTracks);
+const audioObjectSchema = buildAudioObjectSchema(post, structuredTracks, { isLabelIndexable: isIndexableLabel });
 const breadcrumbSchema = buildBreadcrumbSchema(breadcrumbSegments);
-const labelEntitiesSchema = buildLabelEntities(structuredTracks);
-const tracklistItemListSchema = buildTracklistItemList(post, structuredTracks);
+const labelEntitiesSchema = buildLabelEntities(structuredTracks, { isLabelIndexable: isIndexableLabel });
+const tracklistItemListSchema = buildTracklistItemList(post, structuredTracks, { isLabelIndexable: isIndexableLabel });
 
 // Keywords for SEO
 const keywords = [
