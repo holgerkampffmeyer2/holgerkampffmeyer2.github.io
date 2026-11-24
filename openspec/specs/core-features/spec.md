@@ -31,7 +31,7 @@ Mix detail pages use `formatDuration` (display, `m:ss`) and `toIsoDuration` (Sch
 
 ### Requirement: Events, Portfolio and Rental
 The system SHALL display past events/portfolio, EM3F gallery, video showcase, and event technology rental information.
-Rental page (`/vermietung`) redirects to `soundundlicht-stuttgart.de` without FAQPage schema.
+Rental (`/vermietung`) is a non-indexable redirect stub to `soundundlicht-stuttgart.de` without FAQPage schema.
 
 #### Scenario: User views work portfolio
 - **WHEN** user visits `/work`
@@ -39,7 +39,7 @@ Rental page (`/vermietung`) redirects to `soundundlicht-stuttgart.de` without FA
 
 #### Scenario: User visits rental page
 - **WHEN** user visits `/vermietung`
-- **THEN** landing page with CTA to external rental site is shown (no FAQPage schema)
+- **THEN** a `noindex` redirect stub sends the visitor to the external rental site (no indexable landing page, no FAQPage schema)
 
 ### Requirement: Build and SEO Automation
 The system SHALL optimize images to WebP, generate RSS feeds and URL lists (`urllist.txt`),

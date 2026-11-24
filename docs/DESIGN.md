@@ -32,7 +32,6 @@ src/
 │   │   ├── mixes-blog-archive.astro
 │   │   ├── labels/[label].astro
 │   │   └── em3f.astro
-│   ├── vermietung.astro  # Landingpage mit Verweis → extern
 │   ├── work.astro
 │   ├── links.astro
 │   └── impressum.astro
@@ -61,7 +60,7 @@ src/
 | /dj/mixes/[slug] | Single Mix mit Tracklist (dynamisch) |
 | /dj/mixes-blog-archive | Mixes Blog-Archiv |
 | /dj/em3f | Festival Fotos |
-| /vermietung | Vermietung Landingpage (Verweis → soundundlicht-stuttgart.de) |
+| /vermietung | Redirect-Stub (noindex) → soundundlicht-stuttgart.de |
 | /work | Work/Research |
 | /links | Links |
 | /impressum | Impressum |

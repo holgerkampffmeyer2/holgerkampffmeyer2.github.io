@@ -75,7 +75,7 @@ export const siteNavigationJsonLd = {
       "@type": "SiteNavigationElement",
       "position": 3,
       "name": "Vermietung",
-      "url": "https://holger-kampffmeyer.de/vermietung/"
+      "url": "https://soundundlicht-stuttgart.de/vermietung"
     },
     {
       "@type": "SiteNavigationElement",

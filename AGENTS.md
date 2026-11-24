@@ -145,7 +145,7 @@ Auf Zuruf "neuen Mix-Post" / "neuen Blog-Eintrag":
 - **`dj/mixes/[number].astro`**: AudioObject + BreadcrumbList + BlogPosting Schema (Mix-Detailseite)
 - **`dj/mixes-weekly.astro`**: BlogPosting + MusicPlaylist + AudioObject Schema (Mixes-Übersicht)
 - **`dj/mixes-blog-archive.astro`**: Blog-Archiv mit CollectionPage + Blog + MusicAlbum + BreadcrumbList (über `src/utils/schema-builders.ts`)
-- **`vermietung.astro`**: **Kein FAQPage Schema** – Weiterleitung zu soundundlicht-stuttgart.de
+- **`/vermietung`**: Kein FAQPage Schema – `noindex`-Redirect-Stub (Astro `redirects`) zu soundundlicht-stuttgart.de; echter 301 extern am Host/CDN nötig
 - **`djhulk-electronic-music.astro`**: Person + MusicGroup Schema
 - **`dj/videos.astro`**: VideoObject Schema (ohne duration, mit publisher)
 - **`booking.astro` / `en/booking.astro`**: Service + BreadcrumbList + FAQPage + LocalBusiness Schema. Hero mit LCP-Bild, SectionNav, SocialStats (Count-Up), PressPhotoGrid (Download), ShareButtons (Native + Copy), Print-to-PDF Button.

@@ -24,6 +24,10 @@ const FILES = [
 
 const MIN_BYTES = 50;
 
+const REDIRECT_STUBS = {
+  'vermietung/index.html': 'https://soundundlicht-stuttgart.de/vermietung',
+};
+
 function checkFile(relative) {
   const full = path.join(DIST_DIR, relative);
   if (!fs.existsSync(full)) {
@@ -45,6 +49,18 @@ function checkHtml(relative) {
   return { ok: true };
 }
 
+function checkRedirectStub(relative, target) {
+  const full = path.join(DIST_DIR, relative);
+  if (!fs.existsSync(full)) return { ok: false, reason: 'fehlt' };
+  const html = fs.readFileSync(full, 'utf-8');
+  if (!html.includes('http-equiv="refresh"') || !html.includes(`content="0;url=${target}"`)) {
+    return { ok: false, reason: 'kein Redirect-Stub' };
+  }
+  if (!html.includes('name="robots" content="noindex"')) return { ok: false, reason: 'Stub nicht noindex' };
+  if (!html.includes(`rel="canonical" href="${target}"`)) return { ok: false, reason: 'falsches canonical' };
+  return { ok: true };
+}
+
 const failures = [];
 
 console.log('Smoke-Test dist/\n');
@@ -62,7 +78,9 @@ for (const relative of FILES) {
 console.log('');
 
 for (const relative of FILES.filter((f) => f.endsWith('.html'))) {
-  const result = checkHtml(relative);
+  const result = relative in REDIRECT_STUBS
+    ? checkRedirectStub(relative, REDIRECT_STUBS[relative])
+    : checkHtml(relative);
   if (!result.ok) {
     console.log(`  ✗ ${relative} — ${result.reason}`);
     failures.push(`${relative} (${result.reason})`);

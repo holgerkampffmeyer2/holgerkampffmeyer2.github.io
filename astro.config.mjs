@@ -36,7 +36,7 @@ export default defineConfig({
       else if (path === '/booking' || path === '/en/booking') { out.priority = 0.9; out.changefreq = ChangeFreqEnum.WEEKLY; }
       else if (path === '/work' || path === '/dj/videos' || path === '/dj/em3f') { out.priority = 0.6; }
       else if (path === '/links') { out.priority = 0.5; }
-      else if (path === '/impressum' || path.startsWith('/vermietung')) { out.priority = 0.3; out.changefreq = ChangeFreqEnum.YEARLY; }
+      else if (path === '/impressum') { out.priority = 0.3; out.changefreq = ChangeFreqEnum.YEARLY; }
       return out;
     }
   })],
@@ -55,6 +55,7 @@ export default defineConfig({
     '/booking.html': '/booking',
     '/en/epk': '/en/booking',
 
+    '/vermietung': 'https://soundundlicht-stuttgart.de/vermietung',
     '/vermietung.html': 'https://soundundlicht-stuttgart.de/vermietung',
     '/vermietung/djpaket-fildern/': 'https://soundundlicht-stuttgart.de/vermietungdjpaket-fildern/',
     '/vermietung/jbl-partybox-300-320/': 'https://soundundlicht-stuttgart.de/vermietungjbl-partybox-300-320/',

@@ -31,7 +31,7 @@ const { currentPage = 'home' } = Astro.props;
         { href: '/dj/em3f', label: 'Fotos' }
       ]
     },
-    { href: '/vermietung', label: 'Vermietung' },
+    { href: 'https://soundundlicht-stuttgart.de/vermietung', label: 'Vermietung', rel: 'noopener' },
     { href: '/work', label: 'Work' },
     { href: '/booking', label: 'Booking' },
     { href: '/links', label: 'Links' },
@@ -56,7 +56,6 @@ const { currentPage = 'home' } = Astro.props;
             };
             const isActive = normalize(currentPage) === normalize(item.href) ||
                              normalize(currentPage).startsWith('/dj') && normalize(item.href) === '/djhulk-electronic-music' ||
-                             normalize(currentPage).startsWith('/vermietung') && normalize(item.href) === '/vermietung' ||
                              (normalize(currentPage).startsWith('/booking') || normalize(currentPage).startsWith('/en/booking')) && normalize(item.href) === '/booking' ||
                              normalize(currentPage) === '' && normalize(item.href) === '';
           
