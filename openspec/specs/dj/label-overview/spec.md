@@ -110,3 +110,11 @@ Das System SHALL die Übersicht im DJing-Bereich des Hauptmenü als `Record Labe
 #### Scenario: Gefilterte Ansicht
 - **WHEN** die Übersicht mit Query-Parametern geöffnet wird
 - **THEN** bleibt die kanonische URL `/dj/labels`
+
+### Requirement: Carousel-Items der Label-Übersicht
+
+Das System SHALL den `ItemList` nur mit indexierbaren Labels und Detailseiten-URLs ausgeben; dünne Labels bleiben sichtbar, werden aber nicht als Carousel-Item markiert.
+
+#### Scenario: Carousel-JSON-LD
+- **WHEN** die Übersicht `ItemList`-JSON-LD ausgibt
+- **THEN** enthält sie ausschließlich minimale `ListItem`-Objekte mit Detailseiten-URL indexierbarer Labels

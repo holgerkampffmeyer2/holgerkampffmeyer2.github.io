@@ -181,6 +181,9 @@ export function buildLabelCollectionSchema(
     isLabelIndexable,
   } = options;
   const pageUrl = resolveUrl('/dj/labels', baseUrl);
+  const indexableEntries = entries.filter((entry) =>
+    isLabelIndexable ? isLabelIndexable(entry.name) : entry.isIndexable
+  );
 
   return [
     {
@@ -197,20 +200,12 @@ export function buildLabelCollectionSchema(
       '@context': 'https://schema.org',
       '@type': 'ItemList',
       '@id': `${pageUrl}#labels`,
-      numberOfItems: entries.length,
-      itemListElement: entries.map((entry, index) => {
-        const labelUrl = resolveUrl(`/dj/labels/${entry.slug}`, baseUrl);
-        const indexable = isLabelIndexable ? isLabelIndexable(entry.name) : entry.isIndexable;
-
-        return {
-          '@type': 'ListItem',
-          position: index + 1,
-          name: entry.name,
-          ...(indexable
-            ? { url: labelUrl, '@id': `${labelUrl}#organization` }
-            : { item: { '@type': 'Organization', name: entry.name } }),
-        };
-      }),
+      numberOfItems: indexableEntries.length,
+      itemListElement: indexableEntries.map((entry, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: resolveUrl(`/dj/labels/${entry.slug}`, baseUrl),
+      })),
     },
   ];
 }

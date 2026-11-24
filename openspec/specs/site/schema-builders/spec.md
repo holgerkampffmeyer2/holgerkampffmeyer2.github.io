@@ -63,19 +63,19 @@ The system SHALL export `buildCollectionPageSchema(posts, options)` that returns
 
 ### Requirement: buildLabelCollectionSchema creates label overview JSON-LD
 
-The system SHALL export `buildLabelCollectionSchema(entries, segments, options)` that returns an object array containing a `CollectionPage`, a `BreadcrumbList` and an `ItemList` for `/dj/labels`. The builders MUST resolve all URLs from the configured base URL. Internal label URLs MUST appear only for indexable labels.
+The system SHALL export `buildLabelCollectionSchema(entries, segments, options)` that returns an object array containing a `CollectionPage`, a `BreadcrumbList` and an `ItemList` for `/dj/labels`. The builders MUST resolve all URLs from the configured base URL. The ItemList SHALL contain only labels with an indexable detail page.
 
 #### Scenario: Build schema for label overview
 - **WHEN** called with label entries and breadcrumb segments
-- **THEN** the returned array contains a CollectionPage for `/dj/labels`, a BreadcrumbList with matching positions and an ItemList whose numberOfItems equals the entry count
+- **THEN** the returned array contains a CollectionPage for `/dj/labels`, a BreadcrumbList with matching positions and an ItemList whose numberOfItems equals the indexable entry count
 
 #### Scenario: Indexability in ItemList
 - **WHEN** the entries include both indexable and thin labels
-- **THEN** only indexable labels receive an internal `url` or `@id`; thin labels are represented by name and position without an internal target
+- **THEN** thin labels are excluded from the ItemList and only indexable labels receive an internal URL
 
 #### Scenario: Schema.org-compliant ListItems
-- **WHEN** the entries include a thin label without an internal detail page
-- **THEN** its ListItem contains an inline `item` with the label name and no `@id`
+- **WHEN** the ItemList is generated for Google carousel validation
+- **THEN** every ListItem contains only `@type`, `position` and `url`, with no `name`, `item` or `@id`
 
 #### Scenario: No hardcoded domain
 - **WHEN** a custom base URL is passed through options

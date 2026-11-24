@@ -66,6 +66,9 @@ const posts = [
 const entries = buildLabelEntries(registry, posts, {
   isLabelIndexable: (name) => name === 'Toolroom Records',
 });
+const realEntries = buildLabelEntries(labelsData, blogData.posts as unknown as BlogPostData[], {
+  isLabelIndexable: isIndexableLabel,
+});
 
 describe('buildLabelEntries', () => {
   it('includes every registry label even without mixes', () => {
@@ -181,10 +184,6 @@ describe('label overview state', () => {
 });
 
 describe('registry integration', () => {
-  const realEntries = buildLabelEntries(labelsData, blogData.posts as unknown as BlogPostData[], {
-    isLabelIndexable: isIndexableLabel,
-  });
-
   it('no longer registers Knowledge Magazine', () => {
     expect(Object.keys(labelsData.labels)).not.toContain('knowledge-magazine');
     expect(realEntries.some((entry) => entry.name === 'Knowledge Magazine')).toBe(false);
@@ -203,7 +202,7 @@ describe('registry integration', () => {
 });
 
 describe('buildLabelCollectionSchema', () => {
-  it('uses the configured base URL and links only indexable labels', () => {
+  it('uses the configured base URL and emits only indexable carousel items', () => {
     const segments = [
       { label: 'Home', href: '/' },
       { label: 'Record Labels' },
@@ -221,11 +220,28 @@ describe('buildLabelCollectionSchema', () => {
 
     expect(page['@id']).toBe('https://example.test/dj/labels#webpage');
     expect(breadcrumb.itemListElement[0].item).toBe('https://example.test/');
-    expect(list.numberOfItems).toBe(3);
-    expect(list.itemListElement[0].url).toBe('https://example.test/dj/labels/toolroom-records');
-    expect(list.itemListElement[1].url).toBeUndefined();
-    expect(list.itemListElement[1].item).toEqual({ '@type': 'Organization', name: 'Defected Records' });
-    expect(list.itemListElement[2]['@id']).toBeUndefined();
-    expect(list.itemListElement[2].item).toEqual({ '@type': 'Organization', name: 'Halogenix' });
+    expect(list.numberOfItems).toBe(1);
+    expect(list.itemListElement).toEqual([
+      {
+        '@type': 'ListItem',
+        position: 1,
+        url: 'https://example.test/dj/labels/toolroom-records',
+      },
+    ]);
+  });
+
+  it('keeps real registry carousel items minimal and limited to detail pages', () => {
+    const schema = buildLabelCollectionSchema(realEntries, [], {
+      isLabelIndexable: isIndexableLabel,
+    }) as { numberOfItems: number; itemListElement: Record<string, unknown>[] }[];
+    const list = schema[2];
+
+    expect(list.numberOfItems).toBe(60);
+    expect(list.itemListElement).toHaveLength(60);
+    expect(
+      list.itemListElement.every(
+        (item) => Object.keys(item).sort().join(',') === '@type,position,url'
+      )
+    ).toBe(true);
   });
 });
