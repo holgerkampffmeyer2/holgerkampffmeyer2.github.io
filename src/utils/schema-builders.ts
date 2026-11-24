@@ -206,10 +206,9 @@ export function buildLabelCollectionSchema(
           '@type': 'ListItem',
           position: index + 1,
           name: entry.name,
-          ...(indexable && {
-            url: labelUrl,
-            '@id': `${labelUrl}#organization`,
-          }),
+          ...(indexable
+            ? { url: labelUrl, '@id': `${labelUrl}#organization` }
+            : { item: { '@type': 'Organization', name: entry.name } }),
         };
       }),
     },

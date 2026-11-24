@@ -73,6 +73,10 @@ The system SHALL export `buildLabelCollectionSchema(entries, segments, options)`
 - **WHEN** the entries include both indexable and thin labels
 - **THEN** only indexable labels receive an internal `url` or `@id`; thin labels are represented by name and position without an internal target
 
+#### Scenario: Schema.org-compliant ListItems
+- **WHEN** the entries include a thin label without an internal detail page
+- **THEN** its ListItem contains an inline `item` with the label name and no `@id`
+
 #### Scenario: No hardcoded domain
 - **WHEN** a custom base URL is passed through options
 - **THEN** every generated URL uses that base URL instead of a hardcoded production domain

@@ -224,6 +224,8 @@ describe('buildLabelCollectionSchema', () => {
     expect(list.numberOfItems).toBe(3);
     expect(list.itemListElement[0].url).toBe('https://example.test/dj/labels/toolroom-records');
     expect(list.itemListElement[1].url).toBeUndefined();
+    expect(list.itemListElement[1].item).toEqual({ '@type': 'Organization', name: 'Defected Records' });
     expect(list.itemListElement[2]['@id']).toBeUndefined();
+    expect(list.itemListElement[2].item).toEqual({ '@type': 'Organization', name: 'Halogenix' });
   });
 });
