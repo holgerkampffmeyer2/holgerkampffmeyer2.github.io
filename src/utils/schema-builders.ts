@@ -2,6 +2,7 @@ import type { BlogPostData } from '../types/blog';
 import { labelSlug } from './label-slug.js';
 import type { StructuredTrack } from './mix-track-data';
 import type { LabelIndexablePredicate } from '../../types/label-indexability.js';
+import type { LabelEntry } from './label-overview.js';
 
 export interface BreadcrumbSegment {
   label: string;
@@ -167,6 +168,52 @@ export function buildBreadcrumbSchema(
       ...(segment.href && { item: resolveUrl(segment.href, baseUrl) }),
     })),
   };
+}
+
+export function buildLabelCollectionSchema(
+  entries: LabelEntry[],
+  segments: BreadcrumbSegment[],
+  options: SchemaBuilderOptions = {}
+): object[] {
+  const {
+    baseUrl = 'https://holger-kampffmeyer.de',
+    description = 'Durchsuchbare Übersicht aller Record Labels in den DJ-Hulk-Mixes mit Tracklists und Release-Daten.',
+    isLabelIndexable,
+  } = options;
+  const pageUrl = resolveUrl('/dj/labels', baseUrl);
+
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      '@id': `${pageUrl}#webpage`,
+      mainEntityOfPage: pageUrl,
+      name: 'Record Labels in DJ Hulk Mixes',
+      description,
+      inLanguage: 'de-DE',
+    },
+    buildBreadcrumbSchema(segments, { baseUrl }),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      '@id': `${pageUrl}#labels`,
+      numberOfItems: entries.length,
+      itemListElement: entries.map((entry, index) => {
+        const labelUrl = resolveUrl(`/dj/labels/${entry.slug}`, baseUrl);
+        const indexable = isLabelIndexable ? isLabelIndexable(entry.name) : entry.isIndexable;
+
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          name: entry.name,
+          ...(indexable && {
+            url: labelUrl,
+            '@id': `${labelUrl}#organization`,
+          }),
+        };
+      }),
+    },
+  ];
 }
 
 export function buildLabelEntities(

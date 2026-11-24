@@ -18,6 +18,7 @@ const FILES = [
   'djhulk-electronic-music/index.html',
   'dj/mixes-weekly/index.html',
   'dj/mixes-blog-archive/index.html',
+  'dj/labels/index.html',
   'links/index.html',
   'vermietung/index.html',
 ];
@@ -28,9 +29,12 @@ const REDIRECT_STUBS = {
   'vermietung/index.html': 'https://soundundlicht-stuttgart.de/vermietung',
 };
 
+const NAV_EXCLUDED_PAGES = new Set([...Object.keys(REDIRECT_STUBS), 'links/index.html']);
+
 const NOINDEX_LABEL_PAGES = ['dj/labels/nothing-hurt/index.html'];
 const INDEXED_LABEL_PAGES = ['dj/labels/ministry-of-sound/index.html'];
-const THIN_LABEL_LINK_SOURCES = ['dj/mixes-weekly/index.html'];
+const THIN_LABEL_LINK_SOURCES = ['dj/mixes-weekly/index.html', 'dj/labels/index.html'];
+const LABEL_OVERVIEW_PAGE = 'dj/labels/index.html';
 
 function checkFile(relative) {
   const full = path.join(DIST_DIR, relative);
@@ -82,6 +86,37 @@ function checkNoThinLabelLink(relative) {
   return { ok: true };
 }
 
+function checkLabelOverview(relative) {
+  const full = path.join(DIST_DIR, relative);
+  if (!fs.existsSync(full)) return { ok: false, reason: 'fehlt' };
+  const html = fs.readFileSync(full, 'utf-8');
+  const required = [
+    'id="label-search"',
+    'id="label-min-tracks"',
+    'id="label-rows"',
+    'data-label-toggle',
+    'data-label-details-row',
+    'id="label-overview-data"',
+    'aria-label="Seitennavigation"',
+  ];
+  const missing = required.filter((token) => !html.includes(token));
+  if (missing.length) return { ok: false, reason: `fehlt: ${missing.join(', ')}` };
+  if (!/rel="canonical" href="[^"]*\/dj\/labels"/.test(html)) {
+    return { ok: false, reason: 'falsches canonical' };
+  }
+  if (html.includes('Knowledge Magazine')) return { ok: false, reason: 'Knowledge Magazine vorhanden' };
+  if (html.includes('href="/dj/labels/nothing-hurt"')) return { ok: false, reason: 'dünnes Label verlinkt' };
+  return { ok: true };
+}
+
+function checkNavLink(relative) {
+  const full = path.join(DIST_DIR, relative);
+  if (!fs.existsSync(full)) return { ok: false, reason: 'fehlt' };
+  const html = fs.readFileSync(full, 'utf-8');
+  if (!html.includes('href="/dj/labels"')) return { ok: false, reason: 'kein Labels-Link im Menü' };
+  return { ok: true };
+}
+
 const failures = [];
 
 console.log('Smoke-Test dist/\n');
@@ -114,6 +149,20 @@ for (const relative of INDEXED_LABEL_PAGES) {
 
 for (const relative of THIN_LABEL_LINK_SOURCES) {
   const result = checkNoThinLabelLink(relative);
+  if (!result.ok) {
+    console.log(`  ✗ ${relative} — ${result.reason}`);
+    failures.push(`${relative} (${result.reason})`);
+  }
+}
+
+const overviewResult = checkLabelOverview(LABEL_OVERVIEW_PAGE);
+if (!overviewResult.ok) {
+  console.log(`  ✗ ${LABEL_OVERVIEW_PAGE} — ${overviewResult.reason}`);
+  failures.push(`${LABEL_OVERVIEW_PAGE} (${overviewResult.reason})`);
+}
+
+for (const relative of FILES.filter((file) => file.endsWith('/index.html') && !NAV_EXCLUDED_PAGES.has(file))) {
+  const result = checkNavLink(relative);
   if (!result.ok) {
     console.log(`  ✗ ${relative} — ${result.reason}`);
     failures.push(`${relative} (${result.reason})`);

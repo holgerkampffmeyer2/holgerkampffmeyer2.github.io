@@ -112,6 +112,12 @@ export const siteNavigationJsonLd = {
       "position": 9,
       "name": "Impressum",
       "url": "https://holger-kampffmeyer.de/impressum/"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "position": 10,
+      "name": "Labels",
+      "url": "https://holger-kampffmeyer.de/dj/labels/"
     }
   ]
 };

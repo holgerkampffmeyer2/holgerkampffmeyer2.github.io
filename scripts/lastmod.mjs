@@ -31,7 +31,14 @@ function gitDateForFile(file) {
       'git',
       ['log', '-1', '--format=%cI', '--', file],
       { cwd: ROOT_DIR, maxBuffer: 1024 * 1024 },
-      (err, stdout) => resolve(err || !stdout.trim() ? null : stdout.trim())
+      (err, stdout) => {
+        if (!err && stdout.trim()) {
+          resolve(stdout.trim());
+          return;
+        }
+        const stat = fs.statSync(path.join(ROOT_DIR, file), { throwIfNoEntry: false });
+        resolve(stat ? stat.mtime.toISOString() : null);
+      }
     );
   });
 }
@@ -83,6 +90,8 @@ function resolveSourceFiles(pagePath) {
   const trim = pagePath.replace(/^\/|\/$/g, '');
   if (!trim) return ['src/pages/index.astro'];
   if (trim.startsWith('dj/mixes/')) return null;
+  if (trim === 'dj/labels') return ['src/pages/dj/labels/index.astro'];
+  if (trim.startsWith('dj/labels/')) return ['src/pages/dj/labels/[label].astro'];
   return [`src/pages/${trim}.astro`];
 }
 

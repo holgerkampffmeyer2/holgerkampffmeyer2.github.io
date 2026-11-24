@@ -27,6 +27,7 @@ const { currentPage = 'home' } = Astro.props;
       items: [
         { href: '/dj/mixes-weekly', label: 'Weekly DJ Mixes' },
         { href: '/dj/mixes-blog-archive', label: 'All Mixes' },
+        { href: '/dj/labels', label: 'Record Labels' },
         { href: '/dj/videos', label: 'Videos' },
         { href: '/dj/em3f', label: 'Fotos' }
       ]
@@ -72,7 +73,7 @@ const { currentPage = 'home' } = Astro.props;
                 {item.label}
                 <Icon name="chevron-down" class="h-4 w-4" />
               </a>
-              <div class="absolute top-full left-0 mt-2 w-48 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div class="absolute top-full left-0 mt-2 w-48 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 z-50">
                 {item.items?.map(subItem => (
                   <a href={subItem.href} class="block px-4 py-2 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-secondary)] hover:bg-[var(--color-bg)] first:rounded-t-lg last:rounded-b-lg">
                     {subItem.label}

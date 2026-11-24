@@ -59,14 +59,18 @@ src/
 | /dj/mixes-weekly | Mixes (Übersicht) |
 | /dj/mixes/[slug] | Single Mix mit Tracklist (dynamisch) |
 | /dj/mixes-blog-archive | Mixes Blog-Archiv |
+| /dj/labels | Label-Übersicht (Suche, Filter, Pagination) |
+| /dj/labels/[slug] | Label-Detailseite (dynamisch) |
 | /dj/em3f | Festival Fotos |
 | /vermietung | Redirect-Stub (noindex) → soundundlicht-stuttgart.de |
 | /work | Work/Research |
 | /links | Links |
 | /impressum | Impressum |
 
-Label-Einzelseiten (`/dj/labels/<slug>`) sind erst ab 3 Tracks indexierbar; dünnere Labels
-werden als `noindex` ausgeliefert und aus Sitemap und `urllist.txt` ausgeschlossen.
+Die Übersicht `/dj/labels` zeigt alle Registry-Labels; dünne Labels bleiben dort reiner Text und
+werden nicht intern verlinkt. Label-Einzelseiten (`/dj/labels/<slug>`) sind erst ab 3 Tracks
+indexierbar; dünnere Labels werden als `noindex` ausgeliefert und aus Sitemap und `urllist.txt`
+ausgeschlossen.
 
 ---
 

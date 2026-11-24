@@ -1,0 +1,906 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import Footer from '../../../components/Footer.astro';
+import Icon from '../../../components/Icon.astro';
+import { loadBlogPosts } from '../../../utils/blog-data';
+import labelsData from '../../../data/labels.json';
+import { isIndexableLabel } from '../../../utils/label-indexability.mjs';
+import { buildLabelEntries, type LabelRegistryData } from '../../../utils/label-overview';
+import {
+  filterAndSortLabelEntries,
+  paginateLabelEntries,
+  parseLabelOverviewState,
+  serializeLabelOverviewState,
+} from '../../../utils/label-overview-state';
+import { buildLabelCollectionSchema } from '../../../utils/schema-builders.js';
+import { filterMixesForSearch, highlightSegments } from '../../../utils/label-search';
+import { formatDate } from '../../../utils/format';
+
+const posts = await loadBlogPosts();
+const entries = buildLabelEntries(labelsData as LabelRegistryData, posts, {
+  isLabelIndexable: isIndexableLabel,
+});
+const state = parseLabelOverviewState(Astro.url.searchParams);
+const filtered = filterAndSortLabelEntries(entries, state);
+const pagination = paginateLabelEntries(filtered, state);
+const siteUrl = Astro.site ?? Astro.url;
+
+const breadcrumbSegments = [
+  { label: 'Home', href: '/' },
+  { label: 'DJ Hulk', href: '/djhulk-electronic-music/' },
+  { label: 'Record Labels' },
+];
+
+const jsonLd = buildLabelCollectionSchema(entries, breadcrumbSegments, {
+  baseUrl: siteUrl.href,
+  isLabelIndexable: isIndexableLabel,
+});
+
+const title = 'Record Labels – alle Labels in DJ-Hulk-Mixes';
+const description =
+  'Alle Record Labels aus den DJ-Hulk-Mixes: durchsuchbar nach Label, Artist, Track und Jahr, mit Tracklists und Release-Daten.';
+const clientEntries = entries.map(({ searchText: _searchText, ...entry }) => entry);
+
+function pageHref(page: number): string {
+  return serializeLabelOverviewState({ ...state, page });
+}
+
+function ariaSort(key: typeof state.sort): 'ascending' | 'descending' | 'none' {
+  if (state.sort !== key) return 'none';
+  return state.dir === 'asc' ? 'ascending' : 'descending';
+}
+---
+
+<Layout title={title} description={description} jsonLd={jsonLd} noIndex={false}>
+  <Navbar currentPage="/dj/mixes/" />
+
+  <Breadcrumb segments={breadcrumbSegments} />
+
+  <section class="pt-8 pb-20 hero-gradient" aria-labelledby="labels-heading">
+    <div class="max-w-7xl mx-auto px-4">
+      <h1 id="labels-heading" class="label-page-heading font-play text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+        <span class="label-heading-bar" aria-hidden="true"></span>
+        <span class="gradient-text">Record Labels</span>
+      </h1>
+      <p class="text-[var(--color-text-muted)] text-lg mb-8 max-w-3xl">
+        Alle {entries.length} Labels aus der Registry und den DJ-Hulk-Mixes. Suche nach Labelnamen,
+        Artists, Tracktiteln, Mixnamen oder Jahr und klappe die zugehörigen Mixes direkt auf.
+      </p>
+
+      <form id="label-filters" class="label-controls" role="search">
+        <div class="label-search-field">
+          <label for="label-search">Suche</label>
+          <input
+            id="label-search"
+            name="q"
+            type="search"
+            autocomplete="off"
+            placeholder="Label, Artist, Track oder Jahr"
+            value={state.q}
+          />
+        </div>
+
+        <label class="label-checkbox" for="label-min-tracks">
+          <input
+            id="label-min-tracks"
+            name="minTracks"
+            type="checkbox"
+            value="3"
+            checked={state.minTracks === 3}
+          />
+          <span>Mindestens 3 Tracks</span>
+        </label>
+
+        <div class="label-search-field label-per-page">
+          <label for="label-per-page">Zeilen pro Seite</label>
+          <select id="label-per-page" name="perPage">
+            <option value="25" selected={state.perPage === 25}>25</option>
+            <option value="50" selected={state.perPage === 50}>50</option>
+          </select>
+        </div>
+
+        <button type="reset" class="btn-secondary label-reset">Zurücksetzen</button>
+      </form>
+
+      <p id="label-status" class="label-status" aria-live="polite">
+        {pagination.totalItems} Labels · Seite {pagination.page} von {pagination.totalPages}
+      </p>
+
+      <div class="label-table-wrap">
+        <table class="label-table">
+          <thead>
+            <tr>
+              <th scope="col" data-sort-header="name" aria-sort={ariaSort('name')}>
+                <button type="button" data-sort="name">Label</button>
+              </th>
+              <th scope="col" class="label-number" data-sort-header="tracks" aria-sort={ariaSort('tracks')}>
+                <button type="button" data-sort="tracks">Tracks</button>
+              </th>
+              <th scope="col" class="label-number" data-sort-header="mixes" aria-sort={ariaSort('mixes')}>
+                <button type="button" data-sort="mixes">Mixes</button>
+              </th>
+              <th scope="col" data-sort-header="latest" aria-sort={ariaSort('latest')}>
+                <button type="button" data-sort="latest">Letzter Mix</button>
+              </th>
+              <th scope="col">Website</th>
+            </tr>
+          </thead>
+          <tbody id="label-rows">
+            {pagination.items.map((entry) => {
+              const visibleMixes = filterMixesForSearch(entry.mixes, state.q, entry.name);
+              const formattedDate = entry.latestDate ? formatDate(entry.latestDate) : '';
+              return (
+                <Fragment>
+                  <tr
+                    data-label-row
+                    data-label-id={entry.id}
+                    data-name={entry.name}
+                    data-expanded={state.q && entry.mixCount > 0 ? 'true' : 'false'}
+                  >
+                    <td>
+                      <div class="label-name-cell">
+                        <button
+                          type="button"
+                          class="label-toggle"
+                          data-label-toggle
+                          aria-expanded={state.q && entry.mixCount > 0 ? 'true' : 'false'}
+                          aria-controls={`label-mixes-${entry.id}`}
+                          aria-label={`${entry.name} Mixes ${state.q && entry.mixCount > 0 ? 'ausblenden' : 'einblenden'}`}
+                          disabled={entry.mixCount === 0}
+                        >
+                          <Icon name="chevron-down" class="toggle-icon w-4 h-4" />
+                        </button>
+                        <div>
+                          {entry.isIndexable ? (
+                            <a href={`/dj/labels/${entry.slug}`} class="label-name-link">
+                              {highlightSegments(entry.name, state.q).map((segment) =>
+                                segment.match ? <mark class="label-search-match">{segment.text}</mark> : segment.text
+                              )}
+                            </a>
+                          ) : (
+                            <span class="label-name-text">
+                              {highlightSegments(entry.name, state.q).map((segment) =>
+                                segment.match ? <mark class="label-search-match">{segment.text}</mark> : segment.text
+                              )}
+                            </span>
+                          )}
+                          <span class="label-subline">
+                            {entry.trackCount} Tracks · {entry.mixCount} Mixes
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="label-number">{entry.trackCount}</td>
+                    <td class="label-number">{entry.mixCount}</td>
+                    <td>
+                      {formattedDate ? (
+                        <time datetime={entry.latestDate}>
+                          {highlightSegments(formattedDate, state.q).map((segment) =>
+                            segment.match ? <mark class="label-search-match">{segment.text}</mark> : segment.text
+                          )}
+                        </time>
+                      ) : (
+                        <span class="label-empty">—</span>
+                      )}
+                    </td>
+                    <td>
+                      {entry.url ? (
+                        <a
+                          class="label-website-link"
+                          href={entry.url}
+                          target="_blank"
+                          rel="noopener noreferrer nofollow"
+                          aria-label={`Website von ${entry.name} öffnen`}
+                        >
+                          Website
+                          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17 17 7M8 7h9v9" />
+                          </svg>
+                        </a>
+                      ) : (
+                        <span class="label-empty">—</span>
+                      )}
+                    </td>
+                  </tr>
+                  <tr data-label-details-row>
+                    <td colspan="5">
+                      <div class="label-details" id={`label-mixes-${entry.id}`} aria-hidden={!(state.q && entry.mixCount > 0)}>
+                        <div class="label-details-clip">
+                          <div class="label-details-content">
+                            {visibleMixes.length > 0 ? (
+                              <div class="label-mix-grid">
+                                {visibleMixes.map((mix) => {
+                                  const formattedMixDate = formatDate(mix.created_time);
+                                  return (
+                                    <article class="label-mix-card">
+                                      <div class="label-mix-heading">
+                                        <a href={`/dj/mixes/${mix.slug}`}>
+                                          {highlightSegments(mix.displayLabel, state.q).map((segment) =>
+                                            segment.match ? <mark class="label-search-match">{segment.text}</mark> : segment.text
+                                          )}
+                                        </a>
+                                        <time datetime={mix.created_time}>
+                                          {highlightSegments(formattedMixDate, state.q).map((segment) =>
+                                            segment.match ? <mark class="label-search-match">{segment.text}</mark> : segment.text
+                                          )}
+                                        </time>
+                                      </div>
+                                      <ul>
+                                        {mix.tracks.map((track) => (
+                                          <li>
+                                            <span class="label-track-artist">
+                                              {highlightSegments(track.artist, state.q).map((segment) =>
+                                                segment.match ? <mark class="label-search-match">{segment.text}</mark> : segment.text
+                                              )}
+                                            </span>
+                                            {' – '}
+                                            {highlightSegments(track.title, state.q).map((segment) =>
+                                              segment.match ? <mark class="label-search-match">{segment.text}</mark> : segment.text
+                                            )}
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </article>
+                                  );
+                                })}
+                              </div>
+                            ) : (
+                              <p class="label-empty">Keine passenden Mixes oder Tracks.</p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <nav id="label-pagination" class="label-pagination" aria-label="Seitennavigation">
+        <a
+          href={pageHref(Math.max(1, pagination.page - 1))}
+          data-page-link
+          data-page={Math.max(1, pagination.page - 1)}
+          aria-disabled={pagination.page === 1}
+        >
+          ← Zurück
+        </a>
+        <span id="label-page-status">
+          Seite {pagination.page} von {pagination.totalPages}
+        </span>
+        <a
+          href={pageHref(Math.min(pagination.totalPages, pagination.page + 1))}
+          data-page-link
+          data-page={Math.min(pagination.totalPages, pagination.page + 1)}
+          aria-disabled={pagination.page === pagination.totalPages}
+        >
+          Weiter →
+        </a>
+      </nav>
+
+      <script type="application/json" id="label-overview-data" set:html={JSON.stringify(clientEntries).replace(/</g, '\\u003c').replace(/>/g, '\\u003e')}></script>
+    </div>
+
+    <style is:global>
+      .label-page-heading {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .label-heading-bar {
+        display: block;
+        align-self: stretch;
+        width: 0.35rem;
+        min-height: 2.25rem;
+        border-radius: 999px;
+        background: linear-gradient(180deg, var(--color-secondary), var(--color-accent));
+        box-shadow: 0 0 1rem color-mix(in srgb, var(--color-secondary) 35%, transparent);
+      }
+
+      .label-controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        gap: 1rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.75rem;
+        background: var(--color-surface);
+      }
+
+      .label-search-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        min-width: min(20rem, 100%);
+        flex: 1 1 18rem;
+      }
+
+      .label-search-field label,
+      .label-checkbox {
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+      }
+
+      .label-search-field input,
+      .label-search-field select {
+        width: 100%;
+        padding: 0.6rem 0.75rem;
+        color: var(--color-text);
+        background: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 0.5rem;
+      }
+
+      .label-checkbox {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-height: 2.4rem;
+      }
+
+      .label-per-page {
+        flex: 0 1 10rem;
+      }
+
+      .label-reset {
+        min-height: 2.4rem;
+      }
+
+      .label-status {
+        margin-bottom: 0.75rem;
+        color: var(--color-text-muted);
+        font-size: 0.875rem;
+      }
+
+      .label-table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--color-border);
+        border-radius: 0.75rem;
+        background: var(--color-surface);
+      }
+
+      .label-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9375rem;
+      }
+
+      .label-table th,
+      .label-table td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .label-table th {
+        font-size: 0.8125rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-text-muted);
+        background: var(--color-bg);
+      }
+
+      .label-table thead {
+        background: linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--color-secondary) 22%, var(--color-bg)),
+          color-mix(in srgb, var(--color-accent) 14%, var(--color-bg)) 65%,
+          var(--color-bg)
+        );
+      }
+
+      .label-table thead th {
+        border-bottom: 2px solid color-mix(in srgb, var(--color-secondary) 45%, var(--color-border));
+        background: transparent;
+      }
+
+      .label-table th button {
+        color: inherit;
+        font: inherit;
+        letter-spacing: inherit;
+        text-transform: inherit;
+      }
+
+      .label-table th button:hover {
+        color: var(--color-secondary);
+      }
+
+      .label-number {
+        text-align: right !important;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .label-name-cell {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+      }
+
+      .label-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.75rem;
+        height: 1.75rem;
+        flex: 0 0 auto;
+        color: var(--color-secondary);
+        border: 1px solid var(--color-border);
+        border-radius: 0.4rem;
+      }
+
+      .label-toggle:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+
+      .toggle-icon {
+        transition: transform 0.35s ease;
+      }
+
+      [data-label-row][data-expanded='true'] .toggle-icon {
+        transform: rotate(180deg);
+      }
+
+      .label-name-link {
+        color: var(--color-text);
+        font-weight: 600;
+      }
+
+      .label-name-link:hover {
+        color: var(--color-primary);
+      }
+
+      .label-name-text {
+        color: var(--color-text);
+        font-weight: 600;
+      }
+
+      .label-website-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.3rem 0.65rem;
+        border: 1px solid color-mix(in srgb, var(--color-secondary) 35%, var(--color-border));
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--color-secondary) 8%, var(--color-surface));
+        color: var(--color-text);
+        font-size: 0.8125rem;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      }
+
+      .label-website-link svg {
+        width: 0.85rem;
+        height: 0.85rem;
+        flex: 0 0 auto;
+      }
+
+      .label-website-link:hover,
+      .label-website-link:focus-visible {
+        border-color: var(--color-secondary);
+        background: color-mix(in srgb, var(--color-secondary) 16%, var(--color-surface));
+        color: var(--color-secondary);
+      }
+
+      [data-label-row] > td {
+        transition: background-color 0.25s ease;
+      }
+
+      [data-label-row] > td:first-child {
+        box-shadow: inset 3px 0 0 color-mix(in srgb, var(--color-secondary) 45%, transparent);
+        transition: background-color 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      [data-label-row]:hover > td,
+      [data-label-row]:focus-within > td,
+      [data-label-row][data-expanded='true'] > td,
+      [data-label-details-row]:hover > td,
+      [data-label-row]:focus-within + [data-label-details-row] > td,
+      [data-label-row][data-expanded='true'] + [data-label-details-row] > td {
+        background: color-mix(in srgb, var(--color-secondary) 8%, var(--color-surface));
+      }
+
+      [data-label-row]:focus-within > td:first-child,
+      [data-label-row][data-expanded='true'] > td:first-child {
+        box-shadow: inset 3px 0 0 var(--color-secondary);
+      }
+
+      .label-subline {
+        display: block;
+        margin-top: 0.15rem;
+        font-size: 0.8125rem;
+        color: var(--color-text-muted);
+      }
+
+      .label-empty {
+        color: var(--color-text-muted);
+      }
+
+      .label-search-match {
+        padding: 0 0.1rem;
+        border-radius: 0.2rem;
+        background: color-mix(in srgb, var(--color-secondary) 24%, transparent);
+        box-shadow: inset 0 -0.15em 0 color-mix(in srgb, var(--color-secondary) 65%, transparent);
+        color: var(--color-text);
+      }
+
+      [data-label-details-row] td {
+        padding: 0 !important;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .label-details {
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        transition: grid-template-rows 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+      }
+
+      [data-label-row][data-expanded='true'] + [data-label-details-row] .label-details {
+        grid-template-rows: 1fr;
+        opacity: 1;
+      }
+
+      .label-details-clip {
+        min-height: 0;
+        overflow: hidden;
+        transform: translateY(-6px);
+        transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      [data-label-row][data-expanded='true'] + [data-label-details-row] .label-details-clip {
+        transform: translateY(0);
+      }
+
+      .label-details-content {
+        margin-left: 2.35rem;
+        padding: 0 1rem 1rem;
+        border-left: 1px solid color-mix(in srgb, var(--color-secondary) 35%, var(--color-border));
+      }
+
+      .label-mix-grid {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .label-mix-card {
+        padding: 0.75rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.5rem;
+        background: var(--color-bg);
+      }
+
+      .label-mix-heading {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      .label-mix-heading a {
+        color: var(--color-text);
+      }
+
+      .label-mix-heading a:hover {
+        color: var(--color-primary);
+      }
+
+      .label-mix-heading time {
+        font-size: 0.8125rem;
+        font-weight: 400;
+        color: var(--color-text-muted);
+      }
+
+      .label-mix-card ul {
+        display: grid;
+        gap: 0.25rem;
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+      }
+
+      .label-track-artist {
+        color: var(--color-text);
+      }
+
+      .label-pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+      }
+
+      .label-pagination a[aria-disabled='true'] {
+        opacity: 0.4;
+        pointer-events: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .label-details,
+        .label-details-clip,
+        .toggle-icon {
+          transition: none;
+        }
+      }
+    </style>
+
+    <script>
+      import { formatDate } from '../../../utils/format';
+      import type { LabelEntry } from '../../../utils/label-overview';
+      import { filterMixesForSearch, highlightSegments } from '../../../utils/label-search';
+      import {
+        filterAndSortLabelEntries,
+        paginateLabelEntries,
+        parseLabelOverviewState,
+        serializeLabelOverviewState,
+        type LabelSortKey,
+      } from '../../../utils/label-overview-state';
+
+      const dataNode = document.getElementById('label-overview-data');
+      const entries: LabelEntry[] = JSON.parse(dataNode?.textContent || '[]');
+      const tbody = document.getElementById('label-rows');
+      const status = document.getElementById('label-status');
+      const form = document.getElementById('label-filters') as HTMLFormElement | null;
+      const searchInput = document.getElementById('label-search') as HTMLInputElement | null;
+      const minTracksInput = document.getElementById('label-min-tracks') as HTMLInputElement | null;
+      const perPageSelect = document.getElementById('label-per-page') as HTMLSelectElement | null;
+      const pagination = document.getElementById('label-pagination');
+      const sortButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-sort]'));
+      const sortHeaders = Array.from(document.querySelectorAll<HTMLTableCellElement>('[data-sort-header]'));
+
+      const escapeEntities: Record<string, string> = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+      };
+      const escapeHtml = (value: string) =>
+        String(value).replace(/[&<>"']/g, (char) => escapeEntities[char]);
+
+      let state = parseLabelOverviewState(new URLSearchParams(window.location.search));
+
+      const highlightedHtml = (text: string): string =>
+        highlightSegments(text, state.q)
+          .map((segment) =>
+            segment.match
+              ? `<mark class="label-search-match">${escapeHtml(segment.text)}</mark>`
+              : escapeHtml(segment.text)
+          )
+          .join('');
+      let searchTimer = 0;
+
+      function rowMarkup(entry: LabelEntry): string {
+        const detailsId = `label-mixes-${entry.id}`;
+        const visibleMixes = filterMixesForSearch(entry.mixes, state.q, entry.name);
+        const labelName = entry.isIndexable
+          ? `<a class="label-name-link" href="/dj/labels/${escapeHtml(entry.slug)}">${highlightedHtml(entry.name)}</a>`
+          : `<span class="label-name-text">${highlightedHtml(entry.name)}</span>`;
+        const website = entry.url
+          ? `<a class="label-website-link" href="${escapeHtml(entry.url)}" target="_blank" rel="noopener noreferrer nofollow" aria-label="${escapeHtml(entry.name)} Website öffnen">Website <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9" /></svg></a>`
+          : '<span class="label-empty">—</span>';
+        const toggleDisabled = entry.mixCount === 0 ? ' disabled' : '';
+        const mixes = visibleMixes.length
+          ? `<div class="label-mix-grid">${visibleMixes
+              .map(
+                (mix) => `<article class="label-mix-card">
+                  <div class="label-mix-heading">
+                    <a href="/dj/mixes/${escapeHtml(mix.slug)}">${highlightedHtml(mix.displayLabel)}</a>
+                    <time datetime="${escapeHtml(mix.created_time)}">${highlightedHtml(formatDate(mix.created_time))}</time>
+                  </div>
+                  <ul>${mix.tracks
+                    .map(
+                      (track) => `<li><span class="label-track-artist">${highlightedHtml(track.artist)}</span> – ${highlightedHtml(track.title)}</li>`
+                    )
+                    .join('')}</ul>
+                </article>`
+              )
+              .join('')}</div>`
+          : '<p class="label-empty">Keine passenden Mixes oder Tracks.</p>';
+        const latestDate = entry.latestDate
+          ? `<time datetime="${escapeHtml(entry.latestDate)}">${escapeHtml(formatDate(entry.latestDate))}</time>`
+          : '<span class="label-empty">—</span>';
+
+        return `<tr data-label-row data-label-id="${escapeHtml(entry.id)}" data-name="${escapeHtml(entry.name)}" data-expanded="false">
+          <td>
+            <div class="label-name-cell">
+              <button type="button" class="label-toggle" data-label-toggle aria-expanded="false" aria-controls="${detailsId}" aria-label="${escapeHtml(entry.name)} Mixes einblenden"${toggleDisabled}>
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="toggle-icon w-4 h-4"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div>${labelName}<span class="label-subline">${entry.trackCount} Tracks · ${entry.mixCount} Mixes</span></div>
+            </div>
+          </td>
+          <td class="label-number">${entry.trackCount}</td>
+          <td class="label-number">${entry.mixCount}</td>
+          <td>${latestDate}</td>
+          <td>${website}</td>
+        </tr>
+        <tr data-label-details-row>
+          <td colspan="5">
+            <div class="label-details" id="${detailsId}" aria-hidden="true">
+              <div class="label-details-clip">
+                <div class="label-details-content">${mixes}</div>
+              </div>
+            </div>
+          </td>
+        </tr>`;
+      }
+
+      function labelRows(): HTMLElement[] {
+        return tbody ? Array.from(tbody.querySelectorAll<HTMLElement>('[data-label-row]')) : [];
+      }
+
+      function setExpanded(row: HTMLElement, expanded: boolean) {
+        row.setAttribute('data-expanded', String(expanded));
+        const detailsRow = row.nextElementSibling as HTMLElement | null;
+        const toggle = row.querySelector<HTMLButtonElement>('[data-label-toggle]');
+        const details = detailsRow?.querySelector<HTMLElement>('.label-details');
+        const name = row.dataset.name || 'Label';
+
+        toggle?.setAttribute('aria-expanded', String(expanded));
+        toggle?.setAttribute('aria-label', `${name} Mixes ${expanded ? 'ausblenden' : 'einblenden'}`);
+        details?.setAttribute('aria-hidden', String(!expanded));
+      }
+
+      function setOpenRow(row: HTMLElement | null) {
+        labelRows().forEach((item) => {
+          const shouldBeOpen = item === row;
+          if (item.getAttribute('data-expanded') !== String(shouldBeOpen)) {
+            setExpanded(item, shouldBeOpen);
+          }
+        });
+      }
+
+      function toggleRow(row: HTMLElement) {
+        const expanded = row.getAttribute('data-expanded') === 'true';
+        if (state.q) {
+          setExpanded(row, !expanded);
+          return;
+        }
+        setOpenRow(expanded ? null : row);
+      }
+
+      function syncUrl() {
+        const query = serializeLabelOverviewState(state);
+        window.history.replaceState(null, '', `${window.location.pathname}${query}`);
+      }
+
+      function updateControls() {
+        if (searchInput && document.activeElement !== searchInput && searchInput.value !== state.q) {
+          searchInput.value = state.q;
+        }
+        if (minTracksInput) minTracksInput.checked = state.minTracks === 3;
+        if (perPageSelect) perPageSelect.value = String(state.perPage);
+        sortHeaders.forEach((header) => {
+          const key = header.dataset.sortHeader as LabelSortKey;
+          header.setAttribute(
+            'aria-sort',
+            state.sort === key ? (state.dir === 'asc' ? 'ascending' : 'descending') : 'none'
+          );
+        });
+      }
+
+      function updatePagination(totalItems: number, page: number, totalPages: number) {
+        if (status) status.textContent = `${totalItems} Labels · Seite ${page} von ${totalPages}`;
+        const pageStatus = document.getElementById('label-page-status');
+        if (pageStatus) pageStatus.textContent = `Seite ${page} von ${totalPages}`;
+
+        pagination?.querySelectorAll<HTMLAnchorElement>('[data-page-link]').forEach((link) => {
+          const direction = link.textContent?.includes('Zurück') ? -1 : 1;
+          const target = Math.min(totalPages, Math.max(1, page + direction));
+          link.dataset.page = String(target);
+          link.href = `${window.location.pathname}${serializeLabelOverviewState({ ...state, page: target })}`;
+          link.setAttribute('aria-disabled', String(direction === -1 ? page === 1 : page === totalPages));
+        });
+      }
+
+      function render() {
+        const result = paginateLabelEntries(filterAndSortLabelEntries(entries, state), state);
+        if (tbody) {
+          tbody.innerHTML = result.items.map(rowMarkup).join('');
+          if (state.q) {
+            labelRows().forEach((row) => {
+              if (!row.querySelector<HTMLButtonElement>('[data-label-toggle]')?.disabled) {
+                setExpanded(row, true);
+              }
+            });
+          }
+        }
+        updateControls();
+        updatePagination(result.totalItems, result.page, result.totalPages);
+      }
+
+      tbody?.addEventListener('click', (event) => {
+        const target = event.target instanceof Element ? event.target : null;
+        const button = target?.closest<HTMLButtonElement>('[data-label-toggle]');
+        const row = button?.closest<HTMLElement>('[data-label-row]');
+        if (!button || !row || button.disabled) return;
+
+        toggleRow(row);
+      });
+
+      searchInput?.addEventListener('input', () => {
+        state.q = searchInput.value;
+        state.page = 1;
+        window.clearTimeout(searchTimer);
+        searchTimer = window.setTimeout(() => {
+          syncUrl();
+          render();
+        }, 180);
+      });
+
+      form?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        window.clearTimeout(searchTimer);
+        state.q = searchInput?.value || '';
+        state.page = 1;
+        syncUrl();
+        render();
+      });
+
+      form?.addEventListener('reset', () => {
+        window.setTimeout(() => {
+          state = parseLabelOverviewState({});
+          syncUrl();
+          render();
+        }, 0);
+      });
+
+      minTracksInput?.addEventListener('change', () => {
+        state.minTracks = minTracksInput.checked ? 3 : 0;
+        state.page = 1;
+        syncUrl();
+        render();
+      });
+
+      perPageSelect?.addEventListener('change', () => {
+        state.perPage = Number(perPageSelect.value) === 50 ? 50 : 25;
+        state.page = 1;
+        syncUrl();
+        render();
+      });
+
+      sortButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const key = button.dataset.sort as LabelSortKey;
+          state.dir = state.sort === key && state.dir === 'asc' ? 'desc' : 'asc';
+          state.sort = key;
+          state.page = 1;
+          syncUrl();
+          render();
+        });
+      });
+
+      pagination?.addEventListener('click', (event) => {
+        const target = event.target instanceof Element ? event.target : null;
+        const link = target?.closest<HTMLAnchorElement>('[data-page-link]');
+        if (!link || link.getAttribute('aria-disabled') === 'true') return;
+
+        event.preventDefault();
+        state.page = Number(link.dataset.page || 1);
+        syncUrl();
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      render();
+    </script>
+  </section>
+
+  <Footer />
+</Layout>

@@ -48,6 +48,13 @@ describe('Heading-Struktur', () => {
     expect(matches).toHaveLength(1);
   });
 
+  it('Label-Übersicht hat genau ein h1', () => {
+    const source = fs.readFileSync(path.join(SRC_DIR, 'pages/dj/labels/index.astro'), 'utf8');
+    const matches = source.match(/<h1\b/g) || [];
+
+    expect(matches).toHaveLength(1);
+  });
+
   it('Mix-Detail-Seite startet mit h1 und nutzt h2 für Abschnitte', () => {
     const source = fs.readFileSync(path.join(SRC_DIR, 'pages/dj/mixes/[number].astro'), 'utf8');
     const headingOrder = [...source.matchAll(/<(h[1-6])\b/g)].map((match) => match[1]);

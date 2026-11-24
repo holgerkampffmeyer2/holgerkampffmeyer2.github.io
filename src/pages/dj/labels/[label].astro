@@ -4,87 +4,25 @@ import Navbar from "../../../components/Navbar.astro";
 import Footer from "../../../components/Footer.astro";
 import Breadcrumb from "../../../components/Breadcrumb.astro";
 import Icon from "../../../components/Icon.astro";
-import type { BlogPostData } from "../../../types/blog";
 import { loadBlogPosts } from "../../../utils/blog-data";
 import labelsData from "../../../data/labels.json";
-import { labelSlug } from "../../../utils/label-slug.js";
 import { isIndexableLabel } from "../../../utils/label-indexability.mjs";
-import { buildMixBreadcrumbLabel } from "../../../utils/mix-seo.js";
+import { buildBreadcrumbSchema } from "../../../utils/schema-builders.js";
+import { buildLabelEntries, type LabelEntry, type LabelRegistryData } from "../../../utils/label-overview";
 import { formatDate } from "../../../utils/format";
 
-interface LabelTrack {
-  artist: string;
-  title: string;
-}
-
-interface LabelMix {
-  slug: string;
-  title: string;
-  created_time: string;
-  displayLabel: string;
-  tracks: LabelTrack[];
-}
-
-interface LabelEntry {
-  id: string;
-  name: string;
-  url: string;
-  slug: string;
-  mixes: LabelMix[];
-  trackCount: number;
-}
-
 export async function getStaticPaths() {
-  const posts = (await loadBlogPosts()).filter((post: BlogPostData) => post.hasTracklist);
-  const trackToLabel = labelsData.tracks as Record<string, string>;
-  const labelDefs = labelsData.labels as Record<string, { name: string; url?: string }>;
+  const posts = await loadBlogPosts();
+  const entries = buildLabelEntries(labelsData as LabelRegistryData, posts, {
+    isLabelIndexable: isIndexableLabel,
+  });
 
-  const entries = new Map<string, LabelEntry>();
-
-  for (const post of posts) {
-    for (const track of post.tracklist || []) {
-      const id = trackToLabel[track];
-      if (!id || !labelDefs[id]) continue;
-
-      const name = labelDefs[id].name;
-      const slug = labelSlug(name);
-
-      if (!entries.has(id)) {
-        entries.set(id, {
-          id,
-          name,
-          url: labelDefs[id].url || '',
-          slug,
-          mixes: [],
-          trackCount: 0,
-        });
-      }
-
-      const entry = entries.get(id)!;
-      const parts = track.split(' - ');
-      const artist = parts[0]?.replace(/,$/, '') || '';
-      const title = parts.slice(1).join(' - ').replace(/,$/, '') || track;
-
-      const existing = entry.mixes.find((mix) => mix.slug === post.slug);
-      if (existing) {
-        existing.tracks.push({ artist, title });
-      } else {
-        entry.mixes.push({
-          slug: post.slug,
-          title: post.title,
-          created_time: post.created_time,
-          displayLabel: buildMixBreadcrumbLabel(post),
-          tracks: [{ artist, title }],
-        });
-      }
-      entry.trackCount += 1;
-    }
-  }
-
-  return Array.from(entries.values()).map((entry) => ({
-    params: { label: entry.slug },
-    props: { entry },
-  }));
+  return entries
+    .filter((entry) => entry.mixCount > 0)
+    .map((entry) => ({
+      params: { label: entry.slug },
+      props: { entry },
+    }));
 }
 
 interface Props {
@@ -92,6 +30,8 @@ interface Props {
 }
 
 const { entry } = Astro.props;
+const siteUrl = Astro.site ?? Astro.url;
+const absoluteUrl = (path: string) => new URL(path, siteUrl).href;
 const mixCount = entry.mixes.length;
 const mixLabel = mixCount === 1 ? 'Mix' : 'Mixes';
 const trackLabel = entry.trackCount === 1 ? 'Track' : 'Tracks';
@@ -116,10 +56,11 @@ const descriptionCandidates = [
 ].filter((candidate) => candidate.length > 0);
 const pageDescription = descriptionCandidates.find((candidate) => candidate.length <= 160) ?? descriptionCandidates[descriptionCandidates.length - 1];
 
+const pageUrl = absoluteUrl(`/dj/labels/${entry.slug}`);
 const breadcrumbSegments = [
   { label: "Home", href: "/" },
   { label: "DJ Hulk", href: "/djhulk-electronic-music/" },
-  { label: "Weekly DJ Mixes", href: "/dj/mixes-weekly" },
+  { label: "Record Labels", href: "/dj/labels" },
   { label: `Label: ${entry.name}` },
 ];
 
@@ -127,8 +68,8 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    '@id': `https://holger-kampffmeyer.de/dj/labels/${entry.slug}#webpage`,
-    mainEntityOfPage: `https://holger-kampffmeyer.de/dj/labels/${entry.slug}`,
+    '@id': `${pageUrl}#webpage`,
+    mainEntityOfPage: pageUrl,
     name: `${entry.name} – Mixes von DJ Hulk`,
     description: pageDescription,
     inLanguage: 'de-DE',
@@ -136,7 +77,7 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': `https://holger-kampffmeyer.de/dj/labels/${entry.slug}`,
+    '@id': `${pageUrl}#organization`,
     name: entry.name,
     url: entry.url || undefined,
     description: `Record label: ${entry.name}`,
@@ -144,15 +85,16 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    '@id': `https://holger-kampffmeyer.de/dj/labels/${entry.slug}#list`,
+    '@id': `${pageUrl}#list`,
     numberOfItems: mixCount,
     itemListElement: entry.mixes.map((mix, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       name: mix.displayLabel,
-      url: `https://holger-kampffmeyer.de/dj/mixes/${mix.slug}`,
+      url: absoluteUrl(`/dj/mixes/${mix.slug}`),
     })),
   },
+  buildBreadcrumbSchema(breadcrumbSegments, { baseUrl: siteUrl.href }),
 ];
 ---
 
@@ -218,7 +160,8 @@ const jsonLd = [
       </div>
 
       <div class="flex flex-wrap justify-center gap-4 mt-10">
-        <a href="/dj/mixes-weekly" class="btn-secondary">← Alle DJ Mixes</a>
+        <a href="/dj/labels" class="btn-secondary">← Alle Record Labels</a>
+        <a href="/dj/mixes-weekly" class="btn-secondary">Alle DJ Mixes</a>
         <a href="/dj/mixes-blog-archive" class="btn-secondary">Mix-Archiv</a>
       </div>
     </div>
