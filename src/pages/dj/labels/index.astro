@@ -214,7 +214,7 @@ function ariaSort(key: typeof state.sort): 'ascending' | 'descending' | 'none' {
                                 {visibleMixes.map((mix) => {
                                   const formattedMixDate = formatDate(mix.created_time);
                                   return (
-                                    <article class="label-mix-card">
+                                    <div class="label-mix-card">
                                       <div class="label-mix-heading">
                                         <a href={`/dj/mixes/${mix.slug}`}>
                                           {highlightSegments(mix.displayLabel, state.q).map((segment) =>
@@ -242,7 +242,7 @@ function ariaSort(key: typeof state.sort): 'ascending' | 'descending' | 'none' {
                                           </li>
                                         ))}
                                       </ul>
-                                    </article>
+                                    </div>
                                   );
                                 })}
                               </div>
@@ -263,10 +263,10 @@ function ariaSort(key: typeof state.sort): 'ascending' | 'descending' | 'none' {
 
       <nav id="label-pagination" class="label-pagination" aria-label="Seitennavigation">
         <a
-          href={pageHref(Math.max(1, pagination.page - 1))}
+          href={pageHref(Math.max(1, pagination.page - 1)) || Astro.url.pathname}
           data-page-link
           data-page={Math.max(1, pagination.page - 1)}
-          aria-disabled={pagination.page === 1}
+          class={pagination.page === 1 ? 'is-disabled' : undefined}
         >
           ← Zurück
         </a>
@@ -274,10 +274,10 @@ function ariaSort(key: typeof state.sort): 'ascending' | 'descending' | 'none' {
           Seite {pagination.page} von {pagination.totalPages}
         </span>
         <a
-          href={pageHref(Math.min(pagination.totalPages, pagination.page + 1))}
+          href={pageHref(Math.min(pagination.totalPages, pagination.page + 1)) || Astro.url.pathname}
           data-page-link
           data-page={Math.min(pagination.totalPages, pagination.page + 1)}
-          aria-disabled={pagination.page === pagination.totalPages}
+          class={pagination.page === pagination.totalPages ? 'is-disabled' : undefined}
         >
           Weiter →
         </a>
@@ -625,7 +625,7 @@ function ariaSort(key: typeof state.sort): 'ascending' | 'descending' | 'none' {
         color: var(--color-text-muted);
       }
 
-      .label-pagination a[aria-disabled='true'] {
+      .label-pagination a.is-disabled {
         opacity: 0.4;
         pointer-events: none;
       }
@@ -698,7 +698,7 @@ function ariaSort(key: typeof state.sort): 'ascending' | 'descending' | 'none' {
         const mixes = visibleMixes.length
           ? `<div class="label-mix-grid">${visibleMixes
               .map(
-                (mix) => `<article class="label-mix-card">
+                (mix) => `<div class="label-mix-card">
                   <div class="label-mix-heading">
                     <a href="/dj/mixes/${escapeHtml(mix.slug)}">${highlightedHtml(mix.displayLabel)}</a>
                     <time datetime="${escapeHtml(mix.created_time)}">${highlightedHtml(formatDate(mix.created_time))}</time>
@@ -708,7 +708,7 @@ function ariaSort(key: typeof state.sort): 'ascending' | 'descending' | 'none' {
                       (track) => `<li><span class="label-track-artist">${highlightedHtml(track.artist)}</span> – ${highlightedHtml(track.title)}</li>`
                     )
                     .join('')}</ul>
-                </article>`
+                </div>`
               )
               .join('')}</div>`
           : '<p class="label-empty">Keine passenden Mixes oder Tracks.</p>';
@@ -805,7 +805,7 @@ function ariaSort(key: typeof state.sort): 'ascending' | 'descending' | 'none' {
           const target = Math.min(totalPages, Math.max(1, page + direction));
           link.dataset.page = String(target);
           link.href = `${window.location.pathname}${serializeLabelOverviewState({ ...state, page: target })}`;
-          link.setAttribute('aria-disabled', String(direction === -1 ? page === 1 : page === totalPages));
+          link.classList.toggle('is-disabled', direction === -1 ? page === 1 : page === totalPages);
         });
       }
 
@@ -889,7 +889,7 @@ function ariaSort(key: typeof state.sort): 'ascending' | 'descending' | 'none' {
       pagination?.addEventListener('click', (event) => {
         const target = event.target instanceof Element ? event.target : null;
         const link = target?.closest<HTMLAnchorElement>('[data-page-link]');
-        if (!link || link.getAttribute('aria-disabled') === 'true') return;
+        if (!link || link.classList.contains('is-disabled')) return;
 
         event.preventDefault();
         state.page = Number(link.dataset.page || 1);

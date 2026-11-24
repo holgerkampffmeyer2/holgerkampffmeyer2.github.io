@@ -116,7 +116,7 @@ export const siteNavigationJsonLd = {
     {
       "@type": "SiteNavigationElement",
       "position": 10,
-      "name": "Labels",
+      "name": "Record Labels",
       "url": "https://holger-kampffmeyer.de/dj/labels/"
     }
   ]

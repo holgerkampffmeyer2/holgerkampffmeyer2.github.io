@@ -195,13 +195,18 @@ describe('registry integration', () => {
     expect(realEntries.filter((entry) => entry.mixCount > 0)).toHaveLength(277);
     expect(realEntries.filter((entry) => entry.isIndexable)).toHaveLength(60);
   });
+
+  it('keeps rendered registry data in Unicode Normalization Form C', () => {
+    const serialized = JSON.stringify(realEntries);
+    expect(serialized.normalize('NFC')).toBe(serialized);
+  });
 });
 
 describe('buildLabelCollectionSchema', () => {
   it('uses the configured base URL and links only indexable labels', () => {
     const segments = [
       { label: 'Home', href: '/' },
-      { label: 'Labels' },
+      { label: 'Record Labels' },
     ];
     const schema = buildLabelCollectionSchema(entries, segments, {
       baseUrl: 'https://example.test',
