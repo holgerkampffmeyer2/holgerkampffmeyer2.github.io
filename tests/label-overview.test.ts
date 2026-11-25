@@ -114,6 +114,18 @@ describe('label search', () => {
     expect(scoreLabelMatch(toolroom, 'Toolrom Records')).toBeGreaterThan(0);
   });
 
+  it('finds labels from partial words such as Secret Fl', () => {
+    const state = { ...parseLabelOverviewState({}), q: 'Secret Fl' };
+    const ids = filterAndSortLabelEntries(realEntries, state).map((entry) => entry.id);
+    expect(ids).toContain('secret-floor-inc');
+    expect(highlightSegments('Secret Floor Inc.', 'Secret Fl')).toEqual([
+      { text: 'Secret', match: true },
+      { text: ' ', match: false },
+      { text: 'Floor', match: true },
+      { text: ' Inc.', match: false },
+    ]);
+  });
+
   it('matches text only when the query is present', () => {
     expect(matchesSearchText('Kirk Mannero – Open Up', 'Kirk Mannero')).toBe(true);
     expect(matchesSearchText('Defected Records', 'Kirk Mannero')).toBe(false);

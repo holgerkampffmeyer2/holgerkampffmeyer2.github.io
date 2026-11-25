@@ -12,6 +12,7 @@ export interface LabelSearchEntry {
 
 const FUZZY_THRESHOLD = 0.62;
 const HIGHLIGHT_THRESHOLD = 0.8;
+const PREFIX_TOKEN_MIN_LENGTH = 2;
 
 export interface SearchSegment {
   text: string;
@@ -37,11 +38,19 @@ function getTextTokens(query: string): string[] {
   return getSearchTokens(query).filter((token) => !/^(19|20)\d{2}$/.test(token));
 }
 
+function matchesWord(word: string, token: string, threshold?: number): boolean {
+  if (word === token) return true;
+  if (token.length >= PREFIX_TOKEN_MIN_LENGTH && word.startsWith(token)) return true;
+  if (token.length < 3) return false;
+  if (word.includes(token)) return true;
+  return threshold !== undefined && searchSimilarity(word, token) >= threshold;
+}
+
 function containsExactToken(text: string, token: string): boolean {
   return normalizeSearchText(text)
     .split(' ')
     .filter(Boolean)
-    .some((word) => word === token || (token.length >= 3 && word.includes(token)));
+    .some((word) => matchesWord(word, token));
 }
 
 function matchesTokens(text: string, tokens: string[]): boolean {
@@ -50,14 +59,7 @@ function matchesTokens(text: string, tokens: string[]): boolean {
   if (!normalized) return false;
   const words = normalized.split(' ').filter(Boolean);
 
-  return tokens.every((token) =>
-    words.some(
-      (word) =>
-        word === token ||
-        (token.length >= 3 && word.includes(token)) ||
-        (token.length >= 3 && searchSimilarity(word, token) >= FUZZY_THRESHOLD)
-    )
-  );
+  return tokens.every((token) => words.some((word) => matchesWord(word, token, FUZZY_THRESHOLD)));
 }
 
 export function matchesSearchText(text: string, query: string): boolean {
@@ -78,11 +80,8 @@ export function highlightSegments(text: string, query: string): SearchSegment[] 
     const normalizedWord = normalizeSearchText(word);
     if (!normalizedWord) continue;
 
-    const isMatch = tokens.some(
-      (token) =>
-        normalizedWord === token ||
-        (token.length >= 3 && normalizedWord.includes(token)) ||
-        (token.length >= 3 && searchSimilarity(normalizedWord, token) >= HIGHLIGHT_THRESHOLD)
+    const isMatch = tokens.some((token) =>
+      matchesWord(normalizedWord, token, HIGHLIGHT_THRESHOLD)
     );
     if (!isMatch) continue;
 

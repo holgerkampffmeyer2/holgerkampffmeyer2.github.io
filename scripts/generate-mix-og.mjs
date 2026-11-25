@@ -3,7 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { getMixDisplay } from '../src/utils/mix-display.js';
-import { brandedOgImageFile } from '../src/utils/og-image.js';
+import { brandedOgImageFile, labelsOverviewOgImageFile } from '../src/utils/og-image.js';
+import { isIndexableLabel } from '../src/utils/label-indexability.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = path.join(__dirname, '..');
@@ -58,6 +59,55 @@ async function generateMixOG() {
     } catch (err) {
       console.error(`✗ Failed to generate ${variant.file}:`, err.message);
     }
+  }
+}
+
+async function generateLabelsOG() {
+  const file = labelsOverviewOgImageFile();
+  const out = path.join(OUT_DIR, file);
+
+  if (fs.existsSync(out) && !FORCE) {
+    console.log(`• ${path.relative(ROOT_DIR, out)} (exists)`);
+    return;
+  }
+
+  const labelsData = JSON.parse(fs.readFileSync(
+    path.join(ROOT_DIR, 'src/data/labels.json'), 'utf-8'
+  ));
+  const counts = new Map();
+
+  for (const id of Object.values(labelsData.tracks ?? {})) {
+    const name = labelsData.labels?.[id]?.name;
+    if (!name || id === 'unreleased' || !isIndexableLabel(name)) continue;
+    counts.set(name, (counts.get(name) ?? 0) + 1);
+  }
+
+  const variant = {
+    file,
+    eyebrow: 'DJ HULK · STUTTGART',
+    title: 'Record Labels',
+    subtitle: 'Alle Labels aus den DJ-Hulk-Mixes',
+    labels: [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 4)
+      .map(([name]) => name),
+    labelsHeader: 'LABELS IM FOKUS',
+    url: 'holger-kampffmeyer.de/dj/labels',
+  };
+  const overlay = buildOverlay(variant);
+  const sourceImage = path.join(ROOT_DIR, 'public/img/_81A4010.webp');
+
+  try {
+    await sharp(sourceImage)
+      .resize(1200, 630, { fit: 'cover', position: 'centre' })
+      .composite([{ input: Buffer.from(overlay), top: 0, left: 0 }])
+      .jpeg({ quality: 88, mozjpeg: true })
+      .toFile(out);
+
+    const meta = await sharp(out).metadata();
+    console.log(`✓ ${path.relative(ROOT_DIR, out)} (${meta.width}×${meta.height})`);
+  } catch (err) {
+    console.error(`✗ Failed to generate ${file}:`, err.message);
   }
 }
 
@@ -150,7 +200,7 @@ function buildOverlay(variant) {
     ${titleHtml}
     <text x="70" y="${subtitleY}" fill="#22d3ee" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="600" letter-spacing="3">${escapeXml(variant.subtitle)}</text>
     ${variant.labels.length > 0 ? `
-    <text x="70" y="${labelsHeaderY}" fill="#a1a1aa" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="500">LABELS IN THIS MIX</text>
+    <text x="70" y="${labelsHeaderY}" fill="#a1a1aa" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="500">${escapeXml(variant.labelsHeader ?? 'LABELS IN THIS MIX')}</text>
     ${labelsHtml}
     ` : ''}
     <line x1="70" y1="478" x2="560" y2="478" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"/>
@@ -234,4 +284,4 @@ function buildTrackLabels(registry) {
   };
 }
 
-generateMixOG().catch(console.error);
+Promise.all([generateMixOG(), generateLabelsOG()]).catch(console.error);

@@ -15,6 +15,7 @@ import {
   serializeLabelOverviewState,
 } from '../../../utils/label-overview-state';
 import { buildLabelCollectionSchema } from '../../../utils/schema-builders.js';
+import { labelsOverviewOgImagePath } from '../../../utils/og-image.js';
 import { filterMixesForSearch, highlightSegments } from '../../../utils/label-search';
 import { formatDate } from '../../../utils/format';
 
@@ -53,7 +54,7 @@ function ariaSort(key: typeof state.sort): 'ascending' | 'descending' | 'none' {
 }
 ---
 
-<Layout title={title} description={description} jsonLd={jsonLd} noIndex={false}>
+<Layout title={title} description={description} image={labelsOverviewOgImagePath()} jsonLd={jsonLd} noIndex={false}>
   <Navbar currentPage="/dj/mixes/" />
 
   <Breadcrumb segments={breadcrumbSegments} />
