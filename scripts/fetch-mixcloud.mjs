@@ -223,6 +223,34 @@ async function fetchAllSources() {
 // then returns one cleaned entry per non-empty line.
 // Files without a "TRACKLIST" marker are parsed exactly as before, so legacy
 // track/guest/b2b files are unaffected.
+const HEADER_FIELDS = new Set([
+  'title',
+  'titel',
+  'track title',
+  'performer',
+  'artist',
+  'interpret',
+  'index',
+  'nr',
+  'no'
+]);
+
+function normalizeHeaderField(field) {
+  return field
+    .trim()
+    .replace(/^"|"$/g, '')
+    .replace(/\.$/, '')
+    .replace(/\s+/g, ' ')
+    .toLowerCase();
+}
+
+function isHeaderLine(line) {
+  const fields = line.split(',').map(normalizeHeaderField);
+  if (fields[fields.length - 1] === '') fields.pop();
+  if (fields.length < 2) return false;
+  return fields.every(field => HEADER_FIELDS.has(field));
+}
+
 function parseTracklistText(rawText) {
   if (!rawText) return [];
   let text = rawText;
@@ -232,10 +260,9 @@ function parseTracklistText(rawText) {
     const end = text.match(/^\s*tags\s*:?\s*$/im);
     if (end) text = text.slice(0, end.index);
   }
-  const headerRe = /^\s*"?\s*(?:title|titel|track\s*title|performer|artist|interpret|index|nr\.?|no\.?)\s*"?(?:\s*,\s*"?\s*(?:title|titel|track\s*title|performer|artist|interpret|index|nr\.?|no\.?)\s*"?)+\s*,?\s*$/i;
   return text
     .split('\n')
-    .filter(line => line.trim() && !line.trim().startsWith('#') && !headerRe.test(line))
+    .filter(line => line.trim() && !line.trim().startsWith('#') && !isHeaderLine(line))
     .map(line => line.trim().replace(/^\d+\.\s*/, '').replace(/\s*\d{2}:\d{2}:\d{2}\s*$/, '').normalize('NFC'));
 }
 

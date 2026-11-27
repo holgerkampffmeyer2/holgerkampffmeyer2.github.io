@@ -118,11 +118,14 @@ describe('fetch-mixcloud.mjs pure functions', () => {
         'TITLE, PERFORMER, INDEX',
         '"Esto No Es Coca Papi", "Agustín Mesa",',
         '# Mix 204',
-        '"Shades Of You", "Amaral Borges",'
+        '"Shades Of You", "Amaral Borges",',
+        '"Track Title", "Artist", "Nr."',
+        '"Not A Header", "Some Artist",'
       ].join('\n');
       expect(parseTracklistText(input)).toEqual([
         '"Esto No Es Coca Papi", "Agustín Mesa",',
-        '"Shades Of You", "Amaral Borges",'
+        '"Shades Of You", "Amaral Borges",',
+        '"Not A Header", "Some Artist",'
       ]);
     });
 
