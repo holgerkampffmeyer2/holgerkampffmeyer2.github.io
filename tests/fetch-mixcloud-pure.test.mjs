@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import fs from 'node:fs';
 
 // Import the pure functions from the module
@@ -7,7 +7,10 @@ import {
   normalizeString,
   extractMixNumber,
   parseTracklistText,
-  parseTracklist
+  parseTracklist,
+  fetchSource,
+  isOwnUpload,
+  loadPlaylistMixMap
 } from '../scripts/fetch-mixcloud.mjs';
 
 describe('fetch-mixcloud.mjs pure functions', () => {
@@ -110,6 +113,19 @@ describe('fetch-mixcloud.mjs pure functions', () => {
       expect(parseTracklistText('Artist - Track')).toEqual(['Artist - Track']);
     });
 
+    it('should drop CSV header rows and comment lines', () => {
+      const input = [
+        'TITLE, PERFORMER, INDEX',
+        '"Esto No Es Coca Papi", "Agustín Mesa",',
+        '# Mix 204',
+        '"Shades Of You", "Amaral Borges",'
+      ].join('\n');
+      expect(parseTracklistText(input)).toEqual([
+        '"Esto No Es Coca Papi", "Agustín Mesa",',
+        '"Shades Of You", "Amaral Borges",'
+      ]);
+    });
+
     it('should drop preamble and TAGS epilogue when a TRACKLIST marker exists', () => {
       const input = [
         '# DJ Hulk Mix-200 - Latin Tech',
@@ -177,6 +193,40 @@ describe('fetch-mixcloud.mjs pure functions', () => {
       const tracks = parseTracklist(file);
       expect(tracks.length).toBeGreaterThan(0);
       expect(tracks.some(t => /TRACKLIST/i.test(t) || /TAGS/i.test(t) || t.startsWith('#'))).toBe(false);
+    });
+  });
+
+  describe('playlist sources', () => {
+    it('follows paging.next and deduplicates cloudcast keys', async () => {
+      const first = {
+        data: [{ key: '/a', name: 'A' }, { key: '/duplicate', name: 'Dup' }],
+        paging: { next: 'https://api.mixcloud.com/playlist-page-2/' }
+      };
+      const second = {
+        data: [{ key: '/duplicate', name: 'Dup again' }, { key: '/b', name: 'B' }],
+        paging: {}
+      };
+      const fetchSpy = vi.spyOn(globalThis, 'fetch').mockImplementation(async (url) => ({
+        ok: true,
+        json: async () => String(url).includes('playlist-page-2') ? second : first
+      }));
+
+      const result = await fetchSource({ playlist: '/holger-kampffmeyer/playlists/test/' });
+      fetchSpy.mockRestore();
+
+      expect(result.map(m => m.key)).toEqual(['/a', '/duplicate', '/b']);
+    });
+
+    it('classifies only own account uploads as own', () => {
+      expect(isOwnUpload({ key: '/holger-kampffmeyer/mix-204/' })).toBe(true);
+      expect(isOwnUpload({ key: '/365fmradio/dj-hulk/' })).toBe(false);
+      expect(isOwnUpload({})).toBe(false);
+    });
+
+    it('loads the committed playlist mix map', () => {
+      const map = loadPlaylistMixMap();
+      expect(typeof map).toBe('object');
+      expect(map).not.toBeNull();
     });
   });
 });

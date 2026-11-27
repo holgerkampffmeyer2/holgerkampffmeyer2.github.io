@@ -77,7 +77,8 @@ describe('mix SEO', () => {
 
     it('does not copy the mixcloud text into the intro', () => {
       const intro = buildMixIntro(post, labels).join(' ');
-      expect(intro).not.toContain(post.description?.trim());
+      const mixcloudDescription = post.description?.trim();
+      if (mixcloudDescription) expect(intro).not.toContain(mixcloudDescription);
       expect(intro).not.toContain('fav, repost');
     });
 

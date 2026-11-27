@@ -11,7 +11,9 @@ const BLOG_DATA_PATH = path.join(ROOT_DIR, 'src/data/blog-posts.json');
 const TRACKLISTS_DIR = path.join(ROOT_DIR, 'tracklists');
 const PUBLIC_TRACKLISTS_DIR = path.join(ROOT_DIR, 'public/tracklists');
 const MAPPING_PATH = path.join(ROOT_DIR, 'src/data/genre-use-case-mapping.json');
+const PLAYLIST_MAP_PATH = path.join(ROOT_DIR, 'src/data/playlist-mix-map.json');
 const TIMESTAMP_FILE = path.join(ROOT_DIR, 'node_modules/.mixcloud-fetch');
+const OWN_ACCOUNT_PREFIX = '/holger-kampffmeyer/';
 
 const MIN_INTERVAL_MS = 24 * 60 * 60 * 1000;
 
@@ -20,7 +22,8 @@ const MIN_INTERVAL_MS = 24 * 60 * 60 * 1000;
 // 365fmradio         - label/radio account, only DJ Hulk guest mixes are relevant
 const MIXCLOUD_SOURCES = [
   { user: 'holger-kampffmeyer' },
-  { user: '365fmradio', match: /dj\s*hulk/i }
+  { user: '365fmradio', match: /dj\s*hulk/i },
+  { playlist: '/holger-kampffmeyer/playlists/hulks-b2b-s-and-guestmixes/' }
 ];
 
 // Helper function to normalize strings for comparison
@@ -108,6 +111,37 @@ function deriveUseCases(tags) {
   return Array.from(useCases);
 }
 
+function loadPlaylistMixMap() {
+  try {
+    const data = JSON.parse(fs.readFileSync(PLAYLIST_MAP_PATH, 'utf-8'));
+    return data.mixes || {};
+  } catch (e) {
+    console.warn(`Could not load playlist-mix-map.json: ${e.message}`);
+    return {};
+  }
+}
+
+function isOwnUpload(mix) {
+  return Boolean(mix?.key?.startsWith(OWN_ACCOUNT_PREFIX));
+}
+
+function getMappedAssets(playlistMixMap, key) {
+  const entry = playlistMixMap?.[key];
+  if (!entry?.tracklist || !entry?.hero) return null;
+  if (entry.status === 'metadata-only') return null;
+  const tracklistPath = path.join(TRACKLISTS_DIR, entry.tracklist);
+  const heroPath = path.join(TRACKLISTS_DIR, entry.hero);
+  if (!fs.existsSync(tracklistPath) || !fs.existsSync(heroPath)) {
+    console.warn(`⚠️  Missing mapped assets for ${key}: ${entry.tracklist} / ${entry.hero}`);
+    return null;
+  }
+  return {
+    tracklist: tracklistPath,
+    hero: heroPath,
+    heroFile: entry.hero
+  };
+}
+
 function computeConfidence(s, t) {
    // s: tracklistBasename (string)
    // t: hero image base name (string)
@@ -141,18 +175,36 @@ async function fetchMixDetails(key) {
   }
 }
 
-// Fetch the latest cloudcasts of one Mixcloud account, optionally filtered by title.
-async function fetchSource({ user, match }) {
+// Fetch cloudcasts from an account or playlist, following pagination.
+async function fetchSource({ user, match, playlist }) {
+  const label = playlist || user;
+  const firstUrl = playlist
+    ? `https://api.mixcloud.com${playlist.replace(/\/$/, '')}/cloudcasts/?limit=100`
+    : `https://api.mixcloud.com/${user}/cloudcasts/?limit=100`;
   try {
-    const res = await fetch(`https://api.mixcloud.com/${user}/cloudcasts/?limit=100`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const cloudcasts = data.data || [];
+    const cloudcasts = [];
+    const seen = new Set();
+    let nextUrl = firstUrl;
+    let pages = 0;
+
+    while (nextUrl && pages < 10) {
+      const res = await fetch(nextUrl);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      for (const cloudcast of data.data || []) {
+        if (!cloudcast.key || seen.has(cloudcast.key)) continue;
+        seen.add(cloudcast.key);
+        cloudcasts.push(cloudcast);
+      }
+      nextUrl = data.paging?.next || null;
+      pages += 1;
+    }
+
     const filtered = match ? cloudcasts.filter(m => match.test(m.name || '')) : cloudcasts;
-    console.log(`  ${user}: ${filtered.length}/${cloudcasts.length} mixes${match ? ' (filtered)' : ''}`);
+    console.log(`  ${label}: ${filtered.length}/${cloudcasts.length} mixes${match ? ' (filtered)' : ''}`);
     return filtered;
   } catch (e) {
-    console.warn(`⚠️  Failed to fetch cloudcasts for "${user}": ${e.message}`);
+    console.warn(`⚠️  Failed to fetch cloudcasts for "${label}": ${e.message}`);
     return [];
   }
 }
@@ -180,9 +232,10 @@ function parseTracklistText(rawText) {
     const end = text.match(/^\s*tags\s*:?\s*$/im);
     if (end) text = text.slice(0, end.index);
   }
+  const headerRe = /^\s*"?\s*(?:title|titel|track\s*title|performer|artist|interpret|index|nr\.?|no\.?)\s*"?(?:\s*,\s*"?\s*(?:title|titel|track\s*title|performer|artist|interpret|index|nr\.?|no\.?)\s*"?)+\s*,?\s*$/i;
   return text
     .split('\n')
-    .filter(line => line.trim())
+    .filter(line => line.trim() && !line.trim().startsWith('#') && !headerRe.test(line))
     .map(line => line.trim().replace(/^\d+\.\s*/, '').replace(/\s*\d{2}:\d{2}:\d{2}\s*$/, '').normalize('NFC'));
 }
 
@@ -263,6 +316,7 @@ async function fetchMixcloud(force = false) {
 
   console.log('Fetching latest mixes from Mixcloud...');
   loadMappings();
+  const playlistMixMap = loadPlaylistMixMap();
 
   let existingSimpleMixes = [];
   let existingPosts = [];
@@ -280,7 +334,8 @@ async function fetchMixcloud(force = false) {
     const cloudcasts = await fetchAllSources();
     if (!cloudcasts.length) throw new Error('No data from Mixcloud');
 
-    const mixes = cloudcasts.map(mix => ({
+    const ownCloudcasts = cloudcasts.filter(isOwnUpload);
+    const mixes = ownCloudcasts.map(mix => ({
       title: mix.name,
       key: mix.key,
       url: mix.url,
@@ -289,13 +344,13 @@ async function fetchMixcloud(force = false) {
     }));
 
     const simpleMap = new Map();
-    for (const m of existingSimpleMixes) simpleMap.set(m.key, m);
+    for (const m of existingSimpleMixes.filter(isOwnUpload)) simpleMap.set(m.key, m);
     for (const m of mixes) simpleMap.set(m.key, m);
     const mergedSimpleMixes = Array.from(simpleMap.values())
       .sort((a, b) => new Date(b.created_time) - new Date(a.created_time));
 
     fs.writeFileSync(SIMPLE_DATA_PATH, JSON.stringify({ lastUpdated: new Date().toISOString(), mixes: mergedSimpleMixes }, null, 2));
-    console.log(`✅ Updated mixcloud-data.json (${mergedSimpleMixes.length} mixes, ${mixes.length} from API)`);
+    console.log(`✅ Updated mixcloud-data.json (${mergedSimpleMixes.length} own mixes, ${mixes.length} from API)`);
 
     // Fetch details for each mix
     console.log('Fetching details for each mix...');
@@ -433,12 +488,26 @@ async function fetchMixcloud(force = false) {
       const mix = mixWithDetails;
       const apiData = mixWithDetails.apiData;
       
-      // Try exact match by mix number first
+      // Curated playlist mapping always wins; curated metadata-only mixes never use heuristics.
+      const mappedAssets = getMappedAssets(playlistMixMap, mix.key);
+      const isCuratedPlaylistMix = Boolean(playlistMixMap[mix.key]);
+      let pair = null;
+      if (mappedAssets) {
+        pair = {
+          tracklist: { path: mappedAssets.tracklist, file: path.basename(mappedAssets.tracklist) },
+          heroImage: { path: mappedAssets.hero, file: mappedAssets.heroFile }
+        };
+        console.log(`🎯 Map-match: "${pair.tracklist.file}" → "${mix.name}"`);
+      }
+
       const mixNumber = extractMixNumber(mix.name || '') || extractMixNumber(mix.key || '');
-      let pair = pairMapByMixNumber.get(mixNumber);
-      
-      // If no exact match found, use fuzzy matching as fallback
-      if (!pair) {
+
+      // If no curated match found, try exact match by mix number, then fuzzy fallback.
+      if (!pair && !isCuratedPlaylistMix) {
+        pair = pairMapByMixNumber.get(mixNumber);
+      }
+
+      if (!pair && !isCuratedPlaylistMix) {
         let bestConfidence = 0;
         let bestPair = null;
         
@@ -556,6 +625,9 @@ export {
   shouldFetch, 
   updateTimestamp, 
   loadMappings, 
+  loadPlaylistMixMap,
+  isOwnUpload,
+  getMappedAssets,
   deriveUseCases, 
   computeConfidence, 
   parseTracklist, 

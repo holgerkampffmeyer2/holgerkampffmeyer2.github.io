@@ -1,0 +1,432 @@
+{
+  "generatedAt": "2026-11-27T15:50:11.371Z",
+  "playlist": "/holger-kampffmeyer/playlists/hulks-b2b-s-and-guestmixes/",
+  "mixes": {
+    "/george-parisis/george-parisis-paul-pilgrims-presents-techno-empathy-friends-summer-ending-edition-2024/": {
+      "status": "ready",
+      "folder": "Techno Empathy",
+      "tracklist": "playlist-george-parisis-paul-pilgrims-presents-techno-empathy-friends-summer-ending-edition-2024-tracklist.txt",
+      "hero": "playlist-george-parisis-paul-pilgrims-presents-techno-empathy-friends-summer-ending-edition-2024.webp"
+    },
+    "/holger-kampffmeyer/this-is-house-tony-c-b2b-dj-hulk/": {
+      "status": "ready",
+      "folder": "Tony C B2B DJ Hulk",
+      "tracklist": "playlist-this-is-house-tony-c-b2b-dj-hulk-tracklist.txt",
+      "hero": "playlist-this-is-house-tony-c-b2b-dj-hulk.webp"
+    },
+    "/holger-kampffmeyer/dj-efunk-b2b-dj-hulk-stuggi-house-connection/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein lokaler CUE-Ordner gefunden"
+    },
+    "/holger-kampffmeyer/pain-girl-b2b-dj-hulk-all-about-tech-house/": {
+      "status": "ready",
+      "folder": "Pain Girl B2B DJ Hulk",
+      "tracklist": "playlist-pain-girl-b2b-dj-hulk-all-about-tech-house-tracklist.txt",
+      "hero": "playlist-pain-girl-b2b-dj-hulk-all-about-tech-house.webp"
+    },
+    "/holger-kampffmeyer/dj-hulk-jdk-radio-guestmix-tribal-vibes/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein eindeutiger lokaler CUE-Ordner gefunden"
+    },
+    "/mikelcugga/mikel-cugga-dj-dragon1965-dj-hulk-dj-rebel-the-resurrection-4q-rework/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein eindeutiger lokaler CUE-Ordner gefunden"
+    },
+    "/holger-kampffmeyer/dj-hulk-b2b-dj-rebel-reupload/": {
+      "status": "ready",
+      "folder": "Mr. Rebel B2B DJ Hulk",
+      "tracklist": "playlist-dj-hulk-b2b-dj-rebel-reupload-tracklist.txt",
+      "hero": "playlist-dj-hulk-b2b-dj-rebel-reupload.webp"
+    },
+    "/holger-kampffmeyer/mikel-cugga-b2b-dj-hulk-tech-house-mix-6/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein lokaler CUE-Ordner für B2B #6 gefunden"
+    },
+    "/holger-kampffmeyer/tech-house-guest-mix-dc-marcus/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein lokaler CUE-Ordner gefunden"
+    },
+    "/holger-kampffmeyer/mikel-cugga-b2b-dj-hulk-5-tech-and-club-house/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein lokaler CUE-Ordner für B2B #5 gefunden"
+    },
+    "/holger-kampffmeyer/ibiza-grooves-orphan-b2b-dj-hulk/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein lokaler CUE-Ordner gefunden"
+    },
+    "/holger-kampffmeyer/mikel-cugga-b2b-dj-hulk-4-club-house-vibes/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein lokaler CUE-Ordner für B2B #4 gefunden"
+    },
+    "/holger-kampffmeyer/mikel-cugga-b2b-dj-hulk-3-ghetto-house-vibes/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein lokaler CUE-Ordner für B2B #3 gefunden"
+    },
+    "/holger-kampffmeyer/mikel-cugga-b2b-dj-hulk-club-classics2/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein lokaler CUE-Ordner für B2B #2 gefunden"
+    },
+    "/holger-kampffmeyer/mikel-cugga-b2b-dj-hulk-tech-ghetto-jackin-latin-house-mix/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein lokaler CUE-Ordner für B2B #1 gefunden"
+    },
+    "/MrBrunch/collab-mix-dj-hulk-mr-brunch-segue008/": {
+      "status": "ready",
+      "folder": "Mr Brunch B2B DJ Hulk",
+      "tracklist": "playlist-collab-mix-dj-hulk-mr-brunch-segue008-tracklist.txt",
+      "hero": "playlist-collab-mix-dj-hulk-mr-brunch-segue008.webp"
+    },
+    "/DJRhythmX/18-10-24-confusion-revisited-hells-kitchen-dj-hulk-rhythm-x-b2b/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Lokaler RhythmX-Ordner ist ein anderes Datum"
+    },
+    "/ChristopherTmuzic/soothe-ur-soul-volume-16/": {
+      "status": "ready",
+      "folder": "Soothe Your Soul Guestmix",
+      "tracklist": "playlist-soothe-ur-soul-volume-16-tracklist.txt",
+      "hero": "playlist-soothe-ur-soul-volume-16.webp"
+    },
+    "/Anjapaingirl/funky-techmania-b2b-dj-hulk-pg/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein eindeutiger lokaler CUE-Ordner gefunden"
+    },
+    "/safe_audio/trip-into-the-jungle-safe-audio-b2b-dj-hulk/": {
+      "status": "ready",
+      "folder": "Safe Audio B2B Hulk",
+      "tracklist": "playlist-trip-into-the-jungle-safe-audio-b2b-dj-hulk-tracklist.txt",
+      "hero": "playlist-trip-into-the-jungle-safe-audio-b2b-dj-hulk.webp"
+    },
+    "/holger-kampffmeyer/dj-hulk-b2b-bigturtle-deep-funky-house/": {
+      "status": "ready",
+      "folder": "Hulk B2B BigTurtle",
+      "tracklist": "playlist-dj-hulk-b2b-bigturtle-deep-funky-house-tracklist.txt",
+      "hero": "playlist-dj-hulk-b2b-bigturtle-deep-funky-house.webp"
+    },
+    "/DJaneSABsonic/b2b-dj-hulkdj-sabsonic-ready-or-not/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein lokaler CUE-Ordner gefunden"
+    },
+    "/safe_audio/dj-hulk-b2b-safe-audio-destination-tech-city/": {
+      "status": "ready",
+      "folder": "DJ Hulk B2B Safe Audio Part2",
+      "tracklist": "playlist-dj-hulk-b2b-safe-audio-destination-tech-city-tracklist.txt",
+      "hero": "playlist-dj-hulk-b2b-safe-audio-destination-tech-city.webp"
+    },
+    "/holger-kampffmeyer/guestmix-by-bigturtle-march2025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Lokaler BigTurtle-Guestmix ist vom 21.06.2025"
+    },
+    "/365fmradio/365-fm-radio-presented-dj-hulk-dj-mix-07032025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Lokale CUE-Datei enthält keine Tracks"
+    },
+    "/holger-kampffmeyer/b2b-big-turtle-dj-hulk-house-brothers/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein eindeutiger lokaler CUE-Ordner gefunden"
+    },
+    "/365fmradio/365-fm-radio-presented-dj-hulk-dj-mix-04042025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Lokale CUE-Datei enthält keine Tracks"
+    },
+    "/Anjapaingirl/get-raw-b2b-dj-hulk-al-pg/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Keine eindeutige lokale CUE-Quelle für GET RAW"
+    },
+    "/365fmradio/365-fm-radio-presented-dj-hulk-dj-mix-13042025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Lokale CUE-Datei enthält keine Tracks"
+    },
+    "/holger-kampffmeyer/oleg-yoshi-b2b-dj-hulk-house-music/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein lokaler CUE-Ordner gefunden"
+    },
+    "/365fmradio/dj-hulk-365-fm-radio-dj-mix-19042025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Lokale CUE-Datei enthält keine Tracks"
+    },
+    "/holger-kampffmeyer/safe-audio-b2b-dj-hulk-next-level-dnb/": {
+      "status": "ready",
+      "folder": "Hulk B2B Safe Audio - Next Level",
+      "tracklist": "playlist-safe-audio-b2b-dj-hulk-next-level-dnb-tracklist.txt",
+      "hero": "playlist-safe-audio-b2b-dj-hulk-next-level-dnb.webp"
+    },
+    "/365fmradio/dj-hulk-365-fm-radio-exclusiv-dj-mix-02052025/": {
+      "status": "ready",
+      "folder": "365 FM Radio Exclusive",
+      "tracklist": "playlist-dj-hulk-365-fm-radio-exclusiv-dj-mix-02052025-tracklist.txt",
+      "hero": "playlist-dj-hulk-365-fm-radio-exclusiv-dj-mix-02052025.webp"
+    },
+    "/365fmradio/dj-hulk-365-fm-radio-dj-mix-16052025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Keine eindeutige lokale CUE-Quelle"
+    },
+    "/365fmradio/dj-hulk-365-fm-radio-dj-mix-09052025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Keine eindeutige lokale CUE-Quelle"
+    },
+    "/365fmradio/dj-hulk-365-fm-radio-dj-mix-24052025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Keine eindeutige lokale CUE-Quelle"
+    },
+    "/holger-kampffmeyer/dj-hulk-presents-safe-audio-deep-techy/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Lokale Safe-Audio-Ordner haben abweichende Daten"
+    },
+    "/365fmradio/dj-hulk-365-fm-radio-dj-mix-30052025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Keine eindeutige lokale CUE-Quelle"
+    },
+    "/safe_audio/weekend-warm-up-12-safe-audio-with-guest-dj-hulk-live-on-drumbasespace-06062025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein lokaler CUE-Ordner gefunden"
+    },
+    "/365fmradio/dj-hulk-exclusive-in-the-mix-365-fm-radio-07062025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Keine eindeutige lokale CUE-Quelle"
+    },
+    "/365fmradio/dj-hulk-exclusive-in-the-mix-365-fm-radio-13062025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Keine eindeutige lokale CUE-Quelle"
+    },
+    "/365fmradio/dj-hulk-exclusive-in-the-mix-365-fm-radio-20062025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Keine eindeutige lokale CUE-Quelle"
+    },
+    "/TheBigTurtle/turtle-friends-guest-mix-mxd-by-dj-hulk-jun2025/": {
+      "status": "ready",
+      "folder": "Guest Mix BigTurtle",
+      "tracklist": "playlist-turtle-friends-guest-mix-mxd-by-dj-hulk-jun2025-tracklist.txt",
+      "hero": "playlist-turtle-friends-guest-mix-mxd-by-dj-hulk-jun2025.webp"
+    },
+    "/365fmradio/dj-hulk-exclusive-in-the-mix-365-fm-radio-27062025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Keine eindeutige lokale CUE-Quelle"
+    },
+    "/365fmradio/dj-hulk-exclusive-in-the-mix-365-fm-radio-12072025/": {
+      "status": "ready",
+      "folder": "DnB Guest Mix",
+      "tracklist": "playlist-dj-hulk-exclusive-in-the-mix-365-fm-radio-12072025-tracklist.txt",
+      "hero": "playlist-dj-hulk-exclusive-in-the-mix-365-fm-radio-12072025.webp"
+    },
+    "/365fmradio/dj-hulk-exclusive-in-the-mix-365-fm-radio-1272025/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Keine eindeutige lokale CUE-Quelle"
+    },
+    "/holger-kampffmeyer/bigt-b2b-dj-hulk-awesome-tech-house-anthems/": {
+      "status": "ready",
+      "folder": "BigT B2B Hulk 09-2025",
+      "tracklist": "playlist-bigt-b2b-dj-hulk-awesome-tech-house-anthems-tracklist.txt",
+      "hero": "playlist-bigt-b2b-dj-hulk-awesome-tech-house-anthems.webp"
+    },
+    "/365fmradio/summer-edition-dj-hulk-4-365-fm-radio/": {
+      "status": "ready",
+      "folder": "Summer Mix 2025 - 365 FM Radio",
+      "tracklist": "playlist-summer-edition-dj-hulk-4-365-fm-radio-tracklist.txt",
+      "hero": "playlist-summer-edition-dj-hulk-4-365-fm-radio.webp"
+    },
+    "/mtverifm/guest-mix-04-dj-hulk-mtverifm_radio/": {
+      "status": "ready",
+      "folder": "MTVERIFM Guest Mix",
+      "tracklist": "playlist-guest-mix-04-dj-hulk-mtverifm-radio-tracklist.txt",
+      "hero": "playlist-guest-mix-04-dj-hulk-mtverifm-radio.webp"
+    },
+    "/365fmradio/dj-hulk-1-year-365-fm-radio-exclusive-mix/": {
+      "status": "ready",
+      "folder": "365 FM Radio 1st Birthday",
+      "tracklist": "playlist-dj-hulk-1-year-365-fm-radio-exclusive-mix-tracklist.txt",
+      "hero": "playlist-dj-hulk-1-year-365-fm-radio-exclusive-mix.webp"
+    },
+    "/DJRhythmX/7-11-2025-confusion-revisited-freaky-friday-feeling-dj-hulk-rhythm-x-b2b-feeling-funky/": {
+      "status": "ready",
+      "folder": "RythmX B2B Hulk - Sept 25",
+      "tracklist": "playlist-7-11-2025-confusion-revisited-freaky-friday-feeling-dj-hulk-rhythm-x-b2b-feeling-funky-tracklist.txt",
+      "hero": "playlist-7-11-2025-confusion-revisited-freaky-friday-feeling-dj-hulk-rhythm-x-b2b-feeling-funky.webp"
+    },
+    "/Anjapaingirl/while-the-record-spins-b2b-dj-hulk-alpg/": {
+      "status": "ready",
+      "folder": "AL PG B2B DJ Hulk",
+      "tracklist": "playlist-while-the-record-spins-b2b-dj-hulk-alpg-tracklist.txt",
+      "hero": "playlist-while-the-record-spins-b2b-dj-hulk-alpg.webp"
+    },
+    "/holger-kampffmeyer/bigt-b2b-dj-hulk-the-next-chapter-of-house-anthems/": {
+      "status": "ready",
+      "folder": "BigT B2B Hulk",
+      "tracklist": "playlist-bigt-b2b-dj-hulk-the-next-chapter-of-house-anthems-tracklist.txt",
+      "hero": "playlist-bigt-b2b-dj-hulk-the-next-chapter-of-house-anthems.webp"
+    },
+    "/holger-kampffmeyer/safe-audio-b2b-dj-hulk-xmas-dnb/": {
+      "status": "ready",
+      "folder": "DnB xmas b2b Hulks Part",
+      "tracklist": "playlist-safe-audio-b2b-dj-hulk-xmas-dnb-tracklist.txt",
+      "hero": "playlist-safe-audio-b2b-dj-hulk-xmas-dnb.webp"
+    },
+    "/safe_audio/keep-it-moving/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Kein lokaler CUE-Ordner gefunden"
+    },
+    "/TonyCeee/the-houseboxx-vol6-by-tony-c-b2b-dj-hulk/": {
+      "status": "ready",
+      "folder": "Tony C B2B DJ Hulk(2)",
+      "tracklist": "playlist-the-houseboxx-vol6-by-tony-c-b2b-dj-hulk-tracklist.txt",
+      "hero": "playlist-the-houseboxx-vol6-by-tony-c-b2b-dj-hulk.webp",
+      "note": "Kandidat für Vol.6 / Jan 2026"
+    },
+    "/TheBigTurtle/bigt-b2b-dj-hulk-select-radio-for-weareone-wbill-mcgruddy-unmastered-full/": {
+      "status": "ready",
+      "folder": "BigT B2B DJ Hulk for Select",
+      "tracklist": "playlist-bigt-b2b-dj-hulk-select-radio-for-weareone-wbill-mcgruddy-unmastered-full-tracklist.txt",
+      "hero": "playlist-bigt-b2b-dj-hulk-select-radio-for-weareone-wbill-mcgruddy-unmastered-full.webp"
+    },
+    "/holger-kampffmeyer/bill-mcgruddy-x-dj-hulk-selected-radio-guestmix-we-are-one-fr-mai-15th/": {
+      "status": "ready",
+      "folder": "Guest Mix Bill - Tech House",
+      "tracklist": "playlist-bill-mcgruddy-x-dj-hulk-selected-radio-guestmix-we-are-one-fr-mai-15th-tracklist.txt",
+      "hero": "playlist-bill-mcgruddy-x-dj-hulk-selected-radio-guestmix-we-are-one-fr-mai-15th.webp"
+    },
+    "/holger-kampffmeyer/dj-hulk-b2b-bigt-beach-house-july-26/": {
+      "status": "ready",
+      "folder": "Hulk B2B BigT July 26",
+      "tracklist": "playlist-dj-hulk-b2b-bigt-beach-house-july-26-tracklist.txt",
+      "hero": "playlist-dj-hulk-b2b-bigt-beach-house-july-26.webp"
+    },
+    "/holger-kampffmeyer/dev-best-b2b-hulk-aug-26-tech-and-bass-house/": {
+      "status": "ready",
+      "folder": "Dev Best B2B Hulk",
+      "tracklist": "playlist-dev-best-b2b-hulk-aug-26-tech-and-bass-house-tracklist.txt",
+      "hero": "playlist-dev-best-b2b-hulk-aug-26-tech-and-bass-house.webp"
+    },
+    "/365fmradio/turtle-friends-mix-serie-dj-hulk-26092026/": {
+      "status": "ready",
+      "folder": "Turtle Friends Mix Sept 26",
+      "tracklist": "playlist-turtle-friends-mix-serie-dj-hulk-26092026-tracklist.txt",
+      "hero": "playlist-turtle-friends-mix-serie-dj-hulk-26092026.webp"
+    },
+    "/holger-kampffmeyer/bigt-b2b-hulk-funky-house-oct-2026/": {
+      "status": "ready",
+      "folder": "BigT B2B Hulk Oct 2026",
+      "tracklist": "playlist-bigt-b2b-hulk-funky-house-oct-2026-tracklist.txt",
+      "hero": "playlist-bigt-b2b-hulk-funky-house-oct-2026.webp"
+    },
+    "/holger-kampffmeyer/mikel-cugga-b2b-hulk-oct-2026-tech-house/": {
+      "status": "ready",
+      "folder": "Hulk B2B Cugga Oct 2026",
+      "tracklist": "playlist-mikel-cugga-b2b-hulk-oct-2026-tech-house-tracklist.txt",
+      "hero": "playlist-mikel-cugga-b2b-hulk-oct-2026-tech-house.webp"
+    },
+    "/365fmradio/dj-hulk-birthday-mix-session/": {
+      "status": "metadata-only",
+      "folder": null,
+      "tracklist": null,
+      "hero": null,
+      "note": "Lokaler Birthday-Ordner ist bereits dem 1-Year-Mix zugeordnet"
+    },
+    "/TonyCeee/the-houseboxx-vol16-by-tony-c-b2b-dj-hulk-271126/": {
+      "status": "ready",
+      "folder": "Tony C Houseboxx",
+      "tracklist": "playlist-the-houseboxx-vol16-by-tony-c-b2b-dj-hulk-271126-tracklist.txt",
+      "hero": "playlist-the-houseboxx-vol16-by-tony-c-b2b-dj-hulk-271126.webp"
+    }
+  }
+}

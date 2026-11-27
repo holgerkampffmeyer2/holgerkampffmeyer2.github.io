@@ -201,7 +201,7 @@
       "url": "https://www.traxsource.com/label/67087/bellosguardo"
     },
     "together-we-re-louder": {
-      "name": "TOGETHER WE'RE LOUDER",
+      "name": "Together We're Louder",
       "url": "https://www.beatport.com/de/label/together-were-louder"
     },
     "cas-music": {
@@ -1090,7 +1090,7 @@
     },
     "massive-house-records": {
       "name": "Massive House Records",
-      "url": ""
+      "url": "https://massivehouserecords.com/"
     },
     "eightbarmusic": {
       "name": "Eight Bar Music",
@@ -1114,6 +1114,106 @@
     },
     "nothing-hurt": {
       "name": "Nothing Hurt",
+      "url": ""
+    },
+    "nos-recordings": {
+      "name": "NOS Recordings",
+      "url": "https://nosrecordings.com/"
+    },
+    "palmlands-records": {
+      "name": "Palmlands Records",
+      "url": "https://palmlands.de/"
+    },
+    "liquid-state": {
+      "name": "Liquid State",
+      "url": ""
+    },
+    "the-myth-of-nyx": {
+      "name": "The Myth of NYX",
+      "url": "https://themythofnyx.com/"
+    },
+    "night-service-only": {
+      "name": "Night Service Only",
+      "url": ""
+    },
+    "pm-recordings": {
+      "name": "PM Recordings",
+      "url": "https://www.pmlabelgroup.com/"
+    },
+    "future-house-music": {
+      "name": "Future House Music",
+      "url": "https://futurehousemusic.com/"
+    },
+    "22-west-records": {
+      "name": "22 WEST RECORDS",
+      "url": ""
+    },
+    "universal-island-records-ltd": {
+      "name": "Universal-Island Records Ltd.",
+      "url": ""
+    },
+    "ultra-records": {
+      "name": "Ultra Records",
+      "url": "https://www.ultrarecords.com/"
+    },
+    "guilty-records": {
+      "name": "Guilty Records",
+      "url": ""
+    },
+    "justus-recs": {
+      "name": "JustUs Recs",
+      "url": ""
+    },
+    "direct-action-records": {
+      "name": "Direct Action Records",
+      "url": ""
+    },
+    "sword-records": {
+      "name": "SWORD RECORDS",
+      "url": ""
+    },
+    "mdlbeast-records": {
+      "name": "MDLBEAST Records",
+      "url": "https://mdlbeastrecords.com/"
+    },
+    "mellow-daze": {
+      "name": "Mellow Daze",
+      "url": ""
+    },
+    "hallwood": {
+      "name": "Hallwood",
+      "url": ""
+    },
+    "netswork-international": {
+      "name": "Netswork International",
+      "url": ""
+    },
+    "dim-mak-records": {
+      "name": "Dim Mak Records",
+      "url": ""
+    },
+    "nervous-records": {
+      "name": "Nervous Records",
+      "url": ""
+    },
+    "airplane-records": {
+      "name": "AIRPLANE! RECORDS",
+      "url": ""
+    },
+    "ionica-audio": {
+      "name": "Ionica Audio",
+      "url": ""
+    },
+    "groove-alchemy-records": {
+      "name": "Groove Alchemy Records",
+      "url": ""
+    },
+    "win-win-situation": {
+      "name": "WIN WIN Situation",
+      "url": ""
+    },
+    "axept": {
+      "name": "AXEPT",
       "url": ""
     }
   },
@@ -1820,6 +1920,105 @@
     "Nina Simone - Take Care Of Business (Solomun Extended Remix)": "whoa",
     "Rafasan - Back 2 House (Extended Mix)": "flying-lap",
     "Drewbear - Shake Down": "nothing-hurt",
-    "Jaxon Tonic - Jaxon Tonic - Outerspace (Extended mix)": "unreleased"
+    "Jaxon Tonic - Jaxon Tonic - Outerspace (Extended mix)": "unreleased",
+    "\"C'est Toi (Extended Mix)\", \"Freshcobar\",": "nos-recordings",
+    "\"Different Way (Extended Mix)\", \"BLOND:ISH & Zeeba\",": "insomniac-records",
+    "\"Esto No Es Coca Papi\", \"Agustín Mesa\",": "moom-sound",
+    "\"Get The Party\", \"JIZZ\",": "like-that-underground",
+    "\"Horizont\", \"Niac\",": "like-that-underground",
+    "\"Pacific State of Mind (Rainy Day Mix)\", \"d.lawrence\",": "like-that-underground",
+    "\"Pleasure (Extended Edit)\", \"Library Fighter\",": "moom-sound",
+    "\"Shades Of You\", \"Amaral Borges\",": "like-that-underground",
+    "Aaron Smith ft. IndiBlu - Grateful (Tony Arzadon Extended)": "gods-of-madness-recordings",
+    "Adam Ten & Bontan - Hey (Extended Mix)": "palmlands-records",
+    "Albert Harvey - Wagwan (Extended Mix)": "what-ya-need",
+    "Albin Kaczka & Danmds - Manifest (Extended)": "natural-rhythm",
+    "Alexinus - Booze (Extended Mix) [Natural Rhythm]": "natural-rhythm",
+    "Amine Edge x Lee Cabrera - Down The Street (Original Mix)": "cuff",
+    "AYYBO - RIZZ (Extended Mix)": "gdb-records",
+    "Balue - Gettoblaster (Vocal Version)": "balearic-vibes-records",
+    "Basura Boyz - Touch (Extended Mix)": "night-bass",
+    "Bewav x Quelupa - Dangerous (Original Mix) [CUFF]": "cuff",
+    "BLR, Terry Zhong - Headrush (Extended Mix)": "liquid-state",
+    "Boothed - I Like That (Extended Mix)": "box-of-cats",
+    "Boothed - They Can't Stop (Extended Mix)": "box-of-cats",
+    "Bouncer - Number 5 [Natural Rhythm]": "natural-rhythm",
+    "CARTER (AU), shotgunwedding - Nobody's Watching (Extended Mix) [GOODSIDE]": "goodside",
+    "CASSIMM - I Like It (Extended Mix)": "the-myth-of-nyx",
+    "Castion - Circumstances (Extended Mix)": "sola",
+    "Castion & Sergiodnine - Wanna Come (Extended Mix)": "sola",
+    "CID - Party Jumpin (Extended Mix)": "night-service-only",
+    "CID - Pass Out (Extended Mix)": "night-service-only",
+    "Crusy, Jem Cooke - Good To Go (Extended Mix)": "toolroom-records",
+    "Curbi & Scrufizzer - Move Over (Extended Mix)": "night-bass",
+    "Dallic - Focus Shift (BLR Remix) (Extended)": "pm-recordings",
+    "Dj Ease - Lusca (Original Mix)": "mixmania-records",
+    "DJ Jace - For the Rest of Your Life": "like-that-underground",
+    "Dubrovnik (UK) - Strata": "like-that-underground",
+    "ELFIGO - Can't Let You Go (Extended Mix)": "spinnin-records",
+    "Eric Remy - So Good": "people-want-to-dance-club-sweat",
+    "Eseym - Glow": "like-that-underground",
+    "Fafaq x DJ Kuba & Neitan - Spread Love (Extended Mix)": "future-house-music",
+    "FLOYD WEST22 - Mamacita! (Original Mix) [22 WEST RECORDS]": "22-west-records",
+    "Fugees - Ready or Not (Patrick Scuro Bootleg)": "tv-recordings",
+    "Genning - Torrent": "like-that-underground",
+    "George Kwali - Husla (Original Mix)": "cuff",
+    "Giovanni Zarzana - Money On The Line (Extended Mix)": "like-that-underground",
+    "Green Velvet - Percolator (Chris Lake Remix) (Extended Mix)": "black-book-records",
+    "Henry Wake Up - What I Need (FDTD Extended Remix)": "club-whatever",
+    "Inner City Kevin Saunderson - Good Life (Mark Lennon Edit)": "armada-music",
+    "James Hype - Don't Wake Me Up (James Mayfield Remix)": "universal-island-records-ltd",
+    "Jaques Le Noir - Right On Soul (Extended Mix)": "bellosguardo",
+    "Jesney - T-A-L-K": "like-that-underground",
+    "Jimmi Rider - Chaos In My Mind (Extended Mix) [Dark Roast Records]": "dark-roast-records",
+    "JMNDZ - DO IT": "natural-rhythm",
+    "Joezi - Heaven In Disguise (ft. UNNA X) (Extended Mix)": "ultra-records",
+    "Johnescu - This Dance (Original Mix)": "mk837",
+    "Jun Wilder - Open Up Your Mind [Extended Mix]": "guilty-records",
+    "Khealo - Ominira (Original Mix)": "together-we-re-louder",
+    "KR - Forever Love [Natural Rhythm]": "natural-rhythm",
+    "longstoryshort - Inna Da Place (Extended)": "justus-recs",
+    "Marclassic & Basilone - Watch Your Back [Direct Action Records]": "direct-action-records",
+    "Marko Nastic - Look At This": "like-that-underground",
+    "Massimo Conte - Glitched Love (Extended)": "club-whatever",
+    "Mc On The Beat - High On Life": "astral-708-records",
+    "Milyo - What They See (Extended Mix)": "sword-records",
+    "Moontalk - Melody (For Space Lovers) [Extended Mix]": "mdlbeast-records",
+    "MorganJ - From The Beat (Extended Mix)": "heldeep-records",
+    "Music P & Nau Leone - Music P & Nau Leone - PLAY (Extended Edit)": "mellow-daze",
+    "Nasjon - Lunar8": "like-that-underground",
+    "NewEra x Nines - Crazy (Extended)": "ministry-of-sound",
+    "Nicolas Barnes - Find your's Mistake": "like-that-underground",
+    "NightFunk - Keep Moving (Extended Mix) [Dark Roast Records]": "dark-roast-records",
+    "Noah Levin - Love the Planet": "feel-hype",
+    "Parro, Levy Sound - Pachangoxo (Extended)": "club-whatever",
+    "PLAVKA - I Lost My Mind On the Dancefloor [Direct Action Records]": "direct-action-records",
+    "Psychedelicdonny - Slaves Of Seth": "feel-hype",
+    "REBRN, Kommando - Control Ya Face (Extended Mix)": "size-records",
+    "Salvatore Mancuso x PAJANE x The Drill - The Drill (Extended Mix)": "tonspiel",
+    "Sasson (FR) - Energy feat. Drea (Extended Mix)": "ultra-records",
+    "Schime - Bendid": "like-that-underground",
+    "SEAN NORVIS & HORATIO - Que Hora Es": "shodan-records",
+    "Secret Floor - Work To Tha Beat (Extended Mix)": "hallwood",
+    "Shadowryuken! - Cigarette": "game-of-tones",
+    "SHOUSE - Call My Name (Extended Mix)": "hell-beach-onelove",
+    "Sidekick - Deep Fear (Mindtone, Stone Van Brooken, Alex Nocera Extended Remix)": "netswork-international",
+    "Skytech, Neitan, DJ Kuba - Dancing (Wh0 Extended Festival Remix)": "game-of-tones",
+    "Steve Aoki & Ownboss - 1-11 ft. LeyeT (Extended)": "dim-mak-records",
+    "Steven Caretti - Get Down (Original Mix)": "houseklange-records",
+    "Super Flu x Robin Schulz - Believe (Extended Rework)": "nervous-records",
+    "Taitou - Voodoo Dance (Club Mix)": "rf-digital-factory",
+    "Technotronic X Sam Jacobs X Tagmann X MK (ITA) - Pump Up the Jam (Ariel Assault 'Blue Berries' Afro Vocal Edit)": "tnkfloor",
+    "Tommy Farrow - Haven (Extended)": "funfair-records",
+    "Tommy Vee, Keller, Mauro Ferrucci - Inside ( At Night ) (Original Mix)": "airplane-records",
+    "Tony Dark Eyes - Dirty Dancin (Extended Mix)": "hothouse",
+    "Trilucid - See Through You (Tim Cullen Extended Mix)": "ionica-audio",
+    "TRIPSO - WTPA": "waldliebe-familien",
+    "TWENTY SIX, Federico Scavo - Funky Nassau (Extended Mix)": "d-vision",
+    "Vincee D - Poppin (Original Mix)": "groove-alchemy-records",
+    "WIN WIN, Luxo - Foot Fantasy (Extended Mix)": "win-win-situation",
+    "Yes Boone - Modern Life (Extended Mix)": "tmrw-music",
+    "Yes Boone - Window 2 (Extended Mix)": "tmrw-music",
+    "Yulia Niko - Intention (Extended Mix)": "axept"
   }
 }

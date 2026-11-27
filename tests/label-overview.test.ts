@@ -203,8 +203,8 @@ describe('registry integration', () => {
 
   it('renders every registry label with stable indexability counts', () => {
     expect(realEntries).toHaveLength(Object.keys(labelsData.labels).length);
-    expect(realEntries.filter((entry) => entry.mixCount > 0)).toHaveLength(277);
-    expect(realEntries.filter((entry) => entry.isIndexable)).toHaveLength(60);
+    expect(realEntries.filter((entry) => entry.mixCount > 0)).toHaveLength(300);
+    expect(realEntries.filter((entry) => entry.isIndexable)).toHaveLength(76);
   });
 
   it('keeps rendered registry data in Unicode Normalization Form C', () => {
@@ -248,8 +248,8 @@ describe('buildLabelCollectionSchema', () => {
     }) as { numberOfItems: number; itemListElement: Record<string, unknown>[] }[];
     const list = schema[2];
 
-    expect(list.numberOfItems).toBe(60);
-    expect(list.itemListElement).toHaveLength(60);
+    expect(list.numberOfItems).toBe(76);
+    expect(list.itemListElement).toHaveLength(76);
     expect(
       list.itemListElement.every(
         (item) => Object.keys(item).sort().join(',') === '@type,position,url'
